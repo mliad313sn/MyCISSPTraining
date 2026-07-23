@@ -6,6 +6,8 @@ Adapté et traduit des [CISSP Study Resources](https://github.com/jefferywmoore/
 
 ## ✨ Fonctionnalités
 
+- **🗺️ Parcours guidé en 12 escales** : le fil conducteur du site — un voyage simple qui emmène le lecteur du niveau débutant au raisonnement d'expert CISSP (décollage mindset → 8 domaines → consolidation → examens blancs → jour J), avec activités cochées automatiquement selon la progression réelle.
+- **🧭 Mindset** : apprendre à *penser et parler* comme un CISSP — 10 principes de raisonnement d'examen, drills « éliminez d'abord les 2 pièges puis tranchez », et reformulations « répondez comme un security manager, pas comme un technicien » (CEO, board, auditeur, presse…).
 - **🎬 Leçons vidéo interactives** : diapositives animées avec **narration vocale française** (Web Speech API), lecture automatique, questions intégrées dans chaque leçon, schémas (flux, cycles, pyramides).
 - **📚 8 domaines complets du CBK** avec leurs pondérations officielles.
 - **🧪 Quiz par domaine** : questions style examen (« MEILLEUR », « EN PREMIER », point de vue manager), correction immédiate et explications détaillées.
@@ -45,11 +47,14 @@ js/
   scenarios.js      # moteur d'études de cas séquentielles
   flashcards.js     # révision par cartes (répétition espacée Leitner)
   memo.js           # mnémoniques + exercices d'ordonnancement
+  parcours.js       # parcours guidé en 12 escales
+  mindset.js        # drills d'élimination + reformulations manager
   progress.js       # persistance de la progression (localStorage)
 data/
   domain1..8.js     # contenu pédagogique des 8 domaines (leçons, quiz, flashcards)
   scenarios.js      # études de cas réalistes
   memo.js           # mnémoniques et séquences à connaître
+  mindset.js        # principes, drills et reformulations
   glossary.js       # glossaire
   SCHEMA.md         # schéma de données des domaines
 ```
