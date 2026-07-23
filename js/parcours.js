@@ -14,7 +14,8 @@ const Parcours = (() => {
       activites: [
         { label: "Lire la Méthode (plan d'étude + stratégie jour J)", href: "#/methode", done: () => Progress.visited("methode") },
         { label: "Découvrir les 10 principes du Mindset CISSP", href: "#/mindset", done: () => Progress.visited("mindset") },
-        { label: "Réussir 3 drills « éliminez les 2 pièges »", href: "#/mindset/drills", done: () => Progress.mindsetCount("drills") >= 3 }
+        { label: "Réussir 3 drills « éliminez les 2 pièges »", href: "#/mindset/drills", done: () => Progress.mindsetCount("drills") >= 3 },
+        { label: "Réussir 3 décodages de question (repérer le mot-opérateur)", href: "#/mindset/decoder", done: () => Progress.mindsetCount("decoder") >= 3 }
       ]
     });
 
@@ -46,7 +47,8 @@ const Parcours = (() => {
         { label: "Réviser au moins 30 flashcards et vider la file du jour", href: "#/flashcards", done: () => Progress.reviewedCount() >= 30 && Flashcards.dueTotal() === 0 },
         { label: "Réussir 10 drills d'élimination au total", href: "#/mindset/drills", done: () => Progress.mindsetCount("drills") >= 10 },
         { label: "Réussir 5 reformulations « parler comme un CISSP »", href: "#/mindset/reformulations", done: () => Progress.mindsetCount("reform") >= 5 },
-        { label: "Réussir tous les exercices d'ordonnancement du Mémo", href: "#/memo/ordres", done: () => ((CISSP_DATA.memo || {}).ordres || []).every(o => Progress.memoDone(o.id)) }
+        { label: "Réussir tous les exercices d'ordonnancement du Mémo", href: "#/memo/ordres", done: () => ((CISSP_DATA.memo || {}).ordres || []).every(o => Progress.memoDone(o.id)) },
+        { label: "Vider le journal d'erreurs (rejouer jusqu'à 0 question en attente)", href: "#/erreurs", done: () => Progress.errorTotal() > 0 && Progress.errors().length === 0 }
       ]
     });
 

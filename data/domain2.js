@@ -352,6 +352,20 @@ window.CISSP_DATA.domains[2] = {
         },
         {
           type: "standard",
+          titre: "Localisation, résidence et souveraineté des données",
+          points: [
+            "Data localization : la LOI impose que la donnée reste dans le pays (ex. Russie, Chine)",
+            "Data residency : CHOIX de l'organisation du lieu de stockage (conformité, latence, contrat)",
+            "Data sovereignty : la donnée est soumise aux LOIS du pays où elle réside physiquement",
+            "Cloud : les régions et zones du provider déterminent quelles juridictions s'appliquent",
+            "Conflits de lois : CLOUD Act américain vs GDPR européen sur l'accès aux données"
+          ],
+          narration:
+            "Trois notions proches mais distinctes à bien séparer pour l'examen. La data localization est une exigence légale : certains pays, comme la Russie ou la Chine, imposent que les données de leurs citoyens soient stockées et parfois traitées sur leur territoire. La data residency, elle, relève du choix de l'organisation : décider où stocker ses données pour des raisons de conformité, de latence ou de contrat. Enfin, la data sovereignty est le principe selon lequel une donnée est soumise aux lois du pays où elle réside physiquement. Dans le cloud, le choix des régions du fournisseur détermine donc quelles juridictions peuvent s'appliquer à vos données. Attention aux conflits de lois : le CLOUD Act américain peut obliger un fournisseur américain à remettre des données stockées en Europe, ce qui entre en tension directe avec le GDPR. D'où l'intérêt de clauses contractuelles solides, du chiffrement avec des clés gérées par le client, et d'une sélection réfléchie des régions cloud.",
+          astuce: "💡 Conseil examen : localization = obligation légale de rester dans le pays ; residency = choix du lieu de stockage ; sovereignty = les lois locales s'appliquent à la donnée."
+        },
+        {
+          type: "standard",
           titre: "Maintenance et rétention",
           points: [
             "Data maintenance : soin continu de la donnée à travers son cycle de vie",
@@ -442,6 +456,7 @@ window.CISSP_DATA.domains[2] = {
           points: [
             "Cycle de vie : création, classification et stockage, utilisation, archivage, destruction",
             "Ne pas collecter sans but clair ; sauvegardes sur site et hors site",
+            "Localization (obligation légale), residency (choix), sovereignty (lois locales) — attention CLOUD Act vs GDPR",
             "Rétention : aussi longtemps que nécessaire, pas plus",
             "Trois états : at rest et in transit se chiffrent, in use est le plus dur à protéger",
             "Rémanence et émanations : slack space, TEMPEST, Van Eck phreaking"
@@ -1129,6 +1144,32 @@ window.CISSP_DATA.domains[2] = {
       explication:
         "Le suivi des actifs logiciels vise deux risques : l'usage au-delà des licences acquises, source de contentieux juridique, et la présence de logiciels non autorisés, source de vulnérabilités. Les gains d'achat ou de performance sont accessoires par rapport à ces enjeux de conformité et de sécurité.",
       difficulte: 2
+    },
+    {
+      q: "Un pays exige par la loi que les données personnelles de ses citoyens soient stockées et traitées exclusivement sur son territoire. De quel concept s'agit-il ?",
+      choix: [
+        "Data sovereignty",
+        "Data localization",
+        "Data residency",
+        "Data remanence"
+      ],
+      reponse: 1,
+      explication:
+        "La data localization est l'exigence LÉGALE de conserver les données dans les frontières du pays (ex. Russie, Chine). La data sovereignty est le principe général selon lequel la donnée est soumise aux lois du pays où elle réside ; la data residency est le CHOIX par l'organisation du lieu de stockage ; la data remanence concerne les résidus de données après effacement.",
+      difficulte: 2
+    },
+    {
+      q: "Une entreprise européenne stocke des données personnelles chez un fournisseur cloud américain, dans une région située dans l'Union européenne. Quelle est la MEILLEURE mesure pour réduire le risque de conflit entre le CLOUD Act et le GDPR ?",
+      choix: [
+        "Se fier uniquement à la localisation européenne de la région cloud",
+        "Chiffrer les données avec des clés gérées et conservées par le client, complété par des clauses contractuelles",
+        "Interdire tout usage du cloud pour les données personnelles",
+        "Transférer la responsabilité de conformité au fournisseur cloud"
+      ],
+      reponse: 1,
+      explication:
+        "Le CLOUD Act peut contraindre un fournisseur américain à remettre des données même stockées en Europe : la localisation seule ne suffit donc pas. Le chiffrement avec des clés détenues par le client rend les données remises inexploitables, et les clauses contractuelles encadrent les transferts. Interdire le cloud est disproportionné, et la responsabilité de conformité du controller ne se transfère jamais.",
+      difficulte: 3
     }
   ],
 
@@ -1231,6 +1272,14 @@ window.CISSP_DATA.domains[2] = {
     {
       recto: "Defensible destruction",
       verso: "Élimination des données de manière contrôlée, légalement défendable et conforme aux réglementations — la méthode de destruction doit être définie par la politique selon la classification (NIST SP 800-88)."
+    },
+    {
+      recto: "Data localization vs Data residency vs Data sovereignty",
+      verso: "Localization : la LOI impose de garder la donnée dans le pays (Russie, Chine). Residency : CHOIX par l'organisation du lieu de stockage (conformité, latence). Sovereignty : la donnée est soumise aux LOIS du pays où elle réside physiquement."
+    },
+    {
+      recto: "CLOUD Act vs GDPR",
+      verso: "Le CLOUD Act américain peut obliger un fournisseur US à remettre des données même stockées hors des États-Unis, en tension avec le GDPR. Mitigations : clauses contractuelles, choix des régions cloud, chiffrement avec clés gérées par le client."
     }
   ]
 };

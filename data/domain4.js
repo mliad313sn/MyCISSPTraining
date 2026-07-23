@@ -291,6 +291,29 @@ window.CISSP_DATA.domains[4] = {
           explication: "Seul ESP fournit le chiffrement, donc la confidentialité ; entre deux passerelles, le mode tunnel protège le paquet entier, en-tête compris. AH n'offre aucun chiffrement, quel que soit le mode, et ISAKMP est un cadre de gestion de clés, pas un mode de protection du trafic."
         },
         {
+          type: "standard",
+          titre: "Protocoles convergés : FCoE, iSCSI, MPLS, VoIP",
+          points: [
+            "Convergence : faire voyager des protocoles spécialisés sur l'infrastructure Ethernet/IP standard",
+            "FCoE (Fibre Channel over Ethernet) : trafic de stockage Fibre Channel encapsulé dans des trames Ethernet — réseau 10 Gbps minimum, reste en couche 2",
+            "iSCSI : commandes de stockage SCSI encapsulées dans TCP/IP — un SAN économique sur un réseau IP standard, sans matériel dédié",
+            "MPLS : commutation rapide par labels, indépendante du protocole transporté ; VoIP : la voix dans des paquets IP ordinaires",
+            "Risque : le trafic convergé hérite des attaques du réseau porteur — segmentation et chiffrement obligatoires"
+          ],
+          narration: "Parlons maintenant des protocoles convergés, un item explicite de l'outline officiel. La convergence consiste à faire transiter sur un même réseau Ethernet et IP des trafics historiquement séparés, comme le stockage ou la voix. FCoE, Fibre Channel over Ethernet, encapsule le trafic de stockage Fibre Channel directement dans des trames Ethernet à haut débit, en restant en couche deux. iSCSI, lui, encapsule les commandes SCSI dans TCP sur IP : on obtient un réseau de stockage, un SAN, sur une infrastructure IP tout à fait ordinaire et bien moins coûteuse. MPLS commute les paquets par labels sans se soucier du protocole transporté, et la voix sur IP est l'exemple le plus quotidien de convergence. Retenez le revers de la médaille : un trafic convergé hérite de toutes les attaques du réseau IP, il faut donc le segmenter et le chiffrer.",
+          astuce: "💡 Conseil examen : « stockage SCSI sur un réseau IP standard » égale iSCSI ; « stockage sur Ethernet haut débit, couche 2 » égale FCoE."
+        },
+        {
+          type: "question",
+          titre: "Contrôle de connaissance",
+          points: ["Reconnaître le bon protocole convergé."],
+          narration: "Question type de l'examen sur les protocoles convergés. Lisez bien l'indice : réseau IP standard, sans matériel dédié.",
+          q: "Quel protocole transporte des commandes de stockage SCSI sur un réseau IP standard, sans matériel dédié ?",
+          choix: ["FCoE", "iSCSI", "MPLS", "SRTP"],
+          reponse: 1,
+          explication: "iSCSI encapsule les commandes SCSI dans TCP/IP : n'importe quel réseau IP standard peut ainsi porter un SAN, sans équipement spécialisé. FCoE encapsule le Fibre Channel dans des trames Ethernet (couche 2, réseau 10 Gbps dédié, pas IP), MPLS est une technique de commutation par labels, et SRTP sécurise les flux média de la VoIP."
+        },
+        {
           type: "resume",
           titre: "Résumé de la leçon",
           points: [
@@ -298,6 +321,7 @@ window.CISSP_DATA.domains[4] = {
             "Unicast, broadcast, multicast, anycast : quatre modes de diffusion",
             "TLS 1.2/1.3 et cryptographie hybride pour le web",
             "IPsec : AH pour l'authentification, ESP pour le chiffrement, transport ou tunnel",
+            "Protocoles convergés : FCoE (stockage sur Ethernet), iSCSI (SCSI sur TCP/IP), MPLS, VoIP",
             "DNSSEC, SPF, DKIM, DMARC et S/MIME sécurisent DNS et messagerie"
           ],
           narration: "En résumé, IP fournit l'acheminement mais aucune sécurité intrinsèque. Vous savez maintenant lire une adresse IPv4 en notation CIDR, situer les plages privées, et distinguer les quatre modes de diffusion jusqu'à l'anycast des CDN. Côté protection, TLS règne sur le web, IPsec sur les VPN avec son duo AH et ESP, SSH sur l'administration, et le trio SPF, DKIM, DMARC défend la messagerie. Ces protocoles reviendront sans cesse dans les questions du domaine."
@@ -333,6 +357,18 @@ window.CISSP_DATA.domains[4] = {
             "Screened subnet (DMZ) : zone tampon entre Internet et le réseau interne"
           ],
           narration: "Commençons par la segmentation physique. Administrer ses équipements in-band, c'est-à-dire via le même réseau que les données de production, est pratique mais risqué ; l'administration out-of-band, sur un réseau dédié, est nettement plus sûre. À l'extrême, l'air gap isole totalement un segment, physiquement et logiquement : c'est la norme pour les systèmes de contrôle industriels sensibles. Enfin, le screened subnet, l'ancienne DMZ, place les serveurs exposés à Internet dans une zone tampon encadrée par des pare-feux, afin de protéger le réseau interne."
+        },
+        {
+          type: "standard",
+          titre: "Protocoles industriels (ICS) : Modbus et DNP3",
+          points: [
+            "Modbus : protocole de communication des automates (PLC), en série ou sur TCP — conçu SANS authentification ni chiffrement",
+            "DNP3 : supervision SCADA des réseaux d'électricité et d'eau — lui aussi conçu sans sécurité native",
+            "Impossible de « patcher » ces protocoles : la parade est l'isolement et la segmentation stricte",
+            "Organiser les zones OT/IT selon le modèle Purdue, vu au domaine 3 ; air gap ou passerelles contrôlées"
+          ],
+          narration: "Les environnements industriels utilisent des protocoles nés à une époque où la sécurité n'était pas une préoccupation. Modbus, le langage des automates programmables, et DNP3, très répandu dans la supervision des réseaux d'électricité et d'eau, ne prévoient nativement ni authentification ni chiffrement : quiconque parle le protocole peut envoyer des commandes. Comme on ne peut pas réécrire ces protocoles ni redémarrer une usine pour les patcher, la réponse du CISSP est architecturale : isoler et segmenter strictement les réseaux industriels, en organisant les zones selon le modèle Purdue vu au domaine trois, avec au besoin un air gap ou des passerelles unidirectionnelles contrôlées.",
+          astuce: "💡 Conseil examen : face à Modbus ou DNP3, la MEILLEURE réponse n'est jamais « ajouter un antivirus » mais « isoler et segmenter » le réseau OT."
         },
         {
           type: "standard",
@@ -422,6 +458,7 @@ window.CISSP_DATA.domains[4] = {
           titre: "Résumé de la leçon",
           points: [
             "Segmentation physique : in-band, out-of-band, air gap, screened subnet",
+            "ICS : Modbus et DNP3 sans sécurité native — isoler et segmenter selon le modèle Purdue",
             "Segmentation logique : VLAN en couche 2, VRF en couche 3, domaines virtuels",
             "Microsegmentation et pare-feux distribués : socle du Zero Trust",
             "SDN : contrôle centralisé ; SD-WAN pour le WAN ; VXLAN pour étirer les segments",
@@ -787,6 +824,18 @@ window.CISSP_DATA.domains[4] = {
         },
         {
           type: "standard",
+          titre: "Authentification d'accès distant : PAP, CHAP, EAP",
+          points: [
+            "PAP (Password Authentication Protocol) : identifiants transmis EN CLAIR — jamais acceptable",
+            "CHAP (Challenge Handshake Authentication Protocol) : challenge-response, le secret ne circule jamais sur le réseau",
+            "CHAP ré-authentifie périodiquement en cours de session, contre le vol de session",
+            "EAP (Extensible Authentication Protocol) : un framework, pas une méthode — accueille certificats, cartes à puce, OTP"
+          ],
+          narration: "Qui dit accès distant dit authentification, et l'examen adore comparer trois sigles. PAP, le Password Authentication Protocol, transmet le nom d'utilisateur et le mot de passe en clair sur le réseau : il ne doit jamais être utilisé. CHAP, le Challenge Handshake Authentication Protocol, procède par défi-réponse : le serveur envoie un challenge, le client répond avec un haché combinant le challenge et le secret, si bien que le mot de passe ne circule jamais en clair ; CHAP ré-authentifie même périodiquement pendant la session pour déjouer le vol de connexion. EAP, enfin, n'est pas une méthode d'authentification mais un cadre extensible qui en accueille des dizaines, des certificats aux cartes à puce, comme nous l'avons vu avec 802.1X.",
+          astuce: "💡 Conseil examen : PAP égale mot de passe en clair, éliminez-le d'office ; CHAP égale challenge-response sans transmission du secret ; EAP égale framework."
+        },
+        {
+          type: "standard",
           titre: "Voix et collaboration : sécuriser la VoIP",
           points: [
             "VoIP : protocole convergé encapsulant la voix dans IP ; SIP établit les sessions",
@@ -815,6 +864,7 @@ window.CISSP_DATA.domains[4] = {
             "Pare-feux : stateless, stateful, NGFW, WAF ; proxys forward et reverse ; screened subnet",
             "NAC : preadmission ou postadmission, agent ou agentless, posture assessment",
             "VPN : IPsec, TLS, WireGuard ; méfiance envers le split tunneling",
+            "Authentification distante : PAP en clair (jamais), CHAP en challenge-response, EAP en framework",
             "VoIP : SIPS et SRTP ; accès distant via jumpbox et VDI ; tiers encadrés par MOU et ISA"
           ],
           narration: "Ce tour d'horizon clôt le domaine quatre. Vous savez situer chaque équipement sur la pile OSI, choisir le bon type de pare-feu selon la menace, et poser un NAC pour n'admettre que des postes conformes. Les canaux se protègent avec les bons protocoles : IPsec ou WireGuard pour les VPN, SIPS et SRTP pour la voix, et un cadre contractuel comme l'ISA pour les tiers. Gardez le réflexe du manager : défense en profondeur, moindre privilège et supervision permanente."
@@ -1161,6 +1211,61 @@ window.CISSP_DATA.domains[4] = {
       reponse: 1,
       explication: "Le chiffrement cellulaire s'arrête souvent à l'antenne et des tours peuvent être simulées pour des attaques on-path : la posture correcte est de traiter le réseau de l'opérateur comme non fiable et de chiffrer au-dessus, via TLS ou VPN. Interdire les mobiles est disproportionné, et la 5G améliore mais ne supprime pas le besoin de chiffrement applicatif.",
       difficulte: 2
+    },
+    {
+      q: "Une organisation veut déployer un réseau de stockage (SAN) en réutilisant son infrastructure IP existante, sans acheter de matériel Fibre Channel dédié. Quel protocole répond le MIEUX à ce besoin ?",
+      choix: ["FCoE", "iSCSI", "NFS sur UDP", "MPLS"],
+      reponse: 1,
+      explication: "iSCSI encapsule les commandes SCSI dans TCP/IP : un réseau IP standard suffit pour bâtir un SAN économique, sans matériel spécialisé. FCoE exige au contraire une infrastructure Ethernet 10 Gbps dédiée et du matériel compatible Fibre Channel, NFS est un partage de fichiers et non un protocole de stockage en mode bloc, et MPLS est une technique de commutation par labels, pas un protocole de stockage.",
+      difficulte: 2
+    },
+    {
+      q: "Quelle affirmation décrit le MIEUX FCoE (Fibre Channel over Ethernet) ?",
+      choix: [
+        "Il encapsule les commandes SCSI dans TCP/IP et traverse les routeurs",
+        "Il encapsule le trafic Fibre Channel dans des trames Ethernet en couche 2, sur un réseau à 10 Gbps minimum",
+        "Il chiffre nativement le trafic de stockage avec TLS",
+        "Il remplace MPLS pour l'interconnexion des sites distants"
+      ],
+      reponse: 1,
+      explication: "FCoE fait converger le stockage Fibre Channel sur l'infrastructure Ethernet : les trames Fibre Channel sont encapsulées en couche 2, ce qui exige un réseau haut débit (10 Gbps minimum) et ne traverse pas nativement les routeurs IP. C'est iSCSI qui encapsule SCSI dans TCP/IP ; ni l'un ni l'autre ne chiffre nativement, et FCoE n'a aucun rapport avec MPLS.",
+      difficulte: 3
+    },
+    {
+      q: "Pourquoi CHAP est-il préférable à PAP pour authentifier un accès distant ?",
+      choix: [
+        "CHAP chiffre l'ensemble de la session de données",
+        "CHAP utilise un échange challenge-response : le mot de passe ne circule jamais en clair, et la ré-authentification est périodique",
+        "CHAP impose des certificats des deux côtés",
+        "CHAP est un framework qui accepte de nombreuses méthodes d'authentification"
+      ],
+      reponse: 1,
+      explication: "CHAP répond au challenge du serveur par un haché combinant le défi et le secret : le mot de passe n'est jamais transmis, contrairement à PAP qui l'envoie en clair, et CHAP ré-authentifie périodiquement en cours de session. CHAP n'assure pas le chiffrement des données de la session, n'utilise pas de certificats (c'est EAP-TLS), et le framework extensible décrit EAP, pas CHAP.",
+      difficulte: 2
+    },
+    {
+      q: "Quelle affirmation à propos d'EAP (Extensible Authentication Protocol) est EXACTE ?",
+      choix: [
+        "EAP est une méthode d'authentification par mot de passe chiffré",
+        "EAP est un framework d'authentification qui accueille de multiples méthodes, comme les certificats ou les cartes à puce",
+        "EAP transmet les identifiants en clair comme PAP",
+        "EAP est réservé aux réseaux sans fil"
+      ],
+      reponse: 1,
+      explication: "EAP n'est pas une méthode unique mais un cadre extensible : EAP-TLS avec certificats, PEAP avec tunnel TLS, méthodes à carte à puce ou OTP s'y branchent. Ce n'est ni un simple mot de passe chiffré, ni un protocole en clair, et il s'utilise aussi bien sur le filaire (802.1X sur les switches) que sur le Wi-Fi ou les liens VPN.",
+      difficulte: 2
+    },
+    {
+      q: "Un audit révèle que des automates industriels communiquent en Modbus et DNP3 sur le réseau de l'usine. Sachant que ces protocoles n'offrent ni authentification ni chiffrement, quelle est la MEILLEURE mesure à recommander ?",
+      choix: [
+        "Installer un antivirus sur les automates",
+        "Remplacer Modbus par HTTPS sur tous les équipements",
+        "Isoler et segmenter strictement le réseau OT, en s'appuyant sur le modèle Purdue",
+        "Activer WPA3 sur le réseau industriel"
+      ],
+      reponse: 2,
+      explication: "Modbus et DNP3 ont été conçus sans sécurité et ne peuvent généralement pas être corrigés ni remplacés sur des équipements industriels : la réponse architecturale est l'isolement et la segmentation stricte des réseaux OT, organisés en zones selon le modèle Purdue, avec des passerelles contrôlées vers l'IT. Les automates ne supportent pas d'antivirus, le remplacement protocolaire est irréaliste, et WPA3 ne concerne que le Wi-Fi.",
+      difficulte: 2
     }
   ],
 
@@ -1197,6 +1302,10 @@ window.CISSP_DATA.domains[4] = {
     { recto: "Split tunnel vs full tunnel", verso: "Full tunnel : tout le trafic du client passe par l'organisation. Split tunnel : accès simultané au réseau interne et à Internet en direct — risque de pont contournant les contrôles." },
     { recto: "SIPS et SRTP", verso: "SIPS : SIP chiffré par TLS, protège la signalisation VoIP. SRTP : extension de RTP ajoutant chiffrement, authentification et anti-rejeu aux flux audio et vidéo." },
     { recto: "MOU vs ISA", verso: "MOU (memorandum of understanding) : expression d'intention entre deux entités. ISA (interconnection security agreement) : déclaration formelle des exigences techniques et de sécurité d'une interconnexion de réseaux." },
-    { recto: "Cut-through / Store-and-forward / Fragment-free", verso: "Cut-through : transmet dès l'adresse lue (rapide, sans contrôle). Store-and-forward : reçoit tout, vérifie les erreurs, puis transmet. Fragment-free : vérifie les 64 premiers octets, compromis entre les deux." }
+    { recto: "Cut-through / Store-and-forward / Fragment-free", verso: "Cut-through : transmet dès l'adresse lue (rapide, sans contrôle). Store-and-forward : reçoit tout, vérifie les erreurs, puis transmet. Fragment-free : vérifie les 64 premiers octets, compromis entre les deux." },
+    { recto: "FCoE (Fibre Channel over Ethernet)", verso: "Protocole convergé qui encapsule le trafic de stockage Fibre Channel dans des trames Ethernet, en couche 2, sur un réseau à 10 Gbps minimum. Ne traverse pas nativement les routeurs IP." },
+    { recto: "iSCSI", verso: "Protocole convergé qui encapsule les commandes de stockage SCSI dans TCP/IP : permet de bâtir un SAN économique sur un réseau IP standard, sans matériel Fibre Channel dédié." },
+    { recto: "CHAP vs PAP", verso: "PAP : identifiants transmis EN CLAIR, à proscrire. CHAP : challenge-response, le serveur envoie un défi et le client répond par un haché (défi + secret) — le mot de passe ne circule jamais, avec ré-authentification périodique. EAP : framework accueillant de multiples méthodes." },
+    { recto: "Modbus / DNP3", verso: "Protocoles industriels (ICS/SCADA) : Modbus pour les automates (PLC), DNP3 pour la supervision des réseaux d'énergie et d'eau. Conçus sans authentification ni chiffrement : parade = isolement et segmentation stricte du réseau OT selon le modèle Purdue." }
   ]
 };

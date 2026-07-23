@@ -1005,6 +1005,172 @@ window.CISSP_DATA.domains[1] = {
             "Résumons cette dernière leçon. Le BCP se construit en quatre étapes, du cadrage à l'approbation par le plus haut niveau de la direction, avec la BIA en pivot central. La BIA produit les métriques clés : RTO pour le délai de restauration, RPO pour la perte de données acceptable, MTD pour la limite de survie de l'organisation. La priorité absolue reste la sécurité des personnes. Et le facteur humain se travaille dans la durée : sensibilisation pour tous, formation annuelle obligatoire, campagnes de phishing simulé, security champions et gamification, avec un contenu régulièrement mis à jour et des résultats mesurés. Bravo, vous avez terminé le tour du Domaine 1 : place aux quiz et aux flashcards pour ancrer tout cela."
         }
       ]
+    },
+
+    // ------------------------------------------------------------------
+    // Leçon 8 — Acteurs de la menace et ingénierie sociale
+    // ------------------------------------------------------------------
+    {
+      id: "d1-l8",
+      titre: "Acteurs de la menace et ingénierie sociale",
+      duree: 13,
+      slides: [
+        {
+          type: "intro",
+          titre: "Connaître son adversaire",
+          points: [
+            "Identifier QUI attaque : motivations, ressources, niveau de sophistication",
+            "Catalogue complet des attaques d'ingénierie sociale, très testé à l'examen",
+            "Bonus : entrapment vs enticement et trois lois américaines clés"
+          ],
+          narration:
+            "Dans cette leçon, nous changeons de perspective : nous passons du côté de l'adversaire. L'examen adore les questions du type : quel acteur de la menace est le plus probable dans ce scénario ? Pour y répondre, il faut connaître la taxonomie des threat actors, leurs motivations et leur niveau de sophistication. Nous passerons ensuite en revue le catalogue complet des attaques d'ingénierie sociale, du simple phishing aux deepfakes, avant de terminer sur la distinction juridique entre entrapment et enticement, et sur trois lois américaines incontournables."
+        },
+        {
+          type: "standard",
+          titre: "Taxonomie des threat actors, première partie",
+          points: [
+            "Script kiddies : outils tout faits, faible compétence, cibles opportunistes",
+            "Hacktivistes : motivation idéologique ou politique (défacement, DDoS, fuites)",
+            "Crime organisé : motivation financière avant tout (ransomware, fraude, vol de données)",
+            "État-nation / APT : ressources quasi illimitées, furtivité, persistance sur le long terme"
+          ],
+          narration:
+            "Commençons par les profils classiques. Les script kiddies sont des attaquants peu qualifiés qui utilisent des outils développés par d'autres ; ils sont opportunistes et bruyants, mais restent dangereux pour les systèmes mal protégés. Les hacktivistes agissent par conviction idéologique ou politique : leurs armes favorites sont le défacement de sites, le déni de service et la divulgation de documents. Le crime organisé, lui, est motivé par l'argent : ransomware, fraude, vol et revente de données. Enfin, les acteurs étatiques, souvent qualifiés d'APT, Advanced Persistent Threat, disposent de ressources quasi illimitées, visent des objectifs d'espionnage ou de sabotage, et privilégient la furtivité et la persistance dans la durée.",
+          astuce: "💡 Conseil examen : « furtif, patient, ciblé, très financé » = état-nation/APT. « Motivé par l'argent » = crime organisé. « Message politique » = hacktiviste."
+        },
+        {
+          type: "standard",
+          titre: "Taxonomie, deuxième partie : insiders et concurrents",
+          points: [
+            "Insider threat malveillant : employé qui abuse volontairement de son accès légitime (vengeance, argent)",
+            "Insider négligent : sans intention de nuire, il cause l'incident par erreur ou contournement des règles",
+            "Concurrents : espionnage industriel, vol de trade secrets, débauchage d'employés clés",
+            "L'insider est souvent le PLUS dangereux : il a déjà l'accès et la connaissance interne"
+          ],
+          narration:
+            "Deux profils méritent une attention particulière. L'insider threat, la menace interne, se décline en deux variantes : l'insider malveillant abuse délibérément de son accès légitime, par vengeance après un licenciement, par appât du gain ou par idéologie ; l'insider négligent, lui, n'a aucune intention de nuire, mais provoque l'incident par erreur, par méconnaissance ou en contournant les règles pour aller plus vite. Retenez que la menace interne est souvent considérée comme la plus dangereuse, car l'insider possède déjà un accès autorisé et connaît l'organisation de l'intérieur. Enfin, les concurrents pratiquent l'espionnage industriel pour voler des trade secrets, un domaine couvert par l'Economic Espionage Act que nous avons vu dans la leçon sur les lois."
+        },
+        {
+          type: "schema",
+          titre: "Motivations et sophistication : la grille de lecture",
+          points: [
+            "À l'examen, on identifie l'acteur par sa motivation et ses moyens",
+            "Croisez toujours : qui, pourquoi, avec quelles ressources"
+          ],
+          schema: {
+            type: "grid",
+            items: [
+              "Script kiddie : reconnaissance/amusement — sophistication faible",
+              "Hacktiviste : idéologie, message — sophistication variable",
+              "Crime organisé : argent — sophistication élevée",
+              "État-nation / APT : espionnage, sabotage — sophistication maximale",
+              "Insider : vengeance, argent, ou simple négligence — accès déjà acquis",
+              "Concurrent : avantage commercial, trade secrets — moyens ciblés"
+            ]
+          },
+          narration:
+            "Voici la grille de lecture à mémoriser. Face à un scénario d'examen, posez-vous trois questions : qui attaque, pourquoi, et avec quelles ressources. Un défacement revendiquant une cause : hacktiviste. Une demande de rançon : crime organisé. Une intrusion discrète qui dure des mois dans un ministère ou un industriel de la défense : état-nation. Un scan maladroit avec des outils publics : script kiddie. Une fuite de données commise par quelqu'un qui avait déjà les accès : insider. Et le vol ciblé d'une formule ou d'un procédé de fabrication : un concurrent. C'est ce raisonnement, motivation plus sophistication, qui donne la réponse la plus probable."
+        },
+        {
+          type: "standard",
+          titre: "La famille du phishing",
+          points: [
+            "Phishing : hameçonnage de masse, non ciblé, par e-mail",
+            "Spear phishing : ciblé sur une personne ou un groupe précis, message personnalisé",
+            "Whaling : spear phishing visant les dirigeants (CEO, CFO) — les « gros poissons »",
+            "Vishing : par téléphone ou VoIP ; Smishing : par SMS"
+          ],
+          narration:
+            "Entrons dans le catalogue de l'ingénierie sociale, en commençant par la famille du phishing. Le phishing classique est un hameçonnage de masse : le même e-mail frauduleux envoyé à des milliers de destinataires, en espérant que quelques-uns mordent. Le spear phishing est ciblé : l'attaquant personnalise son message pour une personne ou un groupe précis, après s'être renseigné sur sa victime. Le whaling est un spear phishing qui vise spécifiquement les gros poissons, c'est-à-dire les dirigeants, le CEO ou le CFO, souvent pour déclencher des virements frauduleux. Le vishing utilise le téléphone ou la voix sur IP, et le smishing passe par SMS.",
+          astuce: "💡 Distinction classique : spear phishing = ciblé sur quelqu'un ; whaling = ciblé sur un DIRIGEANT. Si la victime est un cadre exécutif, la réponse est whaling, pas spear phishing."
+        },
+        {
+          type: "standard",
+          titre: "Manipulations et attaques de proximité",
+          points: [
+            "Pretexting : inventer un scénario crédible (faux technicien, faux auditeur) pour obtenir info ou accès",
+            "Baiting : appâter avec un objet (clé USB piégée) ; Quid pro quo : échange d'un « service » contre des infos",
+            "Tailgating : suivre quelqu'un SANS son accord ; Piggybacking : AVEC son consentement",
+            "Shoulder surfing : observer par-dessus l'épaule ; Dumpster diving : fouiller les poubelles"
+          ],
+          narration:
+            "Poursuivons avec les manipulations et les attaques de proximité. Le pretexting consiste à inventer un scénario crédible, un prétexte : l'attaquant se fait passer pour un technicien du support, un auditeur ou un livreur afin d'obtenir des informations ou un accès. La nuance avec le phishing : le pretexting repose sur un scénario et un dialogue construits, pas seulement sur un message frauduleux. Le baiting appâte la victime avec un objet, typiquement une clé USB piégée abandonnée sur un parking. Le quid pro quo propose un échange : un faux service informatique contre vos identifiants. Le tailgating consiste à franchir une porte sécurisée en suivant un employé sans qu'il le sache, tandis que le piggybacking se fait avec son consentement, souvent par politesse. Ajoutez le shoulder surfing, l'observation par-dessus l'épaule, et le dumpster diving, la fouille des poubelles à la recherche de documents sensibles."
+        },
+        {
+          type: "standard",
+          titre: "Attaques indirectes et menaces émergentes",
+          points: [
+            "Watering hole : compromettre un site web que la cible visite habituellement",
+            "Typosquatting / URL hijacking : enregistrer des domaines proches (goggle.com) pour piéger les fautes de frappe",
+            "Deepfakes : audio ou vidéo synthétiques imitant une personne réelle",
+            "Vishing assisté par IA : clonage de voix d'un dirigeant pour ordonner un virement"
+          ],
+          narration:
+            "Terminons le catalogue avec les attaques indirectes et les menaces émergentes. Dans une attaque de type watering hole, le point d'eau, l'attaquant ne cible pas directement sa victime : il compromet un site web que la victime ou sa communauté visite régulièrement, comme un site professionnel de sa filière, et y dépose un code malveillant. Le typosquatting, ou URL hijacking, consiste à enregistrer des noms de domaine très proches du domaine légitime pour capter les fautes de frappe des utilisateurs et leur servir une fausse page. Enfin, les deepfakes utilisent l'intelligence artificielle pour générer des audios ou des vidéos imitant une personne réelle : combinés au vishing, ils permettent de cloner la voix d'un dirigeant et d'ordonner un virement urgent. La parade reste la même : des procédures de vérification par un canal indépendant, et une sensibilisation régulière."
+        },
+        {
+          type: "question",
+          titre: "Contrôle de connaissance",
+          points: ["Whaling ou spear phishing ?"],
+          narration:
+            "Vérifions la distinction la plus testée du catalogue.",
+          q: "Le directeur financier reçoit un e-mail personnalisé, prétendument envoyé par le CEO, lui demandant de valider en urgence un virement confidentiel. De quelle attaque s'agit-il ?",
+          choix: ["Phishing", "Whaling", "Vishing", "Pretexting"],
+          reponse: 1,
+          explication:
+            "Un message frauduleux ciblé et personnalisé visant un dirigeant, ici le CFO, est du whaling : la variante du spear phishing réservée aux « gros poissons ». Le phishing est massif et non ciblé, le vishing passe par le téléphone, et le pretexting repose sur un scénario interactif plutôt qu'un simple e-mail. Notez que ce schéma correspond aussi à la fraude dite BEC, Business Email Compromise."
+        },
+        {
+          type: "standard",
+          titre: "Entrapment vs Enticement : la frontière légale des honeypots",
+          points: [
+            "Enticement : l'attaquant a DÉJÀ l'intention de commettre le délit ; on lui offre une opportunité — LÉGAL",
+            "Entrapment : on INCITE une personne qui n'en avait pas l'intention à commettre le délit — ILLÉGAL",
+            "Un honeypot bien conçu pratique l'enticement, jamais l'entrapment",
+            "Enjeu : la recevabilité des preuves et la validité des poursuites"
+          ],
+          narration:
+            "Parlons maintenant d'une distinction juridique liée aux honeypots, ces systèmes pièges déployés pour attirer les attaquants. L'enticement, l'attrait, est légal : l'attaquant avait déjà l'intention de s'introduire, et le honeypot ne fait que lui offrir une cible tentante ; les preuves collectées restent recevables. L'entrapment, le piège incitatif, est illégal : il consiste à pousser une personne qui n'avait pas d'intention délictueuse à commettre le délit, par exemple en l'invitant activement à pénétrer un système ; c'est une défense recevable en justice qui peut faire échouer les poursuites. Retenez la formule : l'enticement exploite une intention préexistante, l'entrapment la crée. Un honeypot bien conçu attire sans jamais inciter.",
+          astuce: "💡 Mémo : ENTicement = TENtation légale d'un attaquant déjà décidé. ENTRAPment = TRAP illégal qui fabrique l'intention."
+        },
+        {
+          type: "standard",
+          titre: "Trois lois américaines complémentaires",
+          points: [
+            "CFAA (Computer Fraud and Abuse Act, 1986) : criminalise l'accès non autorisé aux ordinateurs, notamment fédéraux et financiers",
+            "ECPA (Electronic Communications Privacy Act, 1986) : protège les communications électroniques contre l'interception et la surveillance illégales",
+            "PATRIOT Act (2001) : élargit les pouvoirs de surveillance et d'enquête des autorités après le 11 septembre, et alourdit les peines du CFAA"
+          ],
+          narration:
+            "Complétons notre panorama légal avec trois lois américaines qui tombent régulièrement à l'examen. Le Computer Fraud and Abuse Act, le CFAA, de mille neuf cent quatre-vingt-six, est la grande loi pénale contre l'accès non autorisé aux systèmes informatiques, en particulier les ordinateurs du gouvernement fédéral et des institutions financières. L'Electronic Communications Privacy Act, l'ECPA, de la même année, protège les communications électroniques contre l'interception et la surveillance illégales, y compris par le gouvernement. Et le PATRIOT Act de deux mille un a considérablement élargi les pouvoirs de surveillance et d'enquête des autorités américaines après les attentats du onze septembre, tout en aggravant les sanctions prévues par le CFAA."
+        },
+        {
+          type: "question",
+          titre: "Contrôle de connaissance",
+          points: ["Identifier l'acteur le plus probable"],
+          narration:
+            "Une dernière mise en situation avant le résumé.",
+          q: "Un industriel de la défense découvre une intrusion discrète, active depuis 18 mois, utilisant des malwares sur mesure et exfiltrant des plans classifiés. Quel acteur de la menace est le PLUS probable ?",
+          choix: ["Script kiddie", "Hacktiviste", "État-nation (APT)", "Insider négligent"],
+          reponse: 2,
+          explication:
+            "Furtivité, persistance sur dix-huit mois, outils développés sur mesure et ciblage de secrets de défense : tous les marqueurs d'un acteur étatique de type APT sont réunis. Un script kiddie n'a ni la compétence ni la patience, un hacktiviste chercherait la visibilité et revendiquerait son action, et un insider négligent cause des incidents par erreur, pas une campagne d'exfiltration structurée."
+        },
+        {
+          type: "resume",
+          titre: "Ce qu'il faut retenir",
+          points: [
+            "Acteurs : script kiddie, hacktiviste, crime organisé (argent), état-nation/APT (furtif, persistant), insider (malveillant vs négligent), concurrent",
+            "Phishing massif ; spear phishing ciblé ; whaling = dirigeants ; vishing = voix ; smishing = SMS",
+            "Pretexting, baiting, quid pro quo, tailgating vs piggybacking, shoulder surfing, dumpster diving, watering hole, typosquatting, deepfakes",
+            "Enticement légal (intention préexistante), entrapment illégal (intention fabriquée)",
+            "CFAA : accès non autorisé ; ECPA : interception des communications ; PATRIOT Act : pouvoirs de surveillance élargis"
+          ],
+          narration:
+            "Résumons. Vous savez maintenant profiler les acteurs de la menace : le script kiddie opportuniste, le hacktiviste idéologique, le crime organisé motivé par l'argent, l'état-nation furtif et persistant, l'insider malveillant ou simplement négligent, et le concurrent en quête de trade secrets. Vous maîtrisez le catalogue de l'ingénierie sociale, du phishing de masse au whaling des dirigeants, en passant par le pretexting, le baiting, le tailgating et les attaques modernes comme le watering hole, le typosquatting et les deepfakes. Vous distinguez l'enticement, légal, de l'entrapment, illégal. Et vous connaissez les trois lois américaines clés : CFAA, ECPA et PATRIOT Act. Le meilleur contrôle contre tout cela reste un personnel sensibilisé et des procédures de vérification solides."
+        }
+      ]
     }
   ],
 
@@ -1449,6 +1615,69 @@ window.CISSP_DATA.domains[1] = {
       explication:
         "La Due Care est la pratique responsable : appliquer les contrôles, suivre les politiques, agir raisonnablement. La Due Diligence est le volet connaissance et planification : évaluer, documenter, structurer, ce qui permet aussi de prouver que la Due Care est exercée. La première proposition inverse les rôles, et les deux devoirs sont indissociables, pour l'organisation comme pour ses dirigeants.",
       difficulte: 2
+    },
+    {
+      q: "Le site web d'une agence gouvernementale est défiguré : la page d'accueil est remplacée par un message dénonçant la politique environnementale du pays. Quel acteur de la menace est le PLUS probable ?",
+      choix: ["Crime organisé", "Hacktiviste", "État-nation (APT)", "Script kiddie"],
+      reponse: 1,
+      explication:
+        "Un défacement accompagné d'un message revendicatif à caractère politique ou idéologique est la signature typique de l'hacktiviste : son objectif est la visibilité de sa cause. Le crime organisé cherche un gain financier et éviterait de se faire remarquer sans profit, un état-nation privilégie la furtivité et l'espionnage plutôt que la publicité, et un script kiddie agit par défi ou amusement, généralement sans message politique construit.",
+      difficulte: 1
+    },
+    {
+      q: "Des employés d'un sous-traitant aéronautique sont compromis après avoir visité un forum professionnel spécialisé que l'attaquant avait préalablement infecté. Comment appelle-t-on cette attaque ?",
+      choix: ["Spear phishing", "Typosquatting", "Watering hole", "Baiting"],
+      reponse: 2,
+      explication:
+        "Compromettre un site tiers légitime que la population cible visite habituellement, puis attendre que les victimes s'y « abreuvent », est une attaque de type watering hole (point d'eau). Le spear phishing enverrait un message ciblé directement aux victimes, le typosquatting exploiterait un nom de domaine ressemblant au site légitime, et le baiting utiliserait un objet piégé comme une clé USB.",
+      difficulte: 2
+    },
+    {
+      q: "Un individu se présente à l'accueil en se faisant passer pour un auditeur mandaté par le siège, avec un faux ordre de mission, et obtient un accès à la salle serveur. Quelle technique d'ingénierie sociale décrit le MIEUX ce scénario ?",
+      choix: ["Phishing", "Pretexting", "Quid pro quo", "Piggybacking"],
+      reponse: 1,
+      explication:
+        "L'attaquant a construit un scénario crédible et une fausse identité (un prétexte) pour obtenir un accès : c'est du pretexting. Le phishing repose sur un message électronique frauduleux et non sur un scénario joué en personne ; le quid pro quo propose un échange de service contre des informations ; et le piggybacking consiste à franchir un accès contrôlé avec le consentement d'un employé, sans nécessairement d'identité inventée.",
+      difficulte: 2
+    },
+    {
+      q: "Votre organisation déploie un honeypot. Le conseil juridique vous met en garde : quelle pratique rendrait les poursuites contre un attaquant IRRECEVABLES ?",
+      choix: [
+        "Laisser le honeypot visible avec des vulnérabilités attrayantes (enticement)",
+        "Journaliser toutes les actions de l'attaquant sur le honeypot",
+        "Inviter activement des personnes sans intention malveillante à pénétrer le système (entrapment)",
+        "Isoler le honeypot du réseau de production"
+      ],
+      reponse: 2,
+      explication:
+        "L'entrapment consiste à inciter une personne qui n'avait pas d'intention délictueuse à commettre l'infraction : c'est illégal et cela constitue une défense recevable qui fait échouer les poursuites. L'enticement, au contraire, se contente d'offrir une opportunité tentante à un attaquant déjà décidé : c'est légal. La journalisation et l'isolement du honeypot sont des bonnes pratiques qui renforcent, et non affaiblissent, le dossier.",
+      difficulte: 2
+    },
+    {
+      q: "Un employé du service comptabilité, sans aucune intention de nuire, envoie par erreur un fichier de paie complet à un destinataire externe. Comment qualifier cette menace ?",
+      choix: [
+        "Insider threat malveillant",
+        "Insider threat négligent",
+        "Espionnage par un concurrent",
+        "Advanced Persistent Threat"
+      ],
+      reponse: 1,
+      explication:
+        "Un collaborateur qui cause une fuite de données par erreur, sans intention hostile, est un insider négligent : la variante la plus fréquente de la menace interne, que l'on traite par la sensibilisation, le DLP et des contrôles préventifs. L'insider malveillant agit délibérément (vengeance, argent), le concurrent est un acteur externe motivé par l'avantage commercial, et l'APT désigne une campagne externe sophistiquée et persistante.",
+      difficulte: 1
+    },
+    {
+      q: "Quelle loi américaine criminalise principalement l'accès non autorisé aux systèmes informatiques fédéraux et des institutions financières ?",
+      choix: [
+        "ECPA (Electronic Communications Privacy Act)",
+        "CFAA (Computer Fraud and Abuse Act)",
+        "PATRIOT Act",
+        "GLBA (Gramm-Leach-Bliley Act)"
+      ],
+      reponse: 1,
+      explication:
+        "Le CFAA de 1986 est la grande loi pénale américaine contre l'accès non autorisé aux ordinateurs, en particulier ceux du gouvernement fédéral et des institutions financières. L'ECPA protège les communications électroniques contre l'interception illégale, le PATRIOT Act élargit les pouvoirs de surveillance des autorités (et aggrave les peines du CFAA) mais n'est pas la loi d'incrimination de base, et GLBA encadre la confidentialité des données dans le secteur financier.",
+      difficulte: 2
     }
   ],
 
@@ -1567,6 +1796,30 @@ window.CISSP_DATA.domains[1] = {
     {
       recto: "Awareness / Training / Education",
       verso: "Awareness : capter l'attention et installer les réflexes de sécurité chez tous. Training : apprendre à faire son travail conformément à la politique (obligatoire à l'embauche puis au moins annuel). Education : connaissances au-delà du poste, souvent liée à une certification."
+    },
+    {
+      recto: "Whaling",
+      verso: "Variante du spear phishing ciblant spécifiquement les dirigeants (CEO, CFO…), les « gros poissons », souvent pour déclencher des virements frauduleux (proche du BEC, Business Email Compromise). Distinction examen : spear phishing = ciblé sur quelqu'un ; whaling = ciblé sur un DIRIGEANT."
+    },
+    {
+      recto: "Pretexting",
+      verso: "Ingénierie sociale fondée sur un scénario inventé mais crédible (faux technicien du support, faux auditeur, faux livreur) pour obtenir des informations ou un accès. Différence avec le phishing : le pretexting repose sur un prétexte et un dialogue construits, pas seulement sur un message frauduleux."
+    },
+    {
+      recto: "Watering hole attack",
+      verso: "Attaque indirecte : l'attaquant compromet un site web légitime que la cible ou sa communauté visite habituellement (le « point d'eau ») et y dépose un code malveillant, puis attend que les victimes s'y rendent d'elles-mêmes."
+    },
+    {
+      recto: "Typosquatting / URL hijacking",
+      verso: "Enregistrement de noms de domaine très proches d'un domaine légitime (ex. goggle.com) pour capter les fautes de frappe des utilisateurs et les diriger vers une fausse page (vol d'identifiants, malware, publicité). Contre-mesures : enregistrement défensif des variantes, surveillance des domaines."
+    },
+    {
+      recto: "Entrapment vs Enticement",
+      verso: "Enticement (LÉGAL) : offrir une opportunité tentante (ex. honeypot) à un attaquant qui avait DÉJÀ l'intention d'agir — preuves recevables. Entrapment (ILLÉGAL) : inciter une personne sans intention délictueuse à commettre l'infraction — défense recevable qui fait échouer les poursuites. Un honeypot bien conçu attire sans inciter."
+    },
+    {
+      recto: "Insider threat (malveillant vs négligent)",
+      verso: "Menace interne, souvent la plus dangereuse car l'insider a déjà un accès légitime et la connaissance de l'organisation. Malveillant : abuse volontairement de son accès (vengeance, argent, idéologie). Négligent : cause l'incident par erreur ou contournement des règles, sans intention de nuire. Parades : least privilege, DLP, sensibilisation, monitoring, offboarding rigoureux."
     }
   ]
 };

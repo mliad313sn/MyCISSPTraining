@@ -28,17 +28,20 @@ const App = (() => {
       case "mindset":
         if (parts[1] === "drills") Mindset.startDrill();
         else if (parts[1] === "reformulations") Mindset.startReform();
+        else if (parts[1] === "decoder") Mindset.startDecoder();
         else Mindset.list(parts[1]);
         break;
       case "examen": Exam.home(); break;
       case "glossaire": renderGlossary(); break;
+      case "erreurs": renderErrors(); break;
+      case "rejouer-erreurs": Quiz.openErrors(); break;
       case "methode": renderMethod(); break;
       default: renderHome();
     }
   }
 
   function setActiveNav(view) {
-    const map = { "": "accueil", parcours: "parcours", domaines: "domaines", domaine: "domaines", lecon: "domaines", quiz: "domaines", flashcards: "flashcards", scenarios: "scenarios", memo: "memo", mindset: "mindset", examen: "examen", glossaire: "glossaire", methode: "methode" };
+    const map = { "": "accueil", parcours: "parcours", domaines: "domaines", domaine: "domaines", lecon: "domaines", quiz: "domaines", flashcards: "flashcards", scenarios: "scenarios", memo: "memo", mindset: "mindset", examen: "examen", erreurs: "examen", "rejouer-erreurs": "examen", glossaire: "glossaire", methode: "methode" };
     document.querySelectorAll(".topnav a").forEach(a =>
       a.classList.toggle("active", a.dataset.route === (map[view] || "")));
   }
@@ -54,6 +57,14 @@ const App = (() => {
     const totalCards = ds.reduce((s, d) => s + d.flashcards.length, 0);
     const exams = Progress.exams();
     const lastExam = exams[exams.length - 1];
+    const nbErreurs = Progress.errors().length;
+
+    // score de préparation : moyenne par domaine (leçons + meilleur quiz) pondérée
+    // par le meilleur examen blanc complet — vert à partir de 80
+    const base = ds.reduce((s, d) => s + Math.min(100, 0.5 * Progress.domainPct(d) + 0.5 * Progress.quizBest(d.id)), 0) / ds.length;
+    const bestFull = Math.max(0, ...exams.filter(e => e.total >= 100).map(e => e.pct));
+    const readiness = Math.round(0.7 * base + 0.3 * bestFull);
+    const readyColor = readiness >= 80 ? "var(--ok)" : readiness >= 50 ? "var(--warn)" : "var(--ko)";
 
     // prochaine leçon à suivre
     let next = null;
@@ -76,11 +87,11 @@ const App = (() => {
       </section>
 
       <div class="stats-row">
+        <div class="stat"><div class="num" style="color:${readyColor}">${readiness}%</div><div class="lbl">Score de préparation</div></div>
         <div class="stat"><div class="num">${pct}%</div><div class="lbl">Progression du cours</div></div>
-        <div class="stat"><div class="num">${totalLecons}</div><div class="lbl">Leçons vidéo</div></div>
         <div class="stat"><div class="num">${totalQuiz}</div><div class="lbl">Questions d'entraînement</div></div>
-        <div class="stat"><div class="num">${totalCards}</div><div class="lbl">Flashcards</div></div>
         <div class="stat"><div class="num">${Flashcards.dueTotal()}</div><div class="lbl">Cartes à réviser aujourd'hui</div></div>
+        <div class="stat" style="${nbErreurs ? "border-color:var(--ko)" : ""}"><div class="num" style="${nbErreurs ? "color:var(--ko)" : ""}">${nbErreurs}</div><div class="lbl"><a href="#/erreurs" style="color:inherit">Erreurs à retravailler</a></div></div>
         <div class="stat"><div class="num">${lastExam ? lastExam.pct + "%" : "—"}</div><div class="lbl">Dernier examen blanc</div></div>
       </div>
 
@@ -105,6 +116,11 @@ const App = (() => {
           <a class="btn secondary" href="#/memo">Mémoriser</a>
         </div>
         <div class="card" style="text-align:center">
+          <div style="font-size:2rem">📓</div><h3>Journal d'erreurs</h3>
+          <p style="color:var(--text-dim);font-size:.9rem;margin:.4rem 0 1rem">${nbErreurs ? nbErreurs + " question(s) ratée(s) à rejouer jusqu'à zéro." : "Vos questions ratées s'enregistrent ici automatiquement."}</p>
+          <a class="btn secondary" href="#/erreurs">Retravailler</a>
+        </div>
+        <div class="card" style="text-align:center">
           <div style="font-size:2rem">🎯</div><h3>Examen blanc</h3>
           <p style="color:var(--text-dim);font-size:.9rem;margin:.4rem 0 1rem">Simulation chronométrée, tirage pondéré comme le vrai examen.</p>
           <a class="btn secondary" href="#/examen">Se tester</a>
@@ -120,9 +136,11 @@ const App = (() => {
   function domainCard(d) {
     const pct = Progress.domainPct(d);
     const best = Progress.quizBest(d.id);
+    const pret = pct === 100 && best >= 80;
     return `
       <div class="card domain-card" style="--dc:${d.couleur}" onclick="App.nav('#/domaine/${d.id}')">
-        <div class="dc-head"><span class="dc-icon">${d.icone}</span><span class="badge">${d.code} · ${d.poids}</span></div>
+        <div class="dc-head"><span class="dc-icon">${d.icone}</span><span class="badge">${d.code} · ${d.poids}</span>
+          ${pret ? `<span class="badge" style="color:var(--ok);border-color:var(--ok)">✅ prêt</span>` : ""}</div>
         <h3>${esc(d.titre)}</h3>
         <div class="dc-en">${esc(d.titreEn)}</div>
         <div class="progressbar"><span style="width:${pct}%"></span></div>
@@ -198,6 +216,40 @@ const App = (() => {
           </div>
         </div>
       </div>`;
+  }
+
+  /* ---------- Journal d'erreurs ---------- */
+  function renderErrors() {
+    const errs = Progress.errors();
+    document.getElementById("app").innerHTML = `
+      <h1 class="page-title">📓 Mon journal d'erreurs</h1>
+      <p class="page-sub">Chaque question ratée (quiz ou examen blanc) atterrit ici automatiquement.
+      Rejouez-les régulièrement : une bonne réponse la fait sortir du journal. Un journal vide avant l'examen,
+      c'est le meilleur indicateur de préparation.</p>
+      ${errs.length ? `
+        <div style="display:flex;gap:.8rem;align-items:center;margin-bottom:1.2rem;flex-wrap:wrap">
+          <a class="btn" href="#/rejouer-erreurs">🔁 Rejouer mes erreurs (${Math.min(20, errs.length)} questions)</a>
+          <span class="badge">${errs.length} question(s) à retravailler</span>
+        </div>
+        ${errs.map(e => `
+          <div class="card" style="margin-bottom:.8rem">
+            <div style="display:flex;gap:.5rem;align-items:center;margin-bottom:.4rem">
+              ${e.q.domCode ? `<span class="badge">${e.q.domCode}</span>` : ""}
+              <span class="badge" style="color:var(--ko);border-color:var(--ko)">ratée ${e.fails}×</span>
+            </div>
+            <p class="q-text">${esc(e.q.q)}</p>
+            <p style="color:var(--ok);font-size:.93rem">Bonne réponse : ${esc(e.q.choix[e.q.reponse])}</p>
+            <div class="explication">${esc(e.q.explication)}</div>
+          </div>`).join("")}`
+      : `<div class="card" style="text-align:center;padding:2.5rem">
+          <div style="font-size:3rem">🌤</div>
+          <h3>Journal vide — bravo !</h3>
+          <p style="color:var(--text-dim);margin-top:.4rem">${Progress.errorTotal()
+            ? "Toutes vos erreurs passées ont été corrigées. Continuez les quiz pour en débusquer d'autres."
+            : "Faites des quiz et des examens blancs : vos erreurs viendront s'enregistrer ici pour être retravaillées."}</p>
+          <a class="btn" style="margin-top:1rem" href="#/domaines">Aller m'entraîner</a>
+        </div>`}`;
+    window.scrollTo(0, 0);
   }
 
   /* ---------- Glossaire ---------- */

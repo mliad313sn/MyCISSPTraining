@@ -18,7 +18,15 @@ const Progress = (() => {
     s.memo = s.memo || {};         // { "osi": true } — exercices d'ordonnancement réussis
     s.mindset = s.mindset || {};   // { drills: nbFaits, reform: nbFaits }
     s.visites = s.visites || {};   // { methode: true, mindset: true }
+    s.errlog = s.errlog || {};     // journal d'erreurs : { "<clé question>": { q, fails, ts } }
+    s.errTotal = s.errTotal || 0;  // nb total d'erreurs jamais enregistrées
     return s;
+  }
+
+  function qKey(text) {
+    let h = 5381;
+    for (let i = 0; i < text.length; i++) h = ((h << 5) + h + text.charCodeAt(i)) >>> 0;
+    return "q" + h.toString(36);
   }
 
   // Répétition espacée (Leitner) : intervalles en jours selon la boîte
@@ -73,6 +81,25 @@ const Progress = (() => {
     markMemo(id) { const s = state(); s.memo[id] = true; save(s); },
     memoDone(id) { return !!state().memo[id]; },
     memoCount() { return Object.keys(state().memo).length; },
+    /* ---- Journal d'erreurs : chaque question ratée y entre,
+       une bonne réponse ultérieure l'en sort ---- */
+    recordError(q) {
+      const s = state();
+      const k = qKey(q.q);
+      const e = s.errlog[k] || { q, fails: 0, ts: Date.now() };
+      e.fails++; e.ts = Date.now();
+      s.errlog[k] = e; s.errTotal++; save(s);
+    },
+    clearError(qText) {
+      const s = state();
+      delete s.errlog[qKey(qText)]; save(s);
+    },
+    errors() {
+      const s = state();
+      return Object.values(s.errlog).sort((a, b) => b.ts - a.ts);
+    },
+    errorTotal() { return state().errTotal; },
+
     markVisited(page) { const s = state(); s.visites[page] = true; save(s); },
     visited(page) { return !!state().visites[page]; },
     reviewedCount() { return Object.keys(state().cards).length; },

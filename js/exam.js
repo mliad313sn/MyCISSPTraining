@@ -108,7 +108,9 @@ const Exam = (() => {
     tick();
     document.querySelectorAll(".choice").forEach(btn => {
       btn.onclick = () => {
-        answers.push({ q, chosen: +btn.dataset.i, good: +btn.dataset.i === q.reponse });
+        const good = +btn.dataset.i === q.reponse;
+        answers.push({ q, chosen: +btn.dataset.i, good });
+        if (good) Progress.clearError(q.q); else Progress.recordError(q);
         idx++;
         render();
       };

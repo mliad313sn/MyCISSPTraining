@@ -1,7 +1,7 @@
 /* Moteur de quiz par domaine : questions mélangées, correction immédiate,
    explication pédagogique, score enregistré. */
 const Quiz = (() => {
-  let domain, questions, idx, score, answers;
+  let domain, questions, idx, score, answers, custom;
 
   function shuffle(a) {
     a = a.slice();
@@ -14,7 +14,19 @@ const Quiz = (() => {
 
   function open(domainId, count) {
     domain = CISSP_DATA.domains[domainId];
+    custom = null;
     questions = shuffle(domain.quiz).slice(0, count || 15);
+    idx = 0; score = 0; answers = [];
+    render();
+  }
+
+  /* Rejouer le journal d'erreurs : une bonne réponse retire la question du journal */
+  function openErrors() {
+    const errs = Progress.errors();
+    if (!errs.length) { location.hash = "#/erreurs"; return; }
+    domain = null;
+    custom = { titre: "Mes erreurs", retour: "#/erreurs" };
+    questions = shuffle(errs.map(e => e.q)).slice(0, 20);
     idx = 0; score = 0; answers = [];
     render();
   }
@@ -26,9 +38,9 @@ const Quiz = (() => {
     const diff = ["", "🟢 facile", "🟡 moyen", "🔴 difficile"][q.difficulte || 2];
 
     app.innerHTML = `
-      <div class="quiz-view" style="max-width:820px;margin:0 auto;--dc:${domain.couleur}">
+      <div class="quiz-view" style="max-width:820px;margin:0 auto;--dc:${domain ? domain.couleur : "#4f8ef7"}">
         <div class="q-head">
-          <a class="btn secondary small" href="#/domaine/${domain.id}">← ${domain.code}</a>
+          <a class="btn secondary small" href="${custom ? custom.retour : "#/domaine/" + domain.id}">← ${custom ? custom.titre : domain.code}</a>
           <span class="badge">Question ${idx + 1} / ${questions.length}</span>
           <span class="badge">${diff}</span>
           <span class="badge">Score : ${score}</span>
@@ -55,6 +67,9 @@ const Quiz = (() => {
     const good = i === q.reponse;
     if (good) score++;
     answers.push({ q, chosen: i, good });
+    // journal d'erreurs : on entre quand on rate, on sort quand on réussit
+    if (good) Progress.clearError(q.q);
+    else Progress.recordError(domain ? { ...q, domCode: domain.code } : q);
     document.querySelectorAll(".quiz-view .choice").forEach((b, j) => {
       b.disabled = true;
       if (j === q.reponse) b.classList.add("correct");
@@ -71,7 +86,7 @@ const Quiz = (() => {
 
   function renderResult() {
     const pct = Math.round(100 * score / questions.length);
-    Progress.recordQuiz(domain.id, pct);
+    if (domain) Progress.recordQuiz(domain.id, pct);
     const verdict =
       pct >= 80 ? "Excellent ! Vous maîtrisez ce domaine — objectif ≥ 80 % atteint." :
       pct >= 65 ? "Bien. Encore un petit effort pour atteindre la zone de confort (≥ 80 %)." :
@@ -81,13 +96,15 @@ const Quiz = (() => {
     document.getElementById("app").innerHTML = `
       <div style="max-width:820px;margin:0 auto">
         <div class="card" style="text-align:center">
-          <h1 class="page-title">Résultat — ${esc(domain.titre)}</h1>
+          <h1 class="page-title">Résultat — ${esc(custom ? custom.titre : domain.titre)}</h1>
           <div class="quiz-result-ring" style="--p:${pct}"><span>${pct}%</span></div>
-          <p>${score} / ${questions.length} bonnes réponses. ${verdict}</p>
+          <p>${score} / ${questions.length} bonnes réponses. ${custom ? "Les questions réussies quittent votre journal d'erreurs — les autres y restent." : verdict}</p>
           <div style="display:flex;gap:.7rem;justify-content:center;margin-top:1rem;flex-wrap:wrap">
-            <button class="btn" onclick="Quiz.open(${domain.id})">Refaire un quiz</button>
-            <a class="btn secondary" href="#/domaine/${domain.id}">Retour au domaine</a>
-            <a class="btn secondary" href="#/examen">Examen blanc</a>
+            ${custom
+              ? `<a class="btn" href="#/erreurs">Retour au journal d'erreurs</a>`
+              : `<button class="btn" onclick="Quiz.open(${domain.id})">Refaire un quiz</button>
+                 <a class="btn secondary" href="#/domaine/${domain.id}">Retour au domaine</a>
+                 <a class="btn secondary" href="#/examen">Examen blanc</a>`}
           </div>
         </div>
         ${failed.length ? `
@@ -103,5 +120,5 @@ const Quiz = (() => {
     window.scrollTo(0, 0);
   }
 
-  return { open };
+  return { open, openErrors };
 })();

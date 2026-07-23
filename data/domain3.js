@@ -145,7 +145,7 @@ window.CISSP_DATA.domains[3] = {
     {
       id: "d3-l2",
       titre: "Modèles de sécurité et critères d'évaluation",
-      duree: 12,
+      duree: 16,
       slides: [
         {
           type: "intro",
@@ -208,6 +208,38 @@ window.CISSP_DATA.domains[3] = {
           astuce: "💡 Conseil examen : « conflit d'intérêts » ou « cabinet d'audit avec clients concurrents » = Brewer-Nash, sans hésiter."
         },
         {
+          type: "standard",
+          titre: "Modes de sécurité : dedicated et system high",
+          points: [
+            "Quatre modes pour les systèmes traitant de l'information classifiée : dedicated, system high, compartmented, multilevel",
+            "Trois critères à vérifier : clearance, approbation d'accès (access approval), need-to-know",
+            "Dedicated : clearance, approbation ET need-to-know pour TOUTES les informations du système",
+            "System high : clearance et approbation pour TOUT, mais need-to-know seulement pour CERTAINES informations"
+          ],
+          narration: "Les modes de sécurité décrivent comment un système gouvernemental ou militaire traite l'information classifiée, selon trois critères appliqués à chaque utilisateur : la clearance, c'est-à-dire l'habilitation, l'approbation d'accès formelle, et le need-to-know, le besoin d'en connaître. En mode dedicated, chaque utilisateur possède les trois pour la totalité des informations traitées par le système. En mode system high, chaque utilisateur possède la clearance et l'approbation pour tout, mais le need-to-know ne porte que sur une partie des informations. Retenez que dans ces deux modes, c'est l'organisation, et non le système, qui porte l'essentiel du contrôle."
+        },
+        {
+          type: "standard",
+          titre: "Modes de sécurité : compartmented et multilevel",
+          points: [
+            "Compartmented : clearance pour TOUTES les informations, mais approbation et need-to-know limités à chaque compartiment",
+            "Multilevel (controlled) : certains utilisateurs n'ont PAS la clearance pour toutes les informations",
+            "En multilevel, c'est le système (trusted computing base) qui applique le contrôle d'accès entre niveaux",
+            "Progression : du dedicated (tout le monde a tout) au multilevel (le système arbitre tout)"
+          ],
+          narration: "En mode compartmented, chaque utilisateur détient une clearance valide pour toutes les informations traitées par le système, mais l'approbation d'accès et le need-to-know sont limités aux seuls compartiments auxquels il accède. C'est la réponse attendue quand une question évoque une habilitation globale avec un besoin d'en connaître par compartiment. Enfin, en mode multilevel, aussi appelé controlled security mode, certains utilisateurs n'ont même pas la clearance pour toutes les informations : c'est alors le système lui-même, via sa trusted computing base, qui doit séparer les niveaux de classification et arbitrer chaque accès. Plus on descend vers le multilevel, plus la confiance repose sur la technique.",
+          astuce: "💡 Moyen mnémotechnique : de dedicated à multilevel, les exigences imposées aux UTILISATEURS diminuent et celles imposées au SYSTÈME augmentent."
+        },
+        {
+          type: "question",
+          titre: "Contrôle de connaissance",
+          q: "Quel mode de sécurité exige que chaque utilisateur possède une clearance valide pour TOUTES les informations traitées par le système, mais un need-to-know limité aux seuls compartiments auxquels il accède ?",
+          choix: ["Dedicated", "System high", "Compartmented", "Multilevel"],
+          reponse: 2,
+          explication: "Le mode compartmented exige une clearance pour toutes les informations du système, mais l'approbation d'accès et le need-to-know sont limités à chaque compartiment. En mode dedicated, l'utilisateur a clearance, approbation et need-to-know pour tout. En system high, seul le need-to-know est partiel. En multilevel, certains utilisateurs n'ont pas la clearance pour toutes les informations et le système applique lui-même le contrôle.",
+          narration: "Vérifions votre maîtrise des modes de sécurité, une question type de l'examen."
+        },
+        {
           type: "question",
           titre: "Contrôle de connaissance",
           q: "Dans le modèle Bell-LaPadula, que signifie la star (*) property ?",
@@ -215,6 +247,18 @@ window.CISSP_DATA.domains[3] = {
           reponse: 1,
           explication: "La star property de Bell-LaPadula interdit d'écrire vers un niveau inférieur (no write down), pour empêcher la fuite d'informations classifiées. No read up est la simple property de Bell-LaPadula. No read down et no write up appartiennent au modèle Biba, orienté intégrité.",
           narration: "Vérifions que les propriétés de Bell-LaPadula sont bien en place dans votre mémoire."
+        },
+        {
+          type: "standard",
+          titre: "TCSEC (Orange Book) et ITSEC : les ancêtres des Common Criteria",
+          points: [
+            "TCSEC (Orange Book, USA) : niveaux D à A1 — D protection minimale, C1/C2 discretionary protection, B1/B2/B3 mandatory protection, A1 verified design",
+            "TCSEC n'évaluait que la confidentialité et les systèmes autonomes",
+            "ITSEC (Europe) : évalue séparément la fonctionnalité (F) et l'assurance (E1 à E6), couvre aussi intégrité et disponibilité",
+            "Les Common Criteria (ISO 15408) ont remplacé les deux ; correspondance approximative : C2 ≈ EAL3, B1 ≈ EAL4, A1/E6 ≈ EAL7"
+          ],
+          narration: "Avant les Common Criteria, deux référentiels historiques dominaient. Le TCSEC américain, surnommé Orange Book, classait les systèmes de D, protection minimale, à A1, conception formellement vérifiée, en passant par les niveaux C de protection discrétionnaire et les niveaux B de protection obligatoire fondée sur les labels. Sa grande limite : il n'évaluait que la confidentialité. L'ITSEC européen a innové en évaluant séparément la fonctionnalité et l'assurance, notée E1 à E6, et en couvrant aussi l'intégrité et la disponibilité. Les Common Criteria ont fusionné et remplacé ces deux référentiels ; retenez la correspondance approximative : C2 équivaut à peu près à EAL3, B1 à EAL4, et A1, comme E6, à EAL7.",
+          astuce: "💡 Conseil examen : Orange Book = TCSEC = confidentialité uniquement, niveaux D à A1. Si la question parle d'un référentiel européen séparant fonctionnalité et assurance, c'est ITSEC."
         },
         {
           type: "standard",
@@ -256,10 +300,12 @@ window.CISSP_DATA.domains[3] = {
             "Bell-LaPadula = confidentialité : no read up, no write down",
             "Biba = intégrité : no read down, no write up",
             "Clark-Wilson = intégrité via TP, CDI, UDI, IVP ; Brewer-Nash = conflits d'intérêts",
+            "Modes de sécurité : dedicated (tout pour tous), system high (need-to-know partiel), compartmented (need-to-know par compartiment), multilevel (le système arbitre)",
+            "TCSEC (Orange Book, D à A1) et ITSEC (F + E1-E6) : ancêtres des Common Criteria",
             "Common Criteria : TOE, PP (besoins client), ST (promesses vendeur), EAL1 à EAL7",
             "ATO : autorisation d'exploiter, renouvelée après changement majeur ou brèche"
           ],
-          narration: "Faisons le point. Bell-LaPadula protège la confidentialité avec no read up et no write down. Biba protège l'intégrité avec les règles inverses. Clark-Wilson impose un programme intermédiaire entre sujet et objet, et Brewer-Nash prévient les conflits d'intérêts. Côté évaluation, les Common Criteria articulent la TOE, le protection profile du client, le security target du vendeur et les sept niveaux EAL. Enfin, l'ATO officialise l'acceptation du risque d'exploitation d'un système."
+          narration: "Faisons le point. Bell-LaPadula protège la confidentialité avec no read up et no write down. Biba protège l'intégrité avec les règles inverses. Clark-Wilson impose un programme intermédiaire entre sujet et objet, et Brewer-Nash prévient les conflits d'intérêts. Les quatre modes de sécurité, du dedicated au multilevel, décrivent qui, de l'organisation ou du système, porte le contrôle : retenez que le compartmented exige une clearance pour tout mais un need-to-know par compartiment. Côté évaluation, le TCSEC et l'ITSEC ont cédé la place aux Common Criteria, qui articulent la TOE, le protection profile du client, le security target du vendeur et les sept niveaux EAL. Enfin, l'ATO officialise l'acceptation du risque d'exploitation d'un système."
         }
       ]
     },
@@ -630,7 +676,7 @@ window.CISSP_DATA.domains[3] = {
     {
       id: "d3-l6",
       titre: "PKI, signatures, attaques cryptographiques et post-quantique",
-      duree: 14,
+      duree: 17,
       slides: [
         {
           type: "intro",
@@ -677,6 +723,18 @@ window.CISSP_DATA.domains[3] = {
             "Jamais de clé en clair hors du dispositif ; sauvegarder les clés ; cryptographic erase"
           ],
           narration: "La gestion des clés couvre tout leur cycle de vie : génération aléatoire exploitant tout le key space, distribution sécurisée, stockage protégé, rotation régulière, révocation, archivage et destruction. Trois méthodes principales existent pour échanger des clés secrètes : la distribution hors ligne, le chiffrement à clé publique et l'algorithme Diffie-Hellman. Le key escrow confie les clés à un tiers de confiance pour permettre leur récupération ; avec le contrôle m parmi n, on désigne n agents de récupération dont seulement m sont nécessaires. Retenez aussi que les clés ne doivent jamais apparaître en clair hors du dispositif cryptographique, qu'elles doivent être sauvegardées, et que le cryptographic erase détruit définitivement les clés pour rendre les données irrécupérables."
+        },
+        {
+          type: "standard",
+          titre: "Split knowledge et dual control",
+          points: [
+            "Split knowledge : la connaissance de la clé est FRAGMENTÉE — personne ne détient seul l'information complète",
+            "Dual control : l'UTILISATION d'une fonction critique exige la présence simultanée de deux personnes (ou plus)",
+            "Le contrôle m of n combine les deux : n fragments distribués, m requis pour reconstituer la clé",
+            "Historique : le Clipper chip (algorithme Skipjack, NSA, années 90) prévoyait un key escrow gouvernemental avec la clé scindée entre deux agences — abandonné après une forte opposition"
+          ],
+          narration: "Deux principes appliquent la séparation des tâches à la cryptographie. Le split knowledge fragmente la connaissance : chaque personne ne détient qu'une partie de la clé ou du secret, si bien que personne seule ne peut la reconstituer. Le dual control, lui, porte sur l'usage : une opération critique, comme l'activation d'un HSM ou la signature d'une root CA, exige la présence et l'action simultanées d'au moins deux personnes. Le contrôle m parmi n, vu à la diapositive précédente, combine élégamment les deux idées. Petit détour historique : dans les années quatre-vingt-dix, le gouvernement américain a proposé le Clipper chip, une puce de chiffrement fondée sur l'algorithme secret Skipjack, avec un key escrow gouvernemental où la clé de chaque puce était scindée entre deux agences fédérales, illustration même du split knowledge. Le projet a été abandonné face à l'opposition sur la vie privée et aux faiblesses découvertes.",
+          astuce: "💡 Conseil examen : split knowledge = personne ne SAIT tout ; dual control = personne ne FAIT rien seul. Les deux ensemble = m of n control."
         },
         {
           type: "standard",
@@ -738,6 +796,19 @@ window.CISSP_DATA.domains[3] = {
           narration: "L'informatique quantique exploite des qubits capables de représenter zéro et un simultanément. La quantum supremacy désigne sa capacité potentielle à résoudre facilement la factorisation des grands entiers et le logarithme discret, ce qui rendrait RSA et Diffie-Hellman obsolètes. La menace est déjà actuelle avec la stratégie harvest now, decrypt later : des adversaires interceptent et stockent aujourd'hui des données chiffrées pour les déchiffrer demain. La cryptographie post-quantique développe des algorithmes exécutables sur des ordinateurs classiques mais résistants aux attaques quantiques ; la cryptographie fondée sur les réseaux, lattice-based, en est l'exemple phare. À distinguer de la quantum key distribution, qui utilise la mécanique quantique elle-même pour échanger des clés : toute écoute perturbe l'état quantique mesuré et devient détectable."
         },
         {
+          type: "standard",
+          titre: "Cryptographie émergente : homomorphe et confidential computing",
+          points: [
+            "Homomorphic encryption : effectuer des CALCULS directement sur des données chiffrées, sans jamais les déchiffrer",
+            "Le résultat, une fois déchiffré, est identique au calcul sur les données en clair",
+            "Cas d'usage : sous-traiter l'analyse de données sensibles (santé, finance) à un cloud non totalement fiable",
+            "Confidential computing : protéger les données EN COURS DE TRAITEMENT grâce aux enclaves matérielles (TEE) du processeur",
+            "Complète le triptyque : chiffrement at rest, in transit, et désormais in use"
+          ],
+          narration: "Deux technologies émergentes comblent le dernier angle mort du chiffrement : la donnée en cours d'utilisation. Le chiffrement homomorphe permet d'effectuer des calculs directement sur des données chiffrées, sans jamais les déchiffrer : le résultat, une fois déchiffré par le propriétaire, est identique à celui qu'on aurait obtenu sur les données en clair. On peut ainsi confier l'analyse de données médicales ou financières à un fournisseur cloud sans jamais lui révéler leur contenu ; le prix à payer reste un coût de calcul très élevé. Le confidential computing adopte une approche matérielle : les données sont traitées dans une enclave sécurisée du processeur, un trusted execution environment isolé, inaccessible même à l'hyperviseur et à l'administrateur du cloud. Retenez la formule : le chiffrement protégeait déjà les données at rest et in transit ; ces technologies protègent les données in use.",
+          astuce: "💡 Conseil examen : « effectuer des calculs sur des données chiffrées sans les déchiffrer » = homomorphic encryption. « Enclave matérielle isolée dans le cloud » = confidential computing."
+        },
+        {
           type: "question",
           titre: "Contrôle de connaissance",
           q: "Un attaquant mesure précisément la durée des opérations de déchiffrement d'une carte à puce pour en déduire la clé privée. De quel type d'attaque s'agit-il ?",
@@ -753,10 +824,12 @@ window.CISSP_DATA.domains[3] = {
             "PKI : CA émet, RA vérifie, root CA hors ligne, révocation obligatoire",
             "Signature : hash chiffré avec la clé privée = intégrité + authentification + non-répudiation",
             "Gestion des clés : cycle complet, escrow, m of n, cryptographic erase",
+            "Split knowledge (personne ne sait tout) et dual control (personne n'agit seul) ; Clipper/Skipjack en exemple historique",
             "Attaques : brute force → known/chosen plaintext/ciphertext → side-channel → Kerberos",
-            "Post-quantique : lattice-based contre la menace harvest now, decrypt later"
+            "Post-quantique : lattice-based contre la menace harvest now, decrypt later",
+            "Émergent : homomorphic encryption (calcul sur données chiffrées), confidential computing (enclaves, données in use)"
           ],
-          narration: "Récapitulons. La PKI distribue la confiance grâce aux autorités de certification et d'enregistrement, avec une root CA gardée hors ligne. La signature numérique, un hash chiffré avec la clé privée, apporte intégrité, authentification et non-répudiation. La gestion des clés couvre tout le cycle de vie, avec l'escrow et le contrôle m parmi n pour la récupération. Vous savez maintenant classer les attaques, du brute force au golden ticket en passant par les side-channels. Et vous êtes prêts pour la question quantique : anticiper dès aujourd'hui avec la cryptographie post-quantique."
+          narration: "Récapitulons. La PKI distribue la confiance grâce aux autorités de certification et d'enregistrement, avec une root CA gardée hors ligne. La signature numérique, un hash chiffré avec la clé privée, apporte intégrité, authentification et non-répudiation. La gestion des clés couvre tout le cycle de vie, avec l'escrow et le contrôle m parmi n pour la récupération, renforcés par le split knowledge et le dual control. Vous savez maintenant classer les attaques, du brute force au golden ticket en passant par les side-channels. Et vous êtes prêts pour l'avenir : la cryptographie post-quantique face à la menace harvest now decrypt later, le chiffrement homomorphe et le confidential computing pour protéger les données en cours d'utilisation."
         }
       ]
     },
@@ -1319,6 +1392,61 @@ window.CISSP_DATA.domains[3] = {
       reponse: 1,
       explication: "La QKD exploite la mécanique quantique pour échanger des clés : selon le principe d'incertitude de Heisenberg, mesurer un état quantique le perturbe intrinsèquement, ce qui rend toute interception détectable — on parle de sécurité inconditionnelle. Elle distribue des clés, elle ne chiffre pas les données elles-mêmes, et n'a rien à voir avec la taille des clés classiques ni avec les certificats.",
       difficulte: 3
+    },
+    {
+      q: "Sur un système gouvernemental, tous les utilisateurs possèdent une clearance valide pour l'ensemble des informations traitées, mais leur approbation d'accès et leur need-to-know sont limités aux seuls compartiments dont ils ont besoin. Dans quel mode de sécurité ce système fonctionne-t-il ?",
+      choix: ["Dedicated", "System high", "Compartmented", "Multilevel"],
+      reponse: 2,
+      explication: "C'est la définition exacte du mode compartmented : clearance pour TOUTES les informations, mais approbation d'accès et need-to-know par compartiment. En mode dedicated, les utilisateurs ont clearance, approbation et need-to-know pour tout. En system high, seul le need-to-know est partiel (l'approbation couvre tout). En multilevel, certains utilisateurs n'ont pas la clearance pour toutes les informations et c'est le système qui applique la séparation des niveaux.",
+      difficulte: 2
+    },
+    {
+      q: "Dans un système fonctionnant en mode multilevel, quelle affirmation est EXACTE ?",
+      choix: [
+        "Tous les utilisateurs possèdent une clearance pour toutes les informations du système",
+        "Certains utilisateurs n'ont pas de clearance pour toutes les informations : le système lui-même doit séparer les niveaux et arbitrer chaque accès",
+        "Le need-to-know est identique pour tous les utilisateurs",
+        "Le système ne peut traiter qu'un seul niveau de classification à la fois"
+      ],
+      reponse: 1,
+      explication: "Le mode multilevel (ou controlled security mode) permet à des utilisateurs de niveaux d'habilitation différents d'utiliser un système traitant plusieurs niveaux de classification : la trusted computing base doit alors appliquer elle-même le contrôle d'accès entre niveaux. C'est le mode le plus exigeant pour le SYSTÈME. Les trois autres affirmations décrivent au contraire les modes dedicated, system high ou un système mono-niveau.",
+      difficulte: 3
+    },
+    {
+      q: "Dans le référentiel historique TCSEC (Orange Book), que représente le niveau A1 ?",
+      choix: [
+        "Une protection minimale, le système a échoué à l'évaluation",
+        "Une protection discrétionnaire avec journalisation",
+        "Une conception formellement vérifiée (verified design), le niveau le plus élevé",
+        "Un chiffrement obligatoire de tous les supports"
+      ],
+      reponse: 2,
+      explication: "Dans le TCSEC, l'échelle va de D (protection minimale, évaluation échouée) à A1 (verified design, conception formellement vérifiée), en passant par C1/C2 (protection discrétionnaire) et B1/B2/B3 (protection obligatoire fondée sur les labels). A1 correspond approximativement à EAL7 dans les Common Criteria qui ont remplacé le TCSEC et l'ITSEC. Le TCSEC n'imposait pas d'algorithme de chiffrement et n'évaluait que la confidentialité.",
+      difficulte: 2
+    },
+    {
+      q: "Un hôpital souhaite confier l'analyse statistique de données médicales à un fournisseur cloud SANS jamais lui révéler les données en clair, même pendant les calculs. Quelle technologie répond DIRECTEMENT à ce besoin ?",
+      choix: [
+        "Le chiffrement TLS de bout en bout",
+        "Le chiffrement homomorphe (homomorphic encryption)",
+        "Le hachage avec salt des enregistrements",
+        "La tokenisation des identifiants patients"
+      ],
+      reponse: 1,
+      explication: "Le chiffrement homomorphe permet d'effectuer des calculs directement sur des données chiffrées : le fournisseur ne voit jamais le plaintext, et le résultat déchiffré est identique au calcul sur les données en clair. TLS ne protège les données qu'en transit, elles seraient déchiffrées pour le calcul. Le hachage est à sens unique et interdirait les analyses, et la tokenisation ne protège que les identifiants, pas les données analysées. Le confidential computing (enclaves) serait une alternative matérielle, mais il n'est pas proposé ici.",
+      difficulte: 2
+    },
+    {
+      q: "Pour ouvrir le coffre contenant les composants de la clé maîtresse d'un HSM, la politique exige que deux responsables soient présents simultanément, chacun ne connaissant que la moitié de la combinaison. Quels principes sont appliqués ?",
+      choix: [
+        "Key clustering et key stretching",
+        "Split knowledge (connaissance fragmentée) et dual control (action à deux)",
+        "Key escrow et cryptographic erase",
+        "Zero Trust et least privilege"
+      ],
+      reponse: 1,
+      explication: "Chaque responsable ne connaît que la moitié de la combinaison : c'est le split knowledge (personne ne SAIT tout). La présence simultanée des deux est exigée pour agir : c'est le dual control (personne ne FAIT rien seul). Le contrôle m of n généralise ces principes. Key clustering est une faiblesse cryptographique, key stretching ralentit le hachage, key escrow confie les clés à un tiers, et Zero Trust/least privilege sont des principes de conception qui ne décrivent pas ce mécanisme précis.",
+      difficulte: 2
     }
   ],
   flashcards: [
@@ -1355,6 +1483,11 @@ window.CISSP_DATA.domains[3] = {
     { recto: "CPTED", verso: "Crime Prevention Through Environmental Design : réduire le crime par l'architecture passive. Trois principes : natural access control, natural surveillance, natural territorial reinforcement." },
     { recto: "Incidents électriques", verso: "Fault : perte momentanée ; blackout : coupure prolongée. Sag : sous-tension momentanée ; brownout : prolongée. Spike : surtension momentanée ; surge : prolongée. Inrush : appel de courant initial." },
     { recto: "Fire triangle et classes d'extincteurs", verso: "Triangle : fuel + heat + oxygen + réaction chimique — retirer un élément éteint le feu. Classes : A combustibles, B liquides, C électrique, D métaux, K cuisine." },
-    { recto: "Systèmes sprinkler", verso: "Wet pipe : toujours en eau, décharge immédiate. Dry pipe : gaz inerte, eau au déclenchement. Pre-action : double détection, LE choix pour les datacenters. Deluge : gros volumes d'eau." }
+    { recto: "Systèmes sprinkler", verso: "Wet pipe : toujours en eau, décharge immédiate. Dry pipe : gaz inerte, eau au déclenchement. Pre-action : double détection, LE choix pour les datacenters. Deluge : gros volumes d'eau." },
+    { recto: "Security modes : dedicated vs system high", verso: "Dedicated : clearance, approbation d'accès ET need-to-know pour TOUTES les informations du système. System high : clearance et approbation pour tout, mais need-to-know seulement pour CERTAINES informations." },
+    { recto: "Security modes : compartmented vs multilevel", verso: "Compartmented : clearance pour TOUTES les informations, mais approbation et need-to-know limités à chaque compartiment. Multilevel (controlled) : certains utilisateurs n'ont PAS la clearance pour tout — le système (TCB) applique la séparation des niveaux." },
+    { recto: "TCSEC (Orange Book) / ITSEC", verso: "TCSEC (USA) : niveaux D (minimal) → C1/C2 (discretionary) → B1/B2/B3 (mandatory, labels) → A1 (verified design) ; confidentialité uniquement. ITSEC (Europe) : fonctionnalité (F) et assurance (E1-E6) séparées. Remplacés par les Common Criteria : C2 ≈ EAL3, B1 ≈ EAL4, A1/E6 ≈ EAL7." },
+    { recto: "Homomorphic encryption / Confidential computing", verso: "Homomorphic encryption : calculs effectués directement sur des données CHIFFRÉES, sans jamais les déchiffrer (cloud non fiable). Confidential computing : traitement dans une enclave matérielle isolée (TEE) du processeur. Les deux protègent la donnée « in use »." },
+    { recto: "Split knowledge vs Dual control", verso: "Split knowledge : la connaissance d'une clé est fragmentée, personne ne SAIT tout. Dual control : une opération critique exige deux personnes simultanément, personne ne FAIT rien seul. Combinés dans le contrôle m of n. Exemple historique de key escrow : Clipper chip (algorithme Skipjack), clé scindée entre deux agences." }
   ]
 };

@@ -638,6 +638,20 @@ window.CISSP_DATA.domains[5] = {
         },
         {
           type: "standard",
+          titre: "SCIM et SPML : le provisioning automatisé inter-domaines",
+          points: [
+            "SCIM : System for Cross-domain Identity Management — standard MODERNE de provisioning",
+            "API REST et format JSON : créer, mettre à jour et supprimer des comptes entre systèmes",
+            "Cas d'usage : synchroniser les identités entre l'annuaire interne et les applications SaaS",
+            "SPML : Service Provisioning Markup Language — l'ancêtre basé XML, quasi abandonné",
+            "Bénéfices : onboarding/offboarding cohérents et rapides, moins d'erreurs manuelles"
+          ],
+          narration:
+            "Quand une organisation utilise des dizaines d'applications SaaS, créer et supprimer les comptes à la main devient ingérable et dangereux. C'est le rôle de SCIM, System for Cross-domain Identity Management : un standard moderne de provisioning automatisé entre domaines, fondé sur une API REST et le format JSON. Concrètement, quand les ressources humaines créent un utilisateur dans l'annuaire, SCIM propage automatiquement la création du compte vers les applications cloud ; et au départ de l'employé, la suppression se propage de la même manière, ce qui ferme vite les portes. Son ancêtre s'appelle SPML, Service Provisioning Markup Language : un standard basé sur XML qui poursuivait le même objectif, mais qui n'a jamais été largement adopté et est aujourd'hui considéré comme obsolète. À l'examen, retenez le duo : SCIM pour le provisioning, SAML pour l'authentification fédérée — deux standards complémentaires, pas concurrents.",
+          astuce: "💡 Conseil examen : SCIM = provisioning des COMPTES (REST/JSON, moderne) ; SPML = son ancêtre XML ; SAML = échange d'ASSERTIONS d'authentification. Ne les confondez pas."
+        },
+        {
+          type: "standard",
           titre: "Revues d'accès et dérive des privilèges",
           points: [
             "Revoir périodiquement comptes utilisateurs, systèmes et de service",
@@ -719,6 +733,7 @@ window.CISSP_DATA.domains[5] = {
           titre: "Résumé de la leçon et du domaine",
           points: [
             "Cycle de vie : provisioning → revues → transferts → deprovisioning",
+            "SCIM (REST/JSON) automatise le provisioning inter-domaines ; SPML est son ancêtre XML",
             "Privilege creep et excessive privilege : détectés par les revues d'accès",
             "Départ : désactiver immédiatement, puis revoir les données, puis supprimer",
             "PAM : vaulting, session recording, accès just-in-time ; comptes de service sous contrôle",
@@ -1099,6 +1114,32 @@ window.CISSP_DATA.domains[5] = {
       explication:
         "Le provisioning just-in-time crée automatiquement le compte chez le fournisseur de service lors de la première connexion fédérée, sans intervention administrative, et s'appuie couramment sur SAML pour échanger les données requises. Le workflow provisioning passe par un processus établi (souvent RH), le deprovisioning supprime des comptes, et RADIUS n'est pas un protocole de fédération.",
       difficulte: 2
+    },
+    {
+      q: "Votre organisation utilise 40 applications SaaS et souhaite que la création et la suppression des comptes soient automatiquement synchronisées depuis l'annuaire central. Quel standard est le MIEUX adapté ?",
+      choix: [
+        "SPML",
+        "SAML",
+        "SCIM",
+        "OAuth 2.0"
+      ],
+      reponse: 2,
+      explication:
+        "SCIM (System for Cross-domain Identity Management) est le standard moderne de provisioning automatisé inter-domaines, basé sur une API REST et le format JSON : il propage créations, mises à jour et suppressions de comptes vers les applications cloud. SPML poursuivait le même but mais est un ancien standard XML quasi abandonné ; SAML sert à l'authentification fédérée (assertions), et OAuth 2.0 à la délégation d'autorisation, pas au provisioning.",
+      difficulte: 2
+    },
+    {
+      q: "Quelle affirmation décrit le MIEUX la relation entre SPML et SCIM ?",
+      choix: [
+        "SCIM est un profil de SPML pour les environnements cloud",
+        "SPML est l'ancien standard de provisioning basé XML ; SCIM est son successeur moderne basé REST et JSON",
+        "SPML gère le provisioning et SCIM gère l'authentification des utilisateurs",
+        "Les deux sont des protocoles d'authentification unique (SSO)"
+      ],
+      reponse: 1,
+      explication:
+        "SPML (Service Provisioning Markup Language) est un standard XML de provisioning qui n'a jamais été largement adopté ; SCIM l'a remplacé avec une approche moderne fondée sur des API REST et JSON, largement supportée par les fournisseurs SaaS. Aucun des deux n'authentifie les utilisateurs ni ne fournit de SSO : ce sont des standards de gestion du cycle de vie des comptes.",
+      difficulte: 2
     }
   ],
 
@@ -1201,6 +1242,14 @@ window.CISSP_DATA.domains[5] = {
     {
       recto: "Provisioning Just-In-Time (JIT)",
       verso: "En fédération, création automatique du compte chez le fournisseur de service lors de la première connexion, sans intervention administrative ; utilise couramment SAML. Réduit la charge d'administration. (En PAM, JIT = privilèges élevés accordés temporairement au moment du besoin.)"
+    },
+    {
+      recto: "SCIM (System for Cross-domain Identity Management)",
+      verso: "Standard MODERNE de provisioning automatisé inter-domaines : API REST et format JSON pour créer, mettre à jour et supprimer les comptes entre l'annuaire et les applications SaaS. Complémentaire de SAML (SCIM = comptes, SAML = authentification)."
+    },
+    {
+      recto: "SPML (Service Provisioning Markup Language)",
+      verso: "Ancien standard de provisioning basé sur XML, ancêtre de SCIM. Jamais largement adopté, aujourd'hui considéré comme obsolète — remplacé par SCIM (REST/JSON) dans les environnements cloud."
     }
   ]
 };
