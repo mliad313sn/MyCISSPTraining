@@ -934,13 +934,13 @@ window.CISSP_DATA.domains[6] = {
       q: "Comment les logs archivés devraient-ils être protégés contre la modification ?",
       choix: [
         "En les chiffrant avec la clé publique de l'administrateur",
-        "En les stockant sur le poste de chaque administrateur",
+        "En les répliquant en continu vers un serveur secondaire modifiable par l'équipe d'exploitation",
         "En les centralisant, en restreignant l'accès par permissions et en les passant en lecture seule",
-        "En les supprimant après chaque revue"
+        "En réduisant leur durée de rétention à trente jours"
       ],
       reponse: 2,
       explication:
-        "Les logs doivent être stockés de manière centralisée, protégés par des permissions restrictives, et les archives placées en lecture seule pour prévenir toute modification. Le chiffrement seul (A) ne gère pas l'intégrité d'accès de bout en bout, le stockage décentralisé (B) affaiblit la protection, et la suppression (D) détruit la preuve.",
+        "Les logs doivent être stockés de manière centralisée, protégés par des permissions restrictives, et les archives placées en lecture seule pour prévenir toute modification. Le chiffrement seul (A) ne gère pas l'intégrité d'accès de bout en bout, une réplique modifiable (B) n'empêche aucune altération, et raccourcir la rétention (D) détruit la preuve au lieu de la protéger.",
       difficulte: 1
     },
     {
@@ -1009,14 +1009,14 @@ window.CISSP_DATA.domains[6] = {
     {
       q: "Pourquoi les interfaces PHYSIQUES méritent-elles une attention particulière lors des tests d'interface ?",
       choix: [
-        "Elles sont plus faciles à tester que les API",
+        "Elles reposent souvent sur des protocoles propriétaires peu documentés",
         "Leur défaillance peut avoir des conséquences graves lorsqu'elles pilotent des machines ou des automates",
-        "Elles sont toujours exposées à Internet",
-        "Elles ne peuvent pas être testées automatiquement"
+        "Elles échappent souvent à la couverture des scanners de vulnérabilités classiques",
+        "Leur test exige des équipements spécialisés coûteux"
       ],
       reponse: 1,
       explication:
-        "Les interfaces physiques existent dans les applications qui manipulent des machines, des automates programmables ou d'autres objets ; les testeurs doivent y porter une attention particulière en raison des conséquences potentielles (sécurité des personnes, dégâts matériels) en cas de défaillance. Les autres affirmations sont fausses ou hors sujet.",
+        "Les interfaces physiques existent dans les applications qui manipulent des machines, des automates programmables ou d'autres objets ; les testeurs doivent y porter une attention particulière en raison des conséquences potentielles (sécurité des personnes, dégâts matériels) en cas de défaillance. Les protocoles propriétaires (A), la couverture des scanners (C) et le coût de l'outillage (D) sont des difficultés réelles mais secondaires : la raison principale est la conséquence physique et humaine d'une défaillance.",
       difficulte: 2
     },
     {
@@ -1072,11 +1072,11 @@ window.CISSP_DATA.domains[6] = {
         "En comptant le nombre d'heures de formation dispensées",
         "En suivant des métriques comme l'évolution du taux de clic aux simulations de phishing",
         "En vérifiant que chaque employé a signé la politique de sécurité",
-        "En comparant son budget formation à celui des concurrents"
+        "En suivant le taux de complétion des modules e-learning obligatoires"
       ],
       reponse: 1,
       explication:
-        "Les simulations de phishing permettent d'évaluer l'efficacité réelle du programme de sensibilisation, et il faut la mesurer par des métriques comme l'évolution du taux de clic dans le temps. Les heures dispensées (A), les signatures (C) et le budget (D) mesurent l'effort ou la conformité, pas l'efficacité comportementale.",
+        "Les simulations de phishing permettent d'évaluer l'efficacité réelle du programme de sensibilisation, et il faut la mesurer par des métriques comme l'évolution du taux de clic dans le temps. Les heures dispensées (A), les signatures (C) et le taux de complétion (D) mesurent l'effort ou la conformité, pas le changement de comportement réel.",
       difficulte: 2
     },
     {
@@ -1134,14 +1134,14 @@ window.CISSP_DATA.domains[6] = {
     {
       q: "Lors de l'analyse des résultats de tests pour le rapport final, quelle question permet de déterminer l'impact business d'un finding ?",
       choix: [
-        "« Quel outil a détecté cette faille ? »",
+        "« Quel est le score CVSS de cette faille ? »",
         "« Et alors ? » (so what?)",
         "« Qui est responsable de cette erreur ? »",
-        "« Combien de temps a duré le scan ? »"
+        "« Sur combien de systèmes cette faille est-elle présente ? »"
       ],
       reponse: 1,
       explication:
-        "L'analyse doit progresser logiquement des faits vers l'information actionnable : après avoir compris les données, on détermine l'impact business en se demandant « et alors ? », puis on identifie ce qui est actionnable. Les questions d'outillage (A, D) sont techniques, et la recherche de coupables (C) n'apporte pas de valeur au rapport.",
+        "L'analyse doit progresser logiquement des faits vers l'information actionnable : après avoir compris les données, on détermine l'impact business en se demandant « et alors ? », puis on identifie ce qui est actionnable. Le score CVSS (A) et la prévalence (D) restent des mesures techniques qui n'expriment pas l'impact métier, et la recherche de coupables (C) n'apporte pas de valeur au rapport.",
       difficulte: 2
     },
     {
@@ -1296,14 +1296,14 @@ window.CISSP_DATA.domains[6] = {
     {
       q: "Votre équipe ne peut pas patcher toutes les vulnérabilités détectées ce mois-ci. Au-delà du score CVSS de base, QUEL facteur devrait le PLUS influencer la priorisation ?",
       choix: [
-        "L'ordre alphabétique des noms de serveurs",
+        "Le nombre brut de vulnérabilités détectées sur chaque serveur",
         "L'exploitation active observée dans la nature et la criticité métier des actifs concernés",
         "L'ancienneté du CVE, les plus récents d'abord",
         "La facilité d'installation du correctif"
       ],
       reponse: 1,
       explication:
-        "Une priorisation mature combine le score de sévérité avec des renseignements sur l'exploitation réelle (catalogues de vulnérabilités exploitées connues, threat intelligence) et la criticité métier des actifs : une faille moyenne activement exploitée sur un actif critique passe avant une faille critique théorique sur un actif isolé. L'ancienneté (C) et la facilité d'installation (D) sont des critères secondaires, et l'option A est absurde à dessein.",
+        "Une priorisation mature combine le score de sévérité avec des renseignements sur l'exploitation réelle (catalogues de vulnérabilités exploitées connues, threat intelligence) et la criticité métier des actifs : une faille moyenne activement exploitée sur un actif critique passe avant une faille critique théorique sur un actif isolé. L'ancienneté (C) et la facilité d'installation (D) sont des critères secondaires, et le volume brut de failles par serveur (A) mesure une charge de travail, pas un risque.",
       difficulte: 3
     },
     {
@@ -1444,12 +1444,12 @@ window.CISSP_DATA.domains[6] = {
       choix: [
         "La licence du SIEM",
         "Le bon fonctionnement de l'agent ou du mécanisme de collecte et d'acheminement des logs de ce serveur",
-        "La charte graphique des tableaux de bord",
-        "Le niveau de formation des analystes"
+        "Les règles de corrélation appliquées aux événements de ce serveur",
+        "La durée de rétention configurée pour les logs de ce serveur"
       ],
       reponse: 1,
       explication:
-        "Une interruption de réception des logs d'une source est d'abord un problème de chaîne de collecte : agent arrêté, file d'acheminement en erreur, changement de configuration ou filtrage réseau. La bonne pratique est d'ailleurs de superviser la santé des sources de logs et d'alerter automatiquement quand une source devient silencieuse, car un attaquant peut couper la journalisation pour masquer ses traces. Les options A, C et D ne répondent pas au problème immédiat.",
+        "Une interruption de réception des logs d'une source est d'abord un problème de chaîne de collecte : agent arrêté, file d'acheminement en erreur, changement de configuration ou filtrage réseau. La bonne pratique est d'ailleurs de superviser la santé des sources de logs et d'alerter automatiquement quand une source devient silencieuse, car un attaquant peut couper la journalisation pour masquer ses traces. La licence (A) et la rétention (D) n'expliquent pas un arrêt brutal de réception, et les règles de corrélation (C) sont sans objet si les logs n'arrivent même plus.",
       difficulte: 2
     },
     {
@@ -1458,11 +1458,11 @@ window.CISSP_DATA.domains[6] = {
         "Compression et déduplication pour réduire les coûts",
         "Stockage inaltérable (WORM), contrôles d'intégrité par hachage et chaîne de custody documentée",
         "Conservation sur le poste de l'administrateur avec mot de passe",
-        "Conversion de tous les logs au format PDF"
+        "Chiffrement des archives avec une clé détenue par le seul administrateur système"
       ],
       reponse: 1,
       explication:
-        "La valeur probante des logs repose sur la démonstration qu'ils n'ont pas été altérés : stockage en écriture unique (WORM), vérification d'intégrité par hachage, horodatage fiable et chaîne de custody documentée depuis la collecte jusqu'à la présentation. La compression (A) n'apporte rien à l'intégrité, le stockage individuel (C) affaiblit la preuve, et le format (D) est sans rapport avec la recevabilité.",
+        "La valeur probante des logs repose sur la démonstration qu'ils n'ont pas été altérés : stockage en écriture unique (WORM), vérification d'intégrité par hachage, horodatage fiable et chaîne de custody documentée depuis la collecte jusqu'à la présentation. La compression (A) n'apporte rien à l'intégrité, le stockage individuel (C) affaiblit la preuve, et un chiffrement dont la clé est détenue par une seule personne (D) protège la confidentialité mais concentre le pouvoir d'altération au lieu de démontrer l'intégrité.",
       difficulte: 2
     },
     {
@@ -1602,6 +1602,196 @@ window.CISSP_DATA.domains[6] = {
       explication:
         "Quand l'éditeur reste silencieux malgré une notification privée et un délai raisonnable, la divulgation coordonnée via un organisme tiers de confiance, tel qu'un CERT de coordination, est la voie éthique : elle maintient la pression sur l'éditeur tout en préparant une publication responsable qui permet aux utilisateurs de se protéger, sans fournir d'arme clé en main. Publier un exploit complet (A) et vendre (B) sont contraires à l'éthique ; se taire indéfiniment (D) laisse les utilisateurs exposés à leur insu.",
       difficulte: 3
+    },
+    {
+      q: "Un RSSI dispose d'un budget limité pour les tests offensifs d'une plateforme SaaS mature, déjà couverte par le pentest annuel exigé par PCI DSS. Son objectif est de maximiser la découverte CONTINUE de vulnérabilités réelles sur le périmètre exposé au public. QUELLE est la MEILLEURE allocation du budget restant ?",
+      choix: [
+        "Passer le pentest à un rythme semestriel",
+        "Lancer un programme de bug bounty ciblé sur le périmètre public, avec règles d'engagement et processus de triage définis",
+        "Financer un engagement red team furtif de six mois pour éprouver la détection du SOC",
+        "Acquérir une plateforme de Breach and Attack Simulation pour rejouer des scénarios d'attaque connus"
+      ],
+      reponse: 1,
+      explication:
+        "Le pentest annuel couvre déjà l'exigence de conformité ; le besoin exprimé est la découverte continue sur le périmètre public. Le bug bounty mobilise en permanence une diversité de chercheurs, payés au résultat : c'est l'option la plus efficiente pour cet objectif à budget contraint. Doubler le pentest (A) reste ponctuel, la red team (C) évalue la détection et la réponse — un autre objectif —, et la BAS (D) valide les contrôles contre des scénarios connus sans découvrir de vulnérabilités nouvelles.",
+      difficulte: 3,
+      pourquoi: [
+        "Techniquement utile mais toujours ponctuel : deux photos par an ne créent pas la découverte continue recherchée — piège du « plus de la même chose ».",
+        "Le bug bounty mobilise en continu une diversité de chercheurs sur le périmètre public et paie au résultat : c'est l'option qui répond exactement à l'objectif énoncé avec un budget contraint.",
+        "Vraie valeur mais hors objectif : la red team éprouve la détection et la réponse du SOC, pas la découverte exhaustive de failles exposées — réponse correcte à une autre question.",
+        "La BAS rejoue des scénarios connus pour valider les contrôles existants ; elle ne découvre pas de vulnérabilités nouvelles — techniquement vrai mais inadapté au besoin."
+      ]
+    },
+    {
+      q: "La direction veut annoncer publiquement un programme de bug bounty au prochain salon professionnel, dans six semaines. En tant que RSSI, QUE devez-vous vérifier EN PREMIER avant le lancement ?",
+      choix: [
+        "Que le montant des récompenses est compétitif par rapport au marché",
+        "Que l'organisation dispose d'un processus de triage et de remédiation capable d'absorber le flux de rapports, et de règles d'engagement avec safe harbor",
+        "Que la plateforme de bug bounty retenue est la plus reconnue du secteur",
+        "Que le pentest annuel a bien été réalisé avant l'ouverture du programme"
+      ],
+      reponse: 1,
+      explication:
+        "Un bug bounty public génère immédiatement un flux de rapports de qualité variable : sans capacité de triage, de qualification et de remédiation, le programme s'effondre et la réputation avec. Les règles d'engagement avec clause de safe harbor protègent juridiquement les chercheurs et l'organisation. Les récompenses (A) et le choix de plateforme (C) sont des paramètres secondaires, et le pentest préalable (D) est une bonne pratique non bloquante.",
+      difficulte: 3,
+      pourquoi: [
+        "Techniquement pertinent pour attirer les chercheurs, mais inutile si l'organisation ne sait pas traiter leurs rapports : critère secondaire.",
+        "Sans capacité de triage et de remédiation ni règles d'engagement avec safe harbor, le programme génère un flux ingérable et des risques juridiques : c'est le prérequis à valider avant tout lancement.",
+        "Choix de fournisseur, pas condition de réussite : piège du critère de sélection pris pour un prérequis.",
+        "Bonne pratique réelle mais non bloquante : un bug bounty peut coexister avec le cycle de pentest, ce n'est pas la porte d'entrée du lancement."
+      ]
+    },
+    {
+      q: "Votre programme de gestion des tiers doit évaluer 300 fournisseurs avec deux analystes, et le régulateur exige une assurance proportionnée au risque. QUELLE approche est la PLUS défendable ?",
+      choix: [
+        "Envoyer à tous les fournisseurs le même questionnaire détaillé de 400 questions",
+        "Exiger un audit sur site annuel de chaque fournisseur",
+        "Segmenter les fournisseurs par criticité : rapports d'audit indépendants (SOC 2 Type II ou équivalent) pour les tiers critiques, questionnaires pour les tiers à faible risque, audits sur site réservés aux risques élevés non couverts",
+        "Accepter la certification ISO 27001 comme assurance suffisante pour tous les fournisseurs"
+      ],
+      reponse: 2,
+      explication:
+        "La proportionnalité exigée par le régulateur s'obtient en alignant le niveau d'assurance sur la criticité du tiers : attestations indépendantes dans la durée pour les fournisseurs critiques, auto-évaluations questionnaires pour la masse à faible risque, audits sur site en dernier recours ciblé. Le questionnaire unique (A) sature l'équipe sans discriminer le risque, l'audit sur site universel (B) est irréaliste, et la certification ISO 27001 seule (D) atteste un système de management sans couvrir tous les services ni tous les risques.",
+      difficulte: 3,
+      pourquoi: [
+        "Uniforme et ingérable : 300 questionnaires détaillés dépassent la capacité de deux analystes et traitent le fournisseur critique comme le tiers anodin.",
+        "Absolu et irréaliste : l'audit sur site universel est financièrement impossible et disproportionné pour les tiers à faible risque.",
+        "La segmentation par criticité aligne l'effort d'assurance sur le risque, exactement la proportionnalité exigée par le régulateur avec des ressources contraintes.",
+        "Techniquement vrai qu'ISO 27001 apporte une assurance, mais un certificat de système de management ne couvre ni tous les services consommés ni tous les risques : insuffisant seul pour les tiers critiques."
+      ]
+    },
+    {
+      q: "Un fournisseur cloud critique refuse votre clause d'audit sur site en invoquant la mutualisation de son environnement, et propose à la place son rapport SOC 2 Type II sous NDA, ses attestations de pentest et une clause de notification d'incident. QUELLE est la MEILLEURE réponse du responsable de la gestion des tiers ?",
+      choix: [
+        "Refuser le contrat : sans droit d'audit sur site, aucune assurance n'est possible",
+        "Évaluer si le périmètre et les critères du SOC 2 Type II couvrent les services consommés et les obligations réglementaires, puis combler les écarts par des exigences contractuelles ciblées",
+        "Accepter le rapport SOC 2 tel quel, puisque c'est le standard du marché",
+        "Exiger la complétion de votre questionnaire interne détaillé en remplacement de l'audit"
+      ],
+      reponse: 1,
+      explication:
+        "Le refus d'audit sur site est courant et légitime chez les fournisseurs cloud mutualisés : l'assurance passe alors par l'analyse critique du rapport d'audit indépendant. Il faut vérifier que le périmètre (services, sites, période) et les Trust Services Criteria couverts correspondent aux services réellement consommés et aux obligations réglementaires, puis traiter les écarts par contrat. Refuser en bloc (A) est un absolu contre-productif, accepter sans analyse (C) revient à une assurance de façade, et un questionnaire auto-déclaratif (D) est plus faible que l'attestation indépendante déjà proposée.",
+      difficulte: 3,
+      pourquoi: [
+        "Absolu : le refus d'audit sur site est courant chez les fournisseurs cloud mutualisés et n'empêche pas une assurance robuste par d'autres moyens.",
+        "Analyser le périmètre et les critères du rapport, vérifier la couverture des services consommés et combler les écarts par contrat : la démarche d'assurance proportionnée attendue d'un responsable des tiers.",
+        "Accepter sans analyse est le piège inverse : un SOC 2 dont le périmètre n'inclut pas vos services ne vous assure de rien.",
+        "Un questionnaire auto-déclaratif est plus faible que le rapport d'audit indépendant déjà proposé : c'est une régression d'assurance."
+      ]
+    },
+    {
+      q: "Votre entreprise s'apprête à déployer un assistant conversationnel fondé sur un LLM, connecté à la base clients, pour le support de premier niveau. Le pentest applicatif classique n'a rien relevé. En tant que RSSI, QUELLE assurance supplémentaire devez-vous exiger EN PRIORITÉ avant la mise en production ?",
+      choix: [
+        "Un test de charge validant la tenue aux pics de trafic",
+        "Des tests adversariaux ciblant les risques propres aux LLM : injection de prompt, exfiltration de données clients via les réponses, contournement des garde-fous",
+        "Une nouvelle passe d'analyse statique (SAST) sur le code d'intégration",
+        "Une attestation de l'éditeur du modèle sur la sécurité de son entraînement"
+      ],
+      reponse: 1,
+      explication:
+        "Les systèmes fondés sur des LLM présentent des modes de défaillance spécifiques — injection de prompt directe ou indirecte, divulgation de données sensibles dans les réponses, contournement des garde-fous — qu'aucun pentest applicatif classique ni SAST ne couvre. Avant de connecter un modèle à des données clients, des tests adversariaux dédiés (red teaming IA) sont l'assurance manquante. Le test de charge (A) est une préoccupation d'exploitation, le SAST (C) ne voit pas le comportement du modèle, et l'attestation de l'éditeur (D) ne teste ni votre intégration ni vos données.",
+      difficulte: 3,
+      pourquoi: [
+        "Vraie préoccupation d'exploitation, mais elle ne couvre aucun des risques de sécurité propres au LLM : hors sujet pour la décision de sécurité.",
+        "L'injection de prompt, la fuite de données clients via les réponses et le contournement des garde-fous sont des risques spécifiques aux LLM que le pentest classique ne couvre pas : c'est l'assurance manquante avant le go-live.",
+        "Techniquement utile mais déjà couverte par le cycle applicatif : l'analyse statique ne voit pas les comportements émergents du modèle.",
+        "Une attestation de l'éditeur ne teste ni votre intégration ni vos données : piège du transfert de confiance sans vérification."
+      ]
+    },
+    {
+      q: "Votre équipe de gestion des vulnérabilités traite 2 000 findings par mois en les classant par score CVSS décroissant, mais les vulnérabilités réellement exploitées dans votre secteur restent ouvertes plusieurs semaines. QUELLE évolution du processus est la PLUS pertinente ?",
+      choix: [
+        "Abaisser le seuil de traitement pour couvrir aussi les scores moyens",
+        "Intégrer la probabilité d'exploitation (EPSS) et les catalogues de vulnérabilités activement exploitées (type KEV) comme premiers critères, pondérés par la criticité des actifs",
+        "Recruter des analystes supplémentaires pour traiter davantage de findings chaque mois",
+        "Basculer la priorisation sur le score CVSS environnemental recalculé pour chaque actif"
+      ],
+      reponse: 1,
+      explication:
+        "Le symptôme décrit — des failles exploitées qui attendent derrière des failles critiques théoriques — est la limite connue du tri par CVSS brut. Les scores de probabilité d'exploitation (EPSS) et les catalogues d'exploitation avérée (comme le KEV de la CISA), croisés avec la criticité métier des actifs, concentrent l'effort sur le risque réel. Élargir le volume (A) ou recruter (C) aggravent ou compensent l'engorgement sans corriger le critère de tri, et le score environnemental (D), utile en théorie, ne capture pas l'exploitation active et serait impraticable à cette échelle.",
+      difficulte: 3,
+      pourquoi: [
+        "Élargir le volume traité sans changer le critère de tri aggrave l'engorgement : plus d'efforts, même aveuglement.",
+        "EPSS et catalogues type KEV mesurent la probabilité et la réalité de l'exploitation ; croisés avec la criticité des actifs, ils concentrent l'effort sur le risque réel : l'évolution attendue d'un programme mature.",
+        "Réponse de moyens : plus d'analystes traitant dans le mauvais ordre ne réduisent pas l'exposition aux failles exploitées.",
+        "Techniquement vrai que le score environnemental contextualise, mais il ne capture pas l'exploitation active et son recalcul par actif est impraticable à cette échelle : vrai mais contextuellement insuffisant."
+      ]
+    },
+    {
+      q: "Le comité exécutif n'a jamais participé à un exercice de crise cyber ; le conseil d'administration en demande un premier dans le trimestre, sans perturber la production. QUEL format devriez-vous proposer ?",
+      choix: [
+        "Un exercice technique de bascule du datacenter avec les équipes d'exploitation",
+        "Un test full-interruption pour démontrer la réalité du risque à la direction",
+        "Un exercice sur table (tabletop) fondé sur un scénario de ransomware, centré sur les décisions du comité exécutif : communication, obligations légales, arbitrages métier",
+        "Une campagne de phishing simulée ciblant les membres du comité exécutif"
+      ],
+      reponse: 2,
+      explication:
+        "L'objectif est d'entraîner les dirigeants à décider en crise, pas de valider la technique : le tabletop exercise construit sur un scénario réaliste confronte le comité exécutif aux décisions qui lui reviennent — communication de crise, notification aux régulateurs, arbitrages de continuité, question de la rançon — sans toucher à la production et dans le délai imparti. La bascule technique (A) entraîne les mauvaises personnes, le full-interruption (B) est disproportionné pour une première fois, et le phishing simulé (D) mesure la vigilance individuelle, pas la décision collective.",
+      difficulte: 3,
+      pourquoi: [
+        "Exercice utile mais destiné aux équipes techniques : il n'entraîne pas le comité exécutif à décider.",
+        "Absolu et disproportionné : interrompre la production pour une première sensibilisation de la direction est un risque injustifiable.",
+        "Le tabletop centré sur les décisions de crise — communication, obligations légales, arbitrages métier — entraîne exactement la population visée, sans toucher à la production et dans le délai imparti.",
+        "La simulation de phishing mesure la vigilance individuelle, pas la capacité collective de décision en crise : hors objectif."
+      ]
+    },
+    {
+      q: "Le conseil d'administration juge le reporting sécurité « illisible » : quarante métriques techniques présentées chaque trimestre. QUELLE refonte du tableau de bord est la PLUS adaptée ?",
+      choix: [
+        "Réduire le nombre de métriques en conservant les indicateurs techniques les plus précis, comme le taux de patching par système d'exploitation",
+        "Présenter un petit nombre d'indicateurs reliés au risque métier : exposition des actifs critiques, tendances dans le temps, comparaison aux seuils d'appétence au risque validés par le conseil",
+        "Conserver les métriques et ajouter une annexe méthodologique expliquant chacune d'elles",
+        "Confier la présentation au prestataire du SOC, qui maîtrise le détail des indicateurs"
+      ],
+      reponse: 1,
+      explication:
+        "Un conseil d'administration exerce une surveillance : il a besoin de peu d'indicateurs, exprimés en termes de risque métier, montrant des tendances et situés par rapport à l'appétence au risque qu'il a lui-même validée. C'est ce qui rend un tableau de bord « board-ready ». Réduire sans changer d'altitude (A) laisse des métriques de technicien, l'annexe méthodologique (C) documente l'illisible au lieu de le rendre décisionnel, et déléguer au prestataire (D) ajoute du détail technique tout en diluant la responsabilité du RSSI devant le conseil.",
+      difficulte: 3,
+      pourquoi: [
+        "Réduire le volume sans changer d'altitude : des métriques techniques précises restent illisibles pour un conseil d'administration — réponse de technicien.",
+        "Peu d'indicateurs, reliés au risque métier et à l'appétence validée par le conseil, avec des tendances : le format qui permet à un conseil d'exercer sa surveillance.",
+        "Documenter l'illisible ne le rend pas décisionnel : piège de l'effort pédagogique mal placé.",
+        "Déléguer la présentation au prestataire ajoute du détail technique et dilue la responsabilité du RSSI devant le conseil."
+      ]
+    },
+    {
+      q: "Après trois ans de pentests annuels aux findings récurrents, la direction demande si le programme d'évaluation apporte encore de la valeur. QUEL indicateur démontrerait le MIEUX l'efficacité du programme dans la durée ?",
+      choix: [
+        "Le nombre total de vulnérabilités découvertes à chaque campagne de test",
+        "La tendance du taux de findings récurrents et du délai de remédiation entre deux cycles de test",
+        "Le coût journalier du cabinet de pentest comparé aux tarifs du marché",
+        "Le nombre de systèmes couverts par chaque campagne de test"
+      ],
+      reponse: 1,
+      explication:
+        "L'efficacité d'un programme d'évaluation ne se mesure pas au volume de découvertes mais à sa capacité à produire un changement durable : si le taux de findings récurrents baisse et que le délai de remédiation se réduit de cycle en cycle, le programme transforme réellement la posture de sécurité. Le comptage brut (A) peut rester stable pour de mauvaises raisons, le coût journalier (C) mesure la compétitivité de l'achat, et la couverture (D) est une condition de qualité du test, pas une preuve d'amélioration.",
+      difficulte: 3,
+      pourquoi: [
+        "Le comptage brut de findings ne dit pas si l'organisation s'améliore : un chiffre stable peut cacher un périmètre croissant ou une remédiation défaillante — piège de l'indicateur d'activité.",
+        "La baisse des findings récurrents et du délai de remédiation entre cycles prouve que le programme produit un changement durable : la vraie mesure d'efficacité dans le temps.",
+        "Le coût journalier mesure la compétitivité de l'achat, pas la valeur produite par le programme.",
+        "La couverture est une condition de qualité du test, pas une preuve d'amélioration de la posture."
+      ]
+    },
+    {
+      q: "Votre SOC détecte désormais la plupart des scénarios rejoués par votre plateforme BAS. Le RSSI veut éprouver la résilience face à un adversaire créatif et persistant, avec un budget n'autorisant qu'un seul engagement majeur. QUEL choix est le PLUS cohérent avec cet objectif ?",
+      choix: [
+        "Renouveler l'abonnement BAS en élargissant la bibliothèque de scénarios",
+        "Un engagement red team orienté objectifs, mené en furtivité sur plusieurs semaines, suivi d'une restitution purple team",
+        "Un pentest white box exhaustif de l'infrastructure interne",
+        "Un audit de maturité du SOC selon un référentiel reconnu"
+      ],
+      reponse: 1,
+      explication:
+        "La BAS a atteint sa limite : elle rejoue des scénarios connus, or l'objectif est désormais de confronter l'organisation à un adversaire adaptatif. Seul un engagement red team orienté objectifs, furtif et étalé dans le temps, simule cette créativité ; la restitution purple team convertit ensuite l'exercice en améliorations concrètes de détection. Élargir la BAS (A) reste dans le connu, le pentest white box (C) inventorie des vulnérabilités sans éprouver la résilience face à un intrus furtif, et l'audit de maturité (D) évalue des processus sur dossier sans confrontation réelle.",
+      difficulte: 3,
+      pourquoi: [
+        "Techniquement vrai que la bibliothèque s'enrichit, mais la BAS rejoue des scénarios connus : elle ne modélise pas un adversaire créatif et persistant.",
+        "Seul un engagement red team orienté objectifs, furtif et dans la durée, confronte l'organisation à un adversaire adaptatif ; la restitution purple team convertit l'exercice en améliorations de détection.",
+        "Exhaustif mais hors objectif : le pentest white box inventorie des vulnérabilités, il n'éprouve pas la résilience face à un adversaire furtif — réponse de technicien.",
+        "Un audit de maturité évalue des processus sur dossier : aucune confrontation réelle avec un attaquant."
+      ]
     }
   ],
   quizEn: [
@@ -1637,14 +1827,14 @@ window.CISSP_DATA.domains[6] = {
     {
       q: "A security manager must prioritize remediation of dozens of vulnerabilities. Beyond the CVSS base score, which factor should MOST influence the prioritization?",
       choix: [
-        "The alphabetical order of affected hostnames",
+        "The raw number of vulnerabilities found on each host",
         "Evidence of active exploitation in the wild combined with the business criticality of the affected assets",
         "The age of each CVE identifier",
-        "The vendor that published each advisory"
+        "The availability of a vendor-supplied patch for each finding"
       ],
       reponse: 1,
       explication:
-        "Le score CVSS de base mesure une sévérité intrinsèque, pas le risque contextuel. Une priorisation efficace croise ce score avec l'exploitation active observée (threat intelligence, catalogues de vulnérabilités exploitées) et la criticité métier des actifs touchés : une faille moyennement notée mais activement exploitée sur un actif critique passe avant une faille critique théorique sur un système isolé. Les options A, C et D ne reflètent pas le risque.",
+        "Le score CVSS de base mesure une sévérité intrinsèque, pas le risque contextuel. Une priorisation efficace croise ce score avec l'exploitation active observée (threat intelligence, catalogues de vulnérabilités exploitées) et la criticité métier des actifs touchés : une faille moyennement notée mais activement exploitée sur un actif critique passe avant une faille critique théorique sur un système isolé. Le volume brut par hôte (A) mesure une charge de travail, l'ancienneté du CVE (C) est un critère secondaire, et la disponibilité d'un correctif (D) influence le mode de traitement, pas la priorité du risque.",
       difficulte: 2
     },
     {
@@ -1969,6 +2159,82 @@ window.CISSP_DATA.domains[6] = {
       explication:
         "Les Rules of Engagement définissent la procédure de communication et d'escalade en cas d'incident : la première action est de notifier immédiatement le contact désigné afin que l'organisation déclenche ses procédures de reprise, le test étant suspendu si nécessaire. Continuer comme si de rien n'était (A) aggrave le risque, restaurer soi-même en cachette (B) dépasse le mandat et peut empirer la situation, et attendre le rapport final (D) retarde une information critique.",
       difficulte: 3
+    },
+    {
+      q: "A CISO already funds a compliance-mandated annual penetration test of a public-facing platform. With a fixed budget, the board now asks for CONTINUOUS discovery of exploitable flaws. Which option BEST meets this goal?",
+      choix: [
+        "Schedule the annual penetration test twice a year instead",
+        "Launch a scoped bug bounty program with defined rules of engagement and an internal triage process",
+        "Commission a six-month covert red team engagement",
+        "Deploy a breach and attack simulation platform to replay known attack scenarios"
+      ],
+      reponse: 1,
+      explication:
+        "L'exigence de conformité est déjà couverte par le pentest annuel ; le besoin est une découverte continue sur le périmètre public. Le bug bounty cadré mobilise en permanence une diversité de chercheurs payés au résultat : c'est la réponse la plus efficiente à budget constant. Le pentest semestriel (A) reste ponctuel, la red team (C) évalue la détection et la réponse — un objectif différent —, et la BAS (D) valide les contrôles contre des scénarios connus sans découvrir de failles nouvelles.",
+      difficulte: 3,
+      pourquoi: [
+        "Toujours ponctuel : deux campagnes par an ne créent pas une découverte continue — piège du « plus de la même chose ».",
+        "Un bug bounty cadré mobilise en continu des chercheurs variés sur le périmètre public et paie au résultat : la réponse exacte à l'objectif du conseil à budget constant.",
+        "Techniquement vrai qu'une red team apporte de la valeur, mais elle mesure la détection et la réponse, pas la découverte continue de failles exposées.",
+        "La BAS valide les contrôles contre des scénarios connus : elle ne découvre pas de vulnérabilités nouvelles."
+      ]
+    },
+    {
+      q: "A vulnerability management team patches strictly in descending CVSS base score order, yet vulnerabilities listed in known exploited vulnerabilities catalogs remain open for weeks. What should the security manager do FIRST?",
+      choix: [
+        "Lower the CVSS threshold so that medium-severity findings are also patched",
+        "Reprioritize remediation so that actively exploited vulnerabilities on business-critical assets are addressed ahead of higher-scored but unexploited ones",
+        "Recompute environmental CVSS scores for every asset before changing the process",
+        "Increase scanning frequency to detect new vulnerabilities sooner"
+      ],
+      reponse: 1,
+      explication:
+        "Le tri par score CVSS brut est la cause du symptôme : des failles activement exploitées attendent derrière des failles critiques théoriques. La première action du manager est de corriger le critère de priorisation en plaçant l'exploitation avérée (catalogues type KEV, scores EPSS) et la criticité métier des actifs en tête. Abaisser le seuil (A) et scanner plus souvent (D) augmentent le volume sans corriger l'ordre, et recalculer les scores environnementaux de chaque actif (C) est théoriquement juste mais retarde le traitement des failles déjà exploitées.",
+      difficulte: 3,
+      pourquoi: [
+        "Élargit le volume traité sans corriger le critère de tri : l'engorgement empire.",
+        "Réordonner selon l'exploitation active et la criticité métier traite d'abord le risque réel : la correction de processus attendue d'un manager.",
+        "Techniquement vrai que le score environnemental contextualise, mais recalculer chaque actif avant d'agir retarde le traitement des failles déjà exploitées : vrai mais hors tempo.",
+        "Scanner plus souvent découvre plus vite ce que l'on continuera de traiter dans le mauvais ordre."
+      ]
+    },
+    {
+      q: "An organization must assess the security posture of 250 suppliers with a small vendor-risk team, under regulatory expectations of risk-proportionate assurance. Which approach is MOST defensible?",
+      choix: [
+        "Send every supplier the same exhaustive security questionnaire",
+        "Require an annual on-site audit of every supplier",
+        "Tier suppliers by criticality: require independent audit reports such as SOC 2 Type II from critical suppliers, questionnaires for low-risk vendors, and reserve on-site audits for high-risk gaps",
+        "Rely on each supplier's self-declared compliance statement"
+      ],
+      reponse: 2,
+      explication:
+        "L'assurance proportionnée au risque s'obtient en segmentant les tiers par criticité : attestations indépendantes dans la durée (SOC 2 Type II ou équivalent) pour les fournisseurs critiques, questionnaires pour la masse à faible risque, audits sur site ciblés en dernier recours. Le questionnaire unique (A) sature l'équipe sans discriminer, l'audit sur site universel (B) est irréaliste, et l'auto-déclaration (D) n'est pas une assurance vérifiée.",
+      difficulte: 3,
+      pourquoi: [
+        "Uniforme : le même questionnaire exhaustif pour tous ignore le risque et sature une petite équipe.",
+        "Absolu et irréaliste : l'audit sur site universel est impossible avec une petite équipe et disproportionné pour les tiers mineurs.",
+        "La segmentation par criticité, avec rapports d'audit indépendants pour les fournisseurs critiques et questionnaires pour les autres, aligne l'assurance sur le risque : l'approche défendable devant un régulateur.",
+        "L'auto-déclaration sans vérification indépendante n'est pas une assurance."
+      ]
+    },
+    {
+      q: "Before deploying an LLM-based customer service assistant with access to customer records, which assurance activity should the security manager REQUIRE in addition to traditional application testing?",
+      choix: [
+        "A load test demonstrating acceptable response times under peak traffic",
+        "Adversarial testing targeting AI-specific failure modes such as prompt injection, sensitive data leakage, and guardrail bypass",
+        "An additional static analysis pass on the integration code",
+        "The model vendor's documentation of its training data governance"
+      ],
+      reponse: 1,
+      explication:
+        "Les assistants fondés sur des LLM présentent des modes de défaillance propres — injection de prompt directe ou indirecte, divulgation de données sensibles dans les réponses, contournement des garde-fous — que ni le pentest applicatif ni l'analyse statique ne détectent. Des tests adversariaux dédiés (red teaming IA) sont donc l'assurance à exiger avant de connecter le modèle aux données clients. Le test de charge (A) est une préoccupation de performance, le SAST (C) ne voit pas le comportement du modèle, et la documentation du fournisseur (D) ne teste ni votre intégration ni vos garde-fous.",
+      difficulte: 3,
+      pourquoi: [
+        "Préoccupation d'exploitation légitime mais sans lien avec les risques de sécurité propres au modèle.",
+        "Injection de prompt, fuite de données sensibles et contournement des garde-fous sont des modes de défaillance spécifiques aux LLM, invisibles pour les tests applicatifs classiques : l'assurance à exiger.",
+        "Utile mais déjà couvert par le cycle de développement : l'analyse statique ne voit pas le comportement du modèle.",
+        "La gouvernance des données d'entraînement du fournisseur ne teste ni votre intégration ni vos garde-fous : transfert de confiance sans vérification."
+      ]
     }
   ],
   flashcards: [

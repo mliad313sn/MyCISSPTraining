@@ -1261,7 +1261,7 @@ window.CISSP_DATA.domains[7] = {
         "Need-to-know concerne les administrateurs, least privilege les utilisateurs",
         "Need-to-know limite l'accès à l'information, least privilege limite l'étendue des droits et permissions",
         "Need-to-know est technique, least privilege est administratif",
-        "Il n'y a aucune différence, ce sont des synonymes"
+        "Least privilege s'applique uniquement aux comptes ayant accès à des données classifiées"
       ],
       reponse: 1,
       explication:
@@ -1279,14 +1279,14 @@ window.CISSP_DATA.domains[7] = {
     {
       q: "Quel est le bénéfice de sécurité PRINCIPAL de la job rotation ?",
       choix: [
-        "Réduire les coûts de formation",
+        "Garantir la disponibilité du service en cas d'absence imprévue",
         "Fournir revue par les pairs, détection de la fraude et cross-training",
-        "Accélérer les promotions internes",
+        "Améliorer la satisfaction des employés en variant leurs tâches",
         "Éliminer le besoin de séparation des tâches"
       ],
       reponse: 1,
       explication:
-        "La rotation des postes offre une revue par les pairs, réduit la fraude (dissuasion et détection, car une fraude dépendant d'une personne en poste finit par être découverte) et développe la polyvalence. Elle complète la séparation des tâches mais ne la remplace pas, et elle augmente plutôt les coûts de formation.",
+        "La rotation des postes offre une revue par les pairs, réduit la fraude (dissuasion et détection, car une fraude dépendant d'une personne en poste finit par être découverte) et développe la polyvalence. Elle complète la séparation des tâches mais ne la remplace pas ; la continuité de service et la satisfaction des employés sont des bénéfices réels, mais pas des bénéfices de sécurité.",
       difficulte: 1
     },
     {
@@ -1295,11 +1295,11 @@ window.CISSP_DATA.domains[7] = {
         "Parce que les administrateurs sont les employés les moins fiables",
         "Parce que les attaquants utilisent presque toujours des privilèges élevés et que les employés de confiance peuvent en abuser",
         "Uniquement pour satisfaire les exigences des auditeurs externes",
-        "Pour mesurer la productivité des équipes IT"
+        "Pour pouvoir alléger la journalisation des comptes standards et économiser du stockage"
       ],
       reponse: 1,
       explication:
-        "La surveillance des opérations privilégiées répond à deux risques : l'abus par des employés de confiance et la détection d'attaques, car les attaquants exploitent quasi systématiquement des privilèges élevés. Il ne s'agit ni de défiance systématique, ni de simple conformité, ni de mesure de productivité.",
+        "La surveillance des opérations privilégiées répond à deux risques : l'abus par des employés de confiance et la détection d'attaques, car les attaquants exploitent quasi systématiquement des privilèges élevés. Il ne s'agit ni de défiance systématique, ni de simple conformité, ni d'un arbitrage de volumétrie de journalisation.",
       difficulte: 2
     },
     {
@@ -1318,14 +1318,14 @@ window.CISSP_DATA.domains[7] = {
     {
       q: "Lors d'un changement d'infrastructure, quel élément doit IMPÉRATIVEMENT être prêt avant l'implémentation ?",
       choix: [
-        "Un communiqué de presse",
+        "Le rapport post-implémentation destiné au CAB",
         "Un plan de rollback permettant d'annuler le changement",
         "La sauvegarde des logs du SIEM",
         "L'accord écrit de tous les utilisateurs finaux"
       ],
       reponse: 1,
       explication:
-        "Le processus de change management exige un plan de retour arrière avant l'implémentation, afin de pouvoir annuler le changement si un problème survient. La communication vise les parties prenantes clés, pas la presse ni chaque utilisateur, et la sauvegarde des logs SIEM n'est pas l'élément critique ici.",
+        "Le processus de change management exige un plan de retour arrière avant l'implémentation, afin de pouvoir annuler le changement si un problème survient. Le rapport post-implémentation intervient après le changement, l'accord de chaque utilisateur est irréaliste, et la sauvegarde des logs SIEM n'est pas l'élément critique ici.",
       difficulte: 1
     },
     {
@@ -1769,12 +1769,12 @@ window.CISSP_DATA.domains[7] = {
       choix: [
         "Recruter davantage d'analystes de niveau 1",
         "Un SOAR avec un playbook automatisant le triage et la réponse aux phishings",
-        "Désactiver les alertes de phishing",
-        "Basculer tous les e-mails en liste blanche"
+        "Relever les seuils d'alerte pour réduire le volume à traiter",
+        "Externaliser le triage de niveau 1 à un prestataire MSSP"
       ],
       reponse: 1,
       explication:
-        "Les tâches répétitives et bien définies sont le cas d'usage idéal du SOAR : un runbook automatise l'analyse de l'expéditeur, la détonation en sandbox et le blocage, libérant les analystes pour les cas complexes. Recruter ne résout pas la répétitivité, désactiver les alertes crée des false negatives, et une liste blanche globale est irréaliste et dangereuse.",
+        "Les tâches répétitives et bien définies sont le cas d'usage idéal du SOAR : un runbook automatise l'analyse de l'expéditeur, la détonation en sandbox et le blocage, libérant les analystes pour les cas complexes. Recruter ne résout pas la répétitivité, relever les seuils crée des false negatives, et l'externalisation déplace le coût du triage répétitif sans le supprimer.",
       difficulte: 1
     },
     {
@@ -1795,12 +1795,12 @@ window.CISSP_DATA.domains[7] = {
       choix: [
         "Il génère trop d'alertes et fatigue les analystes",
         "Une attaque réelle passe inaperçue, sans aucune alerte ni réponse",
-        "Il ralentit le trafic réseau légitime",
-        "Il augmente le coût des licences du SIEM"
+        "Il déclenche des réponses automatiques injustifiées sur des systèmes sains",
+        "Il fausse les métriques de conformité présentées à l'audit"
       ],
       reponse: 1,
       explication:
-        "Le false negative est le silence face à une activité réellement malveillante : l'attaque progresse sans détection ni réponse, parfois pendant des mois. Le false positive gaspille du temps d'analyste (c'est lui qui cause la fatigue d'alertes), mais l'activité était bénigne. Les deux dernières réponses n'ont pas de lien avec la classification des détections.",
+        "Le false negative est le silence face à une activité réellement malveillante : l'attaque progresse sans détection ni réponse, parfois pendant des mois. Le false positive gaspille du temps d'analyste (c'est lui qui cause la fatigue d'alertes), mais l'activité était bénigne. Les réponses automatiques injustifiées sont une conséquence des faux positifs, et l'impact sur les métriques d'audit est secondaire face à une intrusion non détectée.",
       difficulte: 1
     },
     {
@@ -1924,11 +1924,11 @@ window.CISSP_DATA.domains[7] = {
         "Le DRP englobe le BCP",
         "Le BCP maintient les fonctions critiques de l'ENTREPRISE ; le DRP restaure l'infrastructure TECHNOLOGIQUE — le BCP a le périmètre le plus large",
         "BCP et DRP sont deux noms du même document",
-        "Le BCP ne concerne que les catastrophes naturelles"
+        "Le DRP couvre les processus métier et le BCP la restauration technique"
       ],
       reponse: 1,
       explication:
-        "Le BCP couvre la survie des processus métier dans leur ensemble (personnel, locaux, fournisseurs, communication), tandis que le DRP est son volet technologique : restaurer l'infrastructure IT critique. Le BCP englobe donc le DRP, pas l'inverse, et tous deux couvrent toutes les causes de disruption, pas seulement les catastrophes naturelles.",
+        "Le BCP couvre la survie des processus métier dans leur ensemble (personnel, locaux, fournisseurs, communication), tandis que le DRP est son volet technologique : restaurer l'infrastructure IT critique. Le BCP englobe donc le DRP, pas l'inverse, et la dernière proposition inverse exactement leurs définitions.",
       difficulte: 1
     },
     {
@@ -1989,11 +1989,11 @@ window.CISSP_DATA.domains[7] = {
         "Un simple briefing sécurité avant le départ",
         "Un dispositif complet : itinéraires partagés, check-ins réguliers, point de contact d'urgence, veille géopolitique et plan d'évacuation",
         "L'interdiction de tout déplacement professionnel",
-        "Une augmentation de salaire compensant le risque"
+        "Souscrire une assurance couvrant les frais médicaux à l'étranger"
       ],
       reponse: 1,
       explication:
-        "La protection du personnel à l'étranger est un programme continu : suivi des itinéraires, points de contact réguliers (check-ins), veille sur la situation locale, assistance médicale et plan d'évacuation activable rapidement. Un briefing unique est insuffisant pour une présence durable, l'interdiction générale est rarement réaliste, et une prime de risque ne protège personne.",
+        "La protection du personnel à l'étranger est un programme continu : suivi des itinéraires, points de contact réguliers (check-ins), veille sur la situation locale, assistance médicale et plan d'évacuation activable rapidement. Un briefing unique est insuffisant pour une présence durable, l'interdiction générale est rarement réaliste, et une assurance médicale indemnise après coup sans rien prévenir.",
       difficulte: 2
     }
   ],

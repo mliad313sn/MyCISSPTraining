@@ -718,9 +718,9 @@ window.CISSP_DATA.domains[8] = {
   quiz: [
     {
       q: "Un chef de projet doit choisir une méthodologie pour un projet dont les exigences sont incertaines et évolueront fréquemment. Quelle approche est la PLUS adaptée ?",
-      choix: ["Waterfall", "Agile", "V-Model", "Big Bang"],
+      choix: ["Waterfall", "Agile", "V-Model", "Cleanroom"],
       reponse: 1,
-      explication: "Agile est conçu pour accueillir le changement, même tardif, grâce à des itérations courtes et des retours fréquents. Waterfall fige les exigences au départ et n'offre pas de mécanisme formel d'intégration des changements ; le V-Model hérite de cette rigidité en y ajoutant des phases de test parallèles ; « Big Bang » n'est pas une méthodologie structurée adaptée.",
+      explication: "Agile est conçu pour accueillir le changement, même tardif, grâce à des itérations courtes et des retours fréquents. Waterfall fige les exigences au départ et n'offre pas de mécanisme formel d'intégration des changements ; le V-Model hérite de cette rigidité en y ajoutant des phases de test parallèles ; et Cleanroom repose sur des spécifications formelles figées en amont, incompatibles avec des exigences mouvantes.",
       difficulte: 1
     },
     {
@@ -933,11 +933,11 @@ window.CISSP_DATA.domains[8] = {
       choix: [
         "L'inférence est un problème de sécurité, l'agrégation est l'attaque correspondante",
         "L'agrégation est la capacité à combiner des données non sensibles en information sensible ; l'inférence est l'attaque qui en déduit une information de sensibilité supérieure",
-        "Les deux termes désignent la même attaque sur les index de la base",
-        "L'agrégation ne concerne que les données chiffrées, l'inférence que les données en clair"
+        "L'inférence ne s'applique qu'aux bases relationnelles, l'agrégation qu'aux entrepôts de données",
+        "L'agrégation exige un accès privilégié, tandis que l'inférence exploite une faille d'injection"
       ],
       reponse: 1,
-      explication: "L'agrégation est un problème de sécurité : la capacité de combiner des données non sensibles issues de sources séparées pour créer une information sensible. L'inférence est l'attaque : l'adversaire rassemble des éléments peu sensibles pour déduire une information de sensibilité supérieure. La première proposition inverse les termes, et les deux dernières sont fantaisistes.",
+      explication: "L'agrégation est un problème de sécurité : la capacité de combiner des données non sensibles issues de sources séparées pour créer une information sensible. L'inférence est l'attaque : l'adversaire rassemble des éléments peu sensibles pour déduire une information de sensibilité supérieure. La première proposition inverse les termes, et les deux dernières inventent des restrictions de périmètre ou des mécanismes d'accès qui n'existent pas : les deux notions s'appliquent à tout type de base et à des utilisateurs légitimes.",
       difficulte: 3
     },
     {
@@ -1015,10 +1015,10 @@ window.CISSP_DATA.domains[8] = {
         "Publier la documentation complète de l'API",
         "La validation des paramètres : vérifier que chaque valeur reçue est dans les limites définies avant traitement",
         "Limiter l'API aux seuls appels internes",
-        "Utiliser exclusivement le format XML"
+        "Attribuer une clé API statique unique partagée par tous les clients"
       ],
       reponse: 1,
-      explication: "La parameter validation est la mesure fondamentale : elle garantit que tout paramètre reçu par l'API est contrôlé contre les valeurs malformées, invalides ou malveillantes avant traitement. La documentation aide les développeurs mais ne protège pas, restreindre aux appels internes n'est souvent pas possible et ne valide rien, et le choix du format d'échange n'est pas un contrôle de sécurité en soi.",
+      explication: "La parameter validation est la mesure fondamentale : elle garantit que tout paramètre reçu par l'API est contrôlé contre les valeurs malformées, invalides ou malveillantes avant traitement. La documentation aide les développeurs mais ne protège pas, restreindre aux appels internes n'est souvent pas possible et ne valide rien, et une clé statique partagée n'authentifie personne individuellement, ne se révoque pas sans casser tous les clients et ne valide aucune entrée.",
       difficulte: 1
     },
     {
@@ -1027,10 +1027,10 @@ window.CISSP_DATA.domains[8] = {
         "Un standard est recommandé, une guideline est obligatoire",
         "Un standard est obligatoire, vérifiable et applicable à tous les développements ; une guideline est une recommandation flexible",
         "Les deux termes sont interchangeables",
-        "Un standard ne concerne que les langages compilés"
+        "Une guideline devient automatiquement un standard après un an d'application"
       ],
       reponse: 1,
-      explication: "Un standard est une règle obligatoire : il doit réduire le risque d'un type précis de vulnérabilité, être applicable à l'ensemble des développements de l'organisation et être vérifiable. Une guideline est une recommandation qui laisse de la flexibilité, comme des commentaires cohérents ou des fonctions courtes. La première proposition inverse les définitions, et les deux notions sont bien distinctes, quel que soit le langage.",
+      explication: "Un standard est une règle obligatoire : il doit réduire le risque d'un type précis de vulnérabilité, être applicable à l'ensemble des développements de l'organisation et être vérifiable. Une guideline est une recommandation qui laisse de la flexibilité, comme des commentaires cohérents ou des fonctions courtes. La première proposition inverse les définitions, les deux notions restent bien distinctes, et aucune promotion automatique ne transforme une recommandation en règle obligatoire : cela exige une décision de gouvernance.",
       difficulte: 1
     },
     {
@@ -1039,10 +1039,10 @@ window.CISSP_DATA.domains[8] = {
         "Risque de déni de service ; augmenter les ressources serveur",
         "Divulgation d'informations utiles à un attaquant ; afficher un message générique et journaliser les détails en interne",
         "Perte de données ; mettre en place des sauvegardes",
-        "Aucun risque ; ces informations aident les utilisateurs"
+        "Vulnérabilité d'injection SQL ; déployer un WAF en urgence"
       ],
       reponse: 1,
-      explication: "Des messages d'erreur détaillés révèlent la structure interne de l'application, la technologie utilisée et parfois le schéma de la base : autant d'informations précieuses pour un attaquant. La bonne pratique est d'afficher un message générique à l'utilisateur, de journaliser les détails complets vers un dépôt centralisé, et d'échouer de façon sûre. Il ne s'agit ni d'un problème de capacité ni de sauvegarde.",
+      explication: "Des messages d'erreur détaillés révèlent la structure interne de l'application, la technologie utilisée et parfois le schéma de la base : autant d'informations précieuses pour un attaquant. La bonne pratique est d'afficher un message générique à l'utilisateur, de journaliser les détails complets vers un dépôt centralisé, et d'échouer de façon sûre. Il ne s'agit ni d'un problème de capacité ni de sauvegarde, et afficher une requête en erreur n'est pas en soi une injection : c'est une fuite d'informations qui la facilite.",
       difficulte: 1
     },
     {
@@ -1074,11 +1074,11 @@ window.CISSP_DATA.domains[8] = {
       choix: [
         "Les licences des outils low-code sont coûteuses",
         "Le développement ad hoc est difficile à gérer et généralement dépourvu de considérations de sécurité",
-        "Les employés deviennent plus productifs que les développeurs",
-        "Les applications produites sont trop performantes pour les serveurs"
+        "Les applications low-code ne peuvent pas s'intégrer à l'annuaire d'entreprise",
+        "Le code généré par les outils low-code est de qualité inférieure à celui des développeurs professionnels"
       ],
       reponse: 1,
-      explication: "Les citizen programmers codifient leurs connaissances métier de façon ad hoc : le résultat est difficile à gérer, échappe au SDLC et aux contrôles, et est généralement dépourvu de considérations de sécurité — validation des entrées, gestion des accès, journalisation. Le coût des licences est un enjeu financier secondaire, et les deux dernières propositions ne décrivent pas des risques de sécurité.",
+      explication: "Les citizen programmers codifient leurs connaissances métier de façon ad hoc : le résultat est difficile à gérer, échappe au SDLC et aux contrôles, et est généralement dépourvu de considérations de sécurité — validation des entrées, gestion des accès, journalisation. Le coût des licences est un enjeu financier secondaire, l'intégration à l'annuaire est un point technique généralement résoluble, et la qualité du code n'est pas le cœur du problème : c'est l'absence de gouvernance et de contrôles de sécurité qui crée le risque.",
       difficulte: 2
     },
     {
@@ -1105,11 +1105,11 @@ window.CISSP_DATA.domains[8] = {
       choix: [
         "Le code compilé est toujours moins sécurisé que le code interprété",
         "Le code compilé est plus difficile à manipuler par un tiers, mais les backdoors y sont aussi plus difficiles à détecter faute de code source visible",
-        "Le code compilé ne peut pas contenir de vulnérabilités",
-        "Le code interprété ne peut pas être lu par les attaquants"
+        "Le code compilé garantit l'intégrité car le compilateur le signe automatiquement",
+        "Le code interprété est protégé par l'obfuscation intégrée de l'interpréteur"
       ],
       reponse: 1,
-      explication: "Le code compilé, distribué en binaire, est généralement moins exposé à la manipulation directe par un tiers ; mais comme le code source n'est pas visible dans la forme compilée, il est aussi plus difficile pour les relecteurs d'y détecter des backdoors ou d'autres failles. Aucune forme n'est intrinsèquement exempte de vulnérabilités, et le code interprété est au contraire lisible par quiconque y accède.",
+      explication: "Le code compilé, distribué en binaire, est généralement moins exposé à la manipulation directe par un tiers ; mais comme le code source n'est pas visible dans la forme compilée, il est aussi plus difficile pour les relecteurs d'y détecter des backdoors ou d'autres failles. La compilation n'implique aucune signature — le code signing est un mécanisme distinct et volontaire — et les interpréteurs n'obfusquent rien : le code interprété est lisible par quiconque y accède.",
       difficulte: 3
     },
     {
@@ -1455,13 +1455,13 @@ window.CISSP_DATA.domains[8] = {
     {
       q: "Un malware est distribué signé avec le certificat de code signing légitime d'un éditeur connu, dérobé lors d'une intrusion. Les postes de travail l'exécutent sans alerte. Quelles mesures l'ÉDITEUR aurait-il dû prendre pour prévenir et traiter ce scénario ?",
       choix: [
-        "Publier ses clés privées pour permettre la vérification communautaire",
+        "Étendre la durée de validité du certificat afin d'espacer les opérations de renouvellement, jugées risquées",
         "Protéger les clés de signature dans un HSM avec accès strictement contrôlé, et révoquer immédiatement le certificat dès la compromission détectée",
         "Signer uniquement les versions majeures pour limiter l'usage des clés",
         "Utiliser un certificat auto-signé pour ne pas dépendre d'une autorité de certification"
       ],
       reponse: 1,
-      explication: "La valeur du code signing repose entièrement sur la protection de la clé privée : elle doit résider dans un HSM, avec signature effectuée dans un environnement dédié, accès nominatifs et journalisés. En cas de compromission, la révocation immédiate du certificat auprès de la CA invalide la confiance dans les signatures frauduleuses. Publier une clé privée détruit tout le mécanisme ; signer moins souvent ne protège pas la clé elle-même ; et un certificat auto-signé supprime la chaîne de confiance qui fait précisément la valeur du dispositif.",
+      explication: "La valeur du code signing repose entièrement sur la protection de la clé privée : elle doit résider dans un HSM, avec signature effectuée dans un environnement dédié, accès nominatifs et journalisés. En cas de compromission, la révocation immédiate du certificat auprès de la CA invalide la confiance dans les signatures frauduleuses. Allonger la vie du certificat étend au contraire la fenêtre d'exploitation d'une clé volée ; signer moins souvent ne protège pas la clé elle-même ; et un certificat auto-signé supprime la chaîne de confiance qui fait précisément la valeur du dispositif.",
       difficulte: 2
     },
     {
