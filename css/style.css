@@ -282,6 +282,8 @@ p.page-sub { color: var(--text-dim); margin-bottom: 1.6rem; max-width: 70ch; }
 .rich li { margin: .35rem 0; }
 .rich strong { color: var(--text); }
 
+@keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+
 .footer { text-align: center; padding: 1.4rem; color: var(--text-dim); font-size: .82rem; border-top: 1px solid var(--border); }
 .footer a { color: var(--accent); }
 

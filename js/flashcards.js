@@ -1,30 +1,48 @@
-/* Révision par flashcards : cartes recto/verso par domaine ou tous domaines. */
+/* Révision par flashcards avec répétition espacée (système Leitner) :
+   les cartes dues aujourd'hui passent en premier, « Je connais » espace
+   la prochaine revue (1, 3, 7, 14, 30 jours), « À revoir » ramène en boîte 1. */
 const Flashcards = (() => {
-  let deck, idx, known;
+  let deck, idx, known, scope;
 
-  function build(domainId) {
+  function allCards(domainId) {
     let cards = [];
-    if (domainId === "all") {
-      Object.values(CISSP_DATA.domains).forEach(d =>
-        d.flashcards.forEach(c => cards.push({ ...c, dom: d.code, couleur: d.couleur })));
-    } else {
-      const d = CISSP_DATA.domains[domainId];
-      cards = d.flashcards.map(c => ({ ...c, dom: d.code, couleur: d.couleur }));
-    }
-    for (let i = cards.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [cards[i], cards[j]] = [cards[j], cards[i]];
-    }
+    const push = d => d.flashcards.forEach((c, i) =>
+      cards.push({ ...c, dom: d.code, couleur: d.couleur, key: `d${d.id}:${i}:${c.recto.slice(0, 40)}` }));
+    if (domainId === "all") Object.values(CISSP_DATA.domains).forEach(push);
+    else push(CISSP_DATA.domains[domainId]);
     return cards;
   }
 
-  function open(domainId) {
-    deck = build(domainId || "all");
-    idx = 0; known = 0;
-    render();
+  function build(domainId) {
+    const cards = allCards(domainId);
+    const due = cards.filter(c => Progress.cardDue(c.key));
+    const rest = cards.filter(c => !Progress.cardDue(c.key));
+    const shuffle = a => {
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    };
+    // cartes dues d'abord ; les autres ensuite (révision d'avance)
+    return { due: shuffle(due), ahead: shuffle(rest) };
   }
 
-  function render() {
+  function open(domainId) {
+    scope = domainId || "all";
+    const b = build(scope);
+    deck = b.due.length ? b.due : b.ahead;
+    idx = 0; known = 0;
+    renderInfo(b);
+  }
+
+  let aheadMode = false;
+  function renderInfo(b) {
+    aheadMode = !b.due.length;
+    render(b.due.length);
+  }
+
+  function render(dueCount) {
     const app = document.getElementById("app");
     if (idx >= deck.length) {
       app.innerHTML = `
@@ -32,25 +50,30 @@ const Flashcards = (() => {
           <div style="font-size:3rem">🧠</div>
           <h1 class="page-title">Session terminée !</h1>
           <p>Vous avez marqué <strong>${known} / ${deck.length}</strong> cartes comme connues.</p>
+          <p style="color:var(--text-dim);font-size:.9rem;margin-top:.5rem">Les cartes connues reviendront plus tard (répétition espacée) ;
+          celles à revoir reviendront dès demain.</p>
           <div style="display:flex;gap:.7rem;justify-content:center;margin-top:1rem;flex-wrap:wrap">
-            <button class="btn" onclick="Flashcards.open('all')">Nouvelle session</button>
+            <button class="btn" onclick="Flashcards.open('${scope}')">Nouvelle session</button>
             <a class="btn secondary" href="#/">Tableau de bord</a>
           </div>
         </div>`;
       return;
     }
     const c = deck[idx];
+    const st = Progress.cardState(c.key);
     app.innerHTML = `
       <div style="max-width:680px;margin:0 auto">
         <div class="q-head" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:.6rem">
           <span class="badge" style="border-color:${c.couleur};color:${c.couleur}">${c.dom}</span>
           <span class="badge">Carte ${idx + 1} / ${deck.length}</span>
+          <span class="badge" title="Niveau de mémorisation (boîte de Leitner)">📦 niveau ${st.box}/5</span>
           <select id="fc-domsel" class="btn secondary small" style="cursor:pointer">
-            <option value="all">Tous les domaines</option>
+            <option value="all" ${scope === "all" ? "selected" : ""}>Tous les domaines</option>
             ${Object.values(CISSP_DATA.domains).map(d =>
-              `<option value="${d.id}">${d.code} — ${esc(d.titre)}</option>`).join("")}
+              `<option value="${d.id}" ${String(scope) === String(d.id) ? "selected" : ""}>${d.code} — ${esc(d.titre)}</option>`).join("")}
           </select>
         </div>
+        ${aheadMode ? `<p style="text-align:center;color:var(--ok);font-size:.88rem;margin-bottom:.6rem">✨ Aucune carte due aujourd'hui — vous révisez en avance.</p>` : ""}
         <div class="flashcard-scene">
           <div class="flashcard" id="fc" style="border-color:${c.couleur}">
             <div class="face front">${esc(c.recto)}</div>
@@ -66,10 +89,18 @@ const Flashcards = (() => {
 
     const fc = document.getElementById("fc");
     fc.onclick = () => fc.classList.toggle("flipped");
-    document.getElementById("fc-known").onclick = () => { known++; idx++; render(); };
-    document.getElementById("fc-again").onclick = () => { deck.push(deck[idx]); idx++; render(); };
+    document.getElementById("fc-known").onclick = () => {
+      Progress.reviewCard(c.key, true); known++; idx++; render();
+    };
+    document.getElementById("fc-again").onclick = () => {
+      Progress.reviewCard(c.key, false); deck.push(deck[idx]); idx++; render();
+    };
     document.getElementById("fc-domsel").onchange = e => open(e.target.value === "all" ? "all" : +e.target.value);
   }
 
-  return { open };
+  function dueTotal() {
+    return Progress.dueCount(allCards("all").map(c => c.key));
+  }
+
+  return { open, dueTotal };
 })();

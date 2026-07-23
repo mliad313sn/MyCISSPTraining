@@ -23,6 +23,7 @@ const App = (() => {
       case "quiz": Quiz.open(+parts[1]); break;
       case "flashcards": Flashcards.open("all"); break;
       case "scenarios": parts[1] ? Scenarios.open(parts[1]) : Scenarios.list(); break;
+      case "memo": Memo.list(parts[1]); break;
       case "examen": Exam.home(); break;
       case "glossaire": renderGlossary(); break;
       case "methode": renderMethod(); break;
@@ -31,7 +32,7 @@ const App = (() => {
   }
 
   function setActiveNav(view) {
-    const map = { "": "accueil", domaines: "domaines", domaine: "domaines", lecon: "domaines", quiz: "domaines", flashcards: "flashcards", scenarios: "scenarios", examen: "examen", glossaire: "glossaire", methode: "methode" };
+    const map = { "": "accueil", domaines: "domaines", domaine: "domaines", lecon: "domaines", quiz: "domaines", flashcards: "flashcards", scenarios: "scenarios", memo: "memo", examen: "examen", glossaire: "glossaire", methode: "methode" };
     document.querySelectorAll(".topnav a").forEach(a =>
       a.classList.toggle("active", a.dataset.route === (map[view] || "")));
   }
@@ -72,6 +73,7 @@ const App = (() => {
         <div class="stat"><div class="num">${totalLecons}</div><div class="lbl">Leçons vidéo</div></div>
         <div class="stat"><div class="num">${totalQuiz}</div><div class="lbl">Questions d'entraînement</div></div>
         <div class="stat"><div class="num">${totalCards}</div><div class="lbl">Flashcards</div></div>
+        <div class="stat"><div class="num">${Flashcards.dueTotal()}</div><div class="lbl">Cartes à réviser aujourd'hui</div></div>
         <div class="stat"><div class="num">${lastExam ? lastExam.pct + "%" : "—"}</div><div class="lbl">Dernier examen blanc</div></div>
       </div>
 
@@ -87,8 +89,13 @@ const App = (() => {
         </div>
         <div class="card" style="text-align:center">
           <div style="font-size:2rem">🃏</div><h3>Flashcards</h3>
-          <p style="color:var(--text-dim);font-size:.9rem;margin:.4rem 0 1rem">${totalCards} cartes recto/verso pour mémoriser les concepts clés.</p>
+          <p style="color:var(--text-dim);font-size:.9rem;margin:.4rem 0 1rem">${totalCards} cartes avec répétition espacée (Leitner).</p>
           <a class="btn secondary" href="#/flashcards">Réviser</a>
+        </div>
+        <div class="card" style="text-align:center">
+          <div style="font-size:2rem">🧠</div><h3>Mémo</h3>
+          <p style="color:var(--text-dim);font-size:.9rem;margin:.4rem 0 1rem">Mnémoniques et séquences à remettre dans l'ordre.</p>
+          <a class="btn secondary" href="#/memo">Mémoriser</a>
         </div>
         <div class="card" style="text-align:center">
           <div style="font-size:2rem">🎯</div><h3>Examen blanc</h3>
@@ -192,16 +199,28 @@ const App = (() => {
     document.getElementById("app").innerHTML = `
       <h1 class="page-title">📖 Glossaire CISSP</h1>
       <p class="page-sub">Les termes techniques restent en anglais à l'examen — voici leur explication en français.</p>
-      <input class="gloss-search" id="gs" type="search" placeholder="🔍 Rechercher un terme (ex : ALE, Kerberos, Zero Trust…)" autocomplete="off">
+      <div style="display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;margin-bottom:1.2rem">
+        <input class="gloss-search" id="gs" type="search" placeholder="🔍 Rechercher un terme (ex : ALE, Kerberos, Zero Trust…)" autocomplete="off" style="flex:1;min-width:240px;margin-bottom:0">
+        <label class="badge" style="cursor:pointer;padding:.55rem .9rem;font-size:.9rem">
+          <input type="checkbox" id="gs-acro" style="margin-right:.4rem">Acronymes uniquement
+        </label>
+      </div>
       <div class="card"><dl id="gloss-list">
         ${terms.map(t => `<div class="gloss-item" data-k="${esc((t.terme + " " + t.def).toLowerCase())}">
           <dt>${esc(t.terme)}</dt><dd>${esc(t.def)}</dd></div>`).join("")}
       </dl></div>`;
-    document.getElementById("gs").oninput = e => {
-      const v = e.target.value.toLowerCase().trim();
-      document.querySelectorAll(".gloss-item").forEach(el =>
-        el.style.display = !v || el.dataset.k.includes(v) ? "" : "none");
+    const applyFilter = () => {
+      const v = document.getElementById("gs").value.toLowerCase().trim();
+      const acro = document.getElementById("gs-acro").checked;
+      document.querySelectorAll(".gloss-item").forEach(el => {
+        const term = el.querySelector("dt").textContent;
+        const isAcro = /^[A-Z0-9]{2,}[\s(\/]|^[A-Z0-9]{2,}$/.test(term);
+        const okText = !v || el.dataset.k.includes(v);
+        el.style.display = okText && (!acro || isAcro) ? "" : "none";
+      });
     };
+    document.getElementById("gs").oninput = applyFilter;
+    document.getElementById("gs-acro").onchange = applyFilter;
   }
 
   /* ---------- Méthode ---------- */

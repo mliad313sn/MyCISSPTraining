@@ -10,7 +10,8 @@ Adapté et traduit des [CISSP Study Resources](https://github.com/jefferywmoore/
 - **📚 8 domaines complets du CBK** avec leurs pondérations officielles.
 - **🧪 Quiz par domaine** : questions style examen (« MEILLEUR », « EN PREMIER », point de vue manager), correction immédiate et explications détaillées.
 - **🎬 Scénarios de cas réels** : études de cas séquentielles inspirées d'incidents connus (ransomware, supply chain, GDPR…) pour ancrer les concepts en contexte.
-- **🃏 Flashcards** recto/verso par domaine avec suivi « je connais / à revoir ».
+- **🃏 Flashcards** recto/verso par domaine avec **répétition espacée** (système Leitner : intervalles 1/3/7/14/30 jours, file « à réviser aujourd'hui » sur le tableau de bord).
+- **🧠 Mémo** : mnémoniques éprouvés de la communauté CISSP (OSI, ALE/SLE, STRIDE, classes de feu, CPSOW…) + exercices interactifs « remettre dans l'ordre » (incident response, RMF, order of volatility, tests DRP, Kerberos…).
 - **🎯 Examens blancs chronométrés** : tirage pondéré selon les poids officiels, pas de retour arrière (comme le vrai CAT), analyse des résultats par domaine.
 - **📖 Glossaire** interactif des termes techniques.
 - **📋 Méthode** : plan d'étude 8-12 semaines et stratégie du jour J.
@@ -42,11 +43,13 @@ js/
   quiz.js           # moteur de quiz
   exam.js           # examen blanc chronométré pondéré
   scenarios.js      # moteur d'études de cas séquentielles
-  flashcards.js     # révision par cartes
+  flashcards.js     # révision par cartes (répétition espacée Leitner)
+  memo.js           # mnémoniques + exercices d'ordonnancement
   progress.js       # persistance de la progression (localStorage)
 data/
   domain1..8.js     # contenu pédagogique des 8 domaines (leçons, quiz, flashcards)
   scenarios.js      # études de cas réalistes
+  memo.js           # mnémoniques et séquences à connaître
   glossary.js       # glossaire
   SCHEMA.md         # schéma de données des domaines
 ```

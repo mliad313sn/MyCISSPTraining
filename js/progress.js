@@ -13,9 +13,12 @@ const Progress = (() => {
     s.lessons = s.lessons || {};   // { "d1-l1": true }
     s.quiz = s.quiz || {};         // { "1": { best: 80, attempts: 3 } }
     s.exams = s.exams || [];       // [ { date, score, total, pct } ]
-    s.cards = s.cards || {};       // { "1": nbConnues }
+    s.cards = s.cards || {};       // { "<clé carte>": { box: 1-6, due: timestamp } } — système Leitner
     return s;
   }
+
+  // Répétition espacée (Leitner) : intervalles en jours selon la boîte
+  const INTERVALLES = [0, 1, 3, 7, 14, 30];
 
   return {
     lessonDone(id) { return !!state().lessons[id]; },
@@ -50,6 +53,22 @@ const Progress = (() => {
         done += d.lecons.filter(l => this.lessonDone(l.id)).length;
       });
       return total ? Math.round(100 * done / total) : 0;
+    },
+
+    /* ---- Flashcards : répétition espacée (Leitner) ---- */
+    cardState(key) { return state().cards[key] || { box: 0, due: 0 }; },
+    cardDue(key) { return this.cardState(key).due <= Date.now(); },
+    reviewCard(key, known) {
+      const s = state();
+      const c = s.cards[key] || { box: 0, due: 0 };
+      c.box = known ? Math.min(c.box + 1, INTERVALLES.length - 1) : 1;
+      c.due = Date.now() + INTERVALLES[c.box] * 86400000;
+      s.cards[key] = c; save(s);
+      return c;
+    },
+    dueCount(allKeys) {
+      const cards = state().cards;
+      return allKeys.filter(k => !cards[k] || cards[k].due <= Date.now()).length;
     },
 
     reset() { localStorage.removeItem(KEY); }

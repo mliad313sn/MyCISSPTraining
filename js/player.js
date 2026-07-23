@@ -21,18 +21,31 @@ const Player = (() => {
     utter = null;
   }
 
+  let active = false;
+
   function open(domainId, lessonId) {
     domain = CISSP_DATA.domains[domainId];
     lesson = domain.lecons.find(l => l.id === lessonId);
     idx = 0;
     playing = true;
+    active = true;
     render();
   }
 
   function close() {
     stopAudio();
     playing = false;
+    active = false;
   }
+
+  // Raccourcis clavier : ← → naviguent, espace lecture/pause, M coupe le son
+  document.addEventListener("keydown", e => {
+    if (!active || e.target.tagName === "INPUT" || e.target.tagName === "SELECT") return;
+    if (e.key === "ArrowRight") { e.preventDefault(); go(idx + 1); }
+    else if (e.key === "ArrowLeft") { e.preventDefault(); go(idx - 1); }
+    else if (e.key === " ") { e.preventDefault(); togglePlay(); }
+    else if (e.key.toLowerCase() === "m") { toggleMute(); }
+  });
 
   function render() {
     const app = document.getElementById("app");

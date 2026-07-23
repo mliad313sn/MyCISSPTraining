@@ -38,6 +38,14 @@ const Exam = (() => {
       <p class="page-sub">Simulez les conditions réelles : questions tirées des 8 domaines selon leur poids officiel à l'examen,
       chronomètre, aucune possibilité de revenir en arrière (comme le vrai CAT d'ISC2). La correction détaillée arrive à la fin.
       Objectif avant de réserver votre examen : <strong>≥ 80 %</strong> de façon constante.</p>
+      <div class="card" style="margin-bottom:1.4rem;border-color:var(--warn)">
+        <strong>🧭 Les 3 méta-règles à garder en tête sur CHAQUE question :</strong>
+        <ul style="padding-left:1.2rem;color:var(--text-dim);margin-top:.4rem">
+          <li>La <strong>vie humaine</strong> prime toujours — toute réponse qui protège les personnes gagne.</li>
+          <li><strong>Think like a manager</strong> : processus, politique et portée organisationnelle avant la solution technique ponctuelle.</li>
+          <li>Questions « FIRST / BEST / MOST » : cherchez l'étape la plus en <strong>amont</strong> du processus (identifier/évaluer avant corriger).</li>
+        </ul>
+      </div>
       <div class="grid cols-3">
         ${Object.entries(FORMATS).map(([k, f]) => `
           <div class="card" style="text-align:center">
