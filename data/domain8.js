@@ -1513,6 +1513,316 @@ window.CISSP_DATA.domains[8] = {
       difficulte: 2
     }
   ],
+  quizEn: [
+    {
+      q: "A government agency is developing a payroll system with stable, well-understood requirements and a contractual obligation to produce exhaustive documentation and formal sign-off at each stage. Which development model is MOST appropriate?",
+      choix: ["Scrum", "Waterfall", "Extreme Programming", "Kanban"],
+      reponse: 1,
+      explication: "Waterfall convient précisément aux projets dont les exigences sont stables et connues d'avance, avec des livrables documentaires et des validations formelles à chaque phase : sa rigidité, défaut ailleurs, devient ici un atout de traçabilité contractuelle. Scrum, XP et Kanban sont des approches Agile/Lean conçues pour des exigences évolutives et une documentation minimale, à l'opposé du besoin exprimé.",
+      difficulte: 1
+    },
+    {
+      q: "At which point in the SDLC should a security professional FIRST be engaged to provide the greatest benefit at the lowest cost?",
+      choix: [
+        "During acceptance testing, when the full system can be evaluated",
+        "During the requirements gathering phase, at project initiation",
+        "During code review, once the implementation exists",
+        "During operations, based on real incident data"
+      ],
+      reponse: 1,
+      explication: "La sécurité doit être impliquée dès la collecte des exigences : les besoins de sécurité y sont définis comme exigences non fonctionnelles, orientant toute la conception. Plus un défaut est découvert tard, plus il coûte cher à corriger — plusieurs dizaines de fois plus en production qu'en conception. Les tests d'acceptation, la revue de code et l'exploitation sont tous des points d'intervention utiles mais tardifs : c'est le principe du « shift left ».",
+      difficulte: 1
+    },
+    {
+      q: "Which activity BEST exemplifies the concept of \"shifting security left\" in a DevSecOps environment?",
+      choix: [
+        "Conducting threat modeling during the design phase and running SAST on every commit",
+        "Performing an annual penetration test on the production environment",
+        "Deploying a web application firewall in front of production applications",
+        "Establishing a bug bounty program for released products"
+      ],
+      reponse: 0,
+      explication: "« Shift left » signifie déplacer les activités de sécurité vers le début du cycle de vie : le threat modeling en conception et le SAST à chaque commit détectent les défauts avant qu'ils n'atteignent la production, au moment où la correction est la moins coûteuse. Le pentest annuel, le WAF et le bug bounty interviennent tous « à droite », sur des systèmes déjà déployés : utiles en défense en profondeur, ils ne préviennent pas l'introduction des défauts.",
+      difficulte: 1
+    },
+    {
+      q: "A CISO wants to assess and improve the organization's software security practices using an open framework organized around business functions such as Governance, Design, Implementation, Verification, and Operations. Which model BEST fits this need?",
+      choix: ["SW-CMM", "OWASP SAMM", "IDEAL", "ISO 31000"],
+      reponse: 1,
+      explication: "Le Software Assurance Maturity Model (SAMM) d'OWASP est un cadre open source dédié à la maturité de la SÉCURITÉ logicielle, structuré autour de cinq fonctions métier : Governance, Design, Implementation, Verification et Operations. Le SW-CMM mesure la maturité générale des processus de développement sans traiter explicitement la sécurité, IDEAL est un modèle d'amélioration des processus du SEI, et ISO 31000 est un cadre de management des risques d'entreprise, pas un modèle de maturité logicielle.",
+      difficulte: 2
+    },
+    {
+      q: "Developers merge code into a shared repository several times per day, automatically triggering builds and test suites. Code that passes all tests is packaged and ready for production, but an operations manager must approve each release. Which practices are in place?",
+      choix: [
+        "Continuous integration with continuous deployment",
+        "Continuous integration with continuous delivery",
+        "Continuous monitoring with release control",
+        "Trunk-based development with continuous deployment"
+      ],
+      reponse: 1,
+      explication: "Les fusions fréquentes avec builds et tests automatiques définissent la continuous integration ; le fait que le code soit toujours prêt pour la production mais qu'une APPROBATION HUMAINE reste requise correspond au continuous delivery. Le continuous deployment supprimerait cette approbation : tout changement passant les tests irait automatiquement en production. C'est la distinction favorite de l'examen entre delivery et deployment.",
+      difficulte: 2
+    },
+    {
+      q: "A developer accidentally pushes a file containing production database credentials to the organization's source code repository. The file has been deleted in a subsequent commit. What should the security team do NEXT?",
+      choix: [
+        "Purge the repository history to remove all traces of the file",
+        "Rotate the exposed credentials immediately and review access logs for misuse",
+        "Send the developer to secure coding training",
+        "Enable branch protection rules on the repository"
+      ],
+      reponse: 1,
+      explication: "Un secret entré dans un dépôt doit être considéré comme compromis : l'historique Git le conserve malgré la suppression du fichier, et des clones ont pu être réalisés. La priorité est de révoquer et remplacer les identifiants, puis de vérifier dans les journaux s'ils ont été utilisés. La purge de l'historique est un nettoyage complémentaire qui n'annule pas les copies existantes ; la formation et les protections de branche sont des mesures préventives pour l'avenir, pas la réponse à l'exposition en cours.",
+      difficulte: 2
+    },
+    {
+      q: "Which approach BEST reduces the risk associated with secrets used by automated CI/CD pipeline jobs?",
+      choix: [
+        "Storing secrets in environment configuration files committed with the code",
+        "Embedding secrets in container images at build time",
+        "Retrieving short-lived credentials at runtime from a centralized secrets management service",
+        "Sharing a single service account password across all pipeline stages"
+      ],
+      reponse: 2,
+      explication: "Un service centralisé de gestion des secrets délivre au pipeline des identifiants dynamiques à courte durée de vie, injectés uniquement à l'exécution : rien ne persiste dans le code, les images ou les journaux, la rotation est automatique et chaque accès est audité. Les fichiers de configuration commités exposent les secrets à tout l'historique du dépôt ; les secrets incorporés aux images sont extractibles de chaque couche ; et un mot de passe unique partagé supprime la traçabilité et maximise l'impact d'une compromission.",
+      difficulte: 2
+    },
+    {
+      q: "After learning about attacks in which a compromised build server injected malicious code into legitimately signed software updates, an organization wants assurance that its released artifacts match its reviewed source code. Which control BEST provides this assurance?",
+      choix: [
+        "Requiring two-person code review on all pull requests",
+        "Generating signed provenance attestations from a hardened, isolated build environment and verifying them before release",
+        "Scanning released binaries with antivirus software",
+        "Encrypting the source code repository at rest"
+      ],
+      reponse: 1,
+      explication: "L'attaque de type SolarWinds compromet le processus de BUILD : le code source relu est sain, mais l'artefact produit ne l'est plus. La parade est une chaîne de build de confiance : environnement durci, éphémère et isolé, et attestations de provenance signées (approche SLSA) prouvant que chaque artefact provient bien du code source examiné et du processus attendu. La revue à deux personnes ne voit pas une injection post-compilation, l'antivirus ne détecte pas un implant furtif inédit, et le chiffrement du dépôt ne protège pas le pipeline.",
+      difficulte: 3
+    },
+    {
+      q: "What is the PRIMARY purpose of maintaining a Software Bill of Materials (SBOM) for each application?",
+      choix: [
+        "To document the application's functional requirements for auditors",
+        "To provide a formal inventory of all components and dependencies, enabling rapid identification of exposure when new vulnerabilities are disclosed",
+        "To prove compliance with open source license obligations only",
+        "To estimate the development cost of the application"
+      ],
+      reponse: 1,
+      explication: "Le SBOM est l'inventaire formel de tous les composants, bibliothèques et dépendances — y compris transitives — d'un logiciel. Sa valeur première en sécurité est la réactivité : lors de la divulgation d'une vulnérabilité comme Log4Shell, il permet d'identifier immédiatement les applications affectées. La conformité des licences est un bénéfice secondaire réel mais non principal, et le SBOM ne documente ni les exigences fonctionnelles ni les coûts.",
+      difficulte: 1
+    },
+    {
+      q: "An organization's build system resolves packages from both an internal registry and a public repository. An attacker publishes a package on the public repository using the name of an internal library with a higher version number, and the build system downloads it. Which attack has occurred?",
+      choix: ["Typosquatting", "Watering hole attack", "Dependency confusion", "Cross-site scripting"],
+      reponse: 2,
+      explication: "La dependency confusion exploite les résolveurs de paquets configurés sur plusieurs registres : l'attaquant publie sur le registre public un homonyme du paquet interne avec une version supérieure, que le gestionnaire préfère automatiquement. Le typosquatting repose sur des fautes de frappe humaines dans des noms proches, le watering hole compromet un site fréquenté par les cibles, et le XSS est une vulnérabilité web sans rapport. Défenses : registre privé prioritaire ou exclusif, épinglage des versions, vérification des hashes.",
+      difficulte: 2
+    },
+    {
+      q: "Which application security testing technique examines source code for vulnerabilities WITHOUT executing the program?",
+      choix: [
+        "Dynamic application security testing (DAST)",
+        "Static application security testing (SAST)",
+        "Fuzz testing",
+        "Runtime application self-protection (RASP)"
+      ],
+      reponse: 1,
+      explication: "Le SAST analyse le code source, le bytecode ou les binaires SANS exécuter l'application : approche boîte blanche, applicable tôt dans le cycle, qui localise précisément les défauts dans le code. Le DAST teste l'application EN EXÉCUTION de l'extérieur, le fuzzing envoie des entrées malformées à un programme en fonctionnement, et le RASP est un mécanisme de protection embarqué à l'exécution, pas une technique de test.",
+      difficulte: 1
+    },
+    {
+      q: "A security consultant is asked to test a web application. She has no access to source code or documentation and interacts only with the running application over HTTP, as an attacker would. Which testing approach is she using?",
+      choix: ["SAST", "DAST", "Software composition analysis", "Regression testing"],
+      reponse: 1,
+      explication: "Le DAST (dynamic application security testing) évalue l'application en cours d'exécution, de l'extérieur, sans accès au code source : c'est une approche boîte noire qui reproduit le point de vue de l'attaquant. Le SAST exige l'accès au code sans exécution ; la SCA inventorie les composants tiers et leurs vulnérabilités connues ; et les tests de régression vérifient que les modifications n'ont pas cassé les fonctionnalités existantes — un objectif de qualité, pas de sécurité offensive.",
+      difficulte: 1
+    },
+    {
+      q: "Which technology combines elements of static and dynamic analysis by instrumenting the running application from within, providing code-level context for vulnerabilities discovered during execution?",
+      choix: [
+        "Interactive application security testing (IAST)",
+        "Web application firewall (WAF)",
+        "Software composition analysis (SCA)",
+        "Network vulnerability scanning"
+      ],
+      reponse: 0,
+      explication: "L'IAST instrumente l'application pendant son exécution (généralement lors des tests fonctionnels) avec un accès au code : il combine la visibilité interne du SAST et le réalisme d'exécution du DAST, réduisant les faux positifs et localisant précisément les défauts. Le WAF est un contrôle de protection, pas de test ; la SCA analyse les dépendances tierces ; et le scan réseau opère au niveau infrastructure, sans contexte applicatif.",
+      difficulte: 2
+    },
+    {
+      q: "During testing, an application error displays a full stack trace, framework version, and SQL query text to the end user. Which secure coding principle is MOST directly violated?",
+      choix: [
+        "Least privilege",
+        "Defense in depth",
+        "Error handling should present generic messages to users while logging details server-side",
+        "Separation of duties"
+      ],
+      reponse: 2,
+      explication: "La gestion sécurisée des erreurs impose des messages génériques côté utilisateur et la journalisation des détails techniques côté serveur uniquement : pile d'appels, versions et requêtes SQL offrent à un attaquant une cartographie précieuse pour cibler ses attaques (notamment l'injection SQL). Le moindre privilège concerne les droits d'accès, la défense en profondeur l'empilement des contrôles, et la séparation des tâches la répartition des responsabilités : aucun n'est le principe directement violé ici.",
+      difficulte: 1
+    },
+    {
+      q: "An attacker posts a product review containing JavaScript that is stored by the server and later executes in the browser of every user who views the product page, sending their session cookies to the attacker. Which is the MOST effective set of remediations?",
+      choix: [
+        "Anti-CSRF tokens and SameSite cookies",
+        "Input validation, context-aware output encoding, a Content Security Policy, and HttpOnly cookies",
+        "Parameterized queries and stored procedures",
+        "TLS 1.3 with certificate pinning"
+      ],
+      reponse: 1,
+      explication: "Il s'agit d'un stored XSS : le script persiste côté serveur et s'exécute chez chaque visiteur. La défense combine la validation des entrées, l'encodage contextuel des sorties (la mesure centrale), une Content Security Policy restreignant les scripts exécutables, et l'attribut HttpOnly qui rend les cookies inaccessibles à JavaScript. Les jetons anti-CSRF visent le CSRF, les requêtes paramétrées l'injection SQL, et TLS protège le transport — aucun n'empêche l'exécution du script dans le navigateur.",
+      difficulte: 2
+    },
+    {
+      q: "Which control is SPECIFICALLY designed to prevent cross-site request forgery attacks?",
+      choix: [
+        "Output encoding of user-supplied data",
+        "Unique, unpredictable anti-CSRF tokens validated with each state-changing request",
+        "Password complexity requirements",
+        "Database connection pooling"
+      ],
+      reponse: 1,
+      explication: "Le CSRF exploite le fait que le navigateur joint automatiquement les cookies de session aux requêtes, même émises depuis un site attaquant. Le jeton anti-CSRF — secret unique et imprévisible exigé avec chaque requête modifiant un état — ne peut pas être connu du site attaquant, ce qui invalide la requête forgée ; l'attribut de cookie SameSite complète la défense. L'encodage des sorties contre le XSS, la robustesse des mots de passe et le pooling de connexions n'ont aucun effet sur le CSRF.",
+      difficulte: 1
+    },
+    {
+      q: "A penetration tester bypasses an application's login form by entering ' OR '1'='1' -- in the username field. Which remediation provides the MOST effective long-term protection?",
+      choix: [
+        "Blocking single-quote characters at the web application firewall",
+        "Suppressing database error messages returned to the browser",
+        "Using parameterized queries so user input is never interpreted as SQL code",
+        "Renaming database tables to non-obvious names"
+      ],
+      reponse: 2,
+      explication: "Les requêtes paramétrées (prepared statements) séparent structurellement le code SQL des données : l'entrée utilisateur est traitée comme une valeur, jamais comme de la syntaxe, ce qui élimine l'injection à la racine. Le filtrage de caractères au WAF est un blacklisting contournable par encodages ; masquer les erreurs ne fait que rendre l'injection « blind » ; et renommer les tables relève de la sécurité par l'obscurité, sans effet sur la vulnérabilité elle-même.",
+      difficulte: 1
+    },
+    {
+      q: "A web application accepts a URL from users and fetches its content server-side to generate previews. An attacker submits the address of the cloud provider's instance metadata service and retrieves temporary IAM credentials. Which vulnerability was exploited?",
+      choix: [
+        "Cross-site request forgery",
+        "Server-side request forgery",
+        "Open redirect",
+        "Reflected cross-site scripting"
+      ],
+      reponse: 1,
+      explication: "Le SSRF amène le SERVEUR à émettre des requêtes vers des cibles choisies par l'attaquant, typiquement des ressources internes injoignables depuis Internet, comme le service de métadonnées cloud qui délivre des identifiants IAM temporaires. Le CSRF et le XSS s'exécutent dans le NAVIGATEUR d'une victime, et l'open redirect renvoie l'utilisateur vers un site tiers. Défenses : liste blanche de destinations, blocage des plages d'adresses internes, IMDSv2 avec jeton de session.",
+      difficulte: 3
+    },
+    {
+      q: "Authenticated users of a customer portal discover they can view other customers' invoices by incrementing the numeric invoice identifier in the URL. To which OWASP Top 10 category does this flaw belong?",
+      choix: [
+        "Broken Access Control",
+        "Injection",
+        "Insecure Design",
+        "Identification and Authentication Failures"
+      ],
+      reponse: 0,
+      explication: "C'est une Insecure Direct Object Reference (IDOR), archétype de la catégorie Broken Access Control — numéro un de l'OWASP Top 10 2021 : l'utilisateur est correctement AUTHENTIFIÉ, mais l'application ne vérifie pas son AUTORISATION sur l'objet demandé. Il n'y a pas d'injection de code, l'authentification fonctionne, et si l'on peut discuter d'un défaut de conception, la catégorie précise qui décrit ce contrôle d'accès manquant est Broken Access Control.",
+      difficulte: 1
+    },
+    {
+      q: "A statistical HR database allows aggregate salary queries. An analyst issues a series of increasingly narrow queries until the results reveal the exact salary of a single named executive. Which attack has the analyst performed?",
+      choix: ["Aggregation", "Inference", "Polyinstantiation", "SQL injection"],
+      reponse: 1,
+      explication: "L'inference consiste à DÉDUIRE une information de sensibilité supérieure à partir de requêtes individuellement autorisées : en rétrécissant les filtres, l'analyste isole une valeur individuelle qu'il n'a pas le droit de connaître. L'agrégation est le problème inverse-complémentaire — combiner des données pour créer de la sensibilité — mais ici c'est bien la déduction par requêtes successives qui opère. La polyinstantiation est une DÉFENSE, et aucune injection SQL n'est utilisée : les requêtes sont légitimes.",
+      difficulte: 2
+    },
+    {
+      q: "In a multilevel secure database, which technique prevents a lower-cleared user from inferring the existence of classified data by allowing records with the same primary key to exist at different classification levels?",
+      choix: ["Normalization", "Polyinstantiation", "Referential integrity", "Database sharding"],
+      reponse: 1,
+      explication: "La polyinstantiation autorise plusieurs instances d'un enregistrement partageant la même clé primaire à des niveaux de classification différents : l'utilisateur faiblement habilité voit une version banale, sans erreur de « clé dupliquée » qui trahirait l'existence d'un enregistrement classifié. La normalisation élimine la redondance structurelle (l'inverse), l'intégrité référentielle maintient la cohérence des clés étrangères, et le sharding est un partitionnement de performance, sans dimension de classification.",
+      difficulte: 2
+    },
+    {
+      q: "A data warehouse project combines individually harmless records from several operational systems. The security team notes that the combined dataset now reveals sensitive patterns about employees. Which database security issue does this describe?",
+      choix: ["Inference", "Aggregation", "Dirty read", "Deadlock"],
+      reponse: 1,
+      explication: "L'aggregation est le problème par lequel la COMBINAISON de données individuellement non sensibles produit un ensemble d'une sensibilité supérieure : c'est un risque inhérent aux entrepôts de données qui centralisent des sources multiples. L'inference est l'acte de déduction qui peut exploiter cette combinaison, mais le phénomène décrit — la réunion des données — est l'agrégation. La dirty read et le deadlock sont des problèmes de concurrence transactionnelle, sans rapport avec la confidentialité.",
+      difficulte: 1
+    },
+    {
+      q: "Transaction A reads a row that transaction B has updated but not yet committed. Transaction B then rolls back, leaving A with data that never officially existed. Which ACID property has been violated?",
+      choix: ["Atomicity", "Consistency", "Isolation", "Durability"],
+      reponse: 2,
+      explication: "C'est une dirty read, violation de l'ISOLATION : les transactions concurrentes ne doivent pas voir les modifications non validées les unes des autres, comme si chacune s'exécutait seule. L'atomicité garantit le tout-ou-rien d'une transaction (le rollback de B a d'ailleurs fonctionné), la cohérence le respect des règles d'intégrité, et la durabilité la persistance des transactions VALIDÉES. Retenez l'association d'examen : dirty read = échec d'isolation.",
+      difficulte: 2
+    },
+    {
+      q: "An architect must secure east-west communication among dozens of microservices in accordance with zero trust principles. Which approach BEST meets this requirement?",
+      choix: [
+        "Trusting all internal traffic because the perimeter firewall blocks external attackers",
+        "Requiring mutual TLS with unique cryptographic identities for each service, typically enforced through a service mesh",
+        "Using a shared static API key embedded in every service's configuration",
+        "Routing all inter-service traffic through the public API gateway"
+      ],
+      reponse: 1,
+      explication: "Le zero trust supprime la confiance implicite du réseau interne : chaque service doit prouver cryptographiquement son identité à chaque échange. Le mTLS assure l'authentification mutuelle et le chiffrement du trafic est-ouest, avec des certificats de courte durée par service gérés par un service mesh qui applique aussi des politiques d'autorisation fines. La confiance périmétrique s'effondre dès qu'un service est compromis ; une clé statique partagée n'identifie rien et se diffuse ; et la passerelle API est conçue pour le trafic nord-sud, pas pour les échanges internes.",
+      difficulte: 3
+    },
+    {
+      q: "What is the PRIMARY security benefit of deploying an API gateway in front of an organization's microservices?",
+      choix: [
+        "It eliminates the need to authenticate individual API calls",
+        "It provides a single enforcement point for authentication, authorization, rate limiting, and request validation",
+        "It guarantees the confidentiality of data stored by backend services",
+        "It removes the need for TLS on backend connections"
+      ],
+      reponse: 1,
+      explication: "La passerelle API centralise l'application des politiques : authentification et autorisation de chaque appel, rate limiting contre l'abus et le déni de service, validation des requêtes et journalisation uniforme — évitant que chaque microservice réimplémente ces contrôles de façon inégale. Elle n'élimine pas l'authentification, elle l'APPLIQUE ; elle ne protège pas les données au repos des services ; et le TLS reste nécessaire de bout en bout, y compris derrière la passerelle (zero trust).",
+      difficulte: 2
+    },
+    {
+      q: "An organization licenses mission-critical software from a small vendor that refuses to provide source code. Management is concerned about business continuity if the vendor goes bankrupt or discontinues support. Which contractual provision BEST addresses this risk?",
+      choix: [
+        "A service level agreement with financial penalties",
+        "A software escrow agreement with defined release conditions and periodic deposit verification",
+        "A right-to-audit clause covering the vendor's development practices",
+        "Cyber insurance covering vendor failure"
+      ],
+      reponse: 1,
+      explication: "Le software escrow dépose le code source et sa documentation chez un tiers de confiance, avec libération contractuelle en cas de faillite ou d'arrêt du support : l'organisation peut alors maintenir l'application elle-même. La vérification périodique du dépôt garantit qu'il reste complet et à jour. Un SLA avec pénalités est inopérant contre un éditeur disparu, le droit d'audit évalue les pratiques sans donner accès au code, et l'assurance compense financièrement sans assurer la continuité opérationnelle.",
+      difficulte: 1
+    },
+    {
+      q: "Endpoints across several organizations execute malware that was digitally signed with a valid code-signing certificate stolen from a legitimate software vendor. What does this incident BEST illustrate about code signing?",
+      choix: [
+        "Code signing has no security value and should be abandoned",
+        "Code signing proves origin and integrity relative to the signing key, but does not guarantee the code is safe — and its assurance collapses if the private key is compromised",
+        "Certificate authorities are responsible for testing signed code for malware",
+        "Self-signed certificates would have prevented this incident"
+      ],
+      reponse: 1,
+      explication: "La signature de code garantit deux choses seulement : l'intégrité (le code n'a pas changé depuis la signature) et l'origine (la clé du signataire identifié). Elle ne dit RIEN de l'innocuité du code, et toute la confiance repose sur la protection de la clé privée : volée, elle permet de signer du malware « légitime » — d'où les HSM, les accès contrôlés et la révocation immédiate en cas de compromission. Le mécanisme reste précieux malgré cette limite, les CA ne testent jamais le code, et l'auto-signature supprimerait la chaîne de confiance.",
+      difficulte: 3
+    },
+    {
+      q: "When evaluating a SaaS provider that will process sensitive customer data, which evidence provides the GREATEST assurance that the provider's security controls operate effectively over time?",
+      choix: [
+        "A completed self-assessment security questionnaire",
+        "A recent SOC 2 Type II report from an independent auditor",
+        "The provider's published privacy policy",
+        "Marketing materials describing military-grade encryption"
+      ],
+      reponse: 1,
+      explication: "Le rapport SOC 2 Type II atteste, par un auditeur indépendant, que les contrôles sont non seulement bien CONÇUS mais qu'ils ont FONCTIONNÉ EFFICACEMENT sur une période d'observation de plusieurs mois — c'est le niveau d'assurance le plus élevé parmi les options. Un Type I ne serait qu'un instantané de conception. Le questionnaire auto-déclaré n'engage que le fournisseur, la politique de confidentialité décrit des intentions, et les arguments marketing n'ont aucune valeur probante.",
+      difficulte: 2
+    },
+    {
+      q: "During acquisition of a fraud detection product based on machine learning, which supply chain risk is UNIQUE to the machine learning component compared with traditional software?",
+      choix: [
+        "The vendor may use vulnerable open source libraries",
+        "The training data may have been poisoned to create hidden blind spots in the model's decisions",
+        "The product may contain unpatched operating system components",
+        "The vendor may lack a vulnerability disclosure program"
+      ],
+      reponse: 1,
+      explication: "Le data poisoning est propre aux systèmes de machine learning : un attaquant qui corrompt les données d'ENTRAÎNEMENT peut implanter des angles morts durables — des fraudes systématiquement classées légitimes — invisibles aux tests classiques puisque le code, lui, est correct. L'évaluation doit donc couvrir la provenance et l'intégrité des données d'entraînement. Les bibliothèques vulnérables, les composants non corrigés et l'absence de programme de divulgation sont des risques réels mais communs à TOUT logiciel acquis.",
+      difficulte: 2
+    }
+  ],
   flashcards: [
     { recto: "SDLC (Software Development Life Cycle)", verso: "Cadre structurant la vie du logiciel : collecte des exigences, conception, développement, tests, exploitation et maintenance, jusqu'au décommissionnement. La sécurité doit être intégrée à chaque phase, dès les exigences." },
     { recto: "Waterfall vs Spiral", verso: "Waterfall : modèle linéaire et séquentiel (Royce, 1970), exigences figées, très rigide. Spiral (Boehm) : modèle itératif piloté par le risque, chaque tour commence par l'identification et la résolution des risques." },
