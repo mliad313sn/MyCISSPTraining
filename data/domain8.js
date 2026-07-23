@@ -721,14 +721,26 @@ window.CISSP_DATA.domains[8] = {
       choix: ["Waterfall", "Agile", "V-Model", "Cleanroom"],
       reponse: 1,
       explication: "Agile est conçu pour accueillir le changement, même tardif, grâce à des itérations courtes et des retours fréquents. Waterfall fige les exigences au départ et n'offre pas de mécanisme formel d'intégration des changements ; le V-Model hérite de cette rigidité en y ajoutant des phases de test parallèles ; et Cleanroom repose sur des spécifications formelles figées en amont, incompatibles avec des exigences mouvantes.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Techniquement viable mais hors contexte : Waterfall fige les exigences au départ, l'inverse du besoin exprimé.",
+        "Bonne réponse : Agile est conçu pour accueillir le changement grâce aux itérations courtes et aux retours fréquents du client.",
+        "Piège de proximité : le V-Model ajoute des tests à chaque phase mais hérite de la rigidité séquentielle de Waterfall.",
+        "Trop rigide pour le contexte : Cleanroom repose sur des spécifications formelles figées, incompatibles avec des exigences mouvantes."
+      ]
     },
     {
       q: "Quel modèle de développement est décrit comme « risk-driven », chaque itération commençant par l'identification et la résolution des risques ?",
       choix: ["Waterfall", "Spiral", "Scrum", "RAD"],
       reponse: 1,
       explication: "Le modèle en spirale de Barry Boehm est un processus itératif piloté par le risque : chaque tour comprend la détermination des objectifs, l'identification et la résolution des risques, le développement et les tests, puis la planification de l'itération suivante. Waterfall est linéaire, Scrum est un cadre Agile centré sur les sprints, et RAD privilégie le prototypage rapide.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Hors sujet : Waterfall est linéaire et séquentiel, sans itération ni analyse de risque récurrente.",
+        "Bonne réponse : le modèle en spirale de Boehm ouvre chaque itération par l'identification et la résolution des risques — il est explicitement « risk-driven ».",
+        "Piège de famille : Scrum est itératif mais centré sur les sprints et la valeur métier, pas piloté par le risque.",
+        "Trop étroit : RAD privilégie le prototypage rapide, sans phase de risque structurante à chaque tour."
+      ]
     },
     {
       q: "Quelle affirmation reflète le MIEUX une valeur du Manifeste Agile ?",
@@ -740,14 +752,26 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 2,
       explication: "Le Manifeste Agile valorise la collaboration avec le client plutôt que la négociation contractuelle. Les trois autres propositions inversent les valeurs du manifeste : Agile privilégie le logiciel fonctionnel sur la documentation, la réponse au changement sur le plan, et les individus sur les processus.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Inversion : le manifeste valorise le logiciel fonctionnel PLUTÔT QUE la documentation exhaustive.",
+        "Inversion : le manifeste privilégie la réponse au changement plutôt que le suivi du plan.",
+        "Bonne réponse : la collaboration avec le client plutôt que la négociation contractuelle est l'une des quatre valeurs authentiques du manifeste.",
+        "Inversion : le manifeste place les individus et les interactions au-dessus des processus et des outils."
+      ]
     },
     {
       q: "Une organisation déploie automatiquement en production chaque changement de code qui réussit l'ensemble des tests automatisés, sans aucune approbation humaine. Comment s'appelle cette pratique ?",
       choix: ["Continuous integration", "Continuous delivery", "Continuous deployment", "Continuous monitoring"],
       reponse: 2,
       explication: "Le continuous deployment déploie automatiquement en production tout changement passant les tests, sans intervention manuelle. Le continuous delivery maintient le code toujours déployable mais conserve une approbation humaine avant la production. La continuous integration se limite à fusionner et tester le code fréquemment, et le continuous monitoring est une pratique de supervision, pas de déploiement.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Trop étroit : la continuous integration s'arrête à la fusion et aux tests fréquents du code, sans déploiement.",
+        "Piège de proximité classique : le continuous delivery garde le code toujours déployable mais conserve une approbation humaine avant la production.",
+        "Bonne réponse : le continuous deployment pousse automatiquement en production tout changement passant les tests, sans intervention humaine — exactement le scénario décrit.",
+        "Hors sujet : le continuous monitoring est une pratique de supervision, pas de déploiement."
+      ]
     },
     {
       q: "Quel est l'objectif PRINCIPAL de DevSecOps par rapport à DevOps ?",
@@ -759,7 +783,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "DevSecOps étend DevOps en intégrant la sécurité comme responsabilité partagée, automatisée dans le pipeline CI/CD, pour qu'elle avance au même rythme que le code. Supprimer les contrôles va à l'encontre du concept ; reléguer la sécurité en fin de cycle est précisément l'anti-modèle que DevSecOps corrige ; et les audits annuels sont incompatibles avec des livraisons quotidiennes.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Contresens absolu : supprimer les contrôles de sécurité est l'inverse de DevSecOps, qui les automatise sans les supprimer.",
+        "Bonne réponse : DevSecOps intègre la sécurité comme responsabilité partagée et automatisée sur tout le pipeline, au rythme des livraisons.",
+        "Anti-modèle : reléguer la sécurité à une équipe en fin de cycle est précisément ce que DevSecOps corrige.",
+        "Hors phase : des audits annuels sont incompatibles avec des déploiements quotidiens et ne remplacent pas les tests continus."
+      ]
     },
     {
       q: "Lors de quelle phase du SDLC les exigences de sécurité devraient-elles être définies pour la PREMIÈRE fois ?",
@@ -771,14 +801,26 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "La sécurité doit être intégrée dès la phase des exigences : c'est là que se définissent les besoins fonctionnels et non fonctionnels, dont la sécurité fait partie. Corriger en phase de test ou d'exploitation coûte beaucoup plus cher, et attendre le développement signifie concevoir sans contraintes de sécurité. Le principe du « shift left » traduit cette exigence.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Hors phase : découvrir la sécurité aux tests, c'est corriger au prix fort ce qui aurait dû être conçu en amont.",
+        "Bonne réponse : les exigences de sécurité se définissent dès la collecte des exigences — c'est le principe du shift left, au moment le moins coûteux.",
+        "Hors phase : attendre le développement signifie concevoir l'architecture sans contraintes de sécurité.",
+        "Hors phase : l'exploitation ne fait que subir les défauts non prévenus, au coût maximal."
+      ]
     },
     {
       q: "Quel composant de la gestion du changement fournit le cadre organisé dans lequel les utilisateurs demandent des modifications et les managers conduisent les analyses coûts-bénéfices ?",
       choix: ["Change control", "Release control", "Request control", "Configuration control"],
       reponse: 2,
       explication: "Le request control est le processus qui organise les demandes de modification des utilisateurs, l'analyse coûts-bénéfices par les managers et la priorisation par les développeurs. Le change control encadre la création et le test des changements par les développeurs, le release control gère l'approbation de mise en production avec les tests d'acceptation, et le configuration control protège le système contre les modifications inappropriées.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Piège de proximité : le change control encadre la création et le test des changements par les développeurs, pas la demande initiale.",
+        "Hors phase : le release control gère l'approbation de mise en production, en aval du processus.",
+        "Bonne réponse : le request control organise les demandes des utilisateurs, l'analyse coûts-bénéfices des managers et la priorisation.",
+        "Hors sujet : le configuration control protège les systèmes contre les modifications non autorisées, il ne traite pas les demandes."
+      ]
     },
     {
       q: "Quelle responsabilité relève spécifiquement du release control ?",
@@ -790,7 +832,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 2,
       explication: "Le release control approuve la mise en production et doit inclure l'acceptance testing, confirmant que les modifications des tâches utilisateur sont comprises et fonctionnelles avant la sortie du code. La priorisation des demandes relève du request control, la reproduction des problèmes du change control, et la configuration matérielle du configuration control.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Hors périmètre : prioriser les demandes relève du request control.",
+        "Hors périmètre : recréer le problème signalé relève du change control.",
+        "Bonne réponse : l'acceptance testing avant mise en production est la responsabilité propre du release control.",
+        "Hors périmètre : documenter la configuration matérielle relève du configuration control."
+      ]
     },
     {
       q: "Au niveau 3 « Defined » du SW-CMM, quelle caractéristique distingue l'organisation ?",
@@ -802,7 +850,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le niveau 3, Defined, est marqué par des processus de développement formels et documentés, les revues par les pairs, la coordination inter-groupes et les programmes de formation. Les processus ad hoc caractérisent le niveau 1 (Initial), les mesures quantitatives le niveau 4 (Managed), et l'amélioration continue le niveau 5 (Optimizing).",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Hors niveau : les processus ad hoc dépendant des individus décrivent le niveau 1, Initial.",
+        "Bonne réponse : le niveau 3, Defined, se caractérise par des processus formels documentés, des revues par les pairs et la formation.",
+        "Hors niveau : les objectifs quantitatifs apparaissent au niveau 4, Managed.",
+        "Hors niveau : l'amélioration continue et la prévention des défauts définissent le niveau 5, Optimizing."
+      ]
     },
     {
       q: "Quelle est la distinction CORRECTE entre le modèle IDEAL et le SW-CMM ?",
@@ -814,21 +868,39 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "IDEAL (Initiating, Diagnosing, Establishing, Acting, Learning) est un modèle d'amélioration des processus : il décrit comment progresser. Le SW-CMM est un modèle d'évaluation de maturité : il situe l'organisation sur cinq niveaux. Les deux ont été développés par le SEI de Carnegie Mellon, pas par OWASP ni le NIST, et aucun n'est lié à une méthodologie particulière.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Inversion : c'est exactement le contraire — IDEAL décrit comment s'améliorer, SW-CMM évalue la maturité.",
+        "Bonne réponse : IDEAL est un modèle d'amélioration des processus, le SW-CMM un modèle d'évaluation de maturité en cinq niveaux.",
+        "Fausse attribution : les deux modèles viennent du SEI de Carnegie Mellon, pas d'OWASP ni du NIST.",
+        "Restriction inventée : aucun des deux modèles n'est lié à une méthodologie de développement particulière."
+      ]
     },
     {
       q: "Quelle fonction métier du SAMM d'OWASP couvre le threat modeling et l'architecture de sécurité ?",
       choix: ["Governance", "Design", "Implementation", "Verification"],
       reponse: 1,
       explication: "La fonction Design du SAMM couvre la définition des exigences logicielles et la conception, incluant le threat modeling, l'évaluation des menaces, les exigences de sécurité et l'architecture de sécurité. Governance couvre stratégie, métriques et conformité ; Implementation couvre le build et le déploiement sécurisés ; Verification couvre les tests et l'évaluation d'architecture.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Hors périmètre : Governance couvre la stratégie, les métriques et la conformité, pas la conception.",
+        "Bonne réponse : la fonction Design du SAMM couvre le threat modeling, les exigences de sécurité et l'architecture de sécurité.",
+        "Hors périmètre : Implementation couvre le build et le déploiement sécurisés, après la conception.",
+        "Hors périmètre : Verification couvre les tests de sécurité et l'évaluation de l'architecture existante."
+      ]
     },
     {
       q: "Un RSSI veut évaluer la maturité des pratiques de sécurité du développement logiciel de son organisation. Quel modèle est le PLUS approprié ?",
       choix: ["SW-CMM", "SAMM", "IDEAL", "Waterfall"],
       reponse: 1,
       explication: "Le SAMM d'OWASP est spécifiquement conçu pour intégrer la sécurité dans le développement logiciel et évaluer la maturité de ces pratiques de sécurité. Le SW-CMM mesure la maturité des processus de développement en général mais ne traite pas explicitement de la sécurité ; IDEAL est un modèle d'amélioration générique ; Waterfall est une méthodologie de développement, pas un modèle de maturité.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Techniquement vrai mais trop générique : le SW-CMM mesure la maturité des processus de développement sans traiter explicitement la sécurité.",
+        "Bonne réponse : le SAMM d'OWASP est précisément conçu pour évaluer et améliorer la maturité des pratiques de sécurité logicielle.",
+        "Trop générique : IDEAL est un modèle d'amélioration de processus, sans dimension sécurité spécifique.",
+        "Hors catégorie : Waterfall est une méthodologie de développement, pas un modèle de maturité."
+      ]
     },
     {
       q: "Un développeur découvre des identifiants de base de données codés en dur dans un dépôt de code accessible à toute l'entreprise. Que devrait faire l'organisation EN PREMIER ?",
@@ -840,7 +912,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Les identifiants doivent être considérés comme compromis dès leur exposition : la priorité est de les révoquer et de les remplacer. Supprimer le fichier ne suffit pas, car l'historique du dépôt conserve les données et elles ont pu être copiées. La formation et la migration du dépôt sont des mesures correctives utiles, mais elles viennent après le traitement de l'exposition active.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Trop étroit : supprimer le fichier laisse les identifiants dans l'historique du dépôt et dans les copies déjà faites.",
+        "Bonne réponse : des identifiants exposés sont réputés compromis — les révoquer et les remplacer neutralise le risque immédiat.",
+        "Techniquement utile mais hors phase : la formation est une mesure préventive qui ne traite pas l'exposition en cours.",
+        "Techniquement utile mais hors phase : migrer le dépôt ne révoque pas des secrets déjà exposés et copiés."
+      ]
     },
     {
       q: "Quel est le PLUS GRAND risque associé à l'utilisation de logiciels open source dans une organisation ?",
@@ -852,7 +930,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 2,
       explication: "Le plus grand risque de l'open source est de dépendre de versions obsolètes, en particulier pour les bibliothèques partagées : les vulnérabilités connues restent exploitables tant que la mise à jour n'est pas faite. La visibilité du code profite autant aux défenseurs qu'aux attaquants et n'est pas le risque principal ; l'open source est justement distribué sous licence ; et l'absence de support payant est une contrainte opérationnelle, pas le risque majeur.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Idée reçue : la visibilité du code profite autant aux défenseurs qu'aux attaquants ; ce n'est pas le risque principal.",
+        "Faux factuellement : l'open source est justement distribué sous licence.",
+        "Bonne réponse : dépendre de versions obsolètes de bibliothèques partagées laisse des vulnérabilités connues exploitables — c'est le risque majeur.",
+        "Trop étroit : l'absence de support payant est une contrainte opérationnelle, pas le risque de sécurité principal."
+      ]
     },
     {
       q: "Quel est le PRINCIPAL bénéfice de sécurité d'un Software Bill of Materials (SBOM) ?",
@@ -864,7 +948,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le SBOM est un inventaire formel de tous les composants, bibliothèques et dépendances d'un produit logiciel. Son bénéfice principal est de permettre d'identifier rapidement les systèmes affectés quand une vulnérabilité est divulguée dans un composant. Il ne chiffre rien, n'empêche pas par lui-même l'introduction de code malveillant, et ne remplace aucun test : c'est un outil de visibilité.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux rôle : le SBOM est un inventaire, il ne chiffre rien.",
+        "Bonne réponse : le SBOM permet d'identifier immédiatement les systèmes affectés lors de la divulgation d'une vulnérabilité dans un composant.",
+        "Surestimation : un inventaire ne bloque pas par lui-même l'introduction de code malveillant.",
+        "Absolu : le SBOM est un outil de visibilité qui complète les tests, il ne les remplace jamais."
+      ]
     },
     {
       q: "En programmation orientée objet, quelle combinaison caractérise une conception logicielle de QUALITÉ ?",
@@ -876,14 +966,26 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 2,
       explication: "Une bonne conception combine une cohésion élevée, où les méthodes d'une même classe partagent des objectifs similaires, et un couplage faible, où les objets interagissent peu entre eux. Cette combinaison rend le code plus indépendant, plus facile à dépanner et à faire évoluer. Toute autre combinaison dégrade la maintenabilité et augmente la propagation des erreurs.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Le couplage élevé propage les erreurs entre objets : mauvaise conception malgré la bonne cohésion.",
+        "Une cohésion faible disperse les responsabilités : le couplage faible ne suffit pas à sauver la conception.",
+        "Bonne réponse : cohésion élevée et couplage faible rendent le code indépendant, maintenable et facile à dépanner.",
+        "La pire combinaison : responsabilités dispersées et objets interdépendants."
+      ]
     },
     {
       q: "Quelle caractéristique d'un objet lui permet de répondre par des comportements différents au même message selon les conditions externes ?",
       choix: ["L'encapsulation", "L'héritage", "Le polymorphisme", "La délégation"],
       reponse: 2,
       explication: "Le polymorphisme est la caractéristique d'un objet qui lui permet de répondre avec des comportements différents au même message ou à la même méthode en fonction de changements dans les conditions externes. L'encapsulation regroupe données et méthodes, l'héritage transmet les méthodes d'une classe parente à ses sous-classes, et la délégation transfère une requête à un autre objet.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Piège de proximité : l'encapsulation regroupe données et méthodes et masque l'implémentation, sans varier les comportements.",
+        "Piège de proximité : l'héritage transmet les méthodes d'une classe parente, il ne fait pas varier la réponse au même message.",
+        "Bonne réponse : le polymorphisme permet à un objet de répondre différemment au même message selon les conditions externes.",
+        "Hors sujet : la délégation transfère une requête à un autre objet, elle ne modifie pas le comportement propre de l'objet."
+      ]
     },
     {
       q: "Une application web renvoie l'intégralité de la table clients lorsqu'un utilisateur saisit « ' OR 1=1 -- » dans le champ de connexion. Quel est le MEILLEUR contrôle préventif contre cette attaque ?",
@@ -895,7 +997,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Il s'agit d'une injection SQL. Les requêtes paramétrées empêchent l'interprétation des entrées comme du code SQL, et la validation des entrées la complète : c'est la défense préventive la plus efficace. Un IDS est détectif et non préventif, le chiffrement au repos ne protège pas contre des requêtes exécutées légitimement par l'application, et une revue annuelle est trop ponctuelle pour prévenir l'exploitation.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Réponse détective, pas préventive : un IDS observe l'attaque sans l'empêcher.",
+        "Bonne réponse : les requêtes paramétrées empêchent structurellement l'interprétation des entrées comme du SQL — c'est la prévention à la racine.",
+        "Techniquement vrai mais hors sujet : le chiffrement au repos ne bloque pas des requêtes exécutées légitimement par l'application.",
+        "Hors phase et trop ponctuel : une revue annuelle ne prévient pas une exploitation quotidienne."
+      ]
     },
     {
       q: "Quelle distinction entre XSS et CSRF est CORRECTE ?",
@@ -907,7 +1015,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le XSS injecte un script qui s'exécute dans le navigateur de la victime, abusant de la confiance de l'utilisateur envers le site. Le CSRF abuse de la confiance du site envers le navigateur : il fait émettre à un utilisateur déjà authentifié une requête qu'il n'a pas voulue. La première proposition inverse les deux définitions, et les deux attaques sont bien distinctes, avec des défenses différentes : encodage des sorties pour XSS, jetons anti-CSRF pour CSRF.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Inversion des deux définitions : c'est le CSRF qui abuse de la confiance du site envers le navigateur.",
+        "Bonne réponse : XSS exécute un script chez la victime ; CSRF fait émettre une requête non désirée par une victime authentifiée.",
+        "Restriction inventée : les deux attaques concernent toute application web.",
+        "Absolu faux : les deux attaques sont distinctes, avec des défenses différentes."
+      ]
     },
     {
       q: "Un attaquant soumet une entrée de 5 000 caractères dans un champ prévu pour 256, ce qui lui permet d'écraser des zones mémoire adjacentes et d'exécuter du code arbitraire. De quelle vulnérabilité s'agit-il et quelle est la contre-mesure au niveau du CODE ?",
@@ -919,14 +1033,26 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Une entrée plus grande que l'espace alloué au tampon qui écrase la mémoire adjacente est un buffer overflow. La contre-mesure au niveau du code est la vérification systématique des bornes et de la taille des entrées (bounds checking). Les verrous répondent aux race conditions, les requêtes paramétrées à l'injection SQL, et le chiffrement ne traite pas les canaux cachés au niveau du code applicatif.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Mauvais diagnostic : la race condition concerne la concurrence temporelle, pas le dépassement de mémoire.",
+        "Bonne réponse : entrée dépassant le tampon écrasant la mémoire adjacente = buffer overflow ; la parade code est le bounds checking.",
+        "Mauvais diagnostic : l'injection SQL passe par l'interprétation de requêtes, pas par l'écrasement mémoire.",
+        "Mauvais diagnostic : le covert channel est un canal de communication caché, sans rapport."
+      ]
     },
     {
       q: "Un programme vérifie les permissions d'un utilisateur sur un fichier, puis ouvre ce fichier quelques millisecondes plus tard. Un attaquant remplace le fichier par un lien symbolique vers /etc/shadow entre ces deux opérations. Comment s'appelle cette attaque ?",
       choix: ["Buffer overflow", "TOCTOU (time-of-check to time-of-use)", "Injection de commande", "Dirty read"],
       reponse: 1,
       explication: "C'est une attaque TOCTOU, une forme de race condition qui exploite le délai entre la vérification de sécurité (time of check) et l'utilisation réelle de la ressource (time of use). La parade consiste à rendre les opérations atomiques et à revérifier au moment de l'usage. Le buffer overflow concerne la mémoire, l'injection de commande les entrées utilisateur, et la dirty read la concurrence transactionnelle en base de données.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Mauvais diagnostic : le buffer overflow exploite la mémoire, pas le délai entre vérification et usage.",
+        "Bonne réponse : l'écart entre le contrôle (time of check) et l'utilisation (time of use) définit l'attaque TOCTOU, une race condition.",
+        "Mauvais diagnostic : aucune commande n'est injectée, c'est la fenêtre temporelle qui est exploitée.",
+        "Mauvais diagnostic : la dirty read est un problème transactionnel de base de données."
+      ]
     },
     {
       q: "Quelle affirmation décrit CORRECTEMENT la relation entre agrégation et inférence en sécurité des bases de données ?",
@@ -938,21 +1064,39 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "L'agrégation est un problème de sécurité : la capacité de combiner des données non sensibles issues de sources séparées pour créer une information sensible. L'inférence est l'attaque : l'adversaire rassemble des éléments peu sensibles pour déduire une information de sensibilité supérieure. La première proposition inverse les termes, et les deux dernières inventent des restrictions de périmètre ou des mécanismes d'accès qui n'existent pas : les deux notions s'appliquent à tout type de base et à des utilisateurs légitimes.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Inversion : l'agrégation est le problème, l'inférence est l'attaque — pas l'inverse.",
+        "Bonne réponse : l'agrégation combine des données non sensibles en information sensible ; l'inférence est l'attaque qui déduit l'information supérieure.",
+        "Restriction inventée : les deux notions s'appliquent à tout type de base ou d'entrepôt de données.",
+        "Mécanismes inventés : aucune des deux ne requiert de privilège ni d'injection — elles exploitent des accès légitimes."
+      ]
     },
     {
       q: "Quelle propriété ACID est violée lorsqu'une transaction lit une valeur écrite par une autre transaction qui n'a pas encore été validée (dirty read) ?",
       choix: ["Atomicity", "Consistency", "Isolation", "Durability"],
       reponse: 2,
       explication: "La dirty read viole la propriété d'Isolation, qui exige que les transactions concurrentes n'interfèrent pas entre elles : une transaction ne doit pas voir les modifications non validées d'une autre. L'atomicité garantit le tout-ou-rien, la cohérence le respect des règles d'intégrité, et la durabilité la persistance des transactions validées.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Hors sujet : l'atomicité garantit le tout-ou-rien d'une transaction, pas l'étanchéité entre transactions.",
+        "Hors sujet : la cohérence porte sur le respect des règles d'intégrité de la base.",
+        "Bonne réponse : lire des données non validées d'une autre transaction viole l'Isolation — définition même de la dirty read.",
+        "Hors sujet : la durabilité garantit la persistance des transactions validées."
+      ]
     },
     {
       q: "Quel mécanisme permet à une base de données multiniveau de stocker deux enregistrements portant la même clé primaire à des niveaux de classification différents ?",
       choix: ["La normalisation", "La polyinstantiation", "Le partitionnement", "La réplication"],
       reponse: 1,
       explication: "La polyinstantiation crée plusieurs instances d'une même donnée, avec le même identifiant, à des niveaux de sécurité différents. Chaque utilisateur ne voit que la version correspondant à son habilitation, ce qui empêche l'inférence de l'existence de données classifiées. La normalisation structure le schéma, le partitionnement répartit les données pour la performance, et la réplication copie les données pour la disponibilité.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Hors sujet : la normalisation structure le schéma et élimine la redondance — l'inverse de la coexistence recherchée.",
+        "Bonne réponse : la polyinstantiation stocke plusieurs enregistrements de même clé à des niveaux de classification différents.",
+        "Hors sujet : le partitionnement répartit les données pour la performance, sans notion de classification.",
+        "Hors sujet : la réplication copie les données pour la disponibilité, pas pour la confidentialité multiniveau."
+      ]
     },
     {
       q: "Un développeur a laissé dans l'application de production un mécanisme caché lui permettant de contourner l'authentification « pour faciliter la maintenance ». Comment ce mécanisme est-il désigné et quelle est la position correcte de l'organisation ?",
@@ -964,14 +1108,26 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Un mécanisme caché contournant les contrôles d'accès est une backdoor, aussi appelée trapdoor ou maintenance hook. Même créée avec de bonnes intentions, elle contourne les contrôles d'accès et peut être découverte et exploitée par un attaquant : elle doit être interdite par la politique et retirée avant la mise en production. Un covert channel est un canal de communication violant la politique, et le RASP est un agent de protection légitime intégré à l'application.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Mauvais terme et faux principe : un covert channel est un canal de communication, et documenter une porte dérobée ne la rend pas acceptable.",
+        "Bonne réponse : c'est une backdoor (maintenance hook), à interdire par la politique et à retirer avant la production car elle contourne les contrôles d'accès.",
+        "Contresens : le RASP est un mécanisme de protection légitime, pas un contournement caché.",
+        "Piège de vocabulaire partiellement vrai : trapdoor est bien un synonyme, mais aucun chiffrement ne rend une backdoor acceptable."
+      ]
     },
     {
       q: "Quelle technique d'analyse examine le code source SANS exécuter le programme ?",
       choix: ["DAST", "SAST", "IAST", "Fuzzing"],
       reponse: 1,
       explication: "Le SAST (static application security testing) examine le code sans exécuter le programme, souvent avant compilation, pour détecter défauts et violations de politique de codage. Le DAST évalue le programme en cours d'exécution, l'IAST combine exécution et accès au code source, et le fuzzing est une technique dynamique qui injecte des entrées malformées dans un programme en fonctionnement.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Inversion : le DAST évalue l'application en cours d'exécution, sans le code.",
+        "Bonne réponse : le SAST analyse le code source sans exécuter le programme, souvent avant compilation.",
+        "Piège de proximité : l'IAST combine exécution et accès au code — il exige donc l'exécution.",
+        "Hors sujet : le fuzzing injecte des entrées malformées dans un programme en fonctionnement."
+      ]
     },
     {
       q: "Une équipe sécurité veut inventorier les composants open source d'une application, leurs versions, leurs licences et leurs vulnérabilités connues. Quel type d'outil doit-elle utiliser ?",
@@ -983,7 +1139,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 0,
       explication: "La SCA identifie les composants open source et tiers d'une base de code, catalogue leurs versions et licences, et signale les vulnérabilités connues : c'est l'outil central de la gestion du risque de supply chain logicielle. Le DAST teste l'application en exécution sans inventorier les dépendances, le RASP protège l'application à l'exécution, et le WAF filtre le trafic web.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Bonne réponse : la SCA inventorie les composants open source, leurs versions, licences et vulnérabilités connues.",
+        "Hors périmètre : le DAST teste l'application en exécution mais n'inventorie pas les dépendances.",
+        "Hors périmètre : le RASP protège l'application à l'exécution, il n'analyse pas la composition.",
+        "Hors périmètre : le WAF filtre le trafic web, sans visibilité sur les composants du code."
+      ]
     },
     {
       q: "Votre organisation s'apprête à acheter un logiciel développé sur mesure par un prestataire externe. Quelle est la MEILLEURE pratique pour évaluer sa sécurité avant l'achat ?",
@@ -995,7 +1157,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Pour du logiciel tiers sur mesure, la meilleure pratique consiste à faire réaliser un audit et une évaluation de sécurité par un tiers indépendant, inscrits dans le contrat, la réussite de l'audit conditionnant la finalisation de l'achat. Les certifications générales sont un indicateur mais ne couvrent pas ce développement spécifique, une démonstration fonctionnelle ne dit rien de la sécurité, et attendre la production expose l'organisation à des risques évitables.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Trop faible : des certifications génériques ne disent rien de la sécurité de ce développement spécifique.",
+        "Bonne réponse : un audit de sécurité indépendant, contractualisé et conditionnant l'achat, donne une assurance vérifiable avant l'engagement.",
+        "Trop étroit : une démonstration fonctionnelle ne révèle rien des vulnérabilités.",
+        "Hors phase : tester après la mise en production expose l'organisation à des risques évitables."
+      ]
     },
     {
       q: "Quelles sont les causes PRINCIPALES des brèches de sécurité dans le cloud ?",
@@ -1007,7 +1175,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Les premières causes de brèches cloud restent les misconfigurations, le manque de visibilité sur les paramètres d'accès et les contrôles d'accès insuffisants : des erreurs côté client du modèle de responsabilité partagée. Les zero-days d'hyperviseur sont rares, les pannes matérielles relèvent de la disponibilité gérée par le fournisseur, et les DDoS, bien que réels, ne sont pas la cause principale des brèches de données.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Techniquement réel mais marginal : les zero-days d'hyperviseur sont rares et côté fournisseur.",
+        "Bonne réponse : misconfigurations, manque de visibilité et contrôles d'accès insuffisants — erreurs côté client — sont les premières causes de brèches cloud.",
+        "Hors sujet : les pannes matérielles relèvent de la disponibilité, gérée par le fournisseur.",
+        "Techniquement vrai mais pas la cause principale : les DDoS affectent la disponibilité, pas les fuites de données."
+      ]
     },
     {
       q: "Quelle mesure est FONDAMENTALE pour sécuriser l'utilisation d'une API ?",
@@ -1019,7 +1193,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "La parameter validation est la mesure fondamentale : elle garantit que tout paramètre reçu par l'API est contrôlé contre les valeurs malformées, invalides ou malveillantes avant traitement. La documentation aide les développeurs mais ne protège pas, restreindre aux appels internes n'est souvent pas possible et ne valide rien, et une clé statique partagée n'authentifie personne individuellement, ne se révoque pas sans casser tous les clients et ne valide aucune entrée.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Utile mais pas un contrôle : la documentation aide les développeurs, elle ne protège rien.",
+        "Bonne réponse : la parameter validation contrôle chaque valeur reçue avant traitement — c'est le contrôle fondamental d'une API.",
+        "Irréaliste et insuffisant : restreindre aux appels internes n'est souvent pas possible et ne valide rien.",
+        "Contre-mesure illusoire : une clé statique partagée n'authentifie personne individuellement et ne se révoque pas sans casser tous les clients."
+      ]
     },
     {
       q: "Quelle est la différence entre un standard et une guideline de codage sécurisé ?",
@@ -1031,7 +1211,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Un standard est une règle obligatoire : il doit réduire le risque d'un type précis de vulnérabilité, être applicable à l'ensemble des développements de l'organisation et être vérifiable. Une guideline est une recommandation qui laisse de la flexibilité, comme des commentaires cohérents ou des fonctions courtes. La première proposition inverse les définitions, les deux notions restent bien distinctes, et aucune promotion automatique ne transforme une recommandation en règle obligatoire : cela exige une décision de gouvernance.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Inversion des définitions : c'est le standard qui est obligatoire.",
+        "Bonne réponse : un standard est obligatoire, vérifiable et applicable à tous les développements ; une guideline reste une recommandation flexible.",
+        "Absolu faux : les deux notions sont distinctes par leur caractère contraignant.",
+        "Mécanisme inventé : aucune promotion automatique n'existe — élever une guideline en standard est une décision de gouvernance."
+      ]
     },
     {
       q: "Une application affiche la trace de pile complète et la requête SQL en erreur lorsqu'une exception survient. Quel est le risque PRINCIPAL et la correction appropriée ?",
@@ -1043,7 +1229,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Des messages d'erreur détaillés révèlent la structure interne de l'application, la technologie utilisée et parfois le schéma de la base : autant d'informations précieuses pour un attaquant. La bonne pratique est d'afficher un message générique à l'utilisateur, de journaliser les détails complets vers un dépôt centralisé, et d'échouer de façon sûre. Il ne s'agit ni d'un problème de capacité ni de sauvegarde, et afficher une requête en erreur n'est pas en soi une injection : c'est une fuite d'informations qui la facilite.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Mauvais diagnostic : rien n'indique un problème de capacité ou de disponibilité.",
+        "Bonne réponse : les détails techniques exposés renseignent l'attaquant ; il faut un message générique côté client et la journalisation interne des détails.",
+        "Mauvais diagnostic : aucune donnée n'est perdue, elle est divulguée.",
+        "Confusion symptôme/vulnérabilité : afficher une requête en erreur n'est pas une injection SQL — c'est une fuite d'informations qui la faciliterait."
+      ]
     },
     {
       q: "Selon les pratiques de codage sécurisé de l'OWASP, lequel de ces événements devrait IMPÉRATIVEMENT être journalisé ?",
@@ -1055,7 +1247,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "L'OWASP recommande de journaliser notamment les échecs de validation d'entrée et de sortie, les tentatives d'authentification et surtout leurs échecs, les échecs de contrôle d'accès, les jetons de session invalides, les exceptions, les erreurs TLS et cryptographiques, et l'usage des privilèges d'administration. Journaliser chaque page vue noie le signal, enregistrer les mots de passe est une faute grave, et se limiter aux redémarrages est très insuffisant.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Excès inverse : journaliser chaque page vue noie le signal utile sous le bruit.",
+        "Bonne réponse : échecs de validation, échecs d'authentification et usage des privilèges d'administration sont les événements de sécurité à journaliser selon l'OWASP.",
+        "Faute grave : enregistrer des mots de passe en clair crée une vulnérabilité majeure.",
+        "Trop étroit : se limiter aux redémarrages ignore l'essentiel des signaux d'attaque."
+      ]
     },
     {
       q: "Quelle affirmation décrit CORRECTEMENT la certification et l'accréditation d'un système ?",
@@ -1067,7 +1265,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "La certification est l'analyse technique de sécurité complète vérifiant que le système répond aux exigences applicables. L'accréditation est la déclaration formelle par une autorité d'accréditation désignée (DAA) que le système est approuvé pour fonctionner à un niveau de risque acceptable. La première proposition inverse les définitions ; il ne s'agit ni d'un audit annuel ni d'une décision de l'éditeur.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Inversion des définitions : la certification est l'analyse technique, pas la décision.",
+        "Bonne réponse : certification = analyse technique complète ; accréditation = approbation formelle d'exploitation par l'autorité désignée à un niveau de risque acceptable.",
+        "Confusion de processus : il ne s'agit pas d'un audit annuel de conformité.",
+        "Fausse attribution : l'accréditation émane de l'autorité désignée de l'organisation, jamais de l'éditeur."
+      ]
     },
     {
       q: "Une organisation autorise ses employés métier à créer eux-mêmes des petites applications avec des outils low-code, sans supervision de l'IT. Quel risque PRINCIPAL ce phénomène de « citizen programmers » présente-t-il ?",
@@ -1079,7 +1283,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Les citizen programmers codifient leurs connaissances métier de façon ad hoc : le résultat est difficile à gérer, échappe au SDLC et aux contrôles, et est généralement dépourvu de considérations de sécurité — validation des entrées, gestion des accès, journalisation. Le coût des licences est un enjeu financier secondaire, l'intégration à l'annuaire est un point technique généralement résoluble, et la qualité du code n'est pas le cœur du problème : c'est l'absence de gouvernance et de contrôles de sécurité qui crée le risque.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Techniquement vrai mais secondaire : le coût des licences est un enjeu financier, pas le risque de sécurité principal.",
+        "Bonne réponse : le développement ad hoc hors SDLC, sans considérations de sécurité, est le risque central du citizen development.",
+        "Trop étroit : l'intégration à l'annuaire est un point technique généralement résoluble.",
+        "Débat de qualité hors sujet : le problème est l'absence de gouvernance et de contrôles, pas le niveau des développeurs."
+      ]
     },
     {
       q: "Dans une architecture microservices, quelle combinaison de contrôles réduit le MIEUX la surface d'attaque liée à la multiplication des APIs ?",
@@ -1091,14 +1301,26 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "La bonne combinaison associe une passerelle API qui centralise l'authentification, l'autorisation et la limitation de débit, du chiffrement TLS pour les communications entre services, et une approche zero trust où aucun service ne fait confiance à un autre par défaut. Un secret partagé crée un point de compromission unique, désactiver le chiffrement interne expose les flux, et l'exposition directe multiplie les portes d'entrée.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Anti-modèle : un secret partagé crée un point de compromission unique et les logs locaux se dispersent.",
+        "Bonne réponse : passerelle API centralisée, TLS entre services et zero trust réduisent ensemble la surface d'attaque des APIs.",
+        "Contresens : désactiver le chiffrement interne expose tout le trafic est-ouest.",
+        "Contresens : exposer chaque microservice sur Internet multiplie les portes d'entrée."
+      ]
     },
     {
       q: "Quel terme désigne l'exécution, par la victime, d'un ensemble d'instructions choisi par l'attaquant à la suite de l'exploitation d'une vulnérabilité comme un buffer overflow ?",
       choix: ["Exécution de code arbitraire", "Dirty read", "Query attack", "Data mining"],
       reponse: 0,
       explication: "L'exécution de code arbitraire désigne le fait qu'un attaquant parvienne à faire exécuter au processeur un ensemble alternatif d'instructions de son choix, conséquence typique d'un buffer overflow ou d'une entrée malformée non contrôlée. La dirty read est un problème de concurrence transactionnelle, la query attack un contournement des contrôles d'une base via des requêtes, et le data mining une technique légitime d'analyse de données.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Bonne réponse : faire exécuter au processeur des instructions choisies par l'attaquant est l'exécution de code arbitraire, suite typique d'un buffer overflow.",
+        "Hors sujet : la dirty read est un problème de concurrence transactionnelle.",
+        "Hors sujet : la query attack contourne les contrôles d'une base par des requêtes, sans exécution de code.",
+        "Hors sujet : le data mining est une technique d'analyse légitime."
+      ]
     },
     {
       q: "Pourquoi le code compilé présente-t-il un compromis de sécurité par rapport au code interprété ?",
@@ -1110,7 +1332,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le code compilé, distribué en binaire, est généralement moins exposé à la manipulation directe par un tiers ; mais comme le code source n'est pas visible dans la forme compilée, il est aussi plus difficile pour les relecteurs d'y détecter des backdoors ou d'autres failles. La compilation n'implique aucune signature — le code signing est un mécanisme distinct et volontaire — et les interpréteurs n'obfusquent rien : le code interprété est lisible par quiconque y accède.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Absolu faux : aucune forme n'est intrinsèquement moins sécurisée dans tous les cas.",
+        "Bonne réponse : le binaire compilé résiste mieux à la manipulation directe, mais l'absence de code source visible rend les backdoors plus difficiles à détecter.",
+        "Mécanisme inventé : la compilation ne signe rien — le code signing est un dispositif distinct et volontaire.",
+        "Mécanisme inventé : les interpréteurs n'obfusquent rien ; le code interprété est lisible par quiconque y accède."
+      ]
     },
     {
       q: "Votre organisation dépend d'une application critique développée par un petit éditeur dont la santé financière est incertaine, et le contrat ne donne pas accès au code source. Quelle est la MEILLEURE mesure pour garantir la continuité si l'éditeur fait faillite ?",
@@ -1122,7 +1350,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le software escrow place le code source chez un tiers de confiance, avec des conditions de libération contractuelles comme la faillite de l'éditeur ou l'arrêt du support : le client peut alors reprendre la maintenance. L'assurance compense financièrement mais ne permet pas de maintenir l'application ; un SLA ne sert à rien si l'éditeur disparaît ; et la décompilation viole généralement la licence et donne un résultat inexploitable.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Compensation financière seulement : l'assurance ne permet pas de maintenir l'application.",
+        "Bonne réponse : le software escrow libère le code source au client selon des conditions contractuelles comme la faillite de l'éditeur.",
+        "Inopérant : un SLA renforcé ne sert à rien si l'éditeur a disparu.",
+        "Illégal et inefficace : la décompilation viole généralement la licence et produit un résultat inexploitable."
+      ]
     },
     {
       q: "Que garantit la signature numérique d'un exécutable (code signing) vérifiée avec succès par le système du client ?",
@@ -1134,7 +1368,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le code signing garantit l'intégrité (le hash correspond, donc le code n'a pas été altéré depuis la signature) et l'origine (le certificat authentifie l'éditeur). Il ne dit rien de la qualité ni de l'innocuité du code : un binaire signé peut être vulnérable, et même malveillant si le certificat de signature a été volé. La CA délivre le certificat mais ne teste jamais le code, et la signature n'implique aucun mécanisme de mise à jour.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Surestimation classique : la signature ne dit rien de la qualité ni de l'innocuité du code.",
+        "Bonne réponse : la signature vérifiée garantit l'intégrité depuis la signature et l'origine identifiée par le certificat — rien de plus.",
+        "Faux rôle : la CA délivre le certificat mais ne teste jamais le code.",
+        "Mécanisme inventé : la signature n'implique aucun dispositif de mise à jour."
+      ]
     },
     {
       q: "Quels sont les DEUX composants fondamentaux d'un expert system ?",
@@ -1146,7 +1386,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Un expert system se compose de la knowledge base, qui codifie le savoir d'experts humains sous forme de règles si-alors, et de l'inference engine, qui applique ces règles aux faits observés pour produire des conclusions. Les réseaux de neurones et les données d'entraînement relèvent du machine learning, une approche différente, et les signatures/heuristiques décrivent un antimalware.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Hors sujet : une base relationnelle et SQL ne constituent pas un système expert.",
+        "Bonne réponse : la knowledge base de règles SI-ALORS et l'inference engine sont les deux composants fondamentaux d'un expert system.",
+        "Confusion de famille : réseau de neurones et données d'entraînement relèvent du machine learning.",
+        "Confusion d'outil : signatures et heuristiques décrivent un antimalware."
+      ]
     },
     {
       q: "Un attaquant parvient à insérer des échantillons soigneusement choisis dans les données servant à entraîner le modèle de machine learning de détection de fraude d'une banque, afin que ses futures fraudes soient classées comme légitimes. Comment s'appelle cette attaque ?",
@@ -1158,7 +1404,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le data poisoning, l'empoisonnement des données, consiste à corrompre les données d'ENTRAÎNEMENT pour biaiser durablement le comportement du modèle. L'adversarial example manipule une entrée au moment de l'INFÉRENCE, sans toucher à l'entraînement ; la model inversion cherche à reconstruire les données d'entraînement à partir du modèle ; et l'inference attack, au sens bases de données, déduit des informations sensibles à partir d'éléments moins sensibles.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Piège de proximité : la model inversion reconstruit les données d'entraînement à partir du modèle, elle ne les corrompt pas.",
+        "Bonne réponse : corrompre les données d'ENTRAÎNEMENT pour biaiser durablement le modèle est le data poisoning.",
+        "Piège de phase : l'adversarial example manipule une entrée au moment de l'inférence, sans toucher à l'entraînement.",
+        "Confusion de domaine : l'inference attack déduit des informations sensibles, elle ne modifie pas le modèle."
+      ]
     },
     {
       q: "Une équipe Scrum livre un incrément toutes les deux semaines. Le RSSI veut s'assurer que la sécurité est prise en compte sans casser le rythme des sprints. Quelle est la MEILLEURE approche ?",
@@ -1170,7 +1422,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "En Agile, la sécurité doit être intégrée dans le flux normal de travail : des critères de sécurité dans la Definition of Done garantissent qu'aucune user story n'est « terminée » sans validation sécurité, et les abuse cases (ou evil user stories) forcent l'équipe à penser comme un attaquant dès le backlog. Un pentest annuel est trop tardif et ponctuel pour des livraisons bimensuelles ; une phase dédiée après chaque sprint recrée le goulot d'étranglement que l'Agile cherche à éliminer ; et déléguer au SOC contredit le principe de responsabilité partagée de la sécurité.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Hors phase et trop ponctuel : un pentest annuel ne suit pas un rythme de livraison bimensuel.",
+        "Bonne réponse : critères de sécurité dans la Definition of Done et abuse cases au backlog intègrent la sécurité au flux Agile sans le casser.",
+        "Anti-modèle : une phase dédiée après chaque sprint recrée le goulot d'étranglement que l'Agile élimine.",
+        "Contresens organisationnel : déléguer au SOC contredit la responsabilité partagée de la sécurité."
+      ]
     },
     {
       q: "Votre organisation conçoit une nouvelle application de paiement. Lors de la phase de conception, quelle activité de sécurité devriez-vous mener EN PREMIER ?",
@@ -1182,7 +1440,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 2,
       explication: "Le threat modeling est l'activité de sécurité propre à la phase de conception : il identifie les menaces (Spoofing, Tampering, Repudiation, Information disclosure, Denial of service, Elevation of privilege avec STRIDE) sur l'architecture avant qu'une ligne de code ne soit écrite, quand les corrections coûtent le moins cher. Le DAST exige une application en exécution, la revue de code exige du code écrit, et un audit PCI DSS s'applique à un environnement de production existant : toutes ces activités viennent plus tard dans le cycle.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Hors phase : le DAST exige une application en cours d'exécution, inexistante en conception.",
+        "Hors phase : la revue de code exige du code déjà écrit.",
+        "Bonne réponse : le threat modeling (par exemple STRIDE) est l'activité de sécurité propre à la phase de conception, quand corriger coûte le moins cher.",
+        "Hors phase : un audit PCI DSS s'applique à un environnement de production existant."
+      ]
     },
     {
       q: "Le RSSI veut empêcher que du code contenant des vulnérabilités critiques atteigne la production, sans ralentir les dizaines de déploiements quotidiens de l'équipe DevOps. Quelle est la MEILLEURE solution ?",
@@ -1194,7 +1458,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Des contrôles automatisés (SAST, SCA) intégrés au pipeline, avec des security gates qui font échouer le build au-delà d'un seuil de criticité, appliquent la sécurité à la vitesse du DevOps : c'est l'essence du DevSecOps. Une revue manuelle systématique est incompatible avec des dizaines de déploiements par jour ; attendre le pentest trimestriel laisse les vulnérabilités en production pendant des mois ; et réduire la fréquence des livraisons sacrifie la valeur métier au lieu d'automatiser la sécurité.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Irréaliste à l'échelle : une revue manuelle systématique est incompatible avec des dizaines de déploiements quotidiens.",
+        "Bonne réponse : SAST et SCA automatisés avec des security gates bloquants appliquent la sécurité à la vitesse du DevOps.",
+        "Hors phase : attendre le pentest trimestriel laisse les vulnérabilités en production pendant des mois.",
+        "Sacrifice du business : réduire la fréquence des livraisons détruit la valeur au lieu d'automatiser la sécurité."
+      ]
     },
     {
       q: "Une équipe provisionne toute son infrastructure cloud via des templates Infrastructure as Code (IaC). Quel est le MEILLEUR moyen de prévenir les erreurs de configuration de sécurité en production ?",
@@ -1206,7 +1476,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 0,
       explication: "L'IaC permet précisément de traiter la configuration comme du code : l'analyser automatiquement avant le déploiement (policy as code) détecte les buckets publics, ports ouverts ou chiffrements absents avant qu'ils n'existent en production. Un audit trimestriel manuel est détectif et tardif alors que les misconfigurations sont la première cause de brèches cloud ; limiter l'IaC aux tests supprime ses bénéfices de cohérence ; et chiffrer les templates protège leur confidentialité mais ne corrige en rien leur contenu.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Bonne réponse : scanner les templates IaC avant déploiement (policy as code) bloque les misconfigurations avant qu'elles n'existent en production.",
+        "Détectif et tardif : un audit trimestriel manuel découvre les erreurs après exposition.",
+        "Contresens : restreindre l'IaC aux tests supprime ses bénéfices de cohérence sans réduire le risque.",
+        "Hors sujet : chiffrer les templates protège leur confidentialité, pas la validité de leur contenu."
+      ]
     },
     {
       q: "Un développeur a poussé par erreur une clé API de production dans le dépôt Git de l'entreprise, puis a supprimé le fichier dans un commit suivant. Que devez-vous faire EN PREMIER ?",
@@ -1218,7 +1494,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Un secret commité doit être considéré comme compromis : l'historique Git le conserve même après suppression du fichier, et il a pu être cloné ou indexé entre-temps. La première action est donc de révoquer la clé et d'en émettre une nouvelle, ce qui neutralise le risque. Réécrire l'historique est un nettoyage utile mais ne protège pas contre les copies déjà faites ; la formation et le MFA sont des mesures préventives pertinentes, mais elles n'éliminent pas le danger immédiat de la clé encore valide.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Nettoyage utile mais insuffisant : réécrire l'historique n'annule pas les copies et clones déjà réalisés.",
+        "Bonne réponse : la clé est réputée compromise — la révoquer et en générer une nouvelle neutralise le risque immédiat.",
+        "Préventif hors phase : la formation n'agit pas sur la clé encore valide.",
+        "Préventif hors phase : le MFA du dépôt ne révoque pas le secret exposé."
+      ]
     },
     {
       q: "Quelle est la MEILLEURE pratique pour fournir des identifiants de base de données aux jobs d'un pipeline CI/CD ?",
@@ -1230,7 +1512,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 2,
       explication: "Un secrets manager centralisé injecte les identifiants au moment de l'exécution, sans qu'ils apparaissent jamais dans le code ou le dépôt ; les identifiants dynamiques à courte durée de vie et la rotation automatique réduisent la fenêtre d'exploitation en cas de fuite et fournissent un audit centralisé. Tout stockage dans le dépôt, même « restreint », expose les secrets à chaque clone et à l'historique ; le codage en dur est l'anti-pattern classique détecté par les scanners ; et la transmission manuelle ne s'automatise pas et disperse les secrets.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Exposition garantie : tout secret dans le dépôt est visible de chaque clone et de l'historique.",
+        "Anti-pattern classique : les secrets codés en dur sont la cible première des scanners et des attaquants.",
+        "Bonne réponse : l'injection à l'exécution depuis un vault, avec identifiants éphémères et rotation automatique, élimine la persistance des secrets et centralise l'audit.",
+        "Non industrialisable : la transmission manuelle disperse les secrets et ne s'automatise pas."
+      ]
     },
     {
       q: "Après un incident de type SolarWinds, votre organisation craint qu'un attaquant compromette le serveur de build pour injecter du code malveillant dans des livrables ensuite signés légitimement. Quel ensemble de contrôles répond le MIEUX à ce risque ?",
@@ -1242,7 +1530,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "L'attaque visait la chaîne de build elle-même : le code source était sain, mais le binaire produit ne l'était plus. La réponse est de traiter le pipeline comme un système critique : environnement de build durci, éphémère et isolé, accès à privilèges minimaux, et attestations de provenance (à la manière de SLSA) qui permettent de vérifier qu'un artefact provient bien du bon code source et du bon processus. Les revues de code et tests unitaires ne voient pas une injection post-compilation ; le chiffrement du dépôt et un WAF ne protègent pas le processus de build.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Techniquement vrai mais hors cible : revues et tests ne voient pas une injection réalisée APRÈS la compilation.",
+        "Bonne réponse : durcir et isoler l'environnement de build et produire des attestations de provenance vérifiables (approche SLSA) protège la chaîne de build elle-même.",
+        "Hors sujet : chiffrer le dépôt ne protège pas le processus de build.",
+        "Hors sujet : un WAF protège les applications en production, pas le pipeline qui les fabrique."
+      ]
     },
     {
       q: "Lors de la divulgation de la vulnérabilité Log4Shell, une organisation a mis trois semaines à identifier lesquelles de ses 400 applications utilisaient Log4j. Quel artefact aurait le PLUS réduit ce délai ?",
@@ -1254,14 +1548,26 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 0,
       explication: "Le SBOM est l'inventaire formel de tous les composants, bibliothèques et dépendances (y compris transitives) de chaque application : lors de la divulgation d'une vulnérabilité comme Log4Shell, une simple recherche dans les SBOM identifie en quelques minutes les applications affectées. Le plan de réponse à incident organise la réaction mais ne dit pas où se trouve le composant ; le DAST ne détecte pas de façon fiable une bibliothèque vulnérable non exposée ; et l'inventaire des serveurs s'arrête au niveau OS, sans visibilité sur les dépendances applicatives.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Bonne réponse : le SBOM inventorie toutes les dépendances, y compris transitives — une recherche suffit pour identifier les applications affectées.",
+        "Techniquement vrai mais pas suffisant : le plan de réponse organise la réaction sans dire où se trouve le composant.",
+        "Peu fiable ici : le DAST ne détecte pas systématiquement une bibliothèque vulnérable non exposée.",
+        "Trop superficiel : un inventaire des serveurs s'arrête à l'OS, sans visibilité applicative."
+      ]
     },
     {
       q: "Un attaquant publie sur un dépôt public de paquets une bibliothèque portant le même nom qu'une bibliothèque interne de votre entreprise, avec un numéro de version supérieur. Vos serveurs de build téléchargent automatiquement le paquet malveillant. Comment s'appelle cette attaque ?",
       choix: ["Typosquatting", "Dependency confusion", "DLL hijacking", "Watering hole"],
       reponse: 1,
       explication: "La dependency confusion exploite les gestionnaires de paquets configurés pour interroger à la fois un registre interne et un registre public : en publiant un paquet public homonyme avec une version supérieure, l'attaquant fait « préférer » sa version malveillante par le résolveur. Le typosquatting repose sur des noms proches mais mal orthographiés que des humains saisissent par erreur ; le DLL hijacking détourne l'ordre de recherche des bibliothèques sur un poste ; et le watering hole piège un site web fréquenté par les victimes.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Piège de proximité : le typosquatting exige une faute de frappe humaine sur un nom proche.",
+        "Bonne réponse : publier un homonyme public à version supérieure exploitant la résolution multi-registres est la dependency confusion.",
+        "Hors contexte : le DLL hijacking détourne l'ordre de recherche des bibliothèques sur un poste.",
+        "Hors contexte : le watering hole piège un site web fréquenté par les victimes."
+      ]
     },
     {
       q: "Quelle combinaison de mesures protège le MIEUX une organisation contre les paquets open source malveillants dans sa chaîne d'approvisionnement logicielle ?",
@@ -1273,14 +1579,26 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Un registre interne (proxy) ne servant que des paquets examinés et approuvés, l'épinglage des versions avec vérification des empreintes (lockfiles, hashes) et la SCA continue forment une défense en profondeur : on contrôle ce qui entre, on empêche les substitutions silencieuses et on surveille les vulnérabilités connues. Interdire l'open source est irréaliste et coûteux ; HTTPS protège le transport mais pas le contenu d'un paquet malveillant légitimement publié ; et compiler les sources ne protège pas si la source elle-même est compromise.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Absolu irréaliste : interdire l'open source est économiquement et techniquement intenable.",
+        "Bonne réponse : registre interne approuvé, version pinning, vérification des hashes et SCA continue forment une défense en profondeur de la supply chain.",
+        "Trop étroit : HTTPS protège le transport, pas le contenu d'un paquet malveillant légitimement publié.",
+        "Fausse assurance : compiler les sources ne protège pas si la source elle-même est compromise."
+      ]
     },
     {
       q: "Un client authentifié d'une banque en ligne remarque qu'en changeant le numéro de compte dans l'URL (…/releve?compte=12345), il peut afficher les relevés d'autres clients. De quelle catégorie OWASP relève cette faille ?",
       choix: ["Injection", "Broken Access Control", "Cryptographic Failures", "Security Misconfiguration"],
       reponse: 1,
       explication: "C'est un cas classique d'Insecure Direct Object Reference (IDOR), qui appartient à la catégorie Broken Access Control, numéro un de l'OWASP Top 10 2021 : l'application authentifie l'utilisateur mais ne vérifie pas qu'il est AUTORISÉ à accéder à l'objet demandé. Il n'y a ni injection de code, ni défaut de chiffrement, ni paramétrage de sécurité erroné du serveur : le contrôle d'autorisation au niveau de l'objet est tout simplement absent.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Mauvais diagnostic : aucune donnée n'est injectée, l'application exécute des requêtes légitimes.",
+        "Bonne réponse : accéder aux objets d'autrui faute de vérification d'autorisation est un IDOR, catégorie Broken Access Control.",
+        "Hors sujet : aucun défaut de chiffrement n'est en cause.",
+        "Hors sujet : ce n'est pas un paramétrage serveur erroné mais un contrôle applicatif absent."
+      ]
     },
     {
       q: "Lors d'un test, une erreur applicative renvoie à l'utilisateur la pile d'appels complète, la version du serveur et la chaîne de connexion à la base de données. Quel principe de codage sécurisé est violé ?",
@@ -1292,7 +1610,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 0,
       explication: "Une gestion d'erreurs sécurisée affiche à l'utilisateur un message générique et enregistre les détails techniques (stack trace, versions, requêtes) uniquement dans les journaux côté serveur : les informations divulguées ici constituent une mine d'or pour préparer une attaque ciblée. Le chiffrement au repos, la séparation des tâches et la gestion des sessions sont des contrôles pertinents ailleurs, mais aucun n'est en cause dans cette fuite d'informations par les messages d'erreur.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Bonne réponse : messages génériques côté client et détails journalisés côté serveur — le principe de gestion d'erreurs violé ici.",
+        "Techniquement pertinent ailleurs : le chiffrement au repos n'est pas en cause dans une fuite par messages d'erreur.",
+        "Hors sujet : la séparation des tâches concerne les responsabilités humaines.",
+        "Hors sujet : la gestion des sessions n'a aucun lien avec la divulgation d'erreurs."
+      ]
     },
     {
       q: "Une analyse SCA révèle que l'application e-commerce utilise une bibliothèque comportant une CVE critique activement exploitée, mais l'équipe craint des régressions. Quelle est la MEILLEURE recommandation ?",
@@ -1304,7 +1628,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Une CVE critique activement exploitée exige un correctif prioritaire mais maîtrisé : passage par la gestion des changements avec tests de régression, et, pendant le délai de correction, des contrôles compensatoires comme des règles WAF ou du virtual patching réduisent l'exposition. Attendre une version majeure laisse une fenêtre d'exploitation ouverte ; désactiver l'outil supprime la visibilité, pas le risque ; et un pare-feu réseau ne bloque pas une attaque applicative transitant par le port autorisé de l'application.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Fenêtre d'exploitation ouverte : attendre une version majeure face à une CVE activement exploitée est indéfendable.",
+        "Bonne réponse : correctif prioritaire via la gestion des changements avec tests de régression, et mesures compensatoires (WAF, virtual patching) dans l'intervalle.",
+        "Déni du risque : désactiver l'outil supprime la visibilité, pas la vulnérabilité.",
+        "Fausse assurance : un pare-feu réseau laisse passer l'attaque applicative sur le port autorisé."
+      ]
     },
     {
       q: "Une application web permet à l'utilisateur de fournir une URL dont le serveur va chercher le contenu. Un attaquant fournit l'adresse du service de métadonnées du cloud (http://169.254.169.254/) et récupère des identifiants IAM temporaires. De quelle vulnérabilité s'agit-il ?",
@@ -1316,7 +1646,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le SSRF consiste à faire émettre par le SERVEUR des requêtes vers des cibles choisies par l'attaquant, typiquement des ressources internes inaccessibles de l'extérieur comme le service de métadonnées cloud, qui délivre des identifiants temporaires. Le XSS exécute du script dans le navigateur de la victime, le CSRF fait émettre une requête par le NAVIGATEUR d'une victime authentifiée, et l'open redirect renvoie l'utilisateur vers un site externe : dans ces trois cas, c'est le client qui agit, pas le serveur. Défenses SSRF : liste blanche de destinations, blocage des plages internes, IMDSv2.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Mauvais acteur : le XSS s'exécute dans le navigateur de la victime, pas côté serveur.",
+        "Bonne réponse : faire émettre par le SERVEUR une requête vers une ressource interne comme le service de métadonnées cloud est un SSRF.",
+        "Mauvais acteur : le CSRF fait agir le navigateur d'une victime authentifiée.",
+        "Trop faible : l'open redirect renvoie l'utilisateur vers un site externe, sans requête serveur interne."
+      ]
     },
     {
       q: "Un testeur saisit « ' OR '1'='1 » dans le champ mot de passe et obtient l'accès au premier compte de la table des utilisateurs. Quelle est la correction la PLUS efficace et durable ?",
@@ -1328,7 +1664,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Les requêtes paramétrées séparent structurellement le code SQL des données fournies par l'utilisateur : l'entrée ne peut jamais être interprétée comme du SQL, ce qui neutralise l'injection à la racine. Filtrer l'apostrophe est un blacklisting fragile, contournable par encodages et inutilisable pour les noms légitimes contenant une apostrophe ; masquer les erreurs gêne l'attaquant (l'injection devient « blind ») mais ne l'empêche pas ; et renommer les tables n'est que de la sécurité par l'obscurité.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Blacklisting fragile : filtrer l'apostrophe se contourne par encodages et bloque des noms légitimes.",
+        "Bonne réponse : les requêtes paramétrées séparent structurellement le code SQL des données — neutralisation durable à la racine.",
+        "Palliatif : masquer les erreurs rend l'injection « blind » sans l'empêcher.",
+        "Sécurité par l'obscurité : renommer les tables ne corrige pas la vulnérabilité."
+      ]
     },
     {
       q: "Un attaquant poste sur un forum un commentaire contenant un script qui s'exécute dans le navigateur de chaque visiteur affichant la page et exfiltre leurs cookies de session. Quelle est cette attaque et sa MEILLEURE défense ?",
@@ -1340,7 +1682,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le script est enregistré durablement sur le serveur (dans le commentaire) et servi à chaque visiteur : c'est un stored XSS, la variante la plus dangereuse car elle ne nécessite aucune interaction spécifique de la victime. La défense combine la validation des entrées, l'encodage des sorties adapté au contexte HTML/JavaScript, une CSP qui restreint les scripts exécutables, et des cookies HttpOnly pour protéger les sessions. Le reflected XSS exigerait que la victime clique un lien piégé ; le CSRF ne fait pas exécuter de script ; et il n'y a aucune requête SQL en cause.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Mauvaise variante et mauvaise défense : le reflected XSS exige un lien piégé, et les jetons anti-CSRF ne bloquent pas un script.",
+        "Bonne réponse : script persisté côté serveur = stored XSS ; défense par validation des entrées, encodage contextuel des sorties et CSP.",
+        "Mauvais diagnostic : le CSRF ne fait exécuter aucun script, et l'encodage des sorties vise le XSS.",
+        "Mauvais diagnostic : aucune requête SQL n'est en cause."
+      ]
     },
     {
       q: "Un utilisateur connecté à sa banque clique dans un e-mail sur une image piégée ; à son insu, son navigateur envoie une requête de virement à la banque, qui l'exécute car la session est valide. Quelle défense est SPÉCIFIQUEMENT conçue contre cette attaque ?",
@@ -1352,7 +1700,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Il s'agit d'un Cross-Site Request Forgery : l'attaquant fait émettre par le navigateur de la victime une requête que le serveur croit légitime puisque les cookies de session l'accompagnent automatiquement. Le jeton anti-CSRF, secret propre à la session et inconnu du site attaquant, rend la requête forgée invalide ; l'attribut SameSite empêche l'envoi des cookies sur les requêtes intersites. L'encodage des sorties vise le XSS, TLS protège la confidentialité en transit mais transporte fidèlement la requête forgée, et le mot de passe n'est pas en cause puisque la victime est déjà authentifiée.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Mauvaise cible : l'encodage des sorties combat le XSS, pas la requête forgée.",
+        "Bonne réponse : le jeton anti-CSRF, inconnu du site attaquant, invalide la requête forgée ; SameSite complète la défense.",
+        "Techniquement vrai mais inopérant : TLS transporte fidèlement la requête forgée en la chiffrant.",
+        "Hors sujet : la victime est déjà authentifiée — la robustesse du mot de passe ne change rien."
+      ]
     },
     {
       q: "Une application web appelle un utilitaire système en concaténant un nom de fichier fourni par l'utilisateur ; un testeur soumet « rapport.pdf; cat /etc/passwd » et obtient le contenu du fichier système. Quelle est la MEILLEURE correction ?",
@@ -1364,21 +1718,39 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 0,
       explication: "C'est une OS command injection : l'entrée utilisateur est interprétée par le shell. La correction en profondeur consiste à ne jamais passer d'entrée utilisateur à un shell — utiliser des API natives du langage (ouverture de fichier directe, exécution sans shell avec arguments séparés) — et à valider l'entrée contre une liste blanche stricte. Exécuter en root aggrave dramatiquement l'impact au lieu de le réduire (violation du moindre privilège) ; bloquer le point-virgule au WAF est un pansement contournable (autres métacaractères, encodages) ; et chiffrer un fichier système ne traite qu'une cible parmi toutes celles accessibles.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Bonne réponse : supprimer l'invocation du shell (API natives, arguments séparés) et valider par liste blanche traite l'injection de commande en profondeur.",
+        "Aggravation : exécuter en root maximise l'impact et viole le moindre privilège.",
+        "Pansement contournable : bloquer un métacaractère au WAF laisse tous les autres vecteurs et encodages.",
+        "Trop étroit : chiffrer un fichier cible ne protège pas les innombrables autres ressources accessibles."
+      ]
     },
     {
       q: "Un analyste sans habilitation combine des informations publiques — offres d'emploi, marchés publics, photos satellite — et reconstitue l'existence et l'emplacement d'un programme militaire classifié. Quel problème de sécurité des données ce scénario illustre-t-il ?",
       choix: ["Inference uniquement", "Aggregation", "Polyinstantiation", "Data mining"],
       reponse: 1,
       explication: "L'aggregation est le problème de sécurité par lequel la COMBINAISON d'éléments individuellement non sensibles, issus de sources séparées, produit une information de sensibilité supérieure : chaque pièce est publique, mais l'ensemble révèle un secret. L'inference est l'attaque cognitive associée (déduire l'information), mais le terme qui désigne ce phénomène de combinaison est l'agrégation. La polyinstantiation est une DÉFENSE contre l'inférence, et le data mining est une technique d'analyse légitime.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Piège de vocabulaire : l'inférence est la déduction ; le phénomène de combinaison décrit ici est l'agrégation.",
+        "Bonne réponse : combiner des éléments individuellement publics en information classifiée est le problème d'aggregation.",
+        "Inversion de rôle : la polyinstantiation est une défense, pas un problème.",
+        "Hors sujet : le data mining est une analyse légitime de données."
+      ]
     },
     {
       q: "Un employé du service courrier remarque que la salle du conseil est réservée toute la semaine par la DRH avec un cabinet externe de restructuration, et en déduit qu'un plan social se prépare. Quelle attaque contre la confidentialité ce raisonnement illustre-t-il ?",
       choix: ["Aggregation", "Inference", "Shoulder surfing", "Social engineering"],
       reponse: 1,
       explication: "L'inference est l'attaque par laquelle un individu DÉDUIT une information d'un niveau de sensibilité supérieur à partir d'éléments auxquels il a légitimement accès : ici, des données banales de réservation de salle mènent à une conclusion confidentielle. L'agrégation désigne plutôt le problème structurel de la combinaison de données multiples ; le shoulder surfing est une observation physique directe ; et le social engineering suppose une manipulation d'autrui, absente ici — l'employé raisonne seul.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Piège de vocabulaire : l'agrégation désigne le problème structurel de combinaison, pas l'acte de déduction individuel.",
+        "Bonne réponse : déduire une information confidentielle à partir d'éléments légitimement accessibles est l'inference.",
+        "Hors sujet : le shoulder surfing est une observation physique directe.",
+        "Hors sujet : le social engineering suppose la manipulation d'autrui — l'employé raisonne seul."
+      ]
     },
     {
       q: "Dans une base de données multiniveau, un utilisateur non habilité tente de créer un enregistrement pour le cargo « Aurora » et découvre qu'une clé identique existe déjà à un niveau classifié, révélant l'existence d'une mission secrète. Quelle technique prévient cette fuite ?",
@@ -1390,7 +1762,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 2,
       explication: "La polyinstantiation autorise plusieurs instances d'un même enregistrement, avec la même clé primaire, à des niveaux de classification différents : l'utilisateur non habilité voit une version non classifiée plausible (une cargaison banale), sans erreur de clé dupliquée qui trahirait l'existence de l'enregistrement secret. La normalisation vise l'intégrité structurelle et élimine justement les doublons ; le TDE protège les fichiers de la base au repos ; et les vues filtrent l'accès mais un conflit de clé primaire révélerait quand même l'existence de la donnée cachée.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Contresens : la normalisation élimine justement les doublons de clé.",
+        "Hors sujet : le TDE protège les fichiers de la base au repos, pas l'inférence par conflit de clé.",
+        "Bonne réponse : la polyinstantiation fait coexister deux enregistrements de même clé à des niveaux différents, masquant l'existence du secret.",
+        "Insuffisant : les vues filtrent la lecture, mais le conflit de clé primaire révélerait quand même la donnée cachée."
+      ]
     },
     {
       q: "Une base de données statistique RH permet des requêtes agrégées sur les salaires. Un analyste multiplie les requêtes avec des filtres de plus en plus précis jusqu'à isoler le salaire d'une seule personne. Quels contrôles contrent le MIEUX cette attaque d'inférence ?",
@@ -1402,7 +1780,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 0,
       explication: "Les attaques d'inférence sur bases statistiques se contrent par des contrôles spécifiques : refuser les requêtes dont le résultat porte sur un ensemble trop petit, supprimer les cellules à faibles effectifs, ajouter du bruit aléatoire calibré (perturbation, ancêtre de la differential privacy) et limiter les requêtes successives recoupables (query set overlap control). Le chiffrement au repos, le MFA et les sauvegardes sont de bons contrôles généraux, mais l'analyste est ici un utilisateur AUTORISÉ qui n'exploite que des requêtes légitimes : seuls les contrôles d'inférence traitent ce risque.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Bonne réponse : taille minimale des ensembles, cell suppression et bruit statistique sont les contrôles spécifiques contre l'inférence statistique.",
+        "Techniquement vrai mais hors cible : l'analyste est un utilisateur autorisé — le chiffrement au repos ne bloque pas ses requêtes légitimes.",
+        "Hors cible : le MFA authentifie mieux un utilisateur qui est déjà légitime.",
+        "Hors sujet : les sauvegardes traitent la disponibilité, pas l'inférence."
+      ]
     },
     {
       q: "Un pentest révèle que l'API mobile de votre entreprise renvoie l'objet demandé dès lors que l'appelant présente un jeton valide, sans vérifier que l'objet appartient à cet utilisateur. Les numéros d'objets sont séquentiels. Quelle est cette vulnérabilité ?",
@@ -1414,7 +1798,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 0,
       explication: "La Broken Object Level Authorization — première vulnérabilité du OWASP API Security Top 10 — survient quand l'API authentifie l'appelant mais ne vérifie pas son AUTORISATION sur l'objet précis demandé : avec des identifiants séquentiels, l'énumération de toutes les données devient triviale. La correction impose une vérification d'autorisation systématique à chaque appel et des identifiants non prédictibles. Il n'y a ici ni injection, ni problème de transport, ni surexposition de champs : le contrôle d'accès objet est simplement absent.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Bonne réponse : jeton valide mais autorisation objet jamais vérifiée, identifiants séquentiels — définition du BOLA/IDOR, n°1 du OWASP API Security Top 10.",
+        "Mauvais diagnostic : aucune injection n'est décrite, les appels sont légitimes.",
+        "Mauvais diagnostic : le transport n'est pas en cause.",
+        "Piège de proximité : l'excessive data exposure concerne des champs excédentaires dans les réponses, pas l'accès aux objets d'autrui."
+      ]
     },
     {
       q: "Votre architecture comprend 60 microservices qui communiquent entre eux en interne (trafic est-ouest). Quelle approche sécurise le MIEUX ces communications selon un modèle zero trust ?",
@@ -1426,7 +1816,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le zero trust rejette la confiance implicite du réseau interne : chaque microservice doit prouver son identité à chaque communication. Le mTLS fournit l'authentification mutuelle et le chiffrement du trafic est-ouest, avec des certificats de courte durée gérés par un service mesh qui applique aussi des politiques d'autorisation fines. Se fier au périmètre reproduit le modèle « château fort » qu'un seul service compromis suffit à ruiner ; un secret partagé n'identifie personne et sa compromission expose tout ; et la passerelle API ne voit que le trafic nord-sud, pas les échanges entre services.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Modèle château fort périmé : un seul service compromis ruine la confiance implicite du réseau interne.",
+        "Bonne réponse : le mTLS avec identités et certificats propres à chaque service, via un service mesh, applique le zero trust au trafic est-ouest.",
+        "Anti-modèle : un secret partagé n'identifie personne et sa compromission expose tout.",
+        "Trop étroit : la passerelle API ne voit que le trafic nord-sud, pas les échanges entre services."
+      ]
     },
     {
       q: "Quel est le PRINCIPAL bénéfice de sécurité d'une passerelle API (API gateway) placée devant des microservices ?",
@@ -1438,7 +1834,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "La passerelle API constitue un point d'application central des politiques : authentification et autorisation de chaque appel, rate limiting contre les abus et le déni de service, validation et filtrage des requêtes, journalisation uniforme. Cette centralisation évite que chaque microservice réimplémente (inégalement) ces contrôles. Elle n'a pas vocation à accroître la bande passante ; elle ne dispense jamais de sécuriser les services eux-mêmes (défense en profondeur, trafic est-ouest) ; et elle s'appuie sur TLS, elle ne le remplace pas.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Hors sujet : la passerelle est un point de contrôle, pas un accélérateur de bande passante.",
+        "Bonne réponse : centraliser authentification, rate limiting et validation des requêtes en un point unique est le bénéfice de sécurité principal.",
+        "Fausse assurance : la défense en profondeur impose de sécuriser aussi les services derrière la passerelle.",
+        "Contresens : la passerelle s'appuie sur TLS, elle ne le remplace jamais."
+      ]
     },
     {
       q: "Votre entreprise dispose d'un accord de software escrow pour son ERP critique. L'éditeur fait faillite, mais le code libéré par l'agent d'escrow date de trois ans et ne correspond plus à la version exploitée. Quelle disposition aurait prévenu ce problème ?",
@@ -1450,7 +1852,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Un escrow n'a de valeur que si le dépôt reflète la version en production : le contrat doit imposer des dépôts synchronisés avec les versions livrées et des vérifications périodiques (escrow verification) par un tiers, confirmant que le contenu est complet, documenté et compilable. Des pénalités financières ne servent à rien contre un éditeur en faillite ; une assurance compense financièrement mais ne fournit pas le code nécessaire à la continuité ; et la qualité des coffres protège le dépôt existant sans garantir qu'il soit à jour.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Inopérant : des pénalités financières ne s'appliquent pas à un éditeur en faillite.",
+        "Bonne réponse : dépôts à chaque version majeure et vérification indépendante (complet, compilable, à jour) garantissent la valeur réelle de l'escrow.",
+        "Compensation seulement : l'assurance ne fournit pas le code nécessaire à la continuité.",
+        "Trop étroit : la qualité des coffres protège le dépôt existant sans garantir qu'il soit à jour."
+      ]
     },
     {
       q: "Un malware est distribué signé avec le certificat de code signing légitime d'un éditeur connu, dérobé lors d'une intrusion. Les postes de travail l'exécutent sans alerte. Quelles mesures l'ÉDITEUR aurait-il dû prendre pour prévenir et traiter ce scénario ?",
@@ -1462,7 +1870,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "La valeur du code signing repose entièrement sur la protection de la clé privée : elle doit résider dans un HSM, avec signature effectuée dans un environnement dédié, accès nominatifs et journalisés. En cas de compromission, la révocation immédiate du certificat auprès de la CA invalide la confiance dans les signatures frauduleuses. Allonger la vie du certificat étend au contraire la fenêtre d'exploitation d'une clé volée ; signer moins souvent ne protège pas la clé elle-même ; et un certificat auto-signé supprime la chaîne de confiance qui fait précisément la valeur du dispositif.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Contresens : allonger la vie du certificat étend la fenêtre d'exploitation d'une clé volée.",
+        "Bonne réponse : protéger les clés dans un HSM à accès strictement contrôlé et révoquer immédiatement en cas de compromission — prévention et réponse.",
+        "Trop étroit : signer moins souvent ne protège pas la clé elle-même.",
+        "Contresens : l'auto-signature supprime la chaîne de confiance qui fait la valeur du code signing."
+      ]
     },
     {
       q: "Votre organisation évalue un fournisseur SaaS pour héberger des données clients sensibles. Quel élément fournit la MEILLEURE assurance sur l'efficacité réelle des contrôles de sécurité du fournisseur ?",
@@ -1474,7 +1888,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le rapport SOC 2 Type II est une attestation indépendante qui évalue non seulement la CONCEPTION des contrôles mais leur EFFICACITÉ OPÉRATIONNELLE sur une période de plusieurs mois — bien plus probant qu'un instantané ou qu'une déclaration. Le droit d'audit contractuel complète le dispositif. Un questionnaire auto-déclaré n'engage que la bonne foi du fournisseur, les témoignages clients sont du marketing, et « chiffrement de niveau militaire » est un slogan sans valeur d'assurance vérifiable.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Auto-déclaratif : le questionnaire n'engage que la bonne foi du fournisseur.",
+        "Bonne réponse : le SOC 2 Type II atteste l'efficacité opérationnelle des contrôles sur une période, par un tiers indépendant, complété par un droit d'audit.",
+        "Marketing : les témoignages clients n'ont aucune valeur d'assurance.",
+        "Slogan invérifiable : « niveau militaire » n'est pas une assurance mesurable."
+      ]
     },
     {
       q: "Avant d'intégrer une bibliothèque open source dans un produit critique, vous menez une évaluation. Quel constat devrait le PLUS vous inquiéter ?",
@@ -1486,7 +1906,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le risque majeur de l'open source est l'abandon : un projet sans activité depuis trois ans, avec des CVE critiques ignorées, ne recevra probablement jamais de correctifs — l'organisation devrait prévoir de maintenir le code elle-même ou choisir une alternative activement maintenue. À l'inverse, une communauté active, des versions signées avec changelog et une licence validée juridiquement sont tous des signaux POSITIFS d'un projet sain. L'évaluation de l'open source porte sur la vitalité du projet, sa réactivité aux vulnérabilités et la conformité de licence.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Signal positif, pas une inquiétude : une fondation et des contributeurs actifs indiquent un projet sain.",
+        "Bonne réponse : trois ans sans commit et des CVE critiques ignorées signalent un projet abandonné — le risque majeur de l'open source.",
+        "Signal positif : changelog détaillé et versions signées sont des bonnes pratiques.",
+        "Signal positif : une licence permissive validée juridiquement lève le risque de conformité."
+      ]
     },
     {
       q: "Des chercheurs apposent de petits autocollants sur un panneau stop ; le système de vision d'un véhicule autonome, dont le modèle n'a jamais été modifié, le classe alors comme panneau de limitation de vitesse. Quel type d'attaque contre le machine learning est illustré ?",
@@ -1498,7 +1924,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "L'adversarial example est une entrée subtilement altérée — ici des autocollants imperceptiblement significatifs pour le modèle — qui provoque une classification erronée au moment de l'INFÉRENCE, sans aucune modification du modèle ni des données d'entraînement. Le data poisoning corrompt en amont les données d'ENTRAÎNEMENT ; le model theft reconstruit un modèle équivalent en l'interrogeant massivement ; et la membership inference détermine si une donnée précise a servi à l'entraînement. La précision « modèle jamais modifié » exclut l'empoisonnement.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Piège de phase : le data poisoning corrompt l'entraînement, or le modèle n'a jamais été modifié.",
+        "Bonne réponse : une entrée physiquement altérée qui trompe le modèle au moment de l'inférence est un adversarial example.",
+        "Hors sujet : le model theft reconstruit un modèle par interrogation massive.",
+        "Hors sujet : la membership inference détermine si une donnée a servi à l'entraînement."
+      ]
     },
     {
       q: "Un régulateur bancaire exige que chaque refus de crédit automatisé puisse être expliqué précisément au client. L'équipe hésite entre un réseau de neurones profond très performant et un expert system à base de règles. Quel critère de sécurité et de conformité favorise l'expert system ?",
@@ -1510,7 +1942,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "L'expert system applique des règles si-alors codifiées dans sa knowledge base via un inference engine : chaque décision peut être retracée aux règles déclenchées, ce qui satisfait l'exigence d'explicabilité du régulateur. Un réseau de neurones profond, malgré ses performances, produit des décisions difficilement explicables (boîte noire), un enjeu de conformité majeur. Les distracteurs inversent les réalités : c'est le machine learning qui apprend des données, l'expert system n'est pas intrinsèquement plus précis, et sa base de connaissances exige au contraire une maintenance experte continue.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Inversion : c'est le machine learning qui apprend des données ; l'expert system applique des règles écrites.",
+        "Bonne réponse : des règles SI-ALORS explicites et traçables offrent l'explicabilité exigée par le régulateur, contrairement à la boîte noire neuronale.",
+        "Absolu faux : l'expert system n'est pas intrinsèquement plus précis.",
+        "Absolu faux : la knowledge base exige une maintenance experte continue."
+      ]
     }
   ],
   quizEn: [
@@ -1519,7 +1957,13 @@ window.CISSP_DATA.domains[8] = {
       choix: ["Scrum", "Waterfall", "Extreme Programming", "Kanban"],
       reponse: 1,
       explication: "Waterfall convient précisément aux projets dont les exigences sont stables et connues d'avance, avec des livrables documentaires et des validations formelles à chaque phase : sa rigidité, défaut ailleurs, devient ici un atout de traçabilité contractuelle. Scrum, XP et Kanban sont des approches Agile/Lean conçues pour des exigences évolutives et une documentation minimale, à l'opposé du besoin exprimé.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Hors contexte : Scrum vise des exigences évolutives et une documentation minimale, l'inverse du besoin.",
+        "Bonne réponse : Waterfall convient aux exigences stables avec livrables documentaires et validations formelles à chaque phase.",
+        "Hors contexte : XP est une méthode Agile axée sur le code et le feedback rapide.",
+        "Hors contexte : Kanban est un flux Lean continu, sans jalons documentaires contractuels."
+      ]
     },
     {
       q: "At which point in the SDLC should a security professional FIRST be engaged to provide the greatest benefit at the lowest cost?",
@@ -1531,7 +1975,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "La sécurité doit être impliquée dès la collecte des exigences : les besoins de sécurité y sont définis comme exigences non fonctionnelles, orientant toute la conception. Plus un défaut est découvert tard, plus il coûte cher à corriger — plusieurs dizaines de fois plus en production qu'en conception. Les tests d'acceptation, la revue de code et l'exploitation sont tous des points d'intervention utiles mais tardifs : c'est le principe du « shift left ».",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Hors phase : les tests d'acceptation arrivent trop tard, quand corriger coûte le plus cher.",
+        "Bonne réponse : impliquer la sécurité dès la collecte des exigences maximise le bénéfice au coût minimal — principe du shift left.",
+        "Hors phase : la revue de code suppose une implémentation déjà écrite.",
+        "Hors phase : l'exploitation subit les défauts non prévenus au coût maximal."
+      ]
     },
     {
       q: "Which activity BEST exemplifies the concept of \"shifting security left\" in a DevSecOps environment?",
@@ -1543,14 +1993,26 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 0,
       explication: "« Shift left » signifie déplacer les activités de sécurité vers le début du cycle de vie : le threat modeling en conception et le SAST à chaque commit détectent les défauts avant qu'ils n'atteignent la production, au moment où la correction est la moins coûteuse. Le pentest annuel, le WAF et le bug bounty interviennent tous « à droite », sur des systèmes déjà déployés : utiles en défense en profondeur, ils ne préviennent pas l'introduction des défauts.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Bonne réponse : threat modeling en conception et SAST à chaque commit déplacent la sécurité vers l'amont du cycle — définition du shift left.",
+        "Hors phase : un pentest annuel de production intervient tout « à droite » du cycle.",
+        "Hors phase : un WAF protège des systèmes déjà déployés.",
+        "Hors phase : un bug bounty s'applique aux produits déjà livrés."
+      ]
     },
     {
       q: "A CISO wants to assess and improve the organization's software security practices using an open framework organized around business functions such as Governance, Design, Implementation, Verification, and Operations. Which model BEST fits this need?",
       choix: ["SW-CMM", "OWASP SAMM", "IDEAL", "ISO 31000"],
       reponse: 1,
       explication: "Le Software Assurance Maturity Model (SAMM) d'OWASP est un cadre open source dédié à la maturité de la SÉCURITÉ logicielle, structuré autour de cinq fonctions métier : Governance, Design, Implementation, Verification et Operations. Le SW-CMM mesure la maturité générale des processus de développement sans traiter explicitement la sécurité, IDEAL est un modèle d'amélioration des processus du SEI, et ISO 31000 est un cadre de management des risques d'entreprise, pas un modèle de maturité logicielle.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Techniquement vrai mais trop générique : le SW-CMM mesure la maturité des processus sans traiter la sécurité.",
+        "Bonne réponse : le SAMM d'OWASP est structuré autour des fonctions Governance, Design, Implementation, Verification et Operations.",
+        "Hors catégorie : IDEAL est un modèle d'amélioration des processus du SEI, sans fonctions métier de sécurité.",
+        "Hors catégorie : ISO 31000 est un cadre de management des risques d'entreprise."
+      ]
     },
     {
       q: "Developers merge code into a shared repository several times per day, automatically triggering builds and test suites. Code that passes all tests is packaged and ready for production, but an operations manager must approve each release. Which practices are in place?",
@@ -1562,7 +2024,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Les fusions fréquentes avec builds et tests automatiques définissent la continuous integration ; le fait que le code soit toujours prêt pour la production mais qu'une APPROBATION HUMAINE reste requise correspond au continuous delivery. Le continuous deployment supprimerait cette approbation : tout changement passant les tests irait automatiquement en production. C'est la distinction favorite de l'examen entre delivery et deployment.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Piège de proximité : le continuous deployment supprimerait l'approbation humaine décrite.",
+        "Bonne réponse : fusions et tests automatiques = CI ; code toujours prêt mais approbation humaine requise = continuous delivery.",
+        "Hors sujet : le continuous monitoring est de la supervision, pas une pratique de livraison.",
+        "Mauvaise combinaison : l'approbation manuelle exclut le continuous deployment, quel que soit le mode de branche."
+      ]
     },
     {
       q: "A developer accidentally pushes a file containing production database credentials to the organization's source code repository. The file has been deleted in a subsequent commit. What should the security team do NEXT?",
@@ -1574,7 +2042,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Un secret entré dans un dépôt doit être considéré comme compromis : l'historique Git le conserve malgré la suppression du fichier, et des clones ont pu être réalisés. La priorité est de révoquer et remplacer les identifiants, puis de vérifier dans les journaux s'ils ont été utilisés. La purge de l'historique est un nettoyage complémentaire qui n'annule pas les copies existantes ; la formation et les protections de branche sont des mesures préventives pour l'avenir, pas la réponse à l'exposition en cours.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Nettoyage utile mais insuffisant : la purge n'annule pas les clones déjà réalisés.",
+        "Bonne réponse : les identifiants sont réputés compromis — les révoquer puis vérifier les journaux d'accès traite le risque actif.",
+        "Préventif hors phase : la formation n'agit pas sur les identifiants encore valides.",
+        "Préventif hors phase : la protection de branche n'aurait d'effet que pour l'avenir."
+      ]
     },
     {
       q: "Which approach BEST reduces the risk associated with secrets used by automated CI/CD pipeline jobs?",
@@ -1586,7 +2060,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 2,
       explication: "Un service centralisé de gestion des secrets délivre au pipeline des identifiants dynamiques à courte durée de vie, injectés uniquement à l'exécution : rien ne persiste dans le code, les images ou les journaux, la rotation est automatique et chaque accès est audité. Les fichiers de configuration commités exposent les secrets à tout l'historique du dépôt ; les secrets incorporés aux images sont extractibles de chaque couche ; et un mot de passe unique partagé supprime la traçabilité et maximise l'impact d'une compromission.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Exposition garantie : des fichiers commités livrent les secrets à tout l'historique du dépôt.",
+        "Extractibles : des secrets incorporés aux images se lisent dans chaque couche.",
+        "Bonne réponse : des identifiants éphémères délivrés à l'exécution par un service centralisé éliminent la persistance et centralisent l'audit.",
+        "Anti-modèle : un mot de passe unique partagé supprime la traçabilité et maximise l'impact d'une fuite."
+      ]
     },
     {
       q: "After learning about attacks in which a compromised build server injected malicious code into legitimately signed software updates, an organization wants assurance that its released artifacts match its reviewed source code. Which control BEST provides this assurance?",
@@ -1598,7 +2078,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "L'attaque de type SolarWinds compromet le processus de BUILD : le code source relu est sain, mais l'artefact produit ne l'est plus. La parade est une chaîne de build de confiance : environnement durci, éphémère et isolé, et attestations de provenance signées (approche SLSA) prouvant que chaque artefact provient bien du code source examiné et du processus attendu. La revue à deux personnes ne voit pas une injection post-compilation, l'antivirus ne détecte pas un implant furtif inédit, et le chiffrement du dépôt ne protège pas le pipeline.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Techniquement vrai mais hors cible : la revue à deux ne voit pas une injection post-compilation.",
+        "Bonne réponse : des attestations de provenance signées issues d'un build durci et isolé prouvent que l'artefact correspond au code source relu.",
+        "Trop faible : l'antivirus ne détecte pas un implant furtif inédit.",
+        "Hors sujet : chiffrer le dépôt au repos ne protège pas le pipeline de build."
+      ]
     },
     {
       q: "What is the PRIMARY purpose of maintaining a Software Bill of Materials (SBOM) for each application?",
@@ -1610,14 +2096,26 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le SBOM est l'inventaire formel de tous les composants, bibliothèques et dépendances — y compris transitives — d'un logiciel. Sa valeur première en sécurité est la réactivité : lors de la divulgation d'une vulnérabilité comme Log4Shell, il permet d'identifier immédiatement les applications affectées. La conformité des licences est un bénéfice secondaire réel mais non principal, et le SBOM ne documente ni les exigences fonctionnelles ni les coûts.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Hors sujet : le SBOM n'est pas un document d'exigences fonctionnelles.",
+        "Bonne réponse : inventaire formel des composants et dépendances, il permet d'identifier immédiatement l'exposition lors d'une nouvelle divulgation.",
+        "Trop étroit : la conformité des licences est un bénéfice secondaire, pas le but principal.",
+        "Hors sujet : le SBOM n'estime aucun coût de développement."
+      ]
     },
     {
       q: "An organization's build system resolves packages from both an internal registry and a public repository. An attacker publishes a package on the public repository using the name of an internal library with a higher version number, and the build system downloads it. Which attack has occurred?",
       choix: ["Typosquatting", "Watering hole attack", "Dependency confusion", "Cross-site scripting"],
       reponse: 2,
       explication: "La dependency confusion exploite les résolveurs de paquets configurés sur plusieurs registres : l'attaquant publie sur le registre public un homonyme du paquet interne avec une version supérieure, que le gestionnaire préfère automatiquement. Le typosquatting repose sur des fautes de frappe humaines dans des noms proches, le watering hole compromet un site fréquenté par les cibles, et le XSS est une vulnérabilité web sans rapport. Défenses : registre privé prioritaire ou exclusif, épinglage des versions, vérification des hashes.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Piège de proximité : le typosquatting exige une faute de frappe humaine sur un nom voisin.",
+        "Hors contexte : le watering hole piège un site fréquenté par les cibles.",
+        "Bonne réponse : l'homonyme public à version supérieure préféré par le résolveur multi-registres est la dependency confusion.",
+        "Hors sujet : le XSS est une vulnérabilité web sans lien avec la résolution de paquets."
+      ]
     },
     {
       q: "Which application security testing technique examines source code for vulnerabilities WITHOUT executing the program?",
@@ -1629,14 +2127,26 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le SAST analyse le code source, le bytecode ou les binaires SANS exécuter l'application : approche boîte blanche, applicable tôt dans le cycle, qui localise précisément les défauts dans le code. Le DAST teste l'application EN EXÉCUTION de l'extérieur, le fuzzing envoie des entrées malformées à un programme en fonctionnement, et le RASP est un mécanisme de protection embarqué à l'exécution, pas une technique de test.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Inversion : le DAST teste l'application en cours d'exécution, de l'extérieur.",
+        "Bonne réponse : le SAST analyse le code source sans exécuter le programme — approche boîte blanche en amont.",
+        "Hors sujet : le fuzzing envoie des entrées malformées à un programme en fonctionnement.",
+        "Hors catégorie : le RASP est un mécanisme de protection à l'exécution, pas une technique de test."
+      ]
     },
     {
       q: "A security consultant is asked to test a web application. She has no access to source code or documentation and interacts only with the running application over HTTP, as an attacker would. Which testing approach is she using?",
       choix: ["SAST", "DAST", "Software composition analysis", "Regression testing"],
       reponse: 1,
       explication: "Le DAST (dynamic application security testing) évalue l'application en cours d'exécution, de l'extérieur, sans accès au code source : c'est une approche boîte noire qui reproduit le point de vue de l'attaquant. Le SAST exige l'accès au code sans exécution ; la SCA inventorie les composants tiers et leurs vulnérabilités connues ; et les tests de régression vérifient que les modifications n'ont pas cassé les fonctionnalités existantes — un objectif de qualité, pas de sécurité offensive.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Contresens : le SAST exige l'accès au code, qu'elle n'a pas.",
+        "Bonne réponse : tester l'application en exécution, sans code ni documentation, comme un attaquant, est la définition du DAST boîte noire.",
+        "Hors sujet : la SCA inventorie les composants tiers.",
+        "Hors sujet : les tests de régression vérifient la non-régression fonctionnelle, pas la sécurité offensive."
+      ]
     },
     {
       q: "Which technology combines elements of static and dynamic analysis by instrumenting the running application from within, providing code-level context for vulnerabilities discovered during execution?",
@@ -1648,7 +2158,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 0,
       explication: "L'IAST instrumente l'application pendant son exécution (généralement lors des tests fonctionnels) avec un accès au code : il combine la visibilité interne du SAST et le réalisme d'exécution du DAST, réduisant les faux positifs et localisant précisément les défauts. Le WAF est un contrôle de protection, pas de test ; la SCA analyse les dépendances tierces ; et le scan réseau opère au niveau infrastructure, sans contexte applicatif.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Bonne réponse : instrumenter l'application en exécution avec un contexte code est la définition de l'IAST, hybride SAST/DAST.",
+        "Hors catégorie : le WAF est un contrôle de protection, pas de test.",
+        "Hors sujet : la SCA analyse les dépendances, sans instrumentation d'exécution.",
+        "Trop superficiel : le scan réseau opère au niveau infrastructure, sans contexte applicatif."
+      ]
     },
     {
       q: "During testing, an application error displays a full stack trace, framework version, and SQL query text to the end user. Which secure coding principle is MOST directly violated?",
@@ -1660,7 +2176,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 2,
       explication: "La gestion sécurisée des erreurs impose des messages génériques côté utilisateur et la journalisation des détails techniques côté serveur uniquement : pile d'appels, versions et requêtes SQL offrent à un attaquant une cartographie précieuse pour cibler ses attaques (notamment l'injection SQL). Le moindre privilège concerne les droits d'accès, la défense en profondeur l'empilement des contrôles, et la séparation des tâches la répartition des responsabilités : aucun n'est le principe directement violé ici.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Hors sujet : le moindre privilège concerne les droits d'accès, pas les messages d'erreur.",
+        "Trop générique : la défense en profondeur n'est pas le principe directement violé.",
+        "Bonne réponse : la gestion d'erreurs sécurisée impose des messages génériques côté utilisateur et des détails journalisés côté serveur.",
+        "Hors sujet : la séparation des tâches répartit les responsabilités humaines."
+      ]
     },
     {
       q: "An attacker posts a product review containing JavaScript that is stored by the server and later executes in the browser of every user who views the product page, sending their session cookies to the attacker. Which is the MOST effective set of remediations?",
@@ -1672,7 +2194,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Il s'agit d'un stored XSS : le script persiste côté serveur et s'exécute chez chaque visiteur. La défense combine la validation des entrées, l'encodage contextuel des sorties (la mesure centrale), une Content Security Policy restreignant les scripts exécutables, et l'attribut HttpOnly qui rend les cookies inaccessibles à JavaScript. Les jetons anti-CSRF visent le CSRF, les requêtes paramétrées l'injection SQL, et TLS protège le transport — aucun n'empêche l'exécution du script dans le navigateur.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Mauvaise cible : les jetons anti-CSRF et SameSite combattent le CSRF, pas un script exécuté.",
+        "Bonne réponse : validation des entrées, encodage contextuel des sorties, CSP et cookies HttpOnly traitent le stored XSS en profondeur.",
+        "Mauvaise cible : les requêtes paramétrées neutralisent l'injection SQL.",
+        "Mauvaise cible : TLS protège le transport, pas l'exécution du script dans le navigateur."
+      ]
     },
     {
       q: "Which control is SPECIFICALLY designed to prevent cross-site request forgery attacks?",
@@ -1684,7 +2212,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le CSRF exploite le fait que le navigateur joint automatiquement les cookies de session aux requêtes, même émises depuis un site attaquant. Le jeton anti-CSRF — secret unique et imprévisible exigé avec chaque requête modifiant un état — ne peut pas être connu du site attaquant, ce qui invalide la requête forgée ; l'attribut de cookie SameSite complète la défense. L'encodage des sorties contre le XSS, la robustesse des mots de passe et le pooling de connexions n'ont aucun effet sur le CSRF.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Mauvaise cible : l'encodage des sorties combat le XSS.",
+        "Bonne réponse : un jeton anti-CSRF unique et imprévisible, validé à chaque requête modifiant un état, est LE contrôle spécifique anti-CSRF.",
+        "Hors sujet : la victime est déjà authentifiée, la complexité du mot de passe n'intervient pas.",
+        "Hors sujet : le pooling de connexions est une optimisation de performance."
+      ]
     },
     {
       q: "A penetration tester bypasses an application's login form by entering ' OR '1'='1' -- in the username field. Which remediation provides the MOST effective long-term protection?",
@@ -1696,7 +2230,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 2,
       explication: "Les requêtes paramétrées (prepared statements) séparent structurellement le code SQL des données : l'entrée utilisateur est traitée comme une valeur, jamais comme de la syntaxe, ce qui élimine l'injection à la racine. Le filtrage de caractères au WAF est un blacklisting contournable par encodages ; masquer les erreurs ne fait que rendre l'injection « blind » ; et renommer les tables relève de la sécurité par l'obscurité, sans effet sur la vulnérabilité elle-même.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Blacklisting fragile : le filtrage de caractères au WAF se contourne par encodages.",
+        "Palliatif : masquer les erreurs rend l'injection « blind » sans l'empêcher.",
+        "Bonne réponse : les requêtes paramétrées garantissent que l'entrée n'est jamais interprétée comme du SQL — protection durable à la racine.",
+        "Sécurité par l'obscurité : renommer les tables ne corrige rien."
+      ]
     },
     {
       q: "A web application accepts a URL from users and fetches its content server-side to generate previews. An attacker submits the address of the cloud provider's instance metadata service and retrieves temporary IAM credentials. Which vulnerability was exploited?",
@@ -1708,7 +2248,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le SSRF amène le SERVEUR à émettre des requêtes vers des cibles choisies par l'attaquant, typiquement des ressources internes injoignables depuis Internet, comme le service de métadonnées cloud qui délivre des identifiants IAM temporaires. Le CSRF et le XSS s'exécutent dans le NAVIGATEUR d'une victime, et l'open redirect renvoie l'utilisateur vers un site tiers. Défenses : liste blanche de destinations, blocage des plages d'adresses internes, IMDSv2 avec jeton de session.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Mauvais acteur : le CSRF fait agir le navigateur d'une victime authentifiée.",
+        "Bonne réponse : le serveur émettant une requête forgée vers le service de métadonnées interne est un server-side request forgery.",
+        "Trop faible : l'open redirect renvoie l'utilisateur vers un site tiers, sans requête serveur interne.",
+        "Mauvais acteur : le XSS s'exécute dans le navigateur, pas côté serveur."
+      ]
     },
     {
       q: "Authenticated users of a customer portal discover they can view other customers' invoices by incrementing the numeric invoice identifier in the URL. To which OWASP Top 10 category does this flaw belong?",
@@ -1720,35 +2266,65 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 0,
       explication: "C'est une Insecure Direct Object Reference (IDOR), archétype de la catégorie Broken Access Control — numéro un de l'OWASP Top 10 2021 : l'utilisateur est correctement AUTHENTIFIÉ, mais l'application ne vérifie pas son AUTORISATION sur l'objet demandé. Il n'y a pas d'injection de code, l'authentification fonctionne, et si l'on peut discuter d'un défaut de conception, la catégorie précise qui décrit ce contrôle d'accès manquant est Broken Access Control.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Bonne réponse : utilisateur authentifié mais autorisation objet jamais vérifiée — IDOR, archétype de Broken Access Control.",
+        "Mauvais diagnostic : aucune donnée n'est injectée dans une requête.",
+        "Trop générique : le défaut précis est le contrôle d'accès manquant, pas la conception globale.",
+        "Mauvais diagnostic : l'authentification fonctionne parfaitement, c'est l'autorisation qui manque."
+      ]
     },
     {
       q: "A statistical HR database allows aggregate salary queries. An analyst issues a series of increasingly narrow queries until the results reveal the exact salary of a single named executive. Which attack has the analyst performed?",
       choix: ["Aggregation", "Inference", "Polyinstantiation", "SQL injection"],
       reponse: 1,
       explication: "L'inference consiste à DÉDUIRE une information de sensibilité supérieure à partir de requêtes individuellement autorisées : en rétrécissant les filtres, l'analyste isole une valeur individuelle qu'il n'a pas le droit de connaître. L'agrégation est le problème inverse-complémentaire — combiner des données pour créer de la sensibilité — mais ici c'est bien la déduction par requêtes successives qui opère. La polyinstantiation est une DÉFENSE, et aucune injection SQL n'est utilisée : les requêtes sont légitimes.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Piège de vocabulaire : l'agrégation est le problème de combinaison ; ici l'analyste DÉDUIT activement par requêtes successives.",
+        "Bonne réponse : rétrécir les requêtes autorisées jusqu'à isoler une valeur individuelle est une attaque par inference.",
+        "Inversion de rôle : la polyinstantiation est une défense, pas une attaque.",
+        "Mauvais diagnostic : les requêtes sont légitimes, aucune injection n'est utilisée."
+      ]
     },
     {
       q: "In a multilevel secure database, which technique prevents a lower-cleared user from inferring the existence of classified data by allowing records with the same primary key to exist at different classification levels?",
       choix: ["Normalization", "Polyinstantiation", "Referential integrity", "Database sharding"],
       reponse: 1,
       explication: "La polyinstantiation autorise plusieurs instances d'un enregistrement partageant la même clé primaire à des niveaux de classification différents : l'utilisateur faiblement habilité voit une version banale, sans erreur de « clé dupliquée » qui trahirait l'existence d'un enregistrement classifié. La normalisation élimine la redondance structurelle (l'inverse), l'intégrité référentielle maintient la cohérence des clés étrangères, et le sharding est un partitionnement de performance, sans dimension de classification.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Contresens : la normalisation élimine justement les clés dupliquées.",
+        "Bonne réponse : la polyinstantiation fait coexister des enregistrements de même clé à des niveaux de classification différents, empêchant l'inférence.",
+        "Hors sujet : l'intégrité référentielle maintient la cohérence des clés étrangères.",
+        "Hors sujet : le sharding est un partitionnement de performance sans dimension de classification."
+      ]
     },
     {
       q: "A data warehouse project combines individually harmless records from several operational systems. The security team notes that the combined dataset now reveals sensitive patterns about employees. Which database security issue does this describe?",
       choix: ["Inference", "Aggregation", "Dirty read", "Deadlock"],
       reponse: 1,
       explication: "L'aggregation est le problème par lequel la COMBINAISON de données individuellement non sensibles produit un ensemble d'une sensibilité supérieure : c'est un risque inhérent aux entrepôts de données qui centralisent des sources multiples. L'inference est l'acte de déduction qui peut exploiter cette combinaison, mais le phénomène décrit — la réunion des données — est l'agrégation. La dirty read et le deadlock sont des problèmes de concurrence transactionnelle, sans rapport avec la confidentialité.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Piège de vocabulaire : l'inférence est l'acte de déduction ; le phénomène décrit est la réunion des données.",
+        "Bonne réponse : combiner des enregistrements individuellement anodins en un ensemble sensible est le problème d'aggregation, typique des entrepôts.",
+        "Hors sujet : la dirty read est un problème de concurrence transactionnelle.",
+        "Hors sujet : le deadlock est un blocage mutuel de transactions."
+      ]
     },
     {
       q: "Transaction A reads a row that transaction B has updated but not yet committed. Transaction B then rolls back, leaving A with data that never officially existed. Which ACID property has been violated?",
       choix: ["Atomicity", "Consistency", "Isolation", "Durability"],
       reponse: 2,
       explication: "C'est une dirty read, violation de l'ISOLATION : les transactions concurrentes ne doivent pas voir les modifications non validées les unes des autres, comme si chacune s'exécutait seule. L'atomicité garantit le tout-ou-rien d'une transaction (le rollback de B a d'ailleurs fonctionné), la cohérence le respect des règles d'intégrité, et la durabilité la persistance des transactions VALIDÉES. Retenez l'association d'examen : dirty read = échec d'isolation.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Piège : l'atomicité a fonctionné — le rollback de B s'est bien exécuté.",
+        "Hors sujet : la cohérence porte sur les règles d'intégrité de la base.",
+        "Bonne réponse : lire les modifications non validées d'une autre transaction est une dirty read, violation de l'Isolation.",
+        "Hors sujet : la durabilité concerne la persistance des transactions validées."
+      ]
     },
     {
       q: "An architect must secure east-west communication among dozens of microservices in accordance with zero trust principles. Which approach BEST meets this requirement?",
@@ -1760,7 +2336,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le zero trust supprime la confiance implicite du réseau interne : chaque service doit prouver cryptographiquement son identité à chaque échange. Le mTLS assure l'authentification mutuelle et le chiffrement du trafic est-ouest, avec des certificats de courte durée par service gérés par un service mesh qui applique aussi des politiques d'autorisation fines. La confiance périmétrique s'effondre dès qu'un service est compromis ; une clé statique partagée n'identifie rien et se diffuse ; et la passerelle API est conçue pour le trafic nord-sud, pas pour les échanges internes.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Modèle château fort périmé : un seul service compromis ruine la confiance du réseau interne.",
+        "Bonne réponse : le mTLS avec identité cryptographique par service, appliqué par un service mesh, matérialise le zero trust est-ouest.",
+        "Anti-modèle : une clé statique partagée n'identifie rien et se diffuse.",
+        "Contresens d'architecture : la passerelle publique est conçue pour le trafic nord-sud."
+      ]
     },
     {
       q: "What is the PRIMARY security benefit of deploying an API gateway in front of an organization's microservices?",
@@ -1772,7 +2354,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "La passerelle API centralise l'application des politiques : authentification et autorisation de chaque appel, rate limiting contre l'abus et le déni de service, validation des requêtes et journalisation uniforme — évitant que chaque microservice réimplémente ces contrôles de façon inégale. Elle n'élimine pas l'authentification, elle l'APPLIQUE ; elle ne protège pas les données au repos des services ; et le TLS reste nécessaire de bout en bout, y compris derrière la passerelle (zero trust).",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Contresens : la passerelle applique l'authentification, elle ne la supprime pas.",
+        "Bonne réponse : un point unique d'application de l'authentification, de l'autorisation, du rate limiting et de la validation est le bénéfice principal.",
+        "Surestimation : elle ne protège pas les données au repos des services en aval.",
+        "Contresens : le TLS reste nécessaire de bout en bout, y compris derrière la passerelle."
+      ]
     },
     {
       q: "An organization licenses mission-critical software from a small vendor that refuses to provide source code. Management is concerned about business continuity if the vendor goes bankrupt or discontinues support. Which contractual provision BEST addresses this risk?",
@@ -1784,7 +2372,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le software escrow dépose le code source et sa documentation chez un tiers de confiance, avec libération contractuelle en cas de faillite ou d'arrêt du support : l'organisation peut alors maintenir l'application elle-même. La vérification périodique du dépôt garantit qu'il reste complet et à jour. Un SLA avec pénalités est inopérant contre un éditeur disparu, le droit d'audit évalue les pratiques sans donner accès au code, et l'assurance compense financièrement sans assurer la continuité opérationnelle.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Inopérant : des pénalités ne s'appliquent pas à un éditeur disparu.",
+        "Bonne réponse : l'escrow avec conditions de libération définies et vérification périodique des dépôts assure la continuité sans dépendre de la survie de l'éditeur.",
+        "Trop étroit : le droit d'audit évalue les pratiques sans donner accès au code.",
+        "Compensation financière seulement : l'assurance ne fournit pas le code nécessaire."
+      ]
     },
     {
       q: "Endpoints across several organizations execute malware that was digitally signed with a valid code-signing certificate stolen from a legitimate software vendor. What does this incident BEST illustrate about code signing?",
@@ -1796,7 +2390,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "La signature de code garantit deux choses seulement : l'intégrité (le code n'a pas changé depuis la signature) et l'origine (la clé du signataire identifié). Elle ne dit RIEN de l'innocuité du code, et toute la confiance repose sur la protection de la clé privée : volée, elle permet de signer du malware « légitime » — d'où les HSM, les accès contrôlés et la révocation immédiate en cas de compromission. Le mécanisme reste précieux malgré cette limite, les CA ne testent jamais le code, et l'auto-signature supprimerait la chaîne de confiance.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Absolu faux : le mécanisme reste précieux malgré sa limite.",
+        "Bonne réponse : la signature prouve origine et intégrité relatives à la clé — jamais l'innocuité — et s'effondre si la clé privée est compromise.",
+        "Faux rôle : les CA délivrent des certificats, elles ne testent jamais le code.",
+        "Contresens : l'auto-signature supprimerait la chaîne de confiance."
+      ]
     },
     {
       q: "When evaluating a SaaS provider that will process sensitive customer data, which evidence provides the GREATEST assurance that the provider's security controls operate effectively over time?",
@@ -1808,7 +2408,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le rapport SOC 2 Type II atteste, par un auditeur indépendant, que les contrôles sont non seulement bien CONÇUS mais qu'ils ont FONCTIONNÉ EFFICACEMENT sur une période d'observation de plusieurs mois — c'est le niveau d'assurance le plus élevé parmi les options. Un Type I ne serait qu'un instantané de conception. Le questionnaire auto-déclaré n'engage que le fournisseur, la politique de confidentialité décrit des intentions, et les arguments marketing n'ont aucune valeur probante.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Auto-déclaratif : le questionnaire n'engage que la bonne foi du fournisseur.",
+        "Bonne réponse : le SOC 2 Type II atteste par un auditeur indépendant l'efficacité opérationnelle des contrôles SUR UNE PÉRIODE.",
+        "Déclaration d'intention : la politique de confidentialité ne prouve aucune efficacité.",
+        "Marketing sans valeur probante : « military-grade » n'est pas une assurance vérifiable."
+      ]
     },
     {
       q: "During acquisition of a fraud detection product based on machine learning, which supply chain risk is UNIQUE to the machine learning component compared with traditional software?",
@@ -1820,7 +2426,13 @@ window.CISSP_DATA.domains[8] = {
       ],
       reponse: 1,
       explication: "Le data poisoning est propre aux systèmes de machine learning : un attaquant qui corrompt les données d'ENTRAÎNEMENT peut implanter des angles morts durables — des fraudes systématiquement classées légitimes — invisibles aux tests classiques puisque le code, lui, est correct. L'évaluation doit donc couvrir la provenance et l'intégrité des données d'entraînement. Les bibliothèques vulnérables, les composants non corrigés et l'absence de programme de divulgation sont des risques réels mais communs à TOUT logiciel acquis.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Techniquement vrai mais commun : les bibliothèques vulnérables concernent tout logiciel acquis.",
+        "Bonne réponse : l'empoisonnement des données d'entraînement créant des angles morts invisibles aux tests classiques est propre au machine learning.",
+        "Techniquement vrai mais commun : les composants OS non corrigés touchent tout produit.",
+        "Techniquement vrai mais commun : l'absence de programme de divulgation n'est pas spécifique au ML."
+      ]
     }
   ],
   flashcards: [
