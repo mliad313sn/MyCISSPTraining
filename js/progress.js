@@ -6,7 +6,13 @@ const Progress = (() => {
     try { return JSON.parse(localStorage.getItem(KEY)) || {}; }
     catch { return {}; }
   }
-  function save(state) { localStorage.setItem(KEY, JSON.stringify(state)); }
+  function save(state) {
+    // toute sauvegarde = une action d'étude : alimente le suivi quotidien
+    state.activity = state.activity || {};
+    const t = new Date().toISOString().slice(0, 10);
+    state.activity[t] = (state.activity[t] || 0) + 1;
+    localStorage.setItem(KEY, JSON.stringify(state));
+  }
 
   function state() {
     const s = load();
@@ -20,8 +26,11 @@ const Progress = (() => {
     s.visites = s.visites || {};   // { methode: true, mindset: true }
     s.errlog = s.errlog || {};     // journal d'erreurs : { "<clé question>": { q, fails, ts } }
     s.errTotal = s.errTotal || 0;  // nb total d'erreurs jamais enregistrées
+    s.activity = s.activity || {}; // { "2026-07-23": nbActions } — suivi quotidien
     return s;
   }
+
+  function today() { return new Date().toISOString().slice(0, 10); }
 
   function qKey(text) {
     let h = 5381;
@@ -81,6 +90,27 @@ const Progress = (() => {
     markMemo(id) { const s = state(); s.memo[id] = true; save(s); },
     memoDone(id) { return !!state().memo[id]; },
     memoCount() { return Object.keys(state().memo).length; },
+    /* ---- Suivi d'activité quotidienne (streak, graphique) ---- */
+    touch() { save(state()); },
+    activityByDay(nbJours) {
+      const s = state(), out = [];
+      for (let i = nbJours - 1; i >= 0; i--) {
+        const d = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10);
+        out.push({ jour: d, n: s.activity[d] || 0 });
+      }
+      return out;
+    },
+    streak() {
+      const s = state();
+      let n = 0;
+      // la journée en cours compte si elle a de l'activité, sinon on part d'hier
+      for (let i = s.activity[today()] ? 0 : 1; ; i++) {
+        const d = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10);
+        if (s.activity[d]) n++; else break;
+      }
+      return n;
+    },
+
     /* ---- Journal d'erreurs : chaque question ratée y entre,
        une bonne réponse ultérieure l'en sort ---- */
     recordError(q) {

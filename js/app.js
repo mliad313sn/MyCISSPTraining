@@ -13,6 +13,7 @@ const App = (() => {
     const view = parts[0] || "";
 
     setActiveNav(view);
+    refreshProfilChip();
     window.scrollTo(0, 0);
 
     switch (view) {
@@ -35,13 +36,15 @@ const App = (() => {
       case "glossaire": renderGlossary(); break;
       case "erreurs": renderErrors(); break;
       case "rejouer-erreurs": Quiz.openErrors(); break;
+      case "inscription": Account.signup(parts[1]); break;
+      case "suivi": Account.profil() ? Account.suivi() : Account.signup(1); break;
       case "methode": renderMethod(); break;
       default: renderHome();
     }
   }
 
   function setActiveNav(view) {
-    const map = { "": "accueil", parcours: "parcours", domaines: "domaines", domaine: "domaines", lecon: "domaines", quiz: "domaines", flashcards: "flashcards", scenarios: "scenarios", memo: "memo", mindset: "mindset", examen: "examen", erreurs: "examen", "rejouer-erreurs": "examen", glossaire: "glossaire", methode: "methode" };
+    const map = { "": "accueil", parcours: "parcours", domaines: "domaines", domaine: "domaines", lecon: "domaines", quiz: "domaines", flashcards: "flashcards", scenarios: "scenarios", memo: "memo", mindset: "mindset", examen: "examen", erreurs: "examen", "rejouer-erreurs": "examen", glossaire: "glossaire", methode: "methode", suivi: "suivi", inscription: "suivi" };
     document.querySelectorAll(".topnav a").forEach(a =>
       a.classList.toggle("active", a.dataset.route === (map[view] || "")));
   }
@@ -72,19 +75,44 @@ const App = (() => {
       if (!Progress.lessonDone(l.id)) { next = { d, l }; break outer; }
 
     document.getElementById("app").innerHTML = `
+      ${(() => {
+        const p = Account.profil();
+        if (!p) return `
       <section class="hero">
         <h1>Réussissez le <span>CISSP</span> du premier coup,<br>en français.</h1>
-        <p>Une formation complète et interactive couvrant les 8 domaines du CBK d'ISC2 :
-        vidéos interactives avec narration vocale, quiz corrigés, flashcards et examens blancs chronométrés.
-        Les termes techniques restent en anglais — comme à l'examen.</p>
+        <p>Une formation complète, gratuite et interactive couvrant les 8 domaines du CBK d'ISC2 :
+        vidéos interactives avec narration vocale, quiz corrigés, flashcards, scénarios réels et examens blancs chronométrés.
+        Créez votre compte (local, sans e-mail) pour un plan personnalisé et un suivi complet.</p>
+        <div class="cta">
+          <a class="btn" href="#/inscription">✨ Créer mon compte gratuit</a>
+          <a class="btn secondary" href="#/parcours">🗺️ Explorer le parcours</a>
+          <a class="btn secondary" href="#/methode">📋 La méthode</a>
+        </div>
+      </section>`;
+        const jr = Account.joursRestants();
+        const obj = Account.objectifDuJour();
+        return `
+      <section class="hero" style="padding-bottom:1.6rem">
+        <h1>Bonjour <span>${esc(p.prenom)}</span> 👋</h1>
+        <p>${jr && jr > 0 ? `Examen dans <strong>J-${jr}</strong> · ` : ""}🔥 ${Progress.streak()} jour(s) d'étude consécutifs.
+        Voici votre objectif du jour :</p>
+        <div style="max-width:640px;margin:0 auto 1.2rem;text-align:left">
+          ${obj.map(o => `
+            <a href="${o.href}" style="text-decoration:none;color:inherit">
+              <div class="choice" style="display:flex;gap:.7rem;align-items:center;margin-bottom:.5rem">
+                <span>${o.icone}</span><span style="flex:1">${esc(o.label)}</span><span style="color:var(--accent)">→</span>
+              </div>
+            </a>`).join("")}
+        </div>
         <div class="cta">
           <a class="btn" href="#/parcours">🗺️ ${pct > 0 ? "Reprendre mon parcours" : "Commencer le parcours guidé"}</a>
           ${next
             ? `<a class="btn secondary" href="#/lecon/${next.d.id}/${next.l.id}">▶ Prochaine leçon : ${esc(next.l.titre)}</a>`
             : `<a class="btn secondary" href="#/examen">🏆 Examen blanc</a>`}
-          <a class="btn secondary" href="#/methode">📋 La méthode</a>
+          <a class="btn secondary" href="#/suivi">📈 Mon suivi</a>
         </div>
-      </section>
+      </section>`;
+      })()}
 
       <div class="stats-row">
         <div class="stat"><div class="num" style="color:${readyColor}">${readiness}%</div><div class="lbl">Score de préparation</div></div>
@@ -330,12 +358,22 @@ const App = (() => {
   /* ---------- Initialisation ---------- */
   function init() {
     window.addEventListener("hashchange", route);
-    document.getElementById("btn-reset").onclick = () => {
-      if (confirm("Réinitialiser toute votre progression (leçons, quiz, examens) ?")) {
-        Progress.reset(); route();
-      }
-    };
+    refreshProfilChip();
     route();
+  }
+
+  function refreshProfilChip() {
+    const chip = document.getElementById("btn-profil");
+    if (!chip) return;
+    const p = Account.profil();
+    if (p) {
+      const jr = Account.joursRestants();
+      chip.textContent = `👤 ${p.prenom}${jr && jr > 0 ? " · J-" + jr : ""}`;
+      chip.href = "#/suivi"; chip.title = "Mon suivi";
+    } else {
+      chip.textContent = "✨ S'inscrire";
+      chip.href = "#/inscription"; chip.title = "Créer mon compte gratuit";
+    }
   }
 
   document.addEventListener("DOMContentLoaded", init);

@@ -129,5 +129,5 @@ const Parcours = (() => {
     window.scrollTo(0, 0);
   }
 
-  return { render };
+  return { render, etapes: buildEtapes };
 })();
