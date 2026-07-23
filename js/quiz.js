@@ -76,7 +76,7 @@ const Quiz = (() => {
       else if (j === i) b.classList.add("wrong");
     });
     document.getElementById("q-exp").innerHTML =
-      `<div class="explication"><strong>${good ? "✅ Bonne réponse !" : "❌ Mauvaise réponse."}</strong> ${esc(q.explication)}</div>`;
+      `<div class="explication"><strong>${good ? "✅ Bonne réponse !" : "❌ Mauvaise réponse."}</strong> ${esc(q.explication)}${perOptionHTML(q)}</div>`;
     const nextBtn = document.getElementById("q-next");
     nextBtn.style.display = "inline-flex";
     nextBtn.textContent = idx + 1 < questions.length ? "Question suivante →" : "Voir mon résultat 🏁";
@@ -122,3 +122,16 @@ const Quiz = (() => {
 
   return { open, openErrors };
 })();
+
+/* Correction détaillée option par option (champ optionnel `pourquoi`) —
+   partagé entre quiz, examen et journal d'erreurs. */
+function perOptionHTML(q) {
+  if (!Array.isArray(q.pourquoi) || q.pourquoi.length !== q.choix.length) return "";
+  return `<div style="margin-top:.7rem;border-top:1px dashed var(--border);padding-top:.6rem">
+    ${q.choix.map((c, i) => `
+      <p style="font-size:.9rem;margin:.35rem 0">
+        <strong style="color:${i === q.reponse ? "var(--ok)" : "var(--ko)"}">${i === q.reponse ? "✓" : "✗"} ${LETTRES[i]}.</strong>
+        <span style="color:var(--text-dim)">${esc(q.pourquoi[i])}</span>
+      </p>`).join("")}
+  </div>`;
+}

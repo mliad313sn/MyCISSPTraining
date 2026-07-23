@@ -315,7 +315,7 @@ const Exam = (() => {
                  <p style="color:var(--ok)">Ordre correct : ${a.q.items.map(esc).join(" → ")}</p>`
               : `<p style="color:var(--ko)">Votre réponse : ${LETTRES[a.chosen]}. ${esc(a.q.choix[a.chosen])}</p>
                  <p style="color:var(--ok)">Bonne réponse : ${LETTRES[a.q.reponse]}. ${esc(a.q.choix[a.q.reponse])}</p>
-                 <div class="explication">${esc(a.q.explication)}</div>`}
+                 <div class="explication">${esc(a.q.explication)}${perOptionHTML(a.q)}</div>`}
           </div>`).join("")}` : ""}
       </div>`;
     window.scrollTo(0, 0);

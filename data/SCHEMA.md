@@ -41,7 +41,12 @@ window.CISSP_DATA.domains[1] = {
       choix: ["A", "B", "C", "D"],
       reponse: 2,                 // index 0-3 de la bonne réponse
       explication: "Explication pédagogique de la bonne réponse ET pourquoi les autres sont fausses.",
-      difficulte: 2               // 1 facile, 2 moyen, 3 difficile
+      difficulte: 2,              // 1 facile, 2 moyen, 3 difficile
+      // OPTIONNEL mais fortement recommandé : correction détaillée option par option,
+      // même longueur que choix — une phrase par option expliquant pourquoi elle est
+      // correcte ou pourquoi elle est fausse (piège trop étroit, hors périmètre,
+      // techniquement vrai mais pas prioritaire, absolu…)
+      pourquoi: ["Pourquoi A est fausse.", "Pourquoi B est fausse.", "Pourquoi C est la bonne.", "Pourquoi D est fausse."]
     }
   ],
   flashcards: [

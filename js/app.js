@@ -267,7 +267,7 @@ const App = (() => {
             </div>
             <p class="q-text">${esc(e.q.q)}</p>
             <p style="color:var(--ok);font-size:.93rem">Bonne réponse : ${esc(e.q.choix[e.q.reponse])}</p>
-            <div class="explication">${esc(e.q.explication)}</div>
+            <div class="explication">${esc(e.q.explication)}${perOptionHTML(e.q)}</div>
           </div>`).join("")}`
       : `<div class="card" style="text-align:center;padding:2.5rem">
           <div style="font-size:3rem">🌤</div>
