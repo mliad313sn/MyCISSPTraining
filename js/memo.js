@@ -106,6 +106,7 @@ const Memo = (() => {
   function renderResult() {
     const d = CISSP_DATA.domains[ex.domaine];
     const perfect = errors === 0;
+    if (errors <= 2) Progress.markMemo(ex.id);
     document.getElementById("app").innerHTML = `
       <div style="max-width:760px;margin:0 auto;--dc:${d ? d.couleur : "#4f8ef7"}">
         <div class="card" style="text-align:center">

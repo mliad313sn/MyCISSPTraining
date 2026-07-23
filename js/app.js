@@ -24,6 +24,12 @@ const App = (() => {
       case "flashcards": Flashcards.open("all"); break;
       case "scenarios": parts[1] ? Scenarios.open(parts[1]) : Scenarios.list(); break;
       case "memo": Memo.list(parts[1]); break;
+      case "parcours": Parcours.render(); break;
+      case "mindset":
+        if (parts[1] === "drills") Mindset.startDrill();
+        else if (parts[1] === "reformulations") Mindset.startReform();
+        else Mindset.list(parts[1]);
+        break;
       case "examen": Exam.home(); break;
       case "glossaire": renderGlossary(); break;
       case "methode": renderMethod(); break;
@@ -32,7 +38,7 @@ const App = (() => {
   }
 
   function setActiveNav(view) {
-    const map = { "": "accueil", domaines: "domaines", domaine: "domaines", lecon: "domaines", quiz: "domaines", flashcards: "flashcards", scenarios: "scenarios", memo: "memo", examen: "examen", glossaire: "glossaire", methode: "methode" };
+    const map = { "": "accueil", parcours: "parcours", domaines: "domaines", domaine: "domaines", lecon: "domaines", quiz: "domaines", flashcards: "flashcards", scenarios: "scenarios", memo: "memo", mindset: "mindset", examen: "examen", glossaire: "glossaire", methode: "methode" };
     document.querySelectorAll(".topnav a").forEach(a =>
       a.classList.toggle("active", a.dataset.route === (map[view] || "")));
   }
@@ -61,10 +67,11 @@ const App = (() => {
         vidéos interactives avec narration vocale, quiz corrigés, flashcards et examens blancs chronométrés.
         Les termes techniques restent en anglais — comme à l'examen.</p>
         <div class="cta">
+          <a class="btn" href="#/parcours">🗺️ ${pct > 0 ? "Reprendre mon parcours" : "Commencer le parcours guidé"}</a>
           ${next
-            ? `<a class="btn" href="#/lecon/${next.d.id}/${next.l.id}">▶ ${pct > 0 ? "Reprendre" : "Commencer"} : ${esc(next.l.titre)}</a>`
-            : `<a class="btn" href="#/examen">🏆 Tout est terminé — Examen blanc !</a>`}
-          <a class="btn secondary" href="#/methode">📋 La méthode pour réussir</a>
+            ? `<a class="btn secondary" href="#/lecon/${next.d.id}/${next.l.id}">▶ Prochaine leçon : ${esc(next.l.titre)}</a>`
+            : `<a class="btn secondary" href="#/examen">🏆 Examen blanc</a>`}
+          <a class="btn secondary" href="#/methode">📋 La méthode</a>
         </div>
       </section>
 
@@ -225,6 +232,7 @@ const App = (() => {
 
   /* ---------- Méthode ---------- */
   function renderMethod() {
+    Progress.markVisited("methode");
     document.getElementById("app").innerHTML = `
       <h1 class="page-title">📋 La méthode pour réussir du premier coup</h1>
       <p class="page-sub">Le CISSP n'est pas un examen technique : c'est un examen de <strong>jugement managérial</strong>.

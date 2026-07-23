@@ -100,6 +100,7 @@ const Scenarios = (() => {
 
   function debrief() {
     const pct = Math.round(100 * score / sc.etapes.length);
+    Progress.recordScenario(sc.id, pct);
     document.getElementById("app").innerHTML = `
       <div style="max-width:840px;margin:0 auto">
         <div class="card" style="text-align:center">

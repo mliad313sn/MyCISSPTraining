@@ -14,6 +14,10 @@ const Progress = (() => {
     s.quiz = s.quiz || {};         // { "1": { best: 80, attempts: 3 } }
     s.exams = s.exams || [];       // [ { date, score, total, pct } ]
     s.cards = s.cards || {};       // { "<clé carte>": { box: 1-6, due: timestamp } } — système Leitner
+    s.scen = s.scen || {};         // { "sc-1": meilleurPct }
+    s.memo = s.memo || {};         // { "osi": true } — exercices d'ordonnancement réussis
+    s.mindset = s.mindset || {};   // { drills: nbFaits, reform: nbFaits }
+    s.visites = s.visites || {};   // { methode: true, mindset: true }
     return s;
   }
 
@@ -54,6 +58,29 @@ const Progress = (() => {
       });
       return total ? Math.round(100 * done / total) : 0;
     },
+
+    /* ---- Scénarios, mémo et mindset ---- */
+    recordScenario(id, pct) {
+      const s = state();
+      s.scen[id] = Math.max(s.scen[id] || 0, pct); save(s);
+    },
+    scenarioPct(id) { return state().scen[id] || 0; },
+    scenariosDone(domainId) {
+      const s = state();
+      return (CISSP_DATA.scenarios || []).filter(sc =>
+        (!domainId || sc.domaine === domainId) && (s.scen[sc.id] || 0) >= 60).length;
+    },
+    markMemo(id) { const s = state(); s.memo[id] = true; save(s); },
+    memoDone(id) { return !!state().memo[id]; },
+    memoCount() { return Object.keys(state().memo).length; },
+    markVisited(page) { const s = state(); s.visites[page] = true; save(s); },
+    visited(page) { return !!state().visites[page]; },
+    reviewedCount() { return Object.keys(state().cards).length; },
+    bumpMindset(kind) {
+      const s = state();
+      s.mindset[kind] = (s.mindset[kind] || 0) + 1; save(s);
+    },
+    mindsetCount(kind) { return state().mindset[kind] || 0; },
 
     /* ---- Flashcards : répétition espacée (Leitner) ---- */
     cardState(key) { return state().cards[key] || { box: 0, due: 0 }; },
