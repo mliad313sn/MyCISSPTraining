@@ -1949,6 +1949,186 @@ window.CISSP_DATA.domains[8] = {
         "Absolu faux : l'expert system n'est pas intrinsèquement plus précis.",
         "Absolu faux : la knowledge base exige une maintenance experte continue."
       ]
+    },
+    {
+      q: "Le CISO d'un éditeur SaaS constate qu'un assistant d'IA générative produit désormais près de 40 % du code livré. La direction refuse tout ralentissement du time-to-market. Que devrait faire le CISO EN PREMIER ?",
+      choix: [
+        "Interdire l'usage de l'IA générative jusqu'à ce qu'un audit complet en démontre l'innocuité",
+        "Exiger que le code généré par l'IA passe exactement les mêmes gates que le code humain : revue par un développeur, SAST, SCA et tests automatisés dans le pipeline",
+        "Former les développeurs à rédiger des prompts orientés sécurité pour réduire les défauts à la source",
+        "Acquérir un outil spécialisé de détection de code généré par IA afin d'en tracer la provenance"
+      ],
+      reponse: 1,
+      explication: "Le code généré par IA doit être traité comme du code tiers non fiable : le soumettre aux mêmes contrôles que le code humain (revue, SAST, SCA, tests) applique la gouvernance existante sans créer de processus parallèle ni ralentir les livraisons — la réponse compatible avec la contrainte business. L'interdiction totale ignore l'enjeu de compétitivité et sera contournée ; la formation aux prompts est utile mais ne constitue pas un contrôle vérifiable ; et tracer la provenance n'empêche aucun défaut d'atteindre la production.",
+      difficulte: 3,
+      pourquoi: [
+        "Absolu et hors contexte business : une interdiction ignore la contrainte de time-to-market et pousse à l'usage clandestin.",
+        "Bonne réponse : traiter le code IA comme du code non fiable soumis aux gates existants du pipeline gouverne le risque sans casser la vélocité.",
+        "Techniquement vrai mais insuffisant : la formation aux prompts réduit les défauts sans fournir de contrôle vérifiable — mesure complémentaire, pas première.",
+        "Réponse de technicien : la traçabilité de provenance n'empêche aucun défaut d'atteindre la production."
+      ]
+    },
+    {
+      q: "Une revue interne révèle que l'assistant d'IA de développement reproduit parfois des extraits de code open source sous licence copyleft dans le produit propriétaire de l'entreprise. Quelle est la MEILLEURE réponse de gouvernance ?",
+      choix: [
+        "Demander à la direction juridique d'examiner chaque cas signalé spontanément par les développeurs",
+        "Mettre à jour la politique d'usage de l'IA et intégrer au pipeline une analyse automatisée de similarité de code et de conformité des licences avant chaque fusion",
+        "Désactiver l'assistant d'IA pour tout le code destiné aux produits commercialisés",
+        "Exiger de l'éditeur de l'assistant une clause d'indemnisation en cas de contentieux de propriété intellectuelle"
+      ],
+      reponse: 1,
+      explication: "Le risque est systémique : il exige une réponse systémique — une politique claire et un contrôle automatisé (analyse de similarité et des licences) appliqué à chaque fusion, qui détecte le code copyleft avant qu'il ne contamine le produit propriétaire. S'en remettre aux signalements spontanés est réactif et invérifiable ; désactiver l'assistant sacrifie la productivité sans traiter les autres sources de code copié ; et l'indemnisation transfère une partie du coût financier sans prévenir l'obligation éventuelle de divulguer le code du produit.",
+      difficulte: 3,
+      pourquoi: [
+        "Réactif et invérifiable : les signalements spontanés ne détectent qu'une fraction des cas, après coup.",
+        "Bonne réponse : politique plus contrôle automatisé de similarité et de licences à chaque fusion — la seule réponse préventive et industrialisable.",
+        "Absolu : la désactivation sacrifie la productivité et ne traite pas les copies manuelles de code open source.",
+        "Techniquement vrai mais partiel : l'indemnisation couvre le coût financier, pas l'obligation potentielle de divulguer le code sous copyleft."
+      ]
+    },
+    {
+      q: "Après Log4Shell, le comité exécutif demande au CISO que « cela ne se reproduise plus », avec un budget limité. L'organisation exploite 300 applications sans inventaire de dépendances. Quelle initiative lancer EN PREMIER ?",
+      choix: [
+        "Générer automatiquement un SBOM pour chaque application dans le pipeline de build et centraliser ces inventaires",
+        "Mettre à niveau les bibliothèques obsolètes des 300 applications vers leurs dernières versions",
+        "Déployer un WAF avec virtual patching devant les applications exposées sur Internet",
+        "Imposer une approbation manuelle par l'équipe sécurité de chaque nouvelle dépendance introduite"
+      ],
+      reponse: 0,
+      explication: "Le problème révélé par Log4Shell est d'abord un problème de VISIBILITÉ : sans inventaire des dépendances, aucune remédiation ne peut être priorisée. Générer des SBOM automatisés dans le pipeline crée cette visibilité pour un coût maîtrisé et rend toutes les initiatives suivantes possibles. Mettre à niveau 300 applications sans savoir lesquelles sont exposées est irréalisable avec un budget limité ; le WAF est un palliatif qui ne couvre pas les applications internes ; et l'approbation manuelle des nouvelles dépendances ne traite pas le stock existant tout en créant un goulot d'étranglement.",
+      difficulte: 3,
+      pourquoi: [
+        "Bonne réponse : la visibilité d'abord — le SBOM automatisé est le prérequis de toute priorisation et répond au besoin de réactivité pour un coût maîtrisé.",
+        "Techniquement vrai mais pas premier : impossible de prioriser la mise à niveau de 300 applications sans inventaire, et le budget ne le permet pas.",
+        "Palliatif compensatoire : le virtual patching protège temporairement le périmètre exposé sans créer de gouvernance durable.",
+        "Trop étroit et hors cible : l'approbation manuelle ne couvre pas les dépendances existantes et crée un goulot d'étranglement."
+      ]
+    },
+    {
+      q: "À la suite d'un incident lié à une dépendance vulnérable, le CISO doit arbitrer : l'équipe sécurité veut bloquer tout build contenant la moindre CVE, les équipes produit refusent tout gate bloquant. Quelle politique est la MEILLEURE ?",
+      choix: [
+        "Bloquer les builds sur les vulnérabilités critiques et hautes exploitables, et gérer les autres dans un backlog avec des SLA de remédiation gradués par criticité",
+        "Bloquer tout build contenant une CVE, quelle que soit sa criticité, car la sécurité n'est pas négociable",
+        "Laisser chaque équipe produit définir ses propres seuils de blocage selon son contexte",
+        "Ne rien bloquer, mais publier un tableau de bord mensuel des vulnérabilités par équipe"
+      ],
+      reponse: 0,
+      explication: "Une politique fondée sur le risque concilie les deux camps : bloquer uniquement ce qui est réellement dangereux (critique et haut exploitables) préserve la vélocité tout en garantissant que rien de grave ne passe, et les SLA gradués assurent la remédiation du reste sous gouvernance. Bloquer toute CVE est un absolu ingérable qui provoque l'alert fatigue et des contournements ; déléguer les seuils à chaque équipe abandonne la cohérence de la gouvernance ; et un simple tableau de bord est détectif, sans aucune force préventive.",
+      difficulte: 3,
+      pourquoi: [
+        "Bonne réponse : l'approche par le risque — blocage ciblé et SLA gradués — protège l'essentiel tout en préservant la vélocité, sous gouvernance unifiée.",
+        "Absolu : bloquer toute CVE, même mineure, provoque l'alert fatigue, paralyse les livraisons et incite au contournement.",
+        "Abdication de gouvernance : des seuils propres à chaque équipe détruisent la cohérence et l'auditabilité de la politique.",
+        "Détectif sans force préventive : un tableau de bord informe mais ne bloque rien — l'incident peut se reproduire à l'identique."
+      ]
+    },
+    {
+      q: "Les équipes DevOps demandent la suppression du gate SAST du pipeline : il bloque des releases avec environ 40 % de faux positifs et met en péril des engagements clients. Quelle est la MEILLEURE réponse du CISO ?",
+      choix: [
+        "Maintenir le gate en l'état : accepter des faux positifs est le prix normal de la sécurité",
+        "Retirer le gate et le remplacer par un scan hebdomadaire hors pipeline avec revue différée des résultats",
+        "Régler l'outil, ne bloquer que sur les criticités élevées confirmées, traiter le reste en backlog avec SLA, et suivre le taux de faux positifs comme indicateur d'amélioration",
+        "Exiger une dérogation signée par un vice-président pour chaque release bloquée"
+      ],
+      reponse: 2,
+      explication: "Un gate qui bloque à tort 40 % du temps détruit sa propre légitimité : la bonne réponse managériale est d'améliorer le contrôle, pas de le supprimer ni de le sacraliser — réglage de l'outil, blocage limité aux findings élevés confirmés, backlog avec SLA pour le reste, et mesure du taux de faux positifs pour piloter l'amélioration. Maintenir le gate en l'état ignore le coût business réel et nourrit les contournements ; le scan hebdomadaire hors pipeline abandonne la prévention au profit d'une détection tardive ; et la dérogation par vice-président ajoute de la bureaucratie sans corriger la cause racine.",
+      difficulte: 3,
+      pourquoi: [
+        "Absolu : ignorer le coût business et l'alert fatigue érode la crédibilité de la sécurité et encourage les contournements.",
+        "Capitulation hors phase : un scan hebdomadaire différé transforme un contrôle préventif en détection tardive.",
+        "Bonne réponse : améliorer le contrôle — réglage, blocage ciblé sur les criticités confirmées, SLA et métrique de faux positifs — réconcilie assurance et vélocité.",
+        "Bureaucratie : l'escalade systématique ne corrige pas la cause racine (l'outil mal réglé) et ralentit tout le monde."
+      ]
+    },
+    {
+      q: "Une fintech doit livrer un module de vérification d'identité en quatre mois pour tenir une échéance réglementaire. Le développement interne prendrait neuf mois ; un petit éditeur propose une solution éprouvée mais refuse de céder son code source. Quelle est la MEILLEURE décision ?",
+      choix: [
+        "Développer en interne afin de conserver la maîtrise complète du code et de sa sécurité",
+        "Acheter la solution en négociant un accord de software escrow avec vérification périodique des dépôts, un droit d'audit de sécurité et des SLA de correctifs",
+        "Acheter la solution la moins chère du marché et négocier les clauses de continuité après la mise en production",
+        "Exiger la cession complète du code source comme condition non négociable de l'achat"
+      ],
+      reponse: 1,
+      explication: "La contrainte dominante est l'échéance réglementaire : seul l'achat la respecte. Le risque de dépendance envers un petit éditeur se traite contractuellement — escrow avec vérification périodique des dépôts (complets, compilables, à jour), droit d'audit et SLA de correctifs — c'est l'arbitrage classique buy vs build vu par un manager. Développer en interne offre la maîtrise mais rate l'échéance, ce qui en fait une réponse techniquement vraie mais contextuellement fausse ; négocier la continuité après la mise en production abandonne tout levier contractuel ; et exiger la cession du code est irréaliste face à un éditeur dont c'est l'actif principal.",
+      difficulte: 3,
+      pourquoi: [
+        "Techniquement vrai mais contextuellement faux : la maîtrise interne rate l'échéance réglementaire, la contrainte dominante du scénario.",
+        "Bonne réponse : l'achat tient le délai et le risque fournisseur est traité par escrow vérifié, droit d'audit et SLA — l'arbitrage managérial correct.",
+        "Hors phase : après la mise en production, l'acheteur a perdu tout levier de négociation sur les clauses de continuité.",
+        "Irréaliste et disproportionné : un éditeur ne cède pas son actif principal, et l'escrow suffit à couvrir le risque de continuité."
+      ]
+    },
+    {
+      q: "Le portefeuille d'APIs d'une plateforme est passé de 20 à 300 en deux ans ; deux incidents récents impliquaient des APIs « oubliées », restées exposées après le retrait des applications qu'elles servaient. Sur quoi le responsable de la sécurité applicative devrait-il agir EN PREMIER ?",
+      choix: [
+        "Mettre en place la découverte continue des APIs et une gouvernance de leur cycle de vie : inventaire, propriétaire désigné et procédure de mise hors service",
+        "Généraliser le mTLS et l'authentification forte sur toutes les APIs connues",
+        "Commander un test d'intrusion annuel couvrant l'ensemble du périmètre API",
+        "Renforcer les règles de rate limiting sur la passerelle API"
+      ],
+      reponse: 0,
+      explication: "Les incidents révèlent un problème d'inventaire, pas de mécanisme : des APIs « zombies » échappent à tous les contrôles parce que personne ne sait qu'elles existent. On ne protège pas ce qu'on ignore : la découverte continue et la gouvernance du cycle de vie (inventaire, propriétaire, décommissionnement) sont le préalable. Généraliser le mTLS est excellent mais ne s'applique qu'aux APIs CONNUES — techniquement vrai, contextuellement insuffisant ; un pentest annuel est ponctuel et ne suivra pas un parc qui a été multiplié par quinze ; et le rate limiting traite l'abus, pas l'exposition d'APIs oubliées.",
+      difficulte: 3,
+      pourquoi: [
+        "Bonne réponse : le problème racine est l'inventaire — découverte continue et gouvernance du cycle de vie traitent les APIs oubliées que tout autre contrôle manquera.",
+        "Techniquement vrai mais contextuellement insuffisant : le mTLS ne protège que les APIs connues, or les incidents viennent des APIs inconnues.",
+        "Ponctuel et détectif : un pentest annuel photographie un instant sans suivre la croissance continue du parc.",
+        "Trop étroit : le rate limiting limite l'abus d'APIs légitimes, il ne découvre ni ne retire les APIs zombies."
+      ]
+    },
+    {
+      q: "Une banque envisage d'acquérir un modèle de détection de fraude entraîné par un fournisseur sur des données mutualisées de plusieurs clients. Le RSSI s'inquiète d'un possible empoisonnement du modèle. Quelle exigence d'acquisition répond le MIEUX à ce risque ?",
+      choix: [
+        "Exiger une documentation de provenance et d'intégrité des données d'entraînement, ainsi qu'une évaluation comportementale indépendante du modèle avant son intégration",
+        "Exiger la remise du code source complet du modèle pour revue par les équipes internes",
+        "Faire réaliser un test d'intrusion de l'API qui expose le modèle",
+        "Prévoir une surveillance de la dérive du modèle après sa mise en production"
+      ],
+      reponse: 0,
+      explication: "Le data poisoning se niche dans les DONNÉES d'entraînement, pas dans le code : l'assurance doit porter sur la provenance et l'intégrité de ces données et sur une évaluation comportementale indépendante (tests sur des jeux contrôlés, recherche d'angles morts) avant intégration — l'équivalent ML de la due diligence de supply chain. La revue du code source est la réponse du technicien : un modèle empoisonné a un code parfaitement sain. Le pentest de l'API teste l'enveloppe applicative, pas les décisions du modèle. Et la surveillance de dérive en production est un complément détectif, trop tardif pour être la meilleure réponse d'ACQUISITION.",
+      difficulte: 3,
+      pourquoi: [
+        "Bonne réponse : le poison vit dans les données d'entraînement — provenance, intégrité et évaluation comportementale indépendante avant intégration sont la due diligence adaptée.",
+        "Réponse de technicien : le code d'un modèle empoisonné est sain — la revue de code ne peut pas révéler un biais implanté par les données.",
+        "Hors cible : le pentest éprouve l'enveloppe applicative (API), pas la fiabilité des décisions du modèle.",
+        "Techniquement vrai mais hors phase : la surveillance de dérive est détective et post-production, complément utile mais pas exigence d'acquisition première."
+      ]
+    },
+    {
+      q: "Le modèle de recommandation d'un site marchand est réentraîné chaque nuit sur les données de production, y compris les avis déposés par les utilisateurs. Le CISO veut réduire le risque d'empoisonnement sans arrêter le réentraînement. Quel ensemble de contrôles est le MEILLEUR ?",
+      choix: [
+        "Chiffrer les données d'entraînement au repos et en transit",
+        "Valider et assainir les données entrantes, contrôler l'accès et l'intégrité du pipeline de données, et comparer chaque nouveau modèle à une référence comportementale avant sa promotion",
+        "Geler définitivement le modèle actuel et cesser tout réentraînement",
+        "Faire relire manuellement les données d'entraînement par l'équipe data science avant chaque cycle"
+      ],
+      reponse: 1,
+      explication: "L'empoisonnement passe ici par un canal LÉGITIME : des avis soumis publiquement. La défense combine la validation et l'assainissement des données entrantes (détection d'anomalies, filtrage des soumissions coordonnées), la protection du pipeline de données (accès, intégrité), et un garde-fou de promotion : chaque nouveau modèle est comparé à une référence comportementale avant de remplacer l'ancien. Le chiffrement protège la confidentialité mais laisse passer des données malveillantes légitimement soumises — techniquement vrai, hors cible ; geler le modèle est un absolu qui détruit la valeur métier du réentraînement ; et la relecture manuelle quotidienne de millions d'avis est irréaliste.",
+      difficulte: 3,
+      pourquoi: [
+        "Techniquement vrai mais hors cible : le chiffrement protège la confidentialité, pas contre des données malveillantes soumises par le canal légitime.",
+        "Bonne réponse : assainissement des entrées, intégrité du pipeline et comparaison à une référence avant promotion — défense en profondeur qui préserve le réentraînement.",
+        "Absolu : geler le modèle supprime le risque en détruisant la valeur métier — l'inverse de l'arbitrage demandé.",
+        "Irréaliste à l'échelle : la relecture manuelle quotidienne de volumes massifs de données est impraticable."
+      ]
+    },
+    {
+      q: "À la veille d'un salon stratégique, la direction produit demande de contourner le security gate : l'analyse SCA bloque la release phare pour une vulnérabilité haute sans correctif disponible. Que devrait faire le CISO EN PREMIER ?",
+      choix: [
+        "Refuser le contournement : les gates de sécurité ne doivent souffrir aucune exception",
+        "Présenter le risque évalué au propriétaire du risque métier et formaliser une acceptation temporaire, assortie de mesures compensatoires et d'une date de remédiation",
+        "Retarder la release jusqu'à la publication d'un correctif par le mainteneur de la bibliothèque",
+        "Autoriser le déploiement et faire corriger discrètement après le salon"
+      ],
+      reponse: 1,
+      explication: "Le CISO conseille, il n'est pas propriétaire du risque métier : face à un conflit entre sécurité et enjeu commercial majeur, la démarche correcte est de présenter le risque évalué au business owner et de faire formaliser une acceptation de risque temporaire — avec mesures compensatoires (WAF, surveillance renforcée, désactivation de la fonction vulnérable) et date de remédiation ferme. Refuser catégoriquement outrepasse son rôle et ignore le processus de gestion des risques ; retarder unilatéralement la release est une décision qui ne lui appartient pas seul ; et déployer « discrètement » contourne toute gouvernance et supprime la traçabilité qui protège aussi le CISO.",
+      difficulte: 3,
+      pourquoi: [
+        "Absolu et hors rôle : le CISO conseille le propriétaire du risque, il ne détient pas un droit de veto inconditionnel sur les décisions métier.",
+        "Bonne réponse : acceptation de risque formalisée par le business owner, mesures compensatoires et date de remédiation — la gouvernance des risques appliquée sous contrainte.",
+        "Techniquement prudent mais hors rôle : retarder unilatéralement la release ignore l'enjeu commercial et court-circuite le propriétaire du risque.",
+        "Contournement de gouvernance : déployer sans trace formelle supprime la responsabilité documentée et expose l'organisation comme le CISO."
+      ]
     }
   ],
   quizEn: [
@@ -2432,6 +2612,78 @@ window.CISSP_DATA.domains[8] = {
         "Bonne réponse : l'empoisonnement des données d'entraînement créant des angles morts invisibles aux tests classiques est propre au machine learning.",
         "Techniquement vrai mais commun : les composants OS non corrigés touchent tout produit.",
         "Techniquement vrai mais commun : l'absence de programme de divulgation n'est pas spécifique au ML."
+      ]
+    },
+    {
+      q: "A CISO learns that development teams now merge AI-generated code into product repositories daily. The business will not accept slower release cycles. Which approach BEST manages the associated risk?",
+      choix: [
+        "Ban AI coding assistants until a full security evaluation has been completed",
+        "Require AI-generated code to pass the same pipeline controls as human-written code: peer review, SAST, SCA, and automated testing",
+        "Train developers to write security-aware prompts for the AI assistant",
+        "Deploy a tool that watermarks AI-generated code to ensure traceability"
+      ],
+      reponse: 1,
+      explication: "Le code généré par IA doit être traité comme du code tiers non fiable et soumis aux mêmes contrôles vérifiables que le code humain — revue par les pairs, SAST, SCA et tests automatisés dans le pipeline : la gouvernance existante absorbe le nouveau risque sans ralentir les livraisons. L'interdiction est un absolu incompatible avec la contrainte business et pousse à l'usage clandestin ; la formation aux prompts améliore la qualité en amont mais n'est pas un contrôle vérifiable ; et le marquage de provenance trace le code sans jamais empêcher un défaut d'atteindre la production.",
+      difficulte: 3,
+      pourquoi: [
+        "Absolu et hors contexte business : l'interdiction ignore la contrainte de vélocité et provoque le shadow IT.",
+        "Bonne réponse : soumettre le code IA aux gates existants du pipeline gouverne le risque à la vitesse du DevOps.",
+        "Techniquement vrai mais insuffisant : la formation aux prompts n'est pas un contrôle vérifiable — complément, pas fondement.",
+        "Réponse de technicien : la traçabilité n'empêche aucun défaut de partir en production."
+      ]
+    },
+    {
+      q: "Following a critical vulnerability in a widely used open source logging library, the board directs the CISO to ensure the organization can respond faster next time. No dependency inventory exists for its several hundred applications. What should the CISO do FIRST?",
+      choix: [
+        "Automate SBOM generation for every application within the build pipeline and centralize the results",
+        "Upgrade all applications to the latest versions of their dependencies",
+        "Deploy virtual patching rules on the perimeter web application firewall",
+        "Require security team approval for every new third-party component"
+      ],
+      reponse: 0,
+      explication: "Le mandat du conseil porte sur la capacité de RÉACTION : elle exige d'abord la visibilité. Générer automatiquement des SBOM dans le pipeline et les centraliser permet, à la prochaine divulgation, d'identifier en quelques minutes les applications affectées — le prérequis de toute priorisation. Mettre à niveau des centaines d'applications sans inventaire est irréalisable et non priorisable ; le virtual patching est un palliatif limité au périmètre exposé ; et l'approbation manuelle des nouveaux composants ne couvre pas le stock existant tout en créant un goulot d'étranglement.",
+      difficulte: 3,
+      pourquoi: [
+        "Bonne réponse : la visibilité d'abord — le SBOM automatisé et centralisé est le prérequis de la réactivité demandée par le conseil.",
+        "Techniquement vrai mais pas premier : la mise à niveau massive est impossible à prioriser sans inventaire préalable.",
+        "Palliatif compensatoire : le virtual patching ne couvre que le périmètre exposé, sans gouvernance durable.",
+        "Trop étroit : l'approbation des nouveaux composants ignore l'existant et crée un goulot d'étranglement."
+      ]
+    },
+    {
+      q: "Development teams complain that the pipeline's static analysis gate blocks releases with a high false-positive rate, threatening contractual delivery dates. What is the CISO's BEST course of action?",
+      choix: [
+        "Keep the gate unchanged, because security requirements must never be relaxed",
+        "Tune the tool, block builds only on confirmed high and critical findings, and manage remaining findings in a backlog with remediation SLAs",
+        "Remove the gate and rely on quarterly penetration testing instead",
+        "Escalate every blocked release to executive management for a case-by-case decision"
+      ],
+      reponse: 1,
+      explication: "Un gate au fort taux de faux positifs détruit sa propre légitimité et le coût business est réel : la réponse managériale est d'améliorer le contrôle, pas de le supprimer ni de le sacraliser. Régler l'outil, ne bloquer que sur les findings élevés confirmés et gérer le reste en backlog avec des SLA réconcilie l'assurance sécurité et la vélocité — l'esprit DevSecOps. Maintenir le gate en l'état est un absolu qui nourrit l'alert fatigue et les contournements ; le pentest trimestriel remplace la prévention continue par une détection tardive ; et l'escalade systématique ajoute de la bureaucratie sans corriger la cause racine.",
+      difficulte: 3,
+      pourquoi: [
+        "Absolu : ignorer le coût business et l'alert fatigue érode la crédibilité de la sécurité et incite au contournement.",
+        "Bonne réponse : améliorer le contrôle — réglage, blocage ciblé, SLA de remédiation — préserve l'assurance ET la vélocité.",
+        "Capitulation hors phase : le pentest trimestriel troque la prévention en pipeline contre une détection tardive.",
+        "Bureaucratie : l'escalade au cas par cas ne corrige pas l'outil mal réglé, la cause racine."
+      ]
+    },
+    {
+      q: "A firm must deliver a regulatory reporting capability within months. Building in-house would take three times longer; a niche vendor offers a proven product but will not share its source code. Which option BEST balances time-to-market and long-term risk?",
+      choix: [
+        "Build the capability in-house to retain full control over the code",
+        "License the product with a verified software escrow agreement, security audit rights, and patch service level agreements",
+        "License the cheapest alternative and negotiate continuity clauses after go-live",
+        "Demand full source code ownership as a non-negotiable purchase condition"
+      ],
+      reponse: 1,
+      explication: "L'échéance réglementaire est la contrainte dominante : seule l'acquisition la respecte, et le risque de dépendance envers un petit éditeur se traite contractuellement — escrow avec vérification périodique des dépôts, droit d'audit de sécurité et SLA de correctifs. C'est l'arbitrage buy vs build vu par un manager. Le développement interne conserve la maîtrise mais manque l'échéance — techniquement vrai, contextuellement faux ; négocier la continuité après le go-live abandonne tout levier contractuel ; et exiger la propriété du code est irréaliste face à un éditeur dont c'est l'actif principal, alors que l'escrow suffit.",
+      difficulte: 3,
+      pourquoi: [
+        "Techniquement vrai mais contextuellement faux : la maîtrise interne fait manquer l'échéance réglementaire, la contrainte dominante.",
+        "Bonne réponse : l'achat tient le délai et l'escrow vérifié, le droit d'audit et les SLA traitent le risque fournisseur de long terme.",
+        "Hors phase : après le go-live, l'acheteur n'a plus aucun levier pour obtenir des clauses de continuité.",
+        "Irréaliste : un éditeur ne cède pas son actif principal, et l'escrow couvre déjà le risque de continuité."
       ]
     }
   ],
