@@ -1708,6 +1708,794 @@ window.CISSP_DATA.domains[1] = {
       explication:
         "Le CFAA de 1986 est la grande loi pénale américaine contre l'accès non autorisé aux ordinateurs, en particulier ceux du gouvernement fédéral et des institutions financières. L'ECPA protège les communications électroniques contre l'interception illégale, le PATRIOT Act élargit les pouvoirs de surveillance des autorités (et aggrave les peines du CFAA) mais n'est pas la loi d'incrimination de base, et GLBA encadre la confidentialité des données dans le secteur financier.",
       difficulte: 2
+    },
+    {
+      q: "Un consultant CISSP découvre que son client dissimule une violation de données mettant en danger le public, et le client lui demande de garder le silence. Selon le Code of Ethics ISC², que devrait-il faire ?",
+      choix: [
+        "Respecter la confidentialité due à son client, protégée par le canon III",
+        "Faire primer la protection de la société et refuser de participer à la dissimulation",
+        "Attendre la fin de son contrat avant de se prononcer",
+        "S'en remettre au code d'éthique interne du client"
+      ],
+      reponse: 1,
+      explication:
+        "Les canons du code ISC² sont ordonnés par priorité : le canon I (protéger la société, le bien commun et la confiance du public) prime sur le canon III (servir ses mandants). Un professionnel ne peut donc pas couvrir une dissimulation qui met le public en danger au nom de la loyauté envers son client. Attendre ou s'en remettre au code interne du client reviendrait à cautionner la dissimulation et violerait aussi le canon II (agir honnêtement et légalement).",
+      difficulte: 2
+    },
+    {
+      q: "Selon la RFC 1087 (« Ethics and the Internet »), laquelle de ces activités est explicitement considérée comme non éthique ?",
+      choix: [
+        "Publier un article critiquant un protocole réseau",
+        "Gaspiller délibérément des ressources (personnes, capacité, ordinateurs) via Internet",
+        "Utiliser un logiciel open source à des fins commerciales",
+        "Chiffrer ses communications personnelles"
+      ],
+      reponse: 1,
+      explication:
+        "La RFC 1087 qualifie de non éthique tout acte qui cherche un accès non autorisé, perturbe l'usage prévu d'Internet, gaspille des ressources (personnes, capacité, ordinateurs), détruit l'intégrité d'informations ou compromet la vie privée des utilisateurs. La critique publique d'un protocole, l'usage commercial de l'open source (dans le respect des licences) et le chiffrement de ses communications sont des activités parfaitement légitimes.",
+      difficulte: 2
+    },
+    {
+      q: "Vous fournissez depuis la France un service impliquant des données hébergées aux États-Unis et au Japon, et les lois de ces juridictions entrent en conflit. Quelle approche est généralement recommandée ?",
+      choix: [
+        "Appliquer systématiquement la loi américaine, la plus connue",
+        "Prioriser la juridiction locale depuis laquelle vous fournissez le service",
+        "Choisir la loi la moins contraignante pour l'entreprise",
+        "Ignorer le conflit tant qu'aucun régulateur ne se manifeste"
+      ],
+      reponse: 1,
+      explication:
+        "En cas de conflit de lois entre juridictions, la recommandation classique (reprise dans le corpus ISC²) est de donner la priorité à la juridiction locale depuis laquelle le professionnel fournit le service, tout en recherchant un avis juridique pour les autres obligations. Choisir la loi la moins contraignante ou ignorer le conflit exposerait l'organisation à des sanctions et violerait la Due Care ; appliquer par défaut la loi américaine n'a aucun fondement.",
+      difficulte: 3
+    },
+    {
+      q: "Qui est habilité à déposer une plainte pour violation du canon IV (« Advance and protect the profession ») du code d'éthique ISC² ?",
+      choix: [
+        "Uniquement l'employeur du professionnel",
+        "Tout membre du public, sans condition",
+        "Toute personne elle-même soumise à un code d'éthique professionnel",
+        "Uniquement les clients liés par contrat"
+      ],
+      reponse: 2,
+      explication:
+        "Pour le canon IV, la plainte peut être déposée par toute personne elle-même soumise à un code d'éthique professionnel (certifiés ISC² ou autres professionnels sous code de déontologie). Rappel des autres règles : tout membre du public peut porter plainte au titre des canons I et II, et seuls un employeur ou une personne sous relation contractuelle peuvent le faire pour le canon III.",
+      difficulte: 3
+    },
+    {
+      q: "Un professionnel certifié CISSP embellit volontairement les conclusions d'un audit de sécurité pour plaire à sa direction. Quel canon du code ISC² viole-t-il le PLUS directement ?",
+      choix: [
+        "Protect society, the common good, necessary public trust and confidence, and the infrastructure",
+        "Act honorably, honestly, justly, responsibly, and legally",
+        "Provide diligent and competent service to principals",
+        "Advance and protect the profession"
+      ],
+      reponse: 1,
+      explication:
+        "Falsifier ou embellir des conclusions d'audit est avant tout un manquement à l'honnêteté : c'est le canon II (« Act honorably, honestly, justly, responsibly, and legally ») qui est violé le plus directement. On pourrait aussi soutenir que le service rendu aux mandants n'est plus diligent (canon III), mais la question porte sur la violation la plus directe : le mensonge délibéré relève de l'honnêteté avant tout.",
+      difficulte: 2
+    },
+    {
+      q: "Dans l'ordre de priorité des canons du Code of Ethics ISC², lequel arrive en DERNIER ?",
+      choix: [
+        "Protéger la société et les infrastructures",
+        "Agir honorablement, honnêtement et légalement",
+        "Servir ses mandants avec diligence et compétence",
+        "Faire progresser et protéger la profession"
+      ],
+      reponse: 3,
+      explication:
+        "L'ordre des canons est significatif et exigible à l'examen : 1) protéger la société, 2) agir honorablement et légalement, 3) servir ses mandants, 4) faire progresser et protéger la profession. En cas de conflit, chaque canon prime sur les suivants : la profession passe donc après la société, la légalité et les mandants.",
+      difficulte: 1
+    },
+    {
+      q: "La BIA établit un MTD de 24 heures pour le système de commandes. L'équipe technique propose un RTO de 36 heures pour réduire les coûts. Quelle est la MEILLEURE réponse du responsable de la continuité ?",
+      choix: [
+        "Accepter : le RTO est indépendant du MTD",
+        "Refuser : le RTO doit toujours être inférieur ou égal au MTD",
+        "Accepter, à condition de réduire le RPO en compensation",
+        "Refuser : le RTO doit être strictement égal au MTD"
+      ],
+      reponse: 1,
+      explication:
+        "Le MTD est la durée d'interruption au-delà de laquelle l'organisation cesse d'être viable : un objectif de restauration (RTO) supérieur au MTD signifierait planifier l'échec. Le RTO doit donc toujours être inférieur ou égal au MTD (idéalement avec une marge). Le RPO mesure la perte de données et ne compense en rien un délai de restauration trop long, et rien n'impose que RTO et MTD soient égaux.",
+      difficulte: 2
+    },
+    {
+      q: "Quelle est la PREMIÈRE étape d'une Business Impact Analysis ?",
+      choix: [
+        "Évaluer la probabilité de chaque risque",
+        "Identifier les priorités de l'organisation en déterminant la criticité des processus métier",
+        "Calculer l'ALE de chaque actif informatique",
+        "Sélectionner le site de repli"
+      ],
+      reponse: 1,
+      explication:
+        "La BIA se déroule en quatre temps : identification des priorités (criticité des processus et fonctions), identification des risques, évaluation de leur probabilité, puis priorisation des ressources de récupération. On ne peut pas évaluer des probabilités ni prioriser des ressources avant de savoir quels processus comptent le plus. Le choix du site de repli relève du DRP, en aval.",
+      difficulte: 2
+    },
+    {
+      q: "Après un sinistre majeur, plusieurs systèmes doivent être restaurés. Selon la logique de priorisation issue de la BIA, lesquels devraient l'être EN PREMIER ?",
+      choix: [
+        "Les applications métier les plus visibles des clients",
+        "Les services fondamentaux dont tout le reste dépend, comme le réseau et l'annuaire",
+        "Les systèmes les moins coûteux à restaurer",
+        "Les postes de travail des dirigeants"
+      ],
+      reponse: 1,
+      explication:
+        "La restauration commence par les services d'infrastructure fondamentaux (réseau, DNS, annuaire/authentification) car aucune application métier ne peut fonctionner sans eux. Restaurer d'abord les applications visibles échouerait faute de fondations, et ni le coût de restauration ni le statut hiérarchique des utilisateurs ne sont des critères de priorisation valables.",
+      difficulte: 2
+    },
+    {
+      q: "Quel est l'objectif du Continuity of Operations Plan (COOP), livrable de la phase « provisions and processes » du BCP ?",
+      choix: [
+        "Décrire la restauration technique détaillée des sauvegardes",
+        "Décrire comment maintenir les fonctions critiques depuis la survenue de la perturbation jusqu'à un mois d'opérations soutenues",
+        "Définir la politique de sécurité de l'organisation",
+        "Remplacer intégralement le DRP"
+      ],
+      reponse: 1,
+      explication:
+        "Le COOP décrit comment l'organisation assurera ses fonctions critiques dès la survenue d'une perturbation et jusqu'à un mois d'opérations soutenues. La restauration technique des sauvegardes relève du DRP, qui complète le COOP sans être remplacé par lui, et la politique de sécurité est un document de gouvernance distinct.",
+      difficulte: 3
+    },
+    {
+      q: "Le plan de continuité d'activité est finalisé. Qui devrait l'endosser formellement pour lui donner tout son poids dans l'organisation ?",
+      choix: [
+        "Le RSSI",
+        "Le responsable de la continuité d'activité",
+        "Le dirigeant le plus haut placé de l'organisation",
+        "Le comité d'audit interne"
+      ],
+      reponse: 2,
+      explication:
+        "Le BCP doit être approuvé et endossé par le plus haut dirigeant de l'organisation (CEO ou équivalent) : c'est ce qui démontre l'engagement de la direction, garantit les ressources et donne au plan son autorité en temps de crise. Le RSSI et le responsable de la continuité construisent et maintiennent le plan, et le comité d'audit le contrôle, mais aucun ne peut se substituer à l'endossement de la direction générale.",
+      difficulte: 1
+    },
+    {
+      q: "La direction déclare pouvoir tolérer la perte d'au maximum quinze minutes de transactions en cas d'incident. Quelle métrique vient d'être définie ?",
+      choix: ["RTO", "RPO", "MTD", "MTBF"],
+      reponse: 1,
+      explication:
+        "La quantité maximale de données que l'on accepte de perdre, exprimée en temps (ici quinze minutes de transactions), est le Recovery Point Objective. Ce RPO dictera la fréquence des sauvegardes ou de la réplication. Le RTO concerne le délai de remise en service, le MTD la durée d'interruption maximale supportable, et le MTBF la fiabilité moyenne d'un équipement.",
+      difficulte: 1
+    },
+    {
+      q: "Quelle affirmation distingue le MIEUX le BCP du DRP ?",
+      choix: [
+        "Le BCP est technique, le DRP est stratégique",
+        "Le BCP est stratégique et centré sur les processus métier ; le DRP est tactique et technique (sites de repli, sauvegardes, restauration)",
+        "Le DRP englobe le BCP",
+        "Les deux documents sont interchangeables"
+      ],
+      reponse: 1,
+      explication:
+        "Le Business Continuity Plan est stratégique : il vise à maintenir les processus métier critiques pendant et après une crise. Le Disaster Recovery Plan est son volet tactique et technique : sites de repli, sauvegardes, procédures de restauration des systèmes. C'est le BCP qui englobe conceptuellement le DRP, et non l'inverse ; la première proposition inverse les rôles.",
+      difficulte: 2
+    },
+    {
+      q: "Un utilisateur conteste avoir validé une opération dans une application qui ne journalise pas les actions. Dans le modèle STRIDE, quelle catégorie de menace ce défaut illustre-t-il ?",
+      choix: ["Spoofing", "Repudiation", "Tampering", "Information Disclosure"],
+      reponse: 1,
+      explication:
+        "La capacité d'un utilisateur à nier avoir accompli une action, faute de journalisation et de preuves, relève de la Repudiation, le R de STRIDE. La parade est la non-répudiation : authentification forte, journalisation fiable, signatures. Le spoofing usurpe une identité, le tampering altère des données et l'information disclosure divulgue des informations confidentielles.",
+      difficulte: 1
+    },
+    {
+      q: "Quelle catégorie du modèle STRIDE attaque directement la confidentialité ?",
+      choix: ["Tampering", "Denial of Service", "Information Disclosure", "Elevation of Privilege"],
+      reponse: 2,
+      explication:
+        "L'Information Disclosure est la divulgation d'informations à des personnes non autorisées : c'est l'attaque directe de la confidentialité. Le tampering vise l'intégrité, le denial of service la disponibilité, et l'elevation of privilege l'autorisation. Retenez que chaque catégorie STRIDE se rattache à un pilier de la sécurité : c'est une question classique.",
+      difficulte: 1
+    },
+    {
+      q: "Lors d'une reduction analysis (décomposition d'un système), pourquoi identifie-t-on les trust boundaries ?",
+      choix: [
+        "Pour calculer l'ALE de chaque module applicatif",
+        "Pour localiser les points où le niveau de confiance ou de privilège change, là où les contrôles doivent être concentrés",
+        "Pour mesurer la latence réseau entre les composants",
+        "Pour inventorier les licences des bibliothèques"
+      ],
+      reponse: 1,
+      explication:
+        "La reduction analysis décompose le système en cinq éléments : trust boundaries, data flow paths, input points, opérations privilégiées et détails des contrôles. Les frontières de confiance marquent les endroits où le niveau de confiance ou de privilège change (ex. passage d'Internet au réseau interne) : ce sont précisément les points où valider les entrées et renforcer les contrôles. Les calculs financiers, la latence et les licences ne relèvent pas du threat modeling.",
+      difficulte: 3
+    },
+    {
+      q: "Une équipe intègre la modélisation des menaces dès les phases de conception et de développement d'un produit. Comment qualifie-t-on cette approche ?",
+      choix: ["Réactive / adversariale", "Proactive / défensive", "Corrective", "Compensatoire"],
+      reponse: 1,
+      explication:
+        "Le threat modeling mené pendant la conception et le développement est l'approche proactive, dite défensive : elle permet d'intégrer la sécurité dès le design, où elle coûte le moins cher. L'approche réactive, dite adversariale, intervient après le déploiement (fuzzing, pentest). « Corrective » et « compensatoire » sont des types de contrôles, pas des approches de threat modeling.",
+      difficulte: 1
+    },
+    {
+      q: "Quelle méthodologie de threat modeling a été conçue pour s'intégrer aux environnements agiles et DevOps à grande échelle ?",
+      choix: ["STRIDE", "PASTA", "VAST", "Trike"],
+      reponse: 2,
+      explication:
+        "VAST (Visual, Agile, and Simple Threat modeling) a été pensé pour passer à l'échelle dans les organisations agiles et DevOps, en s'intégrant aux outils et aux sprints des équipes. STRIDE est une grille de catégorisation, PASTA une méthodologie en sept étapes centrée sur le risque, et Trike une méthodologie open source fondée sur le risque et l'audit des exigences.",
+      difficulte: 3
+    },
+    {
+      q: "Votre organisation veut échanger automatiquement du renseignement sur les menaces avec ses partenaires sectoriels. Quel standard sert au TRANSPORT de ce renseignement ?",
+      choix: ["STIX", "TAXII", "CAPEC", "SAML"],
+      reponse: 1,
+      explication:
+        "TAXII (Trusted Automated eXchange of Intelligence Information) est le protocole de transport et d'échange du renseignement sur les menaces. STIX est le langage structuré qui décrit ce renseignement (on dit souvent : STIX décrit, TAXII transporte), CAPEC est un dictionnaire de patterns d'attaque, et SAML est un standard de fédération d'identité sans rapport avec la threat intelligence.",
+      difficulte: 3
+    },
+    {
+      q: "Un fabricant veut pouvoir authentifier chaque puce individuellement grâce à une empreinte électronique unique impossible à cloner. Quelle technologie répond à ce besoin ?",
+      choix: [
+        "Silicon Root of Trust",
+        "Physically Unclonable Function (PUF)",
+        "Software Bill of Materials (SBOM)",
+        "Chiffrement de disque"
+      ],
+      reponse: 1,
+      explication:
+        "La Physically Unclonable Function exploite les micro-variations physiques de fabrication pour créer une empreinte électronique unique et non reproductible, qui permet d'authentifier individuellement chaque puce et de détecter les contrefaçons. Le silicon root of trust sécurise le démarrage mais n'identifie pas chaque exemplaire de façon unique, le SBOM inventorie des composants logiciels, et le chiffrement de disque protège des données au repos.",
+      difficulte: 3
+    },
+    {
+      q: "Quel est le MEILLEUR moyen de rendre exigibles les obligations de sécurité d'un fournisseur critique ?",
+      choix: [
+        "Un e-mail de rappel annuel des bonnes pratiques",
+        "L'intégration d'exigences minimales de sécurité dans les contrats et les SLA",
+        "Une charte volontaire signée par le commercial du fournisseur",
+        "La confiance mutuelle établie de longue date"
+      ],
+      reponse: 1,
+      explication:
+        "Seules des exigences intégrées aux contrats et aux SLA sont juridiquement exigibles : elles définissent les niveaux de sécurité attendus, les droits d'audit et les pénalités en cas de manquement. Un e-mail, une charte volontaire ou la confiance historique n'offrent aucun levier contractuel si le fournisseur défaille. C'est un principe central du Supply Chain Risk Management.",
+      difficulte: 1
+    },
+    {
+      q: "Avant de confier des données sensibles à un prestataire, vous voulez vérifier que ses pratiques réelles correspondent à ses politiques écrites. Quelle méthode d'évaluation est la PLUS probante ?",
+      choix: [
+        "La revue documentaire à distance",
+        "Un questionnaire d'auto-évaluation rempli par le prestataire",
+        "Une évaluation sur site (on-site assessment)",
+        "La consultation de son site web institutionnel"
+      ],
+      reponse: 2,
+      explication:
+        "L'évaluation sur site permet d'observer directement les pratiques, d'interroger les équipes et de confronter la réalité du terrain aux politiques écrites : c'est la méthode la plus probante. La revue documentaire et l'auto-évaluation ne montrent que ce que le prestataire déclare, et un site web institutionnel n'a aucune valeur probante. En pratique, on combine ces méthodes avec des audits tiers indépendants et un monitoring continu.",
+      difficulte: 2
+    },
+    {
+      q: "Des attaquants compromettent le mécanisme de mise à jour d'un éditeur logiciel largement déployé afin de distribuer une porte dérobée à tous ses clients. Comment qualifier cette attaque ?",
+      choix: [
+        "Attaque par watering hole",
+        "Attaque de la chaîne d'approvisionnement (supply chain attack)",
+        "Typosquatting",
+        "Attaque par force brute"
+      ],
+      reponse: 1,
+      explication:
+        "Compromettre un maillon amont de confiance (ici l'éditeur et son canal de mise à jour) pour atteindre ses clients en aval est la définition même de l'attaque de supply chain, illustrée par l'affaire SolarWinds. Le watering hole compromet un site web que la cible visite, le typosquatting exploite des noms de domaine ressemblants, et la force brute vise des mots de passe. La parade passe par le SCRM : évaluation des fournisseurs, signature et vérification des mises à jour, SBOM.",
+      difficulte: 1
+    },
+    {
+      q: "Un fournisseur critique a passé avec succès son évaluation initiale il y a deux ans. Quelle est la MEILLEURE pratique pour maintenir la confiance dans la durée ?",
+      choix: [
+        "Aucune action tant que le contrat court",
+        "Un monitoring continu et des réévaluations périodiques (audits, revues de conformité)",
+        "Attendre un incident pour déclencher une réévaluation",
+        "Se fier à la réputation du fournisseur sur le marché"
+      ],
+      reponse: 1,
+      explication:
+        "La posture de sécurité d'un tiers évolue : rachats, rotation des équipes, nouvelles menaces. Le SCRM impose donc une surveillance continue et des réévaluations périodiques (audits tiers, revues de certification, indicateurs contractuels). Ne rien faire ou attendre l'incident constitue un manquement à la Due Diligence, et la réputation n'est pas une preuve de sécurité.",
+      difficulte: 2
+    },
+    {
+      q: "Sous la directive européenne NIS2, dans quel délai une entité essentielle doit-elle transmettre l'alerte précoce (early warning) d'un incident significatif ?",
+      choix: ["24 heures", "72 heures", "60 jours", "7 jours"],
+      reponse: 0,
+      explication:
+        "NIS2 impose un processus de notification en trois temps : une alerte précoce sous 24 heures après la prise de connaissance de l'incident significatif, une notification complète sous 72 heures, puis un rapport final sous un mois. Ne confondez pas avec le délai unique de 72 heures du GDPR (violation de données personnelles) ni avec les 60 jours de HIPAA/HITECH.",
+      difficulte: 2
+    },
+    {
+      q: "Concernant la notification des violations de données aux États-Unis, quelle affirmation est CORRECTE ?",
+      choix: [
+        "Une loi fédérale unique impose un délai de 72 heures",
+        "Chaque État dispose de sa propre loi de notification, avec des exigences et des délais variables",
+        "Seules les entreprises cotées en bourse doivent notifier",
+        "Aucune notification de violation n'est obligatoire aux États-Unis"
+      ],
+      reponse: 1,
+      explication:
+        "Il n'existe pas de loi fédérale générale de notification des violations aux États-Unis : les cinquante États ont chacun leur propre loi (la Californie fut pionnière avec SB 1386 en 2002), avec des seuils, des délais et des définitions variables. S'y ajoutent des régimes sectoriels fédéraux comme HIPAA/HITECH pour la santé ou GLBA pour la finance. Une entreprise nationale doit donc gérer une mosaïque d'obligations.",
+      difficulte: 2
+    },
+    {
+      q: "Quelle a été la conséquence PRINCIPALE de l'arrêt Schrems II de la Cour de justice de l'Union européenne (2020) ?",
+      choix: [
+        "L'abrogation du GDPR",
+        "L'invalidation du Privacy Shield et l'obligation d'évaluer les transferts fondés sur les SCC, avec des mesures supplémentaires si nécessaire",
+        "L'interdiction définitive de tout transfert de données vers les États-Unis",
+        "La création des Binding Corporate Rules"
+      ],
+      reponse: 1,
+      explication:
+        "Schrems II a invalidé le Privacy Shield, jugeant que la surveillance américaine ne garantissait pas une protection équivalente au droit européen. Les SCC restent valides, mais l'exportateur doit évaluer le droit du pays de destination (transfer impact assessment) et ajouter des mesures supplémentaires (chiffrement, pseudonymisation…) si nécessaire. Les transferts vers les États-Unis n'ont jamais été interdits en bloc, et les BCR existaient bien avant cet arrêt.",
+      difficulte: 2
+    },
+    {
+      q: "La Commission européenne adopte une adequacy decision en faveur d'un pays tiers. Qu'est-ce que cela implique pour les transferts de données personnelles vers ce pays ?",
+      choix: [
+        "Les transferts restent interdits par défaut",
+        "Les transferts peuvent se faire librement, sans garantie supplémentaire, car le pays offre une protection substantiellement équivalente",
+        "Chaque transfert doit être approuvé individuellement par l'autorité de contrôle",
+        "Seules des données anonymisées peuvent être transférées"
+      ],
+      reponse: 1,
+      explication:
+        "Une décision d'adéquation atteste que le pays tiers assure un niveau de protection substantiellement équivalent à celui de l'UE : les transferts vers ce pays sont alors libres, comme s'il s'agissait de transferts intra-européens, sans SCC ni BCR. C'est le mécanisme le plus simple pour l'exportateur, mais il dépend entièrement de la Commission, qui peut réévaluer ou révoquer sa décision.",
+      difficulte: 1
+    },
+    {
+      q: "Une multinationale souhaite encadrer les transferts réguliers de données RH entre toutes ses filiales, dans et hors de l'Union européenne. Quel mécanisme est le PLUS adapté à ces transferts intra-groupe ?",
+      choix: [
+        "Des SCC signées séparément entre chaque paire de filiales",
+        "Des Binding Corporate Rules (BCR) approuvées par une autorité de contrôle",
+        "Une adequacy decision demandée par l'entreprise à la Commission",
+        "Le recueil du consentement systématique de chaque salarié"
+      ],
+      reponse: 1,
+      explication:
+        "Les BCR sont précisément conçues pour les transferts intra-groupe des multinationales : un corpus unique de règles contraignantes, approuvé par une autorité de contrôle, couvre l'ensemble des filiales. Multiplier les SCC bilatérales est lourd et fragile à grande échelle, une adequacy decision concerne un pays (pas une entreprise) et ne se « demande » pas, et le consentement des salariés est considéré comme rarement libre dans la relation de travail.",
+      difficulte: 2
+    },
+    {
+      q: "Que sont les Standard Contractual Clauses (SCC) dans le contexte du GDPR ?",
+      choix: [
+        "Des clauses types approuvées par la Commission européenne, insérées dans les contrats pour encadrer les transferts de données hors UE",
+        "Des règles internes contraignantes propres à un groupe multinational",
+        "Un certificat de conformité délivré par l'ENISA",
+        "Une décision reconnaissant le niveau de protection adéquat d'un pays tiers"
+      ],
+      reponse: 0,
+      explication:
+        "Les SCC sont des modèles de clauses contractuelles adoptés par la Commission européenne : intégrées telles quelles au contrat entre l'exportateur et l'importateur de données, elles créent des garanties appropriées pour les transferts hors UE. Les règles internes d'un groupe sont les BCR, l'ENISA ne délivre pas de certificat de transfert, et la reconnaissance d'un pays relève de l'adequacy decision.",
+      difficulte: 1
+    },
+    {
+      q: "Quel traité constitue le premier accord international visant à harmoniser la lutte contre la cybercriminalité et à faciliter la coopération entre États ?",
+      choix: [
+        "L'arrangement de Wassenaar",
+        "La Convention de Budapest sur la cybercriminalité (2001)",
+        "Le traité de Lisbonne",
+        "L'accord EU-US Data Privacy Framework"
+      ],
+      reponse: 1,
+      explication:
+        "La Convention de Budapest, adoptée en 2001 sous l'égide du Conseil de l'Europe et ouverte aux États non européens, est le premier traité international sur la cybercriminalité : elle harmonise les incriminations (accès illégal, atteinte à l'intégrité des données, fraude informatique…) et organise l'entraide judiciaire. Wassenaar concerne le contrôle des exportations, Lisbonne l'organisation de l'UE, et le Data Privacy Framework les transferts de données UE–USA.",
+      difficulte: 2
+    },
+    {
+      q: "Sous le GDPR, dans quel cas et dans quel délai les personnes concernées doivent-elles être informées d'une violation de leurs données ?",
+      choix: [
+        "Toujours, dans les 72 heures",
+        "Sans retard injustifié, lorsque la violation est susceptible d'engendrer un risque élevé pour leurs droits et libertés",
+        "Uniquement si plus de 500 personnes sont affectées, sous 60 jours",
+        "Jamais : seule l'autorité de contrôle doit être notifiée"
+      ],
+      reponse: 1,
+      explication:
+        "Le délai de 72 heures concerne la notification à l'autorité de contrôle. Les personnes concernées, elles, doivent être informées sans retard injustifié uniquement lorsque la violation est susceptible d'engendrer un risque élevé pour leurs droits et libertés (des exceptions existent, par exemple si les données étaient chiffrées). Le seuil de 500 personnes et le délai de 60 jours relèvent de HIPAA/HITECH, pas du GDPR.",
+      difficulte: 3
+    },
+    {
+      q: "Une violation touche simultanément des données de santé de patients américains (PHI) et des données personnelles de résidents européens. Quelles obligations de notification s'appliquent ?",
+      choix: [
+        "Uniquement le GDPR, car c'est le régime le plus strict",
+        "Uniquement HIPAA, car les données de santé priment",
+        "Les deux régimes cumulativement : autorité européenne sous 72 heures ET notification HIPAA/HITECH des individus sous 60 jours",
+        "Aucune notification tant que l'enquête interne n'est pas terminée"
+      ],
+      reponse: 2,
+      explication:
+        "Les régimes de notification ne s'excluent pas : ils se cumulent en fonction des personnes concernées et des juridictions. L'organisation doit notifier l'autorité de contrôle européenne sous 72 heures pour les résidents de l'UE, et respecter HIPAA/HITECH (individus, HHS, médias si plus de 500 personnes, sous 60 jours) pour les PHI américaines. Attendre la fin de l'enquête interne ferait manquer les délais légaux : c'est la découverte de la violation qui déclenche les horloges.",
+      difficulte: 3
+    },
+    {
+      q: "Un groupe criminel utilise des serveurs préalablement compromis pour lancer un déni de service massif contre le site d'une banque. Dans la taxonomie de la cybercriminalité, le système de la banque est ici :",
+      choix: [
+        "L'outil de l'infraction",
+        "La cible de l'infraction",
+        "Un simple support de preuve",
+        "Hors du champ de la cybercriminalité"
+      ],
+      reponse: 1,
+      explication:
+        "On distingue les crimes où l'ordinateur est la cible (l'attaque vise le système lui-même : intrusion, DoS, sabotage) de ceux où il n'est que l'outil (fraude, escroquerie réalisées au moyen de l'informatique). Ici, le système de la banque subit directement l'attaque : il est la cible. Les serveurs compromis utilisés pour lancer l'attaque jouent, eux, le rôle d'outils. Cette qualification influence les incriminations applicables et la conduite de l'enquête.",
+      difficulte: 2
+    },
+    {
+      q: "Quel cadre encadre depuis 2023 les transferts de données personnelles entre l'Union européenne et les États-Unis, en remplacement du Privacy Shield invalidé ?",
+      choix: [
+        "Le Safe Harbor",
+        "L'EU-US Data Privacy Framework",
+        "Le Cloud Act",
+        "La directive NIS2"
+      ],
+      reponse: 1,
+      explication:
+        "L'EU-US Data Privacy Framework, adossé à une décision d'adéquation de la Commission européenne adoptée en 2023, encadre les transferts vers les entreprises américaines auto-certifiées. Il succède au Privacy Shield (invalidé par Schrems II en 2020), lui-même successeur du Safe Harbor (invalidé par Schrems I en 2015). Le Cloud Act est une loi américaine d'accès aux données, et NIS2 concerne la cybersécurité des entités critiques, pas les transferts.",
+      difficulte: 2
+    }
+  ],
+
+  // --------------------------------------------------------------------
+  // QUIZ EN — authentic CISSP-style exam questions (English), with French
+  // explanations for learning purposes
+  // --------------------------------------------------------------------
+  quizEn: [
+    {
+      q: "Which of the following security principles is violated when an attacker modifies data while it is being transmitted between two systems?",
+      choix: ["Confidentiality", "Integrity", "Availability", "Authenticity"],
+      reponse: 1,
+      explication:
+        "La modification non autorisée de données, au repos ou en transit, est une atteinte à l'intégrité (Integrity). La confidentialité serait violée par une lecture non autorisée, la disponibilité par une interruption de service, et l'authenticité par l'usurpation de l'origine du message. À l'examen, associez toujours l'action de l'attaquant au pilier touché : modifier = intégrité.",
+      difficulte: 1
+    },
+    {
+      q: "A security manager wants to ensure that the sender of a critical financial message cannot later deny having sent it. Which of the following BEST meets this requirement?",
+      choix: [
+        "Symmetric encryption of the message",
+        "Digital signatures supported by a public key infrastructure",
+        "Hashing the message with SHA-256",
+        "Role-based access control"
+      ],
+      reponse: 1,
+      explication:
+        "La non-répudiation exige de lier l'action à une identité unique de façon prouvable : c'est ce que fait la signature numérique, car la clé privée n'est détenue que par le signataire. Le chiffrement symétrique utilise une clé partagée (chaque partie pourrait avoir produit le message), un hachage seul ne prouve pas l'identité de l'émetteur, et le RBAC gère les droits d'accès, pas la preuve d'origine.",
+      difficulte: 2
+    },
+    {
+      q: "Who holds the ULTIMATE responsibility for the security of an organization's information assets?",
+      choix: [
+        "The chief information security officer (CISO)",
+        "The data custodians",
+        "Senior management",
+        "The security steering committee"
+      ],
+      reponse: 2,
+      explication:
+        "La responsabilité ultime de la sécurité appartient toujours à la direction générale (senior management) : elle approuve les politiques, alloue les ressources et assume les conséquences légales. Le CISO porte une responsabilité fonctionnelle, les custodians appliquent la protection au quotidien, et le comité de pilotage conseille et coordonne. C'est l'un des réflexes les plus testés de l'examen.",
+      difficulte: 1
+    },
+    {
+      q: "What should a security manager do FIRST when initiating a business continuity planning effort?",
+      choix: [
+        "Perform the business impact analysis",
+        "Obtain senior management support and define the project scope",
+        "Select an alternate processing site",
+        "Develop recovery procedures for critical systems"
+      ],
+      reponse: 1,
+      explication:
+        "La première étape du processus BCP est le cadrage du projet : obtenir le soutien de la direction, bâtir le business case, constituer l'équipe et définir le périmètre. Sans cet appui, la BIA et les phases suivantes n'aboutiront pas. Le choix d'un site alternatif et les procédures de récupération relèvent de phases ultérieures (continuity planning et DRP). Face à une question « FIRST », remontez toujours au début du processus.",
+      difficulte: 2
+    },
+    {
+      q: "Which of the following BEST describes due diligence?",
+      choix: [
+        "Applying security controls in day-to-day operations",
+        "Understanding risks and developing plans, policies, and processes to address them",
+        "Purchasing cyber insurance to transfer risk",
+        "Delegating security decisions to system administrators"
+      ],
+      reponse: 1,
+      explication:
+        "La Due Diligence, c'est savoir ce qui doit être fait : comprendre les risques, évaluer, planifier, documenter les politiques et structures. L'application quotidienne des contrôles est la Due Care (« Due Diligence pense, Due Care agit »). L'assurance est une réponse de transfert de risque, et déléguer les décisions de sécurité aux administrateurs serait un manquement du management à ses devoirs.",
+      difficulte: 2
+    },
+    {
+      q: "An asset is valued at $400,000. A threat against it has an exposure factor of 25% and is expected to occur once every two years. What is the annualized loss expectancy (ALE)?",
+      choix: ["$100,000", "$50,000", "$200,000", "$25,000"],
+      reponse: 1,
+      explication:
+        "SLE = AV × EF = 400 000 × 0,25 = 100 000 $. ARO = une occurrence tous les deux ans = 0,5. ALE = SLE × ARO = 100 000 × 0,5 = 50 000 $. Le piège classique est de répondre 100 000 $ (la SLE) en oubliant de convertir la fréquence en taux annualisé. Entraînez-vous à convertir « une fois tous les N ans » en ARO = 1/N.",
+      difficulte: 2
+    },
+    {
+      q: "After a risk assessment, management decides to discontinue an online service because the potential losses outweigh the expected benefits. Which risk response does this represent?",
+      choix: ["Risk mitigation", "Risk transference", "Risk avoidance", "Risk acceptance"],
+      reponse: 2,
+      explication:
+        "Renoncer à une activité parce que le risque dépasse le bénéfice attendu est l'évitement du risque (avoidance) : c'est la seule réponse qui supprime l'exposition en éliminant l'activité elle-même. La mitigation réduirait le risque par des contrôles tout en maintenant le service, le transfert le confierait à un tiers (assurance), et l'acceptation assumerait la perte potentielle en continuant l'activité.",
+      difficulte: 1
+    },
+    {
+      q: "What is the PRIMARY purpose of a business impact analysis (BIA)?",
+      choix: [
+        "To test the effectiveness of disaster recovery procedures",
+        "To identify critical business functions and assess the impact of their disruption over time",
+        "To determine who caused previous service outages",
+        "To calculate the annual security budget"
+      ],
+      reponse: 1,
+      explication:
+        "La BIA identifie les fonctions et processus critiques de l'organisation, évalue l'impact de leur interruption dans le temps, et en déduit les priorités de récupération ainsi que les métriques RTO, RPO et MTD. Les tests du DRP interviennent après l'élaboration des plans, la recherche de responsabilité relève d'autres processus, et le budget sécurité n'est pas l'objet de la BIA.",
+      difficulte: 1
+    },
+    {
+      q: "An organization performs backups of its transaction database every six hours. Which recovery metric is DIRECTLY determined by this backup frequency?",
+      choix: [
+        "Recovery time objective (RTO)",
+        "Recovery point objective (RPO)",
+        "Maximum tolerable downtime (MTD)",
+        "Mean time between failures (MTBF)"
+      ],
+      reponse: 1,
+      explication:
+        "La fréquence des sauvegardes détermine la quantité maximale de données perdues en cas d'incident : c'est le RPO. Avec une sauvegarde toutes les six heures, on peut perdre jusqu'à six heures de transactions. Le RTO mesure le délai de remise en service, le MTD la durée d'interruption au-delà de laquelle l'organisation n'est plus viable, et le MTBF la fiabilité moyenne d'un équipement.",
+      difficulte: 1
+    },
+    {
+      q: "A fire breaks out in the primary data center during business hours. What should the disaster recovery team address FIRST?",
+      choix: [
+        "Failing over critical services to the alternate site",
+        "Ensuring the safety of all personnel",
+        "Notifying the cyber insurance provider",
+        "Restoring the most recent backups"
+      ],
+      reponse: 1,
+      explication:
+        "La priorité absolue de tout plan de continuité ou de reprise est la vie humaine : on évacue et on met les personnes en sécurité avant toute considération technique ou financière. Le basculement, les notifications et la restauration viennent ensuite. À l'examen, quand la sécurité des personnes figure parmi les choix, c'est presque toujours la bonne réponse.",
+      difficulte: 1
+    },
+    {
+      q: "During a threat modeling exercise, an analyst determines that an attacker could use stolen session tokens to impersonate a legitimate user. Which STRIDE category does this threat belong to?",
+      choix: ["Tampering", "Spoofing", "Repudiation", "Elevation of privilege"],
+      reponse: 1,
+      explication:
+        "Se faire passer pour un utilisateur légitime à l'aide d'informations d'authentification volées (jetons de session, mots de passe) est du Spoofing, l'usurpation d'identité. Le tampering altère des données, la repudiation consiste à nier une action, et l'elevation of privilege donne à un compte limité des pouvoirs supérieurs — ce qui n'est pas le cas ici : l'attaquant utilise les droits existants de la victime.",
+      difficulte: 2
+    },
+    {
+      q: "Which threat modeling methodology consists of seven stages and focuses on aligning threat analysis with business objectives and risk?",
+      choix: ["STRIDE", "DREAD", "PASTA", "OCTAVE"],
+      reponse: 2,
+      explication:
+        "PASTA (Process for Attack Simulation and Threat Analysis) déroule sept étapes, des objectifs métier jusqu'à l'analyse et la gestion du risque, en passant par la décomposition de l'application et la simulation d'attaques : c'est la méthodologie centrée sur le risque et alignée sur le métier. STRIDE catégorise les menaces, DREAD les priorise, et OCTAVE est un cadre d'évaluation des risques organisationnels, pas une méthodologie de threat modeling en sept étapes.",
+      difficulte: 2
+    },
+    {
+      q: "A development team has categorized a long list of threats using STRIDE. What should the team do NEXT?",
+      choix: [
+        "Implement countermeasures for every identified threat",
+        "Rate and prioritize the threats, for example using DREAD",
+        "Restart the identification phase with a different methodology",
+        "Publish the full threat list to all employees"
+      ],
+      reponse: 1,
+      explication:
+        "Après l'identification et la catégorisation (STRIDE), l'étape logique est la priorisation : noter chaque menace, par exemple avec les cinq critères DREAD, pour traiter d'abord les plus sérieuses. Traiter toutes les menaces sans priorisation gaspillerait les ressources (les moyens sont limités), recommencer l'identification n'apporte rien, et diffuser la liste à tous exposerait des informations sensibles sur les faiblesses du système.",
+      difficulte: 2
+    },
+    {
+      q: "A critical vulnerability is announced in a widely used open source library. Which of the following BEST enables an organization to quickly identify all affected applications?",
+      choix: [
+        "A hardware root of trust",
+        "A software bill of materials (SBOM)",
+        "A vendor service level agreement",
+        "An annual penetration test"
+      ],
+      reponse: 1,
+      explication:
+        "Le SBOM inventorie tous les composants, bibliothèques et dépendances de chaque application : c'est l'outil qui permet de localiser immédiatement les logiciels embarquant la bibliothèque vulnérable. Le root of trust matériel protège le démarrage, le SLA encadre les engagements d'un fournisseur, et un pentest annuel ne fournit ni l'exhaustivité ni la réactivité nécessaires face à une vulnérabilité publiée aujourd'hui.",
+      difficulte: 2
+    },
+    {
+      q: "Which of the following BEST reduces the risk of counterfeit network hardware being introduced into an organization's infrastructure?",
+      choix: [
+        "Purchasing equipment only from authorized distributors and verifying its integrity upon receipt",
+        "Extending the warranty period on all purchased devices",
+        "Increasing the frequency of internal vulnerability scans",
+        "Requiring all employees to sign an acceptable use policy"
+      ],
+      reponse: 0,
+      explication:
+        "Le risque de contrefaçon se traite à la source, dans la chaîne d'approvisionnement : acheter uniquement auprès de canaux autorisés et vérifier l'intégrité et l'authenticité du matériel à réception (numéros de série, scellés, root of trust). La garantie est un recours commercial, pas une prévention ; les scans de vulnérabilités ne détectent pas un implant matériel ; et l'AUP encadre le comportement des employés, pas la provenance du matériel.",
+      difficulte: 2
+    },
+    {
+      q: "A company subject to the GDPR discovers a breach of personal data belonging to EU residents. Within what timeframe must the competent supervisory authority be notified?",
+      choix: ["24 hours", "72 hours", "30 days", "60 days"],
+      reponse: 1,
+      explication:
+        "Le GDPR impose la notification de la violation à l'autorité de contrôle compétente dans les 72 heures suivant sa découverte. Le délai de 24 heures correspond à l'alerte précoce de NIS2, et 60 jours au régime HIPAA/HITECH américain pour la notification des individus. Mémorisez cette grille de délais : c'est une question quasi certaine à l'examen.",
+      difficulte: 1
+    },
+    {
+      q: "Which of the following BEST describes how PCI DSS is enforced on a merchant?",
+      choix: [
+        "Through federal legislation on electronic payments",
+        "Through contractual obligations with the merchant's acquiring bank",
+        "Through a mandatory ISO certification scheme",
+        "Through European Union directives"
+      ],
+      reponse: 1,
+      explication:
+        "PCI DSS n'est pas une loi : c'est un standard de l'industrie des cartes de paiement, imposé par le contrat entre le commerçant et sa banque acquéreuse. Sa force vient des pénalités contractuelles et du risque de perdre la capacité d'accepter les cartes. Aucune législation fédérale, certification ISO ou directive européenne ne fonde son application — c'est le piège classique de l'examen.",
+      difficulte: 2
+    },
+    {
+      q: "A multinational corporation needs a lawful mechanism to routinely transfer employee data among its subsidiaries located inside and outside the European Union. Which mechanism is MOST appropriate?",
+      choix: [
+        "Continuing to rely on the invalidated Privacy Shield",
+        "Binding corporate rules (BCR) approved by a supervisory authority",
+        "Waiting for adequacy decisions covering every country involved",
+        "Collecting individual consent from each employee for every transfer"
+      ],
+      reponse: 1,
+      explication:
+        "Les Binding Corporate Rules sont le mécanisme conçu pour les transferts intra-groupe des multinationales : un corpus unique de règles contraignantes, approuvé par une autorité de contrôle, couvre toutes les filiales. Le Privacy Shield est invalidé depuis Schrems II, les décisions d'adéquation dépendent de la Commission et ne couvrent pas tous les pays, et le consentement des salariés est rarement considéré comme libre dans la relation de travail.",
+      difficulte: 3
+    },
+    {
+      q: "Following the Schrems II ruling, what MUST an organization do before relying on standard contractual clauses (SCC) to transfer personal data outside the EU?",
+      choix: [
+        "Nothing; SCC remain automatically sufficient in all cases",
+        "Assess the legal environment of the destination country and implement supplementary measures where needed",
+        "Obtain individual approval from the European Commission for each transfer",
+        "Replace the SCC with the Privacy Shield framework"
+      ],
+      reponse: 1,
+      explication:
+        "Schrems II a maintenu la validité des SCC mais a imposé une condition : l'exportateur doit évaluer si le droit du pays de destination (notamment ses lois de surveillance) permet de respecter les clauses en pratique — c'est le transfer impact assessment — et ajouter des mesures supplémentaires (chiffrement, pseudonymisation…) si nécessaire. La Commission n'approuve pas chaque transfert individuellement, et le Privacy Shield est précisément ce que l'arrêt a invalidé.",
+      difficulte: 3
+    },
+    {
+      q: "Which standard of proof must be met to obtain a conviction in a criminal case?",
+      choix: [
+        "Preponderance of the evidence",
+        "Beyond a reasonable doubt",
+        "Clear and convincing evidence",
+        "Probable cause"
+      ],
+      reponse: 1,
+      explication:
+        "En matière criminelle, la culpabilité doit être établie au-delà de tout doute raisonnable (beyond a reasonable doubt) : c'est le standard le plus exigeant, car la liberté de la personne est en jeu, et il impose la collecte de preuves la plus rigoureuse. La prépondérance de la preuve suffit au civil, et la probable cause est le seuil requis pour obtenir un mandat, pas pour condamner.",
+      difficulte: 1
+    },
+    {
+      q: "Your organization receives notice of a regulatory investigation along with a request to preserve relevant records. What should the security manager do FIRST?",
+      choix: [
+        "Delete outdated emails in accordance with the retention schedule",
+        "Implement a legal hold to preserve all potentially relevant evidence",
+        "Wait for a court order before taking any action",
+        "Negotiate the scope of the investigation with the regulator"
+      ],
+      reponse: 1,
+      explication:
+        "Dans une enquête réglementaire, l'organisation a l'obligation de coopérer et de préserver les preuves : la première action est de mettre en place un legal hold suspendant toute destruction de documents potentiellement pertinents, y compris les purges automatiques de rétention. Continuer à supprimer des e-mails, même selon le calendrier normal, pourrait constituer une destruction de preuves ; attendre un ordre du tribunal ou négocier ne dispense pas de préserver immédiatement.",
+      difficulte: 2
+    },
+    {
+      q: "A CISSP-certified professional discovers that her employer is knowingly exposing the public to a serious safety risk. According to the ISC² Code of Ethics, whose interests should take precedence?",
+      choix: [
+        "The employer's, under the duty to principals",
+        "Society's and the common good's",
+        "The profession's reputation",
+        "The professional's own career interests"
+      ],
+      reponse: 1,
+      explication:
+        "Les canons du code ISC² sont hiérarchisés : le premier, protéger la société, le bien commun, la confiance du public et les infrastructures, prime sur tous les autres, y compris le devoir envers les mandants (canon III) qui couvre l'employeur. En cas de conflit, l'intérêt de la société l'emporte. La réputation de la profession n'arrive qu'en quatrième position, et l'intérêt personnel n'est pas un canon.",
+      difficulte: 2
+    },
+    {
+      q: "Which type of security document provides detailed, step-by-step instructions for completing a specific security task?",
+      choix: ["Policy", "Standard", "Guideline", "Procedure"],
+      reponse: 3,
+      explication:
+        "La procédure (ou SOP, standard operating procedure) décrit pas à pas les actions exactes pour accomplir une tâche : c'est le document le plus détaillé et le plus opérationnel de la hiérarchie documentaire. La policy fixe les objectifs stratégiques, le standard impose des exigences uniformes obligatoires, et la guideline formule des recommandations flexibles et facultatives.",
+      difficulte: 1
+    },
+    {
+      q: "Which type of security document offers recommendations that are flexible and NOT mandatory?",
+      choix: ["Baseline", "Guideline", "Standard", "Policy"],
+      reponse: 1,
+      explication:
+        "La guideline est le seul document de la hiérarchie qui soit une recommandation : flexible, adaptable au contexte, et non obligatoire. Policies, standards et baselines sont tous contraignants : la policy au niveau stratégique, le standard pour l'uniformité des technologies et pratiques, et la baseline pour le niveau minimal de sécurité de chaque type de système.",
+      difficulte: 1
+    },
+    {
+      q: "A database administrator with privileged access is being terminated involuntarily. What should the organization do FIRST?",
+      choix: [
+        "Conduct a detailed exit interview",
+        "Disable the administrator's accounts and access rights",
+        "Collect the company laptop and access badge",
+        "Announce the departure to the rest of the team"
+      ],
+      reponse: 1,
+      explication:
+        "Pour un départ contraint d'un titulaire de comptes à privilèges, la priorité est de désactiver les accès logiques avant ou au moment même de l'annonce, afin d'empêcher toute action malveillante (sabotage, exfiltration). L'entretien de sortie, la récupération du matériel et la communication interne suivent : aucun d'eux ne protège les systèmes tant que les accès restent actifs.",
+      difficulte: 1
+    },
+    {
+      q: "The badge reader controlling access to the server room fails, and a security guard is posted at the door to verify identities until the system is repaired. Which type of control does the guard represent?",
+      choix: ["Corrective", "Compensating", "Directive", "Recovery"],
+      reponse: 1,
+      explication:
+        "Un contrôle compensatoire remplace ou renforce temporairement un contrôle principal défaillant : le gardien compense la panne du lecteur de badges en assurant la même fonction de contrôle d'accès. Un contrôle correctif ramènerait le système à la normale après incident, un contrôle directif oriente les comportements (panneaux, consignes), et un contrôle de récupération restaure après des dommages étendus.",
+      difficulte: 2
+    },
+    {
+      q: "Which of the following BEST indicates that a security awareness program is effective?",
+      choix: [
+        "The number of training sessions delivered each year",
+        "A decreasing click rate and an increasing reporting rate during simulated phishing campaigns",
+        "The size of the budget allocated to the program",
+        "The attendance rate at the annual training session"
+      ],
+      reponse: 1,
+      explication:
+        "L'efficacité d'un programme de sensibilisation se mesure aux changements de comportement : la baisse du taux de clic et la hausse du taux de signalement lors des campagnes de phishing simulé sont des indicateurs de résultat. Le nombre de sessions, le budget et l'assiduité ne mesurent que l'activité ou les moyens engagés, pas l'impact réel sur les comportements — distinction classique entre indicateurs de moyens et indicateurs de résultats.",
+      difficulte: 2
+    },
+    {
+      q: "A defense contractor discovers a stealthy intrusion that has persisted for two years, using custom-built malware to exfiltrate classified design documents. Which threat actor is MOST likely responsible?",
+      choix: [
+        "A script kiddie",
+        "A negligent insider",
+        "A nation-state advanced persistent threat (APT)",
+        "A hacktivist group"
+      ],
+      reponse: 2,
+      explication:
+        "Furtivité, persistance sur deux ans, malwares développés sur mesure et ciblage de secrets de défense : tous les marqueurs de l'acteur étatique (APT) sont réunis — ressources quasi illimitées, objectifs d'espionnage, patience. Un script kiddie n'a ni la compétence ni la persistance, un insider négligent cause des incidents par erreur et non une campagne structurée, et un hacktiviste chercherait la visibilité et revendiquerait son action.",
+      difficulte: 2
+    },
+    {
+      q: "The chief financial officer receives a personalized email, apparently from the CEO, urgently requesting a confidential wire transfer. Which attack does this scenario BEST describe?",
+      choix: ["Whaling", "Vishing", "Pharming", "Tailgating"],
+      reponse: 0,
+      explication:
+        "Un message frauduleux personnalisé ciblant un dirigeant (ici le CFO) est du whaling, la variante du spear phishing réservée aux « gros poissons », typique de la fraude BEC (Business Email Compromise). Le vishing passe par le téléphone, le pharming redirige les victimes vers de faux sites en manipulant la résolution DNS, et le tailgating est une intrusion physique en suivant un employé.",
+      difficulte: 1
+    },
+    {
+      q: "Which of the following BEST defines residual risk?",
+      choix: [
+        "The risk that exists before any controls are applied",
+        "The risk remaining after controls have been implemented, which management chooses to accept",
+        "The total risk that has been transferred to an insurance provider",
+        "The portion of risk eliminated by the controls gap"
+      ],
+      reponse: 1,
+      explication:
+        "Le risque résiduel est celui qui subsiste après la mise en place des contrôles approuvés : c'est ce risque que la direction accepte formellement. Le risque existant avant tout traitement est le risque inhérent, le transfert à un assureur est une réponse au risque (pas la définition du résiduel), et le controls gap est la part de risque éliminée par les contrôles — le résiduel est ce qui reste, pas ce qui est éliminé.",
+      difficulte: 1
+    },
+    {
+      q: "An organization's board asks which framework BEST supports the governance of enterprise IT and its alignment with business strategy. What should the security manager recommend?",
+      choix: ["COBIT", "PCI DSS", "FedRAMP", "CVSS"],
+      reponse: 0,
+      explication:
+        "COBIT, publié par ISACA, est le référentiel de gouvernance des technologies de l'information par excellence : il aligne l'IT sur la stratégie de l'entreprise et sert couramment de cadre d'audit et de conformité. PCI DSS protège les données de cartes de paiement, FedRAMP autorise les services cloud pour le gouvernement fédéral américain, et CVSS est un système de notation de la gravité des vulnérabilités.",
+      difficulte: 2
+    },
+    {
+      q: "Which of the following BEST describes the difference between risk appetite and risk tolerance?",
+      choix: [
+        "The two terms are synonyms and can be used interchangeably",
+        "Risk appetite is the total amount of risk an organization is willing to accept, while risk tolerance is the acceptable variation around a specific objective",
+        "Risk tolerance always exceeds risk capacity",
+        "Risk appetite applies only to financial risks"
+      ],
+      reponse: 1,
+      explication:
+        "Le risk appetite est la quantité globale de risque que l'organisation est prête à accepter pour poursuivre sa mission ; la risk tolerance est plus fine : la variation acceptable des résultats autour d'un objectif spécifique. Les deux notions ne sont pas synonymes, la tolérance ne doit jamais dépasser la risk capacity (le maximum absorbable), et l'appétit pour le risque s'applique à tous les types de risques, pas seulement financiers.",
+      difficulte: 3
     }
   ],
 
