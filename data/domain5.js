@@ -756,11 +756,17 @@ window.CISSP_DATA.domains[5] = {
         "Garantir la disponibilité des systèmes",
         "Assurer l'accountability des sujets",
         "Chiffrer les données sensibles",
-        "Réduire les coûts d'administration"
+        "Empêcher toute tentative d'accès non autorisé"
       ],
       reponse: 1,
       explication:
-        "L'accountability est le principe même du contrôle d'accès : c'est la combinaison d'une identification unique, d'une authentification fiable et de l'audit qui permet d'attribuer chaque action à un individu et de le tenir responsable. La disponibilité et le chiffrement relèvent d'autres objectifs de sécurité, et la réduction des coûts n'est pas un objectif de sécurité.",
+        "L'accountability est le principe même du contrôle d'accès : c'est la combinaison d'une identification unique, d'une authentification fiable et de l'audit qui permet d'attribuer chaque action à un individu et de le tenir responsable. La disponibilité et le chiffrement relèvent d'autres objectifs de sécurité, et aucun mécanisme ne peut empêcher TOUTE tentative d'accès — le contrôle d'accès vise la responsabilité, pas l'impossibilité.",
+      pourquoi: [
+        "Techniquement souhaitable mais hors sujet : la disponibilité relève de la triade CIA, pas de la finalité du trio identification-authentification-audit.",
+        "Bonne réponse : l'accountability est la finalité du contrôle d'accès — attribuer chaque action à un individu unique et pouvoir le tenir responsable.",
+        "Réponse de technicien : le chiffrement protège la confidentialité, mais il n'est pas le but de la chaîne IAAA.",
+        "Piège absolu : aucun mécanisme ne peut empêcher TOUTE tentative d'accès non autorisé ; le contrôle d'accès vise la responsabilité, pas l'impossibilité."
+      ],
       difficulte: 1
     },
     {
@@ -774,6 +780,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 2,
       explication:
         "Le MFA exige des facteurs de types différents. Un mot de passe et un PIN sont tous deux 'something you know' : c'est donc une authentification à facteur unique en deux étapes. Les réponses A, B et D confondent le nombre d'éléments demandés avec le nombre de types de facteurs, ce qui est le piège classique.",
+      pourquoi: [
+        "Piège classique : deux éléments demandés ne font pas deux facteurs quand ils sont du même type (connaissance).",
+        "Hors cadre : AAL2 exige deux TYPES de facteurs différents, ce que mot de passe + PIN ne fournissent pas.",
+        "Bonne réponse : mot de passe et PIN sont tous deux « something you know » — authentification à facteur unique en deux étapes.",
+        "Faux : l'indépendance de deux secrets ne crée pas une authentification forte s'ils appartiennent au même type de facteur."
+      ],
       difficulte: 1
     },
     {
@@ -787,6 +799,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 2,
       explication:
         "Dans un environnement très sensible, laisser entrer un imposteur (erreur de type 2, FAR) est bien plus grave que rejeter un utilisateur légitime (erreur de type 1, FRR). On augmente donc la sensibilité, quitte à subir plus de faux rejets. Le CER est le point d'équilibre optimal seulement quand les deux erreurs ont des impacts équivalents, ce qui n'est pas le cas ici.",
+      pourquoi: [
+        "Techniquement confortable mais contextuellement faux : fluidifier l'accès augmente le FAR, inacceptable pour un site très sensible.",
+        "Trop générique : le CER sert à comparer des systèmes ; il n'est le bon réglage que si les deux erreurs ont un impact équivalent, ce qui n'est pas le cas ici.",
+        "Bonne réponse : dans un environnement très sensible, on accepte plus de faux rejets (FRR) pour minimiser les fausses acceptations (FAR).",
+        "Hors sujet : le débit d'enrôlement est un critère d'ergonomie, pas de sécurité."
+      ],
       difficulte: 2
     },
     {
@@ -800,6 +818,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le CER est le point où le taux de fausses acceptations (FAR) égale le taux de faux rejets (FRR) : c'est la mesure de référence pour comparer la précision de systèmes biométriques, et un CER bas indique un système précis. La réponse A décrit le FRR, la C évoque le FAR, et la D concerne le processus d'enrôlement.",
+      pourquoi: [
+        "Confusion de définition : le taux de rejets d'utilisateurs légitimes est le FRR, pas le CER.",
+        "Bonne réponse : le CER est le point d'égalité FAR/FRR, mesure de référence de la précision d'un système biométrique.",
+        "Confusion : l'acceptation d'imposteurs décrit le FAR, pas le point de croisement.",
+        "Hors sujet : le temps d'enrôlement est un critère opérationnel sans lien avec la précision."
+      ],
       difficulte: 1
     },
     {
@@ -808,6 +832,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 2,
       explication:
         "AAL3 exige un MFA basé sur du matériel et impose la résistance au phishing et à l'usurpation du vérifieur (verifier impersonation). AAL1 accepte un facteur unique, AAL2 exige le MFA avec résistance au rejeu, et AAL4 n'existe pas dans NIST SP 800-63B.",
+      pourquoi: [
+        "Trop faible : AAL1 accepte l'authentification à facteur unique.",
+        "Trop faible : AAL2 exige le MFA mais n'impose ni matériel ni résistance à l'usurpation du vérifieur.",
+        "Bonne réponse : AAL3 impose un authentificateur matériel avec résistance au phishing et à l'usurpation du vérifieur.",
+        "Piège d'invention : AAL4 n'existe pas dans NIST SP 800-63B."
+      ],
       difficulte: 2
     },
     {
@@ -816,11 +846,17 @@ window.CISSP_DATA.domains[5] = {
         "Le SMS est trop lent pour les utilisateurs",
         "Le canal SMS présente des vulnérabilités permettant l'interception des codes",
         "Le SMS coûte trop cher à grande échelle",
-        "Les téléphones ne peuvent pas recevoir de codes chiffrés"
+        "Le SMS repose sur un appareil personnel qui échappe souvent à la gestion (MDM) de l'organisation"
       ],
       reponse: 1,
       explication:
-        "NIST SP 800-63B pointe les vulnérabilités du canal SMS : interception, SIM swapping, redirection. Ce n'est ni une question de lenteur ni de coût, et la réponse D est techniquement hors sujet. Les alternatives recommandées incluent les applications TOTP et les authentificateurs matériels.",
+        "NIST SP 800-63B pointe les vulnérabilités du canal SMS : interception, SIM swapping, redirection. Ce n'est ni une question de lenteur ni de coût ; et si l'appareil personnel non géré est un vrai enjeu de gestion des terminaux, ce n'est pas le motif de la dépréciation — le problème est la vulnérabilité du canal lui-même. Les alternatives recommandées incluent les applications TOTP et les authentificateurs matériels.",
+      pourquoi: [
+        "Hors sujet : la latence n'est pas un critère de sécurité retenu par le NIST.",
+        "Bonne réponse : le canal SMS est vulnérable à l'interception, au SIM swapping et à la redirection — motif de la dépréciation par NIST SP 800-63B.",
+        "Hors sujet : le coût n'entre pas dans l'analyse de sécurité du NIST.",
+        "Techniquement vrai (terminal souvent hors MDM) mais ce n'est pas le motif du NIST : le problème est la vulnérabilité du canal lui-même."
+      ],
       difficulte: 2
     },
     {
@@ -834,19 +870,31 @@ window.CISSP_DATA.domains[5] = {
       reponse: 0,
       explication:
         "La smart card embarque un circuit intégré capable de générer des données uniques à chaque transaction, ce qui empêche le rejeu. La memory card, à piste magnétique, restitue toujours les mêmes données, ce qui la rend facilement clonable — l'inverse de la sécurité affirmée en B. Les réponses C et D décrivent des exigences qui ne sont pas systématiques.",
+      pourquoi: [
+        "Bonne réponse : la puce de la smart card génère des données uniques à chaque transaction, ce qui empêche clonage et rejeu.",
+        "Inversion : des données statiques rendent la memory card facilement clonable — c'est une faiblesse, pas une force.",
+        "Trop étroit et faux : la smart card fonctionne avec PIN, certificats ou biométrie, sans exclusivité.",
+        "Généralisation abusive : le PIN n'est pas systématique sur une memory card."
+      ],
       difficulte: 2
     },
     {
       q: "Quel est le PRINCIPAL risque introduit par le Single Sign-On, et quelle est la MEILLEURE parade ?",
       choix: [
-        "La lenteur d'authentification ; ajouter des serveurs",
+        "La dépendance à un annuaire central ; redonder l'infrastructure d'authentification",
         "Le point de compromission unique ; exiger le MFA sur l'identifiant SSO",
         "La multiplication des mots de passe ; imposer un gestionnaire de mots de passe",
         "L'absence d'audit ; activer la journalisation"
       ],
       reponse: 1,
       explication:
-        "Le SSO crée un single point of compromise : un identifiant SSO volé expose toutes les ressources liées. La meilleure parade est de protéger cette authentification unique par du MFA. Le SSO réduit justement le nombre de mots de passe (C est contradictoire), et les réponses A et D n'adressent pas le risque principal.",
+        "Le SSO crée un single point of compromise : un identifiant SSO volé expose toutes les ressources liées. La meilleure parade est de protéger cette authentification unique par du MFA. La dépendance à l'annuaire (A) est un vrai enjeu de disponibilité mais pas le risque de sécurité principal ; le SSO réduit justement le nombre de mots de passe (C est contradictoire) ; et D n'adresse pas le risque principal.",
+      pourquoi: [
+        "Techniquement vrai (la disponibilité de l'annuaire est un enjeu) mais ce n'est pas le risque PRINCIPAL : le danger majeur est la compromission, pas la panne.",
+        "Bonne réponse : le SSO crée un point de compromission unique ; le MFA sur l'identifiant SSO est la parade prioritaire.",
+        "Contradiction : le SSO réduit justement le nombre de mots de passe.",
+        "Hors sujet : le SSO n'empêche pas l'audit ; la journalisation existe indépendamment."
+      ],
       difficulte: 1
     },
     {
@@ -860,6 +908,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Kerberos horodate ses tickets (TGT et service tickets) pour prévenir les attaques par rejeu ; il dépend donc de NTP pour synchroniser clients et serveurs. Une dérive d'horloge excessive fait échouer l'authentification. LDAP, RADIUS et SAML ne sont pas en cause dans un scénario de dérive horaire d'un contrôleur de domaine.",
+      pourquoi: [
+        "Réponse de technicien hors cause : une dérive d'horloge ne corrompt pas l'annuaire LDAP.",
+        "Bonne réponse : Kerberos horodate ses tickets contre le rejeu et tolère une dérive limitée — la synchronisation NTP est vitale.",
+        "Hors phase : aucun blocage de ports n'est décrit dans le scénario.",
+        "Hors contexte : SAML n'intervient pas dans l'authentification interne d'un domaine AD."
+      ],
       difficulte: 2
     },
     {
@@ -873,6 +927,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le TGS, hébergé par le KDC, vérifie le TGT présenté par le client puis délivre un service ticket pour la ressource demandée. L'AS vérifie l'authenticité initiale des demandes et participe à l'émission du TGT. Le principal est l'entité qui demande les tickets, et le realm est la zone logique gouvernée par Kerberos.",
+      pourquoi: [
+        "Trop tôt dans le processus : l'AS gère l'authentification initiale et participe à l'émission du TGT, pas des service tickets.",
+        "Bonne réponse : le TGS vérifie le TGT présenté puis délivre les service tickets.",
+        "Contresens : le principal est l'entité qui DEMANDE les tickets, il n'en délivre pas.",
+        "Hors sujet : le realm est la zone logique Kerberos, pas un composant actif."
+      ],
       difficulte: 2
     },
     {
@@ -886,6 +946,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le KDC chiffre la clé de session avec un hash du mot de passe de l'utilisateur : seul le détenteur du bon mot de passe peut la déchiffrer. Le mot de passe n'est donc jamais transmis, mais il est bien vérifié. Kerberos v5 utilise la cryptographie symétrique (AES), pas asymétrique, et le TGT chiffré est installé côté client, pas sur le serveur de ressources.",
+      pourquoi: [
+        "Faux : le mot de passe n'est jamais transmis, même chiffré.",
+        "Bonne réponse : le KDC chiffre la clé de session avec un hash du mot de passe — seul le détenteur du bon mot de passe peut la déchiffrer.",
+        "Faux : Kerberos v5 repose sur la cryptographie symétrique (AES), pas asymétrique.",
+        "Faux et dangereux : le TGT chiffré est conservé côté client, jamais en clair sur le serveur de ressources."
+      ],
       difficulte: 3
     },
     {
@@ -894,6 +960,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "SAML 2.0 est un standard ouvert basé sur XML maintenu par l'OASIS. L'IETF maintient OAuth 2.0 (RFC 6749), l'OpenID Foundation maintient OIDC, et le W3C est derrière WebAuthn et l'API Credential Management.",
+      pourquoi: [
+        "Confusion d'organismes : l'IETF maintient OAuth 2.0 (RFC 6749).",
+        "Bonne réponse : SAML 2.0 est un standard XML maintenu par l'OASIS.",
+        "Confusion : l'OpenID Foundation maintient OIDC, pas SAML.",
+        "Confusion : le W3C est derrière WebAuthn, pas SAML."
+      ],
       difficulte: 2
     },
     {
@@ -907,6 +979,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 2,
       explication:
         "L'authentication assertion prouve que l'agent utilisateur a fourni les bons identifiants, identifie la méthode d'identification et l'heure de connexion. L'authorization assertion indique si l'accès au service est accordé (et pourquoi en cas de refus), l'attribute assertion transporte des informations sur l'utilisateur, et l'assertion de session n'existe pas dans SAML.",
+      pourquoi: [
+        "Hors cible : l'assertion d'autorisation indique si l'accès est accordé, pas comment l'utilisateur s'est authentifié.",
+        "Hors cible : l'assertion d'attribut transporte des informations sur l'utilisateur, pas la preuve de connexion.",
+        "Bonne réponse : l'authentication assertion prouve la fourniture des identifiants et précise la méthode et l'heure de connexion.",
+        "Piège d'invention : l'assertion de session n'existe pas dans SAML."
+      ],
       difficulte: 2
     },
     {
@@ -915,6 +993,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Se connecter à un service tiers via un compte existant est un scénario d'authentification fédérée : OIDC, couche d'authentification bâtie sur OAuth 2.0, avec des jetons JWT. OAuth seul ne fait que de l'autorisation déléguée (accéder à des ressources, pas prouver une identité). Kerberos est un SSO interne et TACACS+ un protocole AAA réseau.",
+      pourquoi: [
+        "Trop étroit : OAuth seul délègue des autorisations, il ne prouve pas une identité.",
+        "Bonne réponse : se connecter via un compte existant est de l'authentification fédérée — OIDC, couche d'identité bâtie sur OAuth 2.0.",
+        "Hors contexte : Kerberos est un SSO de réseau interne, pas un protocole web grand public.",
+        "Hors sujet : TACACS+ est un protocole AAA pour équipements réseau."
+      ],
       difficulte: 2
     },
     {
@@ -928,6 +1012,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 0,
       explication:
         "OIDC ajoute l'authentification (jetons d'identité JWT, profil utilisateur) au-dessus du framework d'autorisation OAuth 2.0 : les deux sont complémentaires, pas concurrents. OAuth n'est ni une extension d'OIDC ni déprécié ; il reste le standard ouvert le plus utilisé pour l'autorisation et la délégation de droits vers les services cloud.",
+      pourquoi: [
+        "Bonne réponse : OIDC est la couche d'authentification construite sur le framework d'autorisation OAuth 2.0.",
+        "Inversion des rôles : OAuth n'étend pas OIDC et ne traite pas de chiffrement.",
+        "Faux : les deux protocoles sont complémentaires, pas concurrents.",
+        "Faux : OAuth 2.0 n'est pas déprécié — il reste le standard d'autorisation le plus utilisé."
+      ],
       difficulte: 2
     },
     {
@@ -941,6 +1031,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "TACACS+ chiffre la totalité des échanges d'authentification (RADIUS ne chiffre par défaut que le mot de passe) et sépare authentification, autorisation et accounting en processus distincts, hébergeables sur des serveurs différents. Il utilise TCP port 49 (pas UDP), reste un modèle centralisé, et Diameter n'est compatible ni avec RADIUS ni concerné ici.",
+      pourquoi: [
+        "Doublement faux : TACACS+ utilise TCP (port 49), et UDP n'est pas un avantage de sécurité.",
+        "Bonne réponse : TACACS+ chiffre l'intégralité des échanges et sépare authentification, autorisation et accounting.",
+        "Faux : TACACS+ reste un modèle AAA centralisé.",
+        "Faux : Diameter n'est rétrocompatible ni avec RADIUS ni avec TACACS+."
+      ],
       difficulte: 2
     },
     {
@@ -949,6 +1045,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "RADIUS utilise UDP 1812 pour l'authentification et UDP 1813 pour l'accounting. Le port 88 est celui de Kerberos, TCP 49 celui de TACACS+, et TCP 2083 celui de RADIUS sur TLS (RadSec) défini par la RFC 6614.",
+      pourquoi: [
+        "Confusion : 88 est le port de Kerberos.",
+        "Bonne réponse : UDP 1812 pour l'authentification et UDP 1813 pour l'accounting.",
+        "Confusion : 49 est le port TCP de TACACS+.",
+        "Confusion : 2083 correspond à RadSec (RADIUS sur TLS, RFC 6614)."
+      ],
       difficulte: 3
     },
     {
@@ -962,6 +1064,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Diameter corrige les faiblesses de RADIUS : transport fiable en TCP ou SCTP, sécurité par IPsec ou TLS (au lieu du hachage MD5), attributs étendus pour les grands réseaux et gestion de sessions complexes. Mais il n'est PAS rétrocompatible avec RADIUS, ne se limite pas au mot de passe, et vise justement les réseaux vastes et complexes.",
+      pourquoi: [
+        "Piège fréquent : Diameter n'est PAS rétrocompatible avec RADIUS.",
+        "Bonne réponse : Diameter utilise TCP ou SCTP et sécurise les échanges par IPsec ou TLS.",
+        "Contresens : c'est RADIUS qui ne chiffre par défaut que le mot de passe.",
+        "Inversion : Diameter vise précisément les grands réseaux complexes."
+      ],
       difficulte: 3
     },
     {
@@ -975,6 +1083,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Dans le DAC, chaque objet a un propriétaire qui accorde ou refuse l'accès à sa discrétion via des ACL — c'est le modèle de NTFS. Le MAC repose sur des labels imposés par le système, le RBAC sur des rôles gérés centralement, et le rule-based sur des règles globales appliquées à tous les sujets.",
+      pourquoi: [
+        "Contresens : le MAC impose des labels par le système — personne ne s'octroie de permissions soi-même.",
+        "Bonne réponse : accorder soi-même des accès sur son fichier via des ACL est la définition du DAC — le modèle de NTFS.",
+        "Hors modèle : le RBAC centralise les droits dans des rôles gérés par l'administration.",
+        "Hors modèle : le rule-based applique des règles globales identiques à tous."
+      ],
       difficulte: 1
     },
     {
@@ -988,6 +1102,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le MAC se reconnaît à ses labels de classification appliqués aux sujets comme aux objets, l'accès étant imposé par le système selon la politique de l'organisation (modèle lattice-based, need to know). La réponse A décrit le DAC, la C le RBAC et la D l'ABAC.",
+      pourquoi: [
+        "Confusion : le propriétaire qui décide, c'est la définition du DAC.",
+        "Bonne réponse : labels sur sujets et objets, politique imposée par le système — la signature du MAC.",
+        "Confusion : les privilèges par rôles métier décrivent le RBAC.",
+        "Confusion : les règles à attributs multiples en XACML décrivent l'ABAC."
+      ],
       difficulte: 1
     },
     {
@@ -1001,6 +1121,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le RBAC attribue les privilèges à des rôles alignés sur les fonctions : à chaque mouvement de personnel, il suffit de changer l'appartenance au rôle, ce qui minimise la charge d'administration et empêche l'accumulation de droits. Le DAC disperse les décisions, le MAC est lourd et destiné aux environnements de haute sécurité, et le rule-based ne gère pas les fonctions métier.",
+      pourquoi: [
+        "Techniquement possible mais contre-productif : le DAC disperse les décisions et aggrave la charge à fort turnover.",
+        "Bonne réponse : avec le RBAC, un changement de poste se gère en changeant l'appartenance au rôle, ce qui limite aussi le privilege creep.",
+        "Techniquement vrai mais hors contexte : le MAC est lourd et réservé aux environnements de haute sécurité.",
+        "Hors sujet : le rule-based ne modélise pas les fonctions métier."
+      ],
       difficulte: 2
     },
     {
@@ -1014,6 +1140,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 0,
       explication:
         "L'ABAC combine plusieurs attributs — le rôle du sujet (manager), le type d'appareil (mobile), la ressource (WAN) et l'environnement (heures ouvrées) — dans des politiques exprimables en langage naturel, formalisées avec XACML. Le RBAC seul ne prend en compte que le rôle, sans les attributs d'environnement ; DAC et MAC ne fonctionnent pas par règles à attributs.",
+      pourquoi: [
+        "Bonne réponse : rôle, type d'appareil, ressource et plage horaire sont des attributs combinés — c'est l'ABAC.",
+        "Hors modèle : le DAC repose sur le propriétaire, pas sur des règles à attributs.",
+        "Hors modèle : le MAC classe par niveaux de sensibilité, sans conditions contextuelles.",
+        "Trop étroit : le RBAC seul ne capture ni l'appareil ni l'horaire."
+      ],
       difficulte: 2
     },
     {
@@ -1027,6 +1159,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le Policy Decision Point évalue les demandes d'accès selon les règles prédéfinies et rend la décision ; le Policy Enforcement Point, en gatekeeper, reçoit les demandes, les transmet au PDP puis applique la décision (accès accordé ou refusé). La réponse A inverse les rôles ; IdP/SP relèvent de la fédération et KDC/TGS de Kerberos.",
+      pourquoi: [
+        "Inversion des rôles PEP/PDP — le piège classique de cette architecture.",
+        "Bonne réponse : le PDP évalue la demande et décide ; le PEP, en point de passage, applique la décision.",
+        "Hors sujet : IdP et SP relèvent de la fédération, pas de l'architecture de politiques.",
+        "Hors sujet : KDC et TGS relèvent de Kerberos."
+      ],
       difficulte: 2
     },
     {
@@ -1040,6 +1178,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le risk-based access control évalue l'environnement et la situation (localisation, MFA, appareil, comportement) et peut utiliser le machine learning pour comparer l'activité courante aux comportements passés, par exemple pour bloquer le trafic anormal d'un IoT infecté. Le rule-based applique des règles statiques identiques pour tous, le content-dependent examine le contenu accédé, et le DAC repose sur le propriétaire.",
+      pourquoi: [
+        "Trop statique : le rule-based applique des règles identiques pour tous, sans analyse comportementale.",
+        "Bonne réponse : évaluer le contexte et le comportement, y compris par machine learning, est du risk-based access control.",
+        "Hors cible : le content-dependent examine le contenu accédé, pas le comportement.",
+        "Hors modèle : le DAC repose sur le propriétaire, sans moteur d'évaluation."
+      ],
       difficulte: 2
     },
     {
@@ -1053,19 +1197,31 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "L'accumulation de privilèges au fil des changements de poste est le privilege creep (creeping privileges), qui viole le principe du least privilege. L'escalade verticale et le mouvement latéral sont des techniques d'attaque, pas des dérives administratives. Les revues d'accès périodiques sont précisément le contrôle qui détecte cette dérive.",
+      pourquoi: [
+        "Confusion : l'escalade verticale est une technique d'attaque, pas une dérive administrative.",
+        "Bonne réponse : l'accumulation de droits au fil des postes est le privilege creep, violation du least privilege.",
+        "Piège d'invention : « excessive delegation » n'est pas le terme consacré.",
+        "Confusion : le mouvement latéral est une technique d'attaque réseau, pas un cumul de droits."
+      ],
       difficulte: 1
     },
     {
       q: "Pourquoi faut-il éviter d'utiliser le compte système local comme compte de service pour une application ?",
       choix: [
-        "Il empêche l'application de démarrer automatiquement",
+        "Son mot de passe ne peut pas être placé dans un coffre-fort PAM",
         "Il accorde généralement à l'application plus d'accès qu'elle n'en a besoin",
-        "Il ne peut pas être audité par le système",
-        "Il expire automatiquement tous les 30 jours"
+        "Ses actions se confondent avec celles du système, ce qui complique l'audit",
+        "Il ne permet pas l'authentification auprès des ressources réseau"
       ],
       reponse: 1,
       explication:
-        "Le compte système local évite de créer un compte de service dédié, mais il accorde presque toujours des privilèges excessifs à l'application, en violation du least privilege — et limiter les privilèges des comptes de service réduit le succès des attaques par escalade. Les réponses A, C et D sont factuellement fausses.",
+        "Le compte système local évite de créer un compte de service dédié, mais il accorde presque toujours des privilèges excessifs à l'application, en violation du least privilege — et limiter les privilèges des comptes de service réduit le succès des attaques par escalade. La difficulté d'attribution dans les journaux (C) est réelle mais secondaire par rapport au sur-privilège ; A et D sont factuellement fausses.",
+      pourquoi: [
+        "Faux : la gestion en coffre-fort n'est pas le problème — le risque du compte système est ailleurs.",
+        "Bonne réponse : le compte système accorde presque toujours plus de privilèges que nécessaire, en violation du least privilege.",
+        "Techniquement vrai mais secondaire : la difficulté d'audit est réelle, mais le risque premier est le sur-privilège exploitable par escalade.",
+        "Faux techniquement : dans un domaine, le compte machine peut s'authentifier auprès des ressources réseau."
+      ],
       difficulte: 2
     },
     {
@@ -1074,6 +1230,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le Kerberoasting consiste à demander des service tickets (chiffrés avec le hash du mot de passe du compte de service) puis à les casser hors ligne ; la parade est d'utiliser des mots de passe de service longs et aléatoires. Le pass-the-hash rejoue un hash NTLM volé, le golden ticket forge des TGT après compromission du compte krbtgt, et le credential stuffing rejoue des identifiants volés sur d'autres sites.",
+      pourquoi: [
+        "Confusion : le pass-the-hash rejoue un hash NTLM volé, sans cassage hors ligne de tickets.",
+        "Bonne réponse : demander des service tickets puis casser hors ligne le mot de passe du compte de service est le Kerberoasting.",
+        "Trop puissant pour le scénario : le golden ticket exige le hash de krbtgt, non décrit ici.",
+        "Hors sujet : le credential stuffing rejoue des identifiants volés ailleurs, sans lien avec Kerberos."
+      ],
       difficulte: 3
     },
     {
@@ -1087,6 +1249,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Passer d'utilisateur standard à administrateur est une escalade verticale (privilèges nettement supérieurs) ; se propager ensuite vers d'autres machines avec des privilèges similaires est une escalade horizontale, appelée mouvement latéral à l'échelle du réseau. La réponse A inverse l'ordre, la C nomme des attaques spécifiques non décrites ici, et la D confond avec des dérives administratives.",
+      pourquoi: [
+        "Inversion de l'ordre des deux escalades.",
+        "Bonne réponse : utilisateur vers administrateur = escalade verticale ; propagation à privilèges équivalents = escalade horizontale (mouvement latéral).",
+        "Trop spécifique : aucune de ces deux attaques nommées n'est décrite dans le scénario.",
+        "Confusion : privilege creep et session hijacking sont d'autres notions."
+      ],
       difficulte: 2
     },
     {
@@ -1100,6 +1268,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Les solutions PAM gèrent, surveillent et auditent les comptes à privilèges : coffre-fort d'identifiants (credential vaulting), enregistrement des sessions et attribution just-in-time des privilèges élevés. Les certificats, le filtrage de courriels et les sauvegardes relèvent d'autres familles d'outils.",
+      pourquoi: [
+        "Réponse de technicien PKI : la gestion de certificats TLS n'est pas du PAM.",
+        "Bonne réponse : enregistrement des sessions privilégiées et accès just-in-time sont des fonctions cœur du PAM.",
+        "Hors famille d'outils : le filtrage de courriels relève de la sécurité de messagerie.",
+        "Hors famille d'outils : les sauvegardes relèvent de la continuité d'activité."
+      ],
       difficulte: 1
     },
     {
@@ -1113,6 +1287,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le provisioning just-in-time crée automatiquement le compte chez le fournisseur de service lors de la première connexion fédérée, sans intervention administrative, et s'appuie couramment sur SAML pour échanger les données requises. Le workflow provisioning passe par un processus établi (souvent RH), le deprovisioning supprime des comptes, et RADIUS n'est pas un protocole de fédération.",
+      pourquoi: [
+        "Hors mécanisme : le workflow provisioning passe par un processus d'approbation, pas une création automatique à la connexion.",
+        "Bonne réponse : création automatique du compte à la première connexion fédérée = just-in-time provisioning, classiquement porté par SAML.",
+        "Hors phase : le deprovisioning supprime des comptes, il n'en crée pas.",
+        "Faux : RADIUS n'est pas un protocole de fédération."
+      ],
       difficulte: 2
     },
     {
@@ -1126,6 +1306,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 2,
       explication:
         "SCIM (System for Cross-domain Identity Management) est le standard moderne de provisioning automatisé inter-domaines, basé sur une API REST et le format JSON : il propage créations, mises à jour et suppressions de comptes vers les applications cloud. SPML poursuivait le même but mais est un ancien standard XML quasi abandonné ; SAML sert à l'authentification fédérée (assertions), et OAuth 2.0 à la délégation d'autorisation, pas au provisioning.",
+      pourquoi: [
+        "Piège d'ancienneté : SPML poursuivait ce but mais c'est un standard XML quasi abandonné.",
+        "Hors rôle : SAML transporte des assertions d'authentification, pas des opérations de gestion de comptes.",
+        "Bonne réponse : SCIM, standard REST/JSON, automatise création, mise à jour et suppression de comptes vers les applications SaaS.",
+        "Hors rôle : OAuth 2.0 délègue des autorisations, il ne provisionne pas de comptes."
+      ],
       difficulte: 2
     },
     {
@@ -1139,6 +1325,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "SPML (Service Provisioning Markup Language) est un standard XML de provisioning qui n'a jamais été largement adopté ; SCIM l'a remplacé avec une approche moderne fondée sur des API REST et JSON, largement supportée par les fournisseurs SaaS. Aucun des deux n'authentifie les utilisateurs ni ne fournit de SSO : ce sont des standards de gestion du cycle de vie des comptes.",
+      pourquoi: [
+        "Faux : SCIM n'est pas un profil de SPML, c'est un standard distinct qui l'a remplacé.",
+        "Bonne réponse : SPML est l'ancien standard de provisioning en XML ; SCIM est son successeur moderne REST/JSON.",
+        "Faux : ni l'un ni l'autre n'authentifie les utilisateurs.",
+        "Faux : aucun des deux ne fournit de SSO."
+      ],
       difficulte: 2
     },
     {
@@ -1152,6 +1344,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 0,
       explication:
         "Présenter le badge revient à déclarer une identité (identification), le PIN prouve que le porteur est bien le titulaire (authentification), et le journal horodaté fournit la trace qui rend l'individu responsable de ses actions (accountability via l'audit). L'autorisation, non citée ici, serait la vérification que cette identité a le droit d'entrer dans cette zone. Les autres réponses inversent ou confondent les étapes.",
+      pourquoi: [
+        "Bonne réponse : badge = déclaration d'identité, PIN = preuve de cette identité, journal = accountability.",
+        "Inversion : le badge seul ne prouve rien et le PIN n'accorde pas de droits.",
+        "Confusion : le PIN est une preuve (authentification), pas une autorisation.",
+        "Double inversion des deux premières étapes du modèle."
+      ],
       difficulte: 1
     },
     {
@@ -1165,6 +1363,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "L'accountability exige une chaîne complète : identification unique, authentification fiable et audit. Un compte partagé brise le premier maillon — impossible d'attribuer une action à un individu précis, donc impossible de le tenir responsable, même avec des journaux parfaits. Ce n'est pas d'abord un problème d'autorisation ni de robustesse du mot de passe, et la disponibilité est une conséquence de l'incident, pas le pilier IAM compromis.",
+      pourquoi: [
+        "Techniquement discutable mais hors cible : le scénario décrit une impossibilité d'ATTRIBUER l'action, pas un excès de droits.",
+        "Bonne réponse : sans identification unique, la chaîne de l'accountability est brisée dès le premier maillon.",
+        "Hors sujet : la robustesse du mot de passe n'est pas en cause.",
+        "Confusion cause/conséquence : la perte de la base est l'impact de l'incident, pas le pilier IAM compromis."
+      ],
       difficulte: 2
     },
     {
@@ -1178,6 +1382,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "FIDO2/WebAuthn est résistant au phishing par conception : la clé privée ne quitte jamais l'authentificateur et la signature est cryptographiquement liée à l'origine (le domaine) du site légitime — un site de phishing, même parfaitement imité, ne peut pas obtenir de réponse valide. Les codes TOTP et SMS restent saisissables par l'utilisateur sur un faux site (attaque adversary-in-the-middle), quelle que soit leur longueur, et la rotation des mots de passe n'empêche pas leur capture en temps réel.",
+      pourquoi: [
+        "Régression : le SMS est plus vulnérable que le TOTP (interception, SIM swapping).",
+        "Bonne réponse : FIDO2/WebAuthn lie cryptographiquement la signature à l'origine du site — un site de phishing n'obtient jamais de réponse valide.",
+        "Inutile : un code TOTP à huit chiffres reste saisissable sur un faux site relayé en temps réel.",
+        "Hors sujet : la rotation des mots de passe n'empêche pas leur capture en temps réel."
+      ],
       difficulte: 2
     },
     {
@@ -1191,6 +1401,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Les deux types reposent sur la même cryptographie asymétrique WebAuthn et sont résistants au phishing. La différence porte sur l'exportabilité de la clé privée : une passkey synchronisée est répliquée entre appareils via un compte cloud (la sécurité dépend alors de ce compte et de son recouvrement), tandis qu'une passkey device-bound reste confinée dans le matériel (élément sécurisé, clé FIDO), ce qui offre une assurance supérieure — exigée par exemple pour atteindre AAL3. Les réponses A et C sont fausses, et D n'est pas une exigence.",
+      pourquoi: [
+        "Faux : les deux types de passkeys utilisent la même cryptographie asymétrique WebAuthn.",
+        "Bonne réponse : la clé privée d'une passkey device-bound ne peut pas être extraite du matériel — assurance supérieure, exigée par exemple pour AAL3.",
+        "Faux : les deux types sont résistants au phishing par conception.",
+        "Faux : aucun mot de passe complémentaire n'est exigé pour une passkey device-bound."
+      ],
       difficulte: 3
     },
     {
@@ -1204,6 +1420,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le MFA fatigue (ou push bombing) consiste à bombarder l'utilisateur de demandes push jusqu'à ce qu'il approuve par lassitude ou erreur — l'attaquant possède déjà le mot de passe. Le number matching (saisir un code affiché à l'écran de connexion dans l'application) ou un authentificateur FIDO2 supprime l'approbation aveugle. Le credential stuffing est l'étape amont probable mais ne décrit pas le bombardement de notifications ; le SIM swapping vise les SMS et le session hijacking des sessions déjà ouvertes.",
+      pourquoi: [
+        "Hors phase : le credential stuffing est l'étape amont probable, mais il ne décrit pas le bombardement de notifications.",
+        "Bonne réponse : le MFA fatigue (push bombing) exploite la lassitude ; le number matching ou FIDO2 supprime l'approbation aveugle.",
+        "Hors canal : le SIM swapping vise le SMS, absent du scénario.",
+        "Hors phase : le session hijacking détourne des sessions déjà ouvertes."
+      ],
       difficulte: 2
     },
     {
@@ -1217,6 +1439,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "FIDO2 combine WebAuthn (API du W3C permettant au site web, via le navigateur, de créer et vérifier des credentials à clé publique) et CTAP (Client to Authenticator Protocol de la FIDO Alliance, qui fait dialoguer le navigateur avec un authentificateur externe comme une clé USB/NFC ou un smartphone). TOTP/HOTP sont des générateurs de codes à usage unique sans lien avec FIDO2, et PKCS#11/X.509 relèvent des infrastructures à clé publique classiques.",
+      pourquoi: [
+        "Mélange incohérent : SAML et OAuth n'interviennent pas dans FIDO2.",
+        "Bonne réponse : WebAuthn est l'API entre navigateur et service web ; CTAP le protocole entre navigateur et authentificateur externe.",
+        "Hors sujet : TOTP et HOTP sont des générateurs de codes à usage unique sans lien avec FIDO2.",
+        "Hors sujet : PKCS#11 et X.509 relèvent des infrastructures à clé publique classiques."
+      ],
       difficulte: 3
     },
     {
@@ -1230,6 +1458,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Au-delà de la précision (FAR/FRR/CER), un système biométrique doit être opérationnellement acceptable : un enrôlement de moins de deux minutes environ et un temps de passage de l'ordre de six à dix secondes maximum sont les repères classiques. Ici, le problème n'est ni la précision ni l'anti-spoofing, mais l'ergonomie : enrôlement trop long et débit insuffisant, qui provoquent le rejet du système par les utilisateurs.",
+      pourquoi: [
+        "Réponse de métrologue : CER et FAR mesurent la précision, or la plainte porte sur les délais.",
+        "Bonne réponse : enrôlement trop long et débit de passage insuffisant sont des critères d'acceptabilité opérationnelle.",
+        "Hors cible : la précision n'est pas mise en cause par le service RH.",
+        "Hors cible : l'anti-spoofing n'est pas le problème décrit."
+      ],
       difficulte: 2
     },
     {
@@ -1238,11 +1472,17 @@ window.CISSP_DATA.domains[5] = {
         "Stocker les images brutes chiffrées dans une base centrale pour faciliter le ré-enrôlement",
         "Stocker uniquement un gabarit (template) mathématique protégé, idéalement sur l'appareil de l'utilisateur",
         "Stocker les empreintes en clair mais sur un serveur isolé du réseau",
-        "Convertir les empreintes en mot de passe réutilisable"
+        "Hacher les images brutes avec un algorithme lent comme bcrypt, comme pour les mots de passe"
       ],
       reponse: 1,
       explication:
-        "On ne stocke jamais l'image biométrique brute : on en dérive un gabarit mathématique, protégé (chiffré, voire conservé dans un élément sécurisé local comme le fait Touch ID/Face ID), car une caractéristique biométrique compromise ne peut pas être révoquée ni changée, contrairement à un mot de passe. La centralisation d'images brutes crée une cible de très grande valeur ; le stockage en clair est inacceptable même isolé ; et convertir une biométrie en mot de passe réutilisable annule tout l'intérêt du facteur.",
+        "On ne stocke jamais l'image biométrique brute : on en dérive un gabarit mathématique, protégé (chiffré, voire conservé dans un élément sécurisé local comme le fait Touch ID/Face ID), car une caractéristique biométrique compromise ne peut pas être révoquée ni changée, contrairement à un mot de passe. La centralisation d'images brutes crée une cible de très grande valeur ; le stockage en clair est inacceptable même isolé ; et le hachage type mot de passe est inapplicable : la biométrie produit des mesures approchées, jamais strictement identiques, ce qui rendrait toute comparaison de hash impossible.",
+      pourquoi: [
+        "Fausse bonne idée : centraliser des images brutes, même chiffrées, crée une cible de très grande valeur pour un vol irrévocable.",
+        "Bonne réponse : ne stocker qu'un gabarit mathématique protégé, idéalement dans un élément sécurisé local (modèle Touch ID/Face ID).",
+        "Inacceptable : le stockage en clair reste une faute, même sur un serveur isolé.",
+        "Techniquement séduisant mais inapplicable : la biométrie produit des mesures approchées, jamais identiques — un hash exact ne pourrait jamais correspondre."
+      ],
       difficulte: 2
     },
     {
@@ -1256,6 +1496,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Diminuer la sensibilité réduit les faux rejets (erreurs de type 1, FRR) — les employés légitimes passent plus facilement — mais augmente les fausses acceptations (erreurs de type 2, FAR) : des imposteurs pourront être acceptés. C'est un arbitrage acceptable pour une cafétéria, pas pour un laboratoire sensible. Le CER est une caractéristique intrinsèque du système, qui ne change pas avec le réglage, et l'enrôlement n'est pas concerné.",
+      pourquoi: [
+        "Inversion : baisser la sensibilité réduit le FRR, il ne l'augmente pas.",
+        "Bonne réponse : moins de faux rejets (FRR) mais plus de fausses acceptations (FAR) — arbitrage acceptable pour une cafétéria.",
+        "Faux : le CER est une caractéristique intrinsèque du système, il ne bouge pas avec le réglage.",
+        "Hors sujet : l'enrôlement n'est pas affecté par la sensibilité du capteur."
+      ],
       difficulte: 1
     },
     {
@@ -1269,6 +1515,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 2,
       explication:
         "La dynamique de frappe — rythme, durée d'appui, temps entre les touches — est une biométrie comportementale, classée 'something you do'. Elle permet notamment l'authentification continue pour détecter qu'un imposteur a pris la place de l'utilisateur en cours de session. Ce n'est ni une connaissance, ni un objet possédé, ni une localisation.",
+      pourquoi: [
+        "Hors type : la dynamique de frappe n'est pas une connaissance mémorisée.",
+        "Hors type : aucun objet possédé n'intervient.",
+        "Bonne réponse : la dynamique de frappe est une biométrie comportementale — « something you do » —, utile pour l'authentification continue.",
+        "Hors type : aucune donnée de localisation n'est utilisée."
+      ],
       difficulte: 1
     },
     {
@@ -1282,6 +1534,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Avec le hash du compte krbtgt (qui signe et chiffre tous les TGT), l'attaquant forge des golden tickets : des TGT valides pour n'importe quel principal, avec la durée de vie de son choix — un contrôle quasi total du domaine. La remédiation exige de réinitialiser le mot de passe de krbtgt deux fois (à cause de l'historique de mots de passe conservé pour la continuité), en plus de l'éradication de l'attaquant. Le silver ticket ne forge que des service tickets pour un service précis, le Kerberoasting casse des mots de passe hors ligne, et bloquer le port 88 paralyserait le domaine.",
+      pourquoi: [
+        "Trop étroit : le silver ticket forge des service tickets avec le hash d'un compte de service, pas des TGT.",
+        "Bonne réponse : le hash de krbtgt permet de forger des golden tickets ; la remédiation est la double réinitialisation du mot de passe krbtgt.",
+        "Hors mécanisme : le Kerberoasting casse des mots de passe hors ligne, il ne forge rien.",
+        "Réponse de technicien désastreuse : bloquer le port 88 paralyserait toute l'authentification du domaine."
+      ],
       difficulte: 3
     },
     {
@@ -1295,6 +1553,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le golden ticket exploite le hash du compte krbtgt pour forger des TGT donnant accès à tout le domaine. Le silver ticket, plus discret mais plus limité, exploite le hash d'un compte de service pour forger directement un service ticket vers CE service, sans jamais dialoguer avec le KDC — ce qui le rend difficile à détecter dans les journaux du contrôleur de domaine. Le silver ticket est donc moins puissant, pas plus. La pré-authentification désactivée concerne l'AS-REP roasting, pas le golden ticket.",
+      pourquoi: [
+        "Faux : les deux attaques visent Kerberos.",
+        "Bonne réponse : golden = TGT forgés avec le hash de krbtgt ; silver = service tickets forgés sans contacter le KDC, donc plus discrets.",
+        "Inversion : le silver ticket est plus limité, pas plus puissant.",
+        "Confusion : la pré-authentification désactivée concerne l'AS-REP roasting."
+      ],
       difficulte: 3
     },
     {
@@ -1308,6 +1572,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 0,
       explication:
         "Sans pré-authentification, n'importe qui peut demander à l'AS une réponse (AS-REP) pour ce compte : une partie de cette réponse est chiffrée avec une clé dérivée du mot de passe de l'utilisateur, ce qui permet une attaque par force brute hors ligne — c'est l'AS-REP roasting. La pré-authentification exige justement de prouver la connaissance du mot de passe (horodatage chiffré) AVANT toute réponse du KDC. Les trois autres attaques existent mais ne dépendent pas de cette option.",
+      pourquoi: [
+        "Bonne réponse : sans pré-authentification, l'AS-REP contient un élément chiffré avec une clé dérivée du mot de passe, cassable hors ligne.",
+        "Hors mécanisme : le golden ticket exige le hash de krbtgt, indépendant de cette option.",
+        "Hors protocole : le pass-the-hash concerne NTLM, pas cette option Kerberos.",
+        "Hors dépendance : l'overpass-the-hash existe mais ne repose pas sur la pré-authentification désactivée."
+      ],
       difficulte: 3
     },
     {
@@ -1321,6 +1591,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Kerberos offre l'authentification mutuelle : grâce aux clés de session partagées via le KDC, le client s'authentifie auprès du service et peut exiger que le service renvoie une preuve (l'horodatage chiffré avec la clé de session), démontrant qu'il détient la clé attendue — parade contre l'usurpation de serveur. Kerberos utilise la cryptographie symétrique, donc pas de non-répudiation (qui exige des signatures asymétriques) ; il protège ses échanges de tickets mais ne chiffre pas automatiquement tout le trafic applicatif ; et le KDC reste un point unique de défaillance à redonder soi-même.",
+      pourquoi: [
+        "Faux : la cryptographie symétrique de Kerberos ne peut pas fournir de non-répudiation.",
+        "Bonne réponse : les clés de session partagées via le KDC permettent l'authentification mutuelle entre client et service.",
+        "Trop large : Kerberos protège ses échanges de tickets mais ne chiffre pas automatiquement tout le trafic applicatif.",
+        "Inversion : le KDC est justement un point unique de défaillance qu'il faut redonder soi-même."
+      ],
       difficulte: 3
     },
     {
@@ -1334,6 +1610,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le KDC détient les clés secrètes de tous les principals et délivre tous les tickets : sa panne bloque toute authentification (single point of failure) et sa compromission livre le domaine entier (cf. golden ticket). On le compense par la redondance, un durcissement maximal et une surveillance renforcée. Les tickets sont bien chiffrés (AES en Kerberos v5), Active Directory repose précisément sur Kerberos, et Kerberos utilise la cryptographie symétrique, pas des certificats par utilisateur.",
+      pourquoi: [
+        "Faux : les tickets sont chiffrés (AES) dans Kerberos v5.",
+        "Bonne réponse : le KDC concentre toutes les clés secrètes — sa panne bloque tout, sa compromission livre le domaine entier (golden ticket).",
+        "Faux : Active Directory repose précisément sur Kerberos.",
+        "Faux : Kerberos utilise la cryptographie symétrique, pas des certificats par utilisateur."
+      ],
       difficulte: 2
     },
     {
@@ -1347,6 +1629,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le SSO web d'entreprise vers des SaaS est le cas d'usage historique de SAML 2.0 : l'IdP interne authentifie l'employé puis transmet au fournisseur de service une assertion signée contenant identité et attributs. OAuth 2.0 seul fait de la délégation d'autorisation, pas de l'authentification ; exposer un KDC Kerberos sur Internet est une hérésie de sécurité ; RADIUS sert au contrôle d'accès réseau, pas au SSO applicatif web. Notez qu'OIDC est aussi possible pour ce besoin, mais il n'est pas proposé ici.",
+      pourquoi: [
+        "Trop étroit : OAuth 2.0 seul fait de l'autorisation déléguée, pas de l'authentification SSO.",
+        "Bonne réponse : le SSO web d'entreprise vers des SaaS est le cas d'usage historique de SAML 2.0 — IdP interne, assertions signées vers chaque SP.",
+        "Hérésie de sécurité : on n'expose jamais un KDC Kerberos sur Internet.",
+        "Hors sujet : RADIUS sert au contrôle d'accès réseau, pas au SSO applicatif web."
+      ],
       difficulte: 2
     },
     {
@@ -1360,6 +1648,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "C'est la délégation d'autorisation, cœur d'OAuth 2.0 : l'utilisateur (resource owner) consent, le serveur d'autorisation émet un access token à portée (scope) limitée, et l'application (client) l'utilise auprès du serveur de ressources — le mot de passe n'est jamais partagé avec l'application tierce. L'ID token OIDC prouve une identité, il ne donne pas accès à des ressources ; SAML fait du SSO web ; SCIM fait du provisioning de comptes.",
+      pourquoi: [
+        "Hors rôle : SAML fait du SSO web, pas de la délégation d'accès à des ressources.",
+        "Bonne réponse : c'est la délégation d'autorisation OAuth 2.0 — access token à portée limitée, sans jamais partager le mot de passe.",
+        "Trop étroit : l'ID token OIDC prouve une identité, il ne donne pas accès aux fichiers.",
+        "Hors rôle : SCIM provisionne des comptes, il ne délègue pas d'accès."
+      ],
       difficulte: 2
     },
     {
@@ -1373,6 +1667,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Pour les clients publics (applications mobiles, SPA) incapables de garder un secret, la recommandation actuelle est OIDC sur le flux authorization code renforcé par PKCE (Proof Key for Code Exchange), qui empêche l'interception du code d'autorisation. L'implicit flow est déprécié (tokens exposés dans l'URL), SAML est peu adapté aux applications natives, et le flux ROPC — où l'application manipule directement le mot de passe — contredit le principe même de la délégation et est déconseillé.",
+      pourquoi: [
+        "Piège d'obsolescence : l'implicit flow est déprécié — les tokens s'exposent dans l'URL.",
+        "Bonne réponse : authorization code flow avec PKCE est la recommandation actuelle pour les clients publics incapables de garder un secret.",
+        "Mal adapté : SAML convient mal aux applications natives mobiles.",
+        "Contresens : le flux ROPC fait manipuler le mot de passe par l'application — l'inverse de la délégation."
+      ],
       difficulte: 3
     },
     {
@@ -1386,6 +1686,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Dans SAML, l'Identity Provider (IdP) détient les comptes et vérifie les identifiants, puis émet une assertion signée ; le Service Provider (SP) fait confiance à cette assertion, la valide (signature, audience, durée) et ouvre la session locale sans jamais voir le mot de passe. La réponse A inverse les rôles, la C décrit Kerberos, et la D mélange les rôles OAuth.",
+      pourquoi: [
+        "Inversion des rôles IdP/SP — le piège classique de la fédération.",
+        "Bonne réponse : l'IdP vérifie les identifiants et émet l'assertion signée ; le SP la valide et ouvre la session locale.",
+        "Hors protocole : cette description correspond à Kerberos.",
+        "Hors protocole : ce sont des rôles OAuth mélangés."
+      ],
       difficulte: 1
     },
     {
@@ -1399,6 +1705,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "En OAuth 2.0, le resource owner est l'utilisateur qui possède les données et donne son consentement ; le client est l'application tierce qui demande l'accès ; le serveur d'autorisation émet les tokens après consentement ; et le serveur de ressources héberge les données et accepte les access tokens. Bien distinguer ces quatre rôles est indispensable pour analyser les flux OAuth à l'examen.",
+      pourquoi: [
+        "Inversion : le fournisseur cloud héberge les ressources, il n'est pas le client.",
+        "Bonne réponse : le client est l'application tierce qui demande l'accès ; le resource owner est l'utilisateur qui possède les données et consent.",
+        "Contresens sur les deux rôles à la fois.",
+        "Faux : ce sont deux rôles distincts du framework OAuth 2.0."
+      ],
       difficulte: 1
     },
     {
@@ -1412,6 +1724,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Dans le flux implicit, l'access token est retourné directement dans le fragment de l'URL de redirection : il s'expose à l'historique du navigateur, aux en-têtes referrer et aux scripts tiers, sans possibilité d'authentifier le client. Les bonnes pratiques OAuth 2.0 actuelles (et OAuth 2.1) le remplacent par l'authorization code flow avec PKCE, qui ne fait transiter qu'un code à usage unique. Ce n'est ni une question de performance ni de compatibilité, et l'implicit flow a justement été conçu pour les clients SANS secret.",
+      pourquoi: [
+        "Hors sujet : la performance n'est pas la raison de la dépréciation.",
+        "Bonne réponse : l'access token transite par l'URL du navigateur — historique, referrer et scripts tiers peuvent le capturer.",
+        "Faux : les serveurs modernes le supportent encore ; il est déconseillé, pas incompatible.",
+        "Contresens : l'implicit flow a été conçu précisément pour les clients SANS secret."
+      ],
       difficulte: 3
     },
     {
@@ -1425,6 +1743,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "C'est la faiblesse classique du DAC face aux chevaux de Troie : un programme s'exécute avec les droits de l'utilisateur, et comme le propriétaire peut re-partager ses objets à discrétion, le malware le peut aussi. Le MAC contre précisément ce risque : les labels sont imposés par le système et ni l'utilisateur ni ses programmes ne peuvent déclasser une information ou étendre les accès. RBAC et ABAC centralisent les décisions et ne donnent pas ce pouvoir discrétionnaire au propriétaire.",
+      pourquoi: [
+        "Inversion : le MAC contre précisément ce risque — les labels ne sont modifiables ni par l'utilisateur ni par ses programmes.",
+        "Bonne réponse : en DAC, tout programme hérite des droits du propriétaire, y compris celui de re-partager — la faiblesse classique face aux chevaux de Troie.",
+        "Hors mécanisme : la largeur des rôles n'est pas ce que le malware exploite.",
+        "Hors mécanisme : le dynamisme des attributs ABAC n'est pas en cause."
+      ],
       difficulte: 3
     },
     {
@@ -1438,6 +1762,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Deux indices signent le MAC : les labels de classification appliqués aux sujets et aux objets, et l'impossibilité pour le propriétaire de passer outre — la politique est imposée par le système (nondiscretionary, lattice-based). C'est exactement l'inverse du DAC. Le RBAC hiérarchique organise des rôles, pas des niveaux de classification avec dominance, et le risk-based évalue le contexte, pas des habilitations.",
+      pourquoi: [
+        "Contresens : en DAC, le propriétaire pourrait accorder l'accès — or ici il ne le peut pas.",
+        "Bonne réponse : labels imposés par le système et impuissance du propriétaire signent le MAC (nondiscretionary, lattice-based).",
+        "Confusion : le RBAC hiérarchique organise des rôles, pas des niveaux de classification avec dominance.",
+        "Hors modèle : le risk-based évalue le contexte, pas des habilitations."
+      ],
       difficulte: 1
     },
     {
@@ -1451,6 +1781,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Quand chaque combinaison de contexte devient un rôle, on subit la 'role explosion' : le RBAC perd son avantage de simplicité administrative. L'ABAC résout élégamment le problème en exprimant les conditions (projet, site, horaire, appareil) comme des attributs de politiques dynamiques, au lieu de multiplier les rôles statiques. Le privilege creep est l'accumulation de droits par un individu, la toxic combination un cumul de droits incompatibles, et le role mining une technique de découverte de rôles — aucun ne décrit la prolifération de rôles.",
+      pourquoi: [
+        "Confusion : le privilege creep est l'accumulation de droits par un individu, pas la prolifération de rôles.",
+        "Bonne réponse : 900 rôles pour 1 100 employés = role explosion ; l'ABAC exprime les exceptions par des attributs au lieu de multiplier les rôles.",
+        "Confusion : la toxic combination est un cumul de droits incompatibles chez une même personne.",
+        "Confusion : le role mining découvre des rôles, il ne résout pas leur prolifération."
+      ],
       difficulte: 2
     },
     {
@@ -1464,6 +1800,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "La règle mêle des attributs du sujet (statut contractuel issu de la RH), de l'environnement (heures ouvrées, poste géré) et de la ressource (le dépôt) : c'est la définition de l'ABAC, où un PDP évalue dynamiquement ces attributs à chaque demande. Un simple rôle RBAC ne capture ni l'horaire ni l'état du poste ni la fin de contrat en temps réel ; le DAC repose sur des décisions manuelles du propriétaire ; le MAC classe des niveaux de sensibilité, pas des conditions contextuelles.",
+      pourquoi: [
+        "Trop étroit : un rôle statique ne capture ni l'horaire, ni l'état du poste, ni le statut contractuel en temps réel.",
+        "Bonne réponse : attributs du sujet, de l'environnement et donnée RH évaluée dynamiquement — la définition de l'ABAC.",
+        "Trop manuel : le DAC repose sur des décisions ponctuelles du propriétaire.",
+        "Hors modèle : le MAC classe des sensibilités, pas des conditions contextuelles."
+      ],
       difficulte: 2
     },
     {
@@ -1477,6 +1819,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 0,
       explication:
         "Le rule-based access control applique des règles globales identiques pour tous les sujets, sans considération d'identité ou de rôle — le pare-feu en est l'exemple canonique, avec l'implicit deny (tout ce qui n'est pas explicitement autorisé est refusé) en règle finale. Ce ne sont pas des rôles métier (RBAC), le propriétaire n'accorde pas d'accès discrétionnaires (DAC), et même si une IP peut être vue comme un attribut, une ACL de pare-feu statique n'est pas un moteur de politiques ABAC.",
+      pourquoi: [
+        "Bonne réponse : règles globales identiques pour tous et refus implicite final = rule-based access control.",
+        "Confusion : des règles de pare-feu ne sont pas des rôles métier.",
+        "Confusion : la propriété administrative de l'équipement ne fait pas du filtrage un modèle DAC.",
+        "Trop généreux : une ACL statique n'est pas un moteur de politiques à attributs."
+      ],
       difficulte: 1
     },
     {
@@ -1490,6 +1838,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le JIT vise le 'zero standing privileges' : au lieu de comptes administrateurs dotés de droits permanents — cibles idéales en cas de vol d'identifiants —, les privilèges sont accordés à la demande, pour une durée limitée, souvent après approbation, puis automatiquement retirés. La fenêtre d'attaque se réduit drastiquement. Le JIT complète le MFA et les revues d'accès, il ne les remplace pas, et son but n'est pas la commodité.",
+      pourquoi: [
+        "Hors sujet : le JIT n'est pas un dispositif de confort ou de rapidité.",
+        "Bonne réponse : le JIT vise le zéro privilège permanent — les droits élevés n'existent que pendant la tâche puis disparaissent.",
+        "Contresens dangereux : le JIT complète le MFA, il ne le remplace pas.",
+        "Faux : les revues d'accès restent nécessaires, le JIT ne les remplace pas."
+      ],
       difficulte: 2
     },
     {
@@ -1503,6 +1857,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Créer un compte à privilèges à la volée pour une tâche, puis le détruire, est une forme de JIT dite 'broker and remove' (ou comptes éphémères) : aucun compte privilégié permanent n'existe entre deux usages, ce qui élimine les privilèges dormants. Le vaulting conserve des comptes permanents dont il protège les mots de passe ; la rotation change des secrets de comptes qui, eux, persistent ; la délégation Kerberos contrainte est un mécanisme technique sans rapport avec le cycle de vie des comptes.",
+      pourquoi: [
+        "Hors mécanisme : le vaulting protège des comptes permanents ; ici aucun compte ne persiste entre deux usages.",
+        "Bonne réponse : créer puis détruire un compte à privilèges à la demande = JIT « broker and remove » (comptes éphémères).",
+        "Hors mécanisme : la rotation change les secrets de comptes qui, eux, persistent.",
+        "Hors sujet : la délégation Kerberos contrainte ne concerne pas le cycle de vie des comptes."
+      ],
       difficulte: 2
     },
     {
@@ -1511,11 +1871,17 @@ window.CISSP_DATA.domains[5] = {
         "Le supprimer : il contredit le principe du moindre privilège",
         "Identifiants scellés en coffre, MFA exclu si l'IdP peut être en panne, alertes et audit systématiques à chaque usage, rotation après chaque utilisation",
         "Le confier au RSSI qui en mémorise le mot de passe",
-        "L'utiliser au quotidien pour éviter que le mot de passe n'expire"
+        "L'intégrer à l'IdP et au MFA d'entreprise pour bénéficier des contrôles standards"
       ],
       reponse: 1,
       explication:
-        "Le compte break-glass sert quand tout le reste est en panne (IdP, MFA, PAM) : ses identifiants sont conservés hors ligne sous scellé, son usage doit déclencher une alerte immédiate et un audit complet, et ses secrets sont changés après chaque utilisation. Le lier au MFA de l'IdP le rendrait inutilisable précisément quand on en a besoin. Le supprimer expose à une perte totale d'administration ; le confier à la mémoire d'une personne crée un point unique de défaillance humain ; l'utiliser au quotidien détruit sa valeur d'exception et noie les alertes.",
+        "Le compte break-glass sert quand tout le reste est en panne (IdP, MFA, PAM) : ses identifiants sont conservés hors ligne sous scellé, son usage doit déclencher une alerte immédiate et un audit complet, et ses secrets sont changés après chaque utilisation. L'intégrer à l'IdP et à son MFA — séduisant sur le papier — le rendrait inutilisable précisément quand on en a besoin, lors d'une panne de l'IdP. Le supprimer expose à une perte totale d'administration, et le confier à la mémoire d'une personne crée un point unique de défaillance humain.",
+      pourquoi: [
+        "Contresens : supprimer le break-glass expose à une perte totale d'administration en cas de panne de l'IdP.",
+        "Bonne réponse : identifiants scellés hors ligne, indépendance vis-à-vis de l'IdP, alerte et audit à chaque usage, rotation après utilisation.",
+        "Point unique de défaillance humain : la mémoire d'une personne n'est ni auditable ni disponible en son absence.",
+        "Techniquement séduisant mais contre-productif : lier le break-glass à l'IdP et son MFA le rend inutilisable précisément quand l'IdP est en panne."
+      ],
       difficulte: 3
     },
     {
@@ -1529,6 +1895,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le check-out via un coffre PAM rattache chaque usage du compte partagé à une identité individuelle authentifiée : qui a pris le mot de passe, quand, pour quelle session (enregistrée), et la rotation immédiate après restitution empêche la réutilisation hors du circuit. L'accountability est restaurée même si le compte technique reste partagé. Les réponses A et C perpétuent l'anonymat, et la D ignore le besoin opérationnel immédiat.",
+      pourquoi: [
+        "Perpétue l'anonymat : le partage du mot de passe, même chiffré en transit, reste intraçable.",
+        "Bonne réponse : check-out individuel authentifié avec MFA, session enregistrée et rotation après usage — l'accountability est restaurée.",
+        "Pire pratique : un mot de passe affiché reste anonyme et exposé à tous.",
+        "Hors délai : interdire sans alternative ignore le besoin opérationnel immédiat."
+      ],
       difficulte: 2
     },
     {
@@ -1542,6 +1914,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "La gestion de session robuste combine trois contrôles : un timeout d'inactivité court (l'utilisateur qui s'éloigne est déconnecté), une durée de vie absolue de la session (même active, elle expire et limite l'exploitation d'un jeton volé), et la ré-authentification (step-up) avant les opérations sensibles comme un virement. Les autres options laissent des sessions exploitables indéfiniment — une session détournée resterait valide tant que l'attaquant génère de l'activité.",
+      pourquoi: [
+        "Confort au détriment de la sécurité : une session détournée resterait exploitable indéfiniment tant qu'elle est « active ».",
+        "Bonne réponse : timeout d'inactivité court, durée de session absolue et ré-authentification avant les opérations sensibles.",
+        "Beaucoup trop long : 24 heures d'inactivité est une éternité pour une banque.",
+        "Insuffisant : la fermeture du navigateur ne borne rien — un jeton volé reste valide ailleurs."
+      ],
       difficulte: 2
     },
     {
@@ -1555,6 +1933,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "HttpOnly rend le cookie inaccessible aux scripts (contre le vol par XSS), Secure impose HTTPS (contre l'interception), la régénération de l'ID à la connexion contre la fixation de session, et la liaison au contexte (empreinte de l'appareil, adresse, ré-évaluation continue) rend le rejeu depuis un autre poste détectable. Les réponses A et D aggravent le risque, et placer l'ID en URL l'expose dans les journaux, l'historique et les referrers — l'exact contraire d'une bonne pratique.",
+      pourquoi: [
+        "Aggrave le risque : un cookie durable prolonge la fenêtre d'exploitation.",
+        "Bonne réponse : Secure et HttpOnly, régénération de l'identifiant à la connexion et liaison au contexte client limitent le vol et le rejeu.",
+        "Contre-pratique : l'identifiant en URL fuit dans les journaux, l'historique et les referrers.",
+        "Facilite la fixation de session : l'identifiant doit changer après l'authentification."
+      ],
       difficulte: 2
     },
     {
@@ -1568,6 +1952,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "La fédération B2B répond aux deux exigences : les employés du partenaire s'authentifient auprès de LEUR IdP avec leurs identifiants habituels (jamais transmis à votre organisation), et dès qu'un compte est désactivé chez le partenaire, l'accès au portail cesse — le deprovisioning reste là où l'information existe, chez l'employeur. Les comptes locaux créent une charge de gestion et un risque de comptes orphelins, le compte partagé détruit l'accountability, et une synchronisation trimestrielle laisse des accès actifs des semaines après un départ.",
+      pourquoi: [
+        "Charge de gestion énorme et comptes orphelins garantis au premier départ non signalé.",
+        "Bonne réponse : fédération B2B — le partenaire reste l'IdP de ses employés et le deprovisioning suit automatiquement les départs.",
+        "Détruit l'accountability : un compte générique rend toute action anonyme.",
+        "Hors délai : une synchronisation trimestrielle laisse des accès actifs des semaines après un départ."
+      ],
       difficulte: 2
     },
     {
@@ -1581,6 +1971,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "La fédération est d'abord une relation de confiance organisationnelle : un accord définit les niveaux d'assurance d'authentification exigés (par ex. MFA obligatoire), les attributs transmis, les responsabilités en cas d'incident et les obligations de deprovisioning ; l'échange de métadonnées SAML/OIDC (certificats de signature, endpoints) en est la traduction technique. Le certificat TLS sécurise le canal mais ne définit aucune exigence mutuelle, et les réponses C et D sont hors sujet. À l'examen, pensez gouvernance avant technique.",
+      pourquoi: [
+        "Réponse de technicien : le certificat TLS sécurise le canal mais ne définit aucune exigence mutuelle.",
+        "Bonne réponse : l'accord de fédération définit niveaux d'assurance, attributs échangés et obligations — la gouvernance précède la technique.",
+        "Hors sujet : le DNS ne gouverne pas la confiance fédérée.",
+        "Hors périmètre : la politique de mots de passe locale ne régit pas la relation inter-organisations."
+      ],
       difficulte: 3
     },
     {
@@ -1594,6 +1990,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le credential stuffing rejoue des couples identifiant/mot de passe volés ailleurs, en pariant sur la réutilisation des mots de passe entre sites. Le password spraying inverse la logique : un seul mot de passe probable, essayé sur un grand nombre de comptes, pour rester sous les seuils de verrouillage par compte. Les parades diffèrent : MFA et vérification des mots de passe contre les bases de fuites pour le premier ; détection transversale des échecs et bannissement des mots de passe communs pour le second.",
+      pourquoi: [
+        "Inversion de l'ordre des deux attaques.",
+        "Bonne réponse : rejeu de couples volés = credential stuffing ; un mot de passe probable sur des milliers de comptes = password spraying.",
+        "Hors scénario : ni cassage brut ni tables précalculées ne sont décrits.",
+        "Hors scénario : aucun hameçonnage ni bombardement push n'est décrit."
+      ],
       difficulte: 2
     },
     {
@@ -1607,6 +2009,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le verrouillage de compte compte les échecs PAR COMPTE ; le spraying distribue les essais sur des milliers de comptes avec un ou deux mots de passe, restant sous chaque seuil individuel. La détection doit donc être transversale : un pic d'échecs répartis sur de nombreux comptes, souvent depuis les mêmes adresses ou avec le même mot de passe, visible dans un SIEM. Les réponses A et C sont techniquement fausses et l'attaque génère bien des échecs — mais dispersés.",
+      pourquoi: [
+        "Faux techniquement : ni chiffrement des mots de passe ni HSM ne sont en cause.",
+        "Bonne réponse : un ou deux essais par compte restent sous chaque seuil individuel ; seule une corrélation transversale des échecs (SIEM) le révèle.",
+        "Faux : Kerberos journalise bien les échecs d'authentification.",
+        "Faux : l'attaque génère des échecs — mais dispersés sur des milliers de comptes."
+      ],
       difficulte: 3
     },
     {
@@ -1620,6 +2028,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le risque porté par un compte à privilèges est démesuré par rapport à un compte standard : les revues doivent y être plus fréquentes (souvent trimestrielles, contre annuelles pour les comptes standard), vérifier la justification métier de chaque droit, et aboutir au retrait immédiat des accès injustifiés — c'est le contrôle qui détecte le privilege creep et les comptes orphelins. Le PAM protège l'usage des comptes mais ne juge pas de la légitimité des droits ; attendre le départ laisse des années d'exposition.",
+      pourquoi: [
+        "Fausse équité : le risque porté par un compte à privilèges est démesuré et justifie un traitement renforcé.",
+        "Bonne réponse : revues plus fréquentes et approfondies, menées par les responsables, avec retrait immédiat des droits injustifiés.",
+        "Contresens : le PAM protège l'usage des comptes mais ne juge pas la légitimité des droits.",
+        "Hors phase : attendre le départ laisse des années d'exposition au privilege creep."
+      ],
       difficulte: 1
     },
     {
@@ -1633,7 +2047,203 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Pour un départ, surtout conflictuel, on DÉSACTIVE le compte immédiatement — idéalement pendant que la personne est en entretien de sortie — pour couper tout accès sans détruire les données, les clés de chiffrement ni les éléments nécessaires aux enquêtes ; la suppression définitive intervient plus tard, selon la politique de rétention. Supprimer d'emblée fait perdre des données et des preuves ; attendre la revue trimestrielle laisse une fenêtre d'attaque béante ; transférer un compte nominatif à un tiers détruit l'accountability.",
+      pourquoi: [
+        "Hors phase : supprimer d'emblée détruit données, clés de chiffrement et preuves nécessaires aux enquêtes.",
+        "Bonne réponse : désactiver immédiatement, idéalement pendant l'entretien de sortie — couper l'accès sans rien détruire.",
+        "Fenêtre d'attaque béante : un départ conflictuel n'attend pas la revue trimestrielle.",
+        "Détruit l'accountability : un compte nominatif ne se transfère pas à un tiers."
+      ],
       difficulte: 1
+    },
+    {
+      q: "Après un incident majeur par adversary-in-the-middle, le COMEX d'un groupe industriel (45 000 employés : sièges, usines avec postes partagés, centres d'appels) donne douze mois au RSSI pour migrer vers un MFA résistant au phishing. Que devrait faire le RSSI EN PREMIER ?",
+      choix: [
+        "Commander des clés FIDO2 pour l'ensemble des employés et fixer une date de bascule unique",
+        "Prioriser par le risque : cartographier populations et applications, migrer d'abord les comptes à privilèges et les accès exposés à Internet, avec des parcours adaptés aux postes partagés",
+        "Activer le number matching sur les notifications push existantes pour toute l'entreprise",
+        "Lancer un pilote sur la base du volontariat au siège et généraliser selon les retours utilisateurs"
+      ],
+      reponse: 1,
+      explication:
+        "Une migration MFA à cette échelle est un programme de gestion du risque, pas un déploiement technique : on commence par cartographier les populations (postes partagés en usine ≠ cadres du siège) et les applications, puis on traite d'abord les comptes dont la compromission coûte le plus — privilèges et accès exposés. Le big-bang matériel ignore les contraintes d'usage (postes partagés) et échouera ; le number matching durcit le push mais ne le rend pas résistant au phishing, donc ne répond pas à l'exigence ; le pilote volontaire est une bonne pratique mais, sans priorisation par le risque, il laisse les comptes critiques exposés pendant des mois.",
+      pourquoi: [
+        "Réponse de technicien : un big-bang matériel sans analyse des populations (postes partagés, centres d'appels) ignore les contraintes d'usage et voue le déploiement à l'échec.",
+        "Bonne réponse : cartographier puis prioriser par le risque — comptes à privilèges et accès exposés d'abord — est la première étape d'un programme de migration managé.",
+        "Techniquement vrai mais insuffisant : le number matching réduit le MFA fatigue mais un code relayé en temps réel reste hameçonnable — l'exigence de résistance au phishing n'est pas satisfaite.",
+        "Techniquement vrai mais pas prioritaire : un pilote volontaire sans priorisation par le risque laisse les comptes les plus critiques exposés pendant des mois."
+      ],
+      difficulte: 3
+    },
+    {
+      q: "Un audit révèle 1 200 secrets applicatifs (clés API, mots de passe de bases de données) codés en dur dans les dépôts de code et les pipelines CI/CD d'une entreprise. Quelle est la MEILLEURE stratégie de remédiation durable ?",
+      choix: [
+        "Faire tourner manuellement tous les secrets identifiés et clore le constat d'audit",
+        "Déployer un coffre-fort de secrets centralisé avec injection de secrets éphémères à l'exécution, et intégrer la détection de secrets dans les pipelines pour prévenir la récidive",
+        "Chiffrer l'ensemble des dépôts de code afin que les secrets ne soient plus lisibles",
+        "Publier une politique interdisant le stockage de secrets dans le code et former les développeurs"
+      ],
+      reponse: 1,
+      explication:
+        "Le problème est systémique : tant que les applications ont besoin de secrets statiques, ils réapparaîtront dans le code. La remédiation durable combine un coffre-fort centralisé (les secrets sont récupérés à l'exécution, idéalement éphémères et générés à la demande) et un contrôle préventif dans les pipelines (secret scanning bloquant). La rotation manuelle corrige le passé sans empêcher la récidive ; chiffrer les dépôts ne change rien pour les développeurs et les pipelines qui doivent les lire ; la politique et la formation sont nécessaires mais, sans mécanisme technique, elles ne survivent pas à la pression des délais de livraison.",
+      pourquoi: [
+        "Hors phase : la rotation corrige le stock existant mais ne prévient pas la récidive — les secrets reviendront au prochain commit.",
+        "Bonne réponse : coffre-fort centralisé, secrets éphémères injectés à l'exécution et détection préventive dans les pipelines traitent la cause et empêchent la récidive.",
+        "Réponse de technicien : le chiffrement des dépôts ne change rien puisque développeurs et pipelines doivent les déchiffrer pour travailler — les secrets restent exposés à l'usage.",
+        "Techniquement vraie mais insuffisante : une politique sans mécanisme d'application ne résiste pas à la pression des livraisons — il faut le contrôle technique qui va avec."
+      ],
+      difficulte: 3
+    },
+    {
+      q: "Une plateforme de 400 microservices répartis sur deux clouds et un datacenter legacy utilise des secrets statiques partagés pour les appels inter-services. L'architecte sécurité veut une authentification mutuelle des workloads à grande échelle. Quelle approche répond le MIEUX au besoin ?",
+      choix: [
+        "Émettre manuellement des certificats TLS par service, renouvelés chaque année par l'équipe PKI",
+        "Attribuer à chaque workload une identité attestée de courte durée, délivrée et renouvelée automatiquement (modèle SPIFFE/SVID), en remplacement des secrets partagés",
+        "Restreindre les flux entre clusters par filtrage d'adresses IP et micro-segmentation réseau",
+        "Créer un compte de service unique par cloud, avec rotation trimestrielle du secret"
+      ],
+      reponse: 1,
+      explication:
+        "À l'échelle de centaines de workloads éphémères multi-environnements, seule une identité de workload délivrée automatiquement sur la base d'une attestation (qui est ce workload, où s'exécute-t-il), de courte durée et renouvelée sans intervention humaine — le modèle SPIFFE et ses SVID — permet l'authentification mutuelle sans gestion manuelle de secrets. Les certificats manuels annuels ne passent pas l'échelle et créent des expirations en cascade ; le filtrage IP authentifie des adresses, pas des workloads, et s'effondre dans des environnements dynamiques ; un compte partagé par cloud reproduit exactement le problème initial : secret partagé, accountability nulle.",
+      pourquoi: [
+        "Hors échelle : la gestion manuelle de certificats pour des centaines de workloads éphémères est ingérable et provoque des expirations en cascade.",
+        "Bonne réponse : identités de workload attestées, de courte durée et renouvelées automatiquement (SPIFFE/SVID) — l'authentification mutuelle sans secrets partagés ni gestion manuelle.",
+        "Réponse réseau, pas identité : une adresse IP n'authentifie pas un workload, surtout dans des environnements dynamiques où les adresses changent sans cesse.",
+        "Techniquement vraie (rotation) mais contextuellement fausse : un compte partagé par cloud conserve le défaut initial — secret partagé et aucune attribution par workload."
+      ],
+      difficulte: 3
+    },
+    {
+      q: "Votre entreprise vient d'acquérir un concurrent. La direction exige que les 3 000 employés acquis accèdent aux applications du groupe dès le premier jour, mais l'équipe sécurité n'a aucune visibilité sur l'hygiène IAM de la cible. En tant que RSSI, que faites-vous EN PREMIER ?",
+      choix: [
+        "Fusionner immédiatement les deux annuaires pour simplifier l'administration",
+        "Évaluer les contrôles IAM de la cible, puis établir une fédération inter-entreprises avec des exigences contractualisées (MFA, niveaux d'assurance, deprovisioning), en attendant l'intégration complète",
+        "Créer des comptes invités dans votre annuaire pour tous les employés acquis",
+        "Bloquer tout accès croisé jusqu'à la fin du programme d'intégration des systèmes d'information"
+      ],
+      reponse: 1,
+      explication:
+        "En fusion-acquisition, fédérer plutôt que fusionner : la fédération donne l'accès demandé par le métier tout en maintenant une frontière de confiance contrôlable — et elle n'est acceptable qu'après une évaluation des contrôles IAM de la cible et la contractualisation des exigences (MFA, assurance, répercussion immédiate des départs). Fusionner les annuaires d'une entité à l'hygiène inconnue importe ses compromissions potentielles au cœur du groupe ; les comptes invités en masse créent une population parallèle sans cycle de vie rattaché à la source RH de la cible ; bloquer tout accès est la posture la plus sûre techniquement mais elle sacrifie l'objectif business que le RSSI doit servir.",
+      pourquoi: [
+        "Hors phase et dangereux : fusionner des annuaires avant toute évaluation importe les compromissions potentielles de la cible au cœur du groupe.",
+        "Bonne réponse : évaluer puis fédérer avec des exigences contractualisées donne l'accès jour 1 en maintenant une frontière de confiance — le compromis risque/business attendu d'un RSSI.",
+        "Techniquement faisable mais contextuellement faux : 3 000 comptes invités forment une population parallèle sans lien avec la source RH de la cible — comptes orphelins garantis.",
+        "Techniquement le plus sûr mais inacceptable pour un manager : bloquer l'accès sacrifie l'objectif business de la fusion au lieu de gérer le risque."
+      ],
+      difficulte: 3
+    },
+    {
+      q: "Les campagnes de certification d'accès de votre outil IGA affichent 98 % d'approbations, la plupart validées en bloc en quelques minutes par les managers (« rubber stamping »). Quelle évolution améliorera le MIEUX la valeur de ces certifications ?",
+      choix: [
+        "Rappeler aux managers leur responsabilité et sanctionner les validations en bloc",
+        "Cibler les campagnes sur les accès à risque, mettre en évidence les écarts (droits inhabituels par rapport aux pairs, privilèges élevés) et révoquer par défaut les droits non justifiés",
+        "Augmenter la fréquence des campagnes de trimestrielle à mensuelle",
+        "Transférer les revues aux administrateurs de l'outil IGA, qui connaissent mieux les droits techniques"
+      ],
+      reponse: 1,
+      explication:
+        "Le rubber stamping est un symptôme de surcharge cognitive : des centaines de lignes techniques illisibles poussent à tout approuver. Le remède est de réduire et qualifier la charge : campagnes ciblées par le risque, mise en évidence des anomalies (écarts par rapport aux pairs, privilèges élevés, droits dormants), et inversion de la charge de la preuve — un droit non justifié est révoqué par défaut. Sanctionner sans réduire la charge ne change pas le comportement ; augmenter la fréquence aggrave la surcharge qui cause le problème ; les administrateurs IGA connaissent la technique mais ignorent la légitimité métier, qui est précisément l'objet de la certification.",
+      pourquoi: [
+        "Trop punitif, cause ignorée : sanctionner sans réduire la surcharge cognitive qui provoque le rubber stamping ne changera pas le comportement.",
+        "Bonne réponse : cibler par le risque, surfacer les anomalies et révoquer par défaut les droits injustifiés rend la décision du manager possible et significative.",
+        "Contre-productif : augmenter la fréquence aggrave la surcharge qui est la cause racine des validations en bloc.",
+        "Contresens de gouvernance : les administrateurs IGA connaissent la technique mais pas la légitimité métier des droits — c'est justement ce que la certification doit établir."
+      ],
+      difficulte: 3
+    },
+    {
+      q: "Votre entreprise déploie des agents IA autonomes qui appellent des API internes (RH, finance, support). Vous découvrez que tous les agents utilisent la clé API partagée de l'équipe plateforme, dotée de larges privilèges. Quelle est la MEILLEURE mesure à mettre en place ?",
+      choix: [
+        "Limiter le nombre d'agents IA autorisés à s'exécuter simultanément",
+        "Attribuer à chaque agent une identité non humaine propre, avec des droits limités à sa fonction, des jetons de courte durée et une journalisation attribuable à l'agent et à son commanditaire",
+        "Exiger une approbation humaine avant chaque action de chaque agent",
+        "Déplacer la clé API partagée dans un coffre-fort de secrets avec rotation automatique"
+      ],
+      reponse: 1,
+      explication:
+        "Les agents IA sont des identités non humaines et doivent être gouvernés comme telles : identité individuelle (pas de clé partagée), least privilege par fonction, jetons de courte durée pour limiter la fenêtre d'exploitation, et journalisation qui rattache chaque appel à l'agent ET au commanditaire humain ou service — sans quoi ni accountability ni révocation ciblée ne sont possibles. Limiter le nombre d'agents ne change rien à l'anonymat ni au sur-privilège ; l'approbation humaine systématique est un absolu qui détruit la valeur de l'autonomie et sera contourné ; le coffre-fort avec rotation améliore la protection du secret mais conserve une identité partagée sur-privilégiée — le problème de fond demeure.",
+      pourquoi: [
+        "Hors sujet : réduire le nombre d'agents ne corrige ni l'identité partagée ni le sur-privilège.",
+        "Bonne réponse : identité propre par agent, least privilege, jetons courts et journalisation attribuable — la gouvernance d'identités non humaines qui restaure accountability et révocation ciblée.",
+        "Piège absolu : approuver chaque action détruit la valeur de l'autonomie et sera contourné — le contrôle doit porter sur l'identité et les droits, pas sur chaque geste.",
+        "Techniquement vraie mais contextuellement fausse : le vaulting protège le secret mais conserve une identité partagée sur-privilégiée — accountability et moindre privilège restent absents."
+      ],
+      difficulte: 3
+    },
+    {
+      q: "Une banque en ligne a déployé les passkeys pour ses clients. Six mois plus tard, le support traite des milliers de demandes de récupération après perte d'appareil, via un simple lien envoyé par e-mail. Quel risque le RSSI doit-il traiter EN PRIORITÉ ?",
+      choix: [
+        "La dégradation de l'expérience client provoquée par les pertes d'accès répétées",
+        "Le processus de récupération par e-mail, qui ramène l'assurance globale du compte au niveau de la boîte mail et contourne la résistance au phishing des passkeys",
+        "La synchronisation des passkeys via des clouds grand public, hors du contrôle de la banque",
+        "L'incompatibilité des passkeys avec les navigateurs anciens de certains clients"
+      ],
+      reponse: 1,
+      explication:
+        "La chaîne d'authentification vaut son maillon le plus faible : si un attaquant peut déclencher une récupération et enregistrer SA propre passkey via un simple lien e-mail, la résistance au phishing de WebAuthn est contournée — les attaquants ciblent désormais la récupération, pas l'authentification. Le RSSI doit durcir ce parcours (vérification d'identité proportionnée, signaux de risque, délais et notifications, canaux multiples). La dégradation de l'expérience est réelle mais c'est un symptôme, pas le risque de sécurité prioritaire ; la synchronisation cloud des passkeys est un vrai sujet d'assurance mais secondaire face à une récupération triviale ; la compatibilité des navigateurs est un problème de technicien.",
+      pourquoi: [
+        "Vrai mais pas prioritaire pour un RSSI : l'irritation client est un symptôme business, pas le risque de sécurité à traiter d'abord.",
+        "Bonne réponse : la récupération est devenue le maillon faible — un lien e-mail permet à un attaquant d'enregistrer sa propre passkey, annulant la résistance au phishing.",
+        "Techniquement vrai mais secondaire : l'assurance des passkeys synchronisées est un arbitrage réel, mais sans commune mesure avec une récupération triviale par e-mail.",
+        "Réponse de technicien : la compatibilité navigateur est un sujet de support, pas un risque de sécurité prioritaire."
+      ],
+      difficulte: 3
+    },
+    {
+      q: "Après une acquisition, un audit révèle que l'application mainframe de facturation héritée de la cible — sans API ni support SCIM — compte des dizaines de comptes d'employés partis depuis plus de 90 jours. Son remplacement est budgété dans trois ans. Quelle est la MEILLEURE réponse ?",
+      choix: [
+        "Accélérer le remplacement du mainframe en réallouant le budget sécurité",
+        "Raccorder l'application au processus de départ : réconciliation automatisée régulière des comptes avec la source RH (connecteur ou traitement de fichiers), complétée par des revues d'accès rapprochées en compensation",
+        "Accepter formellement le risque puisque l'application sera décommissionnée",
+        "Rappeler aux administrateurs de l'application leur obligation de supprimer les comptes sous 24 heures"
+      ],
+      reponse: 1,
+      explication:
+        "Le constat d'audit porte sur le processus leaver, pas sur la technologie : même sans SCIM, on peut réconcilier régulièrement les comptes de l'application avec la source d'autorité RH (connecteur spécifique, export/import automatisé) pour détecter et désactiver les comptes de partants, avec des revues d'accès rapprochées en contrôle compensatoire. Réallouer le budget pour remplacer le mainframe est disproportionné et hors du pouvoir du seul RSSI ; accepter le risque pendant trois ans face à des comptes orphelins actifs sur une application financière est indéfendable ; et rappeler des obligations à un processus manuel qui a déjà échoué n'est pas un contrôle.",
+      pourquoi: [
+        "Vrai à long terme mais hors budget et hors délai : réallouer le budget sécurité pour un remplacement à trois ans ne corrige pas l'exposition actuelle.",
+        "Bonne réponse : réconciliation automatisée avec la source RH et revues compensatoires rapprochées — le processus leaver est réparé sans attendre la modernisation.",
+        "Inacceptable : accepter trois ans de comptes orphelins actifs sur une application financière n'est pas une gestion de risque défendable.",
+        "Illusoire : ré-énoncer une obligation à un processus manuel qui a déjà échoué n'est pas un contrôle — il faut un mécanisme."
+      ],
+      difficulte: 3
+    },
+    {
+      q: "Le RSSI veut généraliser un MFA résistant au phishing, mais 30 % des applications, héritées, ne supportent que des protocoles d'authentification anciens (NTLM, LDAP bind) incompatibles avec l'authentification moderne. Quelle approche est la MEILLEURE ?",
+      choix: [
+        "Reporter le programme MFA jusqu'à la modernisation complète du parc applicatif",
+        "Placer les applications héritées derrière une passerelle ou un proxy d'accès qui impose l'authentification moderne en frontal, et traiter les protocoles hérités comme une dette à réduire progressivement",
+        "Exempter définitivement les applications héritées de l'exigence MFA, documentée dans la politique",
+        "Imposer une connexion VPN avec MFA pour atteindre les applications héritées"
+      ],
+      reponse: 1,
+      explication:
+        "Le pattern éprouvé consiste à interposer un point d'application moderne (proxy d'accès, passerelle d'identité) : l'utilisateur s'authentifie en frontal avec un MFA résistant au phishing, la passerelle traduit ensuite vers le protocole hérité — le tout assorti d'un plan de réduction de la dette. Reporter tout le programme suspend la protection de 100 % du parc à cause de 30 % ; une exemption définitive est un absolu qui institutionnalise la faiblesse sur des applications souvent critiques ; le VPN avec MFA protège l'accès au réseau mais laisse l'authentification applicative faible pour tout attaquant déjà interne — c'est du périmètre, pas de l'identité.",
+      pourquoi: [
+        "Hors délai : suspendre tout le programme à la modernisation de 30 % du parc laisse 100 % des utilisateurs sans protection pendant des années.",
+        "Bonne réponse : une passerelle d'accès impose le MFA moderne en frontal des protocoles hérités et transforme le legacy en dette gérée plutôt qu'en blocage.",
+        "Piège absolu : une exemption définitive institutionnalise la faiblesse précisément sur des applications anciennes et souvent critiques.",
+        "Techniquement vraie mais insuffisante : le VPN protège l'entrée réseau, pas l'authentification applicative — un attaquant interne exploite toujours NTLM ; c'est une réponse périmétrique à un problème d'identité."
+      ],
+      difficulte: 3
+    },
+    {
+      q: "Le nouveau programme de gouvernance des identités révèle 12 000 identités humaines et 45 000 identités non humaines (comptes de service, workloads, robots, agents IA) totalement non gouvernées. Le budget de la première année est limité. Que devriez-vous faire EN PREMIER ?",
+      choix: [
+        "Étendre immédiatement les campagnes de certification existantes à toutes les identités non humaines",
+        "Établir l'inventaire des identités non humaines et assigner un propriétaire responsable à chacune, en priorisant celles dotées de privilèges élevés",
+        "Imposer la rotation immédiate des mots de passe de tous les comptes de service",
+        "Supprimer tous les comptes non humains inactifs depuis plus de 90 jours"
+      ],
+      reponse: 1,
+      explication:
+        "On ne gouverne pas ce qu'on ne connaît pas : la première étape est l'inventaire et l'assignation d'un propriétaire (ownership) pour chaque identité non humaine, en priorisant les privilèges élevés — c'est le prérequis de toute certification, rotation ou nettoyage. Étendre les certifications à 45 000 identités sans propriétaire identifié produirait du rubber stamping à grande échelle : personne ne peut attester d'un compte dont on ignore la fonction. La rotation massive sans connaître les dépendances provoque des pannes en chaîne ; supprimer les comptes « inactifs » sans propriétaire ni analyse casse des traitements périodiques légitimes (batchs trimestriels, plans de secours).",
+      pourquoi: [
+        "Hors phase : certifier 45 000 identités sans propriétaire identifié produit du rubber stamping — personne ne peut attester d'un compte dont la fonction est inconnue.",
+        "Bonne réponse : inventaire et ownership, priorisés par le niveau de privilège — le prérequis de toute gouvernance ; on ne protège pas ce qu'on ne connaît pas.",
+        "Réponse de technicien : une rotation massive sans connaissance des dépendances déclenche des pannes en chaîne sur les applications consommatrices.",
+        "Techniquement vraie mais hors phase : supprimer des comptes « inactifs » sans propriétaire ni analyse casse des traitements légitimes (batchs périodiques, procédures de secours)."
+      ],
+      difficulte: 3
     }
   ],
 
@@ -1648,6 +2258,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "L'accountability exige de pouvoir attribuer chaque action à un individu identifié de manière unique et authentifié. Un compte générique partagé brise cette chaîne : même avec des journaux complets, on ne sait pas QUI a agi. Le least privilege concerne l'étendue des droits, la separation of duties la répartition des tâches sensibles, et la defense in depth la superposition de contrôles — aucun n'est directement en cause ici.",
+      pourquoi: [
+        "Hors cible : le least privilege concerne l'étendue des droits, pas l'attribution des actions.",
+        "Bonne réponse : le compte générique partagé empêche d'attribuer chaque action à un individu — l'accountability est directement compromise.",
+        "Hors cible : la separation of duties répartit les tâches sensibles, ce n'est pas le problème décrit.",
+        "Trop général : la defense in depth superpose des contrôles, sans lien direct ici."
+      ],
       difficulte: 1
     },
     {
@@ -1661,6 +2277,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "L'identification est la déclaration d'une identité (saisir un nom d'utilisateur, présenter un badge) ; l'authentification est la preuve de cette déclaration (mot de passe, biométrie, token). La réponse A inverse les définitions, la C confond avec l'autorisation et l'audit, et les deux termes ne sont jamais synonymes à l'examen CISSP.",
+      pourquoi: [
+        "Inversion des deux définitions.",
+        "Bonne réponse : identifier = déclarer une identité ; authentifier = prouver cette déclaration.",
+        "Confusion avec l'autorisation et l'audit.",
+        "Faux : les deux termes ne sont jamais synonymes à l'examen CISSP."
+      ],
       difficulte: 1
     },
     {
@@ -1674,6 +2296,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le mot de passe est un facteur de connaissance (something you know) ; la notification push validée sur un smartphone enrôlé prouve la possession de cet appareil (something you have). C'est donc un vrai MFA à deux types de facteurs. Aucune biométrie (something you are) ni géolocalisation n'intervient dans ce scénario.",
+      pourquoi: [
+        "Faux : le smartphone enrôlé n'est pas une connaissance.",
+        "Bonne réponse : mot de passe (something you know) + possession du smartphone enrôlé (something you have) = vrai MFA à deux types de facteurs.",
+        "Hors scénario : aucune biométrie n'intervient.",
+        "Hors scénario : aucune géolocalisation n'est utilisée."
+      ],
       difficulte: 1
     },
     {
@@ -1687,6 +2315,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Pour un coffre de haute sécurité, accepter un imposteur (FAR, erreur de type 2) est bien plus grave que rejeter un utilisateur légitime (FRR, erreur de type 1). On augmente donc la sensibilité pour minimiser le FAR, en acceptant davantage de faux rejets. Le CER (point d'égalité FAR/FRR) sert à comparer la précision des systèmes, pas à régler un site sensible, et le débit est un critère de confort, pas de sécurité.",
+      pourquoi: [
+        "Confort maximal = risque maximal : minimiser le FRR facilite l'entrée d'imposteurs dans un site de haute sécurité.",
+        "Bonne réponse : minimiser le FAR, quitte à subir plus de faux rejets — la priorité d'un coffre de haute sécurité.",
+        "Hors usage : l'égalité FAR/FRR (CER) sert à comparer des systèmes, pas à régler un site sensible.",
+        "Hors sujet : le débit est un critère de confort, pas de sécurité."
+      ],
       difficulte: 2
     },
     {
@@ -1700,6 +2334,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le CER — le point où FAR et FRR sont égaux — est la mesure standard pour comparer objectivement la précision de systèmes biométriques : plus il est bas, plus le système est précis, indépendamment du réglage de sensibilité choisi ensuite. Le FAR à sensibilité maximale ne reflète qu'un point extrême de la courbe, et le temps d'enrôlement ou la taille des gabarits sont des critères opérationnels secondaires.",
+      pourquoi: [
+        "Trop partiel : un point extrême de la courbe ne caractérise pas la précision globale.",
+        "Bonne réponse : le CER, point d'égalité FAR/FRR, est la métrique standard pour comparer la précision entre fournisseurs.",
+        "Critère opérationnel secondaire, sans lien avec la précision.",
+        "La taille des gabarits n'indique rien sur la précision."
+      ],
       difficulte: 1
     },
     {
@@ -1708,6 +2348,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 2,
       explication:
         "AAL3 est le niveau le plus élevé d'assurance d'authentification : il exige un authentificateur matériel, du MFA et la résistance à l'usurpation du vérifieur (phishing resistance), typiquement une clé FIDO2 matérielle. AAL1 accepte un facteur unique, AAL2 exige le MFA sans imposer le matériel, et IAL3 concerne l'identity proofing (preuve d'identité à l'enrôlement), pas l'authentification.",
+      pourquoi: [
+        "Trop faible : AAL1 accepte un facteur unique.",
+        "Trop faible : AAL2 exige le MFA sans imposer le matériel ni la résistance à l'usurpation du vérifieur.",
+        "Bonne réponse : AAL3 exige un MFA matériel avec verifier impersonation resistance.",
+        "Piège de sigle : IAL3 concerne l'identity proofing à l'enrôlement, pas l'authentification."
+      ],
       difficulte: 2
     },
     {
@@ -1721,6 +2367,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "C'est l'Authentication Service (AS) du KDC qui vérifie l'authentification initiale de l'utilisateur et délivre le TGT, chiffré de sorte que seul le détenteur du bon mot de passe puisse exploiter la clé de session associée. Le TGS intervient ensuite : il vérifie le TGT et délivre les service tickets. Ni le serveur de ressources ni le poste client n'émettent de tickets.",
+      pourquoi: [
+        "Inversion : le TGS délivre les service tickets APRÈS présentation du TGT, il n'émet pas le TGT initial.",
+        "Bonne réponse : l'Authentication Service du KDC vérifie l'authentification initiale et émet le TGT.",
+        "Hors rôle : le serveur de ressources consomme les service tickets, il n'en émet pas.",
+        "Hors rôle : le poste client demande les tickets, il ne les délivre pas."
+      ],
       difficulte: 2
     },
     {
@@ -1734,6 +2386,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Un retour de snapshot ramène l'horloge du contrôleur de domaine en arrière ; or Kerberos horodate ses tickets et rejette par défaut toute dérive supérieure à la tolérance (classiquement cinq minutes) afin d'empêcher les attaques par rejeu. Le symptôme — échecs d'authentification massifs juste après un décalage temporel — signe le clock skew. Les certificats TLS, le schéma LDAP ou un secret RADIUS n'expliqueraient pas cette corrélation temporelle.",
+      pourquoi: [
+        "Sans corrélation : des certificats expirés ne coïncideraient pas avec un retour de snapshot.",
+        "Bonne réponse : le rollback ramène l'horloge en arrière — dérive supérieure à la tolérance Kerberos (cinq minutes par défaut), d'où les rejets massifs.",
+        "Sans corrélation : un schéma LDAP corrompu n'est pas lié au snapshot.",
+        "Hors protocole : aucun secret RADIUS n'intervient dans l'authentification AD interne."
+      ],
       difficulte: 2
     },
     {
@@ -1747,6 +2405,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le compte krbtgt signe et chiffre tous les TGT du domaine : avec son hash, l'attaquant forge des golden tickets — des TGT parfaitement valides pour n'importe quelle identité, y compris des comptes inexistants, avec la durée de vie de son choix. Le Kerberoasting et l'AS-REP roasting ne nécessitent pas krbtgt (ils exploitent des service tickets ou l'absence de pré-authentification), et le cassage NTLM est une attaque distincte.",
+      pourquoi: [
+        "Trop faible pour ce butin : le Kerberoasting ne nécessite pas krbtgt, de simples service tickets suffisent.",
+        "Bonne réponse : le hash de krbtgt, qui signe et chiffre tous les TGT, permet de forger des golden tickets valides pour tout le domaine.",
+        "Hors dépendance : l'AS-REP roasting exploite l'absence de pré-authentification, pas krbtgt.",
+        "Hors protocole : le cassage NTLM est une attaque distincte."
+      ],
       difficulte: 3
     },
     {
@@ -1760,6 +2424,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "SAML 2.0 est un standard ouvert fondé sur XML, maintenu par l'OASIS, qui permet d'échanger des assertions d'authentification, d'attributs et d'autorisation entre un Identity Provider et un Service Provider — c'est le socle historique du SSO web fédéré. Il n'est ni JSON ni IETF (c'est OAuth qui est une RFC de l'IETF), il ne remplace pas OAuth (rôles différents) et n'a aucun lien avec Kerberos.",
+      pourquoi: [
+        "Faux : SAML est en XML et maintenu par l'OASIS, pas par l'IETF.",
+        "Bonne réponse : standard XML de l'OASIS servant à échanger des assertions d'authentification et d'autorisation entre IdP et SP.",
+        "Faux : SAML et OAuth ont des rôles différents et complémentaires.",
+        "Faux : SAML n'a aucun lien avec Kerberos."
+      ],
       difficulte: 1
     },
     {
@@ -1773,6 +2443,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le besoin décrit est le SSO fédéré : l'IdP d'entreprise authentifie une fois, puis transmet des assertions SAML ou des jetons OIDC aux applications SaaS, qui ouvrent la session sans revoir les identifiants. La synchronisation de mots de passe multiplie les surfaces d'attaque et n'est pas du SSO ; un gestionnaire de mots de passe automatise la saisie mais reste de l'authentification répétée ; TACACS+ gère l'administration d'équipements réseau.",
+      pourquoi: [
+        "Hors sujet : TACACS+ administre des équipements réseau, il ne fait pas de SSO applicatif.",
+        "Bonne réponse : SSO fédéré — l'IdP d'entreprise authentifie une fois, puis assertions SAML ou jetons OIDC vers chaque SaaS.",
+        "Fausse bonne idée : la synchronisation de mots de passe multiplie les surfaces d'attaque sans faire de SSO.",
+        "Trop faible : un gestionnaire de mots de passe automatise la saisie mais reste de l'authentification répétée."
+      ],
       difficulte: 1
     },
     {
@@ -1781,6 +2457,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le serveur d'autorisation authentifie le resource owner, recueille son consentement puis émet les access tokens (et refresh tokens). Le serveur de ressources se contente de vérifier et d'accepter ces tokens pour servir les données ; le client les utilise mais ne les émet jamais ; le user agent (navigateur) n'est qu'un intermédiaire de transport.",
+      pourquoi: [
+        "Hors rôle : le resource server vérifie les tokens, il ne les émet pas.",
+        "Bonne réponse : le serveur d'autorisation émet les access tokens après consentement du resource owner.",
+        "Hors rôle : le client utilise les tokens, il ne les crée jamais.",
+        "Hors rôle : le navigateur n'est qu'un transporteur."
+      ],
       difficulte: 1
     },
     {
@@ -1794,6 +2476,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "OIDC ajoute à OAuth 2.0 une couche d'AUTHENTIFICATION : l'ID token, un JWT signé contenant l'identité de l'utilisateur, l'IdP émetteur, l'heure et la méthode d'authentification. OAuth seul délègue des autorisations sans prouver l'identité. Le chiffrement du transport reste assuré par TLS (qu'OIDC ne remplace pas), et le provisioning inter-domaines relève de SCIM.",
+      pourquoi: [
+        "Hors rôle : le chiffrement du transport reste assuré par TLS, pas par OIDC.",
+        "Bonne réponse : OIDC ajoute la couche d'identité — un ID token JWT signé qui prouve l'authentification de l'utilisateur.",
+        "Hors rôle : le provisioning inter-domaines relève de SCIM.",
+        "Faux : OIDC ne remplace pas TLS."
+      ],
       difficulte: 2
     },
     {
@@ -1807,6 +2495,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le MAC se définit par les labels de classification appliqués aux sujets (habilitations) et aux objets (classifications), l'accès étant imposé par le système selon la politique — le propriétaire n'a aucun pouvoir discrétionnaire. C'est le modèle des environnements militaires (lattice-based). Le DAC laisse le propriétaire décider, le RBAC passe par des rôles métier, et le rule-based applique des règles globales uniformes.",
+      pourquoi: [
+        "Contresens : le DAC laisse le propriétaire décider — l'inverse du scénario.",
+        "Bonne réponse : labels sur sujets et objets et décision imposée par le système, pas par le propriétaire = MAC.",
+        "Hors modèle : le RBAC passe par des rôles métier, pas des labels.",
+        "Hors modèle : le rule-based applique des règles globales sans labels."
+      ],
       difficulte: 1
     },
     {
@@ -1820,6 +2514,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "La décision combine des attributs du sujet (service), de l'objet (sensibilité du dossier), de l'environnement (heure, localisation réseau du poste) : c'est la signature de l'ABAC, où un moteur de politiques évalue dynamiquement ces attributs à chaque requête (souvent exprimées en XACML). Un RBAC pur ne considérerait que le rôle, sans le contexte ; le DAC dépendrait du propriétaire du dossier ; le MAC utiliserait des labels de classification imposés.",
+      pourquoi: [
+        "Trop étroit : le rôle seul n'explique ni l'heure ni la localisation réseau du poste.",
+        "Bonne réponse : service, sensibilité du dossier, heure et réseau sont des attributs évalués dynamiquement — ABAC.",
+        "Hors modèle : le DAC dépendrait du propriétaire du dossier.",
+        "Hors modèle : le MAC utiliserait des labels de classification imposés."
+      ],
       difficulte: 2
     },
     {
@@ -1833,6 +2533,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le RBAC est conçu pour cela : les privilèges sont rattachés à des rôles alignés sur les fonctions ; lors d'une mutation, il suffit de retirer l'ancien rôle et d'assigner le nouveau — les anciens droits disparaissent automatiquement, ce qui prévient aussi le privilege creep. L'attribution individuelle (A) et le DAC (C) explosent en charge administrative et en erreurs, et une règle unique pour tous (D) ne reflète pas les différences de fonctions.",
+      pourquoi: [
+        "Ingérable : l'attribution individuelle explose en charge administrative et en erreurs.",
+        "Bonne réponse : rattacher les droits à des rôles métier réduit chaque mutation à un changement de rôle et prévient le privilege creep.",
+        "Dispersé : le DAC sur demande éparpille les décisions et favorise les dérives.",
+        "Trop uniforme : une règle unique ignore les différences de fonctions."
+      ],
       difficulte: 1
     },
     {
@@ -1846,6 +2552,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Créer un fournisseur ET approuver ses paiements est une combinaison toxique : une seule personne peut monter une fraude complète (fournisseur fictif, paiements approuvés par elle-même). C'est une violation de la separation of duties, souvent issue du privilege creep après une mutation — exactement ce que les revues d'accès doivent détecter, avec retrait immédiat des droits hérités de l'ancien poste. Les autres réponses sont hors sujet par rapport au risque décrit.",
+      pourquoi: [
+        "Hors scénario : rien ne concerne les mots de passe.",
+        "Bonne réponse : créer des fournisseurs ET approuver leurs paiements = combinaison toxique violant la separation of duties, porte ouverte à la fraude.",
+        "Hors scénario : la durée de session n'est pas en cause.",
+        "Hors scénario : le chiffrement n'est pas le risque décrit."
+      ],
       difficulte: 2
     },
     {
@@ -1859,6 +2571,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le JIT supprime les privilèges permanents : les droits élevés sont accordés à la demande, pour une durée limitée et une tâche précise, puis retirés automatiquement. Des identifiants volés entre deux élévations ne donnent alors AUCUN privilège — la fenêtre d'attaque se réduit à la durée de la tâche. Le JIT ne dispense ni du MFA ni de l'enregistrement des sessions, qu'il complète au sein d'une solution PAM.",
+      pourquoi: [
+        "Contresens dangereux : le JIT complète le MFA, il ne le supprime pas.",
+        "Bonne réponse : la suppression des privilèges permanents réduit la fenêtre pendant laquelle des identifiants volés donnent un accès élevé.",
+        "Faux : l'enregistrement des sessions privilégiées reste nécessaire.",
+        "Faux : le nombre de sessions simultanées n'a rien à voir avec le JIT."
+      ],
       difficulte: 2
     },
     {
@@ -1872,6 +2590,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le cœur d'une solution PAM est la gestion des comptes à privilèges : coffre-fort d'identifiants (vaulting), rotation automatique des mots de passe (notamment après chaque check-out), courtage et enregistrement des sessions privilégiées, et élévation just-in-time. L'analyse applicative, le chiffrement de sauvegardes et le DLP de messagerie relèvent d'autres familles d'outils de sécurité.",
+      pourquoi: [
+        "Hors famille : le scan applicatif relève des outils AppSec.",
+        "Bonne réponse : coffre-fort d'identifiants, rotation automatique et enregistrement des sessions privilégiées sont le cœur du PAM.",
+        "Hors famille : le chiffrement de sauvegardes relève de la continuité.",
+        "Hors famille : le DLP de messagerie est une autre catégorie d'outils."
+      ],
       difficulte: 1
     },
     {
@@ -1880,11 +2604,17 @@ window.CISSP_DATA.domains[5] = {
         "Storing the session ID in the page URL for easy tracking",
         "Enforcing both an idle timeout and an absolute session lifetime with re-authentication",
         "Increasing cookie lifetime to one year",
-        "Disabling TLS to simplify session inspection"
+        "Requiring TLS only on the authentication page where credentials are entered"
       ],
       reponse: 1,
       explication:
-        "Une session sans expiration reste exploitable indéfiniment si son jeton est volé. Le duo timeout d'inactivité (déconnexion de l'utilisateur inactif) et durée de vie absolue (la session expire même active, forçant la ré-authentification) borne l'exploitation d'un jeton détourné. Mettre l'ID de session dans l'URL l'expose aux journaux et referrers, allonger la vie du cookie aggrave le risque, et désactiver TLS est une faute grave.",
+        "Une session sans expiration reste exploitable indéfiniment si son jeton est volé. Le duo timeout d'inactivité (déconnexion de l'utilisateur inactif) et durée de vie absolue (la session expire même active, forçant la ré-authentification) borne l'exploitation d'un jeton détourné. Mettre l'ID de session dans l'URL l'expose aux journaux et referrers, allonger la vie du cookie aggrave le risque, et limiter TLS à la page de connexion laisse ensuite le cookie de session circuler en clair (session sidejacking) — TLS doit couvrir toute la session.",
+      pourquoi: [
+        "Contre-pratique : l'identifiant en URL fuit dans les journaux, l'historique et les referrers.",
+        "Bonne réponse : timeout d'inactivité et durée de vie absolue avec ré-authentification bornent l'exploitation d'un jeton volé.",
+        "Aggrave le risque : allonger la vie du cookie prolonge la fenêtre d'exploitation.",
+        "Techniquement séduisant mais insuffisant : limiter TLS à la page de connexion laisse ensuite le cookie de session circuler en clair (session sidejacking)."
+      ],
       difficulte: 2
     },
     {
@@ -1893,6 +2623,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Essayer UN mot de passe probable sur un grand nombre de comptes, en restant sous le seuil de verrouillage par compte, est du password spraying. Le credential stuffing rejoue des couples identifiant/mot de passe volés ailleurs ; les rainbow tables cassent des hashes hors ligne ; le pass-the-hash rejoue un hash NTLM sans connaître le mot de passe. La détection du spraying exige une corrélation transversale des échecs, pas un simple compteur par compte.",
+      pourquoi: [
+        "Confusion : le credential stuffing rejoue des COUPLES volés, pas un mot de passe unique.",
+        "Bonne réponse : un seul mot de passe probable essayé sur tous les comptes, sous le seuil de verrouillage = password spraying.",
+        "Hors mode : les rainbow tables cassent des hashes hors ligne.",
+        "Hors mode : le pass-the-hash rejoue un hash NTLM, pas un mot de passe."
+      ],
       difficulte: 2
     },
     {
@@ -1901,6 +2637,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le credential stuffing exploite la réutilisation des mots de passe : des couples identifiant/mot de passe issus d'une fuite sont rejoués en masse sur d'autres services. Les parades incluent le MFA, la vérification des mots de passe contre les bases de fuites connues et la détection d'automatisation. Le spraying utilise un mot de passe unique sur beaucoup de comptes, le Kerberoasting casse des tickets de service, et la fixation de session impose un ID de session connu de l'attaquant.",
+      pourquoi: [
+        "Confusion : le spraying utilise un mot de passe unique sur beaucoup de comptes.",
+        "Bonne réponse : rejouer des couples identifiant/mot de passe volés sur d'autres sites = credential stuffing, qui parie sur la réutilisation.",
+        "Hors mode : le Kerberoasting casse des tickets de service.",
+        "Hors mode : la fixation de session impose un identifiant de session, sans identifiants volés."
+      ],
       difficulte: 1
     },
     {
@@ -1914,6 +2656,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "La résistance au phishing de FIDO2 tient au 'origin binding' : le navigateur inclut l'origine du site dans le défi signé par la clé privée, qui ne quitte jamais l'authentificateur — un site de phishing, sur un autre domaine, ne peut pas obtenir de signature valide pour le site légitime. Un code TOTP, lui, est une simple suite de chiffres que la victime peut saisir sur un faux site, que l'attaquant relaie en temps réel (adversary-in-the-middle). Les autres réponses sont techniquement fausses.",
+      pourquoi: [
+        "Hors sujet : la longueur des codes n'a aucun rapport avec la résistance au phishing.",
+        "Bonne réponse : la signature FIDO2 est liée à l'origine du site légitime — un faux site n'obtient aucune réponse valide, alors qu'un TOTP se saisit n'importe où.",
+        "Hors sujet : la connexion réseau n'est pas le facteur discriminant.",
+        "Faux : FIDO2 n'utilise pas de mot de passe à chiffrer."
+      ],
       difficulte: 3
     },
     {
@@ -1927,6 +2675,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Dans une fédération B2B, le partenaire reste l'Identity Provider de ses employés : il les authentifie avec leurs identifiants internes et, dès qu'un employé part, la désactivation de son compte chez le partenaire coupe automatiquement l'accès fédéré à votre portail. C'est le grand avantage : le deprovisioning reste là où l'information de départ existe. Votre organisation (SP) consomme les assertions mais ne gère ni mots de passe ni cycle de vie des comptes du partenaire.",
+      pourquoi: [
+        "Inversion : le SP consomme les assertions mais ne gère ni mots de passe ni cycle de vie des comptes du partenaire.",
+        "Bonne réponse : le partenaire, en tant qu'IdP, authentifie ses employés ; la désactivation chez lui coupe automatiquement l'accès fédéré.",
+        "Hors rôle : une autorité de certification n'authentifie pas les utilisateurs de la fédération.",
+        "Absurde : l'utilisateur ne se déprovisionne pas lui-même."
+      ],
       difficulte: 2
     },
     {
@@ -1935,6 +2689,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "SCIM (System for Cross-domain Identity Management) est le standard moderne de provisioning : API REST et objets JSON pour créer, mettre à jour et supprimer automatiquement les comptes dans les applications SaaS depuis l'annuaire central. SPML est son prédécesseur XML quasi abandonné ; SAML transporte des assertions d'authentification, pas des opérations de gestion de comptes ; LDAP est un protocole d'accès aux annuaires, pas un standard de synchronisation inter-domaines.",
+      pourquoi: [
+        "Piège d'ancienneté : SPML est l'ancêtre XML quasi abandonné.",
+        "Bonne réponse : SCIM est le standard REST/JSON de provisioning et deprovisioning automatisés vers les applications cloud.",
+        "Hors rôle : SAML transporte des assertions, pas des opérations de gestion de comptes.",
+        "Hors rôle : LDAP interroge des annuaires, il ne synchronise pas des comptes inter-domaines."
+      ],
       difficulte: 2
     },
     {
@@ -1948,6 +2708,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "La bonne pratique est de DÉSACTIVER immédiatement les comptes — idéalement pendant l'entretien de sortie — afin de couper tout accès sans détruire les données, clés de chiffrement ou preuves potentiellement nécessaires. La suppression définitive vient plus tard, selon la politique de rétention. Supprimer d'emblée fait perdre des éléments irremplaçables, attendre une revue planifiée laisse une fenêtre d'attaque, et donner les identifiants au manager brise l'accountability (mieux vaut des accès délégués tracés).",
+      pourquoi: [
+        "Hors phase : supprimer d'emblée détruit données et preuves potentiellement nécessaires.",
+        "Bonne réponse : désactiver immédiatement les comptes, idéalement pendant l'entretien de sortie.",
+        "Fenêtre d'attaque : attendre la revue planifiée est inacceptable pour un départ hostile.",
+        "Brise l'accountability : donner les identifiants au manager rend les actions inattribuables."
+      ],
       difficulte: 1
     },
     {
@@ -1961,6 +2727,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "La matrice de contrôle d'accès croise sujets (lignes) et objets (colonnes) : lue en colonne, elle donne l'ACL d'un objet (qui peut y accéder et comment) ; lue en ligne, elle donne la capability list d'un sujet (ce à quoi il peut accéder). Cette distinction colonne/ligne est un classique de l'examen. Le treillis de labels (D) décrit le MAC lattice-based, un autre concept.",
+      pourquoi: [
+        "Hors sujet : un schéma réseau n'est pas une matrice de contrôle d'accès.",
+        "Bonne réponse : lue en colonne, la matrice donne l'ACL d'un objet ; lue en ligne, la capability list d'un sujet.",
+        "Confusion : le mapping rôles/unités décrit le RBAC.",
+        "Confusion : le treillis de labels décrit le MAC lattice-based."
+      ],
       difficulte: 2
     },
     {
@@ -1974,6 +2746,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Une interface contrainte (constrained/restricted interface) limite ce que l'utilisateur peut voir et faire en masquant ou grisant les fonctions hors de son périmètre — l'application du guichetier n'affiche que ses opérations. Le content-dependent filtre selon le CONTENU des données (ex. une vue base de données masquant une colonne), le context-dependent selon le contexte de la demande (heure, séquence), et la sécurité par capabilities est un mécanisme de jetons d'accès, pas d'interface.",
+      pourquoi: [
+        "Hors cible : le content-dependent filtre selon le CONTENU des données, pas l'interface.",
+        "Bonne réponse : masquer menus et fonctions hors du périmètre du guichetier = interface contrainte (constrained/restricted UI).",
+        "Hors cible : le context-dependent dépend du contexte de la demande (heure, séquence).",
+        "Hors mécanisme : les capabilities sont des jetons d'accès, pas une technique d'interface."
+      ],
       difficulte: 2
     },
     {
@@ -1987,6 +2765,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "L'authentification adaptative évalue un score de risque contextuel (appareil, localisation, comportement, heure) et n'exige un facteur supplémentaire (step-up) que lorsque le risque dépasse un seuil — équilibre entre sécurité et expérience utilisateur, et composant clé des architectures Zero Trust. Le MFA statique impose les mêmes exigences à chaque connexion ; le SSO et le mTLS ne modulent rien selon le risque.",
+      pourquoi: [
+        "Contresens : le MFA statique impose les mêmes exigences à chaque connexion.",
+        "Bonne réponse : score de risque contextuel et facteur supplémentaire exigé seulement au-delà d'un seuil = authentification adaptative (step-up).",
+        "Hors mécanisme : le SSO persistant ne module rien selon le risque.",
+        "Hors mécanisme : le mTLS est statique et n'évalue aucun risque."
+      ],
       difficulte: 2
     },
     {
@@ -2000,6 +2784,12 @@ window.CISSP_DATA.domains[5] = {
       reponse: 1,
       explication:
         "Le SSO concentre le risque : un seul identifiant compromis ouvre TOUTES les applications reliées (single point of compromise). La parade prioritaire est de durcir cette authentification unique — MFA fort, idéalement résistant au phishing, surveillance des connexions et gestion de session rigoureuse. La réponse A est contradictoire (le SSO réduit le nombre de mots de passe), et les réponses C et D n'adressent pas le risque principal.",
+      pourquoi: [
+        "Contradiction : le SSO réduit le nombre de mots de passe à mémoriser.",
+        "Bonne réponse : un identifiant SSO compromis expose toutes les applications reliées ; la parade est un MFA fort sur l'identité SSO.",
+        "Faux : le SSO ne supprime pas la journalisation applicative.",
+        "Faux problème : allonger la vie des jetons AUGMENTE le risque."
+      ],
       difficulte: 1
     },
     {
@@ -2008,11 +2798,93 @@ window.CISSP_DATA.domains[5] = {
         "Accepting a self-asserted email address",
         "Verifying government-issued identity evidence, with biometric comparison, in person or via supervised remote session",
         "Sending a one-time code to any phone number the applicant provides",
-        "Checking that the username is not already taken"
+        "Confirming control of a corporate email address through a verification link"
       ],
       reponse: 1,
       explication:
-        "L'identity proofing de plus haute assurance (IAL3 dans NIST SP 800-63A) exige la vérification de preuves d'identité officielles avec comparaison biométrique, en présence physique ou en session à distance supervisée — on établit que la personne EST bien qui elle prétend être avant de créer son compte. L'auto-déclaration (A) correspond à IAL1, et les réponses C et D ne prouvent rien sur l'identité réelle du demandeur.",
+        "L'identity proofing de plus haute assurance (IAL3 dans NIST SP 800-63A) exige la vérification de preuves d'identité officielles avec comparaison biométrique, en présence physique ou en session à distance supervisée — on établit que la personne EST bien qui elle prétend être avant de créer son compte. L'auto-déclaration (A) correspond à IAL1 ; un code envoyé à un numéro fourni par le demandeur (C) ne prouve rien ; et contrôler une boîte mail (D) démontre la possession d'un compte, pas l'identité réelle de la personne.",
+      pourquoi: [
+        "Niveau plancher : l'auto-déclaration correspond à IAL1, la plus faible assurance.",
+        "Bonne réponse : preuves d'identité officielles avec comparaison biométrique, en présence ou en session supervisée — la plus haute assurance (IAL3).",
+        "Insuffisant : un code envoyé à un numéro fourni par le demandeur ne prouve rien sur son identité réelle.",
+        "Techniquement utile mais très insuffisant : contrôler une boîte mail démontre une possession, pas l'identité de la personne."
+      ],
+      difficulte: 3
+    },
+    {
+      q: "Following a successful adversary-in-the-middle attack, the board gives the CISO of a 40,000-employee manufacturer twelve months to deploy phishing-resistant MFA across offices, shared-workstation plants, and call centers. What should the CISO do FIRST?",
+      choix: [
+        "Purchase hardware security keys for all employees and set a single cutover date",
+        "Map user populations and applications, then migrate privileged and internet-exposed accounts first with journeys adapted to shared workstations",
+        "Enable number matching on the existing push notifications for the whole company",
+        "Run a voluntary pilot at headquarters and expand based on user feedback"
+      ],
+      reponse: 1,
+      explication:
+        "Une migration MFA à grande échelle est un programme de gestion du risque : la première étape est la cartographie des populations et des applications, suivie d'une priorisation par le risque — comptes à privilèges et accès exposés d'abord, avec des parcours adaptés aux postes partagés. Le big-bang matériel ignore les contraintes d'usage et échouera ; le number matching durcit le push sans le rendre résistant au phishing ; le pilote volontaire, sans priorisation, laisse les comptes critiques exposés pendant des mois.",
+      pourquoi: [
+        "Réponse de technicien : un achat massif avec bascule unique ignore les contraintes des populations (postes partagés, centres d'appels) et voue le déploiement à l'échec.",
+        "Bonne réponse : cartographier puis prioriser par le risque — privilèges et exposition Internet d'abord — est la démarche managériale attendue en première étape.",
+        "Techniquement vrai mais insuffisant : le number matching contre le MFA fatigue ne rend pas le push résistant au phishing — l'exigence du COMEX n'est pas satisfaite.",
+        "Techniquement vrai mais pas prioritaire : un pilote volontaire sans logique de risque retarde la protection des comptes les plus critiques."
+      ],
+      difficulte: 3
+    },
+    {
+      q: "A company deploys autonomous AI agents that invoke internal HR and finance APIs. A review finds all agents authenticate with a single shared, highly privileged API key. Which remediation BEST addresses the risk?",
+      choix: [
+        "Limit how many AI agents may run concurrently",
+        "Issue each agent its own non-human identity with least-privilege entitlements, short-lived credentials, and logging attributable to the agent and its owner",
+        "Require human approval before every action any agent performs",
+        "Store the shared API key in a secrets vault with automatic rotation"
+      ],
+      reponse: 1,
+      explication:
+        "Les agents IA sont des identités non humaines et doivent être gouvernés comme telles : identité individuelle, moindre privilège par fonction, jetons de courte durée et journalisation rattachant chaque appel à l'agent et à son commanditaire — conditions de l'accountability et de la révocation ciblée. Limiter le nombre d'agents ne change rien à l'anonymat ; l'approbation humaine de chaque action est un absolu qui détruit l'autonomie et sera contourné ; le coffre-fort avec rotation protège le secret mais conserve une identité partagée sur-privilégiée.",
+      pourquoi: [
+        "Hors sujet : le nombre d'agents ne corrige ni l'identité partagée ni le sur-privilège.",
+        "Bonne réponse : identité non humaine dédiée, least privilege, jetons courts et journalisation attribuable — la gouvernance qui restaure accountability et révocation ciblée.",
+        "Piège absolu : approuver chaque action supprime la valeur de l'autonomie et sera contourné ; le contrôle porte sur l'identité et les droits, pas sur chaque geste.",
+        "Techniquement vraie mais contextuellement fausse : le vaulting protège le secret sans corriger le vrai problème — une identité partagée et sur-privilégiée."
+      ],
+      difficulte: 3
+    },
+    {
+      q: "Your company has just acquired a competitor. The business requires the acquired employees to reach group applications on day one, but the security team has no visibility into the target's IAM hygiene. As CISO, what should you do FIRST?",
+      choix: [
+        "Merge both directories immediately to simplify administration",
+        "Assess the target's IAM controls, then establish cross-company federation with contractual assurance requirements (MFA, deprovisioning) until full integration",
+        "Create guest accounts in your directory for every acquired employee",
+        "Block all cross-company access until the integration program completes"
+      ],
+      reponse: 1,
+      explication:
+        "En fusion-acquisition, on fédère avant de fusionner : après une évaluation des contrôles IAM de la cible, la fédération inter-entreprises donne l'accès exigé par le métier tout en maintenant une frontière de confiance, avec des exigences contractualisées (MFA, niveaux d'assurance, répercussion immédiate des départs). Fusionner des annuaires à l'hygiène inconnue importe les compromissions potentielles ; les comptes invités en masse créent une population sans cycle de vie rattaché à la source RH de la cible ; bloquer tout accès sacrifie l'objectif business que le RSSI doit servir.",
+      pourquoi: [
+        "Hors phase et dangereux : fusionner avant d'évaluer importe les compromissions potentielles de la cible au cœur du groupe.",
+        "Bonne réponse : évaluer puis fédérer sous exigences contractualisées — l'accès jour 1 avec une frontière de confiance maîtrisée, l'arbitrage attendu d'un CISO.",
+        "Techniquement faisable mais contextuellement faux : des milliers de comptes invités sans lien avec la source RH de la cible garantissent des comptes orphelins.",
+        "Techniquement le plus sûr mais inacceptable : bloquer l'accès sacrifie l'objectif business de l'acquisition au lieu de gérer le risque."
+      ],
+      difficulte: 3
+    },
+    {
+      q: "An online bank rolled out passkeys. Months later, thousands of customers who lost their devices regain access through a simple emailed recovery link. Which risk should the CISO address FIRST?",
+      choix: [
+        "Customer dissatisfaction caused by repeated loss of access",
+        "The email-based recovery path, which reduces overall account assurance to the strength of the mailbox and bypasses the passkeys' phishing resistance",
+        "Passkey synchronization through consumer cloud accounts outside the bank's control",
+        "Passkey incompatibility with older browsers used by some customers"
+      ],
+      reponse: 1,
+      explication:
+        "La chaîne d'authentification vaut son maillon le plus faible : si un lien e-mail suffit à déclencher la récupération et à enregistrer une nouvelle passkey, un attaquant contourne toute la résistance au phishing de WebAuthn en attaquant la boîte mail — les attaques se déplacent vers la récupération. Le parcours doit être durci (vérification proportionnée, signaux de risque, délais, notifications multi-canaux). L'insatisfaction client est un symptôme, pas le risque prioritaire ; la synchronisation cloud est un vrai sujet d'assurance mais secondaire ; la compatibilité navigateur est un problème de support.",
+      pourquoi: [
+        "Vrai mais pas prioritaire pour un CISO : l'insatisfaction est un symptôme business, pas le risque de sécurité à traiter d'abord.",
+        "Bonne réponse : la récupération par e-mail est le maillon faible — elle permet à un attaquant d'enregistrer sa propre passkey et annule la résistance au phishing.",
+        "Techniquement vrai mais secondaire : l'assurance des passkeys synchronisées pèse peu face à une récupération triviale par simple lien e-mail.",
+        "Réponse de technicien : la compatibilité des navigateurs relève du support, pas du risque prioritaire."
+      ],
       difficulte: 3
     }
   ],
