@@ -57,7 +57,8 @@ const Parcours = (() => {
       texte: "Simulez les conditions réelles jusqu'à la constance : ≥ 80 % sur un examen complet, c'est le signal que vous êtes prêt à réserver votre place.",
       activites: [
         { label: "Réussir un mini examen (30 questions) à ≥ 80 %", href: "#/examen", done: () => Progress.exams().some(e => e.total <= 30 && e.pct >= 80) },
-        { label: "Réussir un examen complet (100 questions / 3 h) à ≥ 80 %", href: "#/examen", done: () => Progress.exams().some(e => e.total >= 100 && e.pct >= 80) }
+        { label: "Réussir un examen complet en français (100 questions / 3 h) à ≥ 80 %", href: "#/examen", done: () => Progress.exams().some(e => !e.en && e.total >= 100 && e.pct >= 80) },
+        { label: "Réussir la simulation CAT en anglais — les conditions exactes du jour J (≥ 72 %)", href: "#/examen", done: () => Progress.exams().some(e => e.en && e.pct >= 72) }
       ]
     });
 

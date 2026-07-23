@@ -46,6 +46,12 @@ window.CISSP_DATA.domains[1] = {
   ],
   flashcards: [
     { recto: "Terme ou question (termes techniques en anglais)", verso: "Définition/réponse en français" }
+  ],
+  quizEn: [
+    // Banque en ANGLAIS pour la simulation CAT (l'examen réel est en anglais).
+    // Même format que quiz, mais q et choix en anglais authentique d'examen ;
+    // l'explication reste en FRANÇAIS pour l'apprentissage.
+    { q: "Which of the following BEST…", choix: ["A", "B", "C", "D"], reponse: 1, explication: "Explication en français.", difficulte: 2 }
   ]
 };
 ```

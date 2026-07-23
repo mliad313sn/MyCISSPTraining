@@ -53,9 +53,9 @@ const Progress = (() => {
       s.quiz[domainId] = q; save(s);
     },
 
-    recordExam(score, total) {
+    recordExam(score, total, en) {
       const s = state();
-      s.exams.push({ date: new Date().toISOString(), score, total, pct: Math.round(100 * score / total) });
+      s.exams.push({ date: new Date().toISOString(), score, total, pct: Math.round(100 * score / total), en: !!en });
       save(s);
     },
     exams() { return state().exams; },

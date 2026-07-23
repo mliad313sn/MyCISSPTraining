@@ -1,59 +1,101 @@
-/* Examen blanc : tirage pondéré selon les poids officiels des domaines,
-   chronomètre, pas de retour arrière (comme l'examen CAT réel),
-   correction finale avec analyse par domaine. */
+/* Examens blancs :
+   - Entraînements français (30/60/100 questions, tirage pondéré officiel)
+   - Simulation CAT réaliste EN ANGLAIS : adaptative (la difficulté suit vos
+     réponses), longueur variable 100-150 questions dont 25 items pré-test
+     non notés, arrêt anticipé par confiance statistique, 3 h, sans retour
+     arrière — le format exact que rencontre un candidat francophone,
+     puisque le CISSP ne se passe plus qu'en anglais (ou zh/de/ja/es).
+   - Items « avancés » : questions d'ordonnancement (drag-and-drop du réel)
+     injectées dans l'examen complet et le CAT. */
 const Exam = (() => {
-  let questions, idx, answers, timerId, endTime, config;
+  let mode, questions, idx, answers, timerId, endTime, config;
+  // état CAT
+  let pools, targetDiff, askedCount, pretestFlags, orderPlan;
+  // état item d'ordonnancement en cours
+  let ordChoice;
 
   const FORMATS = {
-    mini:  { n: 30,  minutes: 45,  label: "Mini examen — 30 questions / 45 min" },
-    demi:  { n: 60,  minutes: 90,  label: "Demi examen — 60 questions / 1 h 30" },
-    complet: { n: 100, minutes: 180, label: "Examen complet — 100 questions / 3 h (format CAT)" }
+    mini:  { n: 30,  minutes: 45,  label: "Mini examen (FR) — 30 questions / 45 min" },
+    demi:  { n: 60,  minutes: 90,  label: "Demi examen (FR) — 60 questions / 1 h 30" },
+    complet: { n: 100, minutes: 180, label: "Examen complet (FR) — 100 questions / 3 h" },
+    cat: { minutes: 180, label: "Simulation CAT réelle (EN) — 100-150 questions / 3 h" }
   };
 
-  function weightedDraw(n) {
-    const domains = Object.values(CISSP_DATA.domains);
-    const totalW = domains.reduce((s, d) => s + parseFloat(d.poids), 0);
-    let pool = [];
-    domains.forEach(d => {
-      const want = Math.max(1, Math.round(n * parseFloat(d.poids) / totalW));
-      const qs = d.quiz.slice();
-      for (let i = qs.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [qs[i], qs[j]] = [qs[j], qs[i]];
-      }
-      qs.slice(0, want).forEach(q => pool.push({ ...q, domId: d.id, domCode: d.code, domTitre: d.titre }));
-    });
-    for (let i = pool.length - 1; i > 0; i--) {
+  const shuffle = a => {
+    a = a.slice();
+    for (let i = a.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [pool[i], pool[j]] = [pool[j], pool[i]];
+      [a[i], a[j]] = [a[j], a[i]];
     }
-    return pool.slice(0, n);
+    return a;
+  };
+
+  function domains() { return Object.values(CISSP_DATA.domains); }
+
+  function tagged(d, q) { return { ...q, domId: d.id, domCode: d.code, domTitre: d.titre }; }
+
+  function weightedDraw(n, lang) {
+    const ds = domains();
+    const totalW = ds.reduce((s, d) => s + parseFloat(d.poids), 0);
+    let pool = [];
+    ds.forEach(d => {
+      const bank = lang === "en" ? (d.quizEn || []) : d.quiz;
+      const want = Math.max(1, Math.round(n * parseFloat(d.poids) / totalW));
+      shuffle(bank).slice(0, want).forEach(q => pool.push(tagged(d, q)));
+    });
+    return shuffle(pool).slice(0, n);
   }
 
+  function orderingItems(nb) {
+    const ordres = ((CISSP_DATA.memo || {}).ordres || []);
+    return shuffle(ordres).slice(0, nb).map(o => ({
+      type: "ordre", id: o.id, titre: o.titre, consigne: o.consigne,
+      items: o.items, domId: o.domaine,
+      domCode: (CISSP_DATA.domains[o.domaine] || {}).code || "",
+      domTitre: (CISSP_DATA.domains[o.domaine] || {}).titre || ""
+    }));
+  }
+
+  /* ---------- Accueil ---------- */
   function home() {
     clearInterval(timerId);
     const hist = Progress.exams().slice(-5).reverse();
+    const enTotal = domains().reduce((s, d) => s + (d.quizEn || []).length, 0);
     document.getElementById("app").innerHTML = `
       <h1 class="page-title">🎯 Examen blanc</h1>
-      <p class="page-sub">Simulez les conditions réelles : questions tirées des 8 domaines selon leur poids officiel à l'examen,
-      chronomètre, aucune possibilité de revenir en arrière (comme le vrai CAT d'ISC2). La correction détaillée arrive à la fin.
-      Objectif avant de réserver votre examen : <strong>≥ 80 %</strong> de façon constante.</p>
-      <div class="card" style="margin-bottom:1.4rem;border-color:var(--warn)">
-        <strong>🧭 Les 3 méta-règles à garder en tête sur CHAQUE question :</strong>
-        <ul style="padding-left:1.2rem;color:var(--text-dim);margin-top:.4rem">
-          <li>La <strong>vie humaine</strong> prime toujours — toute réponse qui protège les personnes gagne.</li>
-          <li><strong>Think like a manager</strong> : processus, politique et portée organisationnelle avant la solution technique ponctuelle.</li>
-          <li>Questions « FIRST / BEST / MOST » : cherchez l'étape la plus en <strong>amont</strong> du processus (identifier/évaluer avant corriger).</li>
-        </ul>
+      <p class="page-sub">Entraînez-vous en français, puis passez en <strong>conditions réelles</strong>.
+      Objectif avant de réserver : <strong>≥ 80 %</strong> de façon constante.</p>
+
+      <div class="card" style="border-color:var(--warn);margin-bottom:1.4rem">
+        <h3>⚠️ Important : l'examen réel est en ANGLAIS</h3>
+        <p style="color:var(--text-dim);margin-top:.4rem">Depuis 2024, le CISSP n'est plus proposé en français : un candidat francophone passe
+        l'examen <strong>CAT en anglais</strong> (100 à 150 questions, 3 h, dont 25 items pré-test non notés, arrêt anticipé possible,
+        aucun retour arrière, pas de temps additionnel). Entraînez-vous d'abord en français pour les concepts,
+        puis basculez sur la <strong>simulation CAT en anglais</strong> pour vous préparer aux conditions exactes du jour J.</p>
       </div>
+
+      <div class="card" style="border-color:var(--accent);margin-bottom:1.4rem;display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap">
+        <div style="font-size:2.6rem">🇬🇧</div>
+        <div style="flex:1;min-width:240px">
+          <h3>Simulation CAT réelle — en anglais</h3>
+          <p style="color:var(--text-dim);font-size:.92rem">Adaptative (la difficulté suit vos réponses), 100-150 questions selon votre constance,
+          25 items pré-test non notés, items d'ordonnancement, corrections expliquées en français. Banque : ${enTotal} questions EN.</p>
+        </div>
+        <button class="btn" onclick="Exam.start('cat')" ${enTotal >= 60 ? "" : "disabled title='Banque anglaise en cours de chargement'"}>Passer en conditions réelles</button>
+      </div>
+
+      <h2 class="section-title">🇫🇷 Entraînements en français</h2>
       <div class="grid cols-3">
-        ${Object.entries(FORMATS).map(([k, f]) => `
+        ${["mini", "demi", "complet"].map(k => {
+          const f = FORMATS[k];
+          return `
           <div class="card" style="text-align:center">
             <div style="font-size:2.2rem">${k === "complet" ? "🏆" : k === "demi" ? "⏱" : "⚡"}</div>
             <h3 style="margin:.5rem 0">${f.label.split("—")[0]}</h3>
-            <p style="color:var(--text-dim);font-size:.9rem;margin-bottom:1rem">${f.n} questions · ${f.minutes >= 60 ? (f.minutes / 60) + " h" : f.minutes + " min"}</p>
-            <button class="btn" onclick="Exam.start('${k}')">Commencer</button>
-          </div>`).join("")}
+            <p style="color:var(--text-dim);font-size:.9rem;margin-bottom:1rem">${f.n} questions · ${f.minutes >= 60 ? (f.minutes / 60) + " h" : f.minutes + " min"}${k === "complet" ? " · items d'ordonnancement inclus" : ""}</p>
+            <button class="btn secondary" onclick="Exam.start('${k}')">Commencer</button>
+          </div>`;
+        }).join("")}
       </div>
       ${hist.length ? `
         <h2 class="section-title">📈 Mes derniers examens blancs</h2>
@@ -61,19 +103,59 @@ const Exam = (() => {
           ${hist.map(e => `
             <div style="display:flex;justify-content:space-between;gap:1rem;padding:.45rem 0;border-bottom:1px solid var(--border)">
               <span>${new Date(e.date).toLocaleDateString("fr-FR", { day: "2-digit", month: "short", year: "numeric" })}</span>
-              <span>${e.score} / ${e.total}</span>
+              <span>${e.total} q${e.en ? " · EN/CAT" : " · FR"}</span>
               <strong style="color:${e.pct >= 80 ? "var(--ok)" : e.pct >= 65 ? "var(--warn)" : "var(--ko)"}">${e.pct}%</strong>
             </div>`).join("")}
         </div>` : ""}`;
   }
 
+  /* ---------- Démarrage ---------- */
   function start(formatKey) {
     config = FORMATS[formatKey];
-    questions = weightedDraw(config.n);
-    idx = 0; answers = [];
+    mode = formatKey === "cat" ? "cat" : "lin";
+    idx = 0; answers = []; ordChoice = [];
+
+    if (mode === "lin") {
+      questions = weightedDraw(config.n, "fr");
+      if (formatKey === "complet") {
+        // items avancés : 3 ordonnancements insérés à des positions aléatoires
+        orderingItems(3).forEach(o =>
+          questions.splice(1 + Math.floor(Math.random() * (questions.length - 2)), 0, o));
+      }
+    } else {
+      // CAT : pools par domaine, tirage adaptatif, 25 pré-tests non notés
+      pools = {};
+      domains().forEach(d => pools[d.id] = shuffle((d.quizEn || []).map(q => tagged(d, q))));
+      targetDiff = 2; askedCount = 0;
+      pretestFlags = new Set(shuffle([...Array(100).keys()]).slice(0, 25));
+      // 2 items d'ordonnancement à des positions fixes aléatoires (notés)
+      orderPlan = new Set(shuffle([...Array(80).keys()].map(i => i + 10)).slice(0, 2));
+      questions = null;
+    }
     endTime = Date.now() + config.minutes * 60000;
     timerId = setInterval(tick, 1000);
     render();
+  }
+
+  /* Tirage CAT : domaine pondéré, difficulté proche de la cible */
+  function nextCatQuestion() {
+    if (orderPlan.has(askedCount)) {
+      const o = orderingItems(1)[0];
+      if (o) return o;
+    }
+    const ds = domains().filter(d => (pools[d.id] || []).length);
+    if (!ds.length) return null;
+    const totalW = ds.reduce((s, d) => s + parseFloat(d.poids), 0);
+    let r = Math.random() * totalW, dom = ds[0];
+    for (const d of ds) { r -= parseFloat(d.poids); if (r <= 0) { dom = d; break; } }
+    const pool = pools[dom.id];
+    // question dont la difficulté est la plus proche de la cible adaptative
+    let best = 0, bestDelta = 99;
+    pool.forEach((q, i) => {
+      const delta = Math.abs((q.difficulte || 2) - targetDiff);
+      if (delta < bestDelta) { bestDelta = delta; best = i; }
+    });
+    return pool.splice(best, 1)[0];
   }
 
   function tick() {
@@ -86,64 +168,127 @@ const Exam = (() => {
     el.classList.toggle("low", left < 5 * 60000);
   }
 
+  /* ---------- Rendu d'une question ---------- */
+  let current = null;
   function render() {
-    if (idx >= questions.length) return finish(false);
-    const q = questions[idx];
+    if (mode === "lin" && idx >= questions.length) return finish(false);
+    if (mode === "cat") {
+      // règles d'arrêt du CAT
+      const scored = answers.filter(a => !a.pretest && a.q.type !== "ordre");
+      const acc = scored.length ? scored.filter(a => a.good).length / scored.length : 0;
+      if (askedCount >= 150 || (askedCount >= 100 && (acc >= 0.72 || acc <= 0.58))) return finish(false);
+      current = nextCatQuestion();
+      if (!current) return finish(false);
+    } else {
+      current = questions[idx];
+    }
+    const q = current;
+    const numero = mode === "cat" ? askedCount + 1 : idx + 1;
+    const total = mode === "cat" ? "100-150" : questions.length;
+
     document.getElementById("app").innerHTML = `
       <div style="max-width:840px;margin:0 auto">
         <div class="q-head" style="display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap">
-          <span class="badge">Question ${idx + 1} / ${questions.length}</span>
+          <span class="badge">${mode === "cat" ? "🇬🇧 CAT" : "🇫🇷"} Question ${numero} ${mode === "cat" ? "(max 150)" : "/ " + total}</span>
           <span class="exam-timer" id="exam-timer">…</span>
           <button class="btn danger small" onclick="if(confirm('Abandonner cet examen blanc ?')) Exam.home()">Abandonner</button>
         </div>
-        <div class="progressbar" style="margin-bottom:1.2rem"><span style="width:${Math.round(100 * idx / questions.length)}%"></span></div>
+        <div class="progressbar" style="margin-bottom:1.2rem"><span style="width:${mode === "cat" ? Math.round(100 * askedCount / 150) : Math.round(100 * idx / questions.length)}%"></span></div>
         <div class="card">
+          ${q.type === "ordre" ? renderOrdreHTML(q) : `
           <p class="q-text">${esc(q.q)}</p>
           <div class="choices">
             ${q.choix.map((c, i) => `<button class="choice" data-i="${i}">${LETTRES[i]}. ${esc(c)}</button>`).join("")}
-          </div>
+          </div>`}
         </div>
-        <p style="color:var(--text-dim);font-size:.83rem;margin-top:.7rem">⚠️ Comme à l'examen réel : une fois validée, impossible de revenir sur une question.</p>
+        <p style="color:var(--text-dim);font-size:.83rem;margin-top:.7rem">⚠️ Comme à l'examen réel : une fois validée, impossible de revenir sur une question.${mode === "cat" ? " Certaines questions sont des items pré-test non notés — impossible de les distinguer, comme au vrai CAT." : ""}</p>
       </div>`;
     tick();
-    document.querySelectorAll(".choice").forEach(btn => {
+
+    if (q.type === "ordre") wireOrdre(q);
+    else document.querySelectorAll(".choice").forEach(btn => {
+      btn.onclick = () => submitAnswer(+btn.dataset.i === q.reponse, +btn.dataset.i);
+    });
+  }
+
+  /* ---------- Item d'ordonnancement ---------- */
+  function renderOrdreHTML(q) {
+    ordChoice = [];
+    return `
+      <span class="badge" style="margin-bottom:.6rem">🧩 Item avancé — ordonnancement (comme les drag-and-drop du réel)</span>
+      <p class="q-text" style="margin-top:.5rem">${esc(q.titre)}</p>
+      <p style="color:var(--text-dim);font-size:.92rem;margin-bottom:.8rem">${esc(q.consigne)} Cliquez les éléments dans l'ordre.</p>
+      <div class="choices" id="ord-src">
+        ${shuffle(q.items.map((it, i) => ({ it, i }))).map(o =>
+          `<button class="choice" data-i="${o.i}">${esc(o.it)}</button>`).join("")}
+      </div>
+      <p style="margin-top:.8rem;font-size:.9rem">Votre ordre : <span id="ord-out" style="color:var(--accent)">—</span></p>`;
+  }
+
+  function wireOrdre(q) {
+    document.querySelectorAll("#ord-src .choice").forEach(btn => {
       btn.onclick = () => {
-        const good = +btn.dataset.i === q.reponse;
-        answers.push({ q, chosen: +btn.dataset.i, good });
-        if (good) Progress.clearError(q.q); else Progress.recordError(q);
-        idx++;
-        render();
+        btn.disabled = true; btn.style.opacity = ".35";
+        ordChoice.push(+btn.dataset.i);
+        document.getElementById("ord-out").textContent =
+          ordChoice.map(i => q.items[i]).join(" → ");
+        if (ordChoice.length === q.items.length) {
+          const good = ordChoice.every((v, k) => v === k);
+          submitAnswer(good, ordChoice.map(i => q.items[i]).join(" → "));
+        }
       };
     });
   }
 
+  /* ---------- Réponse ---------- */
+  function submitAnswer(good, chosen) {
+    const q = current;
+    const pretest = mode === "cat" && q.type !== "ordre" && pretestFlags.has(askedCount);
+    answers.push({ q, chosen, good, pretest });
+    if (q.type !== "ordre") {
+      if (good) Progress.clearError(q.q); else Progress.recordError(q);
+    }
+    if (mode === "cat") {
+      askedCount++;
+      if (q.type !== "ordre" && !pretest)
+        targetDiff = good ? Math.min(3, targetDiff + 0.5) : Math.max(1, targetDiff - 0.5);
+    } else idx++;
+    render();
+  }
+
+  /* ---------- Résultat ---------- */
   function finish(timeout) {
     clearInterval(timerId);
-    const score = answers.filter(a => a.good).length;
-    const total = questions.length;
-    const pct = Math.round(100 * score / Math.max(1, answers.length));
-    Progress.recordExam(score, total);
+    const scored = answers.filter(a => !a.pretest);
+    const score = scored.filter(a => a.good).length;
+    const total = scored.length;
+    const pct = total ? Math.round(100 * score / total) : 0;
+    Progress.recordExam(score, Math.max(total, 1), mode === "cat");
 
-    // analyse par domaine
     const byDom = {};
-    answers.forEach(a => {
+    scored.forEach(a => {
       const b = byDom[a.q.domId] = byDom[a.q.domId] || { code: a.q.domCode, titre: a.q.domTitre, ok: 0, n: 0 };
       b.n++; if (a.good) b.ok++;
     });
     const failed = answers.filter(a => !a.good);
+    const passe = pct >= (mode === "cat" ? 72 : 80);
+    const scaled = Math.min(1000, Math.round(pct * 10.5));
 
     document.getElementById("app").innerHTML = `
       <div style="max-width:840px;margin:0 auto">
         <div class="card" style="text-align:center">
           ${timeout ? `<p style="color:var(--warn)">⏰ Temps écoulé !</p>` : ""}
-          <h1 class="page-title">${pct >= 80 ? "🏆 Réussi !" : pct >= 65 ? "🟡 Presque…" : "📚 À retravailler"}</h1>
+          ${mode === "cat" ? `<span class="badge">🇬🇧 Simulation CAT · ${answers.length} questions posées · ${answers.length - total} pré-test non notées</span>` : ""}
+          <h1 class="page-title" style="margin-top:.5rem">${passe ? "🏆 " + (mode === "cat" ? "PASS (estimation)" : "Réussi !") : pct >= 60 ? "🟡 Presque…" : "📚 À retravailler"}</h1>
           <div class="quiz-result-ring" style="--p:${pct}"><span>${pct}%</span></div>
-          <p>${score} bonnes réponses sur ${answers.length} traitées (${total} prévues).</p>
-          <p style="color:var(--text-dim)">${pct >= 80
+          <p>${score} bonnes réponses sur ${total} notées.
+          ${mode === "cat" ? `Score estimé ≈ <strong>${scaled}/1000</strong> (standard de passage : 700).` : ""}</p>
+          <p style="color:var(--text-dim)">${passe
             ? "À ce niveau de constance, vous êtes prêt à réserver l'examen réel."
             : "Concentrez vos révisions sur les domaines les plus faibles ci-dessous, puis retentez."}</p>
           <div style="display:flex;gap:.7rem;justify-content:center;margin-top:1rem;flex-wrap:wrap">
             <button class="btn" onclick="Exam.home()">Nouvel examen blanc</button>
+            <a class="btn secondary" href="#/erreurs">📓 Mon journal d'erreurs</a>
             <a class="btn secondary" href="#/domaines">Réviser les domaines</a>
           </div>
         </div>
@@ -163,11 +308,14 @@ const Exam = (() => {
         <h2 class="section-title">📝 Questions ratées (${failed.length})</h2>
         ${failed.map(a => `
           <div class="card" style="margin-bottom:.8rem">
-            <span class="badge">${a.q.domCode}</span>
-            <p class="q-text" style="margin-top:.5rem">${esc(a.q.q)}</p>
-            <p style="color:var(--ko)">Votre réponse : ${LETTRES[a.chosen]}. ${esc(a.q.choix[a.chosen])}</p>
-            <p style="color:var(--ok)">Bonne réponse : ${LETTRES[a.q.reponse]}. ${esc(a.q.choix[a.q.reponse])}</p>
-            <div class="explication">${esc(a.q.explication)}</div>
+            <span class="badge">${a.q.domCode}</span>${a.pretest ? `<span class="badge">pré-test non noté</span>` : ""}
+            <p class="q-text" style="margin-top:.5rem">${esc(a.q.type === "ordre" ? a.q.titre : a.q.q)}</p>
+            ${a.q.type === "ordre"
+              ? `<p style="color:var(--ko)">Votre ordre : ${esc(String(a.chosen))}</p>
+                 <p style="color:var(--ok)">Ordre correct : ${a.q.items.map(esc).join(" → ")}</p>`
+              : `<p style="color:var(--ko)">Votre réponse : ${LETTRES[a.chosen]}. ${esc(a.q.choix[a.chosen])}</p>
+                 <p style="color:var(--ok)">Bonne réponse : ${LETTRES[a.q.reponse]}. ${esc(a.q.choix[a.q.reponse])}</p>
+                 <div class="explication">${esc(a.q.explication)}</div>`}
           </div>`).join("")}` : ""}
       </div>`;
     window.scrollTo(0, 0);

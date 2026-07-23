@@ -202,6 +202,8 @@ const Mindset = (() => {
           <div id="dc-exp"></div>
         </div>
         <div class="card" style="margin-top:1rem">
+          <p style="color:var(--warn);font-size:.88rem;margin-bottom:.7rem">🇬🇧 Rappel : l'examen réel est en anglais — repérez les mêmes opérateurs dans les deux langues :
+          BEST/MOST = MEILLEUR/LE PLUS · FIRST/NEXT = EN PREMIER/ENSUITE · NOT/EXCEPT/LEAST = SAUF/LE MOINS · PRIMARY = PRINCIPAL · responsible/accountable = responsable/imputable.</p>
           <h3 style="margin-bottom:.5rem">🗝 Les familles de mots-opérateurs</h3>
           ${OPERATEURS.map(o => `<p style="font-size:.9rem;color:var(--text-dim);margin:.3rem 0"><strong style="color:var(--text)">${esc(o.nom)}</strong> — ${esc(o.sens)}</p>`).join("")}
         </div>
