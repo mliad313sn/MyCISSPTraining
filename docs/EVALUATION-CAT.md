@@ -56,6 +56,50 @@ part de questions au niveau de difficulté de l'examen).
 (cibles : ≥ 40 % scénarisées, ≥ 25 % difficulté 3 par banque, 100 % des questions
 avec correction par option). Résultats de l'itération 2 ci-dessous.
 
+### Itération 2 — vague d'assesseurs par domaine (résultats VERIFY)
+
+**REFINE exécuté** (un assesseur par domaine, grille en 5 critères) :
+- Correction détaillée **option par option** (`pourquoi`) sur 100 % des questions,
+  chaque distracteur réfuté avec son type de piège nommé (« techniquement vrai mais
+  pas prioritaire pour un manager », trop étroit, hors phase, absolu, réponse de
+  technicien…). Idem sur les 79 étapes des 16 scénarios.
+- **+86 questions FR et +32 EN de difficulté 3 niveau CAT** sur les thèmes modernes du
+  DCO : gouvernance de l'IA, SCRM et dépendances de rang 2, PQC/HNDL, confidential
+  computing, Zero Trust/SASE en migration, convergence IT/OT et iDMZ, MFA résistant au
+  phishing, identités machine et agents IA, EPSS/KEV, tests adversariaux LLM, IA
+  générative au SOC, double extorsion, code généré par IA, empoisonnement ML.
+- **63 jeux de distracteurs faibles réécrits** (q et réponse inchangées) : les options
+  absurdes remplacées par des pièges plausibles.
+
+**Audit de la mesure (honnêteté méthodologique)** : le détecteur v1 de « questions
+scénarisées » sous-comptait (échantillonnage manuel : des questions pleinement
+contextuelles — « Un auditeur s'inquiète… », calculs ALE en situation — n'étaient pas
+détectées). Détecteur v2 élargi aux acteurs/situations, et assiette restreinte aux
+questions de difficulté ≥ 2 (celles que privilégie le tirage d'examen ; les d1 sont des
+items d'apprentissage assumés).
+
+**VERIFY final (détecteur v2, boucle REFINE rejouée sur D3/D4 puis re-mesure) :**
+
+| Domaine | FR | % scénarisées (d≥2) | % difficulté 3 | pourquoi | EN | Verdict |
+|---|---|---|---|---|---|---|
+| D1 | 92 | 57 % | 26 % | 100 % | 36 | ✅ PASS |
+| D2 | 77 | 55 % | 26 % | 100 % | 35 | ✅ PASS |
+| D3 | 108 | 40 % | 27 % | 100 % | 43 | ✅ PASS |
+| D4 | 95 | 40 % | 34 % | 100 % | 34 | ✅ PASS |
+| D5 | 80 | 57 % | 33 % | 100 % | 35 | ✅ PASS |
+| D6 | 81 | 60 % | 26 % | 100 % | 34 | ✅ PASS |
+| D7 | 85 | 48 % | 25 % | 100 % | 36 | ✅ PASS |
+| D8 | 83 | 56 % | 28 % | 100 % | 33 | ✅ PASS |
+
+**Total : 701 questions FR + 286 EN = 987**, plus 79 étapes de scénarios — toutes avec
+correction par option. **8/8 banques PASS.**
+
+**SCORE après itération 2 : 8,5/10** pour la préparation au CAT réel (contre 6/10 en
+itération 1). Le solde tient à ce que seule l'expérience du vrai examen valide
+totalement la calibration adaptative, et à la poursuite naturelle de l'enrichissement
+de la banque EN. Prochaine itération recommandée : recueil de retours de candidats
+réels et calibration des difficultés sur leurs résultats.
+
 ### Grille d'évaluation d'une question (utilisée par les assesseurs)
 
 1. L'énoncé pose-t-il un **contexte décisionnel** (rôle, organisation, contrainte) ?
