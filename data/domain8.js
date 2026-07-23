@@ -372,6 +372,19 @@ window.CISSP_DATA.domains[8] = {
           schema: { type: "flow", items: ["Développeur", "Dépendances open source", "Dépôt de code", "Pipeline CI/CD", "Artefact signé", "Production"] }
         },
         {
+          type: "standard",
+          titre: "Code signing : signer les exécutables",
+          points: [
+            "Code signing : signature numérique d'un exécutable ou d'un script par son éditeur",
+            "Garantit l'INTÉGRITÉ (le code n'a pas été modifié) et l'ORIGINE (authenticité de l'éditeur)",
+            "Repose sur un certificat de signature délivré par une CA ; hash du code chiffré avec la clé privée",
+            "Ne garantit PAS que le code est sûr ou sans malveillance — seulement qu'il est intact et authentique",
+            "Un certificat de signature volé permet de signer du malware : protéger les clés (HSM), révoquer si compromis"
+          ],
+          narration: "Le code signing, la signature de code, applique la signature numérique aux exécutables, bibliothèques, pilotes et scripts. Le principe : l'éditeur calcule le hash de son code, le chiffre avec sa clé privée, et joint le résultat avec son certificat de signature délivré par une autorité de certification. Le système du client recalcule le hash et vérifie la signature : si tout correspond, il a deux garanties, l'intégrité, le code n'a pas été modifié depuis la signature, et l'origine, il provient bien de l'éditeur annoncé. Attention à la limite classique de l'examen : la signature ne dit rien de la qualité ni de l'innocuité du code ; un logiciel signé peut très bien être vulnérable, voire malveillant si le certificat de l'éditeur a été volé, comme dans plusieurs attaques de supply chain célèbres. D'où l'importance de protéger les clés de signature, idéalement dans un HSM, de signer dans le pipeline CI/CD de façon contrôlée, et de révoquer immédiatement tout certificat compromis.",
+          astuce: "💡 Conseil examen : code signing = intégrité + authenticité de l'origine, jamais une preuve d'absence de malveillance."
+        },
+        {
           type: "question",
           titre: "Contrôle de connaissances",
           points: [],
@@ -394,7 +407,8 @@ window.CISSP_DATA.domains[8] = {
             "OOP : encapsulation, héritage, polymorphisme ; viser cohésion élevée et couplage faible",
             "Les bibliothèques importent leurs vulnérabilités ; le risque majeur de l'open source est l'obsolescence",
             "Outils validés par un CAB ; secrets hors des dépôts de code ; SCM pour l'intégrité et la traçabilité",
-            "SBOM : inventaire des composants, clé de la gestion de la supply chain logicielle"
+            "SBOM : inventaire des composants, clé de la gestion de la supply chain logicielle",
+            "Code signing : intégrité et origine des exécutables via certificat — pas une preuve d'innocuité"
           ],
           narration: "Résumons cette leçon. L'environnement de développement est une surface d'attaque à part entière. Côté langages, retenez la distinction entre compilé et interprété, et les vertus du typage fort. En programmation orientée objet, visez une cohésion élevée et un couplage faible. Les bibliothèques partagées font gagner du temps mais importent leurs failles, et le grand risque de l'open source est l'obsolescence des versions. Protégez les dépôts de code, sortez-en les secrets, appuyez-vous sur la gestion de configuration pour la traçabilité, et documentez vos composants dans un SBOM pour maîtriser la chaîne d'approvisionnement logicielle."
         }
@@ -512,6 +526,19 @@ window.CISSP_DATA.domains[8] = {
           narration: "La polyinstantiation, littéralement plusieurs instances, est la défense reine contre l'inférence dans les bases de données multiniveaux. Le système stocke plusieurs versions d'une même donnée, avec la même clé, à des niveaux de sécurité différents, et ne montre à chaque utilisateur que la version correspondant à son habilitation. Ainsi, un utilisateur de bas niveau ne peut pas détecter l'existence de données plus sensibles à travers des erreurs système ou des conflits de doublons. Retenez aussi les attaques par requête, qui utilisent des outils de requête ou des requêtes malformées pour accéder à des données normalement interdites, et les attaques de contournement qui esquivent les contrôles du front-end. Les vues restreintes et la validation stricte des requêtes complètent l'arsenal défensif."
         },
         {
+          type: "standard",
+          titre: "Systèmes à base de connaissances : expert systems, neural networks, ML",
+          points: [
+            "Expert system : base de règles (knowledge base, règles SI-ALORS) + moteur d'inférence (inference engine)",
+            "Codifie le savoir d'experts humains ; décisions cohérentes, sans émotion ni fatigue",
+            "Neural networks : couches de nœuds pondérés imitant le cerveau, apprentissage par entraînement",
+            "Machine learning : le modèle apprend des données — supervisé (données étiquetées) ou non supervisé",
+            "Risques du ML : data poisoning (empoisonnement des données d'entraînement), biais des jeux de données, décisions inexplicables"
+          ],
+          narration: "Terminons par les systèmes à base de connaissances, un classique de l'examen. Un expert system, ou système expert, codifie le savoir d'experts humains sous deux composants : la knowledge base, un ensemble de règles de type si-alors qui capturent la connaissance du domaine, et l'inference engine, le moteur d'inférence qui applique ces règles aux faits observés pour en tirer des conclusions. L'intérêt : des décisions cohérentes, reproductibles, insensibles à la fatigue ou à la panique, par exemple pour détecter des fraudes ou aider au diagnostic. Les neural networks, réseaux de neurones, adoptent une autre approche : des couches de nœuds pondérés, inspirées du cerveau humain, qui apprennent par entraînement plutôt que par règles explicites. Le machine learning généralise cette idée : le modèle apprend directement des données, en mode supervisé avec des données étiquetées, ou non supervisé pour découvrir des structures cachées. Mais retenez les risques propres au ML : l'empoisonnement des données d'entraînement, data poisoning, où un attaquant corrompt les données pour fausser le modèle ; les biais hérités de jeux de données non représentatifs ; et l'opacité de décisions difficiles à expliquer ou à auditer.",
+          astuce: "💡 Conseil examen : expert system = knowledge base (règles SI-ALORS) + inference engine. Le ML introduit des risques nouveaux : poisoning, biais, explicabilité."
+        },
+        {
           type: "question",
           titre: "Contrôle de connaissances",
           points: [],
@@ -530,7 +557,8 @@ window.CISSP_DATA.domains[8] = {
             "XSS : encodage des sorties ; CSRF : jetons anti-CSRF",
             "Buffer overflow : vérification des bornes ; TOCTOU : opérations atomiques et verrous",
             "Aggregation = problème, inference = attaque ; polyinstantiation = défense",
-            "ACID : Atomicity, Consistency, Isolation, Durability"
+            "ACID : Atomicity, Consistency, Isolation, Durability",
+            "Expert system = knowledge base + inference engine ; neural networks et ML : attention au data poisoning et aux biais"
           ],
           narration: "Récapitulons cette leçon dense. L'OWASP Top 10 cartographie les risques applicatifs majeurs, du broken access control à l'injection en passant par la supply chain. Contre l'injection SQL, exigez des requêtes paramétrées et la validation des entrées. Contre le XSS, encodez les sorties ; contre le CSRF, imposez des jetons uniques. Le buffer overflow se prévient par la vérification des bornes, et les attaques TOCTOU par des opérations atomiques. Côté bases de données, l'agrégation est le problème, l'inférence est l'attaque, et la polyinstantiation est la défense. Enfin, les propriétés ACID garantissent l'intégrité des transactions."
         }
@@ -602,6 +630,18 @@ window.CISSP_DATA.domains[8] = {
         },
         {
           type: "standard",
+          titre: "Software escrow : le séquestre de code source",
+          points: [
+            "Software escrow : le code source est déposé chez un TIERS de confiance (escrow agent)",
+            "Conditions de libération contractuelles : faillite de l'éditeur, arrêt du support, non-respect du contrat",
+            "Protège le client dont l'activité dépend d'un logiciel dont il n'a pas le code",
+            "Bonnes pratiques : dépôts mis à jour à chaque version, vérification que le dépôt compile réellement"
+          ],
+          narration: "Que se passe-t-il si l'éditeur d'un logiciel critique pour votre activité fait faillite ou cesse d'en assurer la maintenance ? Sans le code source, vous ne pouvez ni corriger les bugs ni faire évoluer le produit. La réponse contractuelle s'appelle le software escrow, le séquestre de code source : l'éditeur dépose le code source et sa documentation chez un tiers de confiance, l'escrow agent. Le contrat définit les conditions de libération, en anglais release conditions : typiquement la faillite de l'éditeur, l'arrêt du support du produit ou le non-respect d'obligations contractuelles. Si l'une de ces conditions survient, le client reçoit le code et peut poursuivre la maintenance lui-même ou via un prestataire. Deux précautions rendent l'arrangement réellement utile : exiger que le dépôt soit mis à jour à chaque nouvelle version, et faire vérifier périodiquement que le contenu du séquestre compile et correspond bien au produit livré.",
+          astuce: "💡 Conseil examen : le software escrow est la MEILLEURE protection contre la faillite ou la disparition d'un éditeur dont le logiciel est critique — c'est une mesure de continuité, négociée dans le contrat d'acquisition."
+        },
+        {
+          type: "standard",
           titre: "Logiciels tiers, services managés et cloud",
           points: [
             "Third-party software : logiciel sur mesure, donc ni COTS ni standard — exiger un audit externe contractuel",
@@ -665,6 +705,7 @@ window.CISSP_DATA.domains[8] = {
           points: [
             "SAST analyse le code sans l'exécuter ; DAST teste l'application en exécution ; IAST combine les deux ; SCA inventorie les dépendances",
             "COTS : historique des vulnérabilités et certifications ; open source : risque d'obsolescence ; tiers : audit externe contractuel",
+            "Software escrow : code source déposé chez un tiers, libéré si l'éditeur fait faillite ou cesse le support",
             "Cloud : misconfigurations et contrôles d'accès faibles en tête des causes de brèches",
             "APIs : parameter validation, authentification de chaque appel ; microservices : passerelle API et zero trust",
             "Standards obligatoires et vérifiables ; messages d'erreur sobres, fail secure, journalisation centralisée"
@@ -1070,6 +1111,54 @@ window.CISSP_DATA.domains[8] = {
       reponse: 1,
       explication: "Le code compilé, distribué en binaire, est généralement moins exposé à la manipulation directe par un tiers ; mais comme le code source n'est pas visible dans la forme compilée, il est aussi plus difficile pour les relecteurs d'y détecter des backdoors ou d'autres failles. Aucune forme n'est intrinsèquement exempte de vulnérabilités, et le code interprété est au contraire lisible par quiconque y accède.",
       difficulte: 3
+    },
+    {
+      q: "Votre organisation dépend d'une application critique développée par un petit éditeur dont la santé financière est incertaine, et le contrat ne donne pas accès au code source. Quelle est la MEILLEURE mesure pour garantir la continuité si l'éditeur fait faillite ?",
+      choix: [
+        "Souscrire une assurance couvrant les pertes d'exploitation",
+        "Négocier un accord de software escrow avec conditions de libération du code source",
+        "Exiger un SLA renforcé avec pénalités financières",
+        "Décompiler le logiciel pour reconstituer le code source"
+      ],
+      reponse: 1,
+      explication: "Le software escrow place le code source chez un tiers de confiance, avec des conditions de libération contractuelles comme la faillite de l'éditeur ou l'arrêt du support : le client peut alors reprendre la maintenance. L'assurance compense financièrement mais ne permet pas de maintenir l'application ; un SLA ne sert à rien si l'éditeur disparaît ; et la décompilation viole généralement la licence et donne un résultat inexploitable.",
+      difficulte: 2
+    },
+    {
+      q: "Que garantit la signature numérique d'un exécutable (code signing) vérifiée avec succès par le système du client ?",
+      choix: [
+        "Le code est exempt de vulnérabilités et de malveillance",
+        "Le code n'a pas été modifié depuis sa signature et provient bien de l'éditeur identifié par le certificat",
+        "Le code a été testé et approuvé par l'autorité de certification",
+        "Le code sera automatiquement mis à jour par l'éditeur"
+      ],
+      reponse: 1,
+      explication: "Le code signing garantit l'intégrité (le hash correspond, donc le code n'a pas été altéré depuis la signature) et l'origine (le certificat authentifie l'éditeur). Il ne dit rien de la qualité ni de l'innocuité du code : un binaire signé peut être vulnérable, et même malveillant si le certificat de signature a été volé. La CA délivre le certificat mais ne teste jamais le code, et la signature n'implique aucun mécanisme de mise à jour.",
+      difficulte: 2
+    },
+    {
+      q: "Quels sont les DEUX composants fondamentaux d'un expert system ?",
+      choix: [
+        "La base de données relationnelle et le langage SQL",
+        "La knowledge base (règles SI-ALORS) et l'inference engine",
+        "Le réseau de neurones et les données d'entraînement",
+        "Le référentiel de signatures et le moteur d'analyse heuristique"
+      ],
+      reponse: 1,
+      explication: "Un expert system se compose de la knowledge base, qui codifie le savoir d'experts humains sous forme de règles si-alors, et de l'inference engine, qui applique ces règles aux faits observés pour produire des conclusions. Les réseaux de neurones et les données d'entraînement relèvent du machine learning, une approche différente, et les signatures/heuristiques décrivent un antimalware.",
+      difficulte: 1
+    },
+    {
+      q: "Un attaquant parvient à insérer des échantillons soigneusement choisis dans les données servant à entraîner le modèle de machine learning de détection de fraude d'une banque, afin que ses futures fraudes soient classées comme légitimes. Comment s'appelle cette attaque ?",
+      choix: [
+        "Model inversion",
+        "Data poisoning",
+        "Adversarial example",
+        "Inference attack"
+      ],
+      reponse: 1,
+      explication: "Le data poisoning, l'empoisonnement des données, consiste à corrompre les données d'ENTRAÎNEMENT pour biaiser durablement le comportement du modèle. L'adversarial example manipule une entrée au moment de l'INFÉRENCE, sans toucher à l'entraînement ; la model inversion cherche à reconstruire les données d'entraînement à partir du modèle ; et l'inference attack, au sens bases de données, déduit des informations sensibles à partir d'éléments moins sensibles.",
+      difficulte: 3
     }
   ],
   flashcards: [
@@ -1098,6 +1187,9 @@ window.CISSP_DATA.domains[8] = {
     { recto: "Cohésion et couplage (OOP)", verso: "Cohésion : force de la relation entre les objectifs des méthodes d'une même classe (élevée = bon signe). Couplage : niveau d'interaction entre objets (faible = meilleur design, code plus indépendant et maintenable). Viser : high cohesion, low coupling." },
     { recto: "Parameter validation (API)", verso: "Contrôle fondamental de sécurité des APIs : vérifier que chaque paramètre reçu n'est ni malformé, ni invalide, ni malveillant, et qu'il se situe dans les limites définies, avant tout traitement par le système." },
     { recto: "COTS (Commercial Off-The-Shelf)", verso: "Logiciel fourni comme produit fini, non destiné à être modifié par l'utilisateur. Évaluation : historique des vulnérabilités et réactivité du vendeur, certifications (ISO/IEC 27034, ISO/IEC 27001, FedRAMP), pratiques de defensive programming." },
-    { recto: "RASP (Runtime Application Self-Protection)", verso: "Agents de sécurité intégrés dans l'application, capables de détecter des violations de sécurité à l'exécution et de réagir, par exemple en terminant l'application ou en prenant d'autres actions protectrices." }
+    { recto: "RASP (Runtime Application Self-Protection)", verso: "Agents de sécurité intégrés dans l'application, capables de détecter des violations de sécurité à l'exécution et de réagir, par exemple en terminant l'application ou en prenant d'autres actions protectrices." },
+    { recto: "Software escrow", verso: "Séquestre de code source : l'éditeur dépose le code et sa documentation chez un tiers de confiance (escrow agent). Le code est libéré au client si des conditions contractuelles surviennent — faillite de l'éditeur, arrêt du support. Mesure de continuité négociée dans le contrat d'acquisition." },
+    { recto: "Code signing", verso: "Signature numérique des exécutables et scripts : hash du code chiffré avec la clé privée de l'éditeur, vérifié via son certificat (CA). Garantit l'INTÉGRITÉ et l'ORIGINE du code — jamais son innocuité. Un certificat volé permet de signer du malware : protéger les clés (HSM), révoquer si compromis." },
+    { recto: "Expert system", verso: "Système à base de connaissances composé d'une knowledge base (règles SI-ALORS codifiant le savoir d'experts humains) et d'un inference engine (moteur d'inférence qui applique les règles aux faits). Décisions cohérentes, sans émotion ni fatigue. À distinguer du ML, qui apprend des données (risques : data poisoning, biais)." }
   ]
 };
