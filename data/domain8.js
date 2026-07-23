@@ -1159,6 +1159,358 @@ window.CISSP_DATA.domains[8] = {
       reponse: 1,
       explication: "Le data poisoning, l'empoisonnement des données, consiste à corrompre les données d'ENTRAÎNEMENT pour biaiser durablement le comportement du modèle. L'adversarial example manipule une entrée au moment de l'INFÉRENCE, sans toucher à l'entraînement ; la model inversion cherche à reconstruire les données d'entraînement à partir du modèle ; et l'inference attack, au sens bases de données, déduit des informations sensibles à partir d'éléments moins sensibles.",
       difficulte: 3
+    },
+    {
+      q: "Une équipe Scrum livre un incrément toutes les deux semaines. Le RSSI veut s'assurer que la sécurité est prise en compte sans casser le rythme des sprints. Quelle est la MEILLEURE approche ?",
+      choix: [
+        "Planifier un test d'intrusion annuel après la version majeure",
+        "Intégrer des critères de sécurité dans la Definition of Done et ajouter des abuse cases au backlog",
+        "Insérer une phase de sécurité dédiée d'une semaine après chaque sprint",
+        "Transférer la responsabilité de la sécurité à l'équipe SOC"
+      ],
+      reponse: 1,
+      explication: "En Agile, la sécurité doit être intégrée dans le flux normal de travail : des critères de sécurité dans la Definition of Done garantissent qu'aucune user story n'est « terminée » sans validation sécurité, et les abuse cases (ou evil user stories) forcent l'équipe à penser comme un attaquant dès le backlog. Un pentest annuel est trop tardif et ponctuel pour des livraisons bimensuelles ; une phase dédiée après chaque sprint recrée le goulot d'étranglement que l'Agile cherche à éliminer ; et déléguer au SOC contredit le principe de responsabilité partagée de la sécurité.",
+      difficulte: 2
+    },
+    {
+      q: "Votre organisation conçoit une nouvelle application de paiement. Lors de la phase de conception, quelle activité de sécurité devriez-vous mener EN PREMIER ?",
+      choix: [
+        "Un scan DAST de l'environnement de préproduction",
+        "Une revue de code manuelle ligne par ligne",
+        "Une modélisation des menaces (threat modeling) de l'architecture, par exemple avec STRIDE",
+        "Un audit de conformité PCI DSS de la production"
+      ],
+      reponse: 2,
+      explication: "Le threat modeling est l'activité de sécurité propre à la phase de conception : il identifie les menaces (Spoofing, Tampering, Repudiation, Information disclosure, Denial of service, Elevation of privilege avec STRIDE) sur l'architecture avant qu'une ligne de code ne soit écrite, quand les corrections coûtent le moins cher. Le DAST exige une application en exécution, la revue de code exige du code écrit, et un audit PCI DSS s'applique à un environnement de production existant : toutes ces activités viennent plus tard dans le cycle.",
+      difficulte: 2
+    },
+    {
+      q: "Le RSSI veut empêcher que du code contenant des vulnérabilités critiques atteigne la production, sans ralentir les dizaines de déploiements quotidiens de l'équipe DevOps. Quelle est la MEILLEURE solution ?",
+      choix: [
+        "Exiger une revue manuelle du comité sécurité avant chaque déploiement",
+        "Intégrer des outils SAST et SCA automatisés dans le pipeline CI/CD avec des seuils bloquants (security gates)",
+        "Autoriser les déploiements et corriger les vulnérabilités trouvées lors du pentest trimestriel",
+        "Réduire la fréquence des déploiements à une fois par mois"
+      ],
+      reponse: 1,
+      explication: "Des contrôles automatisés (SAST, SCA) intégrés au pipeline, avec des security gates qui font échouer le build au-delà d'un seuil de criticité, appliquent la sécurité à la vitesse du DevOps : c'est l'essence du DevSecOps. Une revue manuelle systématique est incompatible avec des dizaines de déploiements par jour ; attendre le pentest trimestriel laisse les vulnérabilités en production pendant des mois ; et réduire la fréquence des livraisons sacrifie la valeur métier au lieu d'automatiser la sécurité.",
+      difficulte: 2
+    },
+    {
+      q: "Une équipe provisionne toute son infrastructure cloud via des templates Infrastructure as Code (IaC). Quel est le MEILLEUR moyen de prévenir les erreurs de configuration de sécurité en production ?",
+      choix: [
+        "Scanner les templates IaC dans le pipeline avant le déploiement et bloquer les configurations non conformes",
+        "Auditer manuellement la console cloud chaque trimestre",
+        "Restreindre l'IaC aux environnements de test uniquement",
+        "Chiffrer les templates IaC dans le dépôt de code"
+      ],
+      reponse: 0,
+      explication: "L'IaC permet précisément de traiter la configuration comme du code : l'analyser automatiquement avant le déploiement (policy as code) détecte les buckets publics, ports ouverts ou chiffrements absents avant qu'ils n'existent en production. Un audit trimestriel manuel est détectif et tardif alors que les misconfigurations sont la première cause de brèches cloud ; limiter l'IaC aux tests supprime ses bénéfices de cohérence ; et chiffrer les templates protège leur confidentialité mais ne corrige en rien leur contenu.",
+      difficulte: 3
+    },
+    {
+      q: "Un développeur a poussé par erreur une clé API de production dans le dépôt Git de l'entreprise, puis a supprimé le fichier dans un commit suivant. Que devez-vous faire EN PREMIER ?",
+      choix: [
+        "Réécrire l'historique Git pour effacer toute trace du fichier",
+        "Révoquer immédiatement la clé exposée et en générer une nouvelle",
+        "Former le développeur aux bonnes pratiques de gestion des secrets",
+        "Activer l'authentification à deux facteurs sur le dépôt"
+      ],
+      reponse: 1,
+      explication: "Un secret commité doit être considéré comme compromis : l'historique Git le conserve même après suppression du fichier, et il a pu être cloné ou indexé entre-temps. La première action est donc de révoquer la clé et d'en émettre une nouvelle, ce qui neutralise le risque. Réécrire l'historique est un nettoyage utile mais ne protège pas contre les copies déjà faites ; la formation et le MFA sont des mesures préventives pertinentes, mais elles n'éliminent pas le danger immédiat de la clé encore valide.",
+      difficulte: 2
+    },
+    {
+      q: "Quelle est la MEILLEURE pratique pour fournir des identifiants de base de données aux jobs d'un pipeline CI/CD ?",
+      choix: [
+        "Les stocker dans un fichier de configuration du dépôt, accessible aux seuls développeurs",
+        "Les coder en dur dans les scripts de build pour éviter les erreurs de saisie",
+        "Les injecter à l'exécution depuis un gestionnaire de secrets centralisé (vault), avec des identifiants à courte durée de vie et rotation automatique",
+        "Les transmettre par messagerie chiffrée au responsable des déploiements"
+      ],
+      reponse: 2,
+      explication: "Un secrets manager centralisé injecte les identifiants au moment de l'exécution, sans qu'ils apparaissent jamais dans le code ou le dépôt ; les identifiants dynamiques à courte durée de vie et la rotation automatique réduisent la fenêtre d'exploitation en cas de fuite et fournissent un audit centralisé. Tout stockage dans le dépôt, même « restreint », expose les secrets à chaque clone et à l'historique ; le codage en dur est l'anti-pattern classique détecté par les scanners ; et la transmission manuelle ne s'automatise pas et disperse les secrets.",
+      difficulte: 2
+    },
+    {
+      q: "Après un incident de type SolarWinds, votre organisation craint qu'un attaquant compromette le serveur de build pour injecter du code malveillant dans des livrables ensuite signés légitimement. Quel ensemble de contrôles répond le MIEUX à ce risque ?",
+      choix: [
+        "Augmenter la couverture des tests unitaires et exiger deux relecteurs par pull request",
+        "Durcir et isoler l'environnement de build, restreindre ses accès, et générer des attestations de provenance vérifiables pour chaque artefact",
+        "Chiffrer le code source au repos dans le dépôt",
+        "Déployer un WAF devant les applications produites"
+      ],
+      reponse: 1,
+      explication: "L'attaque visait la chaîne de build elle-même : le code source était sain, mais le binaire produit ne l'était plus. La réponse est de traiter le pipeline comme un système critique : environnement de build durci, éphémère et isolé, accès à privilèges minimaux, et attestations de provenance (à la manière de SLSA) qui permettent de vérifier qu'un artefact provient bien du bon code source et du bon processus. Les revues de code et tests unitaires ne voient pas une injection post-compilation ; le chiffrement du dépôt et un WAF ne protègent pas le processus de build.",
+      difficulte: 3
+    },
+    {
+      q: "Lors de la divulgation de la vulnérabilité Log4Shell, une organisation a mis trois semaines à identifier lesquelles de ses 400 applications utilisaient Log4j. Quel artefact aurait le PLUS réduit ce délai ?",
+      choix: [
+        "Un SBOM (Software Bill of Materials) maintenu pour chaque application",
+        "Un plan de réponse à incident à jour",
+        "Une couverture DAST complète des applications",
+        "Un inventaire des serveurs et de leurs systèmes d'exploitation"
+      ],
+      reponse: 0,
+      explication: "Le SBOM est l'inventaire formel de tous les composants, bibliothèques et dépendances (y compris transitives) de chaque application : lors de la divulgation d'une vulnérabilité comme Log4Shell, une simple recherche dans les SBOM identifie en quelques minutes les applications affectées. Le plan de réponse à incident organise la réaction mais ne dit pas où se trouve le composant ; le DAST ne détecte pas de façon fiable une bibliothèque vulnérable non exposée ; et l'inventaire des serveurs s'arrête au niveau OS, sans visibilité sur les dépendances applicatives.",
+      difficulte: 1
+    },
+    {
+      q: "Un attaquant publie sur un dépôt public de paquets une bibliothèque portant le même nom qu'une bibliothèque interne de votre entreprise, avec un numéro de version supérieur. Vos serveurs de build téléchargent automatiquement le paquet malveillant. Comment s'appelle cette attaque ?",
+      choix: ["Typosquatting", "Dependency confusion", "DLL hijacking", "Watering hole"],
+      reponse: 1,
+      explication: "La dependency confusion exploite les gestionnaires de paquets configurés pour interroger à la fois un registre interne et un registre public : en publiant un paquet public homonyme avec une version supérieure, l'attaquant fait « préférer » sa version malveillante par le résolveur. Le typosquatting repose sur des noms proches mais mal orthographiés que des humains saisissent par erreur ; le DLL hijacking détourne l'ordre de recherche des bibliothèques sur un poste ; et le watering hole piège un site web fréquenté par les victimes.",
+      difficulte: 2
+    },
+    {
+      q: "Quelle combinaison de mesures protège le MIEUX une organisation contre les paquets open source malveillants dans sa chaîne d'approvisionnement logicielle ?",
+      choix: [
+        "Interdire totalement l'open source et ne développer qu'en interne",
+        "Utiliser un registre interne de paquets approuvés, épingler les versions (version pinning) et vérifier l'intégrité par hash, avec analyse SCA continue",
+        "Ne télécharger les paquets que depuis des sites en HTTPS",
+        "Compiler soi-même tous les paquets à partir des sources"
+      ],
+      reponse: 1,
+      explication: "Un registre interne (proxy) ne servant que des paquets examinés et approuvés, l'épinglage des versions avec vérification des empreintes (lockfiles, hashes) et la SCA continue forment une défense en profondeur : on contrôle ce qui entre, on empêche les substitutions silencieuses et on surveille les vulnérabilités connues. Interdire l'open source est irréaliste et coûteux ; HTTPS protège le transport mais pas le contenu d'un paquet malveillant légitimement publié ; et compiler les sources ne protège pas si la source elle-même est compromise.",
+      difficulte: 3
+    },
+    {
+      q: "Un client authentifié d'une banque en ligne remarque qu'en changeant le numéro de compte dans l'URL (…/releve?compte=12345), il peut afficher les relevés d'autres clients. De quelle catégorie OWASP relève cette faille ?",
+      choix: ["Injection", "Broken Access Control", "Cryptographic Failures", "Security Misconfiguration"],
+      reponse: 1,
+      explication: "C'est un cas classique d'Insecure Direct Object Reference (IDOR), qui appartient à la catégorie Broken Access Control, numéro un de l'OWASP Top 10 2021 : l'application authentifie l'utilisateur mais ne vérifie pas qu'il est AUTORISÉ à accéder à l'objet demandé. Il n'y a ni injection de code, ni défaut de chiffrement, ni paramétrage de sécurité erroné du serveur : le contrôle d'autorisation au niveau de l'objet est tout simplement absent.",
+      difficulte: 1
+    },
+    {
+      q: "Lors d'un test, une erreur applicative renvoie à l'utilisateur la pile d'appels complète, la version du serveur et la chaîne de connexion à la base de données. Quel principe de codage sécurisé est violé ?",
+      choix: [
+        "La gestion des erreurs doit rester sobre côté client et journaliser les détails côté serveur",
+        "Le chiffrement des données au repos",
+        "La séparation des tâches entre développeurs et opérateurs",
+        "La limitation du nombre de sessions simultanées"
+      ],
+      reponse: 0,
+      explication: "Une gestion d'erreurs sécurisée affiche à l'utilisateur un message générique et enregistre les détails techniques (stack trace, versions, requêtes) uniquement dans les journaux côté serveur : les informations divulguées ici constituent une mine d'or pour préparer une attaque ciblée. Le chiffrement au repos, la séparation des tâches et la gestion des sessions sont des contrôles pertinents ailleurs, mais aucun n'est en cause dans cette fuite d'informations par les messages d'erreur.",
+      difficulte: 1
+    },
+    {
+      q: "Une analyse SCA révèle que l'application e-commerce utilise une bibliothèque comportant une CVE critique activement exploitée, mais l'équipe craint des régressions. Quelle est la MEILLEURE recommandation ?",
+      choix: [
+        "Attendre la prochaine version majeure de l'application pour tout mettre à jour",
+        "Mettre à jour la bibliothèque en priorité via le processus de gestion des changements, avec tests de régression, et appliquer des mesures compensatoires (WAF, virtual patching) dans l'intervalle",
+        "Désactiver l'analyse SCA qui génère trop d'alertes",
+        "Accepter le risque puisque l'application est derrière un pare-feu"
+      ],
+      reponse: 1,
+      explication: "Une CVE critique activement exploitée exige un correctif prioritaire mais maîtrisé : passage par la gestion des changements avec tests de régression, et, pendant le délai de correction, des contrôles compensatoires comme des règles WAF ou du virtual patching réduisent l'exposition. Attendre une version majeure laisse une fenêtre d'exploitation ouverte ; désactiver l'outil supprime la visibilité, pas le risque ; et un pare-feu réseau ne bloque pas une attaque applicative transitant par le port autorisé de l'application.",
+      difficulte: 2
+    },
+    {
+      q: "Une application web permet à l'utilisateur de fournir une URL dont le serveur va chercher le contenu. Un attaquant fournit l'adresse du service de métadonnées du cloud (http://169.254.169.254/) et récupère des identifiants IAM temporaires. De quelle vulnérabilité s'agit-il ?",
+      choix: [
+        "Cross-Site Scripting (XSS)",
+        "Server-Side Request Forgery (SSRF)",
+        "Cross-Site Request Forgery (CSRF)",
+        "Open redirect"
+      ],
+      reponse: 1,
+      explication: "Le SSRF consiste à faire émettre par le SERVEUR des requêtes vers des cibles choisies par l'attaquant, typiquement des ressources internes inaccessibles de l'extérieur comme le service de métadonnées cloud, qui délivre des identifiants temporaires. Le XSS exécute du script dans le navigateur de la victime, le CSRF fait émettre une requête par le NAVIGATEUR d'une victime authentifiée, et l'open redirect renvoie l'utilisateur vers un site externe : dans ces trois cas, c'est le client qui agit, pas le serveur. Défenses SSRF : liste blanche de destinations, blocage des plages internes, IMDSv2.",
+      difficulte: 3
+    },
+    {
+      q: "Un testeur saisit « ' OR '1'='1 » dans le champ mot de passe et obtient l'accès au premier compte de la table des utilisateurs. Quelle est la correction la PLUS efficace et durable ?",
+      choix: [
+        "Interdire le caractère apostrophe dans les formulaires",
+        "Utiliser des requêtes paramétrées (prepared statements) dans tout le code d'accès aux données",
+        "Masquer les messages d'erreur SQL renvoyés à l'utilisateur",
+        "Renommer les tables sensibles de la base de données"
+      ],
+      reponse: 1,
+      explication: "Les requêtes paramétrées séparent structurellement le code SQL des données fournies par l'utilisateur : l'entrée ne peut jamais être interprétée comme du SQL, ce qui neutralise l'injection à la racine. Filtrer l'apostrophe est un blacklisting fragile, contournable par encodages et inutilisable pour les noms légitimes contenant une apostrophe ; masquer les erreurs gêne l'attaquant (l'injection devient « blind ») mais ne l'empêche pas ; et renommer les tables n'est que de la sécurité par l'obscurité.",
+      difficulte: 1
+    },
+    {
+      q: "Un attaquant poste sur un forum un commentaire contenant un script qui s'exécute dans le navigateur de chaque visiteur affichant la page et exfiltre leurs cookies de session. Quelle est cette attaque et sa MEILLEURE défense ?",
+      choix: [
+        "Reflected XSS ; défense : jetons anti-CSRF",
+        "Stored XSS ; défense : validation des entrées et encodage contextuel des sorties, complétés par une Content Security Policy",
+        "CSRF ; défense : encodage des sorties",
+        "SQL injection ; défense : requêtes paramétrées"
+      ],
+      reponse: 1,
+      explication: "Le script est enregistré durablement sur le serveur (dans le commentaire) et servi à chaque visiteur : c'est un stored XSS, la variante la plus dangereuse car elle ne nécessite aucune interaction spécifique de la victime. La défense combine la validation des entrées, l'encodage des sorties adapté au contexte HTML/JavaScript, une CSP qui restreint les scripts exécutables, et des cookies HttpOnly pour protéger les sessions. Le reflected XSS exigerait que la victime clique un lien piégé ; le CSRF ne fait pas exécuter de script ; et il n'y a aucune requête SQL en cause.",
+      difficulte: 2
+    },
+    {
+      q: "Un utilisateur connecté à sa banque clique dans un e-mail sur une image piégée ; à son insu, son navigateur envoie une requête de virement à la banque, qui l'exécute car la session est valide. Quelle défense est SPÉCIFIQUEMENT conçue contre cette attaque ?",
+      choix: [
+        "L'encodage des sorties HTML",
+        "Des jetons anti-CSRF uniques et imprévisibles dans chaque formulaire, complétés par l'attribut de cookie SameSite",
+        "Le chiffrement TLS de toutes les communications",
+        "Une politique de mots de passe robustes"
+      ],
+      reponse: 1,
+      explication: "Il s'agit d'un Cross-Site Request Forgery : l'attaquant fait émettre par le navigateur de la victime une requête que le serveur croit légitime puisque les cookies de session l'accompagnent automatiquement. Le jeton anti-CSRF, secret propre à la session et inconnu du site attaquant, rend la requête forgée invalide ; l'attribut SameSite empêche l'envoi des cookies sur les requêtes intersites. L'encodage des sorties vise le XSS, TLS protège la confidentialité en transit mais transporte fidèlement la requête forgée, et le mot de passe n'est pas en cause puisque la victime est déjà authentifiée.",
+      difficulte: 2
+    },
+    {
+      q: "Une application web appelle un utilitaire système en concaténant un nom de fichier fourni par l'utilisateur ; un testeur soumet « rapport.pdf; cat /etc/passwd » et obtient le contenu du fichier système. Quelle est la MEILLEURE correction ?",
+      choix: [
+        "Éviter l'invocation du shell en utilisant des API natives, et valider l'entrée par liste blanche stricte",
+        "Exécuter le serveur web en tant que root pour maîtriser les permissions",
+        "Bloquer le caractère point-virgule dans le WAF",
+        "Chiffrer le fichier /etc/passwd"
+      ],
+      reponse: 0,
+      explication: "C'est une OS command injection : l'entrée utilisateur est interprétée par le shell. La correction en profondeur consiste à ne jamais passer d'entrée utilisateur à un shell — utiliser des API natives du langage (ouverture de fichier directe, exécution sans shell avec arguments séparés) — et à valider l'entrée contre une liste blanche stricte. Exécuter en root aggrave dramatiquement l'impact au lieu de le réduire (violation du moindre privilège) ; bloquer le point-virgule au WAF est un pansement contournable (autres métacaractères, encodages) ; et chiffrer un fichier système ne traite qu'une cible parmi toutes celles accessibles.",
+      difficulte: 3
+    },
+    {
+      q: "Un analyste sans habilitation combine des informations publiques — offres d'emploi, marchés publics, photos satellite — et reconstitue l'existence et l'emplacement d'un programme militaire classifié. Quel problème de sécurité des données ce scénario illustre-t-il ?",
+      choix: ["Inference uniquement", "Aggregation", "Polyinstantiation", "Data mining"],
+      reponse: 1,
+      explication: "L'aggregation est le problème de sécurité par lequel la COMBINAISON d'éléments individuellement non sensibles, issus de sources séparées, produit une information de sensibilité supérieure : chaque pièce est publique, mais l'ensemble révèle un secret. L'inference est l'attaque cognitive associée (déduire l'information), mais le terme qui désigne ce phénomène de combinaison est l'agrégation. La polyinstantiation est une DÉFENSE contre l'inférence, et le data mining est une technique d'analyse légitime.",
+      difficulte: 1
+    },
+    {
+      q: "Un employé du service courrier remarque que la salle du conseil est réservée toute la semaine par la DRH avec un cabinet externe de restructuration, et en déduit qu'un plan social se prépare. Quelle attaque contre la confidentialité ce raisonnement illustre-t-il ?",
+      choix: ["Aggregation", "Inference", "Shoulder surfing", "Social engineering"],
+      reponse: 1,
+      explication: "L'inference est l'attaque par laquelle un individu DÉDUIT une information d'un niveau de sensibilité supérieur à partir d'éléments auxquels il a légitimement accès : ici, des données banales de réservation de salle mènent à une conclusion confidentielle. L'agrégation désigne plutôt le problème structurel de la combinaison de données multiples ; le shoulder surfing est une observation physique directe ; et le social engineering suppose une manipulation d'autrui, absente ici — l'employé raisonne seul.",
+      difficulte: 2
+    },
+    {
+      q: "Dans une base de données multiniveau, un utilisateur non habilité tente de créer un enregistrement pour le cargo « Aurora » et découvre qu'une clé identique existe déjà à un niveau classifié, révélant l'existence d'une mission secrète. Quelle technique prévient cette fuite ?",
+      choix: [
+        "La normalisation de la base de données",
+        "Le chiffrement transparent des données (TDE)",
+        "La polyinstantiation : deux enregistrements de même clé coexistent à des niveaux de classification différents",
+        "Le database view filtering"
+      ],
+      reponse: 2,
+      explication: "La polyinstantiation autorise plusieurs instances d'un même enregistrement, avec la même clé primaire, à des niveaux de classification différents : l'utilisateur non habilité voit une version non classifiée plausible (une cargaison banale), sans erreur de clé dupliquée qui trahirait l'existence de l'enregistrement secret. La normalisation vise l'intégrité structurelle et élimine justement les doublons ; le TDE protège les fichiers de la base au repos ; et les vues filtrent l'accès mais un conflit de clé primaire révélerait quand même l'existence de la donnée cachée.",
+      difficulte: 2
+    },
+    {
+      q: "Une base de données statistique RH permet des requêtes agrégées sur les salaires. Un analyste multiplie les requêtes avec des filtres de plus en plus précis jusqu'à isoler le salaire d'une seule personne. Quels contrôles contrent le MIEUX cette attaque d'inférence ?",
+      choix: [
+        "Imposer une taille minimale aux ensembles de résultats, supprimer les cellules trop petites (cell suppression) et ajouter du bruit statistique (perturbation)",
+        "Chiffrer la base de données au repos avec AES-256",
+        "Exiger le MFA pour accéder à l'outil de reporting",
+        "Sauvegarder la base quotidiennement sur un site distant"
+      ],
+      reponse: 0,
+      explication: "Les attaques d'inférence sur bases statistiques se contrent par des contrôles spécifiques : refuser les requêtes dont le résultat porte sur un ensemble trop petit, supprimer les cellules à faibles effectifs, ajouter du bruit aléatoire calibré (perturbation, ancêtre de la differential privacy) et limiter les requêtes successives recoupables (query set overlap control). Le chiffrement au repos, le MFA et les sauvegardes sont de bons contrôles généraux, mais l'analyste est ici un utilisateur AUTORISÉ qui n'exploite que des requêtes légitimes : seuls les contrôles d'inférence traitent ce risque.",
+      difficulte: 3
+    },
+    {
+      q: "Un pentest révèle que l'API mobile de votre entreprise renvoie l'objet demandé dès lors que l'appelant présente un jeton valide, sans vérifier que l'objet appartient à cet utilisateur. Les numéros d'objets sont séquentiels. Quelle est cette vulnérabilité ?",
+      choix: [
+        "Broken Object Level Authorization (BOLA/IDOR) : l'API doit vérifier l'autorisation sur chaque objet à chaque appel",
+        "Injection SQL dans les paramètres de l'API",
+        "Absence de chiffrement TLS sur l'API",
+        "Excessive data exposure dans les réponses JSON"
+      ],
+      reponse: 0,
+      explication: "La Broken Object Level Authorization — première vulnérabilité du OWASP API Security Top 10 — survient quand l'API authentifie l'appelant mais ne vérifie pas son AUTORISATION sur l'objet précis demandé : avec des identifiants séquentiels, l'énumération de toutes les données devient triviale. La correction impose une vérification d'autorisation systématique à chaque appel et des identifiants non prédictibles. Il n'y a ici ni injection, ni problème de transport, ni surexposition de champs : le contrôle d'accès objet est simplement absent.",
+      difficulte: 2
+    },
+    {
+      q: "Votre architecture comprend 60 microservices qui communiquent entre eux en interne (trafic est-ouest). Quelle approche sécurise le MIEUX ces communications selon un modèle zero trust ?",
+      choix: [
+        "Faire confiance au trafic interne puisque le périmètre réseau est protégé par un pare-feu",
+        "Imposer une authentification mutuelle TLS (mTLS) entre services avec des identités et certificats propres à chaque service, souvent via un service mesh",
+        "Utiliser un mot de passe partagé commun à tous les microservices",
+        "Limiter la sécurité à la passerelle API qui reçoit le trafic externe"
+      ],
+      reponse: 1,
+      explication: "Le zero trust rejette la confiance implicite du réseau interne : chaque microservice doit prouver son identité à chaque communication. Le mTLS fournit l'authentification mutuelle et le chiffrement du trafic est-ouest, avec des certificats de courte durée gérés par un service mesh qui applique aussi des politiques d'autorisation fines. Se fier au périmètre reproduit le modèle « château fort » qu'un seul service compromis suffit à ruiner ; un secret partagé n'identifie personne et sa compromission expose tout ; et la passerelle API ne voit que le trafic nord-sud, pas les échanges entre services.",
+      difficulte: 3
+    },
+    {
+      q: "Quel est le PRINCIPAL bénéfice de sécurité d'une passerelle API (API gateway) placée devant des microservices ?",
+      choix: [
+        "Elle augmente la bande passante disponible pour les clients",
+        "Elle centralise l'application de l'authentification, de la limitation de débit (rate limiting) et de la validation des requêtes en un point de contrôle unique",
+        "Elle rend inutile la sécurisation des microservices situés derrière elle",
+        "Elle remplace le chiffrement TLS entre le client et les services"
+      ],
+      reponse: 1,
+      explication: "La passerelle API constitue un point d'application central des politiques : authentification et autorisation de chaque appel, rate limiting contre les abus et le déni de service, validation et filtrage des requêtes, journalisation uniforme. Cette centralisation évite que chaque microservice réimplémente (inégalement) ces contrôles. Elle n'a pas vocation à accroître la bande passante ; elle ne dispense jamais de sécuriser les services eux-mêmes (défense en profondeur, trafic est-ouest) ; et elle s'appuie sur TLS, elle ne le remplace pas.",
+      difficulte: 2
+    },
+    {
+      q: "Votre entreprise dispose d'un accord de software escrow pour son ERP critique. L'éditeur fait faillite, mais le code libéré par l'agent d'escrow date de trois ans et ne correspond plus à la version exploitée. Quelle disposition aurait prévenu ce problème ?",
+      choix: [
+        "Une clause de pénalités financières en cas de retard de support",
+        "Des dépôts obligatoires à chaque version majeure, avec vérification périodique indépendante que le dépôt est complet, compilable et à jour",
+        "Une assurance cyber couvrant la défaillance des fournisseurs",
+        "Le choix d'un agent d'escrow disposant de coffres physiques certifiés"
+      ],
+      reponse: 1,
+      explication: "Un escrow n'a de valeur que si le dépôt reflète la version en production : le contrat doit imposer des dépôts synchronisés avec les versions livrées et des vérifications périodiques (escrow verification) par un tiers, confirmant que le contenu est complet, documenté et compilable. Des pénalités financières ne servent à rien contre un éditeur en faillite ; une assurance compense financièrement mais ne fournit pas le code nécessaire à la continuité ; et la qualité des coffres protège le dépôt existant sans garantir qu'il soit à jour.",
+      difficulte: 2
+    },
+    {
+      q: "Un malware est distribué signé avec le certificat de code signing légitime d'un éditeur connu, dérobé lors d'une intrusion. Les postes de travail l'exécutent sans alerte. Quelles mesures l'ÉDITEUR aurait-il dû prendre pour prévenir et traiter ce scénario ?",
+      choix: [
+        "Publier ses clés privées pour permettre la vérification communautaire",
+        "Protéger les clés de signature dans un HSM avec accès strictement contrôlé, et révoquer immédiatement le certificat dès la compromission détectée",
+        "Signer uniquement les versions majeures pour limiter l'usage des clés",
+        "Utiliser un certificat auto-signé pour ne pas dépendre d'une autorité de certification"
+      ],
+      reponse: 1,
+      explication: "La valeur du code signing repose entièrement sur la protection de la clé privée : elle doit résider dans un HSM, avec signature effectuée dans un environnement dédié, accès nominatifs et journalisés. En cas de compromission, la révocation immédiate du certificat auprès de la CA invalide la confiance dans les signatures frauduleuses. Publier une clé privée détruit tout le mécanisme ; signer moins souvent ne protège pas la clé elle-même ; et un certificat auto-signé supprime la chaîne de confiance qui fait précisément la valeur du dispositif.",
+      difficulte: 2
+    },
+    {
+      q: "Votre organisation évalue un fournisseur SaaS pour héberger des données clients sensibles. Quel élément fournit la MEILLEURE assurance sur l'efficacité réelle des contrôles de sécurité du fournisseur ?",
+      choix: [
+        "Le questionnaire de sécurité auto-déclaré rempli par le fournisseur",
+        "Un rapport SOC 2 Type II récent, attestant l'efficacité opérationnelle des contrôles sur une période, complété par un droit d'audit contractuel",
+        "Les témoignages de clients publiés sur le site du fournisseur",
+        "La promesse commerciale d'un chiffrement « de niveau militaire »"
+      ],
+      reponse: 1,
+      explication: "Le rapport SOC 2 Type II est une attestation indépendante qui évalue non seulement la CONCEPTION des contrôles mais leur EFFICACITÉ OPÉRATIONNELLE sur une période de plusieurs mois — bien plus probant qu'un instantané ou qu'une déclaration. Le droit d'audit contractuel complète le dispositif. Un questionnaire auto-déclaré n'engage que la bonne foi du fournisseur, les témoignages clients sont du marketing, et « chiffrement de niveau militaire » est un slogan sans valeur d'assurance vérifiable.",
+      difficulte: 2
+    },
+    {
+      q: "Avant d'intégrer une bibliothèque open source dans un produit critique, vous menez une évaluation. Quel constat devrait le PLUS vous inquiéter ?",
+      choix: [
+        "La bibliothèque est maintenue par une fondation avec de nombreux contributeurs actifs",
+        "Le dernier commit remonte à trois ans et deux CVE critiques restent sans correctif ni réponse des mainteneurs",
+        "Le projet publie un changelog détaillé et des versions signées",
+        "La licence est une licence permissive approuvée par votre direction juridique"
+      ],
+      reponse: 1,
+      explication: "Le risque majeur de l'open source est l'abandon : un projet sans activité depuis trois ans, avec des CVE critiques ignorées, ne recevra probablement jamais de correctifs — l'organisation devrait prévoir de maintenir le code elle-même ou choisir une alternative activement maintenue. À l'inverse, une communauté active, des versions signées avec changelog et une licence validée juridiquement sont tous des signaux POSITIFS d'un projet sain. L'évaluation de l'open source porte sur la vitalité du projet, sa réactivité aux vulnérabilités et la conformité de licence.",
+      difficulte: 3
+    },
+    {
+      q: "Des chercheurs apposent de petits autocollants sur un panneau stop ; le système de vision d'un véhicule autonome, dont le modèle n'a jamais été modifié, le classe alors comme panneau de limitation de vitesse. Quel type d'attaque contre le machine learning est illustré ?",
+      choix: [
+        "Data poisoning des données d'entraînement",
+        "Adversarial example : une entrée manipulée trompe le modèle au moment de l'inférence",
+        "Model theft par extraction de requêtes",
+        "Membership inference sur les données d'entraînement"
+      ],
+      reponse: 1,
+      explication: "L'adversarial example est une entrée subtilement altérée — ici des autocollants imperceptiblement significatifs pour le modèle — qui provoque une classification erronée au moment de l'INFÉRENCE, sans aucune modification du modèle ni des données d'entraînement. Le data poisoning corrompt en amont les données d'ENTRAÎNEMENT ; le model theft reconstruit un modèle équivalent en l'interrogeant massivement ; et la membership inference détermine si une donnée précise a servi à l'entraînement. La précision « modèle jamais modifié » exclut l'empoisonnement.",
+      difficulte: 2
+    },
+    {
+      q: "Un régulateur bancaire exige que chaque refus de crédit automatisé puisse être expliqué précisément au client. L'équipe hésite entre un réseau de neurones profond très performant et un expert system à base de règles. Quel critère de sécurité et de conformité favorise l'expert system ?",
+      choix: [
+        "L'expert system apprend seul de nouvelles fraudes sans intervention humaine",
+        "Ses décisions découlent de règles SI-ALORS explicites et traçables, offrant l'explicabilité exigée, là où le réseau de neurones agit en boîte noire",
+        "L'expert system est toujours plus précis qu'un réseau de neurones",
+        "L'expert system ne nécessite aucune maintenance de sa base de connaissances"
+      ],
+      reponse: 1,
+      explication: "L'expert system applique des règles si-alors codifiées dans sa knowledge base via un inference engine : chaque décision peut être retracée aux règles déclenchées, ce qui satisfait l'exigence d'explicabilité du régulateur. Un réseau de neurones profond, malgré ses performances, produit des décisions difficilement explicables (boîte noire), un enjeu de conformité majeur. Les distracteurs inversent les réalités : c'est le machine learning qui apprend des données, l'expert system n'est pas intrinsèquement plus précis, et sa base de connaissances exige au contraire une maintenance experte continue.",
+      difficulte: 2
     }
   ],
   flashcards: [
