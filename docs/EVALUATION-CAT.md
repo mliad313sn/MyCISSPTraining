@@ -45,9 +45,16 @@ part de questions au niveau de difficulté de l'examen).
    managérial), réécriture des questions trop faciles à distracteurs faibles, corrections
    option par option (`pourquoi`) typant chaque piège.
 
-**VERIFY :** re-mesure automatisée après la vague (cibles : ≥ 40 % scénarisées,
-≥ 25 % difficulté 3 par banque, 100 % des questions avec correction par option).
-Les résultats de l'itération 2 seront consignés ci-dessous.
+**VERIFY (volet moteur — validé empiriquement, simulation navigateur) :**
+- Examen complet FR de 103 items : **16 % d1 / 53 % d2 / 31 % d3** + 3 items
+  d'ordonnancement — quotas atteints (cible ≈ 25/45/30).
+- Mode CAT : en répondant juste, la difficulté servie converge vers 3
+  (2,3,3,3,… — moyenne 2,8 → 3,0) ; en répondant faux, elle converge vers 1
+  (3,2,2,1,1,… — moyenne 2,0 → 1,0). **Adaptativité prouvée dans les deux sens.**
+
+**VERIFY (volet banques) :** re-mesure automatisée après la vague d'assesseurs
+(cibles : ≥ 40 % scénarisées, ≥ 25 % difficulté 3 par banque, 100 % des questions
+avec correction par option). Résultats de l'itération 2 ci-dessous.
 
 ### Grille d'évaluation d'une question (utilisée par les assesseurs)
 
