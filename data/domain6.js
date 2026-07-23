@@ -308,7 +308,7 @@ window.CISSP_DATA.domains[6] = {
             "Vulnerability management : cycle continu fondé sur l'inventaire des actifs"
           ],
           narration:
-            "En résumé, l'évaluation des vulnérabilités suit des étapes précises, de la reconnaissance passive à la documentation des findings, l'exploitation étant réservée aux tests d'intrusion. Les scans se déclinent en quatre catégories, et le scan authentifié apporte précision et profondeur. Le cadre SCAP standardise le vocabulaire, avec CVE pour nommer et CVSS pour scorer. Enfin, tout cela alimente un cycle continu de vulnerability management fondé sur un inventaire d'actifs à jour."
+            "En résumé, l'évaluation des vulnérabilités suit des étapes précises, de la reconnaissance passive à la documentation des findings, l'exploitation étant réservée aux tests d'intrusion. Les scans se déclinent en quatre catégories, et le scan authentifié apporte précision et profondeur. Côté réseau, retenez les trois états de ports, open, closed et filtered, le SYN scan semi-ouvert plus discret que le connect scan, les limites du scan UDP et le banner grabbing. Le cadre SCAP standardise le vocabulaire, avec CVE pour nommer et CVSS pour scorer. Enfin, tout cela alimente un cycle continu de vulnerability management fondé sur un inventaire d'actifs à jour."
         }
       ]
     },
@@ -408,10 +408,12 @@ window.CISSP_DATA.domains[6] = {
             "Plateformes BAS : automatisation partielle du pen testing",
             "Combinent techniques red et blue avec de l'automatisation",
             "Injectent des indicateurs de menace pour déclencher les contrôles de détection",
-            "Références : MITRE ATT&CK, OSSTMM, NIST 800-115, OWASP"
+            "Références : MITRE ATT&CK, OSSTMM, NIST 800-115, OWASP",
+            "Modèles d'analyse d'attaque : Cyber Kill Chain, MITRE ATT&CK et Diamond Model of Intrusion Analysis"
           ],
           narration:
-            "Les plateformes de Breach and Attack Simulation automatisent certains aspects du test d'intrusion. Elles combinent des techniques de red team et de blue team avec de l'automatisation pour simuler des menaces persistantes avancées contre l'environnement. Concrètement, elles injectent des indicateurs de menace sur les systèmes et les réseaux, par exemple un fichier suspect déposé sur un serveur, pour vérifier que les contrôles de détection et de prévention réagissent immédiatement. Côté méthodologies, connaissez les références : le framework MITRE ATT&CK, l'OSSTMM, le guide NIST huit cents tiret cent quinze et le Web Security Testing Guide de l'OWASP."
+            "Les plateformes de Breach and Attack Simulation automatisent certains aspects du test d'intrusion. Elles combinent des techniques de red team et de blue team avec de l'automatisation pour simuler des menaces persistantes avancées contre l'environnement. Concrètement, elles injectent des indicateurs de menace sur les systèmes et les réseaux, par exemple un fichier suspect déposé sur un serveur, pour vérifier que les contrôles de détection et de prévention réagissent immédiatement. Côté méthodologies, connaissez les références : le framework MITRE ATT&CK, l'OSSTMM, le guide NIST huit cents tiret cent quinze et le Web Security Testing Guide de l'OWASP. Et pour modéliser les attaques simulées ou réelles, trois cadres sont à connaître : la Cyber Kill Chain de Lockheed Martin, qui décrit les étapes séquentielles d'une intrusion, MITRE ATT&CK, qui catalogue les tactiques et techniques réelles des attaquants, et le Diamond Model of Intrusion Analysis, qui analyse chaque événement d'intrusion selon quatre sommets reliés : l'adversaire, ses capacités, son infrastructure et la victime.",
+          astuce: "💡 Conseil examen : Diamond Model = 4 sommets — adversary, capability, infrastructure, victim ; Kill Chain = étapes séquentielles ; ATT&CK = matrice de tactiques et techniques."
         },
         {
           type: "question",
@@ -1167,6 +1169,45 @@ window.CISSP_DATA.domains[6] = {
       explication:
         "Un audit externe (parfois appelé second-party audit) conduit par ou pour un partenaire commercial est lié au contrat : par définition, son périmètre doit se limiter aux obligations contractuelles de l'organisation. Ouvrir tout le SI (A, D) excède le besoin et crée des risques de confidentialité ; aligner sur l'audit interne (C) n'a pas de fondement contractuel.",
       difficulte: 3
+    },
+    {
+      q: "Lors d'un scan de découverte, nmap rapporte un port en état « filtered ». Que devez-vous en conclure ?",
+      choix: [
+        "Aucun service n'écoute sur ce port",
+        "Un service écoute et accepte les connexions",
+        "Un firewall ou un filtre empêche le scanner de déterminer l'état du port",
+        "Le port est ouvert mais le service est en panne"
+      ],
+      reponse: 2,
+      explication:
+        "Filtered signifie que les sondes du scanner sont interceptées par un dispositif de filtrage (firewall, ACL) et qu'aucune réponse exploitable ne revient : le scanner ne peut pas conclure. Closed (A) signifie que le port répond mais qu'aucun service n'écoute ; open (B) signifie qu'un service accepte les connexions ; l'option D ne correspond à aucun état nmap.",
+      difficulte: 2
+    },
+    {
+      q: "Un testeur souhaite identifier les ports TCP ouverts d'un serveur en restant le PLUS discret possible, sans établir de connexion complète. Quelle technique devrait-il utiliser ?",
+      choix: [
+        "TCP connect scan",
+        "TCP SYN scan (half-open)",
+        "UDP scan",
+        "Banner grabbing"
+      ],
+      reponse: 1,
+      explication:
+        "Le SYN scan, dit half-open, envoie un SYN, interprète le SYN/ACK comme un port ouvert puis répond par un RST : la connexion n'est jamais complétée, ce qui le rend plus rapide et plus discret. Le connect scan établit le handshake complet et est journalisé par la cible ; le scan UDP ne concerne pas les ports TCP ; le banner grabbing identifie les versions de services déjà découverts, il ne recense pas les ports.",
+      difficulte: 2
+    },
+    {
+      q: "Un analyste veut représenter une intrusion en reliant l'adversaire, ses capacités, son infrastructure et la victime. Quel modèle d'analyse devrait-il utiliser ?",
+      choix: [
+        "La Cyber Kill Chain de Lockheed Martin",
+        "Le Diamond Model of Intrusion Analysis",
+        "La matrice MITRE ATT&CK",
+        "Le modèle STRIDE"
+      ],
+      reponse: 1,
+      explication:
+        "Le Diamond Model of Intrusion Analysis analyse chaque événement d'intrusion selon quatre sommets reliés : adversary, capability, infrastructure et victim. La Kill Chain décrit les étapes séquentielles d'une attaque, ATT&CK catalogue les tactiques et techniques observées, et STRIDE est un modèle de threat modeling orienté catégories de menaces, pas d'analyse d'intrusion.",
+      difficulte: 2
     }
   ],
   flashcards: [
@@ -1209,6 +1250,14 @@ window.CISSP_DATA.domains[6] = {
     {
       recto: "Authenticated scan (credentialed scan)",
       verso: "Scan de vulnérabilités utilisant des identifiants valides pour accéder aux couches profondes du système ; résultats plus précis, moins de faux positifs ; utilise souvent un compte read-only."
+    },
+    {
+      recto: "États de ports : open / closed / filtered",
+      verso: "Open : un service écoute et accepte les connexions. Closed : le port répond mais aucun service n'écoute. Filtered : un firewall ou filtre bloque les sondes, le scanner ne peut pas conclure. Techniques : TCP connect (handshake complet, bruyant), TCP SYN half-open (SYN → SYN/ACK → RST, discret), UDP (lent, peu fiable), banner grabbing (identifier logiciel et version)."
+    },
+    {
+      recto: "Diamond Model of Intrusion Analysis",
+      verso: "Modèle analysant chaque événement d'intrusion selon 4 sommets reliés : adversary (l'attaquant), capability (ses outils/techniques), infrastructure (ses moyens, C2), victim (la cible). Complémentaire de la Cyber Kill Chain (étapes séquentielles) et de MITRE ATT&CK (tactiques et techniques)."
     },
     {
       recto: "Les 4 phases NIST du penetration testing",
