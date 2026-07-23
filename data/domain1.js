@@ -422,16 +422,46 @@ window.CISSP_DATA.domains[1] = {
             "En matière civile, il suffit de démontrer la prépondérance de la preuve, c'est-à-dire qu'il est plus probable qu'improbable que les faits reprochés soient vrais. Le standard « au-delà de tout doute raisonnable » est réservé aux affaires criminelles, où l'enjeu, la liberté de la personne, justifie une exigence bien plus élevée."
         },
         {
+          type: "standard",
+          titre: "Cybercrime et notification de violation",
+          points: [
+            "Trois familles de cybercriminalité : l'ordinateur CIBLE (accès non autorisé, malware, DoS), l'ordinateur OUTIL (fraude, usurpation d'identité), les infractions de CONTENU",
+            "Convention de Budapest (2001) : premier traité international contre la cybercriminalité, harmonisation et coopération entre États",
+            "GDPR : autorité de contrôle notifiée sous 72 h ; personnes concernées « sans retard injustifié » si risque élevé",
+            "USA : pas de loi fédérale unique — chaque État a sa loi de notification (pionnière : Californie, SB 1386)",
+            "NIS2 (UE) : alerte précoce 24 h, notification 72 h, rapport final sous 1 mois pour les entités essentielles et importantes"
+          ],
+          narration:
+            "Élargissons maintenant le regard sur la cybercriminalité et les obligations de notification. On classe généralement les cybercrimes en trois familles : les attaques où l'ordinateur est la cible, comme l'accès non autorisé, les malwares ou le déni de service ; celles où il est l'outil de l'infraction, comme la fraude ou l'usurpation d'identité ; et les infractions de contenu, comme la diffusion de matériels illicites. La Convention de Budapest de deux mille un est le premier traité international qui harmonise ces incriminations et organise la coopération entre États. Côté notification, retenez bien les délais par juridiction : le GDPR impose soixante-douze heures vers l'autorité de contrôle, et une information des personnes concernées sans retard injustifié quand le risque pour leurs droits est élevé. La directive européenne NIS2 exige une alerte précoce en vingt-quatre heures, une notification complète en soixante-douze heures, puis un rapport final sous un mois. Et aux États-Unis, il n'existe pas de loi fédérale unique : chaque État possède sa propre loi de notification depuis la loi pionnière de la Californie.",
+          astuce: "💡 Conseil examen : mémorisez la grille des délais — GDPR : 72 h vers l'autorité. NIS2 : 24 h, puis 72 h, puis 1 mois. HIPAA/HITECH : 60 jours vers les individus. USA : une loi par État, pas de délai fédéral unique."
+        },
+        {
+          type: "standard",
+          titre: "Transferts transfrontières de données",
+          points: [
+            "Principe GDPR : transfert hors UE interdit par défaut, sauf garantie appropriée",
+            "Adequacy decision : la Commission européenne reconnaît une protection équivalente dans le pays tiers — transfert libre",
+            "SCC (Standard Contractual Clauses) : clauses types approuvées par la Commission, insérées dans les contrats avec le destinataire",
+            "BCR (Binding Corporate Rules) : règles internes contraignantes pour les transferts intra-groupe, approuvées par une autorité de contrôle",
+            "Schrems II (2020) : Privacy Shield invalidé ; même avec des SCC, évaluer le droit du pays de destination et ajouter des mesures supplémentaires ; relais par l'EU-US Data Privacy Framework (2023)"
+          ],
+          narration:
+            "Le GDPR interdit par défaut le transfert de données personnelles hors de l'Union européenne, sauf garanties appropriées. Première voie : la décision d'adéquation, l'adequacy decision, par laquelle la Commission européenne reconnaît qu'un pays tiers offre une protection substantiellement équivalente, ce qui autorise les transferts librement. Deuxième voie : les Standard Contractual Clauses, des clauses contractuelles types approuvées par la Commission, que l'on insère dans les contrats avec les destinataires des données. Troisième voie : les Binding Corporate Rules, des règles d'entreprise contraignantes qui encadrent les transferts au sein d'un même groupe multinational, après approbation d'une autorité de contrôle. Enfin, l'arrêt Schrems deux de deux mille vingt a invalidé le Privacy Shield et exige, même en présence de SCC, d'évaluer la législation du pays de destination et d'ajouter des mesures supplémentaires si nécessaire. L'EU-US Data Privacy Framework a pris le relais en deux mille vingt-trois pour les transferts vers les États-Unis.",
+          astuce: "💡 Conseil examen : adequacy = transfert libre ; SCC = clauses types dans le contrat ; BCR = intra-groupe multinational. Schrems II impose une évaluation d'impact du transfert même avec des SCC."
+        },
+        {
           type: "resume",
           titre: "Ce qu'il faut retenir",
           points: [
             "Criminal, civil, administrative : trois catégories de droit, trois logiques",
             "GDPR : portée mondiale, notification 72 h ; HIPAA/HITECH : PHI, 60 jours",
             "PCI DSS est contractuel, SOX vise les sociétés cotées, GLBA la finance, FISMA le fédéral",
-            "Cinq types d'enquêtes avec des standards de preuve différents"
+            "Cinq types d'enquêtes avec des standards de preuve différents",
+            "Cybercrime : cible, outil ou contenu ; notification selon la juridiction (GDPR 72 h, NIS2 24 h/72 h/1 mois, lois par État aux USA)",
+            "Transferts hors UE : adequacy decision, SCC, BCR — et l'impact de Schrems II"
           ],
           narration:
-            "Résumons cette leçon dense. Trois catégories de droit : pénal, civil et administratif, chacune avec sa logique et son standard de preuve. Le GDPR s'applique mondialement dès qu'on traite des données de résidents européens, avec notification sous soixante-douze heures. HIPAA et HITECH protègent les données de santé avec un délai de soixante jours. PCI DSS est un standard contractuel, SOX responsabilise les dirigeants des sociétés cotées, GLBA encadre la finance et FISMA le secteur fédéral américain. Enfin, sachez reconnaître les cinq types d'enquêtes et leurs niveaux d'exigence respectifs."
+            "Résumons cette leçon dense. Trois catégories de droit : pénal, civil et administratif, chacune avec sa logique et son standard de preuve. Le GDPR s'applique mondialement dès qu'on traite des données de résidents européens, avec notification sous soixante-douze heures. HIPAA et HITECH protègent les données de santé avec un délai de soixante jours. PCI DSS est un standard contractuel, SOX responsabilise les dirigeants des sociétés cotées, GLBA encadre la finance et FISMA le secteur fédéral américain. Sachez reconnaître les cinq types d'enquêtes et leurs niveaux d'exigence respectifs. Enfin, vous savez désormais situer les grandes familles de cybercriminalité, les obligations de notification propres à chaque juridiction, et les mécanismes de transfert transfrontière de données : décisions d'adéquation, clauses contractuelles types et règles d'entreprise contraignantes, dans le monde d'après Schrems deux."
         }
       ]
     },

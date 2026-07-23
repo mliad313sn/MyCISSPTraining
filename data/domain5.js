@@ -1140,6 +1140,500 @@ window.CISSP_DATA.domains[5] = {
       explication:
         "SPML (Service Provisioning Markup Language) est un standard XML de provisioning qui n'a jamais été largement adopté ; SCIM l'a remplacé avec une approche moderne fondée sur des API REST et JSON, largement supportée par les fournisseurs SaaS. Aucun des deux n'authentifie les utilisateurs ni ne fournit de SSO : ce sont des standards de gestion du cycle de vie des comptes.",
       difficulte: 2
+    },
+    {
+      q: "Un employé badge à l'entrée du datacenter, saisit un code PIN, puis le système enregistre son entrée dans un journal horodaté. À quelles étapes du modèle IAAA correspondent respectivement le badge présenté, le PIN saisi et le journal ?",
+      choix: [
+        "Identification ; authentification ; accountability",
+        "Authentification ; autorisation ; audit",
+        "Identification ; autorisation ; accountability",
+        "Authentification ; identification ; autorisation"
+      ],
+      reponse: 0,
+      explication:
+        "Présenter le badge revient à déclarer une identité (identification), le PIN prouve que le porteur est bien le titulaire (authentification), et le journal horodaté fournit la trace qui rend l'individu responsable de ses actions (accountability via l'audit). L'autorisation, non citée ici, serait la vérification que cette identité a le droit d'entrer dans cette zone. Les autres réponses inversent ou confondent les étapes.",
+      difficulte: 1
+    },
+    {
+      q: "Lors d'une investigation, l'équipe SOC ne parvient pas à déterminer QUEL administrateur a supprimé une base de données, car les trois administrateurs partagent le compte 'admin'. Quel pilier du modèle IAAA est fondamentalement compromis ?",
+      choix: [
+        "L'autorisation, car le compte avait trop de droits",
+        "L'accountability, car l'identification n'est pas unique",
+        "L'authentification, car le mot de passe était faible",
+        "La disponibilité, car la base a été supprimée"
+      ],
+      reponse: 1,
+      explication:
+        "L'accountability exige une chaîne complète : identification unique, authentification fiable et audit. Un compte partagé brise le premier maillon — impossible d'attribuer une action à un individu précis, donc impossible de le tenir responsable, même avec des journaux parfaits. Ce n'est pas d'abord un problème d'autorisation ni de robustesse du mot de passe, et la disponibilité est une conséquence de l'incident, pas le pilier IAM compromis.",
+      difficulte: 2
+    },
+    {
+      q: "Après plusieurs compromissions par phishing malgré le déploiement de codes TOTP, le RSSI veut une authentification résistante au phishing. Quelle solution répond le MIEUX à ce besoin ?",
+      choix: [
+        "Envoyer les codes par SMS plutôt que par application",
+        "Déployer des authentificateurs FIDO2/WebAuthn liés à l'origine du site",
+        "Allonger les codes TOTP à huit chiffres",
+        "Imposer un changement de mot de passe tous les 30 jours"
+      ],
+      reponse: 1,
+      explication:
+        "FIDO2/WebAuthn est résistant au phishing par conception : la clé privée ne quitte jamais l'authentificateur et la signature est cryptographiquement liée à l'origine (le domaine) du site légitime — un site de phishing, même parfaitement imité, ne peut pas obtenir de réponse valide. Les codes TOTP et SMS restent saisissables par l'utilisateur sur un faux site (attaque adversary-in-the-middle), quelle que soit leur longueur, et la rotation des mots de passe n'empêche pas leur capture en temps réel.",
+      difficulte: 2
+    },
+    {
+      q: "Quelle est la PRINCIPALE différence de sécurité entre une passkey synchronisée (via un cloud grand public) et une passkey liée à l'appareil (device-bound, ex. clé de sécurité matérielle) ?",
+      choix: [
+        "La passkey synchronisée n'utilise pas la cryptographie asymétrique",
+        "La passkey device-bound garantit que la clé privée ne peut pas être copiée hors du matériel",
+        "La passkey synchronisée est vulnérable au phishing, contrairement à la device-bound",
+        "La passkey device-bound exige obligatoirement un mot de passe en complément"
+      ],
+      reponse: 1,
+      explication:
+        "Les deux types reposent sur la même cryptographie asymétrique WebAuthn et sont résistants au phishing. La différence porte sur l'exportabilité de la clé privée : une passkey synchronisée est répliquée entre appareils via un compte cloud (la sécurité dépend alors de ce compte et de son recouvrement), tandis qu'une passkey device-bound reste confinée dans le matériel (élément sécurisé, clé FIDO), ce qui offre une assurance supérieure — exigée par exemple pour atteindre AAL3. Les réponses A et C sont fausses, et D n'est pas une exigence.",
+      difficulte: 3
+    },
+    {
+      q: "Des employés reçoivent en pleine nuit des dizaines de notifications push MFA et l'un d'eux finit par approuver pour faire cesser les alertes. Quelle attaque est décrite et quelle est la MEILLEURE contre-mesure ?",
+      choix: [
+        "Credential stuffing ; imposer des mots de passe uniques",
+        "MFA fatigue (push bombing) ; activer le number matching ou passer à FIDO2",
+        "SIM swapping ; contacter l'opérateur mobile",
+        "Session hijacking ; raccourcir la durée des sessions"
+      ],
+      reponse: 1,
+      explication:
+        "Le MFA fatigue (ou push bombing) consiste à bombarder l'utilisateur de demandes push jusqu'à ce qu'il approuve par lassitude ou erreur — l'attaquant possède déjà le mot de passe. Le number matching (saisir un code affiché à l'écran de connexion dans l'application) ou un authentificateur FIDO2 supprime l'approbation aveugle. Le credential stuffing est l'étape amont probable mais ne décrit pas le bombardement de notifications ; le SIM swapping vise les SMS et le session hijacking des sessions déjà ouvertes.",
+      difficulte: 2
+    },
+    {
+      q: "Dans l'architecture FIDO2, quels sont les deux composants standardisés et leur rôle respectif ?",
+      choix: [
+        "SAML pour le navigateur et OAuth pour l'authentificateur",
+        "WebAuthn, l'API entre le navigateur et le service web ; CTAP, le protocole entre le navigateur et l'authentificateur externe",
+        "TOTP pour générer les codes et HOTP pour les vérifier",
+        "PKCS#11 pour la carte à puce et X.509 pour le certificat"
+      ],
+      reponse: 1,
+      explication:
+        "FIDO2 combine WebAuthn (API du W3C permettant au site web, via le navigateur, de créer et vérifier des credentials à clé publique) et CTAP (Client to Authenticator Protocol de la FIDO Alliance, qui fait dialoguer le navigateur avec un authentificateur externe comme une clé USB/NFC ou un smartphone). TOTP/HOTP sont des générateurs de codes à usage unique sans lien avec FIDO2, et PKCS#11/X.509 relèvent des infrastructures à clé publique classiques.",
+      difficulte: 3
+    },
+    {
+      q: "Le service RH se plaint qu'un nouveau lecteur biométrique exige trois minutes par personne pour l'enrôlement et plus de dix secondes à chaque passage. Quels critères d'acceptabilité opérationnelle sont en cause ?",
+      choix: [
+        "Le CER et le FAR",
+        "Le temps d'enrôlement et le throughput (débit de passage)",
+        "La précision et le taux de faux rejets",
+        "La résistance au spoofing et la vivacité (liveness)"
+      ],
+      reponse: 1,
+      explication:
+        "Au-delà de la précision (FAR/FRR/CER), un système biométrique doit être opérationnellement acceptable : un enrôlement de moins de deux minutes environ et un temps de passage de l'ordre de six à dix secondes maximum sont les repères classiques. Ici, le problème n'est ni la précision ni l'anti-spoofing, mais l'ergonomie : enrôlement trop long et débit insuffisant, qui provoquent le rejet du système par les utilisateurs.",
+      difficulte: 2
+    },
+    {
+      q: "Quelle est la MEILLEURE pratique pour le stockage des données biométriques d'authentification ?",
+      choix: [
+        "Stocker les images brutes chiffrées dans une base centrale pour faciliter le ré-enrôlement",
+        "Stocker uniquement un gabarit (template) mathématique protégé, idéalement sur l'appareil de l'utilisateur",
+        "Stocker les empreintes en clair mais sur un serveur isolé du réseau",
+        "Convertir les empreintes en mot de passe réutilisable"
+      ],
+      reponse: 1,
+      explication:
+        "On ne stocke jamais l'image biométrique brute : on en dérive un gabarit mathématique, protégé (chiffré, voire conservé dans un élément sécurisé local comme le fait Touch ID/Face ID), car une caractéristique biométrique compromise ne peut pas être révoquée ni changée, contrairement à un mot de passe. La centralisation d'images brutes crée une cible de très grande valeur ; le stockage en clair est inacceptable même isolé ; et convertir une biométrie en mot de passe réutilisable annule tout l'intérêt du facteur.",
+      difficulte: 2
+    },
+    {
+      q: "Pour réduire les plaintes d'employés rejetés par le lecteur d'empreintes de la cafétéria, l'administrateur diminue la sensibilité du capteur. Quelle est la conséquence directe de ce réglage ?",
+      choix: [
+        "Le FRR augmente et le FAR diminue",
+        "Le FRR diminue mais le FAR augmente",
+        "Le CER diminue mécaniquement",
+        "Le temps d'enrôlement augmente"
+      ],
+      reponse: 1,
+      explication:
+        "Diminuer la sensibilité réduit les faux rejets (erreurs de type 1, FRR) — les employés légitimes passent plus facilement — mais augmente les fausses acceptations (erreurs de type 2, FAR) : des imposteurs pourront être acceptés. C'est un arbitrage acceptable pour une cafétéria, pas pour un laboratoire sensible. Le CER est une caractéristique intrinsèque du système, qui ne change pas avec le réglage, et l'enrôlement n'est pas concerné.",
+      difficulte: 1
+    },
+    {
+      q: "Un système d'authentification continue analyse la dynamique de frappe (keystroke dynamics) de l'utilisateur pendant toute la session. À quel type de facteur cette technique appartient-elle ?",
+      choix: [
+        "Something you know",
+        "Something you have",
+        "Something you do (biométrie comportementale)",
+        "Somewhere you are"
+      ],
+      reponse: 2,
+      explication:
+        "La dynamique de frappe — rythme, durée d'appui, temps entre les touches — est une biométrie comportementale, classée 'something you do'. Elle permet notamment l'authentification continue pour détecter qu'un imposteur a pris la place de l'utilisateur en cours de session. Ce n'est ni une connaissance, ni un objet possédé, ni une localisation.",
+      difficulte: 1
+    },
+    {
+      q: "Un attaquant a extrait le hash du compte krbtgt d'un domaine Active Directory et forge désormais des TGT valides pour n'importe quel utilisateur. Comment s'appelle cette attaque et quelle est la remédiation reconnue ?",
+      choix: [
+        "Silver ticket ; réinitialiser le mot de passe du compte de service concerné",
+        "Golden ticket ; réinitialiser deux fois le mot de passe du compte krbtgt",
+        "Kerberoasting ; allonger les mots de passe des comptes de service",
+        "Pass-the-ticket ; bloquer le port 88"
+      ],
+      reponse: 1,
+      explication:
+        "Avec le hash du compte krbtgt (qui signe et chiffre tous les TGT), l'attaquant forge des golden tickets : des TGT valides pour n'importe quel principal, avec la durée de vie de son choix — un contrôle quasi total du domaine. La remédiation exige de réinitialiser le mot de passe de krbtgt deux fois (à cause de l'historique de mots de passe conservé pour la continuité), en plus de l'éradication de l'attaquant. Le silver ticket ne forge que des service tickets pour un service précis, le Kerberoasting casse des mots de passe hors ligne, et bloquer le port 88 paralyserait le domaine.",
+      difficulte: 3
+    },
+    {
+      q: "Quelle est la différence ESSENTIELLE entre une attaque golden ticket et une attaque silver ticket dans Kerberos ?",
+      choix: [
+        "Le golden ticket vise RADIUS, le silver ticket vise Kerberos",
+        "Le golden ticket forge des TGT avec le hash de krbtgt ; le silver ticket forge des service tickets avec le hash d'un compte de service, sans contacter le KDC",
+        "Le silver ticket donne plus de privilèges que le golden ticket",
+        "Le golden ticket ne fonctionne que si la pré-authentification est désactivée"
+      ],
+      reponse: 1,
+      explication:
+        "Le golden ticket exploite le hash du compte krbtgt pour forger des TGT donnant accès à tout le domaine. Le silver ticket, plus discret mais plus limité, exploite le hash d'un compte de service pour forger directement un service ticket vers CE service, sans jamais dialoguer avec le KDC — ce qui le rend difficile à détecter dans les journaux du contrôleur de domaine. Le silver ticket est donc moins puissant, pas plus. La pré-authentification désactivée concerne l'AS-REP roasting, pas le golden ticket.",
+      difficulte: 3
+    },
+    {
+      q: "Lors d'un audit Active Directory, vous découvrez des comptes configurés avec l'option « Do not require Kerberos preauthentication ». Quelle attaque ces comptes rendent-ils possible ?",
+      choix: [
+        "AS-REP roasting : obtenir une réponse chiffrée avec le hash du mot de passe et la casser hors ligne",
+        "Golden ticket : forger des TGT arbitraires",
+        "Pass-the-hash : rejouer le hash NTLM sur d'autres machines",
+        "Overpass-the-hash : convertir un hash en TGT"
+      ],
+      reponse: 0,
+      explication:
+        "Sans pré-authentification, n'importe qui peut demander à l'AS une réponse (AS-REP) pour ce compte : une partie de cette réponse est chiffrée avec une clé dérivée du mot de passe de l'utilisateur, ce qui permet une attaque par force brute hors ligne — c'est l'AS-REP roasting. La pré-authentification exige justement de prouver la connaissance du mot de passe (horodatage chiffré) AVANT toute réponse du KDC. Les trois autres attaques existent mais ne dépendent pas de cette option.",
+      difficulte: 3
+    },
+    {
+      q: "Outre le SSO, quel service de sécurité Kerberos fournit-il nativement entre le client et le serveur de ressources ?",
+      choix: [
+        "La non-répudiation par signature numérique",
+        "L'authentification mutuelle : le client prouve son identité au service, et le service peut prouver la sienne au client",
+        "Le chiffrement de bout en bout de toutes les données applicatives",
+        "La haute disponibilité du KDC"
+      ],
+      reponse: 1,
+      explication:
+        "Kerberos offre l'authentification mutuelle : grâce aux clés de session partagées via le KDC, le client s'authentifie auprès du service et peut exiger que le service renvoie une preuve (l'horodatage chiffré avec la clé de session), démontrant qu'il détient la clé attendue — parade contre l'usurpation de serveur. Kerberos utilise la cryptographie symétrique, donc pas de non-répudiation (qui exige des signatures asymétriques) ; il protège ses échanges de tickets mais ne chiffre pas automatiquement tout le trafic applicatif ; et le KDC reste un point unique de défaillance à redonder soi-même.",
+      difficulte: 3
+    },
+    {
+      q: "Quel est le PRINCIPAL point faible architectural de Kerberos qu'un concepteur doit compenser ?",
+      choix: [
+        "L'absence totale de chiffrement des tickets",
+        "Le KDC concentre toutes les clés secrètes et constitue un point unique de défaillance et de compromission",
+        "L'impossibilité de fonctionner avec Active Directory",
+        "L'obligation d'utiliser des certificats X.509 pour chaque utilisateur"
+      ],
+      reponse: 1,
+      explication:
+        "Le KDC détient les clés secrètes de tous les principals et délivre tous les tickets : sa panne bloque toute authentification (single point of failure) et sa compromission livre le domaine entier (cf. golden ticket). On le compense par la redondance, un durcissement maximal et une surveillance renforcée. Les tickets sont bien chiffrés (AES en Kerberos v5), Active Directory repose précisément sur Kerberos, et Kerberos utilise la cryptographie symétrique, pas des certificats par utilisateur.",
+      difficulte: 2
+    },
+    {
+      q: "Votre entreprise veut offrir aux employés un SSO navigateur vers une dizaine d'applications SaaS d'entreprise (paie, CRM, RH), l'annuaire interne restant la source d'autorité. Quel standard est le PLUS classiquement déployé pour ce scénario ?",
+      choix: [
+        "OAuth 2.0 sans OIDC",
+        "SAML 2.0, l'IdP interne émettant des assertions vers chaque SaaS (SP)",
+        "Kerberos, en exposant le KDC sur Internet",
+        "RADIUS avec un portail captif"
+      ],
+      reponse: 1,
+      explication:
+        "Le SSO web d'entreprise vers des SaaS est le cas d'usage historique de SAML 2.0 : l'IdP interne authentifie l'employé puis transmet au fournisseur de service une assertion signée contenant identité et attributs. OAuth 2.0 seul fait de la délégation d'autorisation, pas de l'authentification ; exposer un KDC Kerberos sur Internet est une hérésie de sécurité ; RADIUS sert au contrôle d'accès réseau, pas au SSO applicatif web. Notez qu'OIDC est aussi possible pour ce besoin, mais il n'est pas proposé ici.",
+      difficulte: 2
+    },
+    {
+      q: "Une application de gestion de photos demande l'autorisation d'accéder aux fichiers stockés dans votre drive cloud, sans jamais connaître votre mot de passe. Quel protocole réalise EXACTEMENT cette fonction ?",
+      choix: [
+        "SAML 2.0, via une assertion d'attributs",
+        "OAuth 2.0 : le serveur d'autorisation délivre un access token à portée limitée",
+        "OIDC, via l'ID token",
+        "SCIM, via une API REST"
+      ],
+      reponse: 1,
+      explication:
+        "C'est la délégation d'autorisation, cœur d'OAuth 2.0 : l'utilisateur (resource owner) consent, le serveur d'autorisation émet un access token à portée (scope) limitée, et l'application (client) l'utilise auprès du serveur de ressources — le mot de passe n'est jamais partagé avec l'application tierce. L'ID token OIDC prouve une identité, il ne donne pas accès à des ressources ; SAML fait du SSO web ; SCIM fait du provisioning de comptes.",
+      difficulte: 2
+    },
+    {
+      q: "Pour une application mobile native qui propose « Se connecter avec votre compte d'entreprise », quelle combinaison est aujourd'hui recommandée ?",
+      choix: [
+        "OAuth 2.0 implicit flow, optimisé pour les clients publics",
+        "OIDC avec authorization code flow et PKCE",
+        "SAML 2.0 avec artifact binding",
+        "Resource Owner Password Credentials : l'app collecte le mot de passe et le transmet"
+      ],
+      reponse: 1,
+      explication:
+        "Pour les clients publics (applications mobiles, SPA) incapables de garder un secret, la recommandation actuelle est OIDC sur le flux authorization code renforcé par PKCE (Proof Key for Code Exchange), qui empêche l'interception du code d'autorisation. L'implicit flow est déprécié (tokens exposés dans l'URL), SAML est peu adapté aux applications natives, et le flux ROPC — où l'application manipule directement le mot de passe — contredit le principe même de la délégation et est déconseillé.",
+      difficulte: 3
+    },
+    {
+      q: "Dans une fédération SAML, quelle entité VÉRIFIE les identifiants de l'utilisateur, et quelle entité CONSOMME l'assertion pour ouvrir la session ?",
+      choix: [
+        "Le Service Provider vérifie ; l'Identity Provider consomme",
+        "L'Identity Provider authentifie l'utilisateur ; le Service Provider consomme l'assertion",
+        "Le KDC authentifie ; le TGS consomme",
+        "Le client authentifie ; le serveur d'autorisation consomme"
+      ],
+      reponse: 1,
+      explication:
+        "Dans SAML, l'Identity Provider (IdP) détient les comptes et vérifie les identifiants, puis émet une assertion signée ; le Service Provider (SP) fait confiance à cette assertion, la valide (signature, audience, durée) et ouvre la session locale sans jamais voir le mot de passe. La réponse A inverse les rôles, la C décrit Kerberos, et la D mélange les rôles OAuth.",
+      difficulte: 1
+    },
+    {
+      q: "Dans la terminologie OAuth 2.0, votre application de calendrier demande l'accès aux contacts stockés chez un fournisseur cloud, avec votre accord. Qui est le « client » et qui est le « resource owner » ?",
+      choix: [
+        "Le client est le fournisseur cloud ; le resource owner est l'application",
+        "Le client est l'application de calendrier ; le resource owner est l'utilisateur",
+        "Le client est l'utilisateur ; le resource owner est le serveur d'autorisation",
+        "Le client et le resource owner désignent la même entité"
+      ],
+      reponse: 1,
+      explication:
+        "En OAuth 2.0, le resource owner est l'utilisateur qui possède les données et donne son consentement ; le client est l'application tierce qui demande l'accès ; le serveur d'autorisation émet les tokens après consentement ; et le serveur de ressources héberge les données et accepte les access tokens. Bien distinguer ces quatre rôles est indispensable pour analyser les flux OAuth à l'examen.",
+      difficulte: 1
+    },
+    {
+      q: "Un consultant sécurité déconseille le flux OAuth « implicit » pour votre nouvelle SPA. Quelle est la raison PRINCIPALE ?",
+      choix: [
+        "Il est trop lent car il exige deux allers-retours supplémentaires",
+        "L'access token transite par l'URL du navigateur, où il peut fuiter (historique, referrer, scripts)",
+        "Il ne fonctionne pas avec les serveurs d'autorisation modernes",
+        "Il impose un secret client impossible à stocker"
+      ],
+      reponse: 1,
+      explication:
+        "Dans le flux implicit, l'access token est retourné directement dans le fragment de l'URL de redirection : il s'expose à l'historique du navigateur, aux en-têtes referrer et aux scripts tiers, sans possibilité d'authentifier le client. Les bonnes pratiques OAuth 2.0 actuelles (et OAuth 2.1) le remplacent par l'authorization code flow avec PKCE, qui ne fait transiter qu'un code à usage unique. Ce n'est ni une question de performance ni de compatibilité, et l'implicit flow a justement été conçu pour les clients SANS secret.",
+      difficulte: 3
+    },
+    {
+      q: "Un utilisateur exécute par mégarde un cheval de Troie qui partage silencieusement ses documents avec un attaquant, en utilisant les propres permissions de l'utilisateur. Quel modèle de contrôle d'accès est INTRINSÈQUEMENT vulnérable à ce scénario ?",
+      choix: [
+        "MAC, car les labels peuvent être modifiés par le malware",
+        "DAC, car tout programme exécuté hérite des droits du propriétaire, y compris celui de re-partager",
+        "RBAC, car les rôles sont trop larges",
+        "ABAC, car les attributs sont dynamiques"
+      ],
+      reponse: 1,
+      explication:
+        "C'est la faiblesse classique du DAC face aux chevaux de Troie : un programme s'exécute avec les droits de l'utilisateur, et comme le propriétaire peut re-partager ses objets à discrétion, le malware le peut aussi. Le MAC contre précisément ce risque : les labels sont imposés par le système et ni l'utilisateur ni ses programmes ne peuvent déclasser une information ou étendre les accès. RBAC et ABAC centralisent les décisions et ne donnent pas ce pouvoir discrétionnaire au propriétaire.",
+      difficulte: 3
+    },
+    {
+      q: "Un système militaire applique des étiquettes (Secret, Très Secret) aux documents et aux utilisateurs ; un analyste habilité Secret ne peut pas lire un document Très Secret, même si son collègue propriétaire du document le souhaite. Quel modèle est en place ?",
+      choix: [
+        "DAC, avec des ACL renforcées",
+        "MAC : le système impose la politique via les labels, le propriétaire n'a pas voix au chapitre",
+        "RBAC hiérarchique",
+        "Risk-based access control"
+      ],
+      reponse: 1,
+      explication:
+        "Deux indices signent le MAC : les labels de classification appliqués aux sujets et aux objets, et l'impossibilité pour le propriétaire de passer outre — la politique est imposée par le système (nondiscretionary, lattice-based). C'est exactement l'inverse du DAC. Le RBAC hiérarchique organise des rôles, pas des niveaux de classification avec dominance, et le risk-based évalue le contexte, pas des habilitations.",
+      difficulte: 1
+    },
+    {
+      q: "Votre déploiement RBAC compte désormais 900 rôles pour 1 100 employés, à force de créer un rôle par exception (par projet, par site, par horaire). Comment s'appelle ce phénomène et quelle évolution est la PLUS pertinente ?",
+      choix: [
+        "Privilege creep ; lancer des revues d'accès",
+        "Role explosion ; évoluer vers l'ABAC, qui exprime les exceptions par des attributs et non par de nouveaux rôles",
+        "Toxic combination ; appliquer la separation of duties",
+        "Roles mining ; supprimer tous les rôles inutilisés"
+      ],
+      reponse: 1,
+      explication:
+        "Quand chaque combinaison de contexte devient un rôle, on subit la 'role explosion' : le RBAC perd son avantage de simplicité administrative. L'ABAC résout élégamment le problème en exprimant les conditions (projet, site, horaire, appareil) comme des attributs de politiques dynamiques, au lieu de multiplier les rôles statiques. Le privilege creep est l'accumulation de droits par un individu, la toxic combination un cumul de droits incompatibles, et le role mining une technique de découverte de rôles — aucun ne décrit la prolifération de rôles.",
+      difficulte: 2
+    },
+    {
+      q: "Vous devez implémenter la politique suivante : « Un prestataire externe ne peut accéder au dépôt de code QUE depuis un poste géré par l'entreprise, pendant les heures ouvrées, et si son contrat est actif dans l'outil RH ». Quel mécanisme d'autorisation choisir ?",
+      choix: [
+        "RBAC avec un rôle 'prestataire'",
+        "ABAC : la politique combine des attributs du sujet, de l'environnement et une donnée RH évaluée dynamiquement",
+        "DAC : le responsable du dépôt gère les accès",
+        "MAC avec un label 'prestataire'"
+      ],
+      reponse: 1,
+      explication:
+        "La règle mêle des attributs du sujet (statut contractuel issu de la RH), de l'environnement (heures ouvrées, poste géré) et de la ressource (le dépôt) : c'est la définition de l'ABAC, où un PDP évalue dynamiquement ces attributs à chaque demande. Un simple rôle RBAC ne capture ni l'horaire ni l'état du poste ni la fin de contrat en temps réel ; le DAC repose sur des décisions manuelles du propriétaire ; le MAC classe des niveaux de sensibilité, pas des conditions contextuelles.",
+      difficulte: 2
+    },
+    {
+      q: "Un pare-feu applique la même liste de règles à tous les paquets, quel que soit l'utilisateur, et termine par un refus implicite. Quel modèle de contrôle d'accès illustre-t-il ?",
+      choix: [
+        "Rule-based access control avec implicit deny",
+        "RBAC, car les règles forment des rôles",
+        "DAC, car l'administrateur possède le pare-feu",
+        "ABAC, car l'adresse IP est un attribut"
+      ],
+      reponse: 0,
+      explication:
+        "Le rule-based access control applique des règles globales identiques pour tous les sujets, sans considération d'identité ou de rôle — le pare-feu en est l'exemple canonique, avec l'implicit deny (tout ce qui n'est pas explicitement autorisé est refusé) en règle finale. Ce ne sont pas des rôles métier (RBAC), le propriétaire n'accorde pas d'accès discrétionnaires (DAC), et même si une IP peut être vue comme un attribut, une ACL de pare-feu statique n'est pas un moteur de politiques ABAC.",
+      difficulte: 1
+    },
+    {
+      q: "Quel est l'objectif FINAL d'une stratégie d'accès Just-In-Time (JIT) pour les administrateurs ?",
+      choix: [
+        "Accélérer la connexion des administrateurs",
+        "Tendre vers le zéro privilège permanent : les droits élevés n'existent que pendant la tâche, puis disparaissent",
+        "Supprimer le besoin de MFA pour les comptes à privilèges",
+        "Remplacer les revues d'accès périodiques"
+      ],
+      reponse: 1,
+      explication:
+        "Le JIT vise le 'zero standing privileges' : au lieu de comptes administrateurs dotés de droits permanents — cibles idéales en cas de vol d'identifiants —, les privilèges sont accordés à la demande, pour une durée limitée, souvent après approbation, puis automatiquement retirés. La fenêtre d'attaque se réduit drastiquement. Le JIT complète le MFA et les revues d'accès, il ne les remplace pas, et son but n'est pas la commodité.",
+      difficulte: 2
+    },
+    {
+      q: "Votre solution PAM crée un compte administrateur éphémère à la demande, valable une heure, puis le supprime automatiquement. Quelle approche est mise en œuvre ?",
+      choix: [
+        "Le password vaulting classique",
+        "Le provisioning JIT de comptes éphémères (broker and remove)",
+        "La rotation de secrets à intervalle fixe",
+        "La délégation Kerberos contrainte"
+      ],
+      reponse: 1,
+      explication:
+        "Créer un compte à privilèges à la volée pour une tâche, puis le détruire, est une forme de JIT dite 'broker and remove' (ou comptes éphémères) : aucun compte privilégié permanent n'existe entre deux usages, ce qui élimine les privilèges dormants. Le vaulting conserve des comptes permanents dont il protège les mots de passe ; la rotation change des secrets de comptes qui, eux, persistent ; la délégation Kerberos contrainte est un mécanisme technique sans rapport avec le cycle de vie des comptes.",
+      difficulte: 2
+    },
+    {
+      q: "Comment une organisation devrait-elle gérer son compte « break-glass » d'administration d'urgence ?",
+      choix: [
+        "Le supprimer : il contredit le principe du moindre privilège",
+        "Identifiants scellés en coffre, MFA exclu si l'IdP peut être en panne, alertes et audit systématiques à chaque usage, rotation après chaque utilisation",
+        "Le confier au RSSI qui en mémorise le mot de passe",
+        "L'utiliser au quotidien pour éviter que le mot de passe n'expire"
+      ],
+      reponse: 1,
+      explication:
+        "Le compte break-glass sert quand tout le reste est en panne (IdP, MFA, PAM) : ses identifiants sont conservés hors ligne sous scellé, son usage doit déclencher une alerte immédiate et un audit complet, et ses secrets sont changés après chaque utilisation. Le lier au MFA de l'IdP le rendrait inutilisable précisément quand on en a besoin. Le supprimer expose à une perte totale d'administration ; le confier à la mémoire d'une personne crée un point unique de défaillance humain ; l'utiliser au quotidien détruit sa valeur d'exception et noie les alertes.",
+      difficulte: 3
+    },
+    {
+      q: "Trois administrateurs de bases de données utilisent le même compte 'sa'. Quelle configuration PAM restaure le MIEUX l'accountability sans supprimer le compte ?",
+      choix: [
+        "Communiquer le mot de passe par messagerie chiffrée",
+        "Coffre-fort PAM : chaque administrateur s'authentifie individuellement (avec MFA), obtient le mot de passe ou une session injectée, la session est enregistrée et le mot de passe est changé après chaque utilisation",
+        "Changer le mot de passe chaque mois et l'afficher dans la salle serveur",
+        "Interdire l'usage du compte et attendre la refonte de l'application"
+      ],
+      reponse: 1,
+      explication:
+        "Le check-out via un coffre PAM rattache chaque usage du compte partagé à une identité individuelle authentifiée : qui a pris le mot de passe, quand, pour quelle session (enregistrée), et la rotation immédiate après restitution empêche la réutilisation hors du circuit. L'accountability est restaurée même si le compte technique reste partagé. Les réponses A et C perpétuent l'anonymat, et la D ignore le besoin opérationnel immédiat.",
+      difficulte: 2
+    },
+    {
+      q: "Pour une application bancaire en ligne, quelle combinaison de contrôles de session est la PLUS appropriée ?",
+      choix: [
+        "Session illimitée tant que l'utilisateur est actif, pour le confort",
+        "Timeout d'inactivité court, durée de session absolue maximale, et ré-authentification avant toute opération sensible",
+        "Uniquement un timeout d'inactivité de 24 heures",
+        "Déconnexion uniquement à la fermeture du navigateur"
+      ],
+      reponse: 1,
+      explication:
+        "La gestion de session robuste combine trois contrôles : un timeout d'inactivité court (l'utilisateur qui s'éloigne est déconnecté), une durée de vie absolue de la session (même active, elle expire et limite l'exploitation d'un jeton volé), et la ré-authentification (step-up) avant les opérations sensibles comme un virement. Les autres options laissent des sessions exploitables indéfiniment — une session détournée resterait valide tant que l'attaquant génère de l'activité.",
+      difficulte: 2
+    },
+    {
+      q: "Un attaquant a volé le cookie de session d'un utilisateur via un script malveillant et rejoue la session depuis son propre poste. Quelles mesures auraient le MIEUX limité cette attaque ?",
+      choix: [
+        "Allonger la durée de vie du cookie pour éviter les reconnexions",
+        "Attributs Secure et HttpOnly sur le cookie, régénération de l'identifiant de session après connexion, et liaison de la session au contexte du client",
+        "Stocker l'identifiant de session dans l'URL",
+        "Utiliser le même identifiant de session avant et après l'authentification"
+      ],
+      reponse: 1,
+      explication:
+        "HttpOnly rend le cookie inaccessible aux scripts (contre le vol par XSS), Secure impose HTTPS (contre l'interception), la régénération de l'ID à la connexion contre la fixation de session, et la liaison au contexte (empreinte de l'appareil, adresse, ré-évaluation continue) rend le rejeu depuis un autre poste détectable. Les réponses A et D aggravent le risque, et placer l'ID en URL l'expose dans les journaux, l'historique et les referrers — l'exact contraire d'une bonne pratique.",
+      difficulte: 2
+    },
+    {
+      q: "Votre entreprise ouvre son portail fournisseurs aux 2 000 employés d'un partenaire. Le partenaire exige que ses employés utilisent leurs identifiants internes existants et que les départs soient immédiatement répercutés. Quelle architecture répond le MIEUX à ces exigences ?",
+      choix: [
+        "Créer 2 000 comptes locaux et envoyer les mots de passe au partenaire",
+        "Fédération B2B : le partenaire reste l'IdP de ses employés, votre portail agit en SP et fait confiance à ses assertions",
+        "Un compte générique partagé 'partenaire' avec un mot de passe fort",
+        "Synchroniser une copie de l'annuaire du partenaire chaque trimestre"
+      ],
+      reponse: 1,
+      explication:
+        "La fédération B2B répond aux deux exigences : les employés du partenaire s'authentifient auprès de LEUR IdP avec leurs identifiants habituels (jamais transmis à votre organisation), et dès qu'un compte est désactivé chez le partenaire, l'accès au portail cesse — le deprovisioning reste là où l'information existe, chez l'employeur. Les comptes locaux créent une charge de gestion et un risque de comptes orphelins, le compte partagé détruit l'accountability, et une synchronisation trimestrielle laisse des accès actifs des semaines après un départ.",
+      difficulte: 2
+    },
+    {
+      q: "Dans une fédération avec un partenaire, quel document ou mécanisme établit les exigences mutuelles (niveaux d'assurance, attributs échangés, obligations de sécurité) AVANT l'échange technique d'assertions ?",
+      choix: [
+        "Le certificat TLS du Service Provider",
+        "Un accord de fédération (trust agreement) négocié entre les organisations, complété par l'échange de métadonnées",
+        "Le fichier de zone DNS",
+        "La politique de mots de passe locale"
+      ],
+      reponse: 1,
+      explication:
+        "La fédération est d'abord une relation de confiance organisationnelle : un accord définit les niveaux d'assurance d'authentification exigés (par ex. MFA obligatoire), les attributs transmis, les responsabilités en cas d'incident et les obligations de deprovisioning ; l'échange de métadonnées SAML/OIDC (certificats de signature, endpoints) en est la traduction technique. Le certificat TLS sécurise le canal mais ne définit aucune exigence mutuelle, et les réponses C et D sont hors sujet. À l'examen, pensez gouvernance avant technique.",
+      difficulte: 3
+    },
+    {
+      q: "Des millions d'identifiants issus d'une fuite chez un site tiers sont rejoués tels quels contre votre portail, avec un taux de réussite de 1 %. Puis un autre attaquant essaie « Printemps2026! » sur des milliers de vos comptes. Comment nommer ces DEUX attaques, dans l'ordre ?",
+      choix: [
+        "Password spraying, puis credential stuffing",
+        "Credential stuffing, puis password spraying",
+        "Brute force, puis rainbow table",
+        "Phishing, puis MFA fatigue"
+      ],
+      reponse: 1,
+      explication:
+        "Le credential stuffing rejoue des couples identifiant/mot de passe volés ailleurs, en pariant sur la réutilisation des mots de passe entre sites. Le password spraying inverse la logique : un seul mot de passe probable, essayé sur un grand nombre de comptes, pour rester sous les seuils de verrouillage par compte. Les parades diffèrent : MFA et vérification des mots de passe contre les bases de fuites pour le premier ; détection transversale des échecs et bannissement des mots de passe communs pour le second.",
+      difficulte: 2
+    },
+    {
+      q: "Pourquoi le password spraying échappe-t-il souvent aux politiques classiques de verrouillage de compte, et quel contrôle le détecte le MIEUX ?",
+      choix: [
+        "Il utilise des mots de passe chiffrés ; seul un HSM le détecte",
+        "Il ne fait qu'un ou deux essais par compte, sous le seuil de verrouillage ; une détection centralisée des échecs sur l'ensemble des comptes (et depuis les mêmes sources) le révèle",
+        "Il passe par le protocole Kerberos, invisible dans les journaux",
+        "Il ne génère aucun échec d'authentification"
+      ],
+      reponse: 1,
+      explication:
+        "Le verrouillage de compte compte les échecs PAR COMPTE ; le spraying distribue les essais sur des milliers de comptes avec un ou deux mots de passe, restant sous chaque seuil individuel. La détection doit donc être transversale : un pic d'échecs répartis sur de nombreux comptes, souvent depuis les mêmes adresses ou avec le même mot de passe, visible dans un SIEM. Les réponses A et C sont techniquement fausses et l'attaque génère bien des échecs — mais dispersés.",
+      difficulte: 3
+    },
+    {
+      q: "Quelle exigence de gouvernance est la PLUS appropriée pour les revues d'accès (access reviews) des comptes à privilèges par rapport aux comptes standard ?",
+      choix: [
+        "Les mêmes revues annuelles pour tous les comptes, par équité",
+        "Des revues plus fréquentes et plus approfondies pour les comptes à privilèges, menées par les managers ou propriétaires de ressources, avec retrait immédiat des droits non justifiés",
+        "Aucune revue pour les comptes à privilèges, car le PAM suffit",
+        "Des revues uniquement lors du départ de l'employé"
+      ],
+      reponse: 1,
+      explication:
+        "Le risque porté par un compte à privilèges est démesuré par rapport à un compte standard : les revues doivent y être plus fréquentes (souvent trimestrielles, contre annuelles pour les comptes standard), vérifier la justification métier de chaque droit, et aboutir au retrait immédiat des accès injustifiés — c'est le contrôle qui détecte le privilege creep et les comptes orphelins. Le PAM protège l'usage des comptes mais ne juge pas de la légitimité des droits ; attendre le départ laisse des années d'exposition.",
+      difficulte: 1
+    },
+    {
+      q: "Un développeur quitte l'entreprise un vendredi en mauvais termes. Concernant ses accès, que devriez-vous faire EN PREMIER ?",
+      choix: [
+        "Supprimer immédiatement son compte et toutes ses données",
+        "Désactiver son compte dès l'annonce du départ, avant même l'entretien de sortie",
+        "Attendre la revue d'accès trimestrielle",
+        "Transférer son compte à son remplaçant pour assurer la continuité"
+      ],
+      reponse: 1,
+      explication:
+        "Pour un départ, surtout conflictuel, on DÉSACTIVE le compte immédiatement — idéalement pendant que la personne est en entretien de sortie — pour couper tout accès sans détruire les données, les clés de chiffrement ni les éléments nécessaires aux enquêtes ; la suppression définitive intervient plus tard, selon la politique de rétention. Supprimer d'emblée fait perdre des données et des preuves ; attendre la revue trimestrielle laisse une fenêtre d'attaque béante ; transférer un compte nominatif à un tiers détruit l'accountability.",
+      difficulte: 1
     }
   ],
 

@@ -1599,6 +1599,376 @@ window.CISSP_DATA.domains[2] = {
   ],
 
   // ────────────────────────────────────────────────────────────
+  // QUIZ EN — questions en anglais, style examen CISSP CAT
+  // (q et choix en anglais authentique ; explication en français)
+  // ────────────────────────────────────────────────────────────
+  quizEn: [
+    {
+      q: "Which of the following BEST describes the primary purpose of data classification?",
+      choix: [
+        "To satisfy external audit requirements",
+        "To determine the level of protection required based on the value and sensitivity of the data",
+        "To reduce storage costs by identifying obsolete data",
+        "To assign encryption keys to each dataset"
+      ],
+      reponse: 1,
+      explication:
+        "La classification attribue à chaque donnée un niveau de sensibilité fondé sur sa valeur et l'impact d'une compromission, ce qui détermine ensuite le niveau de protection requis. Les audits, la réduction des coûts de stockage et l'attribution de clés sont au mieux des bénéfices secondaires ou des contrôles en aval, pas l'objectif premier.",
+      difficulte: 1
+    },
+    {
+      q: "Who is ULTIMATELY accountable for the protection of an organization's data assets?",
+      choix: [
+        "The data custodian who performs daily backups",
+        "The security administrator who configures the controls",
+        "The data owner, typically a senior manager or department head",
+        "The end users who handle the data daily"
+      ],
+      reponse: 2,
+      explication:
+        "Le data owner — typiquement un cadre dirigeant — porte l'accountability ultime de la protection de la donnée : il classifie, autorise l'accès et s'assure que les contrôles sont en place. Il peut déléguer les tâches (au custodian, à l'administrateur), mais jamais la responsabilité. Les utilisateurs n'ont qu'une responsabilité d'usage conforme.",
+      difficulte: 1
+    },
+    {
+      q: "A company hires a third-party firm to process customer data for targeted analytics. Under GDPR, which role does the third-party firm assume?",
+      choix: ["Data controller", "Data processor", "Data owner", "Data protection officer"],
+      reponse: 1,
+      explication:
+        "Le tiers traite les données pour le compte et sous la direction de l'entreprise cliente : c'est le data processor. L'entreprise, qui décide quelles données traiter, pourquoi et comment, reste le data controller. Le DPO est un rôle interne de supervision de la conformité, et « data owner » est un rôle de gouvernance interne, pas un rôle GDPR.",
+      difficulte: 1
+    },
+    {
+      q: "Which of the following BEST distinguishes marking from labeling?",
+      choix: [
+        "Marking is human-readable while labeling is system-readable",
+        "Marking applies to paper documents only while labeling applies to digital files",
+        "Marking is mandatory while labeling is optional",
+        "Marking is applied by users while labeling is applied by the data owner"
+      ],
+      reponse: 0,
+      explication:
+        "Le marking associe des attributs de sécurité sous forme lisible par l'humain (tampon, bandeau) et guide les processus manuels ; le labeling est lisible par le système (métadonnées, RFID, QR codes) et permet l'application automatique des politiques. Les deux s'appliquent à tous les supports, physiques comme numériques.",
+      difficulte: 2
+    },
+    {
+      q: "A server processes both Secret and Unclassified data. What classification should the organization assign to the server?",
+      choix: [
+        "Unclassified, because it is the lowest common level",
+        "Secret, because an asset inherits the classification of the most sensitive data it processes",
+        "An intermediate custom level between the two",
+        "No classification, because hardware is not classified"
+      ],
+      reponse: 1,
+      explication:
+        "Un actif hérite toujours de la classification de la donnée la plus sensible qu'il traite ou stocke : le serveur devient un actif Secret et reçoit les contrôles correspondants. Classer au niveau le plus bas exposerait les données Secret, et le matériel qui traite des données classifiées est bel et bien classifié.",
+      difficulte: 1
+    },
+    {
+      q: "An employee holds a Secret clearance and requests access to a Secret project file. What else is REQUIRED before access is granted?",
+      choix: [
+        "A Top Secret clearance as a safety margin",
+        "A signed non-disclosure agreement only",
+        "A demonstrated need-to-know and formal approval from the data owner",
+        "Nothing, since the clearance level matches the data classification"
+      ],
+      reponse: 2,
+      explication:
+        "La clearance ne suffit jamais : l'accès exige aussi le need-to-know — la donnée doit être nécessaire à la mission — et une approbation formelle impliquant le data owner. C'est le piège classique de l'examen : niveau d'habilitation égal ne signifie pas accès automatique.",
+      difficulte: 2
+    },
+    {
+      q: "Which of the following is the FIRST step an organization should take before implementing data protection controls?",
+      choix: [
+        "Deploy a network-based DLP solution",
+        "Identify and classify information and assets",
+        "Encrypt all data at rest",
+        "Purchase cyber liability insurance"
+      ],
+      reponse: 1,
+      explication:
+        "On ne protège que ce que l'on connaît : l'identification et la classification des actifs précèdent toujours le choix des contrôles. DLP, chiffrement et assurance sont des mesures qui se choisissent et se dimensionnent EN FONCTION de la classification établie — les déployer d'abord serait mettre la charrue avant les bœufs.",
+      difficulte: 1
+    },
+    {
+      q: "Which data state is the MOST difficult to protect?",
+      choix: ["Data at rest", "Data in transit", "Data in use", "Data in archive"],
+      reponse: 2,
+      explication:
+        "La donnée en cours d'utilisation est en clair en mémoire pendant son traitement : les options se limitent au patching, aux builds standardisés, à l'antimalware et à la purge des buffers. Les états at rest et in transit bénéficient du chiffrement (volumes, TLS, IPsec), bien plus robuste. L'archive n'est qu'un cas particulier du repos.",
+      difficulte: 1
+    },
+    {
+      q: "Which of the following BEST protects the confidentiality of data at rest?",
+      choix: [
+        "Role-based access control",
+        "Strong encryption of volumes and backup media",
+        "A strict password policy",
+        "Continuous access logging"
+      ],
+      reponse: 1,
+      explication:
+        "Le chiffrement fort est la meilleure protection de la confidentialité au repos : même si le support est volé ou les contrôles d'accès contournés, la donnée reste illisible. Le RBAC et les mots de passe protègent le chemin d'accès logique mais pas le support lui-même ; la journalisation est un contrôle détectif, pas préventif.",
+      difficulte: 1
+    },
+    {
+      q: "A retention policy states that all corporate email must be deleted after one year unless subject to a legal hold. Which of the following BEST describes the rationale?",
+      choix: [
+        "Older email has no business value",
+        "Retaining data longer than necessary increases legal liability and breach exposure",
+        "Storage costs grow linearly with retention time",
+        "Email backups slow down the network"
+      ],
+      reponse: 1,
+      explication:
+        "Conserver des données au-delà du nécessaire accroît la responsabilité juridique — tout e-mail conservé est produisible en justice (eDiscovery) — et augmente la surface d'exposition en cas de compromission. La règle d'or : conserver aussi longtemps que le métier ou la loi l'exige, mais pas plus. Les coûts sont secondaires face au risque juridique, et le legal hold suspend la suppression.",
+      difficulte: 2
+    },
+    {
+      q: "Which of the following BEST explains why classified data must NEVER be processed on an unclassified system?",
+      choix: [
+        "Unclassified systems lack sufficient processing power",
+        "The operating system may write memory contents into slack space, leaving hidden remnants of classified data",
+        "Software licenses prohibit mixed processing",
+        "Unclassified systems cannot run encryption software"
+      ],
+      reponse: 1,
+      explication:
+        "Certains systèmes d'exploitation remplissent le slack space — l'espace inutilisé des clusters — avec des données issues de la mémoire : des fragments de données classifiées peuvent persister sur le disque à l'insu de tous, créant une rémanence invisible sur un système non habilité. C'est un problème de data remanence, pas de performance ni de licence.",
+      difficulte: 3
+    },
+    {
+      q: "Which sanitization method renders data unrecoverable by standard software recovery tools but NOT by advanced laboratory techniques?",
+      choix: ["Erasing", "Clearing", "Purging", "Destruction"],
+      reponse: 1,
+      explication:
+        "Le clearing — réécriture des données avec un motif — protège contre la récupération par les utilitaires logiciels standards, mais des techniques de laboratoire avancées peuvent encore restaurer les données. Le purging vise l'irrécupérabilité même en laboratoire ; l'erasing (simple suppression) ne protège de rien ; la destruction élimine le support.",
+      difficulte: 2
+    },
+    {
+      q: "An organization is disposing of solid-state drives (SSDs) that contained highly sensitive data. Which method would be INEFFECTIVE?",
+      choix: ["Physical shredding", "Degaussing", "Cryptographic erasure", "Incineration"],
+      reponse: 1,
+      explication:
+        "Le degaussing applique un champ magnétique puissant : il efface bandes et disques magnétiques, mais n'a AUCUN effet sur les SSD, qui stockent l'information dans de la mémoire flash, ni sur les supports optiques. Pour un SSD : destruction physique (broyage, incinération) ou crypto-shredding. « Degaussing + SSD » est un piège récurrent de l'examen.",
+      difficulte: 1
+    },
+    {
+      q: "A company is terminating its contract with a cloud provider and wants assurance that its data cannot be recovered from the provider's infrastructure. Which of the following is the BEST approach?",
+      choix: [
+        "Request that the provider degausses all storage arrays",
+        "Cryptographic erasure: destroy the encryption keys protecting the data",
+        "Delete all files and empty the recycle bin before leaving",
+        "Ask the provider for a certificate of physical destruction of the disks"
+      ],
+      reponse: 1,
+      explication:
+        "Dans le cloud, on ne contrôle pas les supports physiques mutualisés : ni degaussing ni destruction physique ne sont réalistes pour VOS seules données. Le crypto-shredding — chiffrer les données puis détruire les clés — les rend logiquement irrécupérables où qu'elles résident. La simple suppression laisse une rémanence totale.",
+      difficulte: 2
+    },
+    {
+      q: "Which of the following BEST describes the difference between End-of-Life (EOL) and End-of-Support (EOS)?",
+      choix: [
+        "EOL is when support ends; EOS is when sales end",
+        "EOL is when the vendor stops selling the product; EOS is when the vendor stops providing patches and assistance",
+        "EOL applies to hardware only; EOS applies to software only",
+        "They are synonyms used interchangeably by vendors"
+      ],
+      reponse: 1,
+      explication:
+        "L'EOL marque la fin de la commercialisation ; l'EOS (ou EOSL) marque la fin de tout support : plus de correctifs de sécurité ni d'assistance. Les deux jalons s'appliquent au matériel comme au logiciel. Du point de vue du risque, l'EOS est le signal critique : toute vulnérabilité découverte ensuite reste ouverte à jamais.",
+      difficulte: 1
+    },
+    {
+      q: "A security manager learns that a business-critical application reaches End-of-Support in six months. What should the manager do FIRST?",
+      choix: [
+        "Wait for the first unpatched vulnerability before acting",
+        "Begin planning the migration or replacement before the EOS date",
+        "Permanently isolate the system and continue operating it",
+        "Renegotiate the license price with the vendor"
+      ],
+      reponse: 1,
+      explication:
+        "La bonne réponse managériale est proactive : planifier la migration AVANT l'échéance, tant que le support existe encore. Attendre une vulnérabilité est réactif et dangereux ; l'isolation n'est qu'une mesure compensatoire temporaire, pas une stratégie ; le prix des licences est hors sujet sécurité.",
+      difficulte: 2
+    },
+    {
+      q: "Which DLP deployment is BEST suited to prevent users from copying sensitive files to USB drives?",
+      choix: ["Network-based DLP", "Endpoint-based DLP", "Cloud-based DLP", "A web application firewall"],
+      reponse: 1,
+      explication:
+        "La copie vers un support amovible se produit sur le poste : seul le DLP endpoint-based, exécuté localement, peut la bloquer (comme l'impression). Le DLP réseau n'inspecte que le trafic en bordure, le DLP cloud protège les environnements cloud natifs, et le WAF protège les applications web — aucun ne voit le port USB.",
+      difficulte: 2
+    },
+    {
+      q: "An organization wants its security policies enforced consistently when employees access sanctioned cloud applications. Which solution BEST meets this requirement?",
+      choix: [
+        "A digital rights management platform",
+        "A cloud access security broker (CASB)",
+        "A network intrusion detection system",
+        "A security information and event management (SIEM) system"
+      ],
+      reponse: 1,
+      explication:
+        "Le CASB se place logiquement entre les utilisateurs et les ressources cloud pour appliquer les politiques de sécurité et de conformité de l'organisation, avec ses quatre piliers : visibilité, sécurité des données, détection des menaces, conformité. Le DRM protège le copyright, l'IDS détecte les intrusions réseau et le SIEM centralise les journaux.",
+      difficulte: 1
+    },
+    {
+      q: "Which of the following is a core pillar of a CASB?",
+      choix: ["Non-repudiation", "Data security", "Load balancing", "Patch management"],
+      reponse: 1,
+      explication:
+        "Les quatre piliers du CASB sont : visibilité, sécurité des données (data security), détection des menaces et conformité. La non-répudiation est un service de sécurité générique, le load balancing une fonction réseau et le patch management une pratique d'exploitation — aucun n'est un pilier du CASB.",
+      difficulte: 2
+    },
+    {
+      q: "A research partner must receive a customer dataset in a form where individual identities can NEVER be reconstructed, even by the sender. Which technique BEST meets this requirement?",
+      choix: [
+        "Pseudonymization with a protected mapping table",
+        "Tokenization backed by a secure vault",
+        "Anonymization using randomized masking",
+        "Encryption with a customer-managed key"
+      ],
+      reponse: 2,
+      explication:
+        "Seule l'anonymisation — notamment par randomized masking bien réalisé — est permanente et irréversible : les identités sont définitivement supprimées, y compris pour l'émetteur. Pseudonymisation, tokenisation et chiffrement sont réversibles pour qui détient la table, le vault ou la clé : ce sont des quasi-anonymisations.",
+      difficulte: 2
+    },
+    {
+      q: "In a payment system using tokenization, why does compromising the point-of-sale terminal NOT expose customers' card numbers?",
+      choix: [
+        "The terminal stores card numbers encrypted with a merchant key",
+        "The terminal only handles random tokens; the real card numbers remain in a secure vault",
+        "The terminal hashes the card numbers irreversibly",
+        "Card numbers are pseudonymized locally on the terminal"
+      ],
+      reponse: 1,
+      explication:
+        "Avec la tokenisation, le terminal ne manipule qu'un jeton aléatoire sans valeur intrinsèque ; la correspondance avec le vrai numéro de carte n'existe que dans le vault de tokenisation sécurisé. Le numéro réel ne transite jamais par le point de vente — sa compromission ne livre donc que des jetons inutilisables ailleurs.",
+      difficulte: 3
+    },
+    {
+      q: "An organization adopts a NIST control baseline and removes all controls related to wireless networking because no system in scope uses wireless. Which process does this describe?",
+      choix: ["Tailoring parameters", "Scoping", "Hardening", "Categorization"],
+      reponse: 1,
+      explication:
+        "Retirer d'une baseline les contrôles qui ne s'appliquent pas aux systèmes visés, c'est le scoping. Il fait partie du processus plus large de tailoring, qui ajoute l'ajustement des paramètres définis par l'organisation et les contrôles compensatoires — mais l'action décrite ici est précisément le scoping. Le hardening durcit une configuration, la categorization évalue l'impact.",
+      difficulte: 2
+    },
+    {
+      q: "Which of the following BEST describes tailoring as it goes BEYOND scoping?",
+      choix: [
+        "Selecting the initial control baseline",
+        "Removing controls that do not apply to in-scope systems",
+        "Adjusting controls to the mission, specifying organization-defined parameters, and selecting compensating controls",
+        "Documenting the asset inventory"
+      ],
+      reponse: 2,
+      explication:
+        "Le tailoring englobe le scoping mais va plus loin : il ajuste l'ensemble des contrôles à la mission de l'organisation — identification des contrôles communs, spécification des paramètres définis par l'organisation, sélection de contrôles compensatoires. Le scoping seul se limite à retirer l'inapplicable.",
+      difficulte: 3
+    },
+    {
+      q: "A country's law requires that all personal data of its citizens be stored and processed within its national borders. Which concept does this describe?",
+      choix: ["Data sovereignty", "Data residency", "Data localization", "Data minimization"],
+      reponse: 2,
+      explication:
+        "La data localization est l'exigence LÉGALE de conserver (et parfois traiter) les données dans les frontières du pays — comme en Russie ou en Chine. La sovereignty est le principe général selon lequel la donnée est soumise aux lois du pays où elle réside ; la residency est le CHOIX du lieu de stockage par l'organisation ; la minimization limite la collecte.",
+      difficulte: 2
+    },
+    {
+      q: "A European company stores personal data with a US cloud provider in an EU region. Which measure BEST mitigates the risk of a CLOUD Act request conflicting with GDPR?",
+      choix: [
+        "Relying solely on the EU location of the cloud region",
+        "Encrypting the data with customer-managed keys, combined with strong contractual clauses",
+        "Transferring GDPR compliance responsibility to the cloud provider",
+        "Prohibiting all cloud usage for personal data"
+      ],
+      reponse: 1,
+      explication:
+        "Le CLOUD Act peut contraindre un fournisseur américain à remettre des données même stockées en Europe : la localisation seule ne protège pas. Le chiffrement avec des clés détenues par le client rend les données remises inexploitables, complété par des clauses contractuelles. La responsabilité du controller ne se transfère jamais, et bannir le cloud est disproportionné.",
+      difficulte: 3
+    },
+    {
+      q: "Which of the following BEST explains why an accurate asset inventory is a prerequisite for security management?",
+      choix: [
+        "It allows the finance department to depreciate assets correctly",
+        "An organization cannot protect assets it does not know exist",
+        "It speeds up procurement of replacement hardware",
+        "It is required by all software license agreements"
+      ],
+      reponse: 1,
+      explication:
+        "Le principe fondateur de la gestion des actifs : on ne peut pas protéger un actif dont on ignore l'existence. L'inventaire — matériel, logiciels, licences, VM, données — est le point de départ de la classification, du patching, de la surveillance et du déprovisioning. Les bénéfices comptables ou d'achat sont accessoires.",
+      difficulte: 1
+    },
+    {
+      q: "Despite maintaining a manually updated asset register, an audit finds several unknown servers on the network. Which control BEST addresses this gap?",
+      choix: [
+        "A more detailed annual manual inventory campaign",
+        "Automated and continuous asset discovery feeding the CMDB",
+        "Disciplinary action against system administrators",
+        "Disabling all unused switch ports"
+      ],
+      reponse: 1,
+      explication:
+        "Un inventaire déclaratif se périme entre deux campagnes. La découverte automatisée et continue — scans réseau, agents, intégration DHCP et annuaire — détecte en permanence les actifs non déclarés et alimente la CMDB. L'inventaire annuel reste ponctuel, la sanction ne corrige pas le processus, et couper des ports n'inventorie rien.",
+      difficulte: 2
+    },
+    {
+      q: "During secure provisioning of a new virtual machine, which step ensures accountability throughout the asset's lifecycle?",
+      choix: [
+        "Assigning a static IP address",
+        "Taking an initial snapshot",
+        "Registering the VM in the inventory and tagging it with its owner, classification, and environment",
+        "Installing endpoint protection software"
+      ],
+      reponse: 2,
+      explication:
+        "Le provisioning sécurisé exige d'enregistrer l'actif dans l'inventaire et de le taguer dès sa création — owner, classification, environnement. Sans owner assigné, personne n'est responsable du patching ni du déprovisioning : la VM risque de devenir orpheline, donc non maintenue. IP, snapshot et antivirus sont utiles mais n'établissent pas la responsabilité.",
+      difficulte: 2
+    },
+    {
+      q: "Which of the following BEST describes the PRIMARY risk created by shadow IT?",
+      choix: [
+        "Increased software licensing costs",
+        "Corporate data flows into services that are not inventoried, assessed, or protected by organizational controls",
+        "Reduced network bandwidth for approved applications",
+        "Employees becoming more productive than planned"
+      ],
+      reponse: 1,
+      explication:
+        "Le shadow IT — services et actifs adoptés sans approbation de l'IT — crée avant tout un problème de VISIBILITÉ : des données d'entreprise partent vers des services ni inventoriés, ni évalués, ni couverts par les contrôles (DLP, sauvegarde, conformité). Les coûts et la bande passante sont des préoccupations mineures en comparaison.",
+      difficulte: 1
+    },
+    {
+      q: "A CISO wants to discover which unsanctioned cloud services employees are actually using. Which tool BEST provides this visibility?",
+      choix: [
+        "A cloud access security broker (CASB)",
+        "A digital rights management solution",
+        "A host-based intrusion prevention system",
+        "A password manager with SSO integration"
+      ],
+      reponse: 0,
+      explication:
+        "La visibilité est le premier pilier du CASB : en analysant les flux vers le cloud, il révèle les services réellement utilisés — y compris le shadow IT — puis permet d'y appliquer les politiques. Le DRM protège le copyright, le HIPS protège un hôte, et le gestionnaire de mots de passe ne voit que les services déclarés.",
+      difficulte: 2
+    },
+    {
+      q: "When decommissioning a server that stored Confidential data, which sequence BEST describes a defensible process?",
+      choix: [
+        "Power off the server and ship it to a recycler immediately",
+        "Remove it from the inventory, then delete all user accounts",
+        "Revoke its credentials and certificates, sanitize the media per policy and classification, update the inventory, and document the disposal",
+        "Reformat the drives and reinstall the operating system before resale"
+      ],
+      reponse: 2,
+      explication:
+        "Un déprovisioning défendable enchaîne : révocation des accès et certificats, assainissement des supports selon la classification et la politique (NIST SP 800-88), mise à jour de l'inventaire, et documentation de l'élimination — la trace écrite rend la destruction légalement défendable. Expédier ou reformater sans assainir laisse une rémanence exploitable.",
+      difficulte: 3
+    }
+  ],
+
+  // ────────────────────────────────────────────────────────────
   // FLASHCARDS
   // ────────────────────────────────────────────────────────────
   flashcards: [
