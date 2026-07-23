@@ -1060,6 +1060,36 @@ window.CISSP_DATA.domains[7] = {
             "Terminons par la protection du personnel. En voyage, les appareils ne doivent pas contenir de données sensibles, le wi-fi gratuit est à considérer comme hostile, et l'entreprise doit fournir un VPN ; dans certains pays, des dispositifs de surveillance peuvent même être installés dans les chambres d'hôtel. La sensibilisation couvre les menaces internes, les risques de sur-partage sur les réseaux sociaux qui alimentent l'ingénierie sociale, et les attaques par MFA fatigue, où l'attaquant bombarde de notifications en espérant une approbation : la consigne est de ne jamais approuver une demande non sollicitée et de la signaler. Les systèmes de duress permettent de donner l'alerte discrètement, avec un mot de code pour distinguer les fausses alertes, particulièrement utiles pour le personnel isolé. Et dans toute gestion d'urgence, la sécurité des personnes prime sur tout le reste."
         },
         {
+          type: "standard",
+          titre: "Duress codes : alerter sous la contrainte",
+          points: [
+            "Duress : agir sous la menace directe d'un agresseur (arme, otage, chantage)",
+            "Duress code : mot, phrase ou geste convenu qui déclenche une alerte SILENCIEUSE",
+            "Exemples : phrase anodine au téléphone, PIN alternatif qui ouvre ET alerte, bouton panique",
+            "Règle d'or : coopérer en apparence, ne jamais résister — la vie humaine d'abord",
+            "Coercition/extorsion d'employés : canal de signalement confidentiel, sans crainte de sanction",
+            "Former et tester régulièrement : un code jamais répété sera oublié sous stress"
+          ],
+          narration:
+            "Approfondissons la notion de duress, la contrainte. Un employé sous duress agit sous la menace directe d'un agresseur : une arme pointée, un proche pris en otage, un chantage. Le duress code est un mot, une phrase ou un geste convenu à l'avance qui déclenche une alerte silencieuse sans éveiller les soupçons de l'agresseur : une phrase anodine glissée au téléphone, un code PIN alternatif qui ouvre bien la porte mais prévient la sécurité, ou un bouton panique discret. La règle d'or est absolue : l'employé coopère en apparence et ne résiste jamais, car la vie humaine passe avant tout actif. Pensez aussi à la coercition de longue durée : un employé victime d'extorsion ou de chantage doit disposer d'un canal de signalement confidentiel, sans crainte de sanction, sinon il cédera à l'attaquant en silence. Enfin, ces procédures doivent être enseignées et répétées régulièrement, car un code jamais exercé sera oublié dans le stress d'une situation réelle.",
+          astuce: "💡 Conseil examen : face à une menace physique, la bonne réponse combine toujours coopération apparente et alerte discrète. Toute option de résistance ou de confrontation est fausse — la vie humaine prime."
+        },
+        {
+          type: "standard",
+          titre: "Sécurité en voyage et protection à l'étranger",
+          points: [
+            "Appareils jetables ou de prêt (burner/loaner devices) : données minimales, réinitialisés au retour",
+            "Avant le départ : patchs à jour, chiffrement intégral, formation à la sûreté, briefing pays",
+            "Sur place : VPN systématique, wi-fi public hostile, appareils jamais laissés sans surveillance",
+            "Douanes : certains pays peuvent exiger le déverrouillage — le chiffrement ne protège pas d'une injonction légale",
+            "Collaborateurs à l'étranger : itinéraires partagés, check-ins réguliers, point de contact, plan d'évacuation",
+            "Zones à haut risque : executive protection, veille géopolitique, assistance médicale et rapatriement"
+          ],
+          narration:
+            "La protection du personnel en déplacement mérite un vrai programme. Pour les destinations sensibles, la meilleure pratique est l'appareil jetable ou de prêt : un téléphone et un ordinateur dédiés au voyage, contenant le strict minimum de données, entièrement réinitialisés au retour. Avant le départ, on applique tous les correctifs, on active le chiffrement intégral du disque, et surtout on forme le voyageur : briefing sur les risques du pays, consignes de comportement et procédures d'urgence. Sur place, le VPN est systématique, le wi-fi public est considéré comme hostile, et les appareils ne sont jamais laissés sans surveillance, pas même dans le coffre de l'hôtel. Point souvent ignoré : au passage des douanes, certains pays peuvent légalement exiger le déverrouillage des appareils ; le chiffrement ne protège pas contre une injonction, d'où l'intérêt de ne transporter aucune donnée sensible. Pour les collaborateurs expatriés ou en mission, l'organisation maintient des itinéraires partagés, des check-ins réguliers, un point de contact d'urgence et un plan d'évacuation. Et pour les dirigeants en zone à haut risque, on ajoute l'executive protection, la veille géopolitique et l'assistance médicale avec rapatriement.",
+          astuce: "💡 Conseil examen : pour un voyage en pays à risque, la MEILLEURE réponse est presque toujours l'appareil de prêt avec données minimales — pas le chiffrement seul, qui ne résiste pas à une fouille frontalière légale."
+        },
+        {
           type: "question",
           titre: "Contrôle de connaissance",
           narration:

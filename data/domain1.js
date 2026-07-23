@@ -284,7 +284,7 @@ window.CISSP_DATA.domains[1] = {
     {
       id: "d1-l3",
       titre: "Lois, réglementation, conformité et types d'enquêtes",
-      duree: 13,
+      duree: 15,
       slides: [
         {
           type: "intro",

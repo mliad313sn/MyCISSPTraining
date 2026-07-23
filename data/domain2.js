@@ -270,6 +270,36 @@ window.CISSP_DATA.domains[2] = {
             "Deux principes gouvernent l'accès aux actifs. Le need-to-know impose qu'une personne n'accède à une donnée que si sa mission l'exige absolument. Le moindre privilège, least privilege, va dans le même sens pour les droits : uniquement les privilèges nécessaires à la tâche, et rien de plus. Ces principes s'appliquent dans le cadre d'une gestion d'actifs rigoureuse, qui commence toujours par un inventaire complet : les actifs tangibles comme le matériel, et les actifs intangibles comme les logiciels, les brevets, les droits d'auteur ou la réputation de l'entreprise."
         },
         {
+          type: "standard",
+          titre: "Inventaire des actifs : CMDB, découverte automatisée, ITAM",
+          points: [
+            "On ne peut pas protéger un actif dont on ignore l'existence",
+            "Inventaire = matériel, logiciels, licences, machines virtuelles, données",
+            "CMDB : base de données de configuration, source de vérité des actifs et de leurs relations",
+            "Découverte automatisée (scans réseau, agents) : détecte les actifs non déclarés",
+            "ITAM : gestion du cycle de vie complet, de l'acquisition à la mise au rebut",
+            "Tagging : étiquettes physiques (code-barres, RFID) et logiques (owner, classification, environnement)"
+          ],
+          narration:
+            "Le provisionnement sécurisé des actifs commence par une évidence trop souvent négligée : on ne peut pas protéger un actif dont on ignore l'existence. L'inventaire doit couvrir le matériel, les logiciels et leurs licences, les machines virtuelles et conteneurs, et les données elles-mêmes. La CMDB, Configuration Management Database, sert de source de vérité : elle recense les actifs, leurs configurations et surtout leurs relations, ce qui permet d'évaluer l'impact d'un incident ou d'un changement. Mais un inventaire déclaratif se périme vite : la découverte automatisée, par scans réseau ou par agents installés sur les postes, détecte en continu les actifs qui apparaissent sans avoir été déclarés. L'ensemble s'inscrit dans l'IT Asset Management, l'ITAM, qui suit chaque actif de l'acquisition à la mise au rebut. Enfin, le tagging associe à chaque actif des étiquettes physiques, comme un code-barres ou une puce RFID, et des étiquettes logiques : propriétaire, classification, environnement. Sans tag, pas de responsable identifié, et sans responsable, pas de protection.",
+          astuce: "💡 Conseil examen : à la question « que faire EN PREMIER pour protéger les actifs ? », la réponse est presque toujours l'inventaire — on ne protège que ce que l'on connaît."
+        },
+        {
+          type: "standard",
+          titre: "Provisioning, déprovisioning et shadow IT",
+          points: [
+            "Provisioning sécurisé : déployer l'actif durci (baseline), tagué, inventorié, avec un owner assigné",
+            "Vaut pour le matériel, les logiciels ET les actifs virtuels (VM, conteneurs, comptes cloud)",
+            "Déprovisioning : retirer l'actif de l'inventaire, révoquer les accès, assainir le support",
+            "Un actif oublié (VM orpheline, serveur fantôme) n'est plus patché : cible idéale",
+            "Shadow IT : actifs ou services adoptés sans approbation de l'IT — invisibles donc non protégés",
+            "Réponses au shadow IT : découverte automatisée, CASB, politique claire et processus de demande simple"
+          ],
+          narration:
+            "Provisionner un actif de manière sécurisée, ce n'est pas seulement le brancher. C'est le déployer à partir d'une configuration durcie conforme à la baseline, l'enregistrer dans l'inventaire, le taguer, et lui assigner un owner responsable dès le premier jour. Cette discipline vaut pour un serveur physique comme pour une machine virtuelle, un conteneur ou un compte cloud, qui se créent en quelques secondes et s'oublient tout aussi vite. Le déprovisioning est le miroir : quand l'actif quitte le service, on le retire de l'inventaire, on révoque ses accès et ses certificats, et on assainit le support selon sa classification. Un actif oublié, comme une machine virtuelle orpheline, ne reçoit plus de correctifs et devient une cible idéale. Le shadow IT désigne les actifs et services adoptés par les employés sans approbation de l'informatique : une application cloud souscrite par un département, un disque personnel branché au réseau. Invisibles pour l'inventaire, ils échappent à toute protection. Les réponses du manager combinent la découverte automatisée, un CASB pour révéler les services cloud utilisés, une politique claire, et surtout un processus de demande suffisamment simple pour que les employés n'aient pas envie de le contourner.",
+          astuce: "💡 Conseil examen : le shadow IT est avant tout un problème de VISIBILITÉ. Le CASB est l'outil clé pour découvrir les services cloud non autorisés."
+        },
+        {
           type: "question",
           titre: "Contrôle de connaissance",
           points: [],
@@ -1169,6 +1199,401 @@ window.CISSP_DATA.domains[2] = {
       reponse: 1,
       explication:
         "Le CLOUD Act peut contraindre un fournisseur américain à remettre des données même stockées en Europe : la localisation seule ne suffit donc pas. Le chiffrement avec des clés détenues par le client rend les données remises inexploitables, et les clauses contractuelles encadrent les transferts. Interdire le cloud est disproportionné, et la responsabilité de conformité du controller ne se transfère jamais.",
+      difficulte: 3
+    },
+    {
+      q: "Dans la classification gouvernementale américaine, quel niveau correspond à une divulgation qui causerait un dommage « exceptionnellement grave » à la sécurité nationale ?",
+      choix: ["Secret", "Confidential", "Top Secret", "Sensitive But Unclassified"],
+      reponse: 2,
+      explication:
+        "Top Secret correspond au dommage exceptionnellement grave (exceptionally grave damage), Secret au dommage sérieux (serious damage) et Confidential au dommage (damage). Sensitive But Unclassified désigne des données non classifiées mais méritant des précautions. L'examen teste souvent la correspondance exacte entre le niveau et la formulation du dommage.",
+      difficulte: 1
+    },
+    {
+      q: "Quelle affirmation sur les niveaux de classification du secteur privé est CORRECTE ?",
+      choix: [
+        "Ils sont normalisés par NIST et identiques dans toutes les entreprises",
+        "Chaque organisation définit librement ses niveaux, documentés dans sa politique de sécurité",
+        "Ils doivent obligatoirement reprendre les niveaux gouvernementaux",
+        "Ils ne s'appliquent qu'aux données électroniques, pas au papier"
+      ],
+      reponse: 1,
+      explication:
+        "Contrairement au secteur gouvernemental, les étiquettes du privé (Confidential/Proprietary, Private, Sensitive, Public…) ne sont pas normalisées : chaque organisation choisit ses niveaux et leur granularité, du moment que la politique de sécurité les définit clairement. La classification s'applique à tous les supports, papier comme électronique.",
+      difficulte: 1
+    },
+    {
+      q: "Un hôpital externalise la numérisation de dossiers médicaux à un prestataire. Quelle affirmation sur les PHI est CORRECTE ?",
+      choix: [
+        "Seul l'hôpital est soumis à HIPAA, pas le prestataire",
+        "Le prestataire manipule des PHI et doit donc aussi respecter les exigences applicables",
+        "Les dossiers numérisés ne sont plus des PHI car ils changent de support",
+        "Les PHI deviennent des PII une fois numérisées"
+      ],
+      reponse: 1,
+      explication:
+        "Les exigences sur les PHI s'appliquent à tout organisme qui manipule des informations de santé rattachables à une personne, pas seulement aux hôpitaux : le prestataire (business associate au sens HIPAA) y est également soumis. Le changement de support ne change rien à la nature de la donnée, et les PHI sont une catégorie spécifique qui ne « devient » pas de simples PII.",
+      difficulte: 2
+    },
+    {
+      q: "Quelle est la PREMIÈRE conséquence pratique de l'attribution d'une classification à un actif ?",
+      choix: [
+        "Son prix d'assurance augmente",
+        "Les exigences de manipulation (handling) et de stockage qui s'y appliquent sont déterminées",
+        "Il doit être remplacé plus fréquemment",
+        "Il est automatiquement chiffré par le système"
+      ],
+      reponse: 1,
+      explication:
+        "La classification détermine directement les exigences de handling : comment déplacer, stocker, transmettre et détruire l'actif. C'est tout l'intérêt de classifier — proportionner les contrôles à la sensibilité. Le chiffrement peut être l'une de ces exigences, mais rien n'est « automatique » : les contrôles découlent de la politique associée au niveau.",
+      difficulte: 1
+    },
+    {
+      q: "Un employé détient une clearance Secret. Peut-il accéder à TOUTES les données classifiées Secret de l'organisation ?",
+      choix: [
+        "Oui, la clearance suffit",
+        "Non, il lui faut en plus le besoin d'en connaître (need-to-know) et l'approbation formelle",
+        "Oui, mais uniquement en lecture seule",
+        "Non, il doit d'abord obtenir une clearance Top Secret"
+      ],
+      reponse: 1,
+      explication:
+        "La clearance est une condition nécessaire mais pas suffisante : l'accès exige aussi le need-to-know — la donnée doit être nécessaire à la mission — et une approbation formelle impliquant le data owner. C'est un principe fondamental : détenir l'habilitation au niveau n'ouvre jamais l'accès à tout le niveau.",
+      difficulte: 2
+    },
+    {
+      q: "Qui, selon NIST SP 800-18, développe et maintient le System Security Plan d'un système d'information ?",
+      choix: ["Le data owner", "Le system owner", "Le data custodian", "Le DPO"],
+      reponse: 1,
+      explication:
+        "Le system owner est responsable du système qui traite la donnée : il développe et maintient le System Security Plan, s'assure du déploiement des contrôles, du patching et de la formation des utilisateurs (NIST SP 800-18). Le data owner possède la donnée, le custodian exécute les tâches déléguées, et le DPO supervise la conformité vie privée.",
+      difficulte: 2
+    },
+    {
+      q: "Quel rôle est responsable de la QUALITÉ et de la gouvernance MÉTIER des données, y compris la définition des métadonnées ?",
+      choix: ["Data custodian", "Data steward", "Security administrator", "System owner"],
+      reponse: 1,
+      explication:
+        "Le data steward porte la responsabilité métier de la donnée : qualité, gouvernance, conformité et métadonnées. Le custodian assure les tâches techniques quotidiennes (sauvegardes, restauration), l'administrateur sécurité protège l'infrastructure, et le system owner sécurise le système. Astuce : custodian = technique, steward = sens métier.",
+      difficulte: 1
+    },
+    {
+      q: "Quelle affirmation sur la notion de « subject » est CORRECTE ?",
+      choix: [
+        "Un subject est toujours un être humain",
+        "Un subject est toute entité qui accède à un objet : utilisateur, mais aussi processus ou service",
+        "Subject et user sont strictement synonymes",
+        "Un subject est la ressource à laquelle on accède"
+      ],
+      reponse: 1,
+      explication:
+        "Un subject est toute entité active qui accède à un objet (la ressource passive) : les utilisateurs en sont, mais aussi les programmes, processus et services. Tous les users sont des subjects, mais tous les subjects ne sont pas des users — nuance que l'examen aime tester.",
+      difficulte: 2
+    },
+    {
+      q: "Le DPO d'une entreprise rapporte directement au responsable marketing, qui décide aussi de ses objectifs annuels. Quel est le PRINCIPAL problème ?",
+      choix: [
+        "Le DPO devrait rapporter au DSI",
+        "Le rôle de DPO doit être indépendant : ce rattachement crée un conflit d'intérêts",
+        "Le marketing n'a pas le budget pour un DPO",
+        "Aucun : le GDPR n'impose rien sur le rattachement du DPO"
+      ],
+      reponse: 1,
+      explication:
+        "Le DPO est un rôle de leadership indépendant qui supervise la conformité vie privée. Le rattacher à une fonction qui exploite intensivement les données personnelles (marketing) et qui fixe ses objectifs compromet son indépendance — le GDPR exige justement que le DPO exerce ses missions sans conflit d'intérêts et rapporte au plus haut niveau de direction.",
+      difficulte: 3
+    },
+    {
+      q: "Quelle est la PREMIÈRE phase du cycle de vie de la donnée ?",
+      choix: ["La classification", "La création ou la collecte", "Le stockage", "L'archivage"],
+      reponse: 1,
+      explication:
+        "Le cycle de vie commence par la création ou la collecte de la donnée, suivie de la classification, du stockage, de l'utilisation, de l'archivage et enfin de la destruction. La classification intervient juste après la création — on ne peut classifier une donnée qui n'existe pas encore.",
+      difficulte: 1
+    },
+    {
+      q: "Où une organisation devrait-elle conserver ses copies de sauvegarde pour se protéger d'un sinistre majeur ?",
+      choix: [
+        "Uniquement sur site, pour garantir un accès rapide",
+        "Sur site ET hors site, avec une distance suffisante entre les deux emplacements",
+        "Uniquement hors site, le stockage sur site étant inutile",
+        "Dans le même bâtiment mais à des étages différents"
+      ],
+      reponse: 1,
+      explication:
+        "La bonne pratique combine une copie sur site (restauration rapide) et une copie hors site, séparées par une distance suffisante pour qu'un même sinistre — incendie, inondation, tempête — ne détruise pas l'original et la sauvegarde. Un autre étage du même bâtiment ne protège pas d'un incendie généralisé.",
+      difficulte: 1
+    },
+    {
+      q: "Une multinationale choisit de stocker les données de ses clients allemands dans un datacenter à Francfort pour des raisons de latence et de conformité, sans y être légalement obligée. De quel concept s'agit-il ?",
+      choix: ["Data localization", "Data residency", "Data sovereignty", "Data localization ET sovereignty"],
+      reponse: 1,
+      explication:
+        "La data residency est le CHOIX par l'organisation du lieu de stockage de ses données, pour des raisons de conformité, de latence ou de contrat. La localization serait une OBLIGATION légale de garder les données dans le pays ; la sovereignty est le principe selon lequel la donnée est soumise aux lois du pays où elle réside.",
+      difficulte: 2
+    },
+    {
+      q: "Pourquoi le choix des régions cloud d'un fournisseur est-il une décision de SÉCURITÉ et pas seulement de performance ?",
+      choix: [
+        "Les régions éloignées augmentent la latence",
+        "La région détermine dans quelles juridictions la donnée réside, donc quelles lois s'y appliquent (data sovereignty)",
+        "Certaines régions ont des datacenters moins fiables",
+        "Le prix varie selon les régions"
+      ],
+      reponse: 1,
+      explication:
+        "En vertu de la data sovereignty, une donnée est soumise aux lois du pays où elle réside physiquement : choisir une région cloud, c'est choisir les juridictions qui pourront s'appliquer à vos données (réquisitions, obligations de divulgation…). La latence et le coût sont des considérations opérationnelles, pas l'enjeu de sécurité principal.",
+      difficulte: 2
+    },
+    {
+      q: "Quel état de la donnée est protégé par TLS et IPsec ?",
+      choix: ["Data at rest", "Data in transit", "Data in use", "Data archivée"],
+      reponse: 1,
+      explication:
+        "TLS et IPsec chiffrent la donnée en transit, c'est-à-dire lorsqu'elle circule sur un réseau. La donnée at rest se protège par le chiffrement des supports et volumes, et la donnée in use par le patching, les builds standardisés et la purge des buffers mémoire.",
+      difficulte: 1
+    },
+    {
+      q: "Pourquoi faut-il chiffrer les flux réseau MÊME entre applications internes ?",
+      choix: [
+        "Pour améliorer les performances réseau",
+        "Parce qu'un attaquant ayant pénétré le réseau interne pourrait intercepter les flux en clair",
+        "Parce que TLS est gratuit",
+        "Uniquement pour satisfaire les auditeurs"
+      ],
+      reponse: 1,
+      explication:
+        "Considérer le réseau interne comme sûr est une erreur : après une intrusion, un attaquant peut écouter le trafic interne (mouvement latéral, sniffing). Chiffrer partout — y compris en interne — limite ce risque ; c'est aussi l'esprit du Zero Trust. Le chiffrement a un léger coût de performance, il n'en améliore pas.",
+      difficulte: 2
+    },
+    {
+      q: "Quelle mémoire conserve son contenu après une mise hors tension et peut donc retenir des données sensibles ?",
+      choix: ["La RAM dynamique", "La RAM statique", "L'EEPROM", "Le cache du processeur"],
+      reponse: 2,
+      explication:
+        "L'EEPROM (comme la ROM, la PROM et l'EPROM) est non volatile : elle conserve les données hors tension et peut donc retenir des informations sensibles à assainir avant mise au rebut. La RAM (dynamique ou statique) et le cache CPU sont volatils et perdent leur contenu à la coupure d'alimentation.",
+      difficulte: 2
+    },
+    {
+      q: "Quelle attaque consiste à intercepter les émanations électromagnétiques d'un écran pour reconstituer son affichage ?",
+      choix: ["Le sniffing", "Le Van Eck phreaking", "Le file carving", "Le side-channel timing"],
+      reponse: 1,
+      explication:
+        "Le Van Eck phreaking capte les émanations électromagnétiques des équipements (écrans, câbles) pour reconstituer l'information affichée ou traitée. Les contre-mesures relèvent de TEMPEST : cages de Faraday, bruit blanc, zones de contrôle, blindage. Le sniffing capture le trafic réseau, pas les émanations.",
+      difficulte: 2
+    },
+    {
+      q: "Classez ces méthodes d'assainissement de l'assurance la PLUS FAIBLE à la PLUS FORTE.",
+      choix: [
+        "Clearing → Erasing → Purging → Destruction",
+        "Erasing → Clearing → Purging → Destruction",
+        "Erasing → Purging → Clearing → Destruction",
+        "Purging → Clearing → Destruction → Erasing"
+      ],
+      reponse: 1,
+      explication:
+        "L'ordre croissant d'assurance est : erasing (simple suppression, rémanence intacte), clearing (réécriture, résiste aux outils logiciels standards), purging (vise l'irrécupérabilité même en laboratoire), destruction physique (élimination du support, la plus sûre).",
+      difficulte: 1
+    },
+    {
+      q: "Après un simple reformatage, un disque destiné au don contient encore des données récupérables. Quel principe cette situation illustre-t-elle ?",
+      choix: [
+        "Le slack space",
+        "La data remanence : le formatage ne détruit pas les données, seulement les index",
+        "Le crypto-shredding",
+        "La defensible destruction"
+      ],
+      reponse: 1,
+      explication:
+        "Le reformatage reconstruit les structures du système de fichiers mais laisse les données elles-mêmes sur le support : c'est la data remanence, exploitable par des outils de récupération ou par file carving. Avant don ou mise au rebut, il faut au minimum un clearing, et une méthode proportionnée à la classification.",
+      difficulte: 1
+    },
+    {
+      q: "Quel document du NIST est LA référence pour choisir les méthodes d'assainissement des supports (media sanitization) ?",
+      choix: ["NIST SP 800-53", "NIST SP 800-88", "NIST SP 800-18", "NIST SP 800-122"],
+      reponse: 1,
+      explication:
+        "NIST SP 800-88 (Guidelines for Media Sanitization) est la référence pour définir les méthodes d'assainissement acceptables selon le support et la classification. SP 800-53 catalogue les contrôles de sécurité, SP 800-18 traite des System Security Plans, et SP 800-122 définit la protection des PII.",
+      difficulte: 3
+    },
+    {
+      q: "Votre organisation retire du service des bandes magnétiques de sauvegarde contenant des données Confidential, destinées à être réutilisées en interne pour des données de même niveau. Quelle méthode est la PLUS appropriée et la plus économique ?",
+      choix: [
+        "La destruction physique par incinération",
+        "Le clearing ou le degaussing, suffisants pour une réutilisation au même niveau",
+        "Le crypto-shredding",
+        "Aucune : la réutilisation interne ne nécessite pas d'assainissement"
+      ],
+      reponse: 1,
+      explication:
+        "Pour une réutilisation interne au même niveau de classification, détruire le support serait un gaspillage : un clearing (réécriture) ou un degaussing (support magnétique) suffit selon la politique. La destruction physique s'impose pour la mise au rebut de supports très sensibles ; ne rien faire exposerait les données au prochain utilisateur.",
+      difficulte: 3
+    },
+    {
+      q: "Quel est le risque PRINCIPAL de continuer à exploiter un équipement matériel après son End-of-Support ?",
+      choix: [
+        "Sa valeur de revente diminue",
+        "Les vulnérabilités découvertes ne seront plus jamais corrigées par le constructeur",
+        "Il consomme plus d'énergie",
+        "Il n'est plus compatible avec les baies de brassage récentes"
+      ],
+      reponse: 1,
+      explication:
+        "Après l'EOS, le constructeur ne publie plus ni correctifs ni assistance : toute vulnérabilité découverte reste exploitable indéfiniment. C'est un risque de sécurité majeur qui impose de planifier le remplacement avant l'échéance, ou à défaut des mesures compensatoires (isolation) strictement temporaires.",
+      difficulte: 1
+    },
+    {
+      q: "Une organisation prévoit de conserver des archives sur bandes pendant quinze ans. Quelle considération est la PLUS souvent oubliée ?",
+      choix: [
+        "Le coût des bandes",
+        "Maintenir des lecteurs compatibles et du personnel sachant restaurer, pendant toute la durée",
+        "La couleur des étiquettes",
+        "Le chiffrement des bandes"
+      ],
+      reponse: 1,
+      explication:
+        "La rétention couvre les données, mais aussi le MATÉRIEL capable de les lire et le PERSONNEL compétent : dans quinze ans, les lecteurs actuels seront obsolètes et les experts partis. Sans plan de migration des supports et de maintien des compétences, les archives deviennent illisibles — donc inutiles.",
+      difficulte: 2
+    },
+    {
+      q: "Quel type de DLP est le MIEUX placé pour empêcher l'impression d'un document sensible ?",
+      choix: ["Network-based", "Endpoint-based", "Cloud-based", "Un DLP ne peut pas bloquer l'impression"],
+      reponse: 1,
+      explication:
+        "L'impression se déclenche sur le poste de travail : seul le DLP endpoint-based, qui s'exécute localement, peut l'intercepter, comme il bloque la copie vers USB. Le DLP réseau ne voit que le trafic en bordure de réseau et le DLP cloud protège les environnements cloud natifs.",
+      difficulte: 2
+    },
+    {
+      q: "Un éditeur veut empêcher la copie et la redistribution non autorisées de ses livres numériques après leur vente. Quelle technologie répond à ce besoin ?",
+      choix: ["Le DLP", "Le DRM", "Le CASB", "La tokenisation"],
+      reponse: 1,
+      explication:
+        "Le Digital Rights Management protège les contenus soumis au droit d'auteur : il empêche l'usage, la modification et la distribution non autorisés, et la protection voyage avec le fichier même après sa vente. Le DLP protège les données de l'ORGANISATION contre l'exfiltration — pas des œuvres vendues à des tiers.",
+      difficulte: 1
+    },
+    {
+      q: "Le RSSI découvre que plusieurs départements utilisent des applications SaaS non approuvées. Quel outil lui donnera la MEILLEURE visibilité sur ces usages cloud ?",
+      choix: ["Un DRM", "Un CASB", "Un antivirus centralisé", "Un gestionnaire de mots de passe"],
+      reponse: 1,
+      explication:
+        "La visibilité est le premier pilier du CASB : placé entre les utilisateurs et le cloud, il révèle quels services cloud sont réellement utilisés — y compris le shadow IT — puis permet d'y appliquer les politiques de sécurité. Le DRM protège le copyright et l'antivirus les endpoints ; aucun ne cartographie l'usage du cloud.",
+      difficulte: 2
+    },
+    {
+      q: "Un chercheur reçoit un jeu de données où les noms sont remplacés par des alias, la table de correspondance restant chez l'émetteur. Quelle technique a été utilisée et quel est le risque résiduel ?",
+      choix: [
+        "Anonymisation ; aucun risque résiduel",
+        "Pseudonymisation ; la ré-identification reste possible pour qui détient la table",
+        "Tokenisation ; le vault est public",
+        "Chiffrement ; la clé est perdue"
+      ],
+      reponse: 1,
+      explication:
+        "Remplacer les identités par des alias avec conservation d'une table de correspondance est la pseudonymisation : elle est réversible, donc les données restent des données personnelles au sens du GDPR, et une fuite de la table permettrait la ré-identification. Seule l'anonymisation véritable est irréversible.",
+      difficulte: 2
+    },
+    {
+      q: "Pourquoi le GDPR continue-t-il de s'appliquer à des données pseudonymisées ?",
+      choix: [
+        "Parce que le GDPR s'applique à toutes les données, même anonymes",
+        "Parce que la pseudonymisation est réversible : les personnes restent identifiables indirectement",
+        "Parce que la pseudonymisation est interdite par le GDPR",
+        "Il ne s'applique plus : pseudonymiser équivaut à anonymiser"
+      ],
+      reponse: 1,
+      explication:
+        "Les données pseudonymisées restent des données personnelles car la ré-identification est possible via la table de correspondance : le GDPR continue de s'appliquer (la pseudonymisation y est d'ailleurs encouragée comme mesure de protection). Seules les données véritablement anonymisées — irréversiblement — sortent du champ du règlement.",
+      difficulte: 3
+    },
+    {
+      q: "Que devrait faire une organisation EN PREMIER pour bâtir son programme de gestion des actifs ?",
+      choix: [
+        "Acheter un outil ITAM du leader du marché",
+        "Établir un inventaire complet des actifs tangibles et intangibles",
+        "Rédiger la procédure de mise au rebut",
+        "Former les utilisateurs au tagging"
+      ],
+      reponse: 1,
+      explication:
+        "Tout programme de gestion d'actifs commence par l'inventaire : matériel, logiciels, licences, machines virtuelles, mais aussi actifs intangibles (brevets, réputation). Sans inventaire, l'outil, les procédures et la formation n'ont pas d'objet — on ne protège que ce que l'on connaît.",
+      difficulte: 1
+    },
+    {
+      q: "Quel est le PRINCIPAL apport d'une CMDB par rapport à un simple tableur d'inventaire ?",
+      choix: [
+        "Elle est moins chère à maintenir",
+        "Elle modélise les relations et dépendances entre actifs, utiles pour évaluer l'impact d'un incident ou d'un changement",
+        "Elle remplace la découverte automatisée",
+        "Elle chiffre automatiquement les actifs recensés"
+      ],
+      reponse: 1,
+      explication:
+        "La Configuration Management Database recense les actifs ET leurs relations : quel service dépend de quel serveur, quelle application de quelle base. Cette cartographie des dépendances permet d'évaluer l'impact d'un incident ou d'un changement — ce qu'un tableur statique ne fait pas. Elle se nourrit de la découverte automatisée, elle ne la remplace pas.",
+      difficulte: 2
+    },
+    {
+      q: "Malgré un inventaire déclaratif tenu à jour, un audit révèle des serveurs inconnus sur le réseau. Quelle mesure corrige le MIEUX cette lacune de façon durable ?",
+      choix: [
+        "Un inventaire manuel annuel plus rigoureux",
+        "La découverte automatisée et continue des actifs (scans réseau, agents)",
+        "Une sanction disciplinaire pour les administrateurs",
+        "Le blocage de tous les ports réseau inutilisés"
+      ],
+      reponse: 1,
+      explication:
+        "Un inventaire déclaratif se périme entre deux campagnes : seule la découverte automatisée et continue (scans réseau, agents, intégration DHCP/AD) détecte en permanence les actifs non déclarés. L'inventaire annuel reste ponctuel, la sanction ne traite pas la cause, et le blocage de ports est un contrôle utile mais qui n'inventorie rien.",
+      difficulte: 2
+    },
+    {
+      q: "Lors du provisioning d'une nouvelle machine virtuelle de production, quelle étape garantit qu'un responsable pourra être identifié pendant toute la vie de l'actif ?",
+      choix: [
+        "L'installation d'un antivirus",
+        "Le tagging de la VM avec son owner, sa classification et son environnement, et son enregistrement dans l'inventaire",
+        "L'attribution d'une adresse IP fixe",
+        "La création d'un snapshot initial"
+      ],
+      reponse: 1,
+      explication:
+        "Le provisioning sécurisé impose d'enregistrer l'actif dans l'inventaire et de le taguer dès sa création : owner, classification, environnement. Sans owner assigné, personne n'est responsable du patching ni du déprovisioning — la VM risque de devenir orpheline. Antivirus, IP et snapshot sont utiles mais n'établissent pas la responsabilité.",
+      difficulte: 2
+    },
+    {
+      q: "Un administrateur supprime une VM de test mais oublie de révoquer son compte de service et ses certificats. Quel risque cette situation illustre-t-elle ?",
+      choix: [
+        "Un simple problème de coût de licences",
+        "Un déprovisioning incomplet : des credentials orphelins restent exploitables par un attaquant",
+        "Une violation du droit d'auteur",
+        "Un problème de rémanence magnétique"
+      ],
+      reponse: 1,
+      explication:
+        "Le déprovisioning ne se limite pas à supprimer l'actif : il faut retirer l'actif de l'inventaire, révoquer ses accès, comptes de service et certificats, et assainir les données selon leur classification. Des credentials orphelins sont une porte d'entrée classique — ils ne sont plus surveillés mais restent valides.",
+      difficulte: 2
+    },
+    {
+      q: "Un département marketing souscrit de sa propre initiative à un outil SaaS d'e-mailing pour ses campagnes, sans en informer l'IT. Comment appelle-t-on ce phénomène et quel est son PRINCIPAL danger ?",
+      choix: [
+        "Shadow IT ; les données de l'entreprise échappent à tout inventaire et à toute protection",
+        "BYOD ; les appareils personnels contaminent le réseau",
+        "Vendor lock-in ; le coût de sortie sera élevé",
+        "Scope creep ; le projet dépasse son périmètre"
+      ],
+      reponse: 0,
+      explication:
+        "Le shadow IT désigne les actifs et services adoptés sans approbation de l'IT. Le danger principal est la perte de visibilité : des données d'entreprise (ici, des listes de clients) partent vers un service ni inventorié, ni évalué, ni protégé par les contrôles de l'organisation. La réponse combine découverte (CASB), politique claire et processus de demande simple.",
+      difficulte: 1
+    },
+    {
+      q: "Quelle approche réduit le MIEUX le shadow IT de façon durable, au-delà des outils de détection ?",
+      choix: [
+        "Bloquer l'ensemble des sites web non professionnels",
+        "Offrir un processus d'approbation simple et rapide pour les nouveaux services, avec un catalogue d'alternatives validées",
+        "Sanctionner systématiquement les employés fautifs",
+        "Interdire le cloud dans la charte informatique"
+      ],
+      reponse: 1,
+      explication:
+        "Le shadow IT naît souvent d'un besoin métier légitime face à un processus IT trop lourd : la réponse durable est de rendre la voie officielle plus facile que le contournement — catalogue de services approuvés, approbation rapide. Le blocage total et la sanction traitent les symptômes et poussent les usages encore plus loin dans l'ombre ; un CASB détecte mais ne supprime pas la cause.",
       difficulte: 3
     }
   ],
