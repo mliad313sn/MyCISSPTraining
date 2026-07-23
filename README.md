@@ -1,4 +1,4 @@
-# 🎓 CISSP Démystifié — Formation CISSP complète en français
+# 🎓 CISSP en clair — Formation CISSP complète en français
 
 Site web statique et interactif pour préparer et **réussir la certification CISSP du premier coup**, entièrement en français (les termes techniques consacrés restent en anglais, comme à l'examen).
 
