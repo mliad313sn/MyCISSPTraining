@@ -2505,6 +2505,186 @@ window.CISSP_DATA.domains[3] = {
         "Faux : hors phase et insuffisant — un formatage ne supprime pas réellement les données ; agir avant d'avoir déterminé l'exigence.",
         "Faux : la gestion des étiquettes intervient en fin de processus — hors phase."
       ]
+    },
+    {
+      q: "Le CISO d'un groupe industriel lance une migration Zero Trust sur trois ans. L'équipe réseau propose de commencer immédiatement par le déploiement d'agents ZTNA sur tous les postes, l'équipe datacenter par la microsegmentation des serveurs. Que devriez-vous faire EN PREMIER ?",
+      choix: [
+        "Déployer le ZTNA pour sécuriser les accès distants, vecteur d'attaque le plus visible",
+        "Inventorier les actifs critiques et cartographier les flux afin de définir les surfaces à protéger, avant tout déploiement technique",
+        "Microsegmenter le datacenter, là où résident les données les plus sensibles",
+        "Désactiver le VPN existant pour forcer l'adoption rapide du nouveau modèle"
+      ],
+      reponse: 1,
+      explication: "Une migration Zero Trust réussie part de la connaissance : inventaire des actifs, cartographie des flux et définition des surfaces de protection (protect surfaces). Sans cette étape, les politiques ZTNA et la microsegmentation seront construites sur des hypothèses fausses et bloqueront des flux légitimes — ou laisseront passer des flux dangereux. ZTNA et microsegmentation sont deux chantiers légitimes du programme, mais ils viennent APRÈS la cartographie ; couper le VPN sans solution de remplacement validée créerait une rupture de service et des contournements.",
+      difficulte: 3,
+      pourquoi: [
+        "Faux : chantier légitime du programme mais hors phase — sans cartographie des flux, les politiques ZTNA seront fondées sur des hypothèses ; techniquement vrai mais prématuré.",
+        "Correct : la démarche Zero Trust commence par l'inventaire des actifs et la cartographie des flux — c'est elle qui fonde toutes les politiques ultérieures.",
+        "Faux : vrai objectif de la cible mais contextuellement faux en premier — microsegmenter sans connaître les flux casse la production ou laisse des angles morts.",
+        "Faux : mesure brutale qui crée une rupture de service et pousse aux contournements — l'adoption forcée n'est pas une stratégie de migration."
+      ]
+    },
+    {
+      q: "Une DSI migre ses 40 sites tertiaires vers une architecture SASE. L'usine principale héberge un MES dont les échanges avec les automates exigent une latence de quelques millisecondes ; le point de présence cloud le plus proche ajoute 30 ms. L'intégrateur propose de basculer l'usine comme les autres sites pour homogénéiser. Quelle est la MEILLEURE recommandation du CISO ?",
+      choix: [
+        "Basculer l'usine avec les autres sites : l'homogénéité des politiques prime sur la latence",
+        "Reporter l'ensemble du projet SASE jusqu'à ce que le fournisseur garantisse contractuellement la latence industrielle",
+        "Adopter une architecture hybride : SASE pour les sites tertiaires, inspection et politiques appliquées localement pour les flux temps réel de l'usine",
+        "Exclure définitivement l'usine du programme et conserver son architecture actuelle sans modification"
+      ],
+      reponse: 2,
+      explication: "Le SASE apporte sa valeur aux utilisateurs et sites tertiaires, mais rediriger des flux industriels temps réel vers un point de présence cloud viole la contrainte de latence du procédé — donc sa disponibilité. Le bon arbitrage d'architecte est hybride : les politiques du programme s'appliquent partout, mais leur point d'application (enforcement) reste local pour les flux temps réel de l'usine (pare-feu OT local, segmentation sur site), tandis que les flux non temps réel de l'usine peuvent, eux, passer par le SASE. Homogénéiser au prix du procédé est une faute, tout reporter sacrifie les bénéfices sur 40 sites, et exclure l'usine sans rien faire la laisse hors gouvernance.",
+      difficulte: 3,
+      pourquoi: [
+        "Faux : l'homogénéité est un vrai bénéfice d'exploitation mais contextuellement faux ici — elle sacrifie la contrainte de latence, donc la disponibilité du procédé.",
+        "Faux : précaution en apparence prudente mais disproportionnée — elle prive 40 sites des bénéfices pour une contrainte qui ne concerne qu'un site ; hors arbitrage.",
+        "Correct : l'arbitrage d'architecte — politiques uniformes, mais point d'application local pour les flux temps réel ; le SASE sert là où il apporte de la valeur.",
+        "Faux : exclusion sans contrôle compensatoire ni gouvernance — l'usine resterait le maillon faible du dispositif."
+      ]
+    },
+    {
+      q: "Le CISO d'un groupe de santé dispose d'un budget limité pour engager la transition post-quantique. Les données génétiques des patients doivent rester confidentielles plusieurs décennies. Quelle démarche devriez-vous engager EN PREMIER ?",
+      choix: [
+        "Remplacer immédiatement tous les certificats et signatures TLS par des algorithmes post-quantiques",
+        "Établir un inventaire cryptographique, instaurer la crypto-agilité et prioriser la protection des échanges de clés couvrant les données à longue durée de confidentialité",
+        "Attendre que l'ensemble des éditeurs supportent nativement les nouveaux standards avant toute action",
+        "Porter les clés RSA existantes à 8192 bits pour gagner le temps nécessaire"
+      ],
+      reponse: 1,
+      explication: "Face à la menace Harvest Now, Decrypt Later, la priorité est le chiffrement en transit des données dont la confidentialité doit durer des décennies : des adversaires peuvent capturer ces flux dès aujourd'hui. La démarche rationnelle commence par l'inventaire cryptographique (où, quels algorithmes, quelles données), la crypto-agilité (pouvoir changer d'algorithme sans refonte) puis la migration priorisée des échanges de clés (par exemple en mode hybride). Les signatures sont moins urgentes : une signature ne peut pas être « déchiffrée plus tard », elle ne sera falsifiable qu'à l'arrivée de l'ordinateur quantique. Attendre expose les flux actuels à la capture, et grossir les clés RSA ne résiste pas à l'algorithme de Shor.",
+      difficulte: 3,
+      pourquoi: [
+        "Faux : techniquement vrai qu'il faudra migrer les signatures, mais mauvaise priorité — une signature ne se « déchiffre pas plus tard » ; l'urgence HNDL porte sur les échanges de clés.",
+        "Correct : inventaire, crypto-agilité, puis priorisation par durée de sensibilité des données — la démarche de gestion de risque post-quantique.",
+        "Faux : attendre laisse capturer dès aujourd'hui des flux qui devront rester secrets des décennies — la menace HNDL rend l'attentisme perdant.",
+        "Faux : fausse parade de technicien — l'algorithme de Shor casse RSA quelle que soit la taille de clé ; grossir les clés n'achète pas de résistance quantique."
+      ]
+    },
+    {
+      q: "Pour ses VPN inter-sites, une banque hésite entre un échange de clés purement post-quantique et un mode hybride combinant un algorithme classique éprouvé et un algorithme post-quantique. Quel est le MEILLEUR argument en faveur du mode hybride ?",
+      choix: [
+        "Le mode hybride offre de meilleures performances que l'algorithme post-quantique seul",
+        "Le mode hybride élimine définitivement le risque quantique",
+        "Les régulateurs bancaires interdisent l'usage exclusif d'algorithmes post-quantiques",
+        "Si une faiblesse encore inconnue est découverte dans le jeune algorithme post-quantique, la composante classique éprouvée continue de protéger l'échange, et réciproquement"
+      ],
+      reponse: 3,
+      explication: "Les algorithmes post-quantiques standardisés sont récents et ont un historique de cryptanalyse court — l'exemple de SIKE, cassé en 2022 après des années d'évaluation, l'a rappelé. Le mode hybride applique la défense en profondeur à la cryptographie : la session ne tombe que si les DEUX composantes sont cassées, ce qui couvre à la fois le risque quantique futur (composante PQC) et le risque de jeunesse des nouveaux algorithmes (composante classique). L'hybride coûte au contraire un peu plus cher en calcul, aucune protection n'est définitive, et l'argument réglementaire est inventé.",
+      difficulte: 3,
+      pourquoi: [
+        "Faux : c'est l'inverse — combiner deux échanges de clés ajoute du calcul et de la taille de messages ; l'hybride se paie en performance.",
+        "Faux : formulation absolue — aucun mécanisme n'élimine « définitivement » un risque ; l'hybride le réduit.",
+        "Faux : fausse attribution réglementaire — aucune interdiction de ce type n'existe.",
+        "Correct : c'est la défense en profondeur cryptographique — la session résiste tant que l'une des deux composantes tient, couvrant le risque quantique ET le risque de jeunesse des algorithmes PQC."
+      ]
+    },
+    {
+      q: "Un assureur veut exécuter sur un cloud public un traitement de données réglementées, avec une exigence contractuelle : le fournisseur cloud ne doit jamais pouvoir accéder aux données PENDANT leur traitement. Quelle architecture répond le MIEUX à cette exigence aujourd'hui ?",
+      choix: [
+        "Chiffrer les données au repos avec des clés apportées et gérées par l'assureur (BYOK)",
+        "Exécuter le traitement dans des enclaves d'exécution de confiance (TEE), les clés n'étant livrées qu'après attestation à distance de l'enclave",
+        "Imposer TLS 1.3 sur tous les flux entre les services du traitement",
+        "Réécrire l'ensemble du traitement en chiffrement homomorphe complet"
+      ],
+      reponse: 1,
+      explication: "L'exigence porte sur les données EN COURS D'UTILISATION (in use) : le chiffrement au repos et TLS protègent d'autres phases — au repos et en transit — mais les données sont en clair en mémoire pendant le calcul, accessibles à un hyperviseur ou à un administrateur du fournisseur. Le confidential computing répond précisément à ce besoin : le traitement s'exécute dans une enclave matérielle chiffrée, inaccessible à l'hôte, et les clés ne sont provisionnées qu'après vérification par attestation à distance que l'enclave exécute bien le code attendu. Le chiffrement homomorphe complet répond aussi sur le papier, mais son coût de calcul le rend irréaliste pour un traitement généraliste en production.",
+      difficulte: 3,
+      pourquoi: [
+        "Faux : techniquement vrai et utile, mais hors phase — le BYOK protège les données AU REPOS ; pendant le calcul elles sont en clair en mémoire, visibles de l'hôte.",
+        "Correct : le confidential computing protège les données EN COURS D'UTILISATION — enclave chiffrée inaccessible à l'hôte, clés livrées seulement après attestation à distance.",
+        "Faux : hors phase également — TLS protège les données EN TRANSIT, pas la mémoire pendant le traitement.",
+        "Faux : théoriquement exact mais irréaliste — le chiffrement homomorphe complet est trop coûteux pour un traitement généraliste en production ; vrai sur le papier, faux en contexte."
+      ]
+    },
+    {
+      q: "Une application de scoring s'exécute dans une enclave (TEE) sur une infrastructure mutualisée. L'architecte doit garantir que les clés de déchiffrement des données ne seront jamais remises à un code altéré ou à une fausse enclave. Quel contrôle répond DIRECTEMENT à cette exigence ?",
+      choix: [
+        "Signer le code applicatif dans la chaîne CI/CD avant tout déploiement",
+        "Chiffrer la mémoire de l'enclave avec une clé propre au processeur",
+        "Conditionner la livraison des clés à une attestation à distance réussie, vérifiant les mesures de l'enclave auprès du service de gestion de clés",
+        "Stocker les clés chiffrées dans l'image de l'application déployée"
+      ],
+      reponse: 2,
+      explication: "La question n'est pas de protéger la mémoire (le TEE le fait nativement) mais de décider À QUI livrer les secrets. La remote attestation répond exactement à ce besoin : l'enclave produit une preuve signée par le matériel de son identité et de ses mesures (code chargé, configuration), que le service de gestion de clés vérifie AVANT de provisionner les clés — un code altéré ou une enclave simulée échoue à l'attestation et ne reçoit rien. La signature de code en CI/CD est nécessaire mais ne prouve pas ce qui s'exécute réellement à l'instant T ; le chiffrement mémoire est une propriété du TEE, pas un mécanisme de livraison de secrets ; embarquer les clés dans l'image les expose à quiconque obtient l'image.",
+      difficulte: 3,
+      pourquoi: [
+        "Faux : nécessaire mais insuffisant — la signature en CI/CD ne prouve pas ce qui s'exécute réellement dans l'enclave au moment de la demande de clés ; trop en amont.",
+        "Faux : techniquement vrai mais déjà fourni nativement par le TEE — le chiffrement mémoire ne décide pas à qui livrer les secrets ; hors exigence.",
+        "Correct : l'attestation à distance vérifie l'identité et les mesures de l'enclave avant tout provisionnement de clés — c'est le contrôle qui conditionne la confiance.",
+        "Faux : contresens — des clés embarquées dans l'image sont exposées à quiconque tire l'image, exactement ce que l'on veut éviter."
+      ]
+    },
+    {
+      q: "Un opérateur d'importance vitale renouvelle son parc de serveurs et craint l'insertion d'implants matériels ou de firmwares piégés dans la chaîne d'approvisionnement. Quelle stratégie réduit le MIEUX ce risque ?",
+      choix: [
+        "Exiger l'audit du code source des firmwares de chaque composant avant tout achat",
+        "N'acheter que du matériel fabriqué sur le territoire national",
+        "Faire réaliser un test d'intrusion complet des serveurs après leur mise en production",
+        "Combiner des fournisseurs qualifiés contractuellement, la vérification d'intégrité à la réception et le démarrage mesuré avec attestation (racine de confiance matérielle)"
+      ],
+      reponse: 3,
+      explication: "Le risque de supply chain matérielle se traite par une combinaison de contrôles sur tout le cycle : exigences contractuelles et qualification des fournisseurs (traçabilité, canaux de livraison sûrs, transparence des composants), vérification d'intégrité à la réception, puis ancrage technique — secure boot et measured boot appuyés sur une racine de confiance matérielle, avec attestation permettant de détecter un firmware modifié avant la mise en service et pendant la vie du serveur. Auditer le code source de tous les firmwares est hors de portée réaliste (propriétaire, volumétrie), l'origine nationale ne garantit pas l'intégrité d'une chaîne logistique mondialisée, et un pentest après mise en production intervient trop tard et détecte mal les implants bas niveau.",
+      difficulte: 3,
+      pourquoi: [
+        "Faux : exigence irréaliste — firmwares propriétaires et volumétrie rendent l'audit source exhaustif impossible ; la sur-exigence bloque l'achat sans réduire le risque.",
+        "Faux : trop étroit et fausse garantie — l'origine nationale ne maîtrise ni les composants importés ni la logistique ; le risque est dans la chaîne, pas le drapeau.",
+        "Faux : hors phase — après la mise en production, l'implant est déjà dans le périmètre, et un pentest applicatif détecte mal les compromissions de firmware.",
+        "Correct : défense en profondeur sur toute la chaîne — qualification contractuelle, contrôle à la réception et measured boot avec attestation sur racine de confiance matérielle."
+      ]
+    },
+    {
+      q: "Dans une usine fonctionnant en continu, l'équipe sécurité veut déployer un IPS en coupure sur le réseau de contrôle pour bloquer les attaques ; l'ingénieur procédé refuse tout équipement susceptible d'interrompre les flux des automates. Quelle est la MEILLEURE décision d'architecture ?",
+      choix: [
+        "Imposer l'IPS en coupure : la sécurité prime sur les objections opérationnelles",
+        "Déployer une surveillance passive hors bande (TAP/port mirror) avec détection spécialisée OT, appuyée sur la segmentation et des procédures de réponse",
+        "Renoncer aux contrôles réseau et concentrer l'effort sur le durcissement des postes de supervision",
+        "Planifier un arrêt mensuel du procédé pour exécuter des scans actifs de vulnérabilités"
+      ],
+      reponse: 1,
+      explication: "En environnement OT, la disponibilité et la sûreté du procédé sont premières : un IPS en coupure introduit un point de défaillance et un risque de faux positif bloquant des ordres de contrôle — inacceptable sur un procédé continu. L'architecture adaptée est la surveillance passive hors bande via TAP ou port mirror, avec une détection comprenant les protocoles industriels, adossée à la segmentation (zones et conduits) et à des procédures de réponse : on obtient la visibilité sans créer de risque sur la production. Imposer l'IPS ignore la contrainte fondamentale de l'OT, tout miser sur les postes laisse le réseau de contrôle aveugle, et arrêter le procédé chaque mois pour des scans actifs coûte une disponibilité disproportionnée — les scans actifs sont d'ailleurs eux-mêmes risqués sur des automates.",
+      difficulte: 3,
+      pourquoi: [
+        "Faux : posture de sécurité absolue qui ignore la priorité OT — un blocage à tort d'ordres de contrôle peut arrêter, voire endommager le procédé.",
+        "Correct : la surveillance passive hors bande donne la visibilité sans aucun risque d'interruption — l'arbitrage sécurité/disponibilité propre à l'OT.",
+        "Faux : trop étroit — durcir les postes est utile mais laisse le trafic du réseau de contrôle totalement aveugle ; abandon du contrôle réseau.",
+        "Faux : coût de disponibilité disproportionné et technique inadaptée — les scans actifs peuvent eux-mêmes faire tomber des automates."
+      ]
+    },
+    {
+      q: "Une vulnérabilité exploitable à distance est publiée pour le contrôleur d'une turbine, en fin de vie et non patchable ; son remplacement qualifié est planifié dans dix-huit mois et un arrêt non planifié coûte plusieurs millions. Aucune atteinte aux personnes n'est en jeu. Que devriez-vous faire EN PREMIER ?",
+      choix: [
+        "Arrêter la turbine jusqu'au remplacement du contrôleur",
+        "Faire accepter formellement le risque par la direction et attendre le remplacement planifié",
+        "Avancer le remplacement du contrôleur sans attendre la qualification complète du nouveau matériel",
+        "Déployer des contrôles compensatoires : segmentation renforcée, accès distant limité à un rebond avec MFA, et surveillance dédiée du contrôleur jusqu'au remplacement"
+      ],
+      reponse: 3,
+      explication: "Quand un correctif est impossible et le remplacement lointain, la réponse managériale est la réduction du risque par contrôles compensatoires : isoler le contrôleur dans une zone dédiée aux flux strictement nécessaires, supprimer toute exposition distante directe (rebond durci avec MFA pour la maintenance), et surveiller spécifiquement les communications du contrôleur pour détecter toute tentative d'exploitation. L'arrêt de production est disproportionné puisque aucune vie n'est menacée ; l'acceptation formelle sans mesure de réduction laisse une vulnérabilité exploitable à distance ouverte dix-huit mois ; précipiter un remplacement non qualifié transfère le risque vers la sûreté et la disponibilité du procédé.",
+      difficulte: 3,
+      pourquoi: [
+        "Faux : disproportionné — sans menace pour les personnes, sacrifier dix-huit mois de production excède largement le risque ; la vie humaine n'est pas en jeu ici.",
+        "Faux : l'acceptation formelle est un outil légitime mais contextuellement faux seul — on n'accepte pas un risque exploitable à distance sans avoir d'abord tenté de le réduire.",
+        "Faux : hors procédure — déployer un matériel non qualifié sur un procédé industriel déplace le risque vers la sûreté et la disponibilité.",
+        "Correct : réduction du risque par contrôles compensatoires — isolation, accès distant durci, surveillance ciblée — en attendant le remplacement qualifié."
+      ]
+    },
+    {
+      q: "Au cours d'une migration Zero Trust, une application métier critique ne supporte ni SSO, ni MFA, ni protocoles d'authentification modernes ; son éditeur a disparu. L'équipe projet propose de l'exclure du programme. Quelle est la MEILLEURE décision du CISO ?",
+      choix: [
+        "Accepter l'exclusion et documenter l'application comme exception permanente au programme",
+        "Placer l'application derrière un proxy d'accès qui impose en frontal l'authentification moderne et le MFA, et isoler l'application dans un segment dédié",
+        "Lancer immédiatement la réécriture complète de l'application avant de poursuivre la migration",
+        "Imposer le MFA à l'ouverture de session des postes de travail qui accèdent à l'application"
+      ],
+      reponse: 1,
+      explication: "Le modèle Zero Trust prévoit précisément ce cas : quand la ressource ne peut pas porter elle-même les contrôles, on les déplace devant elle. Un proxy d'accès applicatif (composante ZTNA) impose l'authentification moderne, le MFA et les politiques d'accès en frontal, pendant que la segmentation isole l'application pour que seul le proxy puisse l'atteindre. L'exclusion documentée laisse un accès non contrôlé au cœur du système d'information — une exception « permanente » est une dette de sécurité, pas une décision. La réécriture est peut-être la cible à long terme mais ne protège rien pendant des années, et le MFA du poste de travail ne contrôle pas l'accès à l'application elle-même : n'importe quel processus du poste authentifié peut l'atteindre.",
+      difficulte: 3,
+      pourquoi: [
+        "Faux : une exception « permanente » sans contrôle compensatoire est une acceptation déguisée — l'application resterait un accès non contrôlé au SI.",
+        "Correct : déplacer les contrôles devant la ressource — proxy imposant authentification moderne et MFA, plus isolation réseau — est le patron Zero Trust pour le legacy.",
+        "Faux : techniquement vrai comme cible à long terme, mais hors délai et hors budget — la réécriture ne protège rien pendant des années ; elle ne remplace pas un contrôle immédiat.",
+        "Faux : trop étroit — le MFA du poste contrôle la session locale, pas l'accès à l'application ; tout processus du poste authentifié atteindrait encore l'application."
+      ]
     }
   ],
   quizEn: [
@@ -3108,6 +3288,78 @@ window.CISSP_DATA.domains[3] = {
         "Correct : le crypto-erase détruit les clés de chiffrement — les données deviennent indéchiffrables et le disque reste réutilisable (NIST SP 800-88).",
         "Faux : supprimer les fichiers ne retire que les références — les données restent récupérables.",
         "Faux : le dégaussage est inefficace sur la mémoire flash et rendrait le disque inutilisable — double contre-indication."
+      ]
+    },
+    {
+      q: "A CISO is starting a three-year Zero Trust migration. The network team wants to deploy ZTNA agents to every endpoint immediately, and the data center team wants to begin microsegmentation. What should the CISO do FIRST?",
+      choix: [
+        "Deploy ZTNA to secure remote access, the most exposed attack vector",
+        "Inventory critical assets and map transaction flows to define the protect surfaces before any technical rollout",
+        "Microsegment the data center where the most sensitive data resides",
+        "Decommission the legacy VPN to force rapid adoption of the new model"
+      ],
+      reponse: 1,
+      explication: "Une migration Zero Trust commence par la connaissance : inventaire des actifs critiques, cartographie des flux et définition des surfaces à protéger. Sans cette base, les politiques ZTNA et la microsegmentation reposeront sur des hypothèses — elles bloqueront des flux légitimes ou laisseront passer des flux dangereux. Le ZTNA et la microsegmentation sont des chantiers valables mais viennent après la cartographie, et couper le VPN sans remplacement validé provoquerait rupture de service et contournements.",
+      difficulte: 3,
+      pourquoi: [
+        "Faux : chantier légitime mais hors phase — sans cartographie préalable, les politiques ZTNA reposeront sur des suppositions ; vrai mais prématuré.",
+        "Correct : inventaire et cartographie des flux définissent les surfaces à protéger — le fondement de toutes les politiques Zero Trust ultérieures.",
+        "Faux : vrai objectif de la cible mais contextuellement faux en premier — microsegmenter sans connaître les flux casse la production ou laisse des angles morts.",
+        "Faux : mesure brutale — la rupture de service pousse aux contournements ; forcer l'adoption n'est pas une stratégie de migration."
+      ]
+    },
+    {
+      q: "A healthcare organization holds genomic data that must remain confidential for decades. With a limited budget, which post-quantum readiness step should the security executive take FIRST?",
+      choix: [
+        "Replace all TLS certificates and digital signatures with post-quantum algorithms immediately",
+        "Build a cryptographic inventory, establish crypto-agility, and prioritize migrating the key exchanges protecting long-lived confidential data",
+        "Wait until every vendor natively supports the new standards before acting",
+        "Increase existing RSA key sizes to 8192 bits to buy time"
+      ],
+      reponse: 1,
+      explication: "La menace Harvest Now, Decrypt Later rend prioritaires les échanges de clés protégeant les données à longue durée de confidentialité : ces flux peuvent être capturés dès aujourd'hui et déchiffrés plus tard. La démarche commence par l'inventaire cryptographique et la crypto-agilité, puis la migration priorisée (souvent en mode hybride). Les signatures sont moins urgentes — elles ne peuvent pas être « déchiffrées plus tard » ; attendre expose les flux actuels à la capture ; et l'algorithme de Shor casse RSA quelle que soit la taille de clé.",
+      difficulte: 3,
+      pourquoi: [
+        "Faux : la migration des signatures sera nécessaire mais n'est pas l'urgence — une signature ne se « déchiffre pas plus tard » ; mauvaise priorité face à HNDL.",
+        "Correct : inventaire, crypto-agilité et priorisation par durée de sensibilité — la réponse de gestion de risque à la menace Harvest Now, Decrypt Later.",
+        "Faux : l'attentisme laisse capturer aujourd'hui des flux qui doivent rester secrets des décennies — perdant par construction.",
+        "Faux : parade de technicien inopérante — Shor casse RSA indépendamment de la taille de clé."
+      ]
+    },
+    {
+      q: "An insurer must run regulated data processing in a public cloud under a contractual requirement that the provider can never access the data WHILE it is being processed. Which architecture BEST meets this requirement today?",
+      choix: [
+        "Encrypting data at rest with customer-managed keys (BYOK)",
+        "Running the workload inside hardware trusted execution environments, releasing keys only after successful remote attestation",
+        "Enforcing TLS 1.3 on all traffic between processing services",
+        "Rewriting the entire workload to use fully homomorphic encryption"
+      ],
+      reponse: 1,
+      explication: "L'exigence vise les données EN COURS D'UTILISATION : le chiffrement au repos (BYOK) et TLS protègent d'autres phases — au repos et en transit — mais pendant le calcul, les données sont en clair en mémoire, accessibles à l'hôte. Le confidential computing exécute le traitement dans une enclave matérielle chiffrée inaccessible au fournisseur, et les clés ne sont livrées qu'après attestation à distance prouvant que l'enclave exécute le code attendu. Le chiffrement homomorphe complet répond en théorie mais reste irréaliste en production généraliste à cause de son coût de calcul.",
+      difficulte: 3,
+      pourquoi: [
+        "Faux : hors phase — le BYOK protège les données AU REPOS ; en cours de traitement elles sont en clair en mémoire, visibles de l'hôte.",
+        "Correct : le confidential computing (TEE) protège les données EN COURS D'UTILISATION, avec livraison des clés conditionnée à l'attestation à distance.",
+        "Faux : hors phase — TLS protège les données EN TRANSIT, pas la mémoire pendant le calcul.",
+        "Faux : théoriquement vrai mais irréaliste en production — le coût de calcul du chiffrement homomorphe complet le disqualifie pour un traitement généraliste."
+      ]
+    },
+    {
+      q: "In a plant that operates continuously, the security team wants an inline IPS on the control network, but process engineers reject any device that could interrupt controller traffic. Which architecture decision BEST balances these constraints?",
+      choix: [
+        "Deploy the inline IPS anyway, because security requirements override operational objections",
+        "Deploy passive out-of-band monitoring (TAP/SPAN) with OT-aware detection, supported by network segmentation and response procedures",
+        "Abandon network controls and focus solely on hardening the engineering workstations",
+        "Schedule a monthly production shutdown to run active vulnerability scans"
+      ],
+      reponse: 1,
+      explication: "En OT, la sûreté et la disponibilité du procédé priment : un IPS en coupure crée un point de défaillance et un risque de faux positif bloquant des ordres de contrôle. La bonne architecture est la surveillance passive hors bande (TAP ou port mirror) avec une détection comprenant les protocoles industriels, appuyée sur la segmentation en zones et conduits et des procédures de réponse — la visibilité sans risque pour la production. Imposer l'IPS ignore la contrainte OT fondamentale, tout miser sur les postes laisse le réseau de contrôle aveugle, et des arrêts mensuels pour scans actifs coûtent une disponibilité disproportionnée — les scans actifs sont eux-mêmes dangereux pour les automates.",
+      difficulte: 3,
+      pourquoi: [
+        "Faux : posture absolue qui inverse les priorités OT — un blocage à tort d'ordres de contrôle peut arrêter ou endommager le procédé.",
+        "Correct : la surveillance passive hors bande apporte la visibilité sans risque d'interruption — l'arbitrage sécurité/disponibilité adapté à l'OT.",
+        "Faux : trop étroit — durcir les postes laisse le trafic du réseau de contrôle totalement aveugle.",
+        "Faux : coût de disponibilité disproportionné et technique risquée — les scans actifs peuvent faire tomber les automates."
       ]
     }
   ],
