@@ -3202,6 +3202,82 @@ window.CISSP_DATA.domains[7] = {
         "Risqué : une partition cachée découverte expose à des sanctions.",
         "Dangereux : les ordinateurs d'hôtel doivent être présumés compromis."
       ]
+    },
+    {
+      q: "A security operations center deploys a generative AI assistant that summarizes alerts and recommends dispositions. Several AI-generated summaries later prove inaccurate. Which practice BEST addresses this risk while preserving the efficiency gains?",
+      choix: [
+        "Remove the AI assistant until it produces no errors",
+        "Require documented human validation before any alert is closed or escalated, using the AI only to assist triage",
+        "Restrict the assistant to low-severity alerts only",
+        "Ask the vendor to retrain the model on the organization's historical data"
+      ],
+      reponse: 1,
+      explication:
+        "L'IA générative peut halluciner : elle accélère le triage, mais la décision de clôture ou d'escalade — susceptible de masquer une vraie intrusion — doit rester humaine et documentée (human-in-the-loop). Exiger un taux d'erreur nul est irréaliste, cantonner l'IA aux alertes « faibles » ignore que la sévérité est elle-même une estimation faillible, et réentraîner le modèle réduit l'erreur sans la supprimer.",
+      difficulte: 3,
+      pourquoi: [
+        "Absolu irréaliste : aucun modèle n'atteindra un taux d'erreur nul, et retirer l'outil sacrifie le gain d'efficacité sans traiter la gouvernance du processus.",
+        "Bonne réponse : maintenir l'humain dans la boucle sur les décisions de clôture et d'escalade traite le risque d'erreur de l'IA tout en conservant son apport au triage.",
+        "Vraie mais contextuellement fausse : la sévérité est une estimation — une alerte « faible » mal clôturée peut être le premier signal d'une intrusion majeure.",
+        "Réponse de technicien : réentraîner améliore la précision sans jamais éliminer le risque résiduel — l'enjeu est le contrôle du processus."
+      ]
+    },
+    {
+      q: "A manufacturer restores all systems from clean backups after a double-extortion ransomware attack in which the attackers also exfiltrated customer data. Why is the incident NOT resolved?",
+      choix: [
+        "The restored systems may still contain the ransomware binary",
+        "The exfiltrated data constitutes a breach that still triggers notification and crisis-management obligations",
+        "The attackers may return through the same unpatched vulnerability",
+        "The recovery time objective may have been exceeded during the restore"
+      ],
+      reponse: 1,
+      explication:
+        "La double extorsion transforme un incident de disponibilité en violation de confidentialité : même une fois les systèmes restaurés, les données exfiltrées imposent notification aux autorités et aux personnes concernées, analyse juridique et gestion de crise. Le risque de réinfection et la vulnérabilité non corrigée relèvent de la qualité de la recovery et de la remediation, et le dépassement éventuel du RTO est un enjeu de performance, pas d'obligations résiduelles.",
+      difficulte: 3,
+      pourquoi: [
+        "Vraie mais hors sujet ici : le risque de réinfection concerne la qualité de la recovery, pas la raison pour laquelle l'incident reste ouvert.",
+        "Bonne réponse : la double extorsion fait de l'incident une violation de confidentialité — notification et gestion de crise restent dues malgré la restauration.",
+        "Vraie mais secondaire : corriger la vulnérabilité relève de la remediation ; ce n'est pas ce qui distingue la double extorsion.",
+        "Hors sujet : le dépassement du RTO est un enjeu de performance de la reprise, pas d'obligations résiduelles."
+      ]
+    },
+    {
+      q: "During an incident in a public cloud environment, compromised containers are being automatically terminated and replaced by the auto-scaling service. What should the incident response team do FIRST?",
+      choix: [
+        "Request that the cloud provider seize the physical drives of the host servers",
+        "Pause auto-scaling and preserve volatile evidence through provider APIs, snapshots, and centralized logs before instances are destroyed",
+        "Rely on the cloud provider's incident response team, since it owns the infrastructure",
+        "Redeploy the environment from infrastructure-as-code templates to restore service"
+      ],
+      reponse: 1,
+      explication:
+        "En cloud éphémère, chaque cycle d'auto-scaling détruit des preuves : la seule préservation possible passe par les mécanismes logiques du fournisseur — suspendre le scaling, snapshotter les instances, exporter les journaux via API — avant la destruction automatique. La saisie physique est irréaliste en infrastructure mutualisée, le modèle de responsabilité partagée laisse au client l'investigation de ses charges de travail, et redéployer avant de collecter détruirait les preuves.",
+      difficulte: 3,
+      pourquoi: [
+        "Irréaliste en cloud mutualisé : le fournisseur ne saisira pas des disques physiques partagés entre clients.",
+        "Bonne réponse : figer l'auto-scaling, snapshotter et exporter les journaux via API est la seule préservation possible avant la destruction automatique des instances.",
+        "Piège de responsabilité partagée : le fournisseur gère l'infrastructure, mais l'investigation des charges de travail du client incombe au client.",
+        "Hors phase : restaurer avant d'avoir préservé détruirait les preuves — la recovery vient après la collecte."
+      ]
+    },
+    {
+      q: "A SOAR platform automatically isolated a critical trading server based on a false positive, halting operations for two hours. Management demands both rapid containment and protection of critical services. Which approach BEST satisfies these requirements?",
+      choix: [
+        "Disable automated containment and require analysts to approve every response action",
+        "Tune detection rules until false positives no longer occur",
+        "Apply tiered automation: automatic containment for standard assets, human approval for actions affecting business-critical assets",
+        "Exclude all critical servers from the SOAR platform's scope"
+      ],
+      reponse: 2,
+      explication:
+        "L'automatisation graduée aligne le niveau de contrôle humain sur la criticité métier : confinement automatique pour les actifs standards (réactivité), approbation humaine pour les actions à fort impact sur les actifs critiques (jugement). Revenir au tout-manuel sacrifie la réactivité exigée, aucun tuning n'élimine totalement les faux positifs, et exclure les serveurs critiques les prive de tout confinement rapide alors qu'ils sont les cibles les plus attractives.",
+      difficulte: 3,
+      pourquoi: [
+        "Sur-réaction : exiger une approbation humaine pour chaque action sacrifie la réactivité que la direction veut conserver.",
+        "Vraie mais insuffisante : le tuning réduit les faux positifs sans jamais les éliminer — l'objectif « zéro faux positif » est un absolu inatteignable.",
+        "Bonne réponse : l'automatisation graduée aligne le contrôle humain sur la criticité métier — réactivité sur les actifs standards, jugement humain là où l'impact l'exige.",
+        "Dangereux : exclure les serveurs critiques les prive de tout confinement rapide alors qu'ils sont précisément les cibles les plus attractives."
+      ]
     }
   ],
 
