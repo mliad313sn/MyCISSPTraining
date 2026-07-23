@@ -9,7 +9,7 @@ const Parcours = (() => {
     const etapes = [];
 
     etapes.push({
-      icone: "🛫", titre: "Décollage — l'état d'esprit CISSP",
+      icone: `<span style="color:var(--primary)">${icon("compass", 20)}</span>`, titre: "Décollage — l'état d'esprit CISSP",
       texte: "Avant tout contenu technique : comprendre l'examen et adopter le regard d'un manager de la sécurité. C'est ce qui distingue ceux qui réussissent du premier coup.",
       activites: [
         { label: "Lire la Méthode (plan d'étude + stratégie jour J)", href: "#/methode", done: () => Progress.visited("methode") },
@@ -41,7 +41,7 @@ const Parcours = (() => {
     });
 
     etapes.push({
-      icone: "🧠", titre: "Consolidation — mémoire et langage d'expert",
+      icone: `<span style="color:var(--primary)">${icon("brain", 20)}</span>`, titre: "Consolidation — mémoire et langage d'expert",
       texte: "Le contenu est vu : maintenant on l'ancre. Répétition espacée quotidienne, mnémoniques, et entraînement à parler comme un RSSI face à une direction.",
       activites: [
         { label: "Réviser au moins 30 flashcards et vider la file du jour", href: "#/flashcards", done: () => Progress.reviewedCount() >= 30 && Flashcards.dueTotal() === 0 },
@@ -53,7 +53,7 @@ const Parcours = (() => {
     });
 
     etapes.push({
-      icone: "🎯", titre: "Examens blancs — la répétition générale",
+      icone: `<span style="color:var(--primary)">${icon("target", 20)}</span>`, titre: "Examens blancs — la répétition générale",
       texte: "Simulez les conditions réelles jusqu'à la constance : ≥ 80 % sur un examen complet, c'est le signal que vous êtes prêt à réserver votre place.",
       activites: [
         { label: "Réussir un mini examen (30 questions) à ≥ 80 %", href: "#/examen", done: () => Progress.exams().some(e => e.total <= 30 && e.pct >= 80) },
@@ -63,7 +63,7 @@ const Parcours = (() => {
     });
 
     etapes.push({
-      icone: "🏁", titre: "Prêt pour le jour J",
+      icone: `<span style="color:var(--primary)">${icon("award", 20)}</span>`, titre: "Prêt pour le jour J",
       texte: "Tout est validé. Derniers conseils : relisez vos erreurs d'examens blancs, refaites les mnémoniques la veille, dormez bien — et le jour J, répondez puis avancez sans jamais douter. La communauté vous attend de l'autre côté : vous allez réussir.",
       activites: [
         { label: "Relire la stratégie du jour J dans la Méthode", href: "#/methode", done: () => Progress.visited("methode") }
@@ -87,14 +87,14 @@ const Parcours = (() => {
     if (courante === -1) courante = etapes.length - 1;
 
     document.getElementById("app").innerHTML = `
-      <h1 class="page-title">🗺️ Votre parcours vers le niveau CISSP</h1>
+      <h1 class="page-title">Votre parcours vers le niveau CISSP</h1>
       <p class="page-sub">Un voyage simple, escale par escale : à chaque étape, des activités concrètes cochées automatiquement
       au fil de votre progression. Suivez l'ordre — chaque escale prépare la suivante — et vous arriverez à penser,
       parler et raisonner comme un expert CISSP.</p>
 
       <div class="card" style="margin-bottom:1.6rem">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem">
-          <strong>✈️ Avancement du voyage</strong><span style="font-weight:800;color:var(--accent)">${global}%</span>
+          <strong>Avancement du voyage</strong><span style="font-weight:800;color:var(--accent)">${global}%</span>
         </div>
         <div class="progressbar" style="margin-top:.6rem;height:10px"><span style="width:${global}%"></span></div>
       </div>
@@ -108,7 +108,7 @@ const Parcours = (() => {
              ${isCurrent ? "border-color:var(--accent);box-shadow:0 0 0 1px var(--accent);" : ""}
              ${locked ? "opacity:.55;" : ""}">
           <div style="display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;cursor:pointer" onclick="const b=document.getElementById('et-${i}');b.style.display=b.style.display==='none'?'block':'none'">
-            <span style="font-size:1.7rem">${pct === 100 ? "✅" : locked ? "🔒" : e.icone}</span>
+            <span style="font-size:1.7rem">${pct === 100 ? `<span style="color:var(--ok)">${icon("check", 20)}</span>` : locked ? `<span style="color:var(--faint)">${icon("lock", 18)}</span>` : e.icone}</span>
             <div style="flex:1;min-width:220px">
               <strong>${esc(e.titre)}</strong>
               ${isCurrent ? `<span class="badge" style="margin-left:.5rem;border-color:var(--accent);color:var(--accent)">escale en cours</span>` : ""}
@@ -121,7 +121,7 @@ const Parcours = (() => {
             ${e.activites.map(a => `
               <a href="${a.href}" style="text-decoration:none;color:inherit">
                 <div class="choice" style="display:flex;gap:.7rem;align-items:center;margin-bottom:.5rem;${a.done() ? "border-color:var(--ok);" : ""}">
-                  <span>${a.done() ? "✅" : "⬜"}</span><span style="flex:1">${esc(a.label)}</span><span style="color:var(--accent)">→</span>
+                  <span>${a.done() ? "✓" : "○"}</span><span style="flex:1">${esc(a.label)}</span><span style="color:var(--accent)">→</span>
                 </div>
               </a>`).join("")}
           </div>

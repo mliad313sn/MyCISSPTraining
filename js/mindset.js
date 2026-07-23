@@ -28,21 +28,21 @@ const Mindset = (() => {
     tab = tab || "principes";
     const m = data();
     document.getElementById("app").innerHTML = `
-      <h1 class="page-title">🧭 Mindset — penser et parler comme un CISSP</h1>
+      <h1 class="page-title">Mindset — penser et parler comme un CISSP</h1>
       <p class="page-sub">L'examen ne teste pas votre technique : il teste votre <strong>jugement de security manager</strong>.
       Ce module entraîne le raisonnement (éliminer les pièges, choisir la réponse la plus « amont »)
       et le langage (parler risque et business, pas outils et features).</p>
       <div style="display:flex;gap:.6rem;margin-bottom:1.4rem;flex-wrap:wrap">
-        <button class="btn ${tab === "principes" ? "" : "secondary"}" onclick="Mindset.list('principes')">🧭 Principes</button>
-        <button class="btn ${tab === "drills" ? "" : "secondary"}" onclick="Mindset.startDrill()">🎯 Drills d'élimination <span class="badge">${Progress.mindsetCount("drills")} réussis</span></button>
-        <button class="btn ${tab === "reformulations" ? "" : "secondary"}" onclick="Mindset.startReform()">🗣 Parler comme un CISSP <span class="badge">${Progress.mindsetCount("reform")} réussies</span></button>
-        <button class="btn ${tab === "decoder" ? "" : "secondary"}" onclick="Mindset.startDecoder()">🔍 Décoder la question <span class="badge">${Progress.mindsetCount("decoder")} réussis</span></button>
+        <button class="btn ${tab === "principes" ? "" : "secondary"}" onclick="Mindset.list('principes')">${icon("compass", 15)} Principes</button>
+        <button class="btn ${tab === "drills" ? "" : "secondary"}" onclick="Mindset.startDrill()">${icon("target", 15)} Drills d'élimination <span class="badge">${Progress.mindsetCount("drills")} réussis</span></button>
+        <button class="btn ${tab === "reformulations" ? "" : "secondary"}" onclick="Mindset.startReform()">${icon("message", 15)} Parler comme un CISSP <span class="badge">${Progress.mindsetCount("reform")} réussies</span></button>
+        <button class="btn ${tab === "decoder" ? "" : "secondary"}" onclick="Mindset.startDecoder()">${icon("search", 15)} Décoder la question <span class="badge">${Progress.mindsetCount("decoder")} réussis</span></button>
       </div>
       ${tab === "principes" ? `
       <div class="grid cols-2">
         ${m.principes.map(p => `
           <div class="card">
-            <h3 style="display:flex;gap:.5rem;align-items:center">${p.icone || "🧭"} ${esc(p.titre)}</h3>
+            <h3 style="display:flex;gap:.5rem;align-items:center">${esc(p.titre)}</h3>
             <p style="color:var(--text-dim);margin:.5rem 0">${esc(p.texte)}</p>
             <div class="astuce">${esc(p.exemple)}</div>
           </div>`).join("")}
@@ -65,14 +65,14 @@ const Mindset = (() => {
         <div class="q-head" style="display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-bottom:1rem;flex-wrap:wrap">
           <button class="btn secondary small" onclick="Mindset.list('principes')">← Mindset</button>
           <span class="badge">${phase === 1 ? "Phase 1 — éliminez les 2 pièges" : "Phase 2 — tranchez entre les 2 restantes"}</span>
-          <span class="badge">🎯 ${Progress.mindsetCount("drills")} drills réussis</span>
+          <span class="badge">${Progress.mindsetCount("drills")} drills réussis</span>
         </div>
         <div class="card">
           <p class="q-text">${esc(drill.q)}</p>
           <p style="color:${phase === 1 ? "var(--warn)" : "var(--accent)"};font-size:.92rem;margin-bottom:.7rem">
             ${phase === 1
-              ? "🔍 Réflexe d'expert : avant de chercher la bonne réponse, écartez les 2 réponses évidemment hors jeu (hors sujet, trop techniques, absolues, hors périmètre)."
-              : "⚖️ Il en reste deux. Laquelle est la plus « amont », la plus large, la plus manager ?"}
+              ? "Réflexe d'expert : avant de chercher la bonne réponse, écartez les 2 réponses évidemment hors jeu (hors sujet, trop techniques, absolues, hors périmètre)."
+              : "Il en reste deux. Laquelle est la plus « amont », la plus large, la plus manager ?"}
           </p>
           <div class="choices">
             ${drill.choix.map((c, i) => {
@@ -96,15 +96,15 @@ const Mindset = (() => {
         eliminated.push(i);
         if (eliminated.length === 2) {
           phase = 2;
-          renderDrill(`<div class="explication">✅ Les 2 pièges sont écartés. ${esc(drill.pourquoiPieges)}</div>`);
+          renderDrill(`<div class="explication">✓ Les 2 pièges sont écartés. ${esc(drill.pourquoiPieges)}</div>`);
         } else {
-          renderDrill(`<div class="explication">✅ Bien vu, c'est un piège. Encore un à trouver.</div>`);
+          renderDrill(`<div class="explication">✓ Bien vu, c'est un piège. Encore un à trouver.</div>`);
         }
       } else {
         misses++;
         btn.style.animation = "none"; void btn.offsetWidth; btn.style.animation = "shake .3s";
         document.getElementById("dr-exp").innerHTML =
-          `<div class="explication" style="border-color:var(--ko)">❌ Non — celle-ci reste en course. Cherchez les réponses hors sujet, absolues ou purement techniques.</div>`;
+          `<div class="explication" style="border-color:var(--ko)">✗ Non — celle-ci reste en course. Cherchez les réponses hors sujet, absolues ou purement techniques.</div>`;
       }
     } else {
       const good = i === drill.reponse;
@@ -116,9 +116,9 @@ const Mindset = (() => {
       });
       document.getElementById("dr-exp").innerHTML = `
         <div class="explication">
-          <strong>${good ? (misses === 0 ? "🏆 Sans faute — drill validé !" : "✅ Bonne réponse (mais avec des hésitations en phase 1).") : "❌ C'était l'autre."}</strong>
+          <strong>${good ? (misses === 0 ? "Sans faute — drill validé." : "✓ Bonne réponse (mais avec des hésitations en phase 1).") : "✗ C'était l'autre."}</strong>
           ${esc(drill.explication)}
-          <div style="margin-top:.5rem"><span class="badge">🧭 Règle : ${esc(drill.regle)}</span></div>
+          <div style="margin-top:.5rem"><span class="badge">Règle : ${esc(drill.regle)}</span></div>
         </div>
         <div style="margin-top:1rem;text-align:right">
           <button class="btn" onclick="Mindset.startDrill()">Drill suivant →</button>
@@ -135,13 +135,13 @@ const Mindset = (() => {
       <div style="max-width:820px;margin:0 auto">
         <div class="q-head" style="display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-bottom:1rem;flex-wrap:wrap">
           <button class="btn secondary small" onclick="Mindset.list('principes')">← Mindset</button>
-          <span class="badge">🗣 Parler comme un CISSP</span>
+          <span class="badge">Parler comme un CISSP</span>
           <span class="badge">${Progress.mindsetCount("reform")} réussies</span>
         </div>
         <div class="card">
           <p style="margin-bottom:.8rem">📋 <strong>Contexte :</strong> ${esc(reform.contexte)}</p>
           <div class="explication" style="border-color:var(--ko);background:rgba(231,76,60,.07);margin-bottom:1rem">
-            🙅 <em>Réponse de technicien :</em> « ${esc(reform.technicien)} »
+            <em>Réponse de technicien :</em> « ${esc(reform.technicien)} »
           </div>
           <p class="q-text">Quelle reformulation est celle d'un expert CISSP ?</p>
           <div class="choices">
@@ -163,7 +163,7 @@ const Mindset = (() => {
         });
         document.getElementById("rf-exp").innerHTML = `
           <div class="explication">
-            <strong>${good ? "✅ C'est la voix d'un security manager." : "❌ Pas celle-ci."}</strong> ${esc(reform.pourquoi)}
+            <strong>${good ? "✓ C'est la voix d'un security manager." : "✗ Pas celle-ci."}</strong> ${esc(reform.pourquoi)}
           </div>
           <div style="margin-top:1rem;text-align:right">
             <button class="btn" onclick="Mindset.startReform()">Situation suivante →</button>
@@ -189,12 +189,12 @@ const Mindset = (() => {
       <div style="max-width:820px;margin:0 auto">
         <div class="q-head" style="display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-bottom:1rem;flex-wrap:wrap">
           <button class="btn secondary small" onclick="Mindset.list('principes')">← Mindset</button>
-          <span class="badge">🔍 Décoder la question</span>
+          <span class="badge">Décoder la question</span>
           <span class="badge">${q.domCode}</span>
           <span class="badge">${Progress.mindsetCount("decoder")} réussis</span>
         </div>
         <div class="card">
-          <p style="color:var(--warn);font-size:.92rem;margin-bottom:.7rem">🔍 Avant même de penser à la réponse : quel <strong>mot-opérateur</strong> pilote cette question, et donc la nature de la bonne réponse ?</p>
+          <p style="color:var(--warn);font-size:.92rem;margin-bottom:.7rem">Avant même de penser à la réponse : quel <strong>mot-opérateur</strong> pilote cette question, et donc la nature de la bonne réponse ?</p>
           <p class="q-text">${esc(q.q)}</p>
           <div class="choices">
             ${options.map((o, i) => `<button class="choice" data-n="${o.nom === bon.nom ? 1 : 0}">${LETTRES[i]}. ${esc(o.nom)}</button>`).join("")}
@@ -202,9 +202,9 @@ const Mindset = (() => {
           <div id="dc-exp"></div>
         </div>
         <div class="card" style="margin-top:1rem">
-          <p style="color:var(--warn);font-size:.88rem;margin-bottom:.7rem">🇬🇧 Rappel : l'examen réel est en anglais — repérez les mêmes opérateurs dans les deux langues :
+          <p style="color:var(--warn);font-size:.88rem;margin-bottom:.7rem">Rappel : l'examen réel est en anglais — repérez les mêmes opérateurs dans les deux langues :
           BEST/MOST = MEILLEUR/LE PLUS · FIRST/NEXT = EN PREMIER/ENSUITE · NOT/EXCEPT/LEAST = SAUF/LE MOINS · PRIMARY = PRINCIPAL · responsible/accountable = responsable/imputable.</p>
-          <h3 style="margin-bottom:.5rem">🗝 Les familles de mots-opérateurs</h3>
+          <h3 style="margin-bottom:.5rem">Les familles de mots-opérateurs</h3>
           ${OPERATEURS.map(o => `<p style="font-size:.9rem;color:var(--text-dim);margin:.3rem 0"><strong style="color:var(--text)">${esc(o.nom)}</strong> — ${esc(o.sens)}</p>`).join("")}
         </div>
       </div>`;
@@ -220,7 +220,7 @@ const Mindset = (() => {
         });
         document.getElementById("dc-exp").innerHTML = `
           <div class="explication">
-            <strong>${good ? "✅ Bien décodé." : "❌ L'opérateur était « " + esc(bon.nom) + " »."}</strong> ${esc(bon.sens)}
+            <strong>${good ? "✓ Bien décodé." : "✗ L'opérateur était « " + esc(bon.nom) + " »."}</strong> ${esc(bon.sens)}
             <div style="margin-top:.5rem;color:var(--text-dim)">Réponse attendue à cette question : « ${esc(q.choix[q.reponse])} » — ${esc(q.explication.split(".")[0])}.</div>
           </div>
           <div style="margin-top:1rem;text-align:right"><button class="btn" onclick="Mindset.startDecoder()">Question suivante →</button></div>`;

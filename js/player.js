@@ -59,22 +59,22 @@ const Player = (() => {
             <a class="btn secondary small" href="#/domaine/${domain.id}" onclick="Player.close()">← ${domain.code}</a>
             <strong style="margin-left:.6rem">${esc(lesson.titre)}</strong>
           </div>
-          <span class="tts-note">🔊 Narration vocale : ${("speechSynthesis" in window) ? (frVoice ? "voix française activée" : "voix du navigateur") : "non disponible sur ce navigateur"}</span>
+          <span class="tts-note">${icon("mic", 13)} Narration vocale : ${("speechSynthesis" in window) ? (frVoice ? "voix française activée" : "voix du navigateur") : "non disponible sur ce navigateur"}</span>
         </div>
         <div class="player">
           <div class="slide ${s.type === "intro" ? "intro" : ""} ${s.type === "question" ? "slide-question" : ""}" id="slide">
             ${slideHTML(s)}
           </div>
           <div class="player-controls">
-            <button id="pv-prev" title="Diapositive précédente">⏮</button>
-            <button id="pv-play" title="Lecture / pause">${playing ? "⏸" : "▶"}</button>
-            <button id="pv-next" title="Diapositive suivante">⏭</button>
+            <button id="pv-prev" title="Diapositive précédente">${icon("prev", 16)}</button>
+            <button id="pv-play" title="Lecture / pause">${playing ? icon("pause", 16) : icon("play", 16)}</button>
+            <button id="pv-next" title="Diapositive suivante">${icon("next", 16)}</button>
             <div class="timeline">
               ${lesson.slides.map((_, i) =>
                 `<div class="seg ${i < idx ? "seen" : ""}" data-i="${i}"><i id="seg-${i}"></i></div>`).join("")}
             </div>
             <span class="counter">${idx + 1} / ${li}</span>
-            <button id="pv-mute" title="Couper / activer la narration">${muted ? "🔇" : "🔊"}</button>
+            <button id="pv-mute" title="Couper / activer la narration">${muted ? icon("volumeOff", 16) : icon("volume", 16)}</button>
           </div>
         </div>
       </div>`;
@@ -94,7 +94,7 @@ const Player = (() => {
     muted = !muted;
     if (muted) stopAudio(); else playSlide(lesson.slides[idx]);
     const b = document.getElementById("pv-mute");
-    if (b) b.textContent = muted ? "🔇" : "🔊";
+    if (b) b.innerHTML = muted ? icon("volumeOff", 16) : icon("volume", 16);
   }
 
   function slideHTML(s) {
@@ -113,7 +113,7 @@ const Player = (() => {
         `<li style="animation-delay:${playing ? (i * 1.1) : 0}s">${esc(p)}</li>`).join("")}</ul>`;
     }
     if (s.astuce) h += `<div class="astuce">${esc(s.astuce)}</div>`;
-    if (s.narration) h += `<div class="narration-text">🎙 ${esc(s.narration)}</div>`;
+    if (s.narration) h += `<div class="narration-text">${esc(s.narration)}</div>`;
     return h;
   }
 
@@ -142,7 +142,7 @@ const Player = (() => {
           else if (j === i) b.classList.add("wrong");
         });
         document.getElementById("sq-exp").innerHTML =
-          `<div class="explication">${i === s.reponse ? "✅ Exact !" : "❌ Pas tout à fait."} ${esc(s.explication)}</div>`;
+          `<div class="explication">${i === s.reponse ? "✓ Exact !" : "✗ Pas tout à fait."} ${esc(s.explication)}</div>`;
         if (playing) speak(i === s.reponse
           ? "Bonne réponse ! " + s.explication
           : "Ce n'est pas la bonne réponse. " + s.explication, () => advanceSoon(3200));
@@ -211,11 +211,11 @@ const Player = (() => {
     const next = domain.lecons[domain.lecons.indexOf(lesson) + 1];
     document.getElementById("slide").innerHTML = `
       <div style="margin:auto;text-align:center">
-        <div style="font-size:3.4rem">🎉</div>
+        <div style="color:var(--ok);margin-bottom:.5rem">${icon("award", 40)}</div>
         <h2 style="border:none;padding:0">Leçon terminée !</h2>
         <p style="color:var(--text-dim);margin:.6rem 0 1.2rem">« ${esc(lesson.titre)} » est validée dans votre progression.</p>
         <div style="display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap">
-          ${next ? `<a class="btn" href="#/lecon/${domain.id}/${next.id}" onclick="Player.open(${domain.id},'${next.id}');return false;">Leçon suivante ▶</a>` : ""}
+          ${next ? `<a class="btn" href="#/lecon/${domain.id}/${next.id}" onclick="Player.open(${domain.id},'${next.id}');return false;">Leçon suivante →</a>` : ""}
           <a class="btn secondary" href="#/quiz/${domain.id}">Quiz du domaine ${domain.id}</a>
           <a class="btn secondary" href="#/domaine/${domain.id}">Retour au domaine</a>
         </div>

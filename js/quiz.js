@@ -35,7 +35,7 @@ const Quiz = (() => {
     const app = document.getElementById("app");
     if (idx >= questions.length) return renderResult();
     const q = questions[idx];
-    const diff = ["", "🟢 facile", "🟡 moyen", "🔴 difficile"][q.difficulte || 2];
+    const diff = ["", "facile", "moyen", "difficile"][q.difficulte || 2];
 
     app.innerHTML = `
       <div class="quiz-view" style="max-width:820px;margin:0 auto;--dc:${domain ? domain.couleur : "#4f8ef7"}">
@@ -76,10 +76,10 @@ const Quiz = (() => {
       else if (j === i) b.classList.add("wrong");
     });
     document.getElementById("q-exp").innerHTML =
-      `<div class="explication"><strong>${good ? "✅ Bonne réponse !" : "❌ Mauvaise réponse."}</strong> ${esc(q.explication)}${perOptionHTML(q)}</div>`;
+      `<div class="explication"><strong>${good ? "✓ Bonne réponse !" : "✗ Mauvaise réponse."}</strong> ${esc(q.explication)}${perOptionHTML(q)}</div>`;
     const nextBtn = document.getElementById("q-next");
     nextBtn.style.display = "inline-flex";
-    nextBtn.textContent = idx + 1 < questions.length ? "Question suivante →" : "Voir mon résultat 🏁";
+    nextBtn.textContent = idx + 1 < questions.length ? "Question suivante →" : "Voir mon résultat";
     nextBtn.onclick = () => { idx++; render(); };
     nextBtn.focus();
   }
@@ -108,7 +108,7 @@ const Quiz = (() => {
           </div>
         </div>
         ${failed.length ? `
-        <h2 class="section-title">📝 À revoir (${failed.length})</h2>
+        <h2 class="section-title">À revoir (${failed.length})</h2>
         ${failed.map(a => `
           <div class="card" style="margin-bottom:.8rem">
             <p class="q-text">${esc(a.q.q)}</p>

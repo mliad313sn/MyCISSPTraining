@@ -25,7 +25,7 @@ const Account = (() => {
       app.innerHTML = `
         <div class="card" style="max-width:640px;margin:2rem auto">
           <div style="text-align:center;margin-bottom:1rem">
-            <div style="font-size:3rem">🎓</div>
+            <span style="width:48px;height:48px;margin:0 auto;border-radius:12px;background:var(--primary-soft);color:var(--primary);display:flex;align-items:center;justify-content:center">${icon("user", 24)}</span>
             <h1 class="page-title">Créer mon compte gratuit</h1>
             <p style="color:var(--text-dim)">Étape 1 / 3 — Faisons connaissance. Vos données restent sur votre appareil :
             aucune inscription par e-mail, aucun serveur, aucune publicité.</p>
@@ -55,7 +55,7 @@ const Account = (() => {
       app.innerHTML = `
         <div class="card" style="max-width:640px;margin:2rem auto">
           <div style="text-align:center;margin-bottom:1rem">
-            <div style="font-size:3rem">📅</div>
+            <span style="width:48px;height:48px;margin:0 auto;border-radius:12px;background:var(--primary-soft);color:var(--primary);display:flex;align-items:center;justify-content:center">${icon("calendar", 24)}</span>
             <h1 class="page-title">Votre objectif</h1>
             <p style="color:var(--text-dim)">Étape 2 / 3 — Une date cible transforme une envie en plan.
             Vous pourrez la modifier à tout moment.</p>
@@ -85,30 +85,30 @@ const Account = (() => {
     app.innerHTML = `
       <div class="card" style="max-width:720px;margin:2rem auto">
         <div style="text-align:center;margin-bottom:1rem">
-          <div style="font-size:3rem">🧭</div>
-          <h1 class="page-title">Bienvenue ${esc(profil().prenom)} !</h1>
+          <span style="width:48px;height:48px;margin:0 auto;border-radius:12px;background:var(--primary-soft);color:var(--primary);display:flex;align-items:center;justify-content:center">${icon("compass", 24)}</span>
+          <h1 class="page-title">Bienvenue ${esc(profil().prenom)}</h1>
           <p style="color:var(--text-dim)">Étape 3 / 3 — Voici comment utiliser la plateforme pour réussir du premier coup${jr ? ` (examen dans <strong>${jr} jours</strong>)` : ""}.</p>
         </div>
         <div class="rich">
-          <h3>📐 Votre routine gagnante</h3>
+          <h3>Votre routine gagnante</h3>
           <ul>
             <li><strong>Chaque jour (20-60 min)</strong> : suivez l'objectif du jour sur votre tableau de bord — une ou deux leçons vidéo, puis les flashcards dues (répétition espacée).</li>
             <li><strong>Fin de chaque domaine</strong> : quiz jusqu'à ≥ 80 %, scénarios du domaine, exercices d'ordonnancement.</li>
             <li><strong>Chaque semaine</strong> : videz votre journal d'erreurs et faites quelques drills Mindset (penser/parler comme un manager).</li>
             <li><strong>Dernières semaines</strong> : examens blancs complets jusqu'à une constance ≥ 80 % — c'est le feu vert pour réserver.</li>
           </ul>
-          <h3>🗺️ Votre boussole : le Parcours</h3>
+          <h3>Votre boussole : le Parcours</h3>
           <ul>
             <li>Le <strong>Parcours en 12 escales</strong> est votre fil conducteur : chaque activité s'y coche automatiquement. En cas de doute sur « quoi faire maintenant », ouvrez-le.</li>
             <li>Le <strong>score de préparation</strong> du tableau de bord devient vert à 80 % : il combine leçons, quiz et examens blancs.</li>
           </ul>
-          <h3>💾 Vos données</h3>
+          <h3>Vos données</h3>
           <ul>
             <li>Tout est stocké sur cet appareil. Pensez à <strong>exporter une sauvegarde</strong> depuis la page Suivi (ou pour changer d'appareil).</li>
           </ul>
         </div>
         <div style="display:flex;gap:.7rem;justify-content:center;margin-top:1.4rem;flex-wrap:wrap">
-          <a class="btn" href="#/parcours">🗺️ Commencer mon parcours</a>
+          <a class="btn" href="#/parcours">Commencer mon parcours ${icon("arrowRight", 15)}</a>
           <a class="btn secondary" href="#/">Mon tableau de bord</a>
         </div>
       </div>`;
@@ -123,12 +123,12 @@ const Account = (() => {
     const etapes = Parcours.etapes();
     outer: for (const e of etapes) {
       for (const a of e.activites) {
-        if (!a.done()) { items.push({ icone: "🗺️", label: a.label, href: a.href }); break outer; }
+        if (!a.done()) { items.push({ icone: "map", label: a.label, href: a.href }); break outer; }
       }
     }
-    if (due > 0) items.push({ icone: "🃏", label: `Réviser ${due} flashcard(s) due(s) aujourd'hui`, href: "#/flashcards" });
-    if (errs > 0) items.push({ icone: "📓", label: `Rejouer ${Math.min(20, errs)} question(s) de votre journal d'erreurs`, href: "#/rejouer-erreurs" });
-    if (!items.length) items.push({ icone: "🎯", label: "Tout est à jour — faites un examen blanc pour confirmer !", href: "#/examen" });
+    if (due > 0) items.push({ icone: "cards", label: `Réviser ${due} flashcard(s) due(s) aujourd'hui`, href: "#/flashcards" });
+    if (errs > 0) items.push({ icone: "journal", label: `Rejouer ${Math.min(20, errs)} question(s) de votre journal d'erreurs`, href: "#/rejouer-erreurs" });
+    if (!items.length) items.push({ icone: "target", label: "Tout est à jour — faites un examen blanc pour confirmer !", href: "#/examen" });
     return items.slice(0, 3);
   }
 
@@ -164,26 +164,26 @@ const Account = (() => {
     const ds = Object.values(CISSP_DATA.domains).sort((a, b) => a.id - b.id);
 
     document.getElementById("app").innerHTML = `
-      <h1 class="page-title">📈 Suivi — ${esc(p.prenom)}</h1>
-      <p class="page-sub">${jr && jr > 0 ? `🗓 Examen dans <strong>${jr} jours</strong> (${new Date(p.examDate).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}). ` : ""}
+      <h1 class="page-title">Suivi — ${esc(p.prenom)}</h1>
+      <p class="page-sub">${jr && jr > 0 ? `Examen dans <strong>${jr} jours</strong> (${new Date(p.examDate).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}). ` : ""}
         Votre assiduité et votre plan, mis à jour en continu.</p>
 
       <div class="stats-row">
-        <div class="stat"><div class="num">🔥 ${streak}</div><div class="lbl">jour(s) d'étude consécutifs</div></div>
+        <div class="stat"><div class="num" style="display:flex;align-items:center;gap:.35rem;color:var(--warn)">${icon("flame", 20)} ${streak}</div><div class="lbl">jour(s) d'étude consécutifs</div></div>
         <div class="stat"><div class="num">${jr && jr > 0 ? "J-" + jr : "—"}</div><div class="lbl">avant l'examen</div></div>
         <div class="stat"><div class="num">${Progress.exams().length}</div><div class="lbl">examens blancs passés</div></div>
         <div class="stat"><div class="num">${Progress.errorTotal() - Progress.errors().length}</div><div class="lbl">erreurs corrigées au total</div></div>
       </div>
 
       <div class="card" style="margin-bottom:1.1rem;${pl.alerte ? "border-color:var(--warn)" : ""}">
-        <h3 style="margin-bottom:.4rem">🗓 Mon plan</h3>
+        <h3 style="margin-bottom:.4rem">Mon plan</h3>
         <p style="color:var(--text-dim)">${pl.texte}</p>
-        ${pl.alerte ? `<p style="color:var(--warn);margin-top:.4rem">⚠️ Rythme serré par rapport à votre disponibilité déclarée : augmentez le temps hebdomadaire ou décalez la date.</p>` : ""}
+        ${pl.alerte ? `<p style="color:var(--warn);margin-top:.4rem">Rythme serré par rapport à votre disponibilité déclarée : augmentez le temps hebdomadaire ou décalez la date.</p>` : ""}
         <div style="margin-top:.7rem"><button class="btn secondary small" onclick="Account.signup(2)">Modifier ma date / mon rythme</button></div>
       </div>
 
       <div class="card" style="margin-bottom:1.1rem">
-        <h3 style="margin-bottom:.7rem">📊 Mes 14 derniers jours</h3>
+        <h3 style="margin-bottom:.7rem">Mes 14 derniers jours</h3>
         <div style="display:flex;align-items:flex-end;gap:5px;height:90px">
           ${jours.map(j => `<div title="${j.jour} : ${j.n} action(s)" style="flex:1;background:${j.n ? "linear-gradient(180deg,var(--accent),var(--accent-2))" : "var(--bg-elev)"};height:${Math.max(6, Math.round(84 * j.n / maxN))}px;border-radius:4px"></div>`).join("")}
         </div>
@@ -192,7 +192,7 @@ const Account = (() => {
 
       <div class="grid cols-2" style="margin-bottom:1.1rem">
         <div class="card">
-          <h3 style="margin-bottom:.7rem">📚 Niveau de préparation par domaine</h3>
+          <h3 style="margin-bottom:.7rem">Niveau de préparation par domaine</h3>
           ${ds.map(d => {
             const v = Math.min(100, Math.round(0.5 * Progress.domainPct(d) + 0.5 * Progress.quizBest(d.id)));
             return `<div style="margin-bottom:.55rem">
@@ -202,7 +202,7 @@ const Account = (() => {
           }).join("")}
         </div>
         <div class="card">
-          <h3 style="margin-bottom:.7rem">🎯 Mes examens blancs</h3>
+          <h3 style="margin-bottom:.7rem">Mes examens blancs</h3>
           ${exams.length ? exams.slice().reverse().map(e => `
             <div style="display:flex;justify-content:space-between;gap:1rem;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:.92rem">
               <span>${new Date(e.date).toLocaleDateString("fr-FR", { day: "2-digit", month: "short" })}</span>
@@ -215,13 +215,13 @@ const Account = (() => {
       </div>
 
       <div class="card">
-        <h3 style="margin-bottom:.5rem">💾 Mes données (100 % locales)</h3>
+        <h3 style="margin-bottom:.5rem">Mes données (100 % locales)</h3>
         <p style="color:var(--text-dim);font-size:.9rem;margin-bottom:.8rem">Profil et progression sont stockés uniquement sur cet appareil.
         Exportez une sauvegarde régulière, ou transférez-la sur un autre appareil.</p>
         <div style="display:flex;gap:.7rem;flex-wrap:wrap">
-          <button class="btn secondary" onclick="Account.exporter()">⬇ Exporter ma sauvegarde</button>
-          <label class="btn secondary" style="cursor:pointer">⬆ Restaurer une sauvegarde<input id="import-file" type="file" accept=".json" style="display:none"></label>
-          <button class="btn danger" onclick="if(confirm('Tout effacer (profil + progression) sur cet appareil ?')){Account.reset();}">🗑 Tout réinitialiser</button>
+          <button class="btn secondary" onclick="Account.exporter()">${icon("download", 15)} Exporter ma sauvegarde</button>
+          <label class="btn secondary" style="cursor:pointer">${icon("upload", 15)} Restaurer une sauvegarde<input id="import-file" type="file" accept=".json" style="display:none"></label>
+          <button class="btn danger" onclick="if(confirm('Tout effacer (profil + progression) sur cet appareil ?')){Account.reset();}">${icon("trash", 15)} Tout réinitialiser</button>
         </div>
       </div>`;
 
@@ -253,7 +253,7 @@ const Account = (() => {
         if (!d.profil && !d.progression) throw new Error("format inconnu");
         if (d.profil) saveProfil(d.profil);
         if (d.progression) localStorage.setItem("cissp-fr-progress-v1", JSON.stringify(d.progression));
-        alert("Sauvegarde restaurée ✔");
+        alert("Sauvegarde restaurée ✓");
         location.hash = "#/suivi"; location.reload();
       } catch { alert("Fichier de sauvegarde invalide."); }
     };

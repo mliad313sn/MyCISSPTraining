@@ -7,12 +7,12 @@ const Memo = (() => {
     const m = CISSP_DATA.memo || { mnemoniques: [], ordres: [] };
     const ds = CISSP_DATA.domains;
     document.getElementById("app").innerHTML = `
-      <h1 class="page-title">🧠 Mémo — mnémoniques & séquences</h1>
+      <h1 class="page-title">Mémo — mnémoniques & séquences</h1>
       <p class="page-sub">L'examen adore les listes ordonnées et les acronymes. Cette section rassemble les moyens
       mnémotechniques éprouvés de la communauté CISSP et des exercices interactifs pour ancrer les séquences.</p>
       <div style="display:flex;gap:.6rem;margin-bottom:1.4rem">
-        <button class="btn ${tab === "mnemo" ? "" : "secondary"}" onclick="Memo.list('mnemo')">💡 Mnémoniques</button>
-        <button class="btn ${tab === "ordres" ? "" : "secondary"}" onclick="Memo.list('ordres')">🔢 Remettre dans l'ordre</button>
+        <button class="btn ${tab === "mnemo" ? "" : "secondary"}" onclick="Memo.list('mnemo')">${icon("brain", 15)} Mnémoniques</button>
+        <button class="btn ${tab === "ordres" ? "" : "secondary"}" onclick="Memo.list('ordres')">${icon("layers", 15)} Remettre dans l'ordre</button>
       </div>
       ${tab === "mnemo" ? `
         <div class="grid cols-2">
@@ -25,7 +25,7 @@ const Memo = (() => {
                 <span class="badge" style="border-color:${d ? d.couleur : ""};color:${d ? d.couleur : ""}">${d ? d.code : ""}</span>
               </div>
               <p style="margin:.5rem 0;color:var(--warn)">${esc(x.moyen)}</p>
-              <button class="btn secondary small" onclick="const el=document.getElementById('mn-${i}');el.style.display=el.style.display==='none'?'block':'none';this.textContent=el.style.display==='none'?'👁 Révéler le détail':'🙈 Masquer'">👁 Révéler le détail</button>
+              <button class="btn secondary small" onclick="const el=document.getElementById('mn-${i}');el.style.display=el.style.display==='none'?'block':'none';this.textContent=el.style.display==='none'?'Révéler le détail':'Masquer'">Révéler le détail</button>
               <p id="mn-${i}" style="display:none;margin-top:.6rem;color:var(--text-dim)">${esc(x.detail)}</p>
             </div>`;
           }).join("")}
@@ -35,7 +35,7 @@ const Memo = (() => {
             const d = ds[o.domaine];
             return `
             <div class="card domain-card" style="--dc:${d ? d.couleur : "#4f8ef7"}" onclick="Memo.openEx('${o.id}')">
-              <div class="dc-head"><span class="dc-icon">🔢</span><span class="badge">${d ? d.code : ""}</span></div>
+              <div class="dc-head"><span class="dc-icon" style="color:var(--primary)">${icon("layers", 17)}</span><span class="badge">${d ? d.code : ""}</span></div>
               <h3>${esc(o.titre)}</h3>
               <div class="dc-en">${o.items.length} éléments à ordonner</div>
             </div>`;
@@ -68,7 +68,7 @@ const Memo = (() => {
       <div style="max-width:760px;margin:0 auto;--dc:${d ? d.couleur : "#4f8ef7"}">
         <button class="btn secondary small" onclick="Memo.list('ordres')">← Tous les exercices</button>
         <div class="card" style="margin-top:1rem">
-          <h1 class="page-title" style="font-size:1.4rem">🔢 ${esc(ex.titre)}</h1>
+          <h1 class="page-title" style="font-size:1.4rem">${esc(ex.titre)}</h1>
           <p style="color:var(--text-dim);margin-bottom:1rem">${esc(ex.consigne)} Cliquez les éléments <strong>dans l'ordre</strong> — une erreur et l'élément vibre.</p>
           <div id="ex-done" style="display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem">
             ${picked.map((p, i) => `<div class="choice correct" style="cursor:default">${i + 1}. ${esc(p)}</div>`).join("")}
@@ -110,15 +110,15 @@ const Memo = (() => {
     document.getElementById("app").innerHTML = `
       <div style="max-width:760px;margin:0 auto;--dc:${d ? d.couleur : "#4f8ef7"}">
         <div class="card" style="text-align:center">
-          <div style="font-size:3rem">${perfect ? "🏆" : errors <= 2 ? "👍" : "📚"}</div>
+          <div style="color:${perfect ? "var(--ok)" : errors <= 2 ? "var(--primary)" : "var(--warn)"};margin-bottom:.4rem">${icon(perfect ? "award" : errors <= 2 ? "check" : "book", 36)}</div>
           <h1 class="page-title">${perfect ? "Sans faute !" : errors + " erreur(s)"}</h1>
           <p style="color:var(--text-dim)">${esc(ex.titre)}</p>
           <div style="display:flex;flex-direction:column;gap:.4rem;margin:1.2rem 0;text-align:left">
             ${ex.items.map((p, i) => `<div class="choice correct" style="cursor:default">${i + 1}. ${esc(p)}</div>`).join("")}
           </div>
-          <div class="astuce" style="text-align:left">💡 Moyen mnémotechnique : ${esc(ex.indice)}</div>
+          <div class="astuce" style="text-align:left">Moyen mnémotechnique : ${esc(ex.indice)}</div>
           <div style="display:flex;gap:.7rem;justify-content:center;margin-top:1.2rem;flex-wrap:wrap">
-            <button class="btn" onclick="Memo.openEx('${ex.id}')">🔁 Recommencer</button>
+            <button class="btn" onclick="Memo.openEx('${ex.id}')">Recommencer</button>
             <button class="btn secondary" onclick="Memo.list('ordres')">Autres exercices</button>
           </div>
         </div>

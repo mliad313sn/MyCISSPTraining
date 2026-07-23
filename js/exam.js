@@ -62,12 +62,12 @@ const Exam = (() => {
     const hist = Progress.exams().slice(-5).reverse();
     const enTotal = domains().reduce((s, d) => s + (d.quizEn || []).length, 0);
     document.getElementById("app").innerHTML = `
-      <h1 class="page-title">🎯 Examen blanc</h1>
+      <h1 class="page-title">Examen blanc</h1>
       <p class="page-sub">Entraînez-vous en français, puis passez en <strong>conditions réelles</strong>.
       Objectif avant de réserver : <strong>≥ 80 %</strong> de façon constante.</p>
 
       <div class="card" style="border-color:var(--warn);margin-bottom:1.4rem">
-        <h3>⚠️ Important : l'examen réel est en ANGLAIS</h3>
+        <h3 style="display:flex;align-items:center;gap:.5rem;color:var(--warn)">${icon("alert", 17)} Important : l'examen réel est en anglais</h3>
         <p style="color:var(--text-dim);margin-top:.4rem">Depuis 2024, le CISSP n'est plus proposé en français : un candidat francophone passe
         l'examen <strong>CAT en anglais</strong> (100 à 150 questions, 3 h, dont 25 items pré-test non notés, arrêt anticipé possible,
         aucun retour arrière, pas de temps additionnel). Entraînez-vous d'abord en français pour les concepts,
@@ -75,7 +75,7 @@ const Exam = (() => {
       </div>
 
       <div class="card" style="border-color:var(--accent);margin-bottom:1.4rem;display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap">
-        <div style="font-size:2.6rem">🇬🇧</div>
+        <span style="flex:none;width:44px;height:44px;border-radius:11px;background:var(--primary-soft);color:var(--primary);display:flex;align-items:center;justify-content:center">${icon("globe", 22)}</span>
         <div style="flex:1;min-width:240px">
           <h3>Simulation CAT réelle — en anglais</h3>
           <p style="color:var(--text-dim);font-size:.92rem">Adaptative (la difficulté suit vos réponses), 100-150 questions selon votre constance,
@@ -84,13 +84,13 @@ const Exam = (() => {
         <button class="btn" onclick="Exam.start('cat')" ${enTotal >= 60 ? "" : "disabled title='Banque anglaise en cours de chargement'"}>Passer en conditions réelles</button>
       </div>
 
-      <h2 class="section-title">🇫🇷 Entraînements en français</h2>
+      <h2 class="section-title">Entraînements en français</h2>
       <div class="grid cols-3">
         ${["mini", "demi", "complet"].map(k => {
           const f = FORMATS[k];
           return `
           <div class="card" style="text-align:center">
-            <div style="font-size:2.2rem">${k === "complet" ? "🏆" : k === "demi" ? "⏱" : "⚡"}</div>
+            <span style="width:40px;height:40px;margin:0 auto;border-radius:10px;background:var(--surface-3);color:var(--muted);display:flex;align-items:center;justify-content:center">${icon(k === "complet" ? "award" : k === "demi" ? "timer" : "sparkle", 20)}</span>
             <h3 style="margin:.5rem 0">${f.label.split("—")[0]}</h3>
             <p style="color:var(--text-dim);font-size:.9rem;margin-bottom:1rem">${f.n} questions · ${f.minutes >= 60 ? (f.minutes / 60) + " h" : f.minutes + " min"}${k === "complet" ? " · items d'ordonnancement inclus" : ""}</p>
             <button class="btn secondary" onclick="Exam.start('${k}')">Commencer</button>
@@ -98,7 +98,7 @@ const Exam = (() => {
         }).join("")}
       </div>
       ${hist.length ? `
-        <h2 class="section-title">📈 Mes derniers examens blancs</h2>
+        <h2 class="section-title">Mes derniers examens blancs</h2>
         <div class="card">
           ${hist.map(e => `
             <div style="display:flex;justify-content:space-between;gap:1rem;padding:.45rem 0;border-bottom:1px solid var(--border)">
@@ -189,7 +189,7 @@ const Exam = (() => {
     document.getElementById("app").innerHTML = `
       <div style="max-width:840px;margin:0 auto">
         <div class="q-head" style="display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap">
-          <span class="badge">${mode === "cat" ? "🇬🇧 CAT" : "🇫🇷"} Question ${numero} ${mode === "cat" ? "(max 150)" : "/ " + total}</span>
+          <span class="badge">${mode === "cat" ? "CAT · EN" : "FR"} · Question ${numero} ${mode === "cat" ? "(max 150)" : "/ " + total}</span>
           <span class="exam-timer" id="exam-timer">…</span>
           <button class="btn danger small" onclick="if(confirm('Abandonner cet examen blanc ?')) Exam.home()">Abandonner</button>
         </div>
@@ -201,7 +201,7 @@ const Exam = (() => {
             ${q.choix.map((c, i) => `<button class="choice" data-i="${i}">${LETTRES[i]}. ${esc(c)}</button>`).join("")}
           </div>`}
         </div>
-        <p style="color:var(--text-dim);font-size:.83rem;margin-top:.7rem">⚠️ Comme à l'examen réel : une fois validée, impossible de revenir sur une question.${mode === "cat" ? " Certaines questions sont des items pré-test non notés — impossible de les distinguer, comme au vrai CAT." : ""}</p>
+        <p style="color:var(--text-dim);font-size:.83rem;margin-top:.7rem">Comme à l'examen réel : une fois validée, impossible de revenir sur une question.${mode === "cat" ? " Certaines questions sont des items pré-test non notés — impossible de les distinguer, comme au vrai CAT." : ""}</p>
       </div>`;
     tick();
 
@@ -215,7 +215,7 @@ const Exam = (() => {
   function renderOrdreHTML(q) {
     ordChoice = [];
     return `
-      <span class="badge" style="margin-bottom:.6rem">🧩 Item avancé — ordonnancement (comme les drag-and-drop du réel)</span>
+      <span class="badge" style="margin-bottom:.6rem">Item avancé — ordonnancement (comme les drag-and-drop du réel)</span>
       <p class="q-text" style="margin-top:.5rem">${esc(q.titre)}</p>
       <p style="color:var(--text-dim);font-size:.92rem;margin-bottom:.8rem">${esc(q.consigne)} Cliquez les éléments dans l'ordre.</p>
       <div class="choices" id="ord-src">
@@ -277,9 +277,9 @@ const Exam = (() => {
     document.getElementById("app").innerHTML = `
       <div style="max-width:840px;margin:0 auto">
         <div class="card" style="text-align:center">
-          ${timeout ? `<p style="color:var(--warn)">⏰ Temps écoulé !</p>` : ""}
-          ${mode === "cat" ? `<span class="badge">🇬🇧 Simulation CAT · ${answers.length} questions posées · ${answers.length - total} pré-test non notées</span>` : ""}
-          <h1 class="page-title" style="margin-top:.5rem">${passe ? "🏆 " + (mode === "cat" ? "PASS (estimation)" : "Réussi !") : pct >= 60 ? "🟡 Presque…" : "📚 À retravailler"}</h1>
+          ${timeout ? `<p style="color:var(--warn)">Temps écoulé.</p>` : ""}
+          ${mode === "cat" ? `<span class="badge">Simulation CAT · EN · ${answers.length} questions posées · ${answers.length - total} pré-test non notées</span>` : ""}
+          <h1 class="page-title" style="margin-top:.5rem">${passe ? (mode === "cat" ? "PASS (estimation)" : "Réussi") : pct >= 60 ? "Presque…" : "À retravailler"}</h1>
           <div class="quiz-result-ring" style="--p:${pct}"><span>${pct}%</span></div>
           <p>${score} bonnes réponses sur ${total} notées.
           ${mode === "cat" ? `Score estimé ≈ <strong>${scaled}/1000</strong> (standard de passage : 700).` : ""}</p>
@@ -288,11 +288,11 @@ const Exam = (() => {
             : "Concentrez vos révisions sur les domaines les plus faibles ci-dessous, puis retentez."}</p>
           <div style="display:flex;gap:.7rem;justify-content:center;margin-top:1rem;flex-wrap:wrap">
             <button class="btn" onclick="Exam.home()">Nouvel examen blanc</button>
-            <a class="btn secondary" href="#/erreurs">📓 Mon journal d'erreurs</a>
+            <a class="btn secondary" href="#/erreurs">Mon journal d'erreurs</a>
             <a class="btn secondary" href="#/domaines">Réviser les domaines</a>
           </div>
         </div>
-        <h2 class="section-title">📊 Résultat par domaine</h2>
+        <h2 class="section-title">Résultat par domaine</h2>
         <div class="card">
           ${Object.values(byDom).map(b => {
             const p = Math.round(100 * b.ok / b.n);
@@ -305,7 +305,7 @@ const Exam = (() => {
           }).join("")}
         </div>
         ${failed.length ? `
-        <h2 class="section-title">📝 Questions ratées (${failed.length})</h2>
+        <h2 class="section-title">Questions ratées (${failed.length})</h2>
         ${failed.map(a => `
           <div class="card" style="margin-bottom:.8rem">
             <span class="badge">${a.q.domCode}</span>${a.pretest ? `<span class="badge">pré-test non noté</span>` : ""}

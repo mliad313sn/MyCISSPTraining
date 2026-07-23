@@ -47,7 +47,7 @@ const Flashcards = (() => {
     if (idx >= deck.length) {
       app.innerHTML = `
         <div class="card" style="max-width:620px;margin:2rem auto;text-align:center">
-          <div style="font-size:3rem">🧠</div>
+          <span style="width:48px;height:48px;margin:0 auto .6rem;border-radius:12px;background:var(--primary-soft);color:var(--primary);display:flex;align-items:center;justify-content:center">${icon("brain", 24)}</span>
           <h1 class="page-title">Session terminée !</h1>
           <p>Vous avez marqué <strong>${known} / ${deck.length}</strong> cartes comme connues.</p>
           <p style="color:var(--text-dim);font-size:.9rem;margin-top:.5rem">Les cartes connues reviendront plus tard (répétition espacée) ;
@@ -66,14 +66,14 @@ const Flashcards = (() => {
         <div class="q-head" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:.6rem">
           <span class="badge" style="border-color:${c.couleur};color:${c.couleur}">${c.dom}</span>
           <span class="badge">Carte ${idx + 1} / ${deck.length}</span>
-          <span class="badge" title="Niveau de mémorisation (boîte de Leitner)">📦 niveau ${st.box}/5</span>
+          <span class="badge" title="Niveau de mémorisation (boîte de Leitner)">niveau ${st.box}/5</span>
           <select id="fc-domsel" class="btn secondary small" style="cursor:pointer">
             <option value="all" ${scope === "all" ? "selected" : ""}>Tous les domaines</option>
             ${Object.values(CISSP_DATA.domains).map(d =>
               `<option value="${d.id}" ${String(scope) === String(d.id) ? "selected" : ""}>${d.code} — ${esc(d.titre)}</option>`).join("")}
           </select>
         </div>
-        ${aheadMode ? `<p style="text-align:center;color:var(--ok);font-size:.88rem;margin-bottom:.6rem">✨ Aucune carte due aujourd'hui — vous révisez en avance.</p>` : ""}
+        ${aheadMode ? `<p style="text-align:center;color:var(--ok);font-size:.88rem;margin-bottom:.6rem">Aucune carte due aujourd'hui — vous révisez en avance.</p>` : ""}
         <div class="flashcard-scene">
           <div class="flashcard" id="fc" style="border-color:${c.couleur}">
             <div class="face front">${esc(c.recto)}</div>
@@ -82,8 +82,8 @@ const Flashcards = (() => {
         </div>
         <p style="text-align:center;color:var(--text-dim);font-size:.85rem;margin-top:.6rem">Cliquez sur la carte pour la retourner</p>
         <div class="fc-controls">
-          <button class="btn danger" id="fc-again">🔁 À revoir</button>
-          <button class="btn" id="fc-known" style="background:linear-gradient(135deg,#1e8f4d,#2ecc71)">✔ Je connais</button>
+          <button class="btn danger" id="fc-again">À revoir</button>
+          <button class="btn" id="fc-known" style="background:var(--ok)">✓ Je connais</button>
         </div>
       </div>`;
 

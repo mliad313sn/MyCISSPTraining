@@ -79,37 +79,37 @@ const App = (() => {
         const p = Account.profil();
         if (!p) return `
       <section class="hero">
+        <div class="eyebrow"><span class="dot"></span> Gratuit · 8 domaines · Aligné ISC2 2024</div>
         <h1>Réussissez le <span>CISSP</span> du premier coup,<br>en français.</h1>
-        <p>Une formation complète, gratuite et interactive couvrant les 8 domaines du CBK d'ISC2 :
-        vidéos interactives avec narration vocale, quiz corrigés, flashcards, scénarios réels et examens blancs chronométrés.
-        Créez votre compte (local, sans e-mail) pour un plan personnalisé et un suivi complet.</p>
+        <p>Formation complète et interactive : leçons narrées, quiz corrigés en détail, scénarios réels,
+        simulation CAT en conditions d'examen et suivi de progression personnalisé — sans e-mail, sans serveur, sans frais.</p>
         <div class="cta">
-          <a class="btn" href="#/inscription">✨ Créer mon compte gratuit</a>
-          <a class="btn secondary" href="#/parcours">🗺️ Explorer le parcours</a>
-          <a class="btn secondary" href="#/methode">📋 La méthode</a>
+          <a class="btn" href="#/inscription">Créer mon compte gratuit ${icon("arrowRight", 16)}</a>
+          <a class="btn secondary" href="#/parcours">${icon("map", 16)} Explorer le parcours</a>
+          <a class="btn secondary" href="#/methode">${icon("clipboard", 16)} La méthode</a>
         </div>
       </section>`;
         const jr = Account.joursRestants();
         const obj = Account.objectifDuJour();
         return `
-      <section class="hero" style="padding-bottom:1.6rem">
-        <h1>Bonjour <span>${esc(p.prenom)}</span> 👋</h1>
-        <p>${jr && jr > 0 ? `Examen dans <strong>J-${jr}</strong> · ` : ""}🔥 ${Progress.streak()} jour(s) d'étude consécutifs.
-        Voici votre objectif du jour :</p>
+      <section class="hero" style="padding:2.2rem 1rem 1.6rem">
+        <h1 style="font-size:1.9rem">Bonjour <span>${esc(p.prenom)}</span></h1>
+        <p>${jr && jr > 0 ? `Examen dans <strong>J-${jr}</strong> · ` : ""}${icon("flame", 15)} ${Progress.streak()} jour(s) d'étude consécutifs.
+        Votre objectif du jour :</p>
         <div style="max-width:640px;margin:0 auto 1.2rem;text-align:left">
           ${obj.map(o => `
             <a href="${o.href}" style="text-decoration:none;color:inherit">
               <div class="choice" style="display:flex;gap:.7rem;align-items:center;margin-bottom:.5rem">
-                <span>${o.icone}</span><span style="flex:1">${esc(o.label)}</span><span style="color:var(--accent)">→</span>
+                <span style="color:var(--primary);display:flex">${icon(o.icone, 18)}</span><span style="flex:1">${esc(o.label)}</span><span style="color:var(--faint)">${icon("arrowRight", 15)}</span>
               </div>
             </a>`).join("")}
         </div>
         <div class="cta">
-          <a class="btn" href="#/parcours">🗺️ ${pct > 0 ? "Reprendre mon parcours" : "Commencer le parcours guidé"}</a>
+          <a class="btn" href="#/parcours">${icon("map", 16)} ${pct > 0 ? "Reprendre mon parcours" : "Commencer le parcours guidé"}</a>
           ${next
-            ? `<a class="btn secondary" href="#/lecon/${next.d.id}/${next.l.id}">▶ Prochaine leçon : ${esc(next.l.titre)}</a>`
-            : `<a class="btn secondary" href="#/examen">🏆 Examen blanc</a>`}
-          <a class="btn secondary" href="#/suivi">📈 Mon suivi</a>
+            ? `<a class="btn secondary" href="#/lecon/${next.d.id}/${next.l.id}">${icon("play", 14)} Prochaine leçon : ${esc(next.l.titre)}</a>`
+            : `<a class="btn secondary" href="#/examen">${icon("target", 16)} Examen blanc</a>`}
+          <a class="btn secondary" href="#/suivi">${icon("chart", 16)} Mon suivi</a>
         </div>
       </section>`;
       })()}
@@ -123,41 +123,27 @@ const App = (() => {
         <div class="stat"><div class="num">${lastExam ? lastExam.pct + "%" : "—"}</div><div class="lbl">Dernier examen blanc</div></div>
       </div>
 
-      <h2 class="section-title">📚 Les 8 domaines du CISSP</h2>
+      <h2 class="section-title">Les 8 domaines du CISSP</h2>
       <div class="grid cols-4">${ds.map(domainCard).join("")}</div>
 
-      <h2 class="section-title">🚀 Entraînement</h2>
-      <div class="grid cols-4">
-        <div class="card" style="text-align:center">
-          <div style="font-size:2rem">🎬</div><h3>Scénarios réels</h3>
-          <p style="color:var(--text-dim);font-size:.9rem;margin:.4rem 0 1rem">${(CISSP_DATA.scenarios || []).length} études de cas inspirées d'incidents réels.</p>
-          <a class="btn secondary" href="#/scenarios">Décider</a>
-        </div>
-        <div class="card" style="text-align:center">
-          <div style="font-size:2rem">🃏</div><h3>Flashcards</h3>
-          <p style="color:var(--text-dim);font-size:.9rem;margin:.4rem 0 1rem">${totalCards} cartes avec répétition espacée (Leitner).</p>
-          <a class="btn secondary" href="#/flashcards">Réviser</a>
-        </div>
-        <div class="card" style="text-align:center">
-          <div style="font-size:2rem">🧠</div><h3>Mémo</h3>
-          <p style="color:var(--text-dim);font-size:.9rem;margin:.4rem 0 1rem">Mnémoniques et séquences à remettre dans l'ordre.</p>
-          <a class="btn secondary" href="#/memo">Mémoriser</a>
-        </div>
-        <div class="card" style="text-align:center">
-          <div style="font-size:2rem">📓</div><h3>Journal d'erreurs</h3>
-          <p style="color:var(--text-dim);font-size:.9rem;margin:.4rem 0 1rem">${nbErreurs ? nbErreurs + " question(s) ratée(s) à rejouer jusqu'à zéro." : "Vos questions ratées s'enregistrent ici automatiquement."}</p>
-          <a class="btn secondary" href="#/erreurs">Retravailler</a>
-        </div>
-        <div class="card" style="text-align:center">
-          <div style="font-size:2rem">🎯</div><h3>Examen blanc</h3>
-          <p style="color:var(--text-dim);font-size:.9rem;margin:.4rem 0 1rem">Simulation chronométrée, tirage pondéré comme le vrai examen.</p>
-          <a class="btn secondary" href="#/examen">Se tester</a>
-        </div>
-        <div class="card" style="text-align:center">
-          <div style="font-size:2rem">📖</div><h3>Glossaire</h3>
-          <p style="color:var(--text-dim);font-size:.9rem;margin:.4rem 0 1rem">Tous les termes techniques anglais expliqués en français.</p>
-          <a class="btn secondary" href="#/glossaire">Consulter</a>
-        </div>
+      <h2 class="section-title">Entraînement</h2>
+      <div class="grid cols-3">
+        ${[
+          { ic: "clapper", t: "Scénarios réels", p: `${(CISSP_DATA.scenarios || []).length} études de cas inspirées d'incidents réels.`, a: "Décider", h: "#/scenarios" },
+          { ic: "cards", t: "Flashcards", p: `${totalCards} cartes avec répétition espacée (Leitner).`, a: "Réviser", h: "#/flashcards" },
+          { ic: "brain", t: "Mémo", p: "Mnémoniques et séquences à remettre dans l'ordre.", a: "Mémoriser", h: "#/memo" },
+          { ic: "journal", t: "Journal d'erreurs", p: nbErreurs ? nbErreurs + " question(s) ratée(s) à rejouer jusqu'à zéro." : "Vos questions ratées s'enregistrent ici automatiquement.", a: "Retravailler", h: "#/erreurs" },
+          { ic: "target", t: "Examen blanc", p: "Simulation chronométrée, tirage pondéré, mode CAT anglais.", a: "Se tester", h: "#/examen" },
+          { ic: "book", t: "Glossaire", p: "Tous les termes techniques anglais expliqués en français.", a: "Consulter", h: "#/glossaire" }
+        ].map(c => `
+        <div class="card" style="display:flex;gap:.9rem;align-items:flex-start;cursor:pointer" onclick="App.nav('${c.h}')">
+          <span style="flex:none;width:38px;height:38px;border-radius:10px;background:var(--primary-soft);color:var(--primary);display:flex;align-items:center;justify-content:center">${icon(c.ic, 19)}</span>
+          <div style="flex:1">
+            <h3>${c.t}</h3>
+            <p style="color:var(--muted);font-size:.85rem;margin:.25rem 0 .5rem">${c.p}</p>
+            <a class="btn secondary small" href="${c.h}" onclick="event.stopPropagation()">${c.a}</a>
+          </div>
+        </div>`).join("")}
       </div>`;
   }
 
@@ -168,7 +154,7 @@ const App = (() => {
     return `
       <div class="card domain-card" style="--dc:${d.couleur}" onclick="App.nav('#/domaine/${d.id}')">
         <div class="dc-head"><span class="dc-icon">${d.icone}</span><span class="badge">${d.code} · ${d.poids}</span>
-          ${pret ? `<span class="badge" style="color:var(--ok);border-color:var(--ok)">✅ prêt</span>` : ""}</div>
+          ${pret ? `<span class="badge" style="color:var(--ok);border-color:var(--ok)">✓ prêt</span>` : ""}</div>
         <h3>${esc(d.titre)}</h3>
         <div class="dc-en">${esc(d.titreEn)}</div>
         <div class="progressbar"><span style="width:${pct}%"></span></div>
@@ -213,7 +199,7 @@ const App = (() => {
           </div>
         </div>
 
-        <h2 class="section-title">🎬 Leçons vidéo interactives</h2>
+        <h2 class="section-title">Leçons vidéo interactives</h2>
         ${d.lecons.map((l, i) => `
           <div class="lesson-row ${Progress.lessonDone(l.id) ? "done" : ""}" onclick="App.nav('#/lecon/${d.id}/${l.id}')">
             <div class="lr-num">${Progress.lessonDone(l.id) ? "✓" : i + 1}</div>
@@ -221,10 +207,10 @@ const App = (() => {
               <div class="lr-title">${esc(l.titre)}</div>
               <div class="lr-sub">${l.slides.length} diapositives · ≈ ${l.duree} min · narration vocale 🇫🇷</div>
             </div>
-            <div class="lr-play">▶</div>
+            <div class="lr-play">${icon("play", 15)}</div>
           </div>`).join("")}
 
-        <h2 class="section-title">🧪 Se tester sur ce domaine</h2>
+        <h2 class="section-title">Se tester sur ce domaine</h2>
         <div class="grid cols-3">
           <div class="card" style="text-align:center">
             <h3>Quiz du domaine</h3>
@@ -237,7 +223,7 @@ const App = (() => {
             <button class="btn secondary" onclick="Flashcards.open(${d.id})">Réviser</button>
           </div>
           <div class="card">
-            <h3>🎯 Objectifs officiels</h3>
+            <h3>Objectifs officiels</h3>
             <ul style="padding-left:1.1rem;color:var(--text-dim);font-size:.88rem;margin-top:.5rem">
               ${d.objectifs.slice(0, 8).map(o => `<li>${esc(o)}</li>`).join("")}
             </ul>
@@ -250,13 +236,13 @@ const App = (() => {
   function renderErrors() {
     const errs = Progress.errors();
     document.getElementById("app").innerHTML = `
-      <h1 class="page-title">📓 Mon journal d'erreurs</h1>
+      <h1 class="page-title">Mon journal d'erreurs</h1>
       <p class="page-sub">Chaque question ratée (quiz ou examen blanc) atterrit ici automatiquement.
       Rejouez-les régulièrement : une bonne réponse la fait sortir du journal. Un journal vide avant l'examen,
       c'est le meilleur indicateur de préparation.</p>
       ${errs.length ? `
         <div style="display:flex;gap:.8rem;align-items:center;margin-bottom:1.2rem;flex-wrap:wrap">
-          <a class="btn" href="#/rejouer-erreurs">🔁 Rejouer mes erreurs (${Math.min(20, errs.length)} questions)</a>
+          <a class="btn" href="#/rejouer-erreurs">Rejouer mes erreurs (${Math.min(20, errs.length)} questions)</a>
           <span class="badge">${errs.length} question(s) à retravailler</span>
         </div>
         ${errs.map(e => `
@@ -270,7 +256,7 @@ const App = (() => {
             <div class="explication">${esc(e.q.explication)}${perOptionHTML(e.q)}</div>
           </div>`).join("")}`
       : `<div class="card" style="text-align:center;padding:2.5rem">
-          <div style="font-size:3rem">🌤</div>
+          <div style="color:var(--ok);margin-bottom:.4rem">${icon("check", 34)}</div>
           <h3>Journal vide — bravo !</h3>
           <p style="color:var(--text-dim);margin-top:.4rem">${Progress.errorTotal()
             ? "Toutes vos erreurs passées ont été corrigées. Continuez les quiz pour en débusquer d'autres."
@@ -284,10 +270,10 @@ const App = (() => {
   function renderGlossary() {
     const terms = (CISSP_DATA.glossaire || []).slice().sort((a, b) => a.terme.localeCompare(b.terme));
     document.getElementById("app").innerHTML = `
-      <h1 class="page-title">📖 Glossaire CISSP</h1>
+      <h1 class="page-title">Glossaire CISSP</h1>
       <p class="page-sub">Les termes techniques restent en anglais à l'examen — voici leur explication en français.</p>
       <div style="display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;margin-bottom:1.2rem">
-        <input class="gloss-search" id="gs" type="search" placeholder="🔍 Rechercher un terme (ex : ALE, Kerberos, Zero Trust…)" autocomplete="off" style="flex:1;min-width:240px;margin-bottom:0">
+        <input class="gloss-search" id="gs" type="search" placeholder="Rechercher un terme (ex : ALE, Kerberos, Zero Trust…)" autocomplete="off" style="flex:1;min-width:240px;margin-bottom:0">
         <label class="badge" style="cursor:pointer;padding:.55rem .9rem;font-size:.9rem">
           <input type="checkbox" id="gs-acro" style="margin-right:.4rem">Acronymes uniquement
         </label>
@@ -314,25 +300,25 @@ const App = (() => {
   function renderMethod() {
     Progress.markVisited("methode");
     document.getElementById("app").innerHTML = `
-      <h1 class="page-title">📋 La méthode pour réussir du premier coup</h1>
+      <h1 class="page-title">La méthode pour réussir du premier coup</h1>
       <p class="page-sub">Le CISSP n'est pas un examen technique : c'est un examen de <strong>jugement managérial</strong>.
       Voici la stratégie complète, adaptée de l'expérience de candidats certifiés.</p>
       <div class="card rich">
-        <h3>🧠 1. Penser comme un manager (« Think like a CEO »)</h3>
+        <h3>1. Penser comme un manager (« Think like a CEO »)</h3>
         <ul>
           <li>Vous êtes un <strong>conseiller du business</strong>, pas un technicien : la sécurité sert les objectifs de l'organisation.</li>
           <li>La <strong>vie humaine</strong> prime toujours sur tout le reste ; ensuite viennent la mission et les données.</li>
           <li>Privilégiez les réponses de <strong>gouvernance et de processus</strong> (politique, analyse de risque, validation de la direction) avant les réponses purement techniques.</li>
           <li>Le bon réflexe : quelle option réduit le risque de façon <strong>rentable</strong> (cost-effective) ?</li>
         </ul>
-        <h3>🗓 2. Plan d'étude conseillé (8 à 12 semaines)</h3>
+        <h3>2. Plan d'étude conseillé (8 à 12 semaines)</h3>
         <ul>
           <li><strong>Semaines 1–6 :</strong> une leçon vidéo par jour, quiz du domaine à la fin de chaque domaine. Visez ≥ 80 % avant de passer au suivant.</li>
           <li><strong>Semaines 7–8 :</strong> flashcards quotidiennes (15 min) + mini examens blancs. Notez chaque erreur dans un carnet.</li>
           <li><strong>Semaines 9–10 :</strong> examens blancs complets (100 questions / 3 h). Constance ≥ 80 % = vous êtes prêt.</li>
           <li><strong>Dernière semaine :</strong> relisez vos erreurs et les résumés de leçons. Pas de bachotage la veille : dormez.</li>
         </ul>
-        <h3>🎯 3. Stratégie le jour J (examen CAT)</h3>
+        <h3>3. Stratégie le jour J (examen CAT)</h3>
         <ul>
           <li>3 heures, 100 à 150 questions, <strong>impossible de revenir en arrière</strong> — répondez et avancez.</li>
           <li>Lisez la question <strong>sans regarder les réponses</strong> ; imaginez la réponse idéale, puis cherchez-la.</li>
@@ -341,18 +327,18 @@ const App = (() => {
           <li>Méfiez-vous des <strong>absolus</strong> (« always », « never ») ; cherchez la réponse qui englobe les autres.</li>
           <li>En cas d'incident dans un scénario : <strong>sauver les vies d'abord</strong>, puis contenir, puis le reste.</li>
         </ul>
-        <h3>📌 4. Repères de l'examen</h3>
+        <h3>4. Repères de l'examen</h3>
         <ul>
           <li>Expérience requise : 5 ans dans au moins 2 domaines du CBK (1 an offert par un diplôme reconnu) ; sinon statut <em>Associate of ISC2</em>.</li>
           <li>Les 8 domaines pèsent chacun entre 10 % et 16 % — aucun ne peut être ignoré.</li>
           <li>Après l'examen : endorsement par un membre ISC2, adhésion au <em>Code of Ethics</em>, puis 120 CPE sur 3 ans pour maintenir le titre.</li>
         </ul>
-        <h3>💪 5. Le mental</h3>
+        <h3>5. Le mental</h3>
         <ul>
           <li>Croyez au processus : votre préparation paiera. Un doute sur une question ? Répondez, oubliez, avancez.</li>
           <li>Étudiez en groupe ou à voix haute : verbaliser les concepts est le meilleur test de compréhension.</li>
         </ul>
-        <h3>🛂 6. Jour J & logistique (à connaître absolument)</h3>
+        <h3>6. Jour J & logistique (à connaître absolument)</h3>
         <ul>
           <li><strong>L'examen est en ANGLAIS</strong> : le CISSP n'est plus proposé en français (langues 2025-2026 : anglais, chinois, allemand, japonais, espagnol). Un francophone passe le <strong>CAT anglais</strong> — entraînez-vous avec notre simulation CAT EN, sans temps additionnel.</li>
           <li><strong>Format CAT</strong> : 100 à 150 questions en 3 h, dont 25 items pré-test non notés (indétectables) ; l'examen peut s'arrêter dès 100 questions si le moteur est statistiquement sûr de votre niveau. Standard de passage : 700/1000.</li>
@@ -376,10 +362,10 @@ const App = (() => {
     const p = Account.profil();
     if (p) {
       const jr = Account.joursRestants();
-      chip.textContent = `👤 ${p.prenom}${jr && jr > 0 ? " · J-" + jr : ""}`;
+      chip.textContent = `${p.prenom}${jr && jr > 0 ? " · J-" + jr : ""}`;
       chip.href = "#/suivi"; chip.title = "Mon suivi";
     } else {
-      chip.textContent = "✨ S'inscrire";
+      chip.textContent = "S'inscrire";
       chip.href = "#/inscription"; chip.title = "Créer mon compte gratuit";
     }
   }
