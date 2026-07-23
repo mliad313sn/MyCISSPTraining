@@ -34,14 +34,26 @@ const Exam = (() => {
 
   function tagged(d, q) { return { ...q, domId: d.id, domCode: d.code, domTitre: d.titre }; }
 
+  /* Tirage pondéré par domaine ET par difficulté : l'examen réel est
+     majoritairement du jugement en situation, donc les difficultés 2-3
+     dominent (~30 % d3, ~45 % d2, le reste d1). */
   function weightedDraw(n, lang) {
     const ds = domains();
     const totalW = ds.reduce((s, d) => s + parseFloat(d.poids), 0);
     let pool = [];
     ds.forEach(d => {
-      const bank = lang === "en" ? (d.quizEn || []) : d.quiz;
+      const bank = shuffle(lang === "en" ? (d.quizEn || []) : d.quiz);
       const want = Math.max(1, Math.round(n * parseFloat(d.poids) / totalW));
-      shuffle(bank).slice(0, want).forEach(q => pool.push(tagged(d, q)));
+      const byDiff = k => bank.filter(q => (q.difficulte || 2) === k);
+      const picked = [];
+      [[3, Math.round(want * 0.3)], [2, Math.round(want * 0.45)]].forEach(([lvl, quota]) => {
+        byDiff(lvl).slice(0, quota).forEach(q => picked.push(q));
+      });
+      for (const q of bank) {
+        if (picked.length >= want) break;
+        if (!picked.includes(q)) picked.push(q);
+      }
+      picked.slice(0, want).forEach(q => pool.push(tagged(d, q)));
     });
     return shuffle(pool).slice(0, n);
   }
