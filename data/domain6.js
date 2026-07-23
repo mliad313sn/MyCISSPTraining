@@ -202,6 +202,32 @@ window.CISSP_DATA.domains[6] = {
         },
         {
           type: "standard",
+          titre: "Les états de ports : open, closed, filtered",
+          points: [
+            "Open : un service écoute sur le port et accepte les connexions",
+            "Closed : le port est accessible mais aucun service n'écoute",
+            "Filtered : un firewall ou filtre bloque, le scanner ne peut pas conclure",
+            "Un port open non justifié augmente la surface d'attaque : à fermer ou filtrer"
+          ],
+          narration:
+            "Quand un scanner de découverte comme nmap sonde un système, il classe chaque port dans un état. Open signifie qu'une application écoute sur ce port et accepte les connexions : c'est un service exposé, donc une surface d'attaque potentielle. Closed signifie que le port est accessible, le système répond, mais qu'aucune application n'y écoute. Filtered signifie que le scanner n'arrive pas à déterminer l'état, généralement parce qu'un firewall ou un filtre intercepte les sondes sans répondre. Pour le manager sécurité, la lecture est simple : tout port open doit correspondre à un besoin métier documenté ; sinon, on désactive le service ou on filtre le port.",
+          astuce: "💡 Conseil examen : filtered ne veut pas dire fermé — cela veut dire qu'un dispositif de filtrage empêche le scanner de conclure."
+        },
+        {
+          type: "standard",
+          titre: "Techniques de scan : TCP connect, SYN, UDP, banner grabbing",
+          points: [
+            "TCP connect scan : three-way handshake complet — fiable mais bruyant, journalisé",
+            "TCP SYN scan (half-open) : SYN, SYN/ACK, puis RST — plus discret, jamais de connexion complète",
+            "UDP scan : sans handshake, lent et moins fiable (pas de réponse ≠ port fermé)",
+            "Banner grabbing : lire la bannière du service pour identifier logiciel et version"
+          ],
+          narration:
+            "Connaissez les principales techniques de scan. Le TCP connect scan établit le three-way handshake complet, SYN, SYN-ACK, ACK : il est fiable et ne demande pas de privilèges particuliers, mais il est bruyant, car la connexion complète est journalisée par la cible. Le TCP SYN scan, dit half-open ou semi-ouvert, envoie un SYN, attend le SYN-ACK qui révèle un port ouvert, puis répond par un RST au lieu de terminer la connexion : plus rapide et plus discret, c'est la technique par défaut de nmap. Le scan UDP est plus délicat, car UDP n'a pas de handshake : l'absence de réponse ne prouve pas que le port est ouvert ou fermé, ce qui rend ce scan lent et moins fiable. Enfin, le banner grabbing consiste à se connecter à un service pour lire sa bannière et identifier le logiciel et sa version, une information précieuse pour cibler les vulnérabilités connues.",
+          astuce: "💡 Conseil examen : SYN scan = half-open = SYN, SYN/ACK, RST — jamais de connexion complète, donc plus furtif que le connect scan."
+        },
+        {
+          type: "standard",
           titre: "Scans authentifiés",
           points: [
             "Authenticated scan ou credentialed scan : le scanner utilise des identifiants valides",
@@ -276,6 +302,7 @@ window.CISSP_DATA.domains[6] = {
           points: [
             "Démarche : reconnaissance, enumeration, analyse, exécution (pen test seulement), documentation",
             "Quatre catégories de scans : discovery, réseau, web, base de données",
+            "États de ports : open, closed, filtered ; SYN scan (half-open) plus discret que connect scan ; UDP lent ; banner grabbing identifie les versions",
             "Scan authentifié : plus profond, plus précis, compte read-only",
             "SCAP : CVE nomme, CVSS score, CCE configure, CPE identifie, XCCDF liste, OVAL teste",
             "Vulnerability management : cycle continu fondé sur l'inventaire des actifs"
