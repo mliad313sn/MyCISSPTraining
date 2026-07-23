@@ -973,77 +973,143 @@ window.CISSP_DATA.domains[3] = {
       choix: ["La star (*) property", "La simple security property", "La strong star property", "La discretionary security property"],
       reponse: 1,
       explication: "La simple security property énonce « no read up » : un sujet ne peut pas lire de données classées au-dessus de son niveau d'habilitation. La star property interdit d'écrire vers le bas (no write down). La strong star property limite lecture et écriture au propre niveau du sujet, et la discretionary security property utilise une matrice d'accès fondée sur le besoin d'en connaître.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : la star (*) property interdit l'écriture vers le bas (no write down) — piège d'inversion entre lecture et écriture.",
+        "Correct : la simple security property énonce « no read up » — un sujet ne peut pas lire au-dessus de son niveau d'habilitation.",
+        "Faux : la strong star property restreint lecture ET écriture au seul niveau du sujet — réponse trop large pour la seule lecture.",
+        "Faux : la discretionary security property repose sur une matrice d'accès et le besoin d'en connaître, pas sur les niveaux de classification."
+      ]
     },
     {
       q: "Quel est l'objectif PRINCIPAL du modèle Biba ?",
       choix: ["Protéger la confidentialité des données classifiées", "Protéger l'intégrité des données", "Prévenir les conflits d'intérêts", "Garantir la disponibilité des systèmes"],
       reponse: 1,
       explication: "Biba est un modèle d'intégrité : no read down (ne pas lire des données de moindre intégrité) et no write up (ne pas écrire vers une intégrité supérieure). La confidentialité est l'objectif de Bell-LaPadula, la prévention des conflits d'intérêts celui de Brewer-Nash, et aucun de ces modèles formels ne traite la disponibilité.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : la confidentialité des données classifiées est l'objectif de Bell-LaPadula — piège de substitution de modèle.",
+        "Correct : Biba est le modèle d'INTÉGRITÉ — no read down, no write up.",
+        "Faux : la prévention des conflits d'intérêts est l'objet de Brewer-Nash, pas de Biba.",
+        "Faux : aucun des modèles formels classiques ne traite la disponibilité — attribut hors périmètre."
+      ]
     },
     {
       q: "Un cabinet de conseil souhaite empêcher qu'un consultant travaillant pour la banque A accède aux données de la banque B, sa concurrente. Quel modèle de sécurité répond le MIEUX à ce besoin ?",
       choix: ["Clark-Wilson", "Bell-LaPadula", "Brewer-Nash", "Graham-Denning"],
       reponse: 2,
       explication: "Brewer-Nash, surnommé « ethical wall », a été créé pour prévenir les conflits d'intérêts : les droits d'accès changent dynamiquement selon l'activité passée de l'utilisateur. Clark-Wilson protège l'intégrité via des programmes intermédiaires, Bell-LaPadula protège la confidentialité par niveaux de classification, et Graham-Denning traite la création et la suppression sûres de sujets et d'objets.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : Clark-Wilson protège l'intégrité via des programmes intermédiaires — techniquement vrai ailleurs, hors besoin ici.",
+        "Faux : Bell-LaPadula protège la confidentialité par niveaux, il ne gère pas les conflits d'intérêts entre clients.",
+        "Correct : Brewer-Nash (« ethical wall ») ajuste dynamiquement les droits selon l'historique d'accès, exactement pour prévenir les conflits d'intérêts.",
+        "Faux : Graham-Denning régit la création et la suppression sûres de sujets et d'objets — hors sujet."
+      ]
     },
     {
       q: "Dans le modèle Clark-Wilson, quel composant est le SEUL autorisé à manipuler les Constrained Data Items (CDI) ?",
       choix: ["Les utilisateurs authentifiés", "Les Transformation Procedures (TP)", "Les Integrity Verification Procedures (IVP)", "Les Unconstrained Data Items (UDI)"],
       reponse: 1,
       explication: "Les CDI ne peuvent être manipulés que par des Transformation Procedures (TP), qui garantissent des transactions bien formées. Les utilisateurs n'accèdent jamais directement aux CDI, c'est le principe du triplet sujet-programme-objet. Les IVP servent à auditer et vérifier la cohérence, pas à manipuler les données. Les UDI sont des données non protégées, accessibles directement.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : les utilisateurs n'accèdent jamais directement aux CDI — c'est le principe même du triplet sujet-programme-objet.",
+        "Correct : seules les Transformation Procedures (TP) manipulent les CDI, garantissant des transactions bien formées.",
+        "Faux : les IVP vérifient et auditent la cohérence des CDI, elles ne les modifient pas — piège de proximité fonctionnelle.",
+        "Faux : les UDI sont des données non contraintes, pas un composant autorisé à manipuler les CDI."
+      ]
     },
     {
       q: "Lors d'une évaluation Common Criteria, quel document décrit les prétentions de sécurité que le fournisseur a intégrées dans son produit ?",
       choix: ["Le Protection Profile (PP)", "Le Security Target (ST)", "La Target of Evaluation (TOE)", "Le Security Assurance Requirement (SAR)"],
       reponse: 1,
       explication: "Le Security Target (ST) spécifie les prétentions de sécurité du fournisseur pour sa TOE. Le Protection Profile (PP) décrit au contraire les besoins de sécurité du client (« je veux »). La TOE est le produit évalué lui-même, et les SAR décrivent comment la TOE doit être évaluée.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : le Protection Profile exprime les besoins du CLIENT (« je veux ») — piège d'inversion des rôles.",
+        "Correct : le Security Target contient les prétentions de sécurité du FOURNISSEUR pour sa TOE.",
+        "Faux : la TOE est le produit évalué lui-même, pas un document.",
+        "Faux : les SAR décrivent comment la TOE doit être évaluée, pas ce qu'elle prétend faire."
+      ]
     },
     {
       q: "Quel niveau EAL des Common Criteria correspond à « méthodiquement conçu, testé et revu » ?",
       choix: ["EAL2", "EAL4", "EAL6", "EAL7"],
       reponse: 1,
       explication: "EAL4 correspond à « methodically designed, tested, and reviewed » ; c'est le niveau le plus élevé raisonnablement atteignable pour un produit commercial existant. EAL2 est « structurellement testé », EAL6 « semi-formellement vérifié, conçu et testé » et EAL7 « formellement vérifié, conçu et testé », réservé aux systèmes les plus critiques.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : EAL2 correspond à « structurellement testé » — niveau inférieur.",
+        "Correct : EAL4 = « methodically designed, tested, and reviewed », plafond réaliste pour un produit commercial existant.",
+        "Faux : EAL6 correspond à « semi-formellement vérifié, conçu et testé ».",
+        "Faux : EAL7 correspond à « formellement vérifié, conçu et testé », réservé aux systèmes les plus critiques."
+      ]
     },
     {
       q: "Un EAL7 signifie que le produit évalué est :",
       choix: ["Impossible à compromettre", "Formellement vérifié, conçu et testé", "Certifié pour un usage militaire uniquement", "Doté d'un chiffrement AES-256 obligatoire"],
       reponse: 1,
       explication: "EAL7 signifie « formally verified, designed, and tested » : la rigueur de l'ÉVALUATION est maximale. Attention au piège classique : un EAL mesure la rigueur de l'évaluation, pas une garantie d'invulnérabilité du produit. Rien ne le limite à un usage militaire et l'EAL n'impose aucun algorithme de chiffrement particulier.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Faux : formulation absolue — aucun niveau d'évaluation ne rend un produit impossible à compromettre.",
+        "Correct : EAL7 = « formally verified, designed, and tested » — c'est la rigueur de l'ÉVALUATION qui est maximale.",
+        "Faux : aucune restriction d'usage militaire n'est attachée aux EAL — affirmation hors périmètre des Common Criteria.",
+        "Faux : l'EAL ne prescrit aucun algorithme de chiffrement — confusion entre assurance et fonctionnalité."
+      ]
     },
     {
       q: "Quel principe de conception affirme qu'aucun utilisateur, appareil ou système ne doit être considéré comme fiable par défaut, même à l'intérieur du réseau ?",
       choix: ["Defense in depth", "Trust but verify", "Zero Trust", "Least privilege"],
       reponse: 2,
       explication: "Le Zero Trust repose sur la devise « never trust, always verify » : chaque requête est authentifiée, autorisée et chiffrée avant tout accès, quelle que soit sa provenance. Trust but verify est justement l'approche traditionnelle (périmétrique) que Zero Trust remplace. Defense in depth empile des contrôles en série, et least privilege limite les privilèges accordés, mais aucun des deux ne définit la posture de non-confiance par défaut.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : defense in depth empile des contrôles en série mais ne définit pas la posture de non-confiance par défaut — piège de proximité.",
+        "Faux : « trust but verify » est justement le modèle périmétrique traditionnel que Zero Trust remplace — inversion.",
+        "Correct : Zero Trust = « never trust, always verify » — aucune confiance implicite, chaque requête est vérifiée.",
+        "Faux : least privilege limite les droits accordés, il ne décrit pas l'absence de confiance par défaut — trop étroit."
+      ]
     },
     {
       q: "En cas d'incendie, les portes contrôlées d'un datacenter se déverrouillent automatiquement pour permettre l'évacuation. Quel principe est appliqué ?",
       choix: ["Fail-secure, car le datacenter reste protégé", "Fail-safe, car la protection des personnes prime", "Fail-closed, car la confidentialité est maintenue", "Secure defaults, car c'est la configuration d'usine"],
       reponse: 1,
       explication: "Dans le monde physique, fail-safe signifie que la défaillance protège les personnes : les portes s'ouvrent pour permettre l'évacuation, car la vie humaine prime toujours sur la protection des actifs. Fail-secure aurait maintenu les portes verrouillées pour protéger les équipements, ce qui est inacceptable quand des vies sont en jeu. Fail-closed est un concept numérique, et secure defaults concerne la configuration initiale.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : fail-secure maintiendrait les portes verrouillées pour protéger les actifs — inacceptable quand des vies sont en jeu.",
+        "Correct : fail-safe fait primer la protection des personnes — la vie humaine passe avant tout actif.",
+        "Faux : fail-closed est un concept de systèmes logiques/réseau, pas de sécurité physique des personnes — hors contexte.",
+        "Faux : secure defaults concerne la configuration initiale d'un système, pas le comportement en défaillance."
+      ]
     },
     {
       q: "Quelle est la fonction PRINCIPALE d'un Trusted Platform Module (TPM) ?",
       choix: ["Accélérer le processeur graphique", "Réaliser des opérations cryptographiques matérielles et protéger des clés", "Filtrer le trafic réseau entrant", "Sauvegarder automatiquement les fichiers système"],
       reponse: 1,
       explication: "Le TPM est une puce inviolable de la carte mère qui réalise des opérations cryptographiques (dont la génération de clés) et protège de petites quantités de données sensibles comme des clés et mots de passe. Il ne joue aucun rôle graphique, réseau ou de sauvegarde. C'est un prérequis de nombreuses solutions de chiffrement de disque.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : le TPM n'a aucun rôle graphique — distracteur hors domaine.",
+        "Correct : le TPM est une puce inviolable dédiée aux opérations cryptographiques matérielles et à la protection de clés.",
+        "Faux : le filtrage réseau est le rôle d'un pare-feu, pas d'un TPM.",
+        "Faux : la sauvegarde de fichiers relève d'une solution de backup, pas d'un cryptoprocesseur."
+      ]
     },
     {
       q: "Quelle différence essentielle distingue un HSM d'entreprise d'un TPM ?",
       choix: ["Le HSM ne peut pas générer de clés", "Le TPM est un dispositif réseau externe", "Le HSM est un cryptoprocesseur dédié, souvent un boîtier externe, tandis que le TPM est intégré à la carte mère", "Le TPM offre plus de puissance de calcul cryptographique que le HSM"],
       reponse: 2,
       explication: "Le TPM est une puce soudée à la carte mère d'une machine, alors que le HSM d'entreprise est un équipement dédié (boîtier ou carte) conçu pour gérer et stocker des clés à grande échelle et accélérer les opérations cryptographiques ; le TPM est d'ailleurs considéré comme un exemple de HSM. Les deux génèrent des clés, le TPM n'est pas un équipement réseau, et c'est le HSM dédié qui offre les meilleures performances.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : le HSM génère bel et bien des clés — c'est l'une de ses fonctions centrales.",
+        "Faux : c'est l'inverse — le TPM est soudé à la carte mère, pas un équipement externe.",
+        "Correct : le HSM est un cryptoprocesseur dédié (souvent en boîtier externe) pour la gestion de clés à grande échelle, le TPM une puce intégrée.",
+        "Faux : inversion — le HSM dédié offre bien plus de puissance cryptographique que la petite puce TPM."
+      ]
     },
     {
       q: "Quelles sont les quatre propriétés du reference monitor résumées par l'acronyme NEAT ?",
@@ -1055,7 +1121,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 0,
       explication: "Le reference monitor doit être Non-bypassable (impossible à contourner), Evaluable (analysable et vérifiable), Always invoked (sollicité à chaque accès) et Tamper-proof (inviolable). Le security kernel en est l'implémentation. Les autres propositions sont des distracteurs plausibles mais ne correspondent pas au concept.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Correct : Non-bypassable, Evaluable, Always invoked, Tamper-proof — les quatre propriétés du reference monitor.",
+        "Faux : vocabulaire de sécurité plausible mais sans rapport avec les propriétés du reference monitor — piège lexical.",
+        "Faux : liste de services de sécurité, pas les propriétés d'un mécanisme de médiation des accès.",
+        "Faux : adjectifs génériques inventés qui ne correspondent à aucun concept formel."
+      ]
     },
     {
       q: "Un attaquant exploite une vulnérabilité de l'hyperviseur pour sortir de sa machine virtuelle et accéder à l'hôte. Comment s'appelle cette attaque, et quelle est la MEILLEURE mesure préventive complémentaire au patching ?",
@@ -1067,14 +1139,26 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Il s'agit d'un VM escape. Outre le maintien à jour de l'hyperviseur, la meilleure mesure est de conserver les systèmes et données hautement sensibles sur des machines physiques distinctes, afin qu'une évasion ne les expose pas. Le VM sprawl est la prolifération incontrôlée de VM (autre problème), le chiffrement des disques n'empêche pas l'évasion, et désactiver la journalisation aggraverait la situation.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : le VM sprawl est la prolifération incontrôlée de VM — mauvais diagnostic de l'attaque.",
+        "Correct : c'est un VM escape ; séparer physiquement les systèmes les plus sensibles limite l'impact d'une évasion, en complément du patching.",
+        "Faux : le side-channel est une autre famille d'attaques (fuites physiques) — diagnostic erroné.",
+        "Faux : diagnostic exact mais remède aggravant — désactiver la journalisation supprime la capacité de détection."
+      ]
     },
     {
       q: "Dans quel modèle de service cloud le fournisseur assure-t-il le MOINS de maintenance et de sécurité ?",
       choix: ["SaaS", "PaaS", "IaaS", "FaaS"],
       reponse: 2,
       explication: "En IaaS, le fournisseur ne livre que les ressources de base (serveurs, stockage, réseau) : le client installe et maintient lui-même les systèmes d'exploitation et les applications. En PaaS le fournisseur gère aussi la plateforme, en SaaS il gère la quasi-totalité, et le FaaS (serverless) est une sous-catégorie du PaaS où le fournisseur gère toute l'infrastructure d'exécution.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : en SaaS le fournisseur gère la quasi-totalité de la pile — c'est le maximum de prise en charge, pas le minimum.",
+        "Faux : en PaaS le fournisseur gère aussi la plateforme d'exécution — plus que l'IaaS.",
+        "Correct : en IaaS le fournisseur ne livre que l'infrastructure de base ; OS et applications restent à la charge du client.",
+        "Faux : le FaaS est une sous-catégorie du PaaS où le fournisseur gère toute l'infrastructure d'exécution."
+      ]
     },
     {
       q: "Votre organisation exploite un système SCADA reposant sur des protocoles propriétaires anciens qui ne peuvent pas être mis à jour. Quelle est la MEILLEURE mesure d'atténuation ?",
@@ -1086,33 +1170,57 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Quand un système industriel ne peut être ni patché ni remplacé rapidement, la segmentation réseau est la mesure la plus efficace : elle isole le SCADA des réseaux exposés et limite drastiquement la surface d'attaque. Le remplacement immédiat est rarement réaliste ni économiquement justifiable. Les automates ne supportent généralement pas d'antivirus, et le chiffrement des disques ne protège pas les communications legacy vulnérables.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : le remplacement immédiat d'un SCADA est rarement réaliste ni justifiable économiquement — réponse hors contrainte.",
+        "Correct : la segmentation isole le système non patchable et réduit drastiquement sa surface d'attaque — le contrôle compensatoire de référence.",
+        "Faux : réponse de technicien inapplicable — les automates ne supportent généralement pas d'agent antivirus.",
+        "Faux : chiffrer les disques des postes ne protège pas les communications legacy vulnérables — hors cible."
+      ]
     },
     {
       q: "Quelle est la PREMIÈRE recommandation pour sécuriser des objets connectés (IoT) dans une entreprise ?",
       choix: [
         "Les déployer sur un réseau distinct et isolé",
-        "Leur attribuer des adresses IP publiques pour la supervision",
-        "Conserver les identifiants par défaut pour faciliter la maintenance",
-        "Activer la gestion à distance via internet"
+        "Changer les identifiants par défaut de chaque objet",
+        "Installer un agent antivirus ou EDR sur chaque objet",
+        "N'acheter que des objets certifiés Common Criteria"
       ],
       reponse: 0,
-      explication: "La mesure de référence est de placer les équipements IoT sur un réseau dédié, séparé et isolé du réseau de production. Les trois autres propositions sont des contre-exemples : exposer les IoT publiquement augmente la surface d'attaque, les identifiants par défaut sont l'une des premières causes de compromission, et la gestion à distance doit au contraire être désactivée.",
-      difficulte: 1
+      explication: "La mesure de référence est de placer les équipements IoT sur un réseau dédié, séparé et isolé du réseau de production : elle contient l'impact de n'importe quelle compromission, y compris celle d'un objet non patchable. Changer les identifiants par défaut est indispensable mais ne limite pas la propagation d'une compromission ; la plupart des objets ne peuvent pas héberger d'agent EDR ; exiger une certification Common Criteria est irréaliste pour l'essentiel du marché IoT et ne protège pas le réseau existant.",
+      difficulte: 1,
+      pourquoi: [
+        "Correct : un réseau dédié et isolé contient l'impact de toute compromission, y compris celle d'objets non patchables.",
+        "Faux : indispensable mais insuffisant — changer les identifiants ne limite pas la propagation une fois l'objet compromis ; vrai mais pas prioritaire.",
+        "Faux : réponse de technicien irréaliste — la plupart des objets IoT ne peuvent pas héberger d'agent antivirus ou EDR.",
+        "Faux : exigence de sur-certification irréaliste pour le marché IoT, et sans effet protecteur sur le réseau existant."
+      ]
     },
     {
       q: "Une base de données permet à un analyste sans habilitation de déduire des informations classifiées en combinant mentalement plusieurs données non sensibles. De quelle attaque s'agit-il ?",
       choix: ["Aggregation", "Inference", "SQL injection", "Pass the hash"],
       reponse: 1,
       explication: "L'inférence repose sur la capacité de déduction humaine : combiner plusieurs informations non sensibles pour en déduire une information d'un niveau de classification supérieur. L'agrégation, elle, utilise les fonctions mathématiques de la base (SUM, COUNT...) pour combiner des enregistrements. L'injection SQL est une attaque applicative, et le pass the hash une attaque d'authentification.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : l'aggregation est le piège de proximité — elle désigne l'accumulation de données dont l'ensemble devient sensible ; ici l'analyste DÉDUIT une information nouvelle.",
+        "Correct : l'inference consiste à déduire des informations classifiées à partir de données individuellement non sensibles.",
+        "Faux : la SQL injection est une attaque technique d'injection de code — hors sujet.",
+        "Faux : le pass the hash est une attaque d'authentification — hors domaine des bases de données."
+      ]
     },
     {
       q: "Combien de clés symétriques sont nécessaires pour que 12 personnes communiquent toutes deux à deux de manière sécurisée ?",
       choix: ["12", "24", "66", "132"],
       reponse: 2,
       explication: "La formule est n(n-1)/2, soit 12 × 11 / 2 = 66 clés. C'est ce problème de croissance quadratique qui rend le symétrique difficile à gérer à grande échelle : la cryptographie asymétrique le résout avec seulement une paire de clés par personne.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : 12 correspondrait à une clé par personne — mauvaise formule.",
+        "Faux : 24 évoque deux clés par personne, la logique de l'asymétrique — piège de substitution de formule.",
+        "Correct : n(n-1)/2 = 12×11/2 = 66 clés symétriques pour des échanges deux à deux.",
+        "Faux : 132 = n(n-1), l'oubli de la division par deux — erreur de calcul classique."
+      ]
     },
     {
       q: "Quelles sont les caractéristiques de l'algorithme AES ?",
@@ -1124,7 +1232,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "AES (algorithme Rijndael) utilise des clés de 128, 192 ou 256 bits avec une taille de bloc fixe de 128 bits ; c'est un chiffrement symétrique, standard du gouvernement américain. La clé de 56 bits sur blocs de 64 bits décrit DES, obsolète. Les clés de 1024 à 4096 bits évoquent RSA, qui est asymétrique.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : mélange de paramètres qui ne correspond à aucune version d'AES.",
+        "Correct : AES accepte des clés de 128, 192 ou 256 bits et travaille toujours sur des blocs de 128 bits.",
+        "Faux : clé de 56 bits et blocs de 64 bits décrivent DES — piège de substitution d'algorithme.",
+        "Faux : les clés de 1024 à 4096 bits décrivent RSA, un algorithme asymétrique."
+      ]
     },
     {
       q: "Sur quel problème mathématique difficile repose la sécurité de l'algorithme RSA ?",
@@ -1136,26 +1250,44 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "RSA repose sur la difficulté de factoriser le produit de deux grands nombres premiers : à l'examen, « factoring attack » doit immédiatement évoquer RSA. Le logarithme discret elliptique fonde ECC, et les lattices fondent la cryptographie post-quantique. Le problème du sac à dos a servi à des cryptosystèmes historiques cassés depuis.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : le logarithme discret elliptique fonde ECC, pas RSA — piège de substitution.",
+        "Correct : RSA repose sur la difficulté de factoriser le produit de deux grands nombres premiers.",
+        "Faux : le problème du sac à dos fonde d'anciens cryptosystèmes abandonnés (Merkle-Hellman).",
+        "Faux : les lattices fondent la cryptographie post-quantique, pas RSA."
+      ]
     },
     {
       q: "Pourquoi choisir ECC plutôt que RSA pour des équipements mobiles à ressources limitées ?",
       choix: [
         "ECC est un algorithme symétrique, donc plus rapide",
         "Une clé ECC de 256 bits offre une sécurité comparable à une clé RSA de 3072 bits",
-        "ECC ne nécessite aucune gestion de clés",
-        "RSA est interdit sur les mobiles par le NIST"
+        "La vérification d'une signature ECC est toujours plus rapide que celle d'une signature RSA",
+        "ECC résiste nativement aux ordinateurs quantiques, contrairement à RSA"
       ],
       reponse: 1,
-      explication: "ECC repose sur le logarithme discret elliptique et atteint un niveau de sécurité équivalent avec des clés beaucoup plus courtes : 256 bits ECC équivalent environ à 3072 bits RSA. Des clés plus courtes signifient moins de calcul, de mémoire et d'énergie, un atout décisif sur mobile. ECC reste asymétrique, exige une gestion de clés, et le NIST n'interdit pas RSA sur mobile.",
-      difficulte: 2
+      explication: "ECC repose sur le logarithme discret elliptique et atteint un niveau de sécurité équivalent avec des clés beaucoup plus courtes : 256 bits ECC équivalent environ à 3072 bits RSA. Des clés plus courtes signifient moins de calcul, de mémoire et d'énergie, un atout décisif sur mobile. ECC reste asymétrique ; la vérification RSA (petit exposant public) est en réalité souvent plus rapide que la vérification ECDSA — l'avantage d'ECC porte sur la taille des clés et le coût global ; et l'algorithme de Shor casse aussi bien ECC que RSA : ECC n'est pas post-quantique.",
+      difficulte: 2,
+      pourquoi: [
+        "Faux : ECC est un algorithme asymétrique — confusion de famille cryptographique.",
+        "Correct : à sécurité équivalente, les clés ECC sont bien plus courtes (256 bits ≈ RSA 3072), d'où moins de calcul, de mémoire et d'énergie.",
+        "Faux : techniquement séduisant mais inexact — la vérification RSA (petit exposant public) est souvent plus rapide que la vérification ECDSA ; formulation absolue (« toujours »).",
+        "Faux : piège de modernité — l'algorithme de Shor casse aussi bien ECC que RSA ; ECC n'est pas post-quantique."
+      ]
     },
     {
       q: "Alice veut envoyer un message confidentiel à Bob en utilisant la cryptographie asymétrique. Quelle clé doit-elle utiliser pour chiffrer ?",
       choix: ["Sa propre clé privée", "Sa propre clé publique", "La clé publique de Bob", "La clé privée de Bob"],
       reponse: 2,
       explication: "Pour la confidentialité, on chiffre avec la clé publique du destinataire : seul Bob, détenteur de la clé privée correspondante, pourra déchiffrer. Chiffrer avec sa propre clé privée correspond à une signature (authentification, pas confidentialité). Alice ne possède jamais la clé privée de Bob, et sa propre clé publique ne permettrait qu'à elle-même... de ne rien faire d'utile.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : sa clé privée sert à signer — elle n'apporterait aucune confidentialité.",
+        "Faux : chiffrer avec sa propre clé publique rendrait le message lisible par elle seule — Bob ne pourrait pas le déchiffrer.",
+        "Correct : chiffrer avec la clé publique de Bob garantit que seul Bob, détenteur de la clé privée associée, peut déchiffrer.",
+        "Faux : la clé privée de Bob n'est jamais partagée — Alice ne peut pas l'utiliser."
+      ]
     },
     {
       q: "Quelle séquence décrit correctement la création d'une signature numérique ?",
@@ -1167,7 +1299,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Signer consiste à générer le digest du message via une fonction de hachage, puis à chiffrer ce digest avec sa propre clé privée. Le destinataire vérifie en déchiffrant avec la clé publique de l'émetteur et en comparant les digests. La signature garantit intégrité, authentification et non-répudiation, mais pas la confidentialité. Chiffrer avec la clé publique de l'émetteur ne permettrait pas la vérification par des tiers.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : chiffrer avec la clé publique du destinataire assure la confidentialité, pas la signature — inversion des services.",
+        "Correct : signer = hacher le message puis chiffrer le digest avec la clé PRIVÉE de l'émetteur, seule preuve de son identité.",
+        "Faux : la clé publique de l'émetteur est connue de tous — un digest ainsi chiffré ne prouverait rien.",
+        "Faux : cette séquence décrit une enveloppe numérique (échange de clé de session), pas une signature."
+      ]
     },
     {
       q: "Que garantit une signature numérique valide ? (Choisissez la MEILLEURE réponse)",
@@ -1179,7 +1317,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "La signature numérique assure que le message provient bien de l'émetteur revendiqué (authentification), qu'il n'a pas été modifié en transit (intégrité) et que l'émetteur ne peut pas nier l'avoir envoyé (non-répudiation). Elle ne chiffre pas le message : la confidentialité exige un chiffrement séparé. Elle identifie l'expéditeur, c'est l'inverse de l'anonymat.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : la signature ne chiffre pas le message — elle n'apporte aucune confidentialité ; piège du service en trop.",
+        "Correct : la signature garantit intégrité, authentification de l'émetteur et non-répudiation.",
+        "Faux : ni la confidentialité ni la disponibilité ne sont des services rendus par une signature.",
+        "Faux : c'est l'inverse — la signature identifie formellement l'expéditeur au lieu de l'anonymiser."
+      ]
     },
     {
       q: "Pourquoi le mode ECB (Electronic Code Book) est-il considéré comme le plus faible des modes de chiffrement par blocs ?",
@@ -1191,21 +1335,39 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "En ECB, chaque bloc est chiffré indépendamment et de la même manière : tout motif répété du plaintext se retrouve dans le ciphertext, révélant la structure des données. ECB est au contraire rapide et parallélisable, n'utilise justement pas d'IV (c'est une partie du problème), et n'est pas limité à des clés de 56 bits.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : ECB est au contraire rapide et parallélisable — mauvais motif.",
+        "Correct : sans chaînage ni IV, des blocs de clair identiques donnent des blocs chiffrés identiques — les motifs du message transparaissent.",
+        "Faux : inversion — ECB n'utilise justement aucun vecteur d'initialisation.",
+        "Faux : la taille de clé dépend de l'algorithme, pas du mode d'opération."
+      ]
     },
     {
       q: "Quel mode de chiffrement fournit à la fois la confidentialité ET l'intégrité des données ?",
       choix: ["ECB", "CBC", "CTR", "GCM"],
       reponse: 3,
       explication: "GCM (Galois/Counter Mode) combine le mode compteur avec l'authentification de Galois : c'est un mode de chiffrement authentifié qui fournit confidentialité et intégrité, reconnu par le NIST. ECB et CBC ne fournissent que la confidentialité (CBC étant en outre vulnérable à POODLE), et CTR est rapide et parallélisable mais dépourvu d'intégrité.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : ECB n'offre même pas une confidentialité correcte — le plus faible des modes.",
+        "Faux : CBC fournit la confidentialité mais aucune protection d'intégrité — vrai à moitié, donc insuffisant.",
+        "Faux : CTR fournit la confidentialité seule, sans authentification des données.",
+        "Correct : GCM est un mode de chiffrement authentifié (AEAD) — confidentialité ET intégrité dans une seule opération."
+      ]
     },
     {
       q: "Quel principe énonce qu'un cryptosystème doit rester sûr même si tout, sauf la clé, est connu publiquement ?",
       choix: ["Le principe de Kerckhoff", "La loi de Moore", "Le work factor", "Le principe de Locard"],
       reponse: 0,
       explication: "Le principe de Kerckhoff affirme que la sécurité doit reposer uniquement sur le secret de la clé, jamais sur celui de l'algorithme — la « sécurité par l'obscurité » est une illusion. La loi de Moore concerne le doublement de la puissance des processeurs, le work factor mesure l'effort nécessaire pour casser un système, et le principe de Locard appartient à la criminalistique.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Correct : le principe de Kerckhoff — la sécurité doit reposer uniquement sur le secret de la clé, pas sur celui de l'algorithme.",
+        "Faux : la loi de Moore décrit la croissance de la puissance de calcul — hors sujet.",
+        "Faux : le work factor mesure l'effort nécessaire pour casser un système, il n'énonce pas ce principe de conception.",
+        "Faux : le principe de Locard relève de la criminalistique (tout contact laisse une trace)."
+      ]
     },
     {
       q: "Quelles conditions rendent un one-time pad théoriquement incassable ? (MEILLEURE réponse)",
@@ -1217,21 +1379,39 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Le one-time pad est le seul chiffre parfaitement sûr, mais uniquement si quatre conditions sont réunies : génération vraiment aléatoire, longueur au moins égale au message, usage strictement unique, et protection physique des pads. Les autres réponses décrivent de bonnes pratiques modernes, mais ne satisfont pas les conditions théoriques du one-time pad (clé plus courte que le message, réutilisation, etc.).",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : une clé de 256 bits renouvelée chaque mois décrit une bonne hygiène symétrique moderne, pas un one-time pad — piège de vraisemblance.",
+        "Correct : les quatre conditions du OTP — clé vraiment aléatoire, au moins aussi longue que le message, à usage unique, protégée physiquement.",
+        "Faux : une clé dérivée d'une phrase de passe n'est pas vraiment aléatoire — condition fondatrice violée.",
+        "Faux : DH et TPM sont de bonnes pratiques mais ne satisfont ni l'unicité d'usage ni la longueur exigées par l'OTP."
+      ]
     },
     {
       q: "Quelle mesure protège le MIEUX les mots de passe stockés contre les attaques par rainbow tables ?",
       choix: ["Chiffrer la base avec AES", "Ajouter un salt unique avant hachage", "Doubler la longueur du hash", "Utiliser le mode CBC"],
       reponse: 1,
       explication: "Le salting ajoute une valeur aléatoire unique à chaque mot de passe avant hachage : les tables précalculées deviennent inutilisables puisque le même mot de passe produit des hashes différents. Le chiffrement de la base déplace le problème vers la clé, la longueur du hash ne neutralise pas la précomputation, et CBC est un mode de chiffrement sans rapport avec le stockage de mots de passe. On complète le salting par du key stretching (bcrypt, PBKDF2, Argon2).",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : chiffrer la base déplace le problème vers la gestion de la clé et ne neutralise pas la logique des tables précalculées — techniquement vrai mais pas la parade spécifique.",
+        "Correct : un salt unique par mot de passe rend inutilisables les rainbow tables, précalculées sans ce salt.",
+        "Faux : la longueur du hash ne change rien — les tables sont construites pour l'algorithme utilisé ; piège de fausse robustesse.",
+        "Faux : CBC est un mode de chiffrement par blocs — hors sujet pour du hachage de mots de passe."
+      ]
     },
     {
       q: "L'attaque meet-in-the-middle a démontré la faiblesse de quel schéma cryptographique ?",
       choix: ["AES-256", "Le double DES (2DES)", "RSA-2048", "ChaCha20"],
       reponse: 1,
       explication: "Le meet-in-the-middle est une attaque de type known plaintext qui mène deux recherches simultanées — chiffrement du plaintext et déchiffrement du ciphertext — pour retrouver les clés. Elle a réduit la sécurité effective du double DES à peine au-dessus de celle du DES simple, ce qui explique le passage direct au triple DES. AES, RSA et ChaCha20 ne sont pas concernés par cette construction en double chiffrement.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Faux : AES-256 n'est pas concerné par le meet-in-the-middle — il reste l'étalon actuel.",
+        "Correct : le meet-in-the-middle réduit la sécurité effective du double DES à environ 2^57, à peine mieux que DES simple — d'où le passage direct à 3DES.",
+        "Faux : RSA-2048 n'est pas visé par cette attaque de chiffrements composés.",
+        "Faux : ChaCha20 est un chiffrement de flux moderne, hors périmètre de cette attaque."
+      ]
     },
     {
       q: "Un attaquant a obtenu le hash du compte de service KRBTGT d'un domaine Active Directory. Quelle est la conséquence la PLUS grave ?",
@@ -1243,7 +1423,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Le hash du compte KRBTGT permet de forger des tickets Kerberos à volonté dans tout l'Active Directory : c'est le golden ticket, qui confère un contrôle quasi total et durable du domaine. L'usurpation d'un seul compte de service correspond au silver ticket (hash d'un compte de service ordinaire). Les deux autres réponses sous-estiment gravement l'impact.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Faux : trop étroit — la lecture d'e-mails est anecdotique face à la compromission totale du domaine.",
+        "Correct : avec le hash KRBTGT, l'attaquant forge des TGT arbitraires (golden ticket) : contrôle durable de tout le domaine.",
+        "Faux : trop étroit — usurper un compte de service décrit le silver ticket, bien moins grave.",
+        "Faux : la désactivation d'antivirus n'est pas la conséquence propre de ce vol — hors sujet."
+      ]
     },
     {
       q: "Quelle contre-mesure est la PLUS efficace contre les attaques par timing sur une implémentation cryptographique ?",
@@ -1255,7 +1441,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "L'attaque par timing exploite les variations de durée des opérations cryptographiques pour en déduire des secrets. La parade directe est d'assurer une exécution en temps constant (ou d'ajouter des délais aléatoires) afin que la durée ne dépende plus des données secrètes. La longueur de clé n'empêche pas la fuite par canal auxiliaire, la rotation d'algorithme est irréaliste, et chiffrer les journaux ne masque pas le temps d'exécution observable.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Faux : allonger les clés ne supprime pas la fuite d'information temporelle — hors cible.",
+        "Correct : des opérations en temps constant suppriment la corrélation entre durée d'exécution et secrets manipulés.",
+        "Faux : changer d'algorithme chaque mois est coûteux et n'élimine pas la fuite par le temps d'exécution — fausse rotation.",
+        "Faux : chiffrer les journaux ne modifie pas le comportement temporel observable par l'attaquant."
+      ]
     },
     {
       q: "Que désigne la menace « Harvest Now, Decrypt Later » ?",
@@ -1267,14 +1459,26 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Harvest Now, Decrypt Later désigne des adversaires qui interceptent et stockent dès maintenant des données chiffrées, en pariant que l'informatique quantique leur permettra de les déchiffrer à l'avenir. C'est pourquoi les données à longue durée de sensibilité doivent migrer sans attendre vers des algorithmes post-quantiques comme la cryptographie lattice-based. Les autres réponses ne décrivent pas ce concept.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : trop étroit — le vol de clés dans des sauvegardes ne décrit pas le pari sur le déchiffrement quantique futur.",
+        "Correct : Harvest Now, Decrypt Later = intercepter et stocker aujourd'hui des données chiffrées pour les déchiffrer demain grâce au quantique.",
+        "Faux : la collecte de hashes relève du pass the hash — autre famille d'attaques.",
+        "Faux : l'archivage légal des opérateurs est une obligation réglementaire, pas cette menace adverse."
+      ]
     },
     {
       q: "Quel composant d'une PKI est chargé de VÉRIFIER l'identité du demandeur avant l'émission d'un certificat ?",
       choix: ["La Certification Authority (CA)", "La Registration Authority (RA)", "Le certificate practice statement (CPS)", "Le serveur OCSP"],
       reponse: 1,
       explication: "La Registration Authority (RA) vérifie l'identité de l'utilisateur ou de l'équipement qui demande un certificat ; la CA émet ensuite le certificat liant l'identité à la clé publique. Le CPS documente les pratiques de sécurité de la PKI, et OCSP sert à vérifier le statut de révocation d'un certificat déjà émis.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : la CA signe et émet les certificats — la vérification d'identité est justement déléguée ; piège d'inversion des rôles.",
+        "Correct : la Registration Authority vérifie l'identité du demandeur avant de transmettre la demande à la CA.",
+        "Faux : le CPS est le document décrivant les pratiques de certification, pas un acteur opérationnel.",
+        "Faux : le serveur OCSP renseigne sur la révocation, pas sur l'enrôlement."
+      ]
     },
     {
       q: "Votre organisation applique un contrôle « m of n » pour la récupération des clés de chiffrement. Qu'est-ce que cela signifie ?",
@@ -1286,7 +1490,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Le contrôle m of n désigne n agents de récupération, dont un sous-ensemble de m est requis pour récupérer une clé : aucune personne seule ne peut le faire, ce qui applique la séparation des tâches au key escrow. Les autres réponses décrivent des dispositifs différents ou inventés.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : des copies complètes chez m administrateurs seraient l'exact contraire du contrôle recherché.",
+        "Correct : m of n = au moins m agents parmi n désignés doivent coopérer pour reconstituer la clé — aucun individu seul ne le peut.",
+        "Faux : la fragmentation géographique par pays est une invention plausible mais étrangère à ce contrôle.",
+        "Faux : confusion avec une politique de durée de vie de clé — hors sujet."
+      ]
     },
     {
       q: "Selon les principes CPTED, quel aménagement relève de la « natural surveillance » ?",
@@ -1298,14 +1508,26 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "La natural surveillance vise à rendre les criminels mal à l'aise en multipliant les occasions d'être observés : allées et escaliers ouverts, zones dégagées et bien éclairées autour des entrées. La clôture est un contrôle physique actif (pas un aménagement « naturel » CPTED), le badge est un contrôle technique d'accès, et l'emplacement de la salle serveurs relève de la conception des locaux techniques.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : une clôture barbelée relève du target hardening mécanique, pas d'un aménagement « naturel ».",
+        "Correct : allées ouvertes et bien éclairées = natural surveillance — rendre les intrus visibles par l'environnement lui-même.",
+        "Faux : le badge est un contrôle d'accès technique, pas une mesure d'aménagement naturel.",
+        "Faux : situer la salle au cœur du bâtiment relève de la protection par l'emplacement, pas de la surveillance."
+      ]
     },
     {
       q: "Quel terme désigne une sous-tension PROLONGÉE de l'alimentation électrique ?",
       choix: ["Sag", "Brownout", "Spike", "Inrush"],
       reponse: 1,
       explication: "Le brownout est une sous-tension prolongée, tandis que le sag (ou dip) est une sous-tension momentanée. Le spike est une surtension momentanée (le surge étant sa version prolongée), et l'inrush est l'appel de courant initial lors du branchement à une source d'alimentation.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : le sag est une sous-tension MOMENTANÉE — piège sur la durée.",
+        "Correct : le brownout est une sous-tension PROLONGÉE du réseau électrique.",
+        "Faux : le spike est une surtension brève — mauvais sens de variation.",
+        "Faux : l'inrush est le courant d'appel initial d'un équipement — hors sujet."
+      ]
     },
     {
       q: "Lors de la conception d'un système d'extinction d'incendie pour un centre de données, quelle doit être la priorité ABSOLUE ?",
@@ -1317,14 +1539,26 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "La protection des personnes est toujours l'objectif prioritaire de tout système de sécurité ou de protection : c'est un réflexe d'examen à ancrer définitivement. La protection des équipements, la continuité d'activité et le coût sont des considérations légitimes, mais toujours secondaires par rapport à la vie humaine.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : objectif réel mais jamais prioritaire sur les personnes — piège du gestionnaire d'actifs.",
+        "Correct : la vie humaine prime toujours — tout système d'extinction se conçoit d'abord pour protéger les personnes.",
+        "Faux : la reprise d'activité compte mais reste subordonnée à la sûreté des personnes — vrai mais pas prioritaire.",
+        "Faux : le coût ne peut jamais primer sur la sécurité des personnes — arbitrage inacceptable."
+      ]
     },
     {
       q: "Un extincteur de classe C est conçu pour quel type de feu ?",
       choix: ["Combustibles ordinaires (bois, papier)", "Liquides inflammables", "Feux d'origine électrique", "Métaux combustibles"],
       reponse: 2,
       explication: "La classe C couvre les feux d'origine électrique. La classe A concerne les combustibles ordinaires, la classe B les liquides inflammables, la classe D les métaux, et la classe K les huiles et graisses de cuisine. Pour une salle informatique, on pense classe C et agents non conducteurs comme le CO2.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : bois et papier relèvent de la classe A.",
+        "Faux : les liquides inflammables relèvent de la classe B.",
+        "Correct : la classe C couvre les feux d'origine électrique — agents non conducteurs requis.",
+        "Faux : les métaux combustibles relèvent de la classe D."
+      ]
     },
     {
       q: "Pourquoi le halon n'est-il plus utilisé comme agent d'extinction dans les installations modernes ?",
@@ -1336,7 +1570,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Le halon interrompt efficacement la réaction chimique de combustion, mais il se dégrade en gaz toxiques vers 900 degrés Fahrenheit et détruit la couche d'ozone, d'où son abandon au profit de substituts et du CO2. Il était justement apprécié pour les feux électriques et ne laisse pas de résidu ; le coût n'est pas la raison principale de son interdiction.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : le halon était au contraire très efficace sur les feux électriques — mauvais motif.",
+        "Correct : le halon se dégrade en gaz toxiques à haute température et détruit la couche d'ozone — d'où son abandon.",
+        "Faux : inversion — le halon est un agent gazeux propre, sans résidu de poudre.",
+        "Faux : le coût de stockage n'est pas la raison de son interdiction."
+      ]
     },
     {
       q: "Où une salle serveurs devrait-elle idéalement être située dans un bâtiment ?",
@@ -1348,7 +1588,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 2,
       explication: "La salle serveurs se place au cœur du bâtiment : le rez-de-chaussée est exposé aux intrusions et véhicules, le dernier étage aux dégâts de toiture et à la foudre, et le sous-sol aux inondations. Elle doit aussi avoir une entrée unique contrôlée (plus une sortie de secours) et des accès journalisés.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : le rez-de-chaussée privilégie la commodité logistique au prix d'une exposition aux intrusions et véhicules.",
+        "Faux : le dernier étage expose aux fuites de toiture et complique l'intervention des secours.",
+        "Correct : le cœur du bâtiment évite inondations du sous-sol, intrusions du rez-de-chaussée et sinistres de toiture.",
+        "Faux : le sous-sol est le premier touché en cas d'inondation — la fraîcheur ne compense pas ce risque."
+      ]
     },
     {
       q: "Quel est le rôle d'un vecteur d'initialisation (IV) dans un chiffrement par blocs comme le mode CBC ?",
@@ -1360,14 +1606,26 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "L'IV est une valeur aléatoire (nonce) combinée par XOR au premier bloc : il élimine la prédictibilité et garantit que deux messages identiques chiffrés avec la même clé produisent des ciphertexts différents. Il n'allonge pas la clé, ne compresse rien et n'authentifie personne — l'authentification exige un MAC ou un mode authentifié comme GCM.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : l'IV ne participe pas à la longueur ni à la force de la clé.",
+        "Correct : l'IV introduit de l'aléa initial pour que deux messages identiques produisent des chiffrés différents.",
+        "Faux : aucun mode de chiffrement ne compresse les données — hors sujet.",
+        "Faux : l'authentification de l'émetteur relève d'un MAC ou d'une signature, pas de l'IV."
+      ]
     },
     {
       q: "Un employé du support technique peut créer des comptes utilisateurs ET valider leurs droits d'accès. Quel principe de conception sécurisée est violé ?",
       choix: ["Defense in depth", "Separation of duties", "Secure defaults", "Keep it simple"],
       reponse: 1,
       explication: "La séparation des tâches exige qu'aucune personne seule ne contrôle une fonction critique de bout en bout : créer les comptes et valider leurs droits doit être confié à des personnes différentes, sans quoi la fraude devient possible sans complicité. Les autres principes (contrôles en couches, configuration sûre par défaut, simplicité) ne sont pas directement concernés ici.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : defense in depth concerne l'empilement de contrôles — hors sujet.",
+        "Correct : créer des comptes ET valider leurs droits cumule deux fonctions incompatibles — violation de la separation of duties.",
+        "Faux : secure defaults concerne les configurations initiales sûres — hors sujet.",
+        "Faux : le principe de simplicité ne traite pas le cumul de fonctions critiques."
+      ]
     },
     {
       q: "Quelle affirmation à propos de la conteneurisation est EXACTE ?",
@@ -1379,7 +1637,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "La conteneurisation élimine la duplication des éléments d'OS : les conteneurs partagent le noyau de l'hôte, ce qui permet une densité 10 à 100 fois supérieure aux VM, au prix d'une isolation moindre. C'est la VM qui embarque un OS complet. Les images de conteneurs doivent être scannées et signées, et l'hôte doit toujours être durci et patché.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : inversion — c'est la machine virtuelle qui embarque un OS complet, pas le conteneur.",
+        "Correct : les conteneurs partagent le noyau de l'hôte — densité supérieure mais isolation plus faible que les VM.",
+        "Faux : formulation absolue — les images de conteneurs véhiculent régulièrement des vulnérabilités.",
+        "Faux : formulation absolue — le noyau partagé rend le patching de l'hôte plus critique que jamais."
+      ]
     },
     {
       q: "Quelle est la caractéristique distinctive de la Quantum Key Distribution (QKD) ?",
@@ -1391,14 +1655,26 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "La QKD exploite la mécanique quantique pour échanger des clés : selon le principe d'incertitude de Heisenberg, mesurer un état quantique le perturbe intrinsèquement, ce qui rend toute interception détectable — on parle de sécurité inconditionnelle. Elle distribue des clés, elle ne chiffre pas les données elles-mêmes, et n'a rien à voir avec la taille des clés classiques ni avec les certificats.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Faux : la taille de clé n'est pas la spécificité de la QKD — critère hors sujet.",
+        "Correct : par principe quantique, toute écoute perturbe l'état mesuré et se détecte — c'est la propriété distinctive de la QKD.",
+        "Faux : la QKD distribue des clés ; elle ne chiffre pas les données « en qubits » — confusion sur l'objet.",
+        "Faux : la QKD ne remplace ni certificats ni jetons — hors sujet."
+      ]
     },
     {
       q: "Sur un système gouvernemental, tous les utilisateurs possèdent une clearance valide pour l'ensemble des informations traitées, mais leur approbation d'accès et leur need-to-know sont limités aux seuls compartiments dont ils ont besoin. Dans quel mode de sécurité ce système fonctionne-t-il ?",
       choix: ["Dedicated", "System high", "Compartmented", "Multilevel"],
       reponse: 2,
       explication: "C'est la définition exacte du mode compartmented : clearance pour TOUTES les informations, mais approbation d'accès et need-to-know par compartiment. En mode dedicated, les utilisateurs ont clearance, approbation et need-to-know pour tout. En system high, seul le need-to-know est partiel (l'approbation couvre tout). En multilevel, certains utilisateurs n'ont pas la clearance pour toutes les informations et c'est le système qui applique la séparation des niveaux.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : en mode dedicated, tous ont aussi l'approbation ET le need-to-know pour tout — plus permissif que la situation décrite.",
+        "Faux : en mode system high, l'approbation d'accès couvre tout le système ; ici elle est limitée par compartiment.",
+        "Correct : compartmented = clearance pour tout, mais approbation d'accès et need-to-know limités aux compartiments nécessaires.",
+        "Faux : le mode multilevel implique que certains utilisateurs n'ont PAS de clearance pour tout — ce n'est pas le cas décrit."
+      ]
     },
     {
       q: "Dans un système fonctionnant en mode multilevel, quelle affirmation est EXACTE ?",
@@ -1410,7 +1686,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Le mode multilevel (ou controlled security mode) permet à des utilisateurs de niveaux d'habilitation différents d'utiliser un système traitant plusieurs niveaux de classification : la trusted computing base doit alors appliquer elle-même le contrôle d'accès entre niveaux. C'est le mode le plus exigeant pour le SYSTÈME. Les trois autres affirmations décrivent au contraire les modes dedicated, system high ou un système mono-niveau.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Faux : la clearance universelle décrit les modes dedicated, system high ou compartmented — pas le multilevel.",
+        "Correct : en multilevel, certains utilisateurs ne sont pas habilités à tout — le système doit lui-même séparer les niveaux et arbitrer chaque accès.",
+        "Faux : le need-to-know varie par utilisateur — affirmation contraire au principe.",
+        "Faux : c'est l'inverse — le multilevel traite simultanément plusieurs niveaux de classification."
+      ]
     },
     {
       q: "Dans le référentiel historique TCSEC (Orange Book), que représente le niveau A1 ?",
@@ -1422,7 +1704,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 2,
       explication: "Dans le TCSEC, l'échelle va de D (protection minimale, évaluation échouée) à A1 (verified design, conception formellement vérifiée), en passant par C1/C2 (protection discrétionnaire) et B1/B2/B3 (protection obligatoire fondée sur les labels). A1 correspond approximativement à EAL7 dans les Common Criteria qui ont remplacé le TCSEC et l'ITSEC. Le TCSEC n'imposait pas d'algorithme de chiffrement et n'évaluait que la confidentialité.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : la protection minimale (échec d'évaluation) correspond au niveau D.",
+        "Faux : la protection discrétionnaire avec journalisation décrit la famille C.",
+        "Correct : A1 = verified design — conception formellement vérifiée, sommet du TCSEC.",
+        "Faux : le TCSEC n'impose pas de chiffrement obligatoire des supports — critère inventé."
+      ]
     },
     {
       q: "Un hôpital souhaite confier l'analyse statistique de données médicales à un fournisseur cloud SANS jamais lui révéler les données en clair, même pendant les calculs. Quelle technologie répond DIRECTEMENT à ce besoin ?",
@@ -1434,7 +1722,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Le chiffrement homomorphe permet d'effectuer des calculs directement sur des données chiffrées : le fournisseur ne voit jamais le plaintext, et le résultat déchiffré est identique au calcul sur les données en clair. TLS ne protège les données qu'en transit, elles seraient déchiffrées pour le calcul. Le hachage est à sens unique et interdirait les analyses, et la tokenisation ne protège que les identifiants, pas les données analysées. Le confidential computing (enclaves) serait une alternative matérielle, mais il n'est pas proposé ici.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : hors phase — TLS protège les données EN TRANSIT, mais le calcul chez le fournisseur exigerait toujours le clair.",
+        "Correct : le chiffrement homomorphe permet d'exécuter des calculs directement sur données chiffrées — le fournisseur ne voit jamais le clair.",
+        "Faux : le hachage est à sens unique — il détruit l'utilisabilité statistique des données médicales.",
+        "Faux : trop étroit — la tokenisation masque des identifiants, mais les données médicales à analyser resteraient en clair."
+      ]
     },
     {
       q: "Pour ouvrir le coffre contenant les composants de la clé maîtresse d'un HSM, la politique exige que deux responsables soient présents simultanément, chacun ne connaissant que la moitié de la combinaison. Quels principes sont appliqués ?",
@@ -1446,7 +1740,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Chaque responsable ne connaît que la moitié de la combinaison : c'est le split knowledge (personne ne SAIT tout). La présence simultanée des deux est exigée pour agir : c'est le dual control (personne ne FAIT rien seul). Le contrôle m of n généralise ces principes. Key clustering est une faiblesse cryptographique, key stretching ralentit le hachage, key escrow confie les clés à un tiers, et Zero Trust/least privilege sont des principes de conception qui ne décrivent pas ce mécanisme précis.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : key clustering (clés équivalentes) et key stretching (renforcement de dérivation) — vocabulaire cryptographique piège, hors sujet.",
+        "Correct : chacun ne connaît qu'une partie du secret (split knowledge) et l'action exige deux personnes simultanées (dual control).",
+        "Faux : key escrow (dépôt de clés) et cryptographic erase (effacement) ne décrivent pas ce dispositif.",
+        "Faux : Zero Trust et least privilege sont des principes généraux — trop larges pour nommer ces mécanismes précis."
+      ]
     },
     {
       q: "Une entreprise dont les effectifs sont majoritairement en télétravail souhaite remplacer ses VPN et ses appliances de sécurité d'agence par un service unique fourni depuis le cloud, combinant SD-WAN, CASB, SWG, ZTNA et FWaaS. Quelle architecture répond le MIEUX à ce besoin ?",
@@ -1458,19 +1758,31 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Le SASE regroupe précisément les fonctions réseau (SD-WAN) et les fonctions de sécurité (CASB, Secure Web Gateway, Zero Trust Network Access, Firewall as a Service) en un service unifié fourni depuis le cloud, au plus près de l'utilisateur où qu'il soit. Le MPLS avec pare-feu centralisé oblige à rapatrier tout le trafic vers le siège (backhauling), ce qui est inefficace pour des télétravailleurs. Le bastion host ne protège qu'un point d'entrée, et un SD-WAN seul optimise le routage sans apporter les fonctions de sécurité demandées.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : MPLS avec pare-feu centralisé décrit le modèle périmétrique avec backhauling — l'inverse du besoin exprimé.",
+        "Correct : le SASE fusionne exactement SD-WAN, CASB, SWG, ZTNA et FWaaS en service cloud unique — définition du besoin.",
+        "Faux : un bastion en DMZ ne couvre que l'accès administratif — trop étroit pour des effectifs entiers en télétravail.",
+        "Faux : le SD-WAN seul apporte le transport mais aucune des fonctions de sécurité demandées — réponse incomplète."
+      ]
     },
     {
       q: "Quel est l'avantage PRINCIPAL d'une architecture SASE par rapport au modèle de sécurité périmétrique traditionnel ?",
       choix: [
-        "Elle supprime le besoin d'authentifier les utilisateurs distants",
+        "Elle réduit les coûts en regroupant tous les contrats de sécurité chez un fournisseur unique",
         "Elle applique les politiques de sécurité au plus près de l'utilisateur, où qu'il se trouve, sans rapatrier le trafic vers le datacenter",
-        "Elle rend le chiffrement du trafic inutile",
-        "Elle garantit une disponibilité de 100 % du réseau"
+        "Elle permet de conserver les pare-feux d'agence existants sans modification",
+        "Elle centralise l'inspection de tout le trafic dans le datacenter de l'entreprise"
       ],
       reponse: 1,
-      explication: "Le SASE déplace l'application des politiques de sécurité vers des points de présence cloud proches de l'utilisateur : le trafic n'a plus besoin d'être rapatrié (backhauled) vers le périmètre de l'entreprise pour être inspecté, ce qui réduit la latence tout en conservant un contrôle homogène. Le SASE repose au contraire fortement sur l'authentification (ZTNA) et le chiffrement, et aucune architecture ne peut garantir une disponibilité absolue.",
-      difficulte: 2
+      explication: "Le SASE déplace l'application des politiques de sécurité vers des points de présence cloud proches de l'utilisateur : le trafic n'a plus besoin d'être rapatrié (backhauled) vers le périmètre de l'entreprise pour être inspecté, ce qui réduit la latence tout en conservant un contrôle homogène. La consolidation des contrats est un effet de bord économique possible, pas l'avantage de sécurité principal ; le SASE remplace justement les appliances d'agence au lieu de les conserver ; et la centralisation de l'inspection dans le datacenter décrit le modèle périmétrique traditionnel, exactement ce que le SASE abandonne.",
+      difficulte: 2,
+      pourquoi: [
+        "Faux : la consolidation des contrats est un effet économique possible, pas l'avantage de sécurité principal — vrai mais pas prioritaire.",
+        "Correct : le SASE applique les politiques dans des points de présence cloud proches de l'utilisateur, sans rapatrier le trafic.",
+        "Faux : le SASE remplace justement les appliances d'agence — il ne les conserve pas.",
+        "Faux : centraliser l'inspection dans le datacenter décrit le modèle périmétrique traditionnel — inversion complète."
+      ]
     },
     {
       q: "Une nouvelle application mobile collecte par défaut la géolocalisation précise des utilisateurs, qui doivent naviguer dans les paramètres pour la désactiver. Quel principe du Privacy by Design est violé ?",
@@ -1482,7 +1794,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 0,
       explication: "Le principe « privacy as the default » exige que la configuration la plus protectrice de la vie privée soit active sans aucune action de l'utilisateur : la collecte de géolocalisation devrait être désactivée par défaut et activée seulement sur consentement (opt-in). Le positive-sum affirme qu'on peut concilier vie privée et fonctionnalités sans compromis, la transparence concerne l'information des utilisateurs sur les pratiques, et l'end-to-end security concerne la protection des données sur tout leur cycle de vie.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Correct : la collecte activée d'office viole « privacy as the default setting » — la protection maximale doit s'appliquer sans action de l'utilisateur.",
+        "Faux : full functionality traite le faux dilemme fonctionnalité/vie privée, pas les réglages par défaut.",
+        "Faux : la transparence concerne l'information de l'utilisateur, pas l'état initial des paramètres.",
+        "Faux : end-to-end security concerne la protection sur tout le cycle de vie des données — hors sujet ici."
+      ]
     },
     {
       q: "Lors d'un projet, l'équipe marketing affirme qu'il faut choisir entre une expérience utilisateur riche et la protection de la vie privée. Quel principe du Privacy by Design contredit DIRECTEMENT cette affirmation ?",
@@ -1494,7 +1812,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 2,
       explication: "Le principe « positive-sum » rejette les faux dilemmes du type vie privée CONTRE fonctionnalité : une bonne conception doit atteindre les deux objectifs à la fois, sans compromis artificiels. « Proactive not reactive » impose d'anticiper les atteintes avant qu'elles ne surviennent, « privacy embedded into design » d'intégrer la protection au cœur de l'architecture, et « respect for user privacy » de garder l'utilisateur au centre — aucun ne répond aussi directement à l'argument du compromis obligatoire.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Faux : « proactive not reactive » concerne l'anticipation des risques, pas le refus du compromis annoncé.",
+        "Faux : piège de proximité — l'intégration dès la conception ne répond pas frontalement au dilemme présenté.",
+        "Correct : « positive-sum, not zero-sum » affirme qu'expérience riche ET vie privée sont conciliables — il contredit directement le faux dilemme.",
+        "Faux : principe chapeau trop général — il n'adresse pas spécifiquement l'arbitrage prétendu."
+      ]
     },
     {
       q: "Votre organisation adopte une solution SaaS de gestion RH. Selon le modèle de responsabilité partagée, quelle responsabilité de sécurité reste TOUJOURS à la charge du client ?",
@@ -1506,7 +1830,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 2,
       explication: "Quel que soit le modèle de service, le client demeure responsable de SES données (classification, exactitude, conformité) et de la gestion de ses identités et habilitations : le fournisseur ne peut pas décider qui, chez le client, doit accéder à quoi. En SaaS, le patching applicatif, la sécurité physique et la redondance de l'infrastructure incombent au fournisseur. Retenez la formule : le CSP sécurise LE cloud, le client sécurise ce qui est DANS le cloud.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : en SaaS, le patching applicatif incombe au fournisseur.",
+        "Faux : la sécurité physique des datacenters reste toujours au fournisseur.",
+        "Correct : la classification des données et la gestion des identités et accès demeurent TOUJOURS la responsabilité du client, quel que soit le modèle.",
+        "Faux : la redondance de l'infrastructure relève du fournisseur."
+      ]
     },
     {
       q: "Un analyste habilité Secret tente d'enregistrer une synthèse de travail dans un dossier partagé classé Confidentiel. Le système, conforme à Bell-LaPadula, bloque l'opération. Quelle règle est appliquée ?",
@@ -1518,7 +1848,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "L'analyste tente d'écrire vers un niveau INFÉRIEUR à son habilitation : la star property l'interdit (no write down) afin d'empêcher toute fuite d'information classifiée vers des niveaux moins protégés. La simple security property interdit la lecture vers le haut, la discretionary property s'appuie sur une matrice d'accès et le besoin d'en connaître, et l'invocation property appartient au modèle Biba, pas à Bell-LaPadula.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : la simple security property régit la LECTURE vers le haut — ici il s'agit d'une écriture ; piège lecture/écriture.",
+        "Correct : la star (*) property interdit d'écrire vers un niveau inférieur (no write down) — c'est elle qui bloque l'enregistrement.",
+        "Faux : la discretionary property applique une matrice d'accès et le besoin d'en connaître — pas la règle déclenchée ici.",
+        "Faux : l'invocation property appartient au modèle Biba, pas à Bell-LaPadula."
+      ]
     },
     {
       q: "Quelle est une limite RECONNUE du modèle Bell-LaPadula ?",
@@ -1530,7 +1866,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Bell-LaPadula est un modèle exclusivement orienté confidentialité : il ignore l'intégrité (traitée par Biba et Clark-Wilson), la disponibilité, et surtout les canaux cachés par lesquels une information peut fuir en contournant les règles formelles. Il protège justement la confidentialité, il est au contraire l'archétype des systèmes MAC multiniveaux, et sa star property interdit précisément l'écriture vers le bas.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Faux : contraire à l'objet même du modèle — la confidentialité est précisément ce qu'il protège.",
+        "Correct : Bell-LaPadula ignore l'intégrité, la disponibilité et les canaux cachés — limites documentées du modèle.",
+        "Faux : Bell-LaPadula s'appuie précisément sur le contrôle d'accès obligatoire (MAC).",
+        "Faux : la star property interdit justement l'écriture vers le bas — affirmation inverse de la règle."
+      ]
     },
     {
       q: "Un système de commandement militaire empêche un processus de haute intégrité d'ingérer des données provenant d'un flux non fiable de moindre intégrité. Quelle propriété du modèle Biba est appliquée ?",
@@ -1542,7 +1884,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 0,
       explication: "La simple integrity property interdit de LIRE des données d'un niveau d'intégrité inférieur : un processus critique ne doit pas se « contaminer » avec des données douteuses, comme on ne cuisine pas avec des ingrédients avariés. La star integrity property interdit d'écrire vers un niveau d'intégrité supérieur. Les deux dernières propositions appartiennent à Bell-LaPadula et concernent la confidentialité, pas l'intégrité.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Correct : la simple integrity property (no read down) empêche un processus de haute intégrité de lire des données de moindre intégrité.",
+        "Faux : la star integrity property concerne l'ÉCRITURE vers une intégrité supérieure — ici il s'agit d'une lecture.",
+        "Faux : la simple security property appartient à Bell-LaPadula (confidentialité) — mauvais modèle.",
+        "Faux : la strong star property relève de Bell-LaPadula — hors modèle Biba."
+      ]
     },
     {
       q: "Dans le modèle Biba, que stipule l'invocation property ?",
@@ -1554,21 +1902,39 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "L'invocation property complète les deux axiomes de Biba : un sujet ne peut pas solliciter un sujet placé à un niveau d'intégrité supérieur, ce qui l'empêcherait d'obtenir indirectement des privilèges ou des traitements de plus haute intégrité que les siens. La lecture vers le bas est couverte par la simple integrity property. Les Transformation Procedures appartiennent à Clark-Wilson, pas à Biba.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Faux : décrit la simple integrity property, pas l'invocation property — piège de substitution interne au modèle.",
+        "Correct : l'invocation property interdit à un sujet d'invoquer un sujet d'un niveau d'intégrité supérieur.",
+        "Faux : les Transformation Procedures appartiennent à Clark-Wilson — mauvais modèle.",
+        "Faux : affirmation inverse — la règle restreint précisément les invocations."
+      ]
     },
     {
       q: "Une banque exige que tout virement passe obligatoirement par l'application métier, qui vérifie les plafonds et journalise l'opération ; l'accès direct à la base de données est interdit aux utilisateurs. Quel modèle de sécurité cette architecture met-elle en œuvre ?",
       choix: ["Bell-LaPadula", "Brewer-Nash", "Clark-Wilson", "Take-Grant"],
       reponse: 2,
       explication: "C'est l'illustration classique de Clark-Wilson : les données protégées (CDI, ici les comptes) ne sont manipulées que par des programmes certifiés (les Transformation Procedures, ici l'application de virement) qui garantissent des transactions bien formées, et jamais directement par les utilisateurs — c'est le triplet sujet-programme-objet. Bell-LaPadula protège la confidentialité par niveaux, Brewer-Nash prévient les conflits d'intérêts et Take-Grant modélise le transfert de droits entre sujets.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : Bell-LaPadula gère des niveaux de confidentialité — rien à voir avec des transactions contrôlées.",
+        "Faux : Brewer-Nash prévient les conflits d'intérêts — hors sujet bancaire ici.",
+        "Correct : accès aux données uniquement via l'application certifiée (TP), plafonds et journalisation = triplet Clark-Wilson et transactions bien formées.",
+        "Faux : Take-Grant modélise la propagation des droits dans un graphe — hors sujet."
+      ]
     },
     {
       q: "Quel modèle de sécurité définit huit règles primitives de protection régissant la création et la suppression sûres des sujets et des objets ainsi que l'attribution des droits d'accès ?",
       choix: ["Graham-Denning", "Biba", "Bell-LaPadula", "Sutherland"],
       reponse: 0,
       explication: "Graham-Denning est centré sur la gestion sûre des sujets, des objets et des droits : ses huit règles couvrent la création et la suppression de sujets et d'objets, ainsi que l'octroi, le transfert et la révocation des droits d'accès (lecture, octroi, suppression...). Biba et Bell-LaPadula sont des modèles à niveaux (intégrité et confidentialité), et Sutherland est un modèle d'intégrité fondé sur la non-interférence.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Correct : Graham-Denning définit huit règles primitives de création/suppression de sujets et objets et d'attribution de droits.",
+        "Faux : Biba est un modèle d'intégrité par niveaux — pas de huit règles.",
+        "Faux : Bell-LaPadula traite la confidentialité — hors sujet.",
+        "Faux : Sutherland traite la non-interférence appliquée à l'intégrité — pas ces huit règles."
+      ]
     },
     {
       q: "Le modèle Take-Grant utilise un graphe orienté pour déterminer comment les droits peuvent se propager d'un sujet à un autre. Quelles sont ses quatre règles fondamentales ?",
@@ -1580,14 +1946,26 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Take-Grant repose sur quatre opérations : take (prendre les droits d'un autre sujet), grant (accorder ses droits à un autre), create (créer de nouveaux droits) et remove (retirer des droits que l'on détient). Le graphe orienté permet d'analyser si un droit peut « fuir » vers un sujet non autorisé. Les autres propositions mélangent des permissions de systèmes de fichiers, les primitives de Graham-Denning et les propriétés de Bell-LaPadula.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Faux : read/write/execute/delete sont des droits de fichiers classiques — vocabulaire hors modèle.",
+        "Correct : take, grant, create, remove — les quatre règles de propagation des droits du modèle Take-Grant.",
+        "Faux : piège de proximité — ce sont quatre des huit règles de Graham-Denning.",
+        "Faux : simple/star/strong star/discretionary sont les propriétés de Bell-LaPadula."
+      ]
     },
     {
       q: "Un auditeur s'inquiète qu'un utilisateur non habilité puisse DÉDUIRE l'existence d'activités classifiées en observant les variations de comportement du système (temps de réponse, ressources occupées). Quel modèle de sécurité traite DIRECTEMENT ce problème ?",
       choix: ["Le modèle de non-interférence", "Le modèle Graham-Denning", "Le modèle Clark-Wilson", "Le modèle HRU"],
       reponse: 0,
       explication: "Le modèle de non-interférence exige que les actions des sujets de niveau supérieur n'aient AUCUN effet observable sur l'état du système vu par les sujets de niveau inférieur : ce qui se passe « en haut » ne doit pas interférer avec ce qui est perçu « en bas », neutralisant ainsi les fuites par inférence et les canaux cachés. Graham-Denning gère les droits, Clark-Wilson l'intégrité transactionnelle, et HRU analyse l'évolution des droits dans une matrice d'accès.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Correct : le modèle de non-interférence garantit que les actions des niveaux supérieurs ne sont pas observables, même indirectement, depuis les niveaux inférieurs.",
+        "Faux : Graham-Denning régit la gestion des sujets et objets — il ne traite pas les fuites par observation.",
+        "Faux : Clark-Wilson traite l'intégrité transactionnelle — hors sujet.",
+        "Faux : HRU raisonne sur les droits d'une matrice d'accès, pas sur l'inférence comportementale."
+      ]
     },
     {
       q: "Sur quel concept fondamental reposent les modèles Bell-LaPadula et Biba pour garantir qu'un système sûr le reste après chaque opération ?",
@@ -1599,14 +1977,26 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 0,
       explication: "Un modèle de machine à états décrit le système comme une succession d'états reliés par des transitions : si chaque état est sûr et si chaque transition préserve la sécurité, alors le système est sûr par induction, quel que soit l'enchaînement des opérations. Bell-LaPadula et Biba sont tous deux des state machine models (et des modèles de flux d'information). Le chiffrement, les matrices DAC et la séparation physique sont des mécanismes, pas le fondement formel de ces modèles.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Correct : la machine à états sécurisée — chaque transition part d'un état sûr et aboutit à un état sûr ; c'est le socle de BLP et Biba.",
+        "Faux : le chiffrement n'est pas le fondement formel de ces modèles — hors sujet.",
+        "Faux : BLP et Biba sont des modèles MAC — la matrice discrétionnaire n'en est pas le socle.",
+        "Faux : la séparation physique est une mesure d'architecture, pas un concept formel de modèle."
+      ]
     },
     {
       q: "Avant de lancer un appel d'offres pour un pare-feu, une agence gouvernementale rédige un document décrivant ses exigences de sécurité selon le formalisme des Common Criteria. Comment s'appelle ce document ?",
       choix: ["Le Security Target (ST)", "Le Protection Profile (PP)", "La Target of Evaluation (TOE)", "Le certificat EAL"],
       reponse: 1,
       explication: "Le Protection Profile exprime les besoins de sécurité du CLIENT, indépendamment de tout produit : c'est le « je veux ». Les fournisseurs répondent ensuite avec un Security Target décrivant les prétentions de sécurité de leur produit (« voici ce que j'offre »), la TOE étant le produit évalué lui-même. L'EAL n'est pas un document d'exigences mais le niveau d'assurance atteint à l'issue de l'évaluation.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : le Security Target est la réponse du FOURNISSEUR (« je fournis ») — inversion classique PP/ST.",
+        "Correct : le Protection Profile formalise les exigences du CLIENT (« je veux ») en amont de l'appel d'offres.",
+        "Faux : la TOE est le produit soumis à évaluation, pas un document d'exigences.",
+        "Faux : l'EAL est le niveau d'assurance obtenu à l'issue de l'évaluation, pas un cahier des charges."
+      ]
     },
     {
       q: "Un pare-feu certifié EAL4 et un antivirus certifié EAL5 sont proposés à votre organisation. Un collègue conclut que l'antivirus est « plus sûr » que le pare-feu. Pourquoi cette conclusion est-elle ERRONÉE ?",
@@ -1618,7 +2008,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Un EAL mesure la profondeur et la rigueur avec lesquelles les prétentions du Security Target ont été ÉVALUÉES — pas la robustesse intrinsèque du produit. Deux produits de catégories différentes, évalués contre des cibles de sécurité différentes, ne sont pas directement comparables : un EAL5 sur des prétentions modestes ne vaut pas un EAL4 sur des prétentions ambitieuses. Tout type de produit peut être évalué, et les Common Criteria s'appliquent bien au-delà du secteur gouvernemental.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Faux : l'échelle EAL est bien croissante — l'erreur du collègue est ailleurs.",
+        "Correct : les EAL mesurent la rigueur de l'ÉVALUATION et ne se comparent qu'entre produits évalués contre des cibles de sécurité comparables.",
+        "Faux : tout type de produit peut être évalué Common Criteria — affirmation inventée.",
+        "Faux : les Common Criteria sont un standard international civil et commercial — pas réservé au gouvernement."
+      ]
     },
     {
       q: "Dans les Common Criteria, quelle est la différence entre les SFR et les SAR ?",
@@ -1630,7 +2026,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 0,
       explication: "Les Security Functional Requirements (SFR) spécifient les fonctions de sécurité individuelles que le produit doit offrir (authentification, audit, chiffrement...). Les Security Assurance Requirements (SAR) décrivent comment le produit doit être évalué : rigueur du développement, tests, analyses de vulnérabilités. Les paquets de SAR déterminent l'EAL atteint. La distinction n'a rien à voir avec matériel/logiciel, avec l'auteur du document ou avec la parité des niveaux.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Correct : les SFR décrivent les fonctions de sécurité attendues de la TOE ; les SAR décrivent les mesures d'assurance de l'évaluation.",
+        "Faux : la distinction matériel/logiciel est inventée — les deux catégories s'appliquent à toute TOE.",
+        "Faux : répartition rédactionnelle fantaisiste — SFR et SAR proviennent des catalogues des Common Criteria.",
+        "Faux : l'association aux EAL pairs/impairs est absurde — les SAR définissent précisément les paquets EAL."
+      ]
     },
     {
       q: "Un ordinateur portable protégé par chiffrement intégral de disque ne libère sa clé de déchiffrement que si les mesures d'intégrité de la séquence de démarrage correspondent aux valeurs enregistrées dans les PCR du TPM. Quelle fonction du TPM est utilisée ?",
@@ -1642,28 +2044,52 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 0,
       explication: "Le sealing (scellement) lie une clé aux valeurs des Platform Configuration Registers : la clé n'est descellée que si l'état mesuré du système (firmware, bootloader, configuration) correspond à l'état de confiance enregistré. Un démarrage altéré — par exemple par un bootkit — produit des mesures différentes et la clé reste inaccessible. Le TPM génère effectivement de l'aléa, mais ce n'est pas la fonction décrite ; il n'accélère pas le chiffrement réseau et ne signe pas le BIOS.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Correct : le sealing lie la clé aux mesures d'intégrité (PCR) — elle n'est libérée que si la plateforme est dans l'état attendu.",
+        "Faux : techniquement vrai (le TPM génère de l'aléa) mais ce n'est pas la fonction décrite — piège de la capacité voisine.",
+        "Faux : l'accélération du chiffrement réseau n'est pas un rôle du TPM.",
+        "Faux : la signature de code du BIOS ne conditionne pas la libération de la clé décrite ici."
+      ]
     },
     {
       q: "Avant d'autoriser un poste de travail à rejoindre le réseau, un serveur de contrôle demande au TPM du poste une preuve signée de l'intégrité de sa configuration de démarrage. Comment s'appelle ce mécanisme ?",
       choix: ["Le key escrow", "La remote attestation (attestation à distance)", "Le certificate pinning", "Le secure enclave provisioning"],
       reponse: 1,
       explication: "La remote attestation permet à un tiers de vérifier l'intégrité d'une plateforme : le TPM signe le condensé des mesures de démarrage (PCR) avec une clé d'attestation, et le serveur distant compare ces valeurs aux valeurs de référence attendues avant d'accorder l'accès. Le key escrow est la garde de clés par un tiers, le certificate pinning fige le certificat attendu d'un serveur TLS, et le provisioning d'enclave concerne les environnements d'exécution de confiance, pas la vérification du démarrage.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : le key escrow est un dépôt de clés auprès d'un tiers — hors sujet.",
+        "Correct : la remote attestation fournit une preuve signée par le TPM de l'intégrité de la séquence de démarrage à un vérificateur distant.",
+        "Faux : le certificate pinning fige le certificat attendu côté client TLS — autre domaine.",
+        "Faux : vocabulaire plausible mais ce terme ne désigne pas le mécanisme d'attestation décrit."
+      ]
     },
     {
       q: "Une banque doit stocker les clés privées de signature de ses transactions dans un module certifié contre les intrusions physiques. Quelle norme certifie les exigences de sécurité des modules cryptographiques ?",
       choix: ["ISO 9001", "FIPS 140-3", "PCI DSS", "IEEE 802.1X"],
       reponse: 1,
       explication: "FIPS 140-3 (successeur de FIPS 140-2) définit les exigences de sécurité des modules cryptographiques, avec quatre niveaux croissants allant de composants de base jusqu'à la résistance active aux intrusions physiques avec effacement des secrets en cas de tentative d'ouverture. C'est la certification de référence pour les HSM. ISO 9001 concerne la qualité, PCI DSS la protection des données de cartes de paiement (qui exige d'ailleurs des modules validés FIPS), et 802.1X le contrôle d'accès réseau.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Faux : ISO 9001 certifie le management de la qualité, pas la sécurité des modules cryptographiques.",
+        "Correct : FIPS 140-3 est LA norme de certification des modules cryptographiques, y compris la résistance aux intrusions physiques.",
+        "Faux : PCI DSS exige des protections pour les données de paiement mais ne certifie pas les modules eux-mêmes — piège du référentiel voisin.",
+        "Faux : IEEE 802.1X traite le contrôle d'accès réseau — hors sujet."
+      ]
     },
     {
       q: "Plusieurs hôpitaux soumis aux mêmes exigences réglementaires décident de mutualiser une infrastructure cloud dédiée à leurs besoins communs, inaccessible au grand public. Quel modèle de déploiement cloud décrit cette situation ?",
       choix: ["Public cloud", "Private cloud", "Community cloud", "Hybrid cloud"],
       reponse: 2,
       explication: "Le community cloud est partagé par plusieurs organisations ayant des besoins communs — mission, exigences de sécurité, conformité réglementaire — comme des établissements de santé soumis aux mêmes obligations. Le cloud public est ouvert à tous les clients, le cloud privé est dédié à une seule organisation, et le cloud hybride combine plusieurs modèles reliés entre eux.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : le cloud public est ouvert à tout client — contraire à l'exclusivité décrite.",
+        "Faux : le cloud privé sert UNE seule organisation — ici plusieurs hôpitaux mutualisent.",
+        "Correct : le community cloud mutualise une infrastructure entre organisations partageant les mêmes exigences (réglementaires, sectorielles).",
+        "Faux : l'hybride combine plusieurs modèles de déploiement — il ne décrit pas ce partage communautaire."
+      ]
     },
     {
       q: "Votre équipe déploie des fonctions serverless (FaaS) chez un fournisseur cloud. Quelles responsabilités de sécurité restent à la charge de votre organisation ?",
@@ -1675,7 +2101,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "En FaaS, le fournisseur gère toute l'infrastructure d'exécution : serveurs, OS, runtime, mise à l'échelle. Le client reste responsable de ce qu'il déploie : la qualité et la sécurité de son code, la configuration fine des permissions accordées à chaque fonction (principe du moindre privilège dans l'IAM), la gestion des secrets et la protection des données. Une fonction sur-privilégiée ou un code vulnérable restent les risques majeurs du serverless.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : en FaaS, l'OS des serveurs d'exécution est entièrement géré par le fournisseur.",
+        "Correct : code des fonctions, permissions IAM et protection des données traitées restent au client — cœur de la responsabilité partagée en serverless.",
+        "Faux : la sécurité physique relève toujours du fournisseur.",
+        "Faux : le runtime d'exécution est maintenu par le fournisseur — c'est l'intérêt du FaaS."
+      ]
     },
     {
       q: "Un audit révèle des dizaines de machines virtuelles inconnues, créées sans validation, non patchées et oubliées sur les hyperviseurs de l'entreprise. Comment s'appelle ce phénomène et quelle est la MEILLEURE réponse ?",
@@ -1687,31 +2119,49 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Le VM sprawl est la prolifération incontrôlée de machines virtuelles : créées en quelques clics, elles échappent à l'inventaire, ne sont pas patchées et élargissent silencieusement la surface d'attaque. La réponse est une mesure de GOUVERNANCE : processus formel de demande, d'approbation, d'inventaire et de décommissionnement des VM. Le VM escape est une attaque d'évasion (autre problème), bloquer les hyperviseurs est disproportionné, et la live migration est une fonctionnalité légitime de déplacement à chaud.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : VM escape = évasion depuis une VM — mauvais diagnostic ; le patching ne traite pas la prolifération.",
+        "Correct : c'est du VM sprawl — un problème de gouvernance qui se traite par un processus formel de provisionnement et de cycle de vie.",
+        "Faux : le blocage total des hyperviseurs est disproportionné — il arrêterait la production ; réponse punitive, pas gouvernance.",
+        "Faux : la live migration est un mécanisme légitime de déplacement de VM — hors sujet."
+      ]
     },
     {
       q: "Quelle pratique réduit le MIEUX le risque d'introduire des vulnérabilités via des images de conteneurs en production ?",
       choix: [
-        "Télécharger les images depuis n'importe quel registre public pour gagner du temps",
+        "N'utiliser que des images de base minimales de type distroless",
         "Scanner les images, n'utiliser que des images signées provenant d'un registre de confiance et les reconstruire régulièrement",
-        "Exécuter tous les conteneurs avec les privilèges root pour éviter les erreurs de permission",
-        "Désactiver les mises à jour des images pour garantir la stabilité"
+        "Analyser les hôtes de conteneurs avec un antivirus traditionnel",
+        "Figer les versions d'images validées et ne plus jamais les reconstruire"
       ],
       reponse: 1,
-      explication: "La chaîne d'approvisionnement des conteneurs est un vecteur d'attaque majeur : il faut scanner les images à la recherche de vulnérabilités et de secrets, exiger des images signées issues d'un registre privé ou de confiance, et les reconstruire régulièrement pour intégrer les correctifs des couches de base. Les registres publics non vérifiés diffusent des images piégées, l'exécution en root aggrave l'impact d'une compromission (les conteneurs partagent le noyau de l'hôte), et geler les images fige aussi leurs vulnérabilités.",
-      difficulte: 2
+      explication: "La chaîne d'approvisionnement des conteneurs est un vecteur d'attaque majeur : il faut scanner les images à la recherche de vulnérabilités et de secrets, exiger des images signées issues d'un registre privé ou de confiance, et les reconstruire régulièrement pour intégrer les correctifs des couches de base. Les images minimales réduisent la surface d'attaque mais ne garantissent ni la provenance ni l'absence de vulnérabilités — c'est une mesure partielle ; un antivirus sur l'hôte n'inspecte pas la chaîne d'approvisionnement des images ; et figer les images fige aussi leurs vulnérabilités.",
+      difficulte: 2,
+      pourquoi: [
+        "Faux : vraie bonne pratique mais partielle — les images minimales ne garantissent ni la provenance ni l'absence de vulnérabilités ; trop étroit.",
+        "Correct : scan + signature + registre de confiance + reconstruction régulière couvrent toute la chaîne d'approvisionnement des images.",
+        "Faux : réponse de technicien inadaptée — un antivirus sur l'hôte n'inspecte pas la chaîne d'approvisionnement des images.",
+        "Faux : figer les images fige aussi leurs vulnérabilités — faux arbitrage stabilité contre sécurité."
+      ]
     },
     {
       q: "Un développeur a inclus les identifiants de la base de données de production directement dans l'image d'un conteneur publiée sur le registre interne. Quel est le risque PRINCIPAL et la MEILLEURE remédiation ?",
       choix: [
-        "Aucun risque, le registre est interne ; ne rien faire",
+        "Risque limité au périmètre interne ; restreindre les droits d'accès au registre et conserver l'image telle quelle",
         "Exposition des secrets à quiconque accède à l'image ; utiliser un gestionnaire de secrets injectant les identifiants à l'exécution, et révoquer les identifiants exposés",
-        "Ralentissement du conteneur ; compresser l'image",
-        "Conflit de version ; renommer l'image"
+        "Exposition des secrets ; supprimer les identifiants dans une nouvelle couche de l'image et republier",
+        "Exposition des secrets ; chiffrer l'image entière dans le registre"
       ],
       reponse: 1,
-      explication: "Un secret embarqué dans une image est lisible par toute personne pouvant tirer l'image ou inspecter ses couches — y compris dans l'historique de construction. La bonne pratique est d'injecter les secrets à l'exécution via un gestionnaire dédié (vault) ou les mécanismes de secrets de l'orchestrateur, et de considérer les identifiants exposés comme compromis : ils doivent être révoqués et remplacés immédiatement. Un registre interne réduit l'exposition mais ne l'élimine pas ; les deux autres réponses sont hors sujet.",
-      difficulte: 2
+      explication: "Un secret embarqué dans une image est lisible par toute personne pouvant tirer l'image ou inspecter ses couches — y compris dans l'historique de construction. La bonne pratique est d'injecter les secrets à l'exécution via un gestionnaire dédié (vault) ou les mécanismes de secrets de l'orchestrateur, et de considérer les identifiants exposés comme compromis : ils doivent être révoqués et remplacés immédiatement. Restreindre l'accès au registre réduit l'exposition sans traiter la compromission déjà possible ; supprimer le secret dans une couche ultérieure le laisse lisible dans les couches précédentes de l'image ; et chiffrer l'image au repos ne protège pas les secrets une fois l'image tirée et exécutée, ni ne révoque les identifiants.",
+      difficulte: 2,
+      pourquoi: [
+        "Faux : restreindre l'accès au registre réduit l'exposition mais ignore la compromission déjà possible — vrai mais pas prioritaire, le secret doit être révoqué.",
+        "Correct : traite la cause (injection des secrets à l'exécution via un gestionnaire dédié) ET la conséquence (révocation des identifiants exposés).",
+        "Faux : piège technique classique — supprimer le secret dans une nouvelle couche le laisse lisible dans les couches précédentes de l'image.",
+        "Faux : réponse de technicien — chiffrer l'image au repos ne protège pas le secret une fois l'image tirée, et ne révoque rien."
+      ]
     },
     {
       q: "Le fournisseur d'un automate industriel publie un correctif de sécurité pour une vulnérabilité critique. Quelle est la MEILLEURE approche pour déployer ce correctif sur l'environnement OT de production ?",
@@ -1723,7 +2173,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "En environnement industriel, la disponibilité et la sûreté priment : un correctif appliqué à l'aveugle peut arrêter une chaîne de production ou créer un danger physique. La démarche correcte consiste à n'utiliser que des correctifs validés par le fabricant, à les tester sur un environnement de préproduction représentatif, puis à les déployer pendant une fenêtre de maintenance planifiée avec plan de retour arrière. Ne jamais patcher laisse la vulnérabilité exploitable ; attendre une mise à niveau lointaine aussi.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : appliquer la méthode IT du déploiement immédiat risque d'arrêter le procédé industriel — la disponibilité OT l'interdit.",
+        "Correct : test du correctif approuvé par le fabricant en environnement représentatif, puis déploiement en fenêtre de maintenance planifiée — l'équilibre OT.",
+        "Faux : formulation absolue — ne jamais patcher laisse une vulnérabilité critique exploitable indéfiniment.",
+        "Faux : hors délai — attendre la prochaine mise à niveau matérielle expose l'environnement pendant des années."
+      ]
     },
     {
       q: "Dans un environnement ICS pilotant un procédé chimique, quelle priorité de sécurité distingue FONDAMENTALEMENT l'OT de l'IT traditionnel ?",
@@ -1735,21 +2191,39 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "En OT, l'ordre des priorités est inversé par rapport au triptyque IT classique : la sûreté (safety) des personnes et de l'environnement d'abord, puis la disponibilité et l'intégrité du procédé industriel, la confidentialité venant en dernier. Un arrêt intempestif ou une commande falsifiée peuvent provoquer des dommages physiques réels. La MFA et la non-répudiation sont des contrôles utiles, mais ne définissent pas la priorité fondamentale de l'OT.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : inversion IT/OT — en environnement industriel, la confidentialité passe après la sûreté et la disponibilité.",
+        "Correct : en ICS, la sûreté des personnes puis la disponibilité du procédé priment — c'est la différence fondamentale avec l'IT.",
+        "Faux : la non-répudiation est utile mais n'est pas le critère structurant de l'OT — vrai mais pas prioritaire.",
+        "Faux : le MFA est un contrôle parmi d'autres, pas la priorité fondamentale distinguant l'OT."
+      ]
     },
     {
       q: "Un cryptanalyste peut soumettre les textes clairs de SON choix au système de chiffrement cible et observer les textes chiffrés produits. De quel type d'attaque s'agit-il ?",
       choix: ["Ciphertext-only", "Known plaintext", "Chosen plaintext", "Brute force"],
       reponse: 2,
       explication: "Dans une attaque à texte clair choisi (chosen plaintext), l'attaquant contrôle les entrées soumises au chiffrement et analyse les sorties pour en déduire la clé ou des faiblesses de l'algorithme — c'est une position plus favorable que le known plaintext, où il ne dispose que de paires clair/chiffré existantes qu'il n'a pas choisies. En ciphertext-only, il n'a que des textes chiffrés. Le brute force essaie toutes les clés sans exploiter de connaissance du clair.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : en ciphertext-only, l'attaquant n'a AUCUN accès aux textes clairs — situation plus pauvre que celle décrite.",
+        "Faux : en known plaintext, les paires clair/chiffré sont subies, pas choisies — piège de nuance sur le contrôle exercé.",
+        "Correct : l'attaquant CHOISIT les clairs soumis et observe les chiffrés — définition du chosen plaintext.",
+        "Faux : la force brute essaie des clés — elle ne suppose aucun accès au système de chiffrement."
+      ]
     },
     {
       q: "Un attaquant a intercepté plusieurs messages chiffrés ainsi que la version en clair de certains d'entre eux, récupérée par ailleurs. Il tente d'en déduire la clé. Quel type d'attaque cryptanalytique mène-t-il ?",
       choix: ["Chosen ciphertext", "Known plaintext", "Ciphertext-only", "Side-channel"],
       reponse: 1,
       explication: "L'attaquant dispose de paires texte clair / texte chiffré qu'il n'a pas choisies lui-même : c'est l'attaque à texte clair connu (known plaintext), qui a par exemple permis de casser Enigma grâce aux formules répétitives des messages allemands. Le chosen ciphertext suppose qu'il peut faire déchiffrer des textes chiffrés de son choix, le ciphertext-only qu'il n'a que du chiffré, et le side-channel exploite des fuites physiques, pas le contenu des messages.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : en chosen ciphertext, l'attaquant soumettrait des chiffrés de SON choix au déchiffrement — pas la situation décrite.",
+        "Correct : il possède des paires clair/chiffré obtenues passivement, sans les avoir choisies — définition du known plaintext.",
+        "Faux : en ciphertext-only, il n'aurait aucune version en clair — condition non remplie ici.",
+        "Faux : le side-channel exploite des fuites physiques (temps, consommation) — hors sujet."
+      ]
     },
     {
       q: "Pourquoi un chiffrement par simple substitution monoalphabétique est-il vulnérable, même avec une clé gardée secrète ?",
@@ -1761,7 +2235,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Une substitution monoalphabétique préserve la fréquence d'apparition des lettres : le symbole le plus fréquent du chiffré correspond très probablement au E en français ou en anglais, et de proche en proche l'analyse fréquentielle reconstitue tout l'alphabet de substitution. C'est la faiblesse historique des chiffres de César et consorts. La longueur de clé et l'échange de clé sont des problèmes distincts, et l'alphabet utilisé n'est pas la cause de la vulnérabilité.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : la longueur de clé n'est pas la faiblesse propre de la substitution monoalphabétique.",
+        "Correct : les fréquences des lettres de la langue subsistent dans le chiffré — l'analyse fréquentielle reconstitue la correspondance.",
+        "Faux : la substitution fonctionne avec n'importe quel alphabet — argument hors sujet.",
+        "Faux : l'échange de clé concerne tout chiffrement symétrique — ce n'est pas la vulnérabilité spécifique demandée ; trop général."
+      ]
     },
     {
       q: "Un attaquant cherche deux documents différents produisant le même hash afin de substituer un contrat frauduleux à un contrat légitimement signé. Comment s'appelle cette attaque et sur quoi repose-t-elle ?",
@@ -1773,14 +2253,26 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "La birthday attack exploite le paradoxe des anniversaires : trouver DEUX entrées quelconques ayant le même hash (collision) est beaucoup plus facile que trouver une entrée correspondant à un hash donné — la difficulté tombe d'environ 2^n à 2^(n/2). L'attaquant fait signer le document légitime puis lui substitue le document frauduleux au hash identique : la signature reste valide. C'est pourquoi les fonctions à collisions connues comme MD5 et SHA-1 sont bannies des signatures.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : l'attaque par dictionnaire vise les mots de passe courants — hors sujet.",
+        "Correct : la birthday attack exploite la probabilité élevée de collisions (2^(n/2)) pour trouver deux documents au même hash.",
+        "Faux : les rainbow tables inversent des hashes de mots de passe précalculés — autre usage du hachage.",
+        "Faux : le pass the hash rejoue un hash d'authentification volé — hors contexte documentaire."
+      ]
     },
     {
       q: "Lors de la négociation TLS, un attaquant en position d'interception force le client et le serveur à utiliser une version obsolète du protocole comportant des faiblesses connues. Comment s'appelle cette attaque ?",
       choix: ["Replay attack", "Downgrade attack", "Birthday attack", "Key clustering"],
       reponse: 1,
       explication: "L'attaque par repli (downgrade) manipule la négociation pour imposer une version ou une suite cryptographique affaiblie, ensuite exploitable — POODLE contre SSL 3.0 en est l'exemple emblématique. La parade consiste à désactiver les versions et suites obsolètes côté serveur et à utiliser les mécanismes anti-repli de TLS 1.3. Le replay rejoue des messages capturés, la birthday attack cherche des collisions de hash, et le key clustering est une faiblesse d'algorithme, pas une attaque de négociation.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : le replay rejoue des messages capturés — il ne force pas le choix d'une version de protocole.",
+        "Correct : forcer la négociation vers une version obsolète et vulnérable = downgrade attack.",
+        "Faux : la birthday attack concerne les collisions de hachage — hors sujet.",
+        "Faux : le key clustering est un phénomène de clés équivalentes — pas une attaque de négociation."
+      ]
     },
     {
       q: "Un laboratoire parvient à extraire la clé d'une carte à puce en mesurant finement sa consommation électrique pendant les opérations de chiffrement. De quelle famille d'attaques s'agit-il ?",
@@ -1792,7 +2284,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 0,
       explication: "L'analyse de consommation (simple ou différentielle, SPA/DPA) est une attaque par canal auxiliaire : elle n'attaque pas les mathématiques de l'algorithme mais son IMPLÉMENTATION physique, dont la consommation électrique varie selon les bits de la clé manipulés. Les parades incluent le lissage de la consommation, l'ajout de bruit, le masquage et les contre-mesures matérielles. Le brute force essaie des clés, le chosen plaintext exploite des paires clair/chiffré et l'ingénierie sociale manipule des humains.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Correct : mesurer la consommation électrique pendant le chiffrement est une attaque par canal auxiliaire (side-channel), ici l'analyse de puissance.",
+        "Faux : la force brute essaie exhaustivement des clés — aucune mesure physique en jeu.",
+        "Faux : chosen plaintext est un modèle cryptanalytique d'accès aux clairs — pas une mesure matérielle.",
+        "Faux : l'ingénierie sociale manipule des humains — hors sujet."
+      ]
     },
     {
       q: "Deux clés DIFFÉRENTES chiffrent le même message en produisant le même texte chiffré. Comment s'appelle ce phénomène et pourquoi est-il dangereux ?",
@@ -1804,14 +2302,26 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Le key clustering désigne le cas où deux clés distinctes produisent le même chiffré à partir du même clair : l'attaquant peut alors déchiffrer avec une clé différente de l'originale, ce qui réduit l'espace de recherche effectif et trahit une faiblesse de conception de l'algorithme. Le key stretching est une technique volontaire de renforcement des mots de passe, la collision de hash concerne les fonctions de hachage, et le key escrow est un dispositif organisationnel de garde de clés.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Faux : le key stretching est un renforcement volontaire de clés dérivées — il ne décrit pas ce phénomène.",
+        "Correct : le key clustering (deux clés produisant le même chiffré) réduit l'espace de clés effectif et facilite la cryptanalyse.",
+        "Faux : la collision concerne les fonctions de hachage, pas deux clés de chiffrement — piège de vocabulaire voisin.",
+        "Faux : le key escrow est un dépôt volontaire de clés auprès d'un tiers — hors sujet."
+      ]
     },
     {
       q: "Pour réduire la charge de ses serveurs OCSP et préserver la vie privée des clients, une organisation fait présenter par ses serveurs web une réponse OCSP signée et horodatée directement pendant la négociation TLS. Comment s'appelle ce mécanisme ?",
       choix: ["Certificate pinning", "OCSP stapling (agrafage OCSP)", "CRL delta", "Cross-certification"],
       reponse: 1,
       explication: "L'OCSP stapling fait porter la preuve de non-révocation par le serveur web lui-même : il obtient périodiquement une réponse OCSP signée par la CA et l'« agrafe » à la négociation TLS. Le client n'a plus à contacter le répondeur OCSP, ce qui réduit la latence, la charge de la PKI et la fuite d'informations de navigation vers la CA. Le pinning fige un certificat attendu, la delta CRL ne publie que les révocations récentes, et la cross-certification établit la confiance entre deux PKI.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Faux : le certificate pinning fige côté client le certificat attendu — autre mécanisme.",
+        "Correct : l'OCSP stapling fait présenter par le serveur une réponse OCSP signée et horodatée pendant la négociation TLS — décharge les répondeurs et préserve la vie privée.",
+        "Faux : la CRL delta est une liste différentielle toujours téléchargée par le client — pas ce mécanisme.",
+        "Faux : la cross-certification établit la confiance entre PKI distinctes — hors sujet."
+      ]
     },
     {
       q: "Une application de paiement doit vérifier EN TEMPS RÉEL le statut de révocation des certificats qu'elle accepte. Quel mécanisme est le PLUS adapté ?",
@@ -1823,19 +2333,31 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "OCSP (Online Certificate Status Protocol) interroge en ligne le statut d'un certificat précis et obtient une réponse fraîche et signée : c'est le mécanisme adapté à une vérification en temps réel. Une CRL téléchargée hebdomadairement peut laisser passer un certificat révoqué pendant plusieurs jours. Ignorer la révocation ou se contenter des dates de validité revient à accepter des certificats compromis avant leur expiration.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : une CRL hebdomadaire laisse une fenêtre d'exposition de plusieurs jours — hors exigence temps réel.",
+        "Correct : OCSP interroge le statut de révocation certificat par certificat, en temps réel — l'exigence du paiement.",
+        "Faux : l'expiration ne dit rien de la révocation — un certificat volé reste « valide » jusqu'à sa date de fin ; raisonnement dangereux.",
+        "Faux : la date de signature n'indique pas le statut actuel du certificat."
+      ]
     },
     {
       q: "Pourquoi la root CA d'une PKI d'entreprise doit-elle être maintenue HORS LIGNE, ses émissions étant déléguées à des CA intermédiaires ?",
       choix: [
-        "Pour économiser l'énergie du datacenter",
+        "Pour satisfaire une exigence de certification Common Criteria applicable aux autorités racines",
         "Parce que la compromission de la root CA invaliderait la confiance de TOUS les certificats de la hiérarchie, sans remédiation simple",
-        "Parce que la root CA ne sait émettre que des CRL",
-        "Pour accélérer l'émission des certificats utilisateurs"
+        "Parce que les CA intermédiaires émettent plus vite, la root ne servant qu'à répartir la charge",
+        "Parce qu'une root CA compromise se révoque facilement via la CRL de l'autorité supérieure"
       ],
       reponse: 1,
-      explication: "La root CA est l'ancre de confiance de toute la hiérarchie : si sa clé privée est compromise, chaque certificat émis directement ou indirectement sous elle devient suspect, et la reconstruction de la PKI est extrêmement coûteuse. On la garde donc hors ligne, activée rarement et sous contrôles stricts (dual control, cérémonie de clés), les CA intermédiaires assurant l'émission quotidienne — leur compromission, elle, se répare par révocation. Les autres réponses sont fantaisistes.",
-      difficulte: 2
+      explication: "La root CA est l'ancre de confiance de toute la hiérarchie : si sa clé privée est compromise, chaque certificat émis directement ou indirectement sous elle devient suspect, et la reconstruction de la PKI est extrêmement coûteuse. On la garde donc hors ligne, activée rarement et sous contrôles stricts (dual control, cérémonie de clés), les CA intermédiaires assurant l'émission quotidienne — leur compromission, elle, se répare par révocation. Aucune exigence Common Criteria n'impose ce choix ; la répartition de charge est un bénéfice accessoire, pas la raison de sécurité ; et une root, auto-signée, n'a précisément aucune autorité supérieure pour la révoquer — c'est tout le problème.",
+      difficulte: 2,
+      pourquoi: [
+        "Faux : fausse attribution réglementaire — aucune exigence Common Criteria n'impose la root hors ligne.",
+        "Correct : la root est l'ancre de confiance — sa compromission invaliderait TOUTE la hiérarchie sans remédiation simple, d'où sa mise hors ligne.",
+        "Faux : bénéfice de performance accessoire — vrai en pratique mais ce n'est pas la raison de sécurité qui motive l'architecture.",
+        "Faux : une root auto-signée n'a précisément AUCUNE autorité supérieure pour la révoquer — c'est tout le problème."
+      ]
     },
     {
       q: "Un administrateur découvre que la clé privée du certificat TLS du portail client a été copiée sur un dépôt de code public. Quelle est la PREMIÈRE action à entreprendre ?",
@@ -1847,7 +2369,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Une clé privée exposée doit être considérée comme définitivement compromise : la priorité est de faire révoquer le certificat (publication en CRL/OCSP) pour que les clients cessent de lui faire confiance, puis de générer une NOUVELLE paire de clés et d'obtenir un nouveau certificat. Attendre l'expiration laisse l'attaquant usurper le portail ; supprimer le dépôt n'efface pas les copies déjà faites ; renouveler avec la même paire de clés reconduit la compromission.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : attendre l'expiration laisse la fenêtre d'usurpation ouverte pendant des mois — inaction inacceptable.",
+        "Correct : révoquer immédiatement, puis générer une NOUVELLE paire de clés et un nouveau certificat — traiter la clé comme compromise.",
+        "Faux : illusion de confinement — supprimer le dépôt n'annule pas les copies déjà réalisées.",
+        "Faux : renouveler avec la MÊME paire de clés reconduit la compromission — contresens cryptographique."
+      ]
     },
     {
       q: "À l'entrée d'un datacenter, un sas à double porte ne laisse passer qu'une seule personne à la fois : la seconde porte ne s'ouvre qu'après fermeture de la première et vérification de l'identité. Contre quelle menace ce dispositif est-il PRINCIPALEMENT conçu ?",
@@ -1859,28 +2387,52 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Le mantrap (sas de sécurité) impose un passage individuel : il empêche qu'une personne non autorisée se glisse derrière un porteur de badge, avec sa complicité (piggybacking) ou à son insu (tailgating). Certains sas pèsent même l'occupant pour détecter une double présence. Il ne joue aucun rôle contre le feu, les coupures électriques ou les émanations électromagnétiques, qui relèvent d'autres contrôles.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : l'incendie relève des dispositifs d'évacuation et d'extinction — pas d'un sas de contrôle.",
+        "Correct : le mantrap force le passage individuel avec vérification — parade directe au piggybacking et au tailgating.",
+        "Faux : la coupure électrique n'est pas traitée par un sas — hors sujet.",
+        "Faux : l'écoute électromagnétique relève de TEMPEST et du blindage — hors sujet."
+      ]
     },
     {
       q: "Quel dispositif protège la façade d'un bâtiment contre une attaque par véhicule-bélier tout en restant discret dans l'aménagement urbain ?",
       choix: ["Des bollards (bornes anti-véhicules)", "Un éclairage à détection de mouvement", "Des caméras PTZ", "Un tourniquet à badge"],
       reponse: 0,
       explication: "Les bollards sont des bornes fixes ou escamotables conçues pour arrêter un véhicule lancé contre une entrée ou une vitrine ; ils s'intègrent discrètement sous forme de plots, jardinières ou bancs renforcés — l'esprit CPTED. L'éclairage et les caméras dissuadent et détectent mais n'arrêtent pas physiquement un véhicule, et le tourniquet contrôle le passage des piétons, pas des véhicules.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Correct : les bollards arrêtent physiquement un véhicule-bélier tout en s'intégrant discrètement à l'aménagement urbain.",
+        "Faux : l'éclairage dissuade et révèle mais n'arrête pas un véhicule lancé — contrôle dissuasif, pas préventif physique.",
+        "Faux : les caméras détectent et enregistrent sans bloquer — contrôle détectif face à une menace cinétique.",
+        "Faux : le tourniquet canalise les piétons — sans effet sur un véhicule."
+      ]
     },
     {
       q: "Le nouveau siège d'une entreprise canalise tous les visiteurs vers une entrée unique grâce à des haies, des jardinières et un dessin des allées qui décourage naturellement l'accès aux autres façades. Quel principe CPTED est appliqué ?",
       choix: ["Natural surveillance", "Natural access control", "Territorial reinforcement", "Target hardening"],
       reponse: 1,
       explication: "Le natural access control guide subtilement les personnes vers les points d'entrée voulus et restreint l'accès aux zones sensibles par l'aménagement lui-même : haies, jardinières, tracé des allées, différences de niveau. La natural surveillance maximise les occasions d'observer (éclairage, zones dégagées), le territorial reinforcement marque l'appropriation des lieux (signalétique, entretien), et le target hardening (serrures, barreaux) est justement l'approche traditionnelle que le CPTED complète.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : la natural surveillance consiste à VOIR (visibilité, éclairage) — ici on canalise les déplacements.",
+        "Correct : haies, jardinières et dessin des allées qui canalisent vers l'entrée unique = natural access control.",
+        "Faux : le territorial reinforcement marque l'appartenance des lieux (signalétique, entretien) — autre principe.",
+        "Faux : le target hardening est le renforcement mécanique (serrures, barreaux) — pas un aménagement naturel."
+      ]
     },
     {
       q: "Pour la salle informatique d'un nouveau bâtiment, l'équipe projet veut un système d'extinction à eau qui ne se déclenche qu'après DEUX événements indépendants : une détection d'incendie qui remplit les canalisations, puis la fusion d'une tête d'extincteur. Quel système choisir ?",
       choix: ["Wet pipe", "Dry pipe", "Pre-action", "Deluge"],
       reponse: 2,
       explication: "Le système pre-action combine deux déclencheurs : les canalisations, normalement vides, ne se remplissent qu'à la détection d'un incendie, et l'eau n'est libérée que si la chaleur fait fondre une tête de sprinkler. Ce double verrou minimise le risque de décharge accidentelle sur les équipements — c'est LE choix recommandé pour les datacenters. Le wet pipe est toujours en eau (risque de fuite), le dry pipe n'a qu'un seul déclencheur, et le deluge libère de gros volumes d'eau, inadapté à l'informatique.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : en wet pipe, l'eau est en permanence dans les canalisations — un seul déclenchement suffit ; risque de fuite au-dessus des serveurs.",
+        "Faux : en dry pipe, l'air comprimé retarde l'eau mais UN seul événement déclenche le remplissage — pas de double condition.",
+        "Correct : le pre-action exige DEUX événements indépendants — détection qui remplit les canalisations, puis fusion d'une tête ; idéal en salle informatique.",
+        "Faux : le deluge inonde massivement par têtes ouvertes — l'inverse de la précaution recherchée."
+      ]
     },
     {
       q: "Lors d'une coupure de courant, quel est le rôle EXACT de l'UPS par rapport au générateur de secours ?",
@@ -1892,19 +2444,31 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "L'UPS (onduleur) prend le relais instantanément sur batteries, mais pour une durée courte — typiquement quelques minutes : son rôle est de couvrir la transition jusqu'à ce que le générateur, qui a besoin de secondes ou de minutes pour démarrer et se stabiliser, reprenne la charge. Le générateur assure ensuite l'alimentation prolongée tant qu'il est ravitaillé en carburant. Les deux dispositifs sont complémentaires, pas interchangeables : l'un est immédiat et bref, l'autre différé et durable.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : l'autonomie d'un UPS se compte en minutes, pas en jours — surestimation de sa capacité.",
+        "Correct : l'UPS assure l'alimentation instantanée de courte durée, le temps que le générateur démarre et se stabilise — rôles complémentaires.",
+        "Faux : inversion — un générateur met des dizaines de secondes à démarrer et se stabiliser ; l'UPS fait bien plus que du filtrage.",
+        "Faux : ils ne sont pas interchangeables — l'un est immédiat et bref, l'autre différé et durable."
+      ]
     },
     {
       q: "Dans une salle serveurs, quels sont les risques respectifs d'une humidité TROP BASSE et d'une humidité TROP ÉLEVÉE ?",
       choix: [
         "Trop basse : corrosion ; trop élevée : électricité statique",
         "Trop basse : électricité statique ; trop élevée : condensation et corrosion",
-        "L'humidité n'a aucun impact sur les équipements",
-        "Trop basse : surchauffe ; trop élevée : incendie"
+        "Trop basse : condensation au redémarrage des serveurs ; trop élevée : électricité statique",
+        "Trop basse : aucun risque matériel ; trop élevée : simple perte de rendement du refroidissement"
       ],
       reponse: 1,
-      explication: "Une humidité trop faible favorise l'accumulation d'électricité statique, dont les décharges peuvent détruire des composants électroniques ; une humidité trop élevée provoque condensation et corrosion des circuits. C'est pourquoi le HVAC maintient l'hygrométrie dans une plage contrôlée (autour de 40 à 60 %), en complément de la température. Les deux dernières réponses sont fausses : l'humidité est un paramètre critique, mais elle ne cause ni surchauffe ni incendie par elle-même.",
-      difficulte: 2
+      explication: "Une humidité trop faible favorise l'accumulation d'électricité statique, dont les décharges peuvent détruire des composants électroniques ; une humidité trop élevée provoque condensation et corrosion des circuits. C'est pourquoi le HVAC maintient l'hygrométrie dans une plage contrôlée (autour de 40 à 60 %), en complément de la température. Les deux premières réponses fausses inversent les phénomènes physiques, et la dernière minimise un paramètre pourtant critique : l'air trop sec présente bien un risque matériel réel (décharges électrostatiques).",
+      difficulte: 2,
+      pourquoi: [
+        "Faux : inversion des phénomènes — la corrosion vient de l'humidité ÉLEVÉE, la statique de l'air SEC.",
+        "Correct : air trop sec = électricité statique (décharges destructrices) ; air trop humide = condensation et corrosion.",
+        "Faux : inversion partielle plausible — la condensation est liée à l'humidité élevée, et la statique à l'air sec, pas l'inverse.",
+        "Faux : minimisation — l'air trop sec présente un risque matériel bien réel (décharges électrostatiques), pas seulement un enjeu de rendement."
+      ]
     },
     {
       q: "Le fournisseur d'un équipement critique annonce la date d'« end-of-support ». Pourquoi cette date représente-t-elle un jalon de risque MAJEUR dans le cycle de vie du système ?",
@@ -1916,7 +2480,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "L'end-of-support (ou end-of-service-life) marque la fin des correctifs et du support du fournisseur : toute vulnérabilité découverte ensuite restera béante, faisant de l'équipement une cible permanente. L'end-of-life, en amont, marque la fin de la commercialisation. Le système doit être remplacé ou migré avant l'EOS ; à défaut, des mesures compensatoires (isolation, segmentation, surveillance renforcée) s'imposent. L'équipement ne s'arrête pas de lui-même, et les deux dernières réponses sont fantaisistes.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : l'équipement continue de fonctionner après l'end-of-support — confusion avec une fin de service contractuelle.",
+        "Correct : après l'end-of-support, plus aucun correctif n'est publié — toute nouvelle vulnérabilité reste définitivement exploitable ; jalon de risque majeur.",
+        "Faux : la fin de support ne modifie pas le modèle de licence — affirmation fantaisiste.",
+        "Faux : contraire de la réalité — la garantie et le support cessent, ils ne se prolongent pas."
+      ]
     },
     {
       q: "Votre organisation retire du service une baie de stockage ayant contenu des données confidentielles. Quelle est la PREMIÈRE étape d'un décommissionnement sécurisé ?",
@@ -1928,7 +2498,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Le décommissionnement commence par l'inventaire des données et de leur classification : c'est elle qui dicte la méthode de sanitisation requise (clear, purge ou destroy selon NIST SP 800-88) et les exigences de traçabilité. Revendre ou simplement formater expose les données résiduelles — un formatage ne supprime pas réellement les contenus. La gestion des étiquettes vient en fin de processus, avec le certificat de destruction ou d'effacement.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : revendre avant sanitisation expose les données résiduelles — la priorité financière passe avant la sécurité ; ordre inversé.",
+        "Correct : identifier les données et leur classification d'abord — c'est elle qui dicte la méthode de sanitisation exigée (clear, purge, destroy).",
+        "Faux : hors phase et insuffisant — un formatage ne supprime pas réellement les données ; agir avant d'avoir déterminé l'exigence.",
+        "Faux : la gestion des étiquettes intervient en fin de processus — hors phase."
+      ]
     }
   ],
   quizEn: [
@@ -1937,21 +2513,39 @@ window.CISSP_DATA.domains[3] = {
       choix: ["Least privilege", "Defense in depth", "Separation of duties", "Fail securely"],
       reponse: 1,
       explication: "La défense en profondeur consiste à empiler plusieurs contrôles indépendants en série, afin que la défaillance de l'un d'eux (ici le pare-feu périmétrique) n'expose pas les actifs : IPS, segmentation interne et contrôles sur les hôtes prennent le relais. Le moindre privilège limite les droits accordés, la séparation des tâches répartit les fonctions critiques entre plusieurs personnes, et fail securely concerne le comportement d'un composant en cas de panne — aucun ne décrit cet empilement de couches.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : least privilege limite les droits accordés — il ne décrit pas l'empilement de contrôles indépendants.",
+        "Correct : plusieurs contrôles en série (IPS, segmentation, contrôles hôtes) prenant le relais du pare-feu défaillant = defense in depth.",
+        "Faux : la separation of duties répartit des fonctions critiques entre personnes — hors sujet architecture.",
+        "Faux : fail securely décrit le comportement sûr d'un composant en panne, pas la superposition de couches."
+      ]
     },
     {
       q: "During a design review, an engineer argues that a proposed authentication module is too complex to be properly analyzed and tested, and should be simplified. Which secure design principle supports this position?",
       choix: ["Economy of mechanism (keep it simple)", "Complete mediation", "Open design", "Psychological acceptability"],
       reponse: 0,
       explication: "L'économie de mécanisme (keep it simple) affirme que plus une conception est simple, plus elle est facile à analyser, à tester et à sécuriser : la complexité multiplie les erreurs et les surfaces d'attaque. Complete mediation exige la vérification de chaque accès, open design que la sécurité ne repose pas sur le secret de la conception, et psychological acceptability que les contrôles restent utilisables — aucun ne vise directement la réduction de la complexité.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Correct : economy of mechanism — un mécanisme simple est analysable, testable et donc plus sûr ; c'est l'argument de l'ingénieur.",
+        "Faux : complete mediation exige la vérification de chaque accès — sans lien avec la complexité du module.",
+        "Faux : open design affirme que la sécurité ne doit pas reposer sur le secret de conception — autre principe.",
+        "Faux : psychological acceptability concerne l'utilisabilité des contrôles pour les utilisateurs — hors sujet."
+      ]
     },
     {
       q: "A shared temporary directory allows information to leak between processes belonging to different users. Which secure design principle was violated?",
       choix: ["Least common mechanism", "Secure defaults", "Zero Trust", "Abstraction"],
       reponse: 0,
       explication: "Le principe du least common mechanism recommande de minimiser les mécanismes et ressources PARTAGÉS entre utilisateurs ou processus, car chaque élément commun (répertoire temporaire, cache, canal partagé) est un vecteur potentiel de fuite d'information entre domaines de sécurité. Secure defaults concerne la configuration initiale, Zero Trust la vérification systématique des requêtes, et l'abstraction masque les détails d'implémentation — aucun ne traite spécifiquement le partage de ressources.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Correct : un mécanisme partagé entre utilisateurs (répertoire commun) devient un canal de fuite — violation du least common mechanism.",
+        "Faux : secure defaults concerne les configurations initiales sûres — pas le partage de ressources.",
+        "Faux : Zero Trust est une posture d'accès réseau/identité — il ne vise pas les mécanismes partagés internes.",
+        "Faux : l'abstraction est un concept de conception (masquer les détails) — pas le principe violé ici."
+      ]
     },
     {
       q: "After stealing one employee's credentials, an attacker moved laterally across the flat corporate network and reached the finance servers. Which architectural approach would BEST have limited this attack?",
@@ -1963,14 +2557,26 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Le problème décrit est la confiance implicite accordée à tout ce qui se trouve DÉJÀ dans le réseau : une architecture Zero Trust avec microsegmentation authentifie et autorise chaque requête, quel que soit son point d'origine, ce qui bloque le mouvement latéral même après un vol d'identifiants. Renforcer le périmètre n'aide pas une fois l'attaquant entré, des mots de passe plus longs n'empêchent pas l'usage d'identifiants volés valides, et le chiffrement de disque ne protège pas des accès effectués via des sessions légitimes.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : renforcer le périmètre ne traite pas le mouvement latéral INTERNE — c'est le modèle dont l'échec est décrit.",
+        "Correct : Zero Trust avec microsegmentation et vérification continue bloque le mouvement latéral, même avec des identifiants volés.",
+        "Faux : la longueur des mots de passe n'arrête pas l'usage d'identifiants déjà volés — contrôle hors cible.",
+        "Faux : le chiffrement de disque protège les données au repos — inopérant face à un attaquant authentifié ; réponse de technicien."
+      ]
     },
     {
       q: "A multinational with thousands of remote workers wants identity-based access policies enforced in the cloud, close to each user, combining SD-WAN, ZTNA, CASB, and firewall-as-a-service. Which architecture matches this requirement?",
       choix: ["SASE (Secure Access Service Edge)", "DMZ with screened subnet", "Hub-and-spoke VPN concentrators", "Air-gapped network"],
       reponse: 0,
       explication: "Le SASE fournit les fonctions réseau et sécurité (SD-WAN, ZTNA, CASB, SWG, FWaaS) comme un service cloud unifié appliqué au plus près de l'utilisateur, avec des politiques fondées sur l'identité — exactement le besoin d'une organisation distribuée. La DMZ et les concentrateurs VPN relèvent du modèle périmétrique traditionnel qui rapatrie le trafic, et l'air gap isole physiquement un réseau, ce qui est incompatible avec le télétravail de masse.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Correct : SASE = SD-WAN + ZTNA + CASB + FWaaS délivrés depuis le cloud, près de chaque utilisateur — la définition du besoin.",
+        "Faux : la DMZ est une architecture périmétrique de datacenter — inadaptée à des milliers de télétravailleurs.",
+        "Faux : les concentrateurs VPN rapatrient le trafic vers le centre — le backhauling que l'on cherche à éliminer.",
+        "Faux : l'air gap isole physiquement — incompatible avec le travail à distance."
+      ]
     },
     {
       q: "In a Bell-LaPadula system, a user cleared at Secret attempts to append information to an Unclassified document. The system denies the operation. Which rule causes the denial?",
@@ -1982,7 +2588,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Écrire vers un niveau de classification INFÉRIEUR est interdit par la star property (« no write down ») : elle empêche qu'un sujet habilité fasse fuir, volontairement ou non, de l'information classifiée vers des conteneurs moins protégés. La simple security property interdit la lecture vers le haut, tandis que la simple integrity property et l'invocation property appartiennent au modèle Biba, qui traite l'intégrité et non la confidentialité.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : la simple security property régit la LECTURE vers le haut — ici c'est une écriture vers le bas.",
+        "Correct : la star (*) property interdit d'écrire vers un niveau inférieur (no write down) — c'est elle qui bloque.",
+        "Faux : la simple integrity property appartient à Biba — mauvais modèle.",
+        "Faux : l'invocation property appartient à Biba — hors modèle Bell-LaPadula."
+      ]
     },
     {
       q: "Which statement BEST describes the purpose of the Bell-LaPadula simple security property?",
@@ -1994,7 +2606,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 0,
       explication: "La simple security property énonce « no read up » : un sujet ne peut pas lire d'objets classés au-dessus de son niveau d'habilitation, ce qui constitue la protection de base de la confidentialité multiniveaux. Le « no write down » est la star property, et les questions d'intégrité ou d'invocation relèvent de Biba. La création d'objets n'est pas restreinte par cette propriété.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Correct : la simple security property = no read up — pas de lecture au-dessus de sa clearance.",
+        "Faux : l'interdiction d'écrire vers le bas décrit la star property — piège d'inversion.",
+        "Faux : l'intégrité des programmes relève de Biba — hors modèle.",
+        "Faux : règle inventée — aucune propriété de BLP ne limite la création d'objets ainsi."
+      ]
     },
     {
       q: "Which pair of rules correctly summarizes the Biba integrity model?",
@@ -2006,35 +2624,65 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Biba protège l'intégrité en inversant la logique de Bell-LaPadula : la simple integrity property interdit de lire des données de moindre intégrité (no read down, pour ne pas se contaminer) et la star integrity property interdit d'écrire vers une intégrité supérieure (no write up, pour ne pas corrompre). « No read up, no write down » est la combinaison de Bell-LaPadula pour la confidentialité ; les deux autres combinaisons ne correspondent à aucun modèle standard.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : no read up / no write down est le couple de Bell-LaPadula — inversion classique confidentialité/intégrité.",
+        "Correct : Biba = no read down, no write up — l'exact miroir de Bell-LaPadula, au service de l'intégrité.",
+        "Faux : mélange incohérent des règles des deux modèles.",
+        "Faux : mélange incohérent — ce couple n'appartient à aucun des deux modèles."
+      ]
     },
     {
       q: "A brokerage firm wants to guarantee that customer account records can only be modified through certified application programs enforcing well-formed transactions, with all changes audited. Which security model BEST describes this design?",
       choix: ["Bell-LaPadula", "Clark-Wilson", "Brewer-Nash", "Non-interference"],
       reponse: 1,
       explication: "Clark-Wilson impose le triplet sujet-programme-objet : les données protégées (CDI) ne sont modifiables qu'à travers des Transformation Procedures certifiées, qui garantissent des transactions bien formées, avec vérification par des IVP et séparation des tâches. C'est le modèle d'intégrité commerciale par excellence. Bell-LaPadula traite la confidentialité multiniveaux, Brewer-Nash les conflits d'intérêts, et la non-interférence l'absence d'influence observable entre niveaux.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : Bell-LaPadula gère la confidentialité par niveaux — il ne contraint pas les modifications à des programmes certifiés.",
+        "Correct : modifications uniquement via des programmes certifiés imposant des transactions bien formées, avec audit = Clark-Wilson.",
+        "Faux : Brewer-Nash prévient les conflits d'intérêts entre clients concurrents — hors sujet.",
+        "Faux : la non-interférence traite l'observation entre niveaux — pas l'intégrité transactionnelle."
+      ]
     },
     {
       q: "An audit firm serves two competing airlines. Once a consultant accesses Airline A's files, the system dynamically prevents any access to Airline B's files. Which security model is implemented?",
       choix: ["Brewer-Nash (Chinese Wall)", "Graham-Denning", "Biba", "Take-Grant"],
       reponse: 0,
       explication: "Brewer-Nash, ou « ethical wall », a été conçu pour les cabinets servant des clients concurrents : les droits d'accès évoluent DYNAMIQUEMENT en fonction de l'historique de consultation de l'utilisateur, afin de prévenir tout conflit d'intérêts. Graham-Denning définit huit règles de gestion des sujets, objets et droits, Biba protège l'intégrité par niveaux, et Take-Grant analyse la propagation des droits dans un graphe — aucun n'offre cette restriction dynamique.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Correct : le mur dynamique fondé sur l'historique d'accès (Airline A consultée, Airline B bloquée) = Brewer-Nash (Chinese Wall).",
+        "Faux : Graham-Denning définit huit règles de gestion des sujets/objets — pas de droits dynamiques par conflit d'intérêts.",
+        "Faux : Biba protège l'intégrité par niveaux — hors sujet.",
+        "Faux : Take-Grant modélise la propagation des droits — pas les conflits d'intérêts."
+      ]
     },
     {
       q: "A certifier is concerned that actions performed by high-level processes could be observed indirectly by lower-level subjects through changes in system behavior. Which security model directly addresses this concern?",
       choix: ["Non-interference model", "Clark-Wilson", "Graham-Denning", "Bell-LaPadula discretionary property"],
       reponse: 0,
       explication: "Le modèle de non-interférence exige que l'activité des sujets de niveau supérieur ne produise AUCUN effet observable sur ce que perçoivent les sujets de niveau inférieur : il vise précisément les fuites indirectes, l'inférence et les canaux cachés que les règles d'accès classiques ne couvrent pas. Clark-Wilson traite l'intégrité transactionnelle, Graham-Denning la gestion des droits, et la discretionary property de Bell-LaPadula repose sur une matrice d'accès — sans traiter l'observabilité indirecte.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Correct : le modèle de non-interférence garantit que les actions des niveaux hauts ne sont pas observables, même indirectement, par les niveaux bas.",
+        "Faux : Clark-Wilson traite l'intégrité transactionnelle — hors sujet.",
+        "Faux : Graham-Denning régit la création/suppression de sujets et objets — hors sujet.",
+        "Faux : la discretionary property de BLP applique le need-to-know — elle ne traite pas les fuites par observation."
+      ]
     },
     {
       q: "Under the Common Criteria, which document contains the vendor's claims about the security functionality implemented in the product being evaluated?",
       choix: ["Protection Profile", "Security Target", "Evaluation Assurance Level", "Security Functional Requirement catalog"],
       reponse: 1,
       explication: "Le Security Target est rédigé par le fournisseur : il décrit les prétentions de sécurité de sa TOE, c'est-à-dire les fonctions implémentées et le périmètre évalué. Le Protection Profile exprime au contraire les besoins du client, l'EAL est le niveau d'assurance atteint à l'issue de l'évaluation, et le catalogue de SFR est la bibliothèque normalisée d'exigences fonctionnelles dans laquelle PP et ST puisent.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : le Protection Profile exprime les besoins du client — inversion des rôles PP/ST.",
+        "Correct : le Security Target contient les prétentions de sécurité du vendeur pour le produit évalué.",
+        "Faux : l'EAL est le niveau d'assurance attribué, pas un document de prétentions.",
+        "Faux : le catalogue des SFR est une bibliothèque d'exigences génériques — pas les revendications du produit."
+      ]
     },
     {
       q: "What does a higher Evaluation Assurance Level (EAL) under the Common Criteria actually indicate?",
@@ -2046,35 +2694,65 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Un EAL élevé signifie que les prétentions du Security Target ont été vérifiées avec davantage de rigueur, de profondeur et de formalisme — EAL7 impliquant une vérification formelle de la conception. Il ne garantit ni l'absence de vulnérabilités, ni un niveau de chiffrement particulier, ni une homologation automatique pour des réseaux classifiés : l'homologation est une décision distincte prise par l'autorité d'accréditation. C'est le piège classique : l'EAL mesure l'ÉVALUATION, pas la sécurité absolue du produit.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : formulation absolue — aucune évaluation ne garantit l'absence de vulnérabilités.",
+        "Correct : un EAL plus élevé signifie une évaluation plus rigoureuse et profonde des prétentions de sécurité — rien de plus.",
+        "Faux : l'EAL n'a aucun lien avec la longueur des clés — confusion assurance/fonctionnalité.",
+        "Faux : l'EAL n'est pas une autorisation d'emploi sur réseaux classifiés — décision d'accréditation distincte."
+      ]
     },
     {
       q: "A network access control server requires each laptop to prove, before joining the network, that its boot process has not been tampered with, using values signed by the laptop's TPM. Which TPM capability is being used?",
       choix: ["Key escrow", "Remote attestation", "Bulk encryption acceleration", "Certificate pinning"],
       reponse: 1,
       explication: "La remote attestation permet au TPM de fournir à un tiers une preuve signée de l'état de la plateforme : les mesures de la séquence de démarrage, accumulées dans les PCR, sont signées par une clé d'attestation et comparées par le serveur aux valeurs de référence. Le key escrow est la garde de clés par un tiers, le TPM n'est pas conçu pour accélérer le chiffrement de masse, et le certificate pinning est une technique de validation TLS côté client, sans rapport avec le TPM.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : le key escrow est un dépôt de clés auprès d'un tiers — hors sujet.",
+        "Correct : prouver à un serveur distant, par des valeurs signées du TPM, que la séquence de démarrage est intègre = remote attestation.",
+        "Faux : le TPM n'est pas un accélérateur de chiffrement de masse — capacité inventée.",
+        "Faux : le certificate pinning est un mécanisme TLS côté client — autre domaine."
+      ]
     },
     {
       q: "A certificate authority must protect its signing keys in a dedicated, tamper-resistant appliance validated under FIPS 140-3, capable of high-volume cryptographic operations. Which solution fits this requirement?",
       choix: ["A TPM chip on each server motherboard", "A Hardware Security Module (HSM)", "A software keystore encrypted with AES", "A smart card issued to the administrator"],
       reponse: 1,
       explication: "Le HSM est un cryptoprocesseur dédié, résistant aux intrusions physiques et certifiable FIPS 140-3, conçu pour générer, stocker et utiliser des clés à grande échelle — c'est l'équipement standard pour protéger les clés d'une autorité de certification. Le TPM est une puce liée à UNE machine, aux capacités limitées ; un keystore logiciel reste exposé aux compromissions de l'hôte ; et une carte à puce protège les clés d'une personne, pas celles d'une infrastructure d'émission.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : le TPM est une puce locale par machine — inadapté à la volumétrie et à la centralisation d'une CA.",
+        "Correct : le HSM est l'équipement dédié inviolable, validé FIPS 140-3, conçu pour les opérations cryptographiques à haut volume.",
+        "Faux : un keystore logiciel n'offre aucune résistance physique certifiée — protection de niveau inférieur.",
+        "Faux : la smart card protège une clé individuelle à faible volumétrie — pas une infrastructure de CA."
+      ]
     },
     {
       q: "An operating system prevents one application from reading or writing the memory space allocated to another application. Which security capability does this describe?",
       choix: ["Process isolation through memory protection", "Data execution prevention only", "Full-disk encryption", "Address translation caching"],
       reponse: 0,
       explication: "L'isolation des processus, mise en œuvre par la protection mémoire (espaces d'adressage virtuels distincts, contrôle par la MMU), empêche qu'un processus accède à la mémoire d'un autre : c'est un fondement du confinement des applications et de la stabilité du système. Le DEP empêche l'exécution de code dans des zones de données, mais ne suffit pas à isoler les processus entre eux ; le chiffrement de disque protège les données au repos ; et le cache de traduction d'adresses est un mécanisme de performance.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Correct : empêcher un processus de lire ou écrire la mémoire d'un autre = isolation des processus par protection mémoire.",
+        "Faux : trop étroit — le DEP empêche l'exécution de zones de données, pas la lecture croisée entre applications.",
+        "Faux : le chiffrement de disque protège au repos — sans effet sur la mémoire vive.",
+        "Faux : la traduction d'adresses en cache (TLB) est un mécanisme de performance, pas de sécurité."
+      ]
     },
     {
       q: "Under the cloud shared responsibility model, who is responsible for patching the guest operating system of virtual machines deployed in an IaaS environment?",
       choix: ["The cloud service provider", "The customer", "The hypervisor vendor", "The internet service provider"],
       reponse: 1,
       explication: "En IaaS, le fournisseur livre et sécurise l'infrastructure — installations physiques, hyperviseurs, réseau et stockage sous-jacents — mais tout ce que le client installe au-dessus lui appartient : systèmes d'exploitation invités, middleware, applications et données. Le patching des OS invités incombe donc au client. L'éditeur de l'hyperviseur fournit des correctifs au CSP, et le fournisseur d'accès internet n'a aucun rôle dans cette répartition.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : en IaaS, la responsabilité du fournisseur s'arrête à l'hyperviseur et à l'infrastructure.",
+        "Correct : l'OS invité des VM IaaS est installé et administré par le client — son patching lui incombe.",
+        "Faux : l'éditeur de l'hyperviseur ne gère pas les systèmes invités des clients.",
+        "Faux : le fournisseur d'accès internet n'a aucun rôle dans la pile cloud."
+      ]
     },
     {
       q: "What is the PRIMARY security concern introduced by multitenancy in a public cloud environment?",
@@ -2086,7 +2764,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "La multi-location fait cohabiter plusieurs clients sur la même infrastructure physique : le risque premier est une rupture d'isolation entre locataires — fuite de données, attaque par canal auxiliaire ou évasion de VM permettant d'atteindre les ressources d'un autre client. Le cloud réduit généralement les coûts matériels, le chiffrement au repos reste parfaitement possible, et l'usage de protocoles propriétaires n'est ni systématique ni le risque principal.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : la mutualisation RÉDUIT les coûts — argument économique inversé et hors sujet sécurité.",
+        "Correct : le risque premier de la multitenancy est la rupture de l'isolation entre locataires partageant la même infrastructure.",
+        "Faux : le chiffrement au repos est parfaitement disponible en cloud public — affirmation fausse.",
+        "Faux : rien n'impose de protocoles propriétaires — affirmation fausse."
+      ]
     },
     {
       q: "Compared with virtual machines, what is the MAIN security trade-off of containerization?",
@@ -2098,7 +2782,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Les conteneurs partagent le noyau du système hôte : une vulnérabilité du noyau ou une mauvaise configuration peut permettre à un conteneur compromis d'affecter l'hôte ou les autres conteneurs, alors qu'une VM bénéficie de l'isolation plus forte de l'hyperviseur avec un OS complet par machine. En contrepartie, les conteneurs offrent densité et rapidité de déploiement. Ils se patchent en reconstruisant les images, ne requièrent aucun matériel dédié et sont omniprésents dans le cloud.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : formulation absolue — les conteneurs se patchent en reconstruisant leurs images.",
+        "Correct : les conteneurs partagent le noyau de l'hôte — isolation plus faible que celle d'un hyperviseur ; c'est LE compromis de sécurité.",
+        "Faux : c'est l'inverse — les conteneurs maximisent la densité sur un même matériel.",
+        "Faux : les conteneurs sont omniprésents dans le cloud — affirmation fausse."
+      ]
     },
     {
       q: "Which control BEST reduces the impact of a potential VM escape vulnerability in a virtualized environment hosting workloads of very different sensitivity levels?",
@@ -2110,7 +2800,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Le VM escape permet de sortir d'une machine virtuelle pour atteindre l'hyperviseur, puis les autres VM du même hôte : la mesure la plus efficace est donc de ne PAS faire cohabiter des charges de sensibilités très différentes — les systèmes critiques vont sur une infrastructure physiquement séparée — tout en maintenant l'hyperviseur à jour. Le chiffrement des disques virtuels ne bloque pas l'évasion à l'exécution, la mémoire n'a aucun rapport, et désactiver la journalisation aggraverait la détection.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : le chiffrement des disques virtuels ne bloque pas une évasion via l'hyperviseur — contrôle hors cible.",
+        "Correct : héberger les charges les plus sensibles sur une infrastructure physiquement séparée limite l'impact d'un VM escape ; le patching réduit sa probabilité.",
+        "Faux : la mémoire allouée est un paramètre de capacité, pas un contrôle de sécurité.",
+        "Faux : désactiver la journalisation supprime la détection — mesure aggravante."
+      ]
     },
     {
       q: "An organization runs its order-processing logic as serverless functions. Which security responsibilities remain with the organization? (Choose the BEST answer.)",
@@ -2122,7 +2818,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "En serverless (FaaS), le fournisseur gère serveurs, OS, runtime et mise à l'échelle : le client reste responsable de son code (vulnérabilités applicatives, dépendances), des permissions IAM accordées à chaque fonction — le sur-privilège est le risque numéro un — et des données traitées, y compris la gestion des secrets. Le durcissement des hôtes, le patching du runtime et la sécurité physique relèvent du fournisseur dans ce modèle.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Faux : en serverless, le durcissement de l'OS hôte relève du fournisseur.",
+        "Correct : code des fonctions, permissions de moindre privilège et protection des données traitées restent au client — cœur du modèle partagé en FaaS.",
+        "Faux : le patching du runtime est assuré par le fournisseur — c'est l'intérêt du serverless.",
+        "Faux : la sécurité physique du datacenter appartient au fournisseur."
+      ]
     },
     {
       q: "A power utility must allow a corporate monitoring team to view real-time data from its SCADA network while guaranteeing that no traffic can ever flow back into the control network. Which control BEST meets this requirement?",
@@ -2134,7 +2836,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 0,
       explication: "La passerelle unidirectionnelle (data diode) garantit PHYSIQUEMENT que les données ne circulent que dans un sens — du réseau de contrôle vers le réseau bureautique — rendant tout flux retour impossible par construction, ce qu'un pare-feu, configurable et faillible, ne peut garantir de manière absolue. Le VPN chiffre un canal mais reste bidirectionnel, et l'IDS détecte sans empêcher. Pour les environnements OT critiques, la diode est la référence quand l'exigence est l'impossibilité du retour.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Correct : la diode de données garantit PHYSIQUEMENT l'unidirectionnalité — aucun trafic ne peut revenir vers le réseau de contrôle.",
+        "Faux : un pare-feu reste une garantie logique, configurable et contournable — insuffisant face à l'exigence « jamais ».",
+        "Faux : un VPN chiffre mais crée précisément un canal bidirectionnel vers le SCADA — contraire au besoin.",
+        "Faux : l'IDS détecte sans empêcher — contrôle détectif face à une exigence préventive absolue."
+      ]
     },
     {
       q: "A hospital deploys network-connected infusion pumps that cannot be patched and only support weak embedded credentials. What is the BEST compensating control?",
@@ -2146,33 +2854,57 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Quand un équipement médical ou IoT ne peut être ni patché ni durci, le contrôle compensatoire de référence est l'isolation réseau : segment dédié, règles d'accès strictes limitées aux flux nécessaires, et surveillance des communications. Accepter le risque sans mesure d'atténuation est injustifiable pour des dispositifs touchant à la vie des patients, les pompes ne peuvent pas héberger d'agent antivirus, et exposer leur interface de gestion sur internet multiplierait la surface d'attaque.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : accepter le risque sans compensation ignore la sécurité des patients — la certification médicale n'est pas une sécurité réseau.",
+        "Correct : isoler les pompes sur un segment dédié avec contrôle d'accès strict et surveillance = contrôle compensatoire de référence pour du non-patchable.",
+        "Faux : impossible techniquement — ces dispositifs embarqués ne supportent pas d'agent antivirus.",
+        "Faux : exposer l'interface de gestion sur internet AUGMENTE la surface d'attaque — mesure aggravante."
+      ]
     },
     {
       q: "Which constraint MOST influences the choice of cryptographic algorithms for battery-powered embedded devices?",
       choix: [
         "The devices' limited processing power, memory, and energy budget",
         "The lack of network connectivity",
-        "The requirement to use export-grade cryptography",
-        "The absence of firmware in embedded systems"
+        "The need to remain compatible with desktop-class TLS cipher suites",
+        "The devices' inability to store cryptographic keys"
       ],
       reponse: 0,
-      explication: "Les systèmes embarqués disposent de peu de puissance de calcul, de mémoire et d'énergie : on privilégie donc des algorithmes efficaces à clés courtes, comme ECC, dont une clé de 256 bits offre une sécurité comparable à RSA 3072 bits pour un coût bien moindre, ou des chiffrements légers dédiés. La connectivité n'est pas le facteur déterminant du choix d'algorithme, la cryptographie « export-grade » affaiblie est une pratique abandonnée et dangereuse, et les systèmes embarqués ont bien un firmware.",
-      difficulte: 2
+      explication: "Les systèmes embarqués disposent de peu de puissance de calcul, de mémoire et d'énergie : on privilégie donc des algorithmes efficaces à clés courtes, comme ECC, dont une clé de 256 bits offre une sécurité comparable à RSA 3072 bits pour un coût bien moindre, ou des chiffrements légers dédiés. La connectivité n'est pas le facteur déterminant du choix d'algorithme ; la compatibilité avec les suites TLS des postes de travail est un objectif secondaire, pas une contrainte de conception première ; et les systèmes embarqués savent stocker des clés (secure element, TPM, mémoire protégée).",
+      difficulte: 2,
+      pourquoi: [
+        "Correct : puissance de calcul, mémoire et budget énergétique limités dictent le choix d'algorithmes efficaces à clés courtes (ECC, chiffrement léger).",
+        "Faux : la connectivité ne détermine pas le choix d'algorithme cryptographique — facteur hors sujet.",
+        "Faux : la compatibilité avec les suites TLS de postes de travail est un objectif secondaire — pas une contrainte de conception première.",
+        "Faux : les systèmes embarqués savent stocker des clés (secure element, TPM, mémoire protégée) — affirmation fausse."
+      ]
     },
     {
       q: "A project team of 20 people needs pairwise secure communication using symmetric cryptography. How many unique keys are required?",
       choix: ["20", "40", "190", "380"],
       reponse: 2,
       explication: "La formule du nombre de clés symétriques deux à deux est n(n-1)/2, soit 20 × 19 / 2 = 190 clés. Cette croissance quadratique illustre le problème de gestion des clés symétriques à grande échelle, que la cryptographie asymétrique résout avec une seule paire de clés par participant (40 clés au total pour 20 personnes). 380 correspond à n(n-1), l'oubli de la division par deux — piège classique de l'examen.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : 20 correspondrait à une clé par personne — mauvaise formule.",
+        "Faux : 40 évoque deux clés par personne, la logique asymétrique — piège de substitution.",
+        "Correct : n(n-1)/2 = 20×19/2 = 190 clés symétriques uniques pour tous les échanges deux à deux.",
+        "Faux : 380 = n(n-1), l'oubli de la division par deux."
+      ]
     },
     {
       q: "Bob receives a digitally signed message from Alice. Which key does Bob use to verify the signature?",
       choix: ["Bob's private key", "Bob's public key", "Alice's public key", "Alice's private key"],
       reponse: 2,
       explication: "Alice signe en chiffrant le condensé du message avec sa clé PRIVÉE ; quiconque peut ensuite vérifier la signature en la déchiffrant avec la clé PUBLIQUE d'Alice et en comparant le condensé obtenu à celui recalculé sur le message. Les clés de Bob n'interviennent que si le message doit aussi être chiffré pour lui (confidentialité). La clé privée d'Alice n'est jamais partagée — c'est ce qui fonde la non-répudiation.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : la clé privée de Bob sert à déchiffrer ce qui lui est destiné — pas à vérifier une signature d'Alice.",
+        "Faux : la clé publique de Bob ne prouve rien concernant Alice.",
+        "Correct : la signature créée avec la clé PRIVÉE d'Alice se vérifie avec sa clé PUBLIQUE — seule Alice a pu la produire.",
+        "Faux : la clé privée d'Alice n'est jamais partagée — Bob ne peut pas l'utiliser."
+      ]
     },
     {
       q: "Why do protocols such as TLS use asymmetric cryptography only to establish a symmetric session key, rather than encrypting the whole session asymmetrically?",
@@ -2184,7 +2916,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "C'est le principe du chiffrement hybride : l'asymétrique, lent mais capable d'établir un secret entre inconnus, sert uniquement à échanger ou négocier une clé de session ; le symétrique, extrêmement rapide, chiffre ensuite le volume des données. Chaque famille apporte sa force et compense la faiblesse de l'autre. L'asymétrique peut chiffrer plusieurs blocs (mais inefficacement), la « supériorité » d'une clé ne se mesure pas ainsi, et l'expiration des certificats n'est pas la raison de cette conception.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : l'asymétrique peut chiffrer plusieurs blocs — c'est son coût prohibitif qui l'interdit, pas une impossibilité.",
+        "Correct : le symétrique est des ordres de grandeur plus rapide pour les volumes, l'asymétrique résout l'échange de clé — d'où le modèle hybride.",
+        "Faux : la « force » n'est pas le critère — les deux familles se complètent, elles ne se classent pas ainsi.",
+        "Faux : l'expiration des certificats est sans rapport avec le choix hybride."
+      ]
     },
     {
       q: "An attacker repeatedly submits modified ciphertexts to a server and uses the server's padding error messages to progressively recover the plaintext. Which type of attack is this?",
@@ -2196,7 +2934,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 0,
       explication: "L'attaquant soumet des textes chiffrés de son choix et exploite le comportement du serveur (les messages d'erreur de padding) comme un « oracle » qui révèle progressivement le clair : c'est une attaque à texte chiffré choisi, dont le padding oracle est l'exemple le plus célèbre (Lucky13, POODLE). Les parades incluent les modes authentifiés comme GCM et des réponses d'erreur indistinctes. Il n'essaie pas toutes les clés, ne dispose pas de paires clair/chiffré préalables et n'analyse pas de fréquences.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Correct : soumettre des chiffrés modifiés et exploiter les messages d'erreur de padding = chosen ciphertext attack via padding oracle.",
+        "Faux : en known plaintext, l'attaquant observe des paires existantes — il ne soumet rien activement.",
+        "Faux : la force brute essaie des clés — ici l'attaquant exploite les réponses du serveur, pas l'espace de clés.",
+        "Faux : l'analyse fréquentielle vise les chiffrements classiques par substitution — hors sujet."
+      ]
     },
     {
       q: "Which control renders precomputed rainbow tables ineffective against a stolen password database?",
@@ -2208,7 +2952,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Le salt est une valeur aléatoire unique concaténée à chaque mot de passe avant hachage : deux utilisateurs ayant le même mot de passe obtiennent des hashes différents, et les tables précalculées deviennent inutilisables puisqu'il faudrait une table par valeur de salt. On y ajoute le key stretching (bcrypt, PBKDF2, Argon2) pour ralentir le brute force. MD5 sans salt est exactement ce que les rainbow tables exploitent, le chiffrement par une clé unique déplace le problème vers cette clé, et la troncature AFFAIBLIT les mots de passe.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : MD5 sans salt est exactement la configuration que les rainbow tables exploitent — mesure contraire au but.",
+        "Correct : un salt aléatoire unique par mot de passe invalide toute table précalculée — chaque hash devient unique.",
+        "Faux : un chiffrement réversible avec clé unique crée un point de défaillance central et ne neutralise pas la logique de précalcul — mauvaise parade.",
+        "Faux : tronquer les mots de passe AFFAIBLIT le système — mesure aggravante."
+      ]
     },
     {
       q: "Why did the industry move directly from DES to Triple DES, skipping Double DES?",
@@ -2220,42 +2970,78 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "L'attaque meet-in-the-middle mène deux calculs simultanés — chiffrer le clair connu avec toutes les clés possibles d'un côté, déchiffrer le chiffré de l'autre — et cherche la « rencontre » au milieu : elle ramène la sécurité effective du double DES à environ 2^57 opérations, à peine plus que le DES simple. Doubler le chiffrement n'a donc presque rien apporté, d'où le passage direct au triple DES. La lenteur, les longueurs de clés et la chronologie des normes ne sont pas les raisons de cet abandon.",
-      difficulte: 3
+      difficulte: 3,
+      pourquoi: [
+        "Faux : la lenteur n'était pas le motif — 2DES a été écarté pour sa faiblesse structurelle.",
+        "Correct : le meet-in-the-middle ramène la force effective de 2DES à environ 2^57 — à peine mieux que DES ; d'où le saut direct vers 3DES.",
+        "Faux : les longueurs de clés de 2DES n'avaient rien d'incompatible — affirmation inventée.",
+        "Faux : chronologie fantaisiste — 3DES a été standardisé en réponse à la faiblesse démontrée de 2DES."
+      ]
     },
     {
       q: "A government facility lines the walls of a sensitive room with shielding to prevent attackers from reconstructing screen contents from electromagnetic emanations. Which program or standard addresses this threat?",
       choix: ["TEMPEST", "FIPS 140-3", "Common Criteria", "CPTED"],
       reponse: 0,
       explication: "TEMPEST désigne les normes et contre-mesures contre la fuite d'informations par émanations électromagnétiques : blindage des salles (cage de Faraday), équipements certifiés à faibles émissions, zones de contrôle. Reconstituer l'affichage d'un écran à distance (attaque de type Van Eck) est le scénario classique. FIPS 140-3 certifie les modules cryptographiques, les Common Criteria évaluent les produits de sécurité, et le CPTED prévient la criminalité par l'aménagement — aucun ne traite les émanations.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Correct : TEMPEST est le programme traitant les émanations électromagnétiques compromettantes (blindage, zones, distances).",
+        "Faux : FIPS 140-3 certifie les modules cryptographiques — pas les émanations.",
+        "Faux : les Common Criteria évaluent des produits de sécurité — hors sujet.",
+        "Faux : le CPTED concerne la prévention par l'aménagement des lieux — pas les signaux électromagnétiques."
+      ]
     },
     {
       q: "In a PKI, which component is responsible for verifying the identity of certificate applicants before issuance?",
       choix: ["The Certification Authority", "The Registration Authority", "The OCSP responder", "The relying party"],
       reponse: 1,
       explication: "La Registration Authority prend en charge la vérification d'identité du demandeur — contrôle des justificatifs, validation de l'organisation — avant de transmettre la demande à la Certification Authority, qui émet et signe le certificat liant l'identité à la clé publique. Le répondeur OCSP renseigne sur le statut de révocation des certificats déjà émis, et la relying party est simplement l'entité qui fait confiance au certificat lors d'une transaction.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : la CA émet et signe les certificats — la vérification d'identité est déléguée ; inversion des rôles.",
+        "Correct : la Registration Authority vérifie l'identité des demandeurs avant l'émission par la CA.",
+        "Faux : le répondeur OCSP renseigne le statut de révocation — pas l'enrôlement.",
+        "Faux : la relying party est le consommateur qui fait confiance au certificat — elle ne vérifie pas les demandeurs."
+      ]
     },
     {
       q: "A browser needs an immediate, per-certificate revocation status without downloading the CA's full list of revoked certificates. Which mechanism provides this?",
       choix: ["Certificate Revocation List (CRL)", "Online Certificate Status Protocol (OCSP)", "Key escrow", "Certificate Signing Request (CSR)"],
       reponse: 1,
       explication: "OCSP interroge en ligne le statut d'UN certificat précis et reçoit une réponse signée quasi immédiate — good, revoked ou unknown — sans télécharger la liste complète. La CRL est une liste signée de tous les certificats révoqués, publiée périodiquement, plus lourde et moins fraîche. Le stapling OCSP optimise encore le procédé en faisant porter la réponse par le serveur web. Le key escrow et le CSR n'ont aucun rapport avec la vérification de révocation.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : la CRL exige le téléchargement de la liste complète — exactement ce que l'on veut éviter.",
+        "Correct : OCSP fournit un statut de révocation immédiat, certificat par certificat, sans liste complète.",
+        "Faux : le key escrow est un dépôt de clés — hors sujet.",
+        "Faux : le CSR est la demande de certificat initiale — rien à voir avec la révocation."
+      ]
     },
     {
       q: "An organization's key recovery policy requires that at least three of the five designated key recovery agents cooperate to reconstruct any escrowed encryption key. What is this control called?",
       choix: ["Key stretching", "M of N control", "Key clustering", "Perfect forward secrecy"],
       reponse: 1,
       explication: "Le contrôle m of n exige qu'au moins m agents parmi les n désignés (ici 3 parmi 5) coopèrent pour récupérer une clé : aucune personne seule ne peut le faire, ce qui applique la séparation des tâches, le split knowledge et le dual control à la gestion des clés. Le key stretching ralentit volontairement le hachage des mots de passe, le key clustering est une faiblesse d'algorithme, et la perfect forward secrecy protège les sessions passées en cas de compromission d'une clé de longue durée.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : le key stretching renforce la dérivation de clés depuis des mots de passe — hors sujet.",
+        "Correct : exiger au moins m agents parmi n (ici 3 sur 5) pour reconstituer une clé = M of N control.",
+        "Faux : le key clustering désigne deux clés produisant le même chiffré — phénomène indésirable, pas un contrôle.",
+        "Faux : la perfect forward secrecy protège les sessions passées en cas de compromission de clé — autre concept."
+      ]
     },
     {
       q: "During the design of a new office building, the architect specifies low hedges, wide sight lines, and abundant lighting around all entrances so that intruders can easily be observed by employees and passers-by. Which CPTED principle does this illustrate?",
       choix: ["Natural access control", "Natural surveillance", "Territorial reinforcement", "Mechanical hardening"],
       reponse: 1,
       explication: "La natural surveillance consiste à maximiser les occasions d'observer les abords — haies basses, lignes de vue dégagées, éclairage généreux — afin que tout intrus se sente exposé aux regards : la simple probabilité d'être vu dissuade. Le natural access control guide les flux vers les entrées voulues, le territorial reinforcement marque l'appropriation du site (signalétique, entretien), et le durcissement mécanique (serrures, barreaux) relève du target hardening traditionnel, hors de l'esprit CPTED.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : le natural access control CANALISE les déplacements — ici l'objectif est de voir, pas de canaliser.",
+        "Correct : haies basses, lignes de vue dégagées et éclairage pour rendre les intrus observables = natural surveillance.",
+        "Faux : le territorial reinforcement marque l'appartenance du lieu (signalétique, entretien) — autre principe.",
+        "Faux : le renforcement mécanique (serrures, barreaux) n'est pas un aménagement « naturel »."
+      ]
     },
     {
       q: "A data center operator needs a fire suppression agent for an occupied server room that extinguishes fire quickly, leaves no residue, and does not endanger personnel. Which option is MOST appropriate?",
@@ -2267,14 +3053,26 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Les agents propres comme le FM-200 (HFC-227ea) éteignent rapidement le feu en absorbant la chaleur, ne laissent aucun résidu sur l'électronique et restent respirables aux concentrations d'extinction : ils conviennent aux salles OCCUPÉES. Le CO2, efficace, est mortel par asphyxie aux concentrations utiles et exige l'évacuation préalable. Le deluge noierait les équipements, et la poudre laisse des résidus corrosifs très dommageables pour les serveurs.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : le CO2 en noyage total prive d'oxygène — létal pour le personnel présent dans la salle occupée.",
+        "Correct : un agent propre type FM-200 éteint vite, sans résidu et sans danger pour les personnes — le choix pour une salle occupée.",
+        "Faux : le deluge inonde massivement et détruit les équipements — contraire aux exigences.",
+        "Faux : la poudre laisse des résidus destructeurs pour l'électronique — critère « no residue » violé."
+      ]
     },
     {
       q: "Which term describes a prolonged period of low voltage from the electrical utility?",
       choix: ["Sag", "Brownout", "Surge", "Transient"],
       reponse: 1,
       explication: "Le brownout est une sous-tension PROLONGÉE, souvent imposée par le fournisseur d'électricité en période de forte demande ; le sag est le même phénomène mais momentané. Le surge est à l'inverse une surtension prolongée, et le transient un parasite bref sur la ligne. Ces distinctions momentané/prolongé (sag/brownout, spike/surge, fault/blackout) sont un classique de l'examen — un onduleur avec régulation de tension protège contre les sous-tensions.",
-      difficulte: 1
+      difficulte: 1,
+      pourquoi: [
+        "Faux : le sag est une sous-tension MOMENTANÉE — piège sur la durée.",
+        "Correct : le brownout est une baisse de tension PROLONGÉE du réseau électrique.",
+        "Faux : le surge est une SURtension prolongée — mauvais sens de variation.",
+        "Faux : le transient est une perturbation très brève — hors durée."
+      ]
     },
     {
       q: "When selecting a site for a new data center, which factor should raise the MOST concern?",
@@ -2286,7 +3084,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 0,
       explication: "L'implantation en zone inondable est un risque naturel majeur et permanent pour un datacenter : l'eau détruit les équipements, interdit le sous-sol et peut rendre le site inaccessible — les référentiels de conception excluent ou pénalisent fortement ces emplacements. La distance au siège est une contrainte opérationnelle gérable, l'aménagement paysager un simple coût, et la double alimentation électrique par deux fournisseurs distincts est au contraire un ATOUT de résilience.",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Correct : une zone inondable est un risque naturel majeur, quasi impossible à compenser — critère rédhibitoire de choix de site.",
+        "Faux : la distance au siège est un inconvénient logistique gérable — vrai mais pas critique.",
+        "Faux : l'aménagement paysager est un coût mineur sans enjeu de sécurité.",
+        "Faux : deux réseaux électriques distincts sont un AVANTAGE de redondance, pas une préoccupation."
+      ]
     },
     {
       q: "An organization is retiring self-encrypting SSDs that stored highly confidential data. Overwriting is unreliable on SSDs due to wear leveling. Which sanitization method is MOST appropriate if the drives must be reused?",
@@ -2298,7 +3102,13 @@ window.CISSP_DATA.domains[3] = {
       ],
       reponse: 1,
       explication: "Sur un SSD auto-chiffrant, l'effacement cryptographique (crypto-erase) détruit de façon sûre les clés de chiffrement : les données, toujours physiquement présentes, deviennent définitivement indéchiffrables — méthode reconnue par NIST SP 800-88 et compatible avec la réutilisation du support. La réécriture est peu fiable sur SSD à cause du wear leveling et des blocs de réserve, la suppression de fichiers ne retire que les références, et le dégaussage, conçu pour les supports magnétiques, est inefficace sur la mémoire flash (et détruirait l'usage du disque sans garantie).",
-      difficulte: 2
+      difficulte: 2,
+      pourquoi: [
+        "Faux : le wear leveling laisse des blocs non réécrits — la réécriture simple est précisément peu fiable sur SSD.",
+        "Correct : le crypto-erase détruit les clés de chiffrement — les données deviennent indéchiffrables et le disque reste réutilisable (NIST SP 800-88).",
+        "Faux : supprimer les fichiers ne retire que les références — les données restent récupérables.",
+        "Faux : le dégaussage est inefficace sur la mémoire flash et rendrait le disque inutilisable — double contre-indication."
+      ]
     }
   ],
   flashcards: [

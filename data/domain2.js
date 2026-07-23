@@ -931,14 +931,14 @@ window.CISSP_DATA.domains[2] = {
     {
       q: "Pourquoi ne faut-il JAMAIS traiter des données classifiées sur un système non classifié ?",
       choix: [
-        "Les systèmes non classifiés sont trop lents",
+        "Parce que les utilisateurs du système n'ont pas signé de NDA couvrant ce niveau de classification",
         "Certains OS écrivent des données de la mémoire dans le slack space, créant une rémanence invisible",
-        "Les licences logicielles l'interdisent",
-        "Le chiffrement ne fonctionne pas sur ces systèmes"
+        "Parce que les systèmes non classifiés ne sont pas audités assez fréquemment",
+        "Parce que la politique impose de chiffrer les données classifiées, ce que ce système ne garantit pas"
       ],
       reponse: 1,
       explication:
-        "Certains systèmes d'exploitation remplissent le slack space (espace inutilisé des clusters) avec des données provenant de la mémoire : des fragments de données classifiées peuvent donc persister sur le disque à l'insu de l'utilisateur. C'est un problème de rémanence, pas de performance, de licence ou de chiffrement.",
+        "Certains systèmes d'exploitation remplissent le slack space (espace inutilisé des clusters) avec des données provenant de la mémoire : des fragments de données classifiées peuvent donc persister sur le disque à l'insu de l'utilisateur. C'est un problème de rémanence — ni le NDA, ni la fréquence d'audit, ni même le chiffrement du système ne traitent ces résidus issus de la mémoire.",
       difficulte: 3
     },
     {
@@ -1022,10 +1022,10 @@ window.CISSP_DATA.domains[2] = {
     {
       q: "Pourquoi la rétention des données doit-elle aussi prendre en compte le matériel et le personnel ?",
       choix: [
-        "Pour amortir comptablement les équipements",
+        "Pour aligner la durée de rétention sur l'amortissement comptable des équipements",
         "Parce que des données conservées sont inutiles sans matériel capable de les lire ni personnel sachant l'exploiter",
-        "Parce que la loi impose de conserver les employés pendant la durée de rétention",
-        "Pour réduire le coût des sauvegardes"
+        "Parce que seuls les administrateurs d'origine sont habilités à restaurer les archives",
+        "Pour pouvoir renégocier les contrats de maintenance des lecteurs avant leur échéance"
       ],
       reponse: 1,
       explication:
@@ -1295,7 +1295,7 @@ window.CISSP_DATA.domains[2] = {
       choix: [
         "Le DPO devrait rapporter au DSI",
         "Le rôle de DPO doit être indépendant : ce rattachement crée un conflit d'intérêts",
-        "Le marketing n'a pas le budget pour un DPO",
+        "Le DPO devrait être externalisé auprès d'un cabinet indépendant",
         "Aucun : le GDPR n'impose rien sur le rattachement du DPO"
       ],
       reponse: 1,
@@ -1356,14 +1356,14 @@ window.CISSP_DATA.domains[2] = {
     {
       q: "Pourquoi faut-il chiffrer les flux réseau MÊME entre applications internes ?",
       choix: [
-        "Pour améliorer les performances réseau",
+        "Parce que la segmentation interne coûte plus cher que le chiffrement généralisé",
         "Parce qu'un attaquant ayant pénétré le réseau interne pourrait intercepter les flux en clair",
-        "Parce que TLS est gratuit",
-        "Uniquement pour satisfaire les auditeurs"
+        "Parce que les référentiels de conformité l'exigent pour tous les flux, internes comme externes",
+        "Parce que les autres applications internes n'ont pas le besoin d'en connaître sur ces flux"
       ],
       reponse: 1,
       explication:
-        "Considérer le réseau interne comme sûr est une erreur : après une intrusion, un attaquant peut écouter le trafic interne (mouvement latéral, sniffing). Chiffrer partout — y compris en interne — limite ce risque ; c'est aussi l'esprit du Zero Trust. Le chiffrement a un léger coût de performance, il n'en améliore pas.",
+        "Considérer le réseau interne comme sûr est une erreur : après une intrusion, un attaquant peut écouter le trafic interne (mouvement latéral, sniffing). Chiffrer partout — y compris en interne — limite ce risque ; c'est aussi l'esprit du Zero Trust. Le coût comparé, la conformité et le cloisonnement sont des considérations annexes : la raison de fond est le risque d'interception interne.",
       difficulte: 2
     },
     {
@@ -1432,10 +1432,10 @@ window.CISSP_DATA.domains[2] = {
     {
       q: "Quel est le risque PRINCIPAL de continuer à exploiter un équipement matériel après son End-of-Support ?",
       choix: [
-        "Sa valeur de revente diminue",
+        "Le coût des contrats de maintenance étendue dépasse celui d'un équipement neuf",
         "Les vulnérabilités découvertes ne seront plus jamais corrigées par le constructeur",
-        "Il consomme plus d'énergie",
-        "Il n'est plus compatible avec les baies de brassage récentes"
+        "Les pièces de rechange deviennent difficiles à obtenir, allongeant les réparations",
+        "Il risque de ne plus être couvert par la cyber-assurance de l'organisation"
       ],
       reponse: 1,
       explication:
@@ -1447,7 +1447,7 @@ window.CISSP_DATA.domains[2] = {
       choix: [
         "Le coût des bandes",
         "Maintenir des lecteurs compatibles et du personnel sachant restaurer, pendant toute la durée",
-        "La couleur des étiquettes",
+        "La capacité de stockage à provisionner pour la durée totale",
         "Le chiffrement des bandes"
       ],
       reponse: 1,
@@ -1933,7 +1933,7 @@ window.CISSP_DATA.domains[2] = {
         "Increased software licensing costs",
         "Corporate data flows into services that are not inventoried, assessed, or protected by organizational controls",
         "Reduced network bandwidth for approved applications",
-        "Employees becoming more productive than planned"
+        "Duplicated tooling across departments increasing integration complexity"
       ],
       reponse: 1,
       explication:
