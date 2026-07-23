@@ -1208,6 +1208,767 @@ window.CISSP_DATA.domains[6] = {
       explication:
         "Le Diamond Model of Intrusion Analysis analyse chaque événement d'intrusion selon quatre sommets reliés : adversary, capability, infrastructure et victim. La Kill Chain décrit les étapes séquentielles d'une attaque, ATT&CK catalogue les tactiques et techniques observées, et STRIDE est un modèle de threat modeling orienté catégories de menaces, pas d'analyse d'intrusion.",
       difficulte: 2
+    },
+    {
+      q: "Votre organisation crée une équipe d'audit interne permanente. À QUI cette équipe devrait-elle rendre compte pour préserver au MIEUX son indépendance ?",
+      choix: [
+        "Au DSI, qui possède les systèmes audités",
+        "Au RSSI, qui pilote le programme de sécurité",
+        "Au comité d'audit du conseil d'administration",
+        "Au directeur des opérations, pour faciliter la remédiation"
+      ],
+      reponse: 2,
+      explication:
+        "Pour limiter les conflits d'intérêts, l'audit interne doit être rattaché au plus haut niveau de gouvernance, idéalement au comité d'audit du conseil d'administration : les auditeurs ne doivent jamais dépendre hiérarchiquement des responsables des fonctions qu'ils auditent. Rendre compte au DSI (A) ou au RSSI (B) crée un conflit direct, car ces derniers sont propriétaires ou pilotes des contrôles évalués ; le directeur des opérations (D) pose le même problème d'indépendance.",
+      difficulte: 2
+    },
+    {
+      q: "Un régulateur bancaire exige une attestation indépendante de l'efficacité de vos contrôles de sécurité. QUELLE approche répond le MIEUX à cette exigence ?",
+      choix: [
+        "Une auto-évaluation annuelle validée par le RSSI",
+        "Un audit tierce partie mené par un cabinet accrédité, selon un référentiel reconnu",
+        "Un rapport d'audit interne présenté au comité de direction",
+        "Un scan de vulnérabilités trimestriel avec rapport exécutif"
+      ],
+      reponse: 1,
+      explication:
+        "Une exigence réglementaire d'attestation indépendante appelle un audit tierce partie (third-party audit) réalisé par un cabinet accrédité selon un référentiel reconnu : c'est la seule option offrant l'indépendance et l'acceptabilité attendues par un régulateur. L'auto-évaluation (A) et l'audit interne (C) manquent d'indépendance, et un scan de vulnérabilités (D) est un test technique, pas une attestation formelle de conformité.",
+      difficulte: 1
+    },
+    {
+      q: "Un prospect important veut la preuve que les contrôles de sécurité de votre plateforme SaaS ont fonctionné efficacement pendant les neuf derniers mois. QUEL rapport devriez-vous lui fournir sous NDA ?",
+      choix: ["SOC 2 Type I", "SOC 2 Type II", "SOC 3", "Rapport de pen test annuel"],
+      reponse: 1,
+      explication:
+        "Le SOC 2 Type II atteste non seulement de la conception des contrôles, mais aussi de leur efficacité opérationnelle sur une période étendue (au moins six mois) : c'est exactement ce que demande le prospect, et il se partage sous NDA. Le Type I (A) ne couvre qu'un instant donné, le SOC 3 (C) est un rapport public moins détaillé, et un rapport de pen test (D) ne constitue pas une attestation d'audit des contrôles dans la durée.",
+      difficulte: 1
+    },
+    {
+      q: "Une jeune société SaaS vient de déployer ses contrôles de sécurité il y a deux mois. Un client stratégique exige un rapport SOC 2 sous six semaines. QUELLE est la MEILLEURE réponse du management ?",
+      choix: [
+        "Produire immédiatement un SOC 2 Type II sur les deux derniers mois",
+        "Faire réaliser un SOC 2 Type I maintenant, puis planifier un Type II après une période d'observation suffisante",
+        "Refuser toute forme d'audit tant que les contrôles n'ont pas un an",
+        "Fournir un SOC 3 à la place, car il est plus rapide à produire"
+      ],
+      reponse: 1,
+      explication:
+        "Un Type II exige une période d'observation d'au moins six mois : impossible ici. La démarche classique est de produire d'abord un SOC 2 Type I, qui évalue la conception des contrôles à un instant donné, puis d'enchaîner sur un Type II une fois la période d'observation écoulée. Le Type II sur deux mois (A) ne respecte pas la période minimale, refuser (C) fait perdre le client, et le SOC 3 (D) est un dérivé public d'un audit SOC 2 déjà réalisé, pas un raccourci.",
+      difficulte: 2
+    },
+    {
+      q: "Vos clients utilisent votre service de paie externalisé et leurs auditeurs financiers veulent évaluer l'impact de vos contrôles sur LEURS états financiers. QUEL rapport est conçu pour cet usage ?",
+      choix: ["SOC 1 Type II", "SOC 2 Type II", "SOC 3", "Attestation PCI DSS"],
+      reponse: 0,
+      explication:
+        "Les rapports SOC 1 portent sur les contrôles d'une organisation de services susceptibles d'affecter le reporting financier de ses clients : c'est le rapport que les auditeurs financiers des clients demanderont, et le Type II confirme l'efficacité opérationnelle dans la durée. Le SOC 2 (B) porte sur les Trust Services Criteria (sécurité, disponibilité, etc.), le SOC 3 (C) est la version publique du SOC 2, et PCI DSS (D) concerne les données de cartes de paiement.",
+      difficulte: 2
+    },
+    {
+      q: "Quel groupe de métriques CVSS évolue dans le TEMPS, par exemple lorsqu'un code d'exploitation devient public ou qu'un correctif officiel est publié ?",
+      choix: ["Base", "Temporal", "Environmental", "Attack Vector"],
+      reponse: 1,
+      explication:
+        "Le groupe Temporal capture les caractéristiques qui changent avec le temps : maturité du code d'exploitation (exploit code maturity), niveau de remédiation disponible et confiance dans le rapport. Le groupe Base (A) décrit les caractéristiques intrinsèques et constantes de la vulnérabilité, le groupe Environmental (C) ajuste le score au contexte propre de l'organisation, et Attack Vector (D) est une métrique de base, pas un groupe.",
+      difficulte: 2
+    },
+    {
+      q: "Deux vulnérabilités sont détectées : CVSS 9.1 sur un serveur de développement isolé sans données sensibles, et CVSS 7.5 sur un serveur web de production exposé à Internet traitant des données personnelles. QUE devriez-vous corriger EN PREMIER ?",
+      choix: [
+        "La vulnérabilité CVSS 9.1, car le score de base est plus élevé",
+        "La vulnérabilité CVSS 7.5, car l'exposition et la criticité de l'actif rendent le risque réel plus élevé",
+        "Les deux simultanément, sans priorisation",
+        "Aucune, tant que le comité de changement n'a pas statué"
+      ],
+      reponse: 1,
+      explication:
+        "Le score CVSS de base mesure la sévérité intrinsèque, pas le risque pour votre organisation. La priorisation doit intégrer le contexte : exposition à Internet, criticité de l'actif, données traitées et exploitation active. Le serveur de production exposé traitant des données personnelles présente un risque métier supérieur malgré un score plus bas ; c'est exactement le rôle des métriques Environmental. Suivre aveuglément le score de base (A) est un piège classique de l'examen, et l'attentisme (D) laisse le risque ouvert.",
+      difficulte: 3
+    },
+    {
+      q: "Une attaque ne fonctionne que si la victime clique sur un lien piégé. QUELLE métrique de base CVSS reflète cette condition ?",
+      choix: ["Attack Complexity", "Privileges Required", "User Interaction", "Scope"],
+      reponse: 2,
+      explication:
+        "La métrique User Interaction (UI) indique si l'exploitation exige une action d'un utilisateur autre que l'attaquant, comme cliquer sur un lien ou ouvrir une pièce jointe. Attack Complexity (A) mesure les conditions techniques hors du contrôle de l'attaquant, Privileges Required (B) le niveau de privilèges nécessaire avant l'attaque, et Scope (D) indique si l'exploitation affecte des ressources au-delà du composant vulnérable.",
+      difficulte: 2
+    },
+    {
+      q: "Votre équipe ne peut pas patcher toutes les vulnérabilités détectées ce mois-ci. Au-delà du score CVSS de base, QUEL facteur devrait le PLUS influencer la priorisation ?",
+      choix: [
+        "L'ordre alphabétique des noms de serveurs",
+        "L'exploitation active observée dans la nature et la criticité métier des actifs concernés",
+        "L'ancienneté du CVE, les plus récents d'abord",
+        "La facilité d'installation du correctif"
+      ],
+      reponse: 1,
+      explication:
+        "Une priorisation mature combine le score de sévérité avec des renseignements sur l'exploitation réelle (catalogues de vulnérabilités exploitées connues, threat intelligence) et la criticité métier des actifs : une faille moyenne activement exploitée sur un actif critique passe avant une faille critique théorique sur un actif isolé. L'ancienneté (C) et la facilité d'installation (D) sont des critères secondaires, et l'option A est absurde à dessein.",
+      difficulte: 3
+    },
+    {
+      q: "Pendant un test d'intrusion autorisé, le testeur découvre des indices d'une compromission RÉELLE préexistante par un attaquant tiers. QUE doit-il faire ?",
+      choix: [
+        "Poursuivre le test et mentionner la découverte dans le rapport final",
+        "Éradiquer lui-même l'attaquant pour protéger le client",
+        "Suspendre le test et notifier immédiatement le contact désigné, conformément à la procédure d'escalade des Rules of Engagement",
+        "Publier un avis de sécurité pour alerter les autres clients du même secteur"
+      ],
+      reponse: 2,
+      explication:
+        "Les Rules of Engagement doivent prévoir une procédure d'escalade pour ce cas précis : le testeur suspend ses activités et notifie sans délai le contact désigné, car une compromission réelle relève de la réponse à incident, pas du test. Attendre le rapport (A) laisse l'attaquant agir, éradiquer soi-même (B) dépasse le mandat et peut détruire des preuves, et publier (D) violerait la confidentialité contractuelle.",
+      difficulte: 3
+    },
+    {
+      q: "Dans la méthodologie de test d'intrusion du NIST SP 800-115, quelle phase suit immédiatement la phase de DISCOVERY ?",
+      choix: ["Planning", "Attack", "Reporting", "Remediation"],
+      reponse: 1,
+      explication:
+        "Le processus NIST SP 800-115 enchaîne quatre phases : planning (accord sur le périmètre et les Rules of Engagement), discovery (reconnaissance et énumération), attack (tentatives d'exploitation, gain et élévation d'accès) et reporting. Après la discovery vient donc la phase d'attack. La remédiation (D) n'est pas une phase du test lui-même mais une suite donnée par l'organisation aux findings.",
+      difficulte: 1
+    },
+    {
+      q: "En pleine phase d'attaque, un pen testeur découvre un sous-réseau inconnu, absent du périmètre convenu, qui semble contenir des systèmes vulnérables. QUE doit-il faire ?",
+      choix: [
+        "Le tester immédiatement, car il est connecté au périmètre autorisé",
+        "L'ignorer définitivement et ne pas le mentionner",
+        "Arrêter tout le test jusqu'à la fin du contrat",
+        "S'abstenir de le tester et demander une autorisation écrite d'extension de périmètre avant toute action"
+      ],
+      reponse: 3,
+      explication:
+        "Le périmètre et les Rules of Engagement délimitent l'autorisation légale du testeur : tester un système hors périmètre sans accord écrit s'apparente à un accès non autorisé, quelle que soit sa connectivité. La bonne pratique est de signaler la découverte au client et d'obtenir une extension de périmètre écrite avant de continuer. Tester sans accord (A) expose juridiquement le testeur, taire la découverte (B) prive le client d'une information utile, et tout arrêter (C) est disproportionné.",
+      difficulte: 2
+    },
+    {
+      q: "Votre direction veut évaluer non seulement les vulnérabilités techniques, mais aussi la capacité de DÉTECTION et de RÉPONSE du SOC, sans le prévenir. QUEL exercice correspond à ce besoin ?",
+      choix: [
+        "Un scan de vulnérabilités authentifié",
+        "Un test d'intrusion double-blind",
+        "Un audit de conformité ISO 27001",
+        "Une revue de code Fagan"
+      ],
+      reponse: 1,
+      explication:
+        "Dans un test double-blind, l'équipe de défense n'est pas informée du test : on évalue ainsi de manière réaliste la détection, l'alerte et la réponse, en plus des vulnérabilités techniques. Un scan (A) ne teste pas la réponse humaine, un audit de conformité (C) vérifie l'alignement sur un référentiel, et une revue de code (D) porte sur le logiciel, pas sur le SOC.",
+      difficulte: 2
+    },
+    {
+      q: "QUELLE caractéristique distingue le MIEUX un engagement de red team d'un test d'intrusion classique ?",
+      choix: [
+        "La red team utilise uniquement des outils automatisés",
+        "La red team poursuit des objectifs précis en émulant un adversaire réaliste, dans la durée et en furtivité, pour éprouver aussi la détection et la réponse",
+        "La red team se limite aux applications web",
+        "La red team travaille toujours avec un accès complet au code source"
+      ],
+      reponse: 1,
+      explication:
+        "Un engagement de red team est orienté objectifs (par exemple exfiltrer des données précises), émule les tactiques d'un adversaire réaliste, se déroule sur une période étendue et privilégie la furtivité afin de tester la capacité de la blue team à détecter et répondre. Un pen test classique vise plutôt l'identification exhaustive des vulnérabilités sur un périmètre donné, dans un temps court. Les affirmations A, C et D sont fausses.",
+      difficulte: 2
+    },
+    {
+      q: "Après un exercice red team, le SOC n'a détecté AUCUNE des techniques employées. QUELLE est la MEILLEURE prochaine étape ?",
+      choix: [
+        "Remplacer les analystes du SOC",
+        "Organiser des sessions purple team où la red team rejoue ses techniques pendant que la blue team construit et valide ses détections",
+        "Renoncer aux exercices offensifs, jugés trop décourageants",
+        "Acheter immédiatement un nouveau SIEM"
+      ],
+      reponse: 1,
+      explication:
+        "L'approche purple team transforme l'échec de détection en apprentissage : la red team rejoue ses tactiques, techniques et procédures de façon transparente pendant que la blue team développe, teste et affine ses règles de détection en boucle courte. C'est la voie la plus directe vers une amélioration mesurable. Sanctionner les analystes (A) ou abandonner les exercices (C) ne corrige rien, et changer d'outil (D) sans comprendre les lacunes de détection est prématuré.",
+      difficulte: 2
+    },
+    {
+      q: "Vous voulez détecter les injections SQL dans le code source AVANT même la compilation et l'intégration. QUELLE technique intégrer au pipeline CI ?",
+      choix: ["DAST", "SAST", "RUM", "Test de charge"],
+      reponse: 1,
+      explication:
+        "Le SAST (Static Application Security Testing) analyse le code source, le bytecode ou les binaires sans exécuter l'application : il s'intègre tôt dans le pipeline CI et détecte des motifs dangereux comme les injections SQL dès l'écriture du code. Le DAST (A) exige une application déployée et en cours d'exécution, le RUM (C) observe les utilisateurs réels en production, et le test de charge (D) mesure la performance, pas la sécurité.",
+      difficulte: 1
+    },
+    {
+      q: "Une faille de configuration d'authentification n'apparaît que lorsque l'application est déployée avec son serveur web et son reverse proxy. QUELLE technique a le PLUS de chances de la détecter ?",
+      choix: [
+        "SAST sur le code source",
+        "Revue de code par pull request",
+        "DAST contre l'application déployée en environnement de test",
+        "Analyse de couverture des instructions"
+      ],
+      reponse: 2,
+      explication:
+        "Les défauts qui n'existent qu'à l'exécution, comme les erreurs de configuration du serveur, des en-têtes ou de la chaîne d'authentification, échappent à l'analyse statique : seul un test dynamique (DAST) contre l'application réellement déployée, avec sa pile complète, peut les révéler. Le SAST (A) et la revue de code (B) ne voient que le code, et la couverture d'instructions (D) mesure l'exhaustivité des tests, pas la sécurité de la configuration.",
+      difficulte: 2
+    },
+    {
+      q: "Vous devez tester la robustesse du parseur d'un protocole binaire propriétaire dont vous connaissez la spécification. QUELLE approche de fuzzing est la PLUS efficace ?",
+      choix: [
+        "Mutation fuzzing à partir de captures de trafic aléatoires",
+        "Generational fuzzing fondé sur un modèle de la spécification du protocole",
+        "Scan de vulnérabilités authentifié",
+        "Test d'interface utilisateur automatisé"
+      ],
+      reponse: 1,
+      explication:
+        "Le generational fuzzing (intelligent) construit des entrées à partir d'un modèle décrivant le format attendu : pour un protocole propriétaire structuré, il atteint des couches profondes du parseur que des mutations aléatoires n'atteindraient presque jamais, car elles échoueraient dès les premières validations de format. Le mutation fuzzing (A) reste utile mais moins efficace ici, et les options C et D ne testent pas la robustesse d'un parseur.",
+      difficulte: 3
+    },
+    {
+      q: "QUELLE catégorie de défauts le fuzzing est-il le MOINS susceptible de détecter ?",
+      choix: [
+        "Les crashs liés au traitement d'entrées malformées",
+        "Les débordements de mémoire tampon",
+        "Les erreurs de logique métier, comme un contournement de règle d'approbation",
+        "Les erreurs de gestion d'exceptions sur entrées inattendues"
+      ],
+      reponse: 2,
+      explication:
+        "Le fuzzing excelle à découvrir les défauts de traitement des entrées : crashs, débordements de tampon, exceptions non gérées. En revanche, il détecte mal les défauts de logique métier ou de conception, car l'application répond alors « correctement » du point de vue technique tout en violant une règle métier ; ces défauts exigent du misuse case testing ou une revue manuelle. C'est une limite classique demandée à l'examen.",
+      difficulte: 3
+    },
+    {
+      q: "Vos analystes SOC ignorent désormais les alertes du SIEM, noyées sous les faux positifs. QUELLE est la MEILLEURE action de management ?",
+      choix: [
+        "Augmenter le nombre d'analystes pour traiter toutes les alertes",
+        "Désactiver les règles les plus bruyantes sans analyse",
+        "Conduire un programme de tuning : réviser les cas d'usage, ajuster seuils et corrélations, et mesurer le taux de faux positifs",
+        "Réduire le nombre de sources de logs envoyées au SIEM"
+      ],
+      reponse: 2,
+      explication:
+        "L'alert fatigue est un risque opérationnel majeur : la réponse managériale est un programme de tuning structuré, qui repart des cas d'usage de détection, ajuste les seuils et les règles de corrélation, et suit des métriques comme le taux de faux positifs. Ajouter des analystes (A) traite le symptôme à coût croissant, désactiver sans analyse (B) crée des angles morts, et couper des sources (D) réduit la visibilité.",
+      difficulte: 2
+    },
+    {
+      q: "Un auditeur constate qu'un serveur critique n'apparaît plus dans le SIEM depuis trois semaines. QUE vérifier EN PREMIER ?",
+      choix: [
+        "La licence du SIEM",
+        "Le bon fonctionnement de l'agent ou du mécanisme de collecte et d'acheminement des logs de ce serveur",
+        "La charte graphique des tableaux de bord",
+        "Le niveau de formation des analystes"
+      ],
+      reponse: 1,
+      explication:
+        "Une interruption de réception des logs d'une source est d'abord un problème de chaîne de collecte : agent arrêté, file d'acheminement en erreur, changement de configuration ou filtrage réseau. La bonne pratique est d'ailleurs de superviser la santé des sources de logs et d'alerter automatiquement quand une source devient silencieuse, car un attaquant peut couper la journalisation pour masquer ses traces. Les options A, C et D ne répondent pas au problème immédiat.",
+      difficulte: 2
+    },
+    {
+      q: "Vos logs pourraient servir de PREUVE dans une procédure judiciaire. QUELLE combinaison de mesures renforce le MIEUX leur recevabilité ?",
+      choix: [
+        "Compression et déduplication pour réduire les coûts",
+        "Stockage inaltérable (WORM), contrôles d'intégrité par hachage et chaîne de custody documentée",
+        "Conservation sur le poste de l'administrateur avec mot de passe",
+        "Conversion de tous les logs au format PDF"
+      ],
+      reponse: 1,
+      explication:
+        "La valeur probante des logs repose sur la démonstration qu'ils n'ont pas été altérés : stockage en écriture unique (WORM), vérification d'intégrité par hachage, horodatage fiable et chaîne de custody documentée depuis la collecte jusqu'à la présentation. La compression (A) n'apporte rien à l'intégrité, le stockage individuel (C) affaiblit la preuve, et le format (D) est sans rapport avec la recevabilité.",
+      difficulte: 2
+    },
+    {
+      q: "Vous voulez identifier QUI communique avec QUI sur le réseau, avec quels volumes, sans capturer le contenu des paquets. QUELLE source de données utiliser ?",
+      choix: [
+        "Full packet capture",
+        "Données NetFlow",
+        "Journaux applicatifs des serveurs web",
+        "Rapports de scan de vulnérabilités"
+      ],
+      reponse: 1,
+      explication:
+        "NetFlow enregistre les métadonnées des flux réseau : adresses source et destination, ports, protocoles, volumes et horodatages, sans le contenu. C'est idéal pour cartographier les communications, détecter des exfiltrations ou des mouvements latéraux, avec un coût de stockage bien inférieur à la capture complète (A), qui conserve le payload. Les journaux applicatifs (C) ne couvrent qu'un service, et les scans (D) ne décrivent pas les flux.",
+      difficulte: 2
+    },
+    {
+      q: "En gestion des journaux, QU'EST-CE qu'un « clipping level » ?",
+      choix: [
+        "La durée maximale de rétention des logs",
+        "Un seuil prédéfini au-delà duquel les événements sont signalés, pour ignorer le bruit des erreurs occasionnelles",
+        "Le niveau de compression appliqué aux archives",
+        "Le nombre maximal de sources connectées au SIEM"
+      ],
+      reponse: 1,
+      explication:
+        "Le clipping level est un seuil : en dessous, les événements ordinaires (par exemple quelques échecs de connexion isolés) sont ignorés ; au-delà (par exemple cinq échecs en dix minutes), l'événement est signalé pour analyse. C'est une forme d'échantillonnage non statistique qui concentre l'attention sur les motifs anormaux. Les options A, C et D décrivent d'autres paramètres de gestion des logs.",
+      difficulte: 2
+    },
+    {
+      q: "Le comité de direction demande un indicateur montrant si les OBJECTIFS du programme de sécurité sont atteints. QUEL type de métrique correspond à cette demande ?",
+      choix: ["KPI", "KRI", "KGI", "SLA"],
+      reponse: 2,
+      explication:
+        "Les KGI (Key Goal Indicators) mesurent l'atteinte des objectifs et répondent à la question « avons-nous atteint le but fixé ? », typiquement pour la gouvernance. Les KPI (A) mesurent la performance des processus qui mènent au but (regard vers le passé), les KRI (B) signalent l'évolution de l'exposition au risque (regard vers le futur), et un SLA (D) est un engagement contractuel de niveau de service, pas une métrique de gouvernance.",
+      difficulte: 3
+    },
+    {
+      q: "QUEL indicateur est le PLUS pertinent pour mesurer la performance de votre programme de gestion des correctifs ?",
+      choix: [
+        "Le nombre total de serveurs de l'organisation",
+        "Le temps moyen de remédiation (MTTR) des vulnérabilités critiques",
+        "Le budget annuel de l'équipe infrastructure",
+        "Le nombre de licences de l'outil de scan"
+      ],
+      reponse: 1,
+      explication:
+        "Le temps moyen de remédiation des vulnérabilités critiques mesure directement l'efficacité du processus de patching : il relie la détection à la correction et peut être suivi dans le temps et comparé à des cibles. Le nombre de serveurs (A), le budget (C) et les licences (D) sont des mesures de volume ou de moyens, pas de performance du processus.",
+      difficulte: 1
+    },
+    {
+      q: "Pour un tableau de bord destiné au conseil d'administration, QUEL indicateur est un bon KRI, orienté vers le FUTUR ?",
+      choix: [
+        "Le nombre d'incidents résolus le trimestre dernier",
+        "Le pourcentage de systèmes critiques arrivant en fin de support éditeur dans les douze prochains mois",
+        "Le temps moyen de détection des incidents l'an passé",
+        "Le nombre de sessions de formation dispensées"
+      ],
+      reponse: 1,
+      explication:
+        "Un KRI signale une exposition au risque à venir : la proportion de systèmes critiques bientôt privés de correctifs de sécurité annonce une augmentation prévisible de la surface d'attaque et appelle une décision (migration, budget, exception). Les incidents résolus (A), le temps de détection passé (C) et les formations dispensées (D) mesurent la performance passée : ce sont des KPI.",
+      difficulte: 2
+    },
+    {
+      q: "QUEL type de test de reprise après sinistre est le MOINS perturbant pour les opérations ?",
+      choix: [
+        "Le full-interruption test",
+        "Le parallel test",
+        "La read-through (revue documentaire par chaque responsable)",
+        "Le test de bascule du datacenter"
+      ],
+      reponse: 2,
+      explication:
+        "La read-through, ou revue documentaire, consiste à distribuer le plan aux responsables concernés pour qu'ils le relisent et signalent les éléments obsolètes : aucune opération n'est touchée, c'est le test le moins perturbant et le moins coûteux. Le parallel test (B) mobilise le site de repli, et le full-interruption (A, D) interrompt réellement la production, avec le risque le plus élevé.",
+      difficulte: 1
+    },
+    {
+      q: "Votre organisation veut vérifier que le site de repli peut réellement traiter la charge, SANS interrompre la production. QUEL test choisir ?",
+      choix: [
+        "Tabletop exercise",
+        "Full-interruption test",
+        "Parallel test",
+        "Read-through"
+      ],
+      reponse: 2,
+      explication:
+        "Le parallel test active les systèmes du site de repli et y rejoue les traitements en parallèle, pendant que le site principal continue d'assurer la production : on valide la capacité réelle de reprise sans risque d'interruption. Le tabletop (A) reste théorique en salle, la read-through (D) est documentaire, et le full-interruption (B) bascule réellement la production, ce que l'énoncé exclut.",
+      difficulte: 2
+    },
+    {
+      q: "Un test DR échoue : la restauration a dépassé le RTO de plusieurs heures. QUELLE est la PREMIÈRE action de management appropriée ?",
+      choix: [
+        "Sanctionner l'équipe d'exploitation responsable du retard",
+        "Documenter les constats dans un rapport de lessons learned et mettre à jour le plan et les procédures en conséquence",
+        "Classer le test comme réussi pour ne pas inquiéter la direction",
+        "Reprogrammer immédiatement le même test sans rien changer"
+      ],
+      reponse: 1,
+      explication:
+        "Un test DR qui révèle des écarts a précisément rempli son rôle : la valeur vient du processus de lessons learned, qui documente les causes, met à jour le plan, les procédures et éventuellement l'architecture, puis planifie une nouvelle validation. Sanctionner (A) décourage la transparence, maquiller le résultat (C) est contraire à l'éthique professionnelle, et retester sans corriger (D) reproduira l'échec.",
+      difficulte: 2
+    },
+    {
+      q: "Après un audit, QUI devrait être PROPRIÉTAIRE de la remédiation d'un finding portant sur une application métier ?",
+      choix: [
+        "L'auditeur qui a identifié le finding",
+        "Le propriétaire métier ou système de l'application concernée, avec le conseil de l'équipe sécurité",
+        "Exclusivement l'équipe sécurité",
+        "Le prestataire de scan de vulnérabilités"
+      ],
+      reponse: 1,
+      explication:
+        "La responsabilité de la remédiation revient au propriétaire du système ou du processus concerné : lui seul peut arbitrer les impacts métier, planifier les changements et engager les ressources, l'équipe sécurité jouant un rôle de conseil et de suivi. L'auditeur (A) doit rester indépendant de la remédiation pour préserver son objectivité, et les options C et D diluent la responsabilité loin de ceux qui possèdent le risque.",
+      difficulte: 2
+    },
+    {
+      q: "Un contrôle exigé par la politique ne peut pas être appliqué sur un système hérité. QUELLES conditions rendent une exception ACCEPTABLE ?",
+      choix: [
+        "L'administrateur du système la valide oralement",
+        "L'exception est approuvée formellement par le niveau de management approprié, assortie de compensating controls, d'une date d'expiration et d'une revue périodique",
+        "L'exception est accordée définitivement, sans limite de durée",
+        "L'équipe sécurité la refuse systématiquement, sans processus d'exception"
+      ],
+      reponse: 1,
+      explication:
+        "Un processus d'exception mûr exige une approbation formelle par le management habilité à accepter le risque, des compensating controls qui réduisent l'exposition, une durée limitée avec date d'expiration et une réévaluation périodique. Une validation orale (A) n'engage personne et ne laisse pas de trace, une exception permanente (C) devient une vulnérabilité oubliée, et l'absence de tout processus (D) pousse les équipes au contournement non documenté.",
+      difficulte: 2
+    },
+    {
+      q: "Un chercheur a notifié en privé une vulnérabilité à un éditeur qui ne répond plus depuis plus de 90 jours malgré plusieurs relances. QUELLE est la démarche la PLUS conforme à l'ethical disclosure ?",
+      choix: [
+        "Publier immédiatement un exploit fonctionnel complet",
+        "Vendre la vulnérabilité au plus offrant",
+        "Recourir à un organisme de coordination (comme un CERT) pour une divulgation coordonnée, puis publier de façon responsable les informations nécessaires à la protection des utilisateurs",
+        "Garder le silence indéfiniment pour éviter tout conflit"
+      ],
+      reponse: 2,
+      explication:
+        "Quand l'éditeur reste silencieux malgré une notification privée et un délai raisonnable, la divulgation coordonnée via un organisme tiers de confiance, tel qu'un CERT de coordination, est la voie éthique : elle maintient la pression sur l'éditeur tout en préparant une publication responsable qui permet aux utilisateurs de se protéger, sans fournir d'arme clé en main. Publier un exploit complet (A) et vendre (B) sont contraires à l'éthique ; se taire indéfiniment (D) laisse les utilisateurs exposés à leur insu.",
+      difficulte: 3
+    }
+  ],
+  quizEn: [
+    {
+      q: "During an authorized penetration test, the tester obtains credentials that grant access to a system explicitly excluded from the agreed scope. What should the tester do NEXT?",
+      choix: [
+        "Use the credentials to demonstrate maximum business impact",
+        "Refrain from accessing the system and report the finding to the designated client contact per the rules of engagement",
+        "Access the system briefly to confirm the credentials are valid",
+        "Delete the credentials and omit them from the report"
+      ],
+      reponse: 1,
+      explication:
+        "Le périmètre et les Rules of Engagement définissent la limite de l'autorisation légale du testeur : un système explicitement exclu ne doit pas être touché, même avec des identifiants valides. La conduite correcte est de s'abstenir et de signaler la découverte au contact désigné, qui décidera d'une éventuelle extension de périmètre écrite. Utiliser les identifiants (A) ou même « vérifier brièvement » (C) constitue un accès non autorisé, et omettre l'information du rapport (D) prive le client d'un finding important.",
+      difficulte: 2
+    },
+    {
+      q: "An organization needs assurance that a SaaS provider's security controls operated effectively over the past nine months. Which report BEST meets this requirement?",
+      choix: ["SOC 2 Type I", "SOC 2 Type II", "SOC 3", "SOC 1 Type I"],
+      reponse: 1,
+      explication:
+        "Le SOC 2 Type II couvre à la fois la conception ET l'efficacité opérationnelle des contrôles sur une période étendue (au moins six mois) : c'est le rapport adapté quand on veut une assurance sur le fonctionnement dans la durée. Le Type I (A) n'évalue la conception qu'à un instant donné, le SOC 3 (C) est une version publique résumée sans le détail des tests, et le SOC 1 (D) porte sur les contrôles affectant le reporting financier.",
+      difficulte: 1
+    },
+    {
+      q: "Which SOC report is specifically designed for unrestricted public distribution, for example on a vendor's website?",
+      choix: ["SOC 1 Type II", "SOC 2 Type I", "SOC 2 Type II", "SOC 3"],
+      reponse: 3,
+      explication:
+        "Le SOC 3 est conçu pour une diffusion publique sans restriction : il atteste que l'organisation a satisfait aux Trust Services Criteria sans divulguer le détail des contrôles ni des tests, et sert souvent d'argument commercial. Les rapports SOC 1 et SOC 2 (A, B, C) contiennent des détails sensibles et sont partagés de manière restreinte, généralement sous NDA.",
+      difficulte: 1
+    },
+    {
+      q: "A security manager must prioritize remediation of dozens of vulnerabilities. Beyond the CVSS base score, which factor should MOST influence the prioritization?",
+      choix: [
+        "The alphabetical order of affected hostnames",
+        "Evidence of active exploitation in the wild combined with the business criticality of the affected assets",
+        "The age of each CVE identifier",
+        "The vendor that published each advisory"
+      ],
+      reponse: 1,
+      explication:
+        "Le score CVSS de base mesure une sévérité intrinsèque, pas le risque contextuel. Une priorisation efficace croise ce score avec l'exploitation active observée (threat intelligence, catalogues de vulnérabilités exploitées) et la criticité métier des actifs touchés : une faille moyennement notée mais activement exploitée sur un actif critique passe avant une faille critique théorique sur un système isolé. Les options A, C et D ne reflètent pas le risque.",
+      difficulte: 2
+    },
+    {
+      q: "Which CVSS metric group allows an organization to adjust a vulnerability score based on the importance of the affected asset in its OWN context?",
+      choix: ["Base", "Temporal", "Environmental", "Exploitability"],
+      reponse: 2,
+      explication:
+        "Le groupe Environmental permet d'adapter le score au contexte propre de l'organisation, notamment via les exigences de confidentialité, d'intégrité et de disponibilité de l'actif concerné et les métriques de base modifiées. Le groupe Base (A) est constant et universel, le groupe Temporal (B) reflète des facteurs évoluant dans le temps comme la maturité de l'exploit, et « Exploitability » (D) est un sous-ensemble de métriques, pas un groupe de contextualisation.",
+      difficulte: 2
+    },
+    {
+      q: "In the NIST SP 800-115 penetration testing methodology, gaining access to systems and escalating privileges occurs during which phase?",
+      choix: ["Planning", "Discovery", "Attack", "Reporting"],
+      reponse: 2,
+      explication:
+        "La phase d'attack du NIST SP 800-115 regroupe le gain d'accès initial, l'élévation de privilèges, le pivot vers d'autres systèmes (system browsing) et l'installation d'outils additionnels. Le planning (A) fixe le périmètre et les Rules of Engagement, la discovery (B) couvre la reconnaissance et l'énumération, et le reporting (D) restitue les résultats au client.",
+      difficulte: 1
+    },
+    {
+      q: "What is the PRIMARY purpose of the rules of engagement in a penetration test?",
+      choix: [
+        "To guarantee that no system will ever fail during the test",
+        "To define the scope, authorized techniques, time windows, communication and escalation procedures that legally frame the test",
+        "To list every vulnerability the testers expect to find",
+        "To transfer all legal liability to the testing firm"
+      ],
+      reponse: 1,
+      explication:
+        "Les Rules of Engagement encadrent juridiquement et opérationnellement le test : périmètre exact, techniques autorisées ou interdites, fenêtres horaires, contacts, procédures de communication et d'escalade en cas d'incident. C'est ce document, avec l'autorisation écrite du management, qui distingue le test légal du piratage. Elles ne garantissent pas l'absence d'incident (A), ne prédisent pas les findings (C) et ne transfèrent pas toute la responsabilité (D).",
+      difficulte: 1
+    },
+    {
+      q: "A red team emulates the tactics of a specific threat actor over several weeks without notifying the SOC. What is the PRIMARY objective of this engagement?",
+      choix: [
+        "To produce an exhaustive inventory of all technical vulnerabilities",
+        "To evaluate the organization's real-world detection and response capabilities against a realistic adversary",
+        "To verify compliance with ISO 27001 controls",
+        "To train developers in secure coding practices"
+      ],
+      reponse: 1,
+      explication:
+        "Un engagement de red team est orienté objectifs : il émule un adversaire réaliste, dans la durée et en furtivité, précisément pour éprouver la capacité réelle de l'organisation (personnes, processus, technologies) à détecter et répondre. L'inventaire exhaustif des vulnérabilités (A) relève du vulnerability assessment ou du pen test classique, la conformité (C) relève de l'audit, et la formation des développeurs (D) n'est pas l'objet de l'exercice.",
+      difficulte: 2
+    },
+    {
+      q: "Which team construct is BEST described as a collaborative process in which offensive and defensive teams share techniques and findings to improve detections?",
+      choix: ["White team", "Blue team", "Purple team", "Tiger team"],
+      reponse: 2,
+      explication:
+        "La purple team n'est pas une équipe permanente distincte mais un mode de collaboration : la red team partage ses tactiques, techniques et procédures pendant que la blue team construit et valide ses détections, en boucle d'amélioration continue. La white team (A) arbitre et contrôle certains exercices, la blue team (B) est la défense seule, et « tiger team » (D) est un terme historique désignant une équipe offensive.",
+      difficulte: 1
+    },
+    {
+      q: "A development manager wants to identify security flaws in application source code before the application is ever executed. Which technique should be used?",
+      choix: [
+        "Dynamic application security testing",
+        "Static application security testing",
+        "Real user monitoring",
+        "Breach and attack simulation"
+      ],
+      reponse: 1,
+      explication:
+        "Le SAST analyse le code source, le bytecode ou les binaires sans exécuter l'application : il s'intègre tôt dans le cycle de développement et détecte des motifs vulnérables (injections, gestion dangereuse de la mémoire) avant tout déploiement. Le DAST (A) exige une application en cours d'exécution, le RUM (C) observe passivement les utilisateurs réels en production, et la BAS (D) simule des attaques contre les contrôles de détection.",
+      difficulte: 1
+    },
+    {
+      q: "An organization deploys a commercial application without any access to its source code. Which security testing technique remains available?",
+      choix: [
+        "Fagan inspection",
+        "Static code analysis",
+        "Dynamic application security testing",
+        "Branch coverage analysis"
+      ],
+      reponse: 2,
+      explication:
+        "Le DAST évalue l'application en cours d'exécution, de l'extérieur, sans nécessiter le code source : c'est souvent la seule option pour les logiciels tiers. L'inspection Fagan (A), l'analyse statique (B) et l'analyse de couverture des branches (D) requièrent toutes l'accès au code source ou aux artefacts internes du développement.",
+      difficulte: 1
+    },
+    {
+      q: "A tester feeds a program with thousands of randomly modified variants of known valid inputs and monitors for crashes. Which technique is being used?",
+      choix: [
+        "Generational fuzzing",
+        "Mutation fuzzing",
+        "Misuse case testing",
+        "Regression testing"
+      ],
+      reponse: 1,
+      explication:
+        "Le mutation fuzzing (dit « dumb fuzzing ») part d'entrées valides connues et les altère aléatoirement pour produire des entrées synthétiques susceptibles de provoquer des comportements inattendus ou des crashs. Le generational fuzzing (A) construit au contraire les entrées à partir d'un modèle de la spécification, le misuse case testing (C) rejoue des scénarios d'abus du point de vue de l'attaquant, et le regression testing (D) vérifie qu'une modification n'a rien cassé d'existant.",
+      difficulte: 1
+    },
+    {
+      q: "Which code review process is the MOST formal, with defined entry and exit criteria for each of its six steps?",
+      choix: [
+        "Pair programming",
+        "Over-the-shoulder review",
+        "Fagan inspection",
+        "Pull request review"
+      ],
+      reponse: 2,
+      explication:
+        "L'inspection Fagan est le processus de revue le plus formel : six étapes (planning, overview, preparation, inspection, rework, follow-up), chacune avec des critères d'entrée et de sortie, des rôles définis et des métriques. On la rencontre dans les environnements à très forte exigence (aéronautique, médical). Le pair programming (A), la revue informelle (B) et les pull requests (D) sont des formes plus légères de peer review.",
+      difficulte: 2
+    },
+    {
+      q: "An auditor correlating events across multiple systems notices that timestamps differ by several minutes between servers. Which control MOST LIKELY failed?",
+      choix: [
+        "Log encryption at rest",
+        "Network Time Protocol synchronization across systems",
+        "Role-based access control on the SIEM",
+        "Log compression before archiving"
+      ],
+      reponse: 1,
+      explication:
+        "Des horodatages incohérents entre systèmes empêchent de reconstituer une chronologie fiable des événements : la cause la plus probable est un défaut de synchronisation NTP. Tous les systèmes émetteurs et le SIEM doivent être synchronisés sur des sources de temps fiables pour permettre la corrélation. Le chiffrement (A), le contrôle d'accès (C) et la compression (D) n'ont aucun effet sur la cohérence temporelle.",
+      difficulte: 2
+    },
+    {
+      q: "A security team configures its monitoring so that failed logons are only reported when more than five occur within ten minutes for a given account. What is this threshold called?",
+      choix: [
+        "A retention period",
+        "A clipping level",
+        "A correlation window",
+        "A sampling bias"
+      ],
+      reponse: 1,
+      explication:
+        "Un clipping level est un seuil prédéfini en dessous duquel les événements ordinaires sont ignorés et au-delà duquel ils sont signalés : ici, plus de cinq échecs de connexion en dix minutes. Cette technique de sélection non statistique concentre l'analyse sur les motifs anormaux et réduit le bruit. La rétention (A) concerne la durée de conservation, la fenêtre de corrélation (C) est un paramètre de règle SIEM plus général, et le biais d'échantillonnage (D) est un défaut statistique.",
+      difficulte: 2
+    },
+    {
+      q: "What is the PRIMARY advantage of synthetic transactions over real user monitoring?",
+      choix: [
+        "They passively capture the experience of actual users",
+        "They proactively verify system behavior against known expected results, even with no user traffic",
+        "They eliminate the need for any other form of testing",
+        "They are always less expensive to operate"
+      ],
+      reponse: 1,
+      explication:
+        "Les transactions synthétiques sont scriptées avec des résultats attendus connus : elles s'exécutent de manière proactive, y compris en l'absence de trafic réel, et détectent les dégradations avant que les utilisateurs ne les subissent. Le RUM (A) est au contraire passif et dépend du trafic réel. Les transactions synthétiques ne remplacent pas les autres tests (C) et leur coût (D) n'est pas leur avantage distinctif.",
+      difficulte: 2
+    },
+    {
+      q: "Which of the following metrics is BEST classified as a key risk indicator (KRI)?",
+      choix: [
+        "The number of incidents closed last quarter",
+        "The mean time to detect incidents over the past year",
+        "The percentage of critical systems running software that will lose vendor support within twelve months",
+        "The number of security awareness sessions delivered"
+      ],
+      reponse: 2,
+      explication:
+        "Un KRI regarde vers l'avenir et signale une exposition croissante au risque : la proportion de systèmes critiques bientôt privés de support éditeur annonce une accumulation prévisible de vulnérabilités non corrigeables et appelle une décision. Les incidents clos (A), le temps de détection passé (B) et les formations dispensées (D) mesurent la performance passée du programme : ce sont des KPI.",
+      difficulte: 3
+    },
+    {
+      q: "Senior management asks for a metric that shows whether the security program's strategic objectives have actually been achieved. Which metric type answers this question?",
+      choix: [
+        "Key performance indicator",
+        "Key risk indicator",
+        "Key goal indicator",
+        "Service level agreement"
+      ],
+      reponse: 2,
+      explication:
+        "Le KGI (Key Goal Indicator) mesure l'atteinte des objectifs : il répond à la question « le but fixé est-il atteint ? », ce qui correspond au besoin de gouvernance exprimé. Le KPI (A) mesure la performance des processus qui concourent au but, le KRI (B) alerte sur l'exposition au risque future, et un SLA (D) est un engagement contractuel de niveau de service.",
+      difficulte: 2
+    },
+    {
+      q: "Which disaster recovery test activates the alternate processing site while the primary site CONTINUES normal production operations?",
+      choix: [
+        "Full-interruption test",
+        "Parallel test",
+        "Tabletop exercise",
+        "Read-through"
+      ],
+      reponse: 1,
+      explication:
+        "Le parallel test active le site de repli et y rejoue les traitements en parallèle de la production, qui n'est jamais interrompue : on valide la capacité réelle de reprise sans risque opérationnel majeur. Le full-interruption test (A) bascule réellement la production (risque maximal), le tabletop (C) est une discussion de scénario en salle, et la read-through (D) une simple revue documentaire du plan.",
+      difficulte: 2
+    },
+    {
+      q: "A business continuity manager gathers the recovery team in a conference room and walks through a simulated disaster scenario without touching any system. Which type of test is this?",
+      choix: [
+        "Parallel test",
+        "Full-interruption test",
+        "Structured walkthrough (tabletop exercise)",
+        "Simulation with live failover"
+      ],
+      reponse: 2,
+      explication:
+        "Le structured walkthrough, ou tabletop exercise, réunit l'équipe autour d'un scénario de sinistre joué sur table : chacun déroule son rôle et le plan est confronté au scénario, sans toucher aux systèmes. C'est peu coûteux et révélateur des lacunes de coordination. Le parallel test (A) et le full-interruption (B) mobilisent réellement les infrastructures, et une bascule réelle (D) dépasse le cadre décrit.",
+      difficulte: 1
+    },
+    {
+      q: "A critical vulnerability cannot be patched because the vendor no longer supports the system, which must remain in production for two more years. What should the security manager do FIRST?",
+      choix: [
+        "Accept the risk silently and take no further action",
+        "Implement compensating controls, document a formal risk exception approved by the appropriate management level, and schedule periodic reviews",
+        "Disconnect the system immediately regardless of business impact",
+        "Reinstall the operating system to remove the vulnerability"
+      ],
+      reponse: 1,
+      explication:
+        "Quand la correction est impossible, la démarche correcte combine des compensating controls (segmentation, restriction d'accès, surveillance renforcée), une exception formellement approuvée par le niveau de management habilité à accepter le risque, et une revue périodique de la décision. L'acceptation silencieuse (A) n'est ni tracée ni autorisée, la déconnexion brutale (C) ignore l'impact métier, et la réinstallation (D) ne corrige pas une vulnérabilité du logiciel lui-même.",
+      difficulte: 2
+    },
+    {
+      q: "A security researcher privately reported a vulnerability to a vendor. After repeated attempts over a reasonable period, the vendor has not responded. What is the MOST ethical next step?",
+      choix: [
+        "Publish a fully weaponized exploit to force the vendor to react",
+        "Sell the vulnerability details to the highest bidder",
+        "Engage a coordination body such as a CERT to pursue coordinated disclosure",
+        "Take no further action and keep the flaw secret indefinitely"
+      ],
+      reponse: 2,
+      explication:
+        "Face à un éditeur silencieux malgré une notification privée et un délai raisonnable, l'ethical disclosure recommande de passer par un organisme de coordination, tel qu'un CERT, pour organiser une divulgation coordonnée : cela maintient la pression sur l'éditeur et prépare une publication responsable permettant aux utilisateurs de se protéger. Publier un exploit armé (A) et vendre la faille (B) sont contraires à l'éthique, et le silence perpétuel (D) laisse les utilisateurs exposés à leur insu.",
+      difficulte: 3
+    },
+    {
+      q: "Which statement about an INTERNAL audit team is TRUE?",
+      choix: [
+        "It offers greater independence than an external audit firm",
+        "Its familiarity with the environment reduces audit time and increases scheduling agility, at the cost of lower perceived independence",
+        "Its reports are universally accepted by regulators as independent attestations",
+        "It must always report administratively to the CIO"
+      ],
+      reponse: 1,
+      explication:
+        "L'atout de l'audit interne est la connaissance de l'environnement, qui réduit le temps d'audit et permet de replanifier avec agilité ; sa limite est une indépendance perçue moindre, car les auditeurs appartiennent à l'organisation. Les régulateurs et investisseurs préfèrent des attestations externes (C), et pour préserver son objectivité l'audit interne doit rendre compte au comité d'audit, surtout pas au DSI dont il audite les systèmes (D).",
+      difficulte: 2
+    },
+    {
+      q: "During a port scan, nmap reports a port as 'closed'. What does this state indicate?",
+      choix: [
+        "A firewall is blocking the scanner's probes",
+        "The port is reachable but no service is listening on it",
+        "A service is accepting connections on the port",
+        "The host is powered off"
+      ],
+      reponse: 1,
+      explication:
+        "L'état closed signifie que le port est accessible, la cible répond aux sondes, mais qu'aucun service n'écoute sur ce port. L'état filtered (A) correspond au cas où un dispositif de filtrage empêche le scanner de conclure, l'état open (C) indique un service qui accepte les connexions, et un hôte éteint (D) ne répondrait pas du tout aux sondes.",
+      difficulte: 2
+    },
+    {
+      q: "Which TCP scanning technique completes the full three-way handshake with the target and is therefore MOST LIKELY to be logged by the target system?",
+      choix: [
+        "TCP SYN (half-open) scan",
+        "TCP connect scan",
+        "UDP scan",
+        "Passive banner analysis"
+      ],
+      reponse: 1,
+      explication:
+        "Le TCP connect scan établit une connexion complète (SYN, SYN/ACK, ACK) via l'API du système : la connexion aboutie est généralement journalisée par la cible, ce qui le rend plus détectable. Le SYN scan (A), dit half-open, interrompt l'échange avant l'établissement complet et laisse moins de traces applicatives. Le scan UDP (C) ne concerne pas le handshake TCP, et l'analyse passive (D) n'émet aucun paquet.",
+      difficulte: 1
+    },
+    {
+      q: "An organization cannot review every user account each quarter. Which account population should ALWAYS receive a full, non-sampled review?",
+      choix: [
+        "Accounts created during the last month",
+        "Highly privileged accounts such as domain and system administrators",
+        "Accounts of employees on vacation",
+        "Service accounts only, chosen at the reviewer's discretion"
+      ],
+      reponse: 1,
+      explication:
+        "Les comptes hautement privilégiés (administrateurs de domaine, de systèmes, comptes root) doivent être revus en totalité à chaque cycle, car leur compromission ou leur dérive a l'impact maximal. Pour les comptes ordinaires, un échantillonnage est acceptable à condition d'être véritablement aléatoire. Les populations proposées en A, C et D ne correspondent pas à une approche fondée sur le risque.",
+      difficulte: 2
+    },
+    {
+      q: "A required security control cannot be implemented on a business-critical system. Who should formally APPROVE the resulting policy exception?",
+      choix: [
+        "The system administrator who discovered the constraint",
+        "The penetration tester who validated the finding",
+        "A management level with the authority to accept the residual risk on behalf of the organization",
+        "The vendor of the affected product"
+      ],
+      reponse: 2,
+      explication:
+        "Accepter un risque résiduel est une décision de gouvernance : seule une autorité de management habilitée (propriétaire du risque, direction, selon la politique de l'organisation) peut approuver formellement l'exception, avec compensating controls, durée limitée et revue périodique. L'administrateur (A) et le testeur (B) n'ont pas cette autorité, et le fournisseur (D) est extérieur à la décision de risque de l'organisation.",
+      difficulte: 2
+    },
+    {
+      q: "Which method provides the STRONGEST evidence that an organization's backup process actually protects its data?",
+      choix: [
+        "Confirming that backup jobs complete without error codes",
+        "Reviewing the backup vendor's marketing documentation",
+        "Periodically performing an actual restoration of systems or files from backup media",
+        "Encrypting all backup media"
+      ],
+      reponse: 2,
+      explication:
+        "Seule une restauration réelle périodique prouve que les données sont effectivement récupérables : c'est le test ultime du processus de sauvegarde. Un code de retour sans erreur (A) ne garantit ni l'intégrité ni la restaurabilité des données, la documentation du fournisseur (B) n'est pas une preuve, et le chiffrement (D) protège la confidentialité des supports, pas la capacité de restauration.",
+      difficulte: 1
+    },
+    {
+      q: "In an ISO management system context, what is the PRIMARY purpose of the formal management review?",
+      choix: [
+        "To assign blame for security incidents to specific employees",
+        "For senior leadership to evaluate the effectiveness of the security management system and direct necessary changes",
+        "To replace internal audits entirely",
+        "To tune SIEM correlation rules"
+      ],
+      reponse: 1,
+      explication:
+        "La revue de direction, qui correspond à la phase Act du cycle Plan-Do-Check-Act, permet à la direction d'évaluer l'efficacité du système de management de la sécurité à partir des résultats d'audits, de tests et de métriques, puis de décider des changements et des ressources nécessaires. Elle ne cherche pas de coupables (A), ne remplace pas les audits (C) qui l'alimentent, et le tuning du SIEM (D) est une tâche opérationnelle.",
+      difficulte: 2
+    },
+    {
+      q: "During the attack phase of a penetration test, a critical production system becomes unresponsive. What should the testing team do FIRST?",
+      choix: [
+        "Continue testing other systems to stay on schedule",
+        "Attempt to restore the system themselves before anyone notices",
+        "Follow the notification and escalation procedure defined in the rules of engagement and inform the designated client contact immediately",
+        "Document the outage and disclose it only in the final report"
+      ],
+      reponse: 2,
+      explication:
+        "Les Rules of Engagement définissent la procédure de communication et d'escalade en cas d'incident : la première action est de notifier immédiatement le contact désigné afin que l'organisation déclenche ses procédures de reprise, le test étant suspendu si nécessaire. Continuer comme si de rien n'était (A) aggrave le risque, restaurer soi-même en cachette (B) dépasse le mandat et peut empirer la situation, et attendre le rapport final (D) retarde une information critique.",
+      difficulte: 3
     }
   ],
   flashcards: [

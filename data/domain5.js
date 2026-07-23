@@ -1638,6 +1638,386 @@ window.CISSP_DATA.domains[5] = {
   ],
 
   // ================================================================
+  // QUIZ EN — questions d'entraînement en anglais, style examen CISSP CAT
+  // (q et choix en anglais ; explication en français)
+  // ================================================================
+  quizEn: [
+    {
+      q: "A security administrator reviews logs and finds that actions performed on a critical server cannot be traced to any specific individual because operators share a generic account. Which access control principle is MOST directly undermined?",
+      choix: ["Least privilege", "Accountability", "Separation of duties", "Defense in depth"],
+      reponse: 1,
+      explication:
+        "L'accountability exige de pouvoir attribuer chaque action à un individu identifié de manière unique et authentifié. Un compte générique partagé brise cette chaîne : même avec des journaux complets, on ne sait pas QUI a agi. Le least privilege concerne l'étendue des droits, la separation of duties la répartition des tâches sensibles, et la defense in depth la superposition de contrôles — aucun n'est directement en cause ici.",
+      difficulte: 1
+    },
+    {
+      q: "Which of the following BEST describes the difference between identification and authentication?",
+      choix: [
+        "Identification proves an identity; authentication claims it",
+        "Identification is claiming an identity; authentication is proving that claim",
+        "Identification grants access rights; authentication logs user actions",
+        "They are synonymous terms in modern IAM systems"
+      ],
+      reponse: 1,
+      explication:
+        "L'identification est la déclaration d'une identité (saisir un nom d'utilisateur, présenter un badge) ; l'authentification est la preuve de cette déclaration (mot de passe, biométrie, token). La réponse A inverse les définitions, la C confond avec l'autorisation et l'audit, et les deux termes ne sont jamais synonymes à l'examen CISSP.",
+      difficulte: 1
+    },
+    {
+      q: "A user authenticates with a password and then approves a push notification on a registered smartphone. Which factor types are being combined?",
+      choix: [
+        "Two instances of something you know",
+        "Something you know and something you have",
+        "Something you know and something you are",
+        "Something you have and somewhere you are"
+      ],
+      reponse: 1,
+      explication:
+        "Le mot de passe est un facteur de connaissance (something you know) ; la notification push validée sur un smartphone enrôlé prouve la possession de cet appareil (something you have). C'est donc un vrai MFA à deux types de facteurs. Aucune biométrie (something you are) ni géolocalisation n'intervient dans ce scénario.",
+      difficulte: 1
+    },
+    {
+      q: "An organization deploying biometric authentication for a high-security vault should tune the system to achieve which of the following?",
+      choix: [
+        "The lowest possible False Rejection Rate",
+        "A False Acceptance Rate as low as possible, even at the cost of more false rejections",
+        "Equal FAR and FRR at all times",
+        "The highest possible throughput"
+      ],
+      reponse: 1,
+      explication:
+        "Pour un coffre de haute sécurité, accepter un imposteur (FAR, erreur de type 2) est bien plus grave que rejeter un utilisateur légitime (FRR, erreur de type 1). On augmente donc la sensibilité pour minimiser le FAR, en acceptant davantage de faux rejets. Le CER (point d'égalité FAR/FRR) sert à comparer la précision des systèmes, pas à régler un site sensible, et le débit est un critère de confort, pas de sécurité.",
+      difficulte: 2
+    },
+    {
+      q: "When comparing biometric systems from different vendors, which single metric is MOST useful?",
+      choix: [
+        "False Acceptance Rate at maximum sensitivity",
+        "Crossover Error Rate (CER)",
+        "Enrollment time",
+        "Template storage size"
+      ],
+      reponse: 1,
+      explication:
+        "Le CER — le point où FAR et FRR sont égaux — est la mesure standard pour comparer objectivement la précision de systèmes biométriques : plus il est bas, plus le système est précis, indépendamment du réglage de sensibilité choisi ensuite. Le FAR à sensibilité maximale ne reflète qu'un point extrême de la courbe, et le temps d'enrôlement ou la taille des gabarits sont des critères opérationnels secondaires.",
+      difficulte: 1
+    },
+    {
+      q: "Which NIST SP 800-63B Authenticator Assurance Level requires multi-factor authentication using a hardware-based authenticator with verifier impersonation resistance?",
+      choix: ["AAL1", "AAL2", "AAL3", "IAL3"],
+      reponse: 2,
+      explication:
+        "AAL3 est le niveau le plus élevé d'assurance d'authentification : il exige un authentificateur matériel, du MFA et la résistance à l'usurpation du vérifieur (phishing resistance), typiquement une clé FIDO2 matérielle. AAL1 accepte un facteur unique, AAL2 exige le MFA sans imposer le matériel, et IAL3 concerne l'identity proofing (preuve d'identité à l'enrôlement), pas l'authentification.",
+      difficulte: 2
+    },
+    {
+      q: "During a Kerberos logon, which component issues the Ticket-Granting Ticket (TGT)?",
+      choix: [
+        "The Ticket-Granting Service after validating a service ticket",
+        "The Authentication Service component of the KDC",
+        "The resource server the user wants to access",
+        "The client workstation itself"
+      ],
+      reponse: 1,
+      explication:
+        "C'est l'Authentication Service (AS) du KDC qui vérifie l'authentification initiale de l'utilisateur et délivre le TGT, chiffré de sorte que seul le détenteur du bon mot de passe puisse exploiter la clé de session associée. Le TGS intervient ensuite : il vérifie le TGT et délivre les service tickets. Ni le serveur de ressources ni le poste client n'émettent de tickets.",
+      difficulte: 2
+    },
+    {
+      q: "Users in a single Active Directory site report authentication failures shortly after a virtualization snapshot rollback on a domain controller. What is the MOST likely cause?",
+      choix: [
+        "Expired TLS certificates on the domain controller",
+        "Kerberos clock skew exceeding the allowed tolerance",
+        "A corrupted LDAP schema",
+        "RADIUS shared secret mismatch"
+      ],
+      reponse: 1,
+      explication:
+        "Un retour de snapshot ramène l'horloge du contrôleur de domaine en arrière ; or Kerberos horodate ses tickets et rejette par défaut toute dérive supérieure à la tolérance (classiquement cinq minutes) afin d'empêcher les attaques par rejeu. Le symptôme — échecs d'authentification massifs juste après un décalage temporel — signe le clock skew. Les certificats TLS, le schéma LDAP ou un secret RADIUS n'expliqueraient pas cette corrélation temporelle.",
+      difficulte: 2
+    },
+    {
+      q: "An attacker who has compromised the krbtgt account hash of a domain can perform which attack?",
+      choix: [
+        "Kerberoasting against service accounts",
+        "Forging Golden Tickets granting arbitrary domain access",
+        "AS-REP roasting against users without preauthentication",
+        "Offline cracking of NTLM hashes"
+      ],
+      reponse: 1,
+      explication:
+        "Le compte krbtgt signe et chiffre tous les TGT du domaine : avec son hash, l'attaquant forge des golden tickets — des TGT parfaitement valides pour n'importe quelle identité, y compris des comptes inexistants, avec la durée de vie de son choix. Le Kerberoasting et l'AS-REP roasting ne nécessitent pas krbtgt (ils exploitent des service tickets ou l'absence de pré-authentification), et le cassage NTLM est une attaque distincte.",
+      difficulte: 3
+    },
+    {
+      q: "Which statement about Security Assertion Markup Language (SAML) 2.0 is TRUE?",
+      choix: [
+        "It is a JSON-based protocol maintained by the IETF",
+        "It is an XML-based standard maintained by OASIS used to exchange authentication and authorization assertions",
+        "It replaced OAuth 2.0 for API authorization",
+        "It requires Kerberos as the underlying ticket system"
+      ],
+      reponse: 1,
+      explication:
+        "SAML 2.0 est un standard ouvert fondé sur XML, maintenu par l'OASIS, qui permet d'échanger des assertions d'authentification, d'attributs et d'autorisation entre un Identity Provider et un Service Provider — c'est le socle historique du SSO web fédéré. Il n'est ni JSON ni IETF (c'est OAuth qui est une RFC de l'IETF), il ne remplace pas OAuth (rôles différents) et n'a aucun lien avec Kerberos.",
+      difficulte: 1
+    },
+    {
+      q: "A company wants employees to sign in once to the corporate identity provider and then access dozens of third-party SaaS applications without re-entering credentials. Which technology BEST meets this requirement?",
+      choix: [
+        "TACACS+ command authorization",
+        "Federated SSO using SAML or OIDC assertions/tokens",
+        "Password synchronization across all SaaS providers",
+        "Local accounts with a password manager"
+      ],
+      reponse: 1,
+      explication:
+        "Le besoin décrit est le SSO fédéré : l'IdP d'entreprise authentifie une fois, puis transmet des assertions SAML ou des jetons OIDC aux applications SaaS, qui ouvrent la session sans revoir les identifiants. La synchronisation de mots de passe multiplie les surfaces d'attaque et n'est pas du SSO ; un gestionnaire de mots de passe automatise la saisie mais reste de l'authentification répétée ; TACACS+ gère l'administration d'équipements réseau.",
+      difficulte: 1
+    },
+    {
+      q: "In the OAuth 2.0 framework, which entity issues access tokens after the resource owner grants consent?",
+      choix: ["The resource server", "The authorization server", "The client application", "The user agent"],
+      reponse: 1,
+      explication:
+        "Le serveur d'autorisation authentifie le resource owner, recueille son consentement puis émet les access tokens (et refresh tokens). Le serveur de ressources se contente de vérifier et d'accepter ces tokens pour servir les données ; le client les utilise mais ne les émet jamais ; le user agent (navigateur) n'est qu'un intermédiaire de transport.",
+      difficulte: 1
+    },
+    {
+      q: "What does OpenID Connect add on top of OAuth 2.0?",
+      choix: [
+        "Transport encryption for bearer tokens",
+        "An identity layer with a signed ID token (JWT) that proves user authentication",
+        "Automatic account provisioning across domains",
+        "A replacement for TLS in mobile applications"
+      ],
+      reponse: 1,
+      explication:
+        "OIDC ajoute à OAuth 2.0 une couche d'AUTHENTIFICATION : l'ID token, un JWT signé contenant l'identité de l'utilisateur, l'IdP émetteur, l'heure et la méthode d'authentification. OAuth seul délègue des autorisations sans prouver l'identité. Le chiffrement du transport reste assuré par TLS (qu'OIDC ne remplace pas), et le provisioning inter-domaines relève de SCIM.",
+      difficulte: 2
+    },
+    {
+      q: "Which access control model relies on security labels assigned to both subjects and objects, with access decisions enforced by the system rather than the data owner?",
+      choix: [
+        "Discretionary Access Control",
+        "Mandatory Access Control",
+        "Role-Based Access Control",
+        "Rule-Based Access Control"
+      ],
+      reponse: 1,
+      explication:
+        "Le MAC se définit par les labels de classification appliqués aux sujets (habilitations) et aux objets (classifications), l'accès étant imposé par le système selon la politique — le propriétaire n'a aucun pouvoir discrétionnaire. C'est le modèle des environnements militaires (lattice-based). Le DAC laisse le propriétaire décider, le RBAC passe par des rôles métier, et le rule-based applique des règles globales uniformes.",
+      difficulte: 1
+    },
+    {
+      q: "A hospital grants access to patient records based on the user's department, the sensitivity of the record, the time of day, and whether the workstation is inside the clinical network. Which access control model is being used?",
+      choix: [
+        "Role-Based Access Control",
+        "Attribute-Based Access Control",
+        "Discretionary Access Control",
+        "Mandatory Access Control"
+      ],
+      reponse: 1,
+      explication:
+        "La décision combine des attributs du sujet (service), de l'objet (sensibilité du dossier), de l'environnement (heure, localisation réseau du poste) : c'est la signature de l'ABAC, où un moteur de politiques évalue dynamiquement ces attributs à chaque requête (souvent exprimées en XACML). Un RBAC pur ne considérerait que le rôle, sans le contexte ; le DAC dépendrait du propriétaire du dossier ; le MAC utiliserait des labels de classification imposés.",
+      difficulte: 2
+    },
+    {
+      q: "An organization with high staff turnover wants to minimize administrative effort when employees change positions. Which access control approach BEST achieves this?",
+      choix: [
+        "Granting permissions individually to each user account",
+        "Assigning permissions to job-based roles and moving users between roles",
+        "Letting data owners grant access on request",
+        "Applying a single access rule set to all employees"
+      ],
+      reponse: 1,
+      explication:
+        "Le RBAC est conçu pour cela : les privilèges sont rattachés à des rôles alignés sur les fonctions ; lors d'une mutation, il suffit de retirer l'ancien rôle et d'assigner le nouveau — les anciens droits disparaissent automatiquement, ce qui prévient aussi le privilege creep. L'attribution individuelle (A) et le DAC (C) explosent en charge administrative et en erreurs, et une règle unique pour tous (D) ne reflète pas les différences de fonctions.",
+      difficulte: 1
+    },
+    {
+      q: "During a quarterly access review, an auditor finds that a financial analyst who transferred from accounts payable can both create vendors and approve payments to them. What is the PRIMARY concern?",
+      choix: [
+        "Password policy violation",
+        "A toxic combination violating separation of duties, enabling potential fraud",
+        "Excessive session duration",
+        "Lack of encryption on financial data"
+      ],
+      reponse: 1,
+      explication:
+        "Créer un fournisseur ET approuver ses paiements est une combinaison toxique : une seule personne peut monter une fraude complète (fournisseur fictif, paiements approuvés par elle-même). C'est une violation de la separation of duties, souvent issue du privilege creep après une mutation — exactement ce que les revues d'accès doivent détecter, avec retrait immédiat des droits hérités de l'ancien poste. Les autres réponses sont hors sujet par rapport au risque décrit.",
+      difficulte: 2
+    },
+    {
+      q: "What is the PRIMARY security benefit of just-in-time (JIT) privileged access?",
+      choix: [
+        "Administrators no longer need MFA",
+        "It eliminates standing privileges, shrinking the window during which stolen credentials grant elevated access",
+        "It removes the need for privileged session logging",
+        "It allows unlimited concurrent administrative sessions"
+      ],
+      reponse: 1,
+      explication:
+        "Le JIT supprime les privilèges permanents : les droits élevés sont accordés à la demande, pour une durée limitée et une tâche précise, puis retirés automatiquement. Des identifiants volés entre deux élévations ne donnent alors AUCUN privilège — la fenêtre d'attaque se réduit à la durée de la tâche. Le JIT ne dispense ni du MFA ni de l'enregistrement des sessions, qu'il complète au sein d'une solution PAM.",
+      difficulte: 2
+    },
+    {
+      q: "Which capability is a core function of a Privileged Access Management (PAM) solution?",
+      choix: [
+        "Scanning web applications for SQL injection",
+        "Vaulting privileged credentials, rotating them, and recording privileged sessions",
+        "Encrypting backup tapes",
+        "Filtering outbound email for data loss"
+      ],
+      reponse: 1,
+      explication:
+        "Le cœur d'une solution PAM est la gestion des comptes à privilèges : coffre-fort d'identifiants (vaulting), rotation automatique des mots de passe (notamment après chaque check-out), courtage et enregistrement des sessions privilégiées, et élévation just-in-time. L'analyse applicative, le chiffrement de sauvegardes et le DLP de messagerie relèvent d'autres familles d'outils de sécurité.",
+      difficulte: 1
+    },
+    {
+      q: "A web application keeps users logged in indefinitely as long as the browser remains open. Which control BEST reduces the risk of session hijacking exploitation?",
+      choix: [
+        "Storing the session ID in the page URL for easy tracking",
+        "Enforcing both an idle timeout and an absolute session lifetime with re-authentication",
+        "Increasing cookie lifetime to one year",
+        "Disabling TLS to simplify session inspection"
+      ],
+      reponse: 1,
+      explication:
+        "Une session sans expiration reste exploitable indéfiniment si son jeton est volé. Le duo timeout d'inactivité (déconnexion de l'utilisateur inactif) et durée de vie absolue (la session expire même active, forçant la ré-authentification) borne l'exploitation d'un jeton détourné. Mettre l'ID de session dans l'URL l'expose aux journaux et referrers, allonger la vie du cookie aggrave le risque, et désactiver TLS est une faute grave.",
+      difficulte: 2
+    },
+    {
+      q: "An attacker obtains a list of usernames and attempts the password \"Winter2026!\" against every account, staying below the account lockout threshold. What is this attack called?",
+      choix: ["Credential stuffing", "Password spraying", "Rainbow table attack", "Pass-the-hash"],
+      reponse: 1,
+      explication:
+        "Essayer UN mot de passe probable sur un grand nombre de comptes, en restant sous le seuil de verrouillage par compte, est du password spraying. Le credential stuffing rejoue des couples identifiant/mot de passe volés ailleurs ; les rainbow tables cassent des hashes hors ligne ; le pass-the-hash rejoue un hash NTLM sans connaître le mot de passe. La détection du spraying exige une corrélation transversale des échecs, pas un simple compteur par compte.",
+      difficulte: 2
+    },
+    {
+      q: "Which attack involves replaying username/password pairs stolen from one breached website against many other sites?",
+      choix: ["Password spraying", "Credential stuffing", "Kerberoasting", "Session fixation"],
+      reponse: 1,
+      explication:
+        "Le credential stuffing exploite la réutilisation des mots de passe : des couples identifiant/mot de passe issus d'une fuite sont rejoués en masse sur d'autres services. Les parades incluent le MFA, la vérification des mots de passe contre les bases de fuites connues et la détection d'automatisation. Le spraying utilise un mot de passe unique sur beaucoup de comptes, le Kerberoasting casse des tickets de service, et la fixation de session impose un ID de session connu de l'attaquant.",
+      difficulte: 1
+    },
+    {
+      q: "Why are FIDO2/WebAuthn authenticators considered phishing-resistant while TOTP codes are not?",
+      choix: [
+        "FIDO2 codes are longer than TOTP codes",
+        "The FIDO2 signature is cryptographically bound to the legitimate site's origin, so a fake site cannot obtain a valid response, whereas a user can type a TOTP code into any site",
+        "TOTP requires a network connection while FIDO2 does not",
+        "FIDO2 encrypts the password before transmission"
+      ],
+      reponse: 1,
+      explication:
+        "La résistance au phishing de FIDO2 tient au 'origin binding' : le navigateur inclut l'origine du site dans le défi signé par la clé privée, qui ne quitte jamais l'authentificateur — un site de phishing, sur un autre domaine, ne peut pas obtenir de signature valide pour le site légitime. Un code TOTP, lui, est une simple suite de chiffres que la victime peut saisir sur un faux site, que l'attaquant relaie en temps réel (adversary-in-the-middle). Les autres réponses sont techniquement fausses.",
+      difficulte: 3
+    },
+    {
+      q: "An identity federation allows a partner's employees to access your procurement portal using their own corporate credentials. Who remains responsible for authenticating these users and deprovisioning them when they leave the partner company?",
+      choix: [
+        "Your organization, as the service provider",
+        "The partner organization, acting as the identity provider",
+        "A neutral third-party certificate authority",
+        "Each individual user"
+      ],
+      reponse: 1,
+      explication:
+        "Dans une fédération B2B, le partenaire reste l'Identity Provider de ses employés : il les authentifie avec leurs identifiants internes et, dès qu'un employé part, la désactivation de son compte chez le partenaire coupe automatiquement l'accès fédéré à votre portail. C'est le grand avantage : le deprovisioning reste là où l'information de départ existe. Votre organisation (SP) consomme les assertions mais ne gère ni mots de passe ni cycle de vie des comptes du partenaire.",
+      difficulte: 2
+    },
+    {
+      q: "Which protocol is the modern REST/JSON-based standard for automating user account provisioning and deprovisioning across cloud applications?",
+      choix: ["SPML", "SCIM", "SAML", "LDAP"],
+      reponse: 1,
+      explication:
+        "SCIM (System for Cross-domain Identity Management) est le standard moderne de provisioning : API REST et objets JSON pour créer, mettre à jour et supprimer automatiquement les comptes dans les applications SaaS depuis l'annuaire central. SPML est son prédécesseur XML quasi abandonné ; SAML transporte des assertions d'authentification, pas des opérations de gestion de comptes ; LDAP est un protocole d'accès aux annuaires, pas un standard de synchronisation inter-domaines.",
+      difficulte: 2
+    },
+    {
+      q: "When an employee is terminated under hostile circumstances, what should the security team do FIRST regarding the employee's accounts?",
+      choix: [
+        "Delete all accounts and associated data immediately",
+        "Disable the accounts immediately, ideally during the exit interview",
+        "Wait for the next scheduled access review",
+        "Reset the passwords and give them to the employee's manager"
+      ],
+      reponse: 1,
+      explication:
+        "La bonne pratique est de DÉSACTIVER immédiatement les comptes — idéalement pendant l'entretien de sortie — afin de couper tout accès sans détruire les données, clés de chiffrement ou preuves potentiellement nécessaires. La suppression définitive vient plus tard, selon la politique de rétention. Supprimer d'emblée fait perdre des éléments irremplaçables, attendre une revue planifiée laisse une fenêtre d'attaque, et donner les identifiants au manager brise l'accountability (mieux vaut des accès délégués tracés).",
+      difficulte: 1
+    },
+    {
+      q: "Which of the following BEST describes an access control matrix and its two derived views?",
+      choix: [
+        "A network diagram showing firewalls and routers",
+        "A table of subjects and objects where each column is an object's ACL and each row is a subject's capability list",
+        "A list of roles mapped to organizational units",
+        "A lattice of security labels ordered by sensitivity"
+      ],
+      reponse: 1,
+      explication:
+        "La matrice de contrôle d'accès croise sujets (lignes) et objets (colonnes) : lue en colonne, elle donne l'ACL d'un objet (qui peut y accéder et comment) ; lue en ligne, elle donne la capability list d'un sujet (ce à quoi il peut accéder). Cette distinction colonne/ligne est un classique de l'examen. Le treillis de labels (D) décrit le MAC lattice-based, un autre concept.",
+      difficulte: 2
+    },
+    {
+      q: "A bank teller application only exposes menu options and data fields appropriate to the teller's job, hiding administrative functions entirely. Which access control technique is this?",
+      choix: [
+        "Content-dependent access control",
+        "Constrained (restricted) user interface",
+        "Context-dependent access control",
+        "Capability-based security"
+      ],
+      reponse: 1,
+      explication:
+        "Une interface contrainte (constrained/restricted interface) limite ce que l'utilisateur peut voir et faire en masquant ou grisant les fonctions hors de son périmètre — l'application du guichetier n'affiche que ses opérations. Le content-dependent filtre selon le CONTENU des données (ex. une vue base de données masquant une colonne), le context-dependent selon le contexte de la demande (heure, séquence), et la sécurité par capabilities est un mécanisme de jetons d'accès, pas d'interface.",
+      difficulte: 2
+    },
+    {
+      q: "A risk-based authentication system prompts for additional verification only when a login originates from a new device in an unusual country. What is this pattern called?",
+      choix: [
+        "Static multi-factor authentication",
+        "Adaptive (step-up) authentication driven by risk scoring",
+        "Single sign-on with session persistence",
+        "Certificate-based mutual TLS"
+      ],
+      reponse: 1,
+      explication:
+        "L'authentification adaptative évalue un score de risque contextuel (appareil, localisation, comportement, heure) et n'exige un facteur supplémentaire (step-up) que lorsque le risque dépasse un seuil — équilibre entre sécurité et expérience utilisateur, et composant clé des architectures Zero Trust. Le MFA statique impose les mêmes exigences à chaque connexion ; le SSO et le mTLS ne modulent rien selon le risque.",
+      difficulte: 2
+    },
+    {
+      q: "Which of the following is the MOST significant risk introduced by single sign-on, and its BEST mitigation?",
+      choix: [
+        "Users must remember more passwords; deploy a password manager",
+        "A compromised SSO credential exposes every connected application; require strong MFA on the SSO identity",
+        "Applications can no longer log user activity; enable local logging",
+        "Session length becomes too short; extend token lifetimes"
+      ],
+      reponse: 1,
+      explication:
+        "Le SSO concentre le risque : un seul identifiant compromis ouvre TOUTES les applications reliées (single point of compromise). La parade prioritaire est de durcir cette authentification unique — MFA fort, idéalement résistant au phishing, surveillance des connexions et gestion de session rigoureuse. La réponse A est contradictoire (le SSO réduit le nombre de mots de passe), et les réponses C et D n'adressent pas le risque principal.",
+      difficulte: 1
+    },
+    {
+      q: "During identity proofing for a new remote employee, which approach provides the HIGHEST assurance according to identity assurance level practices?",
+      choix: [
+        "Accepting a self-asserted email address",
+        "Verifying government-issued identity evidence, with biometric comparison, in person or via supervised remote session",
+        "Sending a one-time code to any phone number the applicant provides",
+        "Checking that the username is not already taken"
+      ],
+      reponse: 1,
+      explication:
+        "L'identity proofing de plus haute assurance (IAL3 dans NIST SP 800-63A) exige la vérification de preuves d'identité officielles avec comparaison biométrique, en présence physique ou en session à distance supervisée — on établit que la personne EST bien qui elle prétend être avant de créer son compte. L'auto-déclaration (A) correspond à IAL1, et les réponses C et D ne prouvent rien sur l'identité réelle du demandeur.",
+      difficulte: 3
+    }
+  ],
+
+  // ================================================================
   // FLASHCARDS — 24 cartes
   // ================================================================
   flashcards: [

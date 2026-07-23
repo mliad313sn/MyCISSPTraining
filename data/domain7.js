@@ -1124,7 +1124,7 @@ window.CISSP_DATA.domains[7] = {
   ],
 
   // --------------------------------------------------------------------
-  // QUIZ — 32 questions style examen
+  // QUIZ — 73 questions style examen
   // --------------------------------------------------------------------
   quiz: [
     {
@@ -1549,6 +1549,839 @@ window.CISSP_DATA.domains[7] = {
       explication:
         "Le sas d'accès (mantrap) utilise deux portes successives, souvent sous contrôle d'un garde, pour empêcher qu'une personne n'en suive une autre (piggybacking) et peut piéger un individu suspect. Le tourniquet limite le passage à une personne mais sans sas, le bollard bloque les véhicules, et le PIDAS est un système de clôtures multiples.",
       difficulte: 1
+    },
+    {
+      q: "Un analyste arrive devant un poste de travail compromis encore allumé et suspecté d'héberger un malware actif. Selon l'ordre de volatilité, que doit-il collecter EN PREMIER ?",
+      choix: [
+        "Une image bit à bit du disque dur",
+        "Le contenu de la mémoire vive (RAM) et des connexions réseau actives",
+        "Les sauvegardes de la veille",
+        "Les journaux archivés sur le serveur central"
+      ],
+      reponse: 1,
+      explication:
+        "L'ordre de volatilité impose de collecter d'abord les données les plus éphémères : registres CPU, cache, RAM, tables de connexions réseau. La RAM disparaît à la mise hors tension et contient le malware actif, les clés de chiffrement et les sessions. Le disque, les sauvegardes et les logs archivés sont persistants et peuvent être collectés ensuite sans perte.",
+      difficulte: 2
+    },
+    {
+      q: "Pendant un procès, l'avocat de la défense démontre qu'un disque saisi est resté deux jours dans le coffre de voiture d'un enquêteur sans aucune mention dans le registre. Quelle est la conséquence la PLUS probable ?",
+      choix: [
+        "Aucune, tant que le hash du disque est intact",
+        "La preuve risque d'être déclarée inadmissible pour rupture de la chain of custody",
+        "L'enquêteur doit simplement signer le registre a posteriori",
+        "Le tribunal ordonne une nouvelle copie du disque"
+      ],
+      reponse: 1,
+      explication:
+        "La chain of custody exige une documentation continue de chaque manipulation et de chaque lieu de stockage. Un trou de deux jours non documenté permet à la défense d'alléguer une altération possible : la preuve risque le rejet. Le hash prouve l'intégrité des données mais pas l'absence d'accès physique non autorisé, et une signature rétroactive ou une nouvelle copie ne réparent pas la rupture.",
+      difficulte: 2
+    },
+    {
+      q: "Avant et après la création d'une image forensique d'un disque, l'enquêteur calcule une empreinte cryptographique (hash). Quel est l'objectif PRINCIPAL ?",
+      choix: [
+        "Chiffrer l'image pour la protéger pendant le transport",
+        "Prouver que la copie est identique à l'original et que la preuve n'a pas été modifiée",
+        "Accélérer la restauration ultérieure de l'image",
+        "Signer numériquement le rapport d'investigation"
+      ],
+      reponse: 1,
+      explication:
+        "Le hash calculé sur l'original puis sur la copie démontre que l'image est bit à bit identique et que l'intégrité de la preuve est préservée (règle « accurate »). Un hash ne chiffre rien, n'accélère aucune restauration, et la signature du rapport est un usage distinct de la cryptographie.",
+      difficulte: 1
+    },
+    {
+      q: "Quel dispositif matériel garantit qu'aucune écriture n'est envoyée vers un disque saisi pendant son acquisition forensique ?",
+      choix: ["Un write blocker", "Un dongle HSM", "Un TPM", "Un duplicateur RAID"],
+      reponse: 0,
+      explication:
+        "Le write blocker (bloqueur d'écriture) s'intercale entre le disque saisi et la station d'analyse : il laisse passer les lectures mais bloque physiquement toute écriture, préservant l'intégrité de l'original. Le HSM protège des clés cryptographiques, le TPM est une puce de sécurité de la carte mère, et un duplicateur RAID n'offre aucune garantie de non-écriture.",
+      difficulte: 1
+    },
+    {
+      q: "Classez ces sources de preuves de la PLUS volatile à la moins volatile : (1) fichiers sur disque, (2) registres et cache CPU, (3) table ARP et connexions réseau, (4) sauvegardes sur bande.",
+      choix: ["2, 3, 1, 4", "3, 2, 4, 1", "1, 2, 3, 4", "2, 1, 3, 4"],
+      reponse: 0,
+      explication:
+        "L'ordre de volatilité va des registres et caches CPU (perdus en nanosecondes), aux structures réseau et à la RAM (perdues à l'extinction), puis aux fichiers sur disque (persistants) et enfin aux sauvegardes et archives (les plus durables). On collecte toujours dans cet ordre pour ne rien perdre.",
+      difficulte: 2
+    },
+    {
+      q: "Un administrateur bien intentionné a examiné directement le disque original d'un serveur compromis, ouvrant plusieurs fichiers avant l'arrivée de l'équipe forensique. Quel est l'impact PRINCIPAL ?",
+      choix: [
+        "Aucun, car il possédait les droits d'administration",
+        "Les métadonnées (horodatages d'accès) ont été altérées, fragilisant l'admissibilité de la preuve",
+        "Le disque doit simplement être défragmenté avant analyse",
+        "L'incident doit être requalifié en événement"
+      ],
+      reponse: 1,
+      explication:
+        "Chaque ouverture de fichier modifie les horodatages d'accès et potentiellement d'autres métadonnées : la preuve originale a été altérée, ce que la partie adverse exploitera. C'est précisément pourquoi on travaille sur des copies bit à bit avec write blocker. Les droits d'administration n'autorisent pas à manipuler une preuve, et les autres réponses sont sans rapport.",
+      difficulte: 2
+    },
+    {
+      q: "Un SIEM reçoit trois événements anodins pris isolément : une connexion VPN depuis l'étranger, une élévation de privilèges, puis un transfert sortant volumineux à 3 h du matin. Quelle capacité du SIEM permet d'en faire UNE alerte critique ?",
+      choix: ["La normalisation", "L'agrégation", "La corrélation", "La rétention"],
+      reponse: 2,
+      explication:
+        "La corrélation relie des événements provenant de sources différentes pour révéler un schéma d'attaque qu'aucun événement isolé ne trahit. L'agrégation collecte et regroupe les logs, la normalisation les convertit dans un format commun, et la rétention en assure la conservation — trois prérequis de la corrélation, mais pas l'analyse elle-même.",
+      difficulte: 1
+    },
+    {
+      q: "Quel élément déclenche typiquement une campagne de threat hunting ?",
+      choix: [
+        "Une alerte critique du SIEM",
+        "Une hypothèse fondée sur la threat intelligence, en l'absence de toute alerte",
+        "Une demande de l'audit interne",
+        "La détection d'un malware par l'antivirus"
+      ],
+      reponse: 1,
+      explication:
+        "Le threat hunting est proactif : l'analyste formule une hypothèse (« si le groupe X nous ciblait avec ses TTP connues, quelles traces trouverait-on ? ») et cherche des preuves de compromission qui ont échappé aux outils. Une alerte SIEM ou antivirus déclenche la réponse aux incidents, pas la chasse ; l'audit poursuit d'autres objectifs.",
+      difficulte: 2
+    },
+    {
+      q: "Lors d'une investigation, les horodatages des logs de trois serveurs se contredisent, rendant la chronologie de l'attaque inexploitable. Quel contrôle aurait DÛ être en place ?",
+      choix: [
+        "La compression des journaux",
+        "La synchronisation de tous les systèmes sur une source de temps commune (NTP)",
+        "Le chiffrement des journaux en transit",
+        "L'augmentation de la durée de rétention"
+      ],
+      reponse: 1,
+      explication:
+        "Sans synchronisation NTP sur une source de temps fiable, la corrélation des événements entre systèmes devient impossible et la chronologie présentée au tribunal est contestable. La compression, le chiffrement et la rétention protègent les logs mais ne résolvent pas l'incohérence temporelle.",
+      difficulte: 2
+    },
+    {
+      q: "Quelle est la MEILLEURE protection contre un attaquant qui efface les journaux locaux d'un serveur compromis pour couvrir ses traces ?",
+      choix: [
+        "Sauvegarder les journaux chaque nuit",
+        "Transmettre les logs en temps réel vers un serveur de logs centralisé en écriture seule",
+        "Activer la rotation automatique des journaux",
+        "Restreindre la taille maximale des fichiers de logs"
+      ],
+      reponse: 1,
+      explication:
+        "L'envoi en temps réel vers un collecteur centralisé, idéalement en écriture seule (WORM), garantit qu'une copie des événements existe hors de portée de l'attaquant, même s'il purge les logs locaux. Une sauvegarde nocturne laisse une fenêtre d'effacement, et la rotation ou la limitation de taille détruisent elles-mêmes des données.",
+      difficulte: 2
+    },
+    {
+      q: "Une faille critique est activement exploitée et l'équipe doit appliquer un correctif en urgence, sans passer par le circuit d'approbation habituel. Que prévoit un processus de change management mature ?",
+      choix: [
+        "Interdire toute dérogation : le circuit normal doit être suivi",
+        "Une procédure de changement d'urgence : implémenter rapidement, puis documenter et faire approuver rétroactivement",
+        "Laisser l'administrateur décider seul sans documentation",
+        "Attendre la prochaine réunion du comité des changements"
+      ],
+      reponse: 1,
+      explication:
+        "Les processus matures prévoient l'emergency change : le correctif est appliqué sans délai pour traiter le risque, mais le changement est documenté, revu et approuvé a posteriori afin de préserver la traçabilité et de détecter d'éventuels effets de bord. Interdire toute urgence ou attendre le comité laisse la faille ouverte ; agir sans documentation détruit la maîtrise des configurations.",
+      difficulte: 2
+    },
+    {
+      q: "Un audit révèle qu'une règle firewall en production ne correspond à aucune demande de changement approuvée. Que devez-vous faire EN PREMIER ?",
+      choix: [
+        "Supprimer immédiatement la règle non autorisée",
+        "Enquêter sur l'origine et l'impact de la règle avant toute action",
+        "Sanctionner l'administrateur firewall",
+        "Mettre à jour la documentation pour régulariser la règle"
+      ],
+      reponse: 1,
+      explication:
+        "Un changement non autorisé peut être une erreur bénigne… ou la trace d'une compromission (persistance d'un attaquant). Il faut d'abord enquêter : qui l'a créée, quand, et quel trafic elle autorise. La supprimer aveuglément pourrait casser un service ou alerter un attaquant, sanctionner est prématuré sans faits, et régulariser sans enquête masquerait un incident potentiel.",
+      difficulte: 3
+    },
+    {
+      q: "Dans un processus de gestion des changements, quel organe évalue l'impact des changements proposés et les approuve ou les rejette ?",
+      choix: [
+        "Le Change Advisory Board (CAB)",
+        "L'équipe de réponse aux incidents",
+        "Le comité d'audit",
+        "Le service desk"
+      ],
+      reponse: 0,
+      explication:
+        "Le CAB réunit des représentants des équipes techniques et métier pour évaluer l'impact, les risques et la planification des changements proposés, puis les approuver ou les rejeter. L'équipe IR gère les incidents, le comité d'audit supervise le contrôle interne, et le service desk enregistre les demandes sans pouvoir d'approbation.",
+      difficulte: 1
+    },
+    {
+      q: "Un utilisateur signale que sa machine est « lente et bizarre ». Dans le cycle de réponse aux incidents, quelle est la PREMIÈRE action de l'équipe ?",
+      choix: [
+        "Activer le plan de reprise après sinistre",
+        "Vérifier et qualifier le signalement pour déterminer s'il s'agit d'un incident réel",
+        "Réinstaller immédiatement le poste",
+        "Notifier le régulateur"
+      ],
+      reponse: 1,
+      explication:
+        "Nous sommes en phase de détection : une alerte ou une plainte n'est pas forcément un incident. Il faut d'abord trier et vérifier (triage) — la lenteur peut venir d'un disque plein comme d'un malware. Le DRP concerne les sinistres majeurs, la réinstallation détruirait les preuves, et la notification réglementaire n'intervient qu'après qualification d'un incident avec exposition de données.",
+      difficulte: 1
+    },
+    {
+      q: "Une violation de données personnelles de clients européens est confirmée. Dans quelle phase du cycle de réponse aux incidents s'inscrit la notification à l'autorité de contrôle sous 72 heures ?",
+      choix: ["Detection", "Mitigation", "Reporting", "Remediation"],
+      reponse: 2,
+      explication:
+        "La notification aux autorités (comme l'exigence RGPD de 72 heures) et aux personnes concernées relève de la phase Reporting, qui couvre les obligations légales, réglementaires et la communication aux parties prenantes. La détection identifie l'incident, la mitigation le contient, et la remédiation traite la cause racine.",
+      difficulte: 2
+    },
+    {
+      q: "Quand la session de lessons learned doit-elle idéalement se tenir après un incident majeur ?",
+      choix: [
+        "Rapidement après l'incident, avant que les souvenirs ne s'estompent, avec un facilitateur",
+        "Six mois plus tard, pour avoir du recul",
+        "Uniquement si l'incident a causé une perte financière",
+        "Pendant la phase de mitigation, tant que l'attaque est en cours"
+      ],
+      reponse: 0,
+      explication:
+        "NIST SP 800-61 recommande de mener les lessons learned rapidement après la clôture, idéalement animées par un facilitateur formé, car les détails s'oublient vite. Attendre six mois dégrade la qualité des enseignements, tout incident majeur mérite une revue, et pendant la mitigation l'équipe doit contenir l'attaque, pas l'analyser rétrospectivement.",
+      difficulte: 1
+    },
+    {
+      q: "Un ransomware vient d'être confirmé sur trois serveurs de fichiers et continue de chiffrer des partages réseau. Quelle est l'action IMMÉDIATE la plus appropriée ?",
+      choix: [
+        "Payer la rançon pour limiter les dégâts",
+        "Isoler les serveurs et segments affectés du réseau pour stopper la propagation",
+        "Restaurer immédiatement les sauvegardes sur les mêmes serveurs",
+        "Éteindre tous les serveurs du datacenter par précaution"
+      ],
+      reponse: 1,
+      explication:
+        "La mitigation impose de contenir : isoler les machines et segments touchés stoppe le chiffrement des partages tout en préservant les preuves en mémoire. Payer la rançon n'est jamais la réponse attendue, restaurer sur des systèmes encore compromis exposerait les sauvegardes au chiffrement, et éteindre tout le datacenter est disproportionné et détruit les preuves volatiles.",
+      difficulte: 2
+    },
+    {
+      q: "Quelle capacité distingue le MIEUX un EDR d'un antivirus traditionnel ?",
+      choix: [
+        "Il compare les fichiers à une base de signatures",
+        "Il surveille en continu le comportement des endpoints, permet l'investigation et la réponse à distance (isolation, kill process)",
+        "Il chiffre les disques des postes de travail",
+        "Il filtre le spam entrant"
+      ],
+      reponse: 1,
+      explication:
+        "L'EDR (Endpoint Detection and Response) enregistre en continu l'activité des endpoints (processus, connexions, modifications), détecte les comportements suspects au-delà des signatures, et offre des capacités de réponse à distance : isoler la machine, tuer un processus, collecter des artefacts. L'antivirus classique se limite essentiellement aux signatures ; le chiffrement et l'anti-spam sont d'autres outils.",
+      difficulte: 2
+    },
+    {
+      q: "Votre SOC passe des heures chaque jour à trier manuellement des alertes de phishing identiques : vérifier l'expéditeur, détoner la pièce jointe, bloquer l'URL. Quelle solution apporte le MEILLEUR gain ?",
+      choix: [
+        "Recruter davantage d'analystes de niveau 1",
+        "Un SOAR avec un playbook automatisant le triage et la réponse aux phishings",
+        "Désactiver les alertes de phishing",
+        "Basculer tous les e-mails en liste blanche"
+      ],
+      reponse: 1,
+      explication:
+        "Les tâches répétitives et bien définies sont le cas d'usage idéal du SOAR : un runbook automatise l'analyse de l'expéditeur, la détonation en sandbox et le blocage, libérant les analystes pour les cas complexes. Recruter ne résout pas la répétitivité, désactiver les alertes crée des false negatives, et une liste blanche globale est irréaliste et dangereuse.",
+      difficulte: 1
+    },
+    {
+      q: "Quelle différence de DÉPLOIEMENT distingue un NIPS d'un NIDS ?",
+      choix: [
+        "Le NIPS analyse une copie du trafic via un port SPAN, le NIDS est en coupure",
+        "Le NIPS est placé en coupure (inline) sur le chemin du trafic, le NIDS analyse une copie passive du trafic",
+        "Les deux sont toujours installés sur les endpoints",
+        "Le NIDS bloque le trafic, le NIPS se contente d'alerter"
+      ],
+      reponse: 1,
+      explication:
+        "Pour bloquer le trafic malveillant, l'IPS doit être inline, en coupure sur le chemin des paquets. L'IDS, purement détectif, analyse une copie du trafic reçue via un port SPAN ou un TAP réseau, sans pouvoir intervenir. Les versions réseau (NIDS/NIPS) sont des équipements ou sondes réseau, pas des agents endpoint, et la dernière proposition inverse les rôles.",
+      difficulte: 2
+    },
+    {
+      q: "Pourquoi un false negative est-il considéré comme PLUS dangereux qu'un false positive pour un système de détection ?",
+      choix: [
+        "Il génère trop d'alertes et fatigue les analystes",
+        "Une attaque réelle passe inaperçue, sans aucune alerte ni réponse",
+        "Il ralentit le trafic réseau légitime",
+        "Il augmente le coût des licences du SIEM"
+      ],
+      reponse: 1,
+      explication:
+        "Le false negative est le silence face à une activité réellement malveillante : l'attaque progresse sans détection ni réponse, parfois pendant des mois. Le false positive gaspille du temps d'analyste (c'est lui qui cause la fatigue d'alertes), mais l'activité était bénigne. Les deux dernières réponses n'ont pas de lien avec la classification des détections.",
+      difficulte: 1
+    },
+    {
+      q: "Sur le plan juridique, quelle distinction rend un honeypot défendable ?",
+      choix: [
+        "L'enticement (offrir une cible tentante) est acceptable, l'entrapment (induire à commettre un délit) ne l'est pas",
+        "L'entrapment est acceptable, l'enticement ne l'est pas",
+        "Un honeypot est illégal dans tous les cas",
+        "Un honeypot doit héberger de vraies données pour être crédible juridiquement"
+      ],
+      reponse: 0,
+      explication:
+        "L'enticement consiste à laisser une opportunité visible à un attaquant qui avait déjà l'intention de s'introduire : c'est admis. L'entrapment consiste à pousser quelqu'un à commettre un délit qu'il n'aurait pas commis autrement : c'est une défense juridique valable pour l'accusé et donc à éviter. Les honeypots ne sont pas illégaux en soi et ne doivent jamais contenir de vraies données sensibles.",
+      difficulte: 3
+    },
+    {
+      q: "Le BIA fixe un RPO de 4 heures pour la base de commandes, mais les sauvegardes actuelles s'exécutent toutes les 24 heures. Quelle est la MEILLEURE conclusion ?",
+      choix: [
+        "La stratégie est conforme puisque les sauvegardes sont quotidiennes",
+        "Il existe un écart : il faut des sauvegardes au moins toutes les 4 heures ou une réplication continue (journaling/mirroring)",
+        "Il faut augmenter le RPO à 24 heures pour s'aligner sur l'existant",
+        "Le RPO ne concerne pas les sauvegardes"
+      ],
+      reponse: 1,
+      explication:
+        "Avec des sauvegardes quotidiennes, une panne peut faire perdre jusqu'à 24 heures de données, soit six fois le RPO de 4 heures fixé par le métier. Il faut combler l'écart par des sauvegardes plus fréquentes ou une réplication quasi continue. Ajuster le RPO à la contrainte technique inverserait la logique : c'est le besoin métier qui dicte la solution, pas l'inverse.",
+      difficulte: 3
+    },
+    {
+      q: "Une application critique a un RTO de 12 heures et le budget DR est contraint. Quel site de secours répond au besoin au MEILLEUR coût ?",
+      choix: ["Cold site", "Warm site", "Hot site", "Site redondant actif-actif"],
+      reponse: 1,
+      explication:
+        "Le warm site, avec équipements et liens préconfigurés mais sans données à jour, s'active en une douzaine d'heures : il satisfait un RTO de 12 heures à un coût bien moindre qu'un hot site. Le cold site demande des semaines (RTO non tenu), et le hot site ou le site redondant, quasi immédiats, seraient surdimensionnés pour ce budget.",
+      difficulte: 2
+    },
+    {
+      q: "Full backup dimanche soir, différentielles chaque soir de la semaine. Un serveur tombe mercredi à midi. Combien de jeux de sauvegarde faut-il restaurer, et lesquels ?",
+      choix: [
+        "Deux : le full de dimanche puis la différentielle de mardi soir",
+        "Quatre : le full puis les différentielles de lundi et mardi et mercredi",
+        "Un seul : la différentielle de mardi soir",
+        "Trois : le full puis les différentielles de lundi et mardi"
+      ],
+      reponse: 0,
+      explication:
+        "Chaque différentielle cumule TOUS les changements depuis le dernier full : la différentielle de mardi soir contient donc aussi ceux de lundi. Deux jeux suffisent : le full de dimanche puis la dernière différentielle disponible (mardi soir). Restaurer chaque différentielle successivement est la logique des incrémentales, et la différentielle seule ne contient pas le socle complet.",
+      difficulte: 2
+    },
+    {
+      q: "Une grappe RAID 5 est composée de quatre disques de 2 To. Quelle capacité utile obtient-on ?",
+      choix: ["8 To", "6 To", "4 To", "2 To"],
+      reponse: 1,
+      explication:
+        "En RAID 5, l'équivalent d'un disque est consommé par la parité répartie : capacité utile = (n − 1) × taille du disque, soit (4 − 1) × 2 To = 6 To. 8 To serait du RAID 0 sans redondance, 4 To correspondrait à un RAID 10 ou à un miroir de deux paires, et 2 To ne correspond à aucune configuration standard ici.",
+      difficulte: 2
+    },
+    {
+      q: "Un administrateur propose de stocker la base de données financière sur un volume RAID 0 « pour la performance ». Pourquoi devez-vous refuser ?",
+      choix: [
+        "Le RAID 0 est plus lent que le RAID 5",
+        "Le RAID 0 n'offre aucune redondance : la panne d'un seul disque détruit toutes les données",
+        "Le RAID 0 est incompatible avec les bases de données",
+        "Le RAID 0 nécessite au moins cinq disques"
+      ],
+      reponse: 1,
+      explication:
+        "Le RAID 0 (striping) répartit les données sur plusieurs disques uniquement pour la vitesse : sans miroir ni parité, la défaillance d'un seul disque rend l'ensemble du volume irrécupérable. Pour des données financières critiques, il faut au minimum du RAID 1, 5, 6 ou 10. Le RAID 0 est justement rapide, fonctionne dès deux disques, et n'a pas d'incompatibilité applicative particulière.",
+      difficulte: 1
+    },
+    {
+      q: "Le métier exige un RPO de quelques minutes pour la base transactionnelle, mais le budget ne permet pas de maintenir un serveur de base de données vivant sur le site distant. Quelle solution choisir ?",
+      choix: [
+        "Electronic vaulting quotidien",
+        "Remote journaling : transfert fréquent des journaux de transactions vers le site distant",
+        "Sauvegardes différentielles hebdomadaires",
+        "Remote mirroring avec serveur actif distant"
+      ],
+      reponse: 1,
+      explication:
+        "Le remote journaling transfère les journaux de transactions toutes les quelques minutes vers le site distant, permettant de reconstruire la base à quelques minutes près — sans le coût d'un serveur distant vivant qu'exige le remote mirroring (exclu ici par le budget). L'electronic vaulting quotidien et les différentielles hebdomadaires laissent des heures ou des jours de perte de données.",
+      difficulte: 3
+    },
+    {
+      q: "Votre DRP vient d'être rédigé et n'a JAMAIS été testé. Par quel type de test devez-vous commencer ?",
+      choix: [
+        "Un full-interruption test pour une preuve immédiate",
+        "Un read-through / tabletop pour vérifier la cohérence du plan sans aucun risque",
+        "Un parallel test sur le site de secours",
+        "Aucun test avant un an d'existence du plan"
+      ],
+      reponse: 1,
+      explication:
+        "La progression des tests va toujours du moins risqué au plus probant : on commence par la relecture et l'exercice sur table pour détecter les incohérences, rôles vacants et informations obsolètes, avant d'engager des tests opérationnels. Lancer un full-interruption sur un plan jamais validé ferait courir un risque réel de sinistre auto-infligé.",
+      difficulte: 2
+    },
+    {
+      q: "Lors du dernier exercice DR, l'équipe a activé le site de secours et fait tourner les applications critiques dessus, pendant que la production continuait normalement sur le site principal. De quel test s'agit-il ?",
+      choix: ["Simulation", "Structured walk-through", "Parallel test", "Full-interruption test"],
+      reponse: 2,
+      explication:
+        "Le parallel test relocalise le personnel et active réellement le site de secours, mais sans interrompre la production : les deux sites tournent en parallèle. La simulation ne teste que certaines mesures sur scénario, le walk-through reste procédural, et le full-interruption bascule réellement les opérations en arrêtant le site principal.",
+      difficulte: 2
+    },
+    {
+      q: "Un incendie majeur frappe le datacenter un samedi à 2 h du matin. Le DRP doit préciser SANS ambiguïté qui peut lancer la bascule vers le site de secours. Quel élément du plan répond à ce besoin ?",
+      choix: [
+        "La matrice RACI du projet BCP",
+        "La désignation de l'autorité habilitée à déclarer le désastre, avec ses suppléants",
+        "Le contrat d'abonnement au hot site",
+        "Le registre des risques de l'organisation"
+      ],
+      reponse: 1,
+      explication:
+        "Le DRP doit désigner nommément qui a l'autorité de déclarer le désastre et d'activer le plan, avec des suppléants joignables à tout moment : sans cela, la bascule est retardée ou déclenchée à tort. La matrice RACI et le registre des risques sont des outils de gouvernance amont, et le contrat de hot site ne dit pas qui décide.",
+      difficulte: 2
+    },
+    {
+      q: "Quelle affirmation compare CORRECTEMENT le BCP et le DRP ?",
+      choix: [
+        "Le DRP englobe le BCP",
+        "Le BCP maintient les fonctions critiques de l'ENTREPRISE ; le DRP restaure l'infrastructure TECHNOLOGIQUE — le BCP a le périmètre le plus large",
+        "BCP et DRP sont deux noms du même document",
+        "Le BCP ne concerne que les catastrophes naturelles"
+      ],
+      reponse: 1,
+      explication:
+        "Le BCP couvre la survie des processus métier dans leur ensemble (personnel, locaux, fournisseurs, communication), tandis que le DRP est son volet technologique : restaurer l'infrastructure IT critique. Le BCP englobe donc le DRP, pas l'inverse, et tous deux couvrent toutes les causes de disruption, pas seulement les catastrophes naturelles.",
+      difficulte: 1
+    },
+    {
+      q: "Un agent de sécurité est contraint, sous la menace d'une arme, d'ouvrir l'accès à la salle serveurs. Quel dispositif lui permet d'alerter la sécurité SANS mettre sa vie en danger ?",
+      choix: [
+        "Refuser d'ouvrir et appeler la police devant l'agresseur",
+        "Un duress code : un code d'ouverture alternatif qui ouvre la porte ET déclenche une alerte silencieuse",
+        "Déclencher l'alarme incendie générale",
+        "Négocier avec l'agresseur pour gagner du temps"
+      ],
+      reponse: 1,
+      explication:
+        "Le duress code est conçu exactement pour cette situation : l'agent coopère en apparence — la vie humaine prime sur tout actif — tout en alertant discrètement la sécurité via un code alternatif ou un geste convenu. Refuser ou négocier met sa vie en danger, et l'alarme incendie révèle l'alerte à l'agresseur tout en déclenchant une évacuation inadaptée.",
+      difficulte: 2
+    },
+    {
+      q: "Une dirigeante part négocier un contrat dans un pays connu pour l'espionnage économique. Quelle est la MEILLEURE pratique concernant ses équipements ?",
+      choix: [
+        "Emporter son ordinateur habituel protégé par un mot de passe robuste",
+        "Lui fournir des appareils de prêt dédiés au voyage, contenant le strict minimum de données, réinitialisés au retour",
+        "Emporter une copie chiffrée de toutes les données de l'entreprise par précaution",
+        "Utiliser uniquement le wi-fi de l'hôtel, réputé plus sûr que les réseaux mobiles"
+      ],
+      reponse: 1,
+      explication:
+        "L'appareil de prêt (loaner/burner device) avec données minimales limite l'exposition en cas de fouille, de saisie, de vol ou de compromission par des dispositifs de surveillance ; il est réinitialisé au retour. L'ordinateur habituel transporte trop de données, en emporter une copie complète aggrave le risque, et le wi-fi d'hôtel à l'étranger doit être considéré comme hostile.",
+      difficulte: 2
+    },
+    {
+      q: "Un consultant doit franchir la frontière d'un pays où les douanes peuvent légalement exiger le déverrouillage des appareils. Son disque est intégralement chiffré. Quelle est la MEILLEURE analyse ?",
+      choix: [
+        "Le chiffrement suffit : les douanes ne pourront rien lire",
+        "Le chiffrement ne protège pas contre une injonction légale de déverrouillage : il faut voyager sans données sensibles et les récupérer ensuite par canal sécurisé",
+        "Il doit refuser le contrôle en invoquant le secret professionnel",
+        "Il doit cacher les données dans une partition dissimulée"
+      ],
+      reponse: 1,
+      explication:
+        "Face à une injonction légale de déverrouillage, le voyageur devra fournir l'accès sous peine de refoulement, de saisie ou de poursuites : le chiffrement ne protège que contre l'accès non autorisé, pas contre la contrainte légale. La bonne stratégie est de ne transporter aucune donnée sensible et de la récupérer sur place via un canal sécurisé (VPN). Refuser ou dissimuler expose à des sanctions et aggrave la situation.",
+      difficulte: 3
+    },
+    {
+      q: "Un administrateur systèmes confie qu'un inconnu le menace de révéler des informations personnelles s'il ne fournit pas ses identifiants d'accès. Quelle réponse organisationnelle est la MEILLEURE ?",
+      choix: [
+        "Le licencier immédiatement car il représente un risque",
+        "Disposer d'un canal de signalement confidentiel et d'un accompagnement, afin que les employés victimes de coercition alertent sans crainte de sanction",
+        "Ignorer l'affaire tant qu'aucun accès frauduleux n'est constaté",
+        "Lui demander de gérer la situation en privé"
+      ],
+      reponse: 1,
+      explication:
+        "La coercition et l'extorsion transforment un employé loyal en menace interne involontaire. La meilleure défense est un programme qui encourage le signalement précoce — canal confidentiel, soutien, absence de représailles — permettant à la sécurité de protéger l'employé et l'organisation. Le licencier dissuaderait tout futur signalement, et ignorer ou privatiser le problème laisse l'attaquant progresser.",
+      difficulte: 3
+    },
+    {
+      q: "Quelle mesure de protection est la PLUS pertinente pour des collaborateurs expatriés travaillant durablement dans une région instable ?",
+      choix: [
+        "Un simple briefing sécurité avant le départ",
+        "Un dispositif complet : itinéraires partagés, check-ins réguliers, point de contact d'urgence, veille géopolitique et plan d'évacuation",
+        "L'interdiction de tout déplacement professionnel",
+        "Une augmentation de salaire compensant le risque"
+      ],
+      reponse: 1,
+      explication:
+        "La protection du personnel à l'étranger est un programme continu : suivi des itinéraires, points de contact réguliers (check-ins), veille sur la situation locale, assistance médicale et plan d'évacuation activable rapidement. Un briefing unique est insuffisant pour une présence durable, l'interdiction générale est rarement réaliste, et une prime de risque ne protège personne.",
+      difficulte: 2
+    }
+  ],
+
+  // --------------------------------------------------------------------
+  // QUIZ EN — 32 questions style examen CISSP (anglais authentique)
+  // --------------------------------------------------------------------
+  quizEn: [
+    {
+      q: "A security analyst responds to a compromised server that is still powered on. According to the order of volatility, which evidence should be collected FIRST?",
+      choix: [
+        "Archived log files stored on a remote server",
+        "Contents of RAM and active network connections",
+        "A bit-level image of the hard drive",
+        "Backup tapes from the previous night"
+      ],
+      reponse: 1,
+      explication:
+        "L'ordre de volatilité impose de capturer d'abord les données les plus éphémères : la mémoire vive et l'état réseau disparaissent à la mise hors tension, alors que le disque, les logs distants et les bandes sont persistants. La RAM contient en outre les processus malveillants actifs et les clés de chiffrement.",
+      difficulte: 2
+    },
+    {
+      q: "During cross-examination, opposing counsel establishes that a seized hard drive was left unattended in an analyst's office for a weekend with no log entry. What is the MOST likely outcome?",
+      choix: [
+        "The evidence will be admitted because the hash values still match",
+        "The evidence may be ruled inadmissible due to a break in the chain of custody",
+        "The analyst will be required to re-image the drive",
+        "The court will order a new investigation"
+      ],
+      reponse: 1,
+      explication:
+        "Toute période non documentée dans la chain of custody permet à la partie adverse d'alléguer une altération possible de la preuve, qui risque alors le rejet. La concordance des hashes prouve l'intégrité logique des données mais pas l'absence d'accès physique ou de substitution pendant la période non tracée.",
+      difficulte: 1
+    },
+    {
+      q: "An investigator needs to examine a running workstation suspected of containing fileless malware. What should the investigator do FIRST?",
+      choix: [
+        "Power off the workstation to freeze its state",
+        "Capture a memory dump while the system is still running",
+        "Disconnect the hard drive and attach it to a write blocker",
+        "Run an antivirus scan to identify the malware"
+      ],
+      reponse: 1,
+      explication:
+        "Un fileless malware ne réside qu'en mémoire : éteindre la machine détruirait la seule preuve existante. Il faut d'abord capturer la RAM pendant que le système tourne. Le write blocker concerne l'acquisition du disque (inutile ici puisque rien n'est écrit sur le disque), et un scan antivirus modifierait l'état du système.",
+      difficulte: 2
+    },
+    {
+      q: "Which rule of evidence requires that the original document, rather than a copy, be presented in court whenever it is available?",
+      choix: [
+        "The hearsay rule",
+        "The best evidence rule",
+        "The parol evidence rule",
+        "The exclusionary rule"
+      ],
+      reponse: 1,
+      explication:
+        "Le best evidence rule exige la présentation de l'original plutôt que d'une copie lorsque c'est possible. Le hearsay concerne le ouï-dire, le parol evidence rule interdit de contredire un contrat écrit par des accords oraux, et l'exclusionary rule écarte les preuves collectées illégalement.",
+      difficulte: 1
+    },
+    {
+      q: "A government agency suspects that a financial institution has violated banking regulations and launches an inquiry. What type of investigation is this?",
+      choix: ["Administrative", "Criminal", "Civil", "Regulatory"],
+      reponse: 3,
+      explication:
+        "Une investigation réglementaire est déclenchée par une agence gouvernementale ou un régulateur qui soupçonne une violation des règles sectorielles. L'investigation administrative est interne à l'organisation, la criminelle est menée par les forces de l'ordre pour un crime, et la civile oppose deux parties privées.",
+      difficulte: 1
+    },
+    {
+      q: "A SIEM converts logs from firewalls, servers, and applications into a common format before analysis. Which SIEM capability does this describe?",
+      choix: ["Aggregation", "Normalization", "Correlation", "Retention"],
+      reponse: 1,
+      explication:
+        "La normalisation convertit les journaux de formats hétérogènes vers un format commun exploitable. L'agrégation collecte et centralise les logs de sources multiples, la corrélation relie les événements entre eux pour détecter des schémas d'attaque, et la rétention assure leur conservation dans le temps.",
+      difficulte: 2
+    },
+    {
+      q: "Which term BEST describes a file hash, an IP address, or a domain name that suggests a system may have been breached?",
+      choix: [
+        "A threat vector",
+        "An indicator of compromise (IoC)",
+        "An attack surface",
+        "A vulnerability signature"
+      ],
+      reponse: 1,
+      explication:
+        "Un indicateur de compromission (IoC) est un artefact observable — hash de fichier malveillant, adresse IP de command and control, nom de domaine — qui suggère qu'une intrusion a eu lieu. Le threat vector est le chemin d'attaque, l'attack surface l'ensemble des points exposés, et « vulnerability signature » n'est pas un terme consacré.",
+      difficulte: 1
+    },
+    {
+      q: "A threat hunting team wants to structure its hunts around the tactics, techniques, and procedures used by known adversary groups. Which resource BEST supports this goal?",
+      choix: [
+        "The MITRE ATT&CK framework",
+        "The OSI reference model",
+        "The CIS benchmarks",
+        "ISO/IEC 27001"
+      ],
+      reponse: 0,
+      explication:
+        "MITRE ATT&CK est une base de connaissances des tactiques, techniques et procédures (TTP) observées chez les attaquants réels : c'est l'outil de référence pour formuler des hypothèses de chasse. Le modèle OSI décrit les couches réseau, les benchmarks CIS servent au hardening, et ISO 27001 encadre le système de management de la sécurité.",
+      difficulte: 2
+    },
+    {
+      q: "An organization configures its audit system to record an alert only after a user exceeds five failed login attempts within one hour. What is this threshold called?",
+      choix: ["A sampling rate", "A clipping level", "A baseline deviation", "A correlation rule"],
+      reponse: 1,
+      explication:
+        "Le clipping level est un seuil prédéfini en dessous duquel les événements sont ignorés : seuls les dépassements (ici plus de cinq échecs en une heure) sont enregistrés ou signalés, ce qui distingue l'erreur humaine normale de l'attaque. Le sampling est un échantillonnage statistique, sans notion de seuil.",
+      difficulte: 2
+    },
+    {
+      q: "Which technology records the source, destination, and volume of network communications, making it valuable for detecting data exfiltration?",
+      choix: ["NetFlow", "SNMP traps", "DHCP snooping", "Syslog"],
+      reponse: 0,
+      explication:
+        "NetFlow enregistre les métadonnées des flux réseau — source, destination, volume — sans le contenu, ce qui permet de repérer des transferts sortants anormaux, signes d'exfiltration. Les traps SNMP signalent des événements d'équipements, le DHCP snooping protège l'attribution d'adresses, et syslog transporte des messages de logs.",
+      difficulte: 2
+    },
+    {
+      q: "During an incident, responders discover that the attacker deleted the local security logs on the compromised host. Which control would BEST ensure that log data remains available for future investigations?",
+      choix: [
+        "Increasing local log file size limits",
+        "Real-time forwarding of logs to a centralized, write-once log server",
+        "Weekly backups of local log files",
+        "Enabling verbose logging on all endpoints"
+      ],
+      reponse: 1,
+      explication:
+        "L'envoi en temps réel vers un collecteur centralisé en écriture seule place une copie des événements hors de portée de l'attaquant, même s'il purge les journaux locaux. Les sauvegardes hebdomadaires laissent une large fenêtre de perte, et augmenter la taille des fichiers ou la verbosité ne protège en rien contre l'effacement.",
+      difficulte: 2
+    },
+    {
+      q: "What is the PRIMARY security benefit of a formal change management process?",
+      choix: [
+        "It accelerates the deployment of new features",
+        "It ensures changes are reviewed for unintended security consequences before implementation",
+        "It eliminates the need for configuration baselines",
+        "It transfers responsibility for outages to the change advisory board"
+      ],
+      reponse: 1,
+      explication:
+        "Le bénéfice sécurité central du change management est la revue préalable : des experts évaluent chaque changement pour repérer les conséquences involontaires — ouverture de ports, affaiblissement de contrôles — avant l'implémentation, avec un plan de rollback prêt. Il ne vise pas la vitesse, ne remplace pas les baselines et ne transfère pas la responsabilité.",
+      difficulte: 1
+    },
+    {
+      q: "A security team wants to detect servers whose configurations have drifted from the approved secure baseline. Which practice BEST meets this need?",
+      choix: [
+        "Annual penetration testing",
+        "Automated configuration audits comparing systems against the baseline",
+        "Reviewing firewall logs daily",
+        "Requiring administrators to sign a code of conduct"
+      ],
+      reponse: 1,
+      explication:
+        "La détection de dérive de configuration (configuration drift) repose sur des audits automatisés qui comparent en continu l'état réel des systèmes à la baseline approuvée et signalent tout écart. Le pentest annuel est trop ponctuel, les logs firewall ne couvrent pas les configurations systèmes, et un code de conduite est un contrôle administratif sans vérification technique.",
+      difficulte: 2
+    },
+    {
+      q: "A critical vulnerability affects a legacy production system, but the vendor's patch cannot be applied because it breaks a core business application. What is the BEST course of action?",
+      choix: [
+        "Accept the risk and document the decision without further action",
+        "Apply compensating controls such as network segmentation and enhanced monitoring until the application is remediated",
+        "Immediately decommission the legacy system",
+        "Apply the patch anyway and let the business application fail"
+      ],
+      reponse: 1,
+      explication:
+        "Quand un correctif ne peut pas être appliqué, on réduit le risque par des contrôles compensatoires : isoler le système par segmentation, restreindre les accès, renforcer la surveillance, en attendant une remédiation durable. Accepter le risque sans mitigation néglige des options disponibles, et les deux dernières réponses sacrifient le métier sans analyse.",
+      difficulte: 3
+    },
+    {
+      q: "Which of the following BEST distinguishes a security incident from a security event?",
+      choix: [
+        "An incident is any observable occurrence on a network or system",
+        "An incident is an event that actually or potentially jeopardizes the confidentiality, integrity, or availability of systems or data",
+        "An event always requires regulatory notification",
+        "An event involves an external attacker while an incident is internal"
+      ],
+      reponse: 1,
+      explication:
+        "L'événement est toute occurrence observable, presque toujours bénigne ; l'incident est l'événement qui menace réellement ou potentiellement la CIA des systèmes ou des données, et lui seul déclenche le processus de réponse. La notification réglementaire ne concerne que certains incidents, et la distinction interne/externe n'entre pas dans la définition.",
+      difficulte: 1
+    },
+    {
+      q: "A first responder confirms that a database server is actively compromised. Which action would MOST likely destroy volatile evidence?",
+      choix: [
+        "Isolating the server from the network",
+        "Powering off the server",
+        "Photographing the screen",
+        "Documenting the running processes"
+      ],
+      reponse: 1,
+      explication:
+        "Éteindre la machine détruit la mémoire vive : processus malveillants, connexions actives, clés de chiffrement — des preuves volatiles irremplaçables. C'est pourquoi la consigne est d'isoler du réseau (mitigation) sans mise hors tension. Photographier l'écran et documenter les processus font partie des bonnes pratiques de préservation.",
+      difficulte: 1
+    },
+    {
+      q: "An incident response team detects an advanced attacker moving laterally through the network. Management wants to observe the attacker's techniques before removing access. What is the GREATEST risk of this strategy?",
+      choix: [
+        "The attacker may notice the monitoring tools",
+        "The attacker may cause additional damage or exfiltrate more data while being observed",
+        "The observation will invalidate the chain of custody",
+        "The SIEM will generate too many alerts"
+      ],
+      reponse: 1,
+      explication:
+        "Observer un attaquant actif peut enrichir le renseignement, mais chaque minute d'accès supplémentaire lui permet de voler davantage de données ou de causer plus de dégâts — un arbitrage risqué qui doit être décidé par la direction en connaissance de cause. Les autres réponses sont des considérations secondaires ou sans fondement.",
+      difficulte: 3
+    },
+    {
+      q: "During which phase of the incident management process does the team perform root cause analysis and implement changes to prevent recurrence?",
+      choix: ["Mitigation", "Recovery", "Remediation", "Reporting"],
+      reponse: 2,
+      explication:
+        "La remediation cherche la cause racine de l'incident et met en œuvre les changements qui empêcheront sa récidive. La mitigation contient l'incident, la recovery restaure les systèmes en état opérationnel, et le reporting couvre la notification aux parties prenantes et aux autorités.",
+      difficulte: 2
+    },
+    {
+      q: "An organization wants to ensure that only approved applications can execute on point-of-sale terminals. Which control BEST achieves this?",
+      choix: [
+        "Application allow listing",
+        "Application deny listing",
+        "Host-based intrusion detection",
+        "Full-disk encryption"
+      ],
+      reponse: 0,
+      explication:
+        "L'allow listing n'autorise que les applications explicitement approuvées et bloque tout le reste par défaut (deny by default) : idéal pour des terminaux à usage fixe comme les caisses. La deny list laisse passer tout ce qui n'est pas listé, le HIDS détecte sans empêcher l'exécution, et le chiffrement protège la confidentialité, pas l'exécution.",
+      difficulte: 1
+    },
+    {
+      q: "A network IPS protecting a hospital's clinical systems fails. The security team must choose between fail-open and fail-closed behavior. Which statement BEST captures the trade-off?",
+      choix: [
+        "Fail-open maintains availability of clinical traffic but allows attacks through; fail-closed blocks attacks but interrupts patient care systems",
+        "Fail-open is always the correct choice for security devices",
+        "Fail-closed maintains both security and availability",
+        "The choice has no impact on clinical operations"
+      ],
+      reponse: 0,
+      explication:
+        "Un IPS en coupure qui tombe en panne doit soit laisser passer le trafic sans inspection (fail-open : disponibilité préservée, sécurité dégradée), soit tout bloquer (fail-closed : sécurité préservée, service interrompu). Dans un contexte hospitalier où la vie des patients dépend de la disponibilité, l'arbitrage penche souvent vers fail-open avec surveillance compensatoire — mais c'est une décision de gestion du risque, pas un automatisme.",
+      difficulte: 3
+    },
+    {
+      q: "A malware sample remains dormant for 30 minutes and checks for virtualization artifacts before executing its payload. What is the MOST likely purpose of this behavior?",
+      choix: [
+        "To reduce its memory footprint",
+        "To evade automated sandbox analysis, which typically observes samples for only a short time",
+        "To synchronize with the attacker's time zone",
+        "To avoid triggering full-disk encryption"
+      ],
+      reponse: 1,
+      explication:
+        "Les sandboxes d'analyse n'observent un échantillon que quelques minutes : un malware qui dort longtemps et détecte les artefacts de virtualisation (sandbox evasion) paraît inoffensif pendant l'analyse et n'exécute sa charge que sur une machine réelle. Les autres réponses ne correspondent à aucune technique documentée.",
+      difficulte: 3
+    },
+    {
+      q: "An organization performs a full backup on Sunday and incremental backups every weeknight. The file server fails on Thursday morning. Which restore sequence is CORRECT?",
+      choix: [
+        "Sunday's full backup, then Wednesday's incremental only",
+        "Sunday's full backup, then Monday's, Tuesday's, and Wednesday's incrementals in chronological order",
+        "Wednesday's incremental only",
+        "Sunday's full backup only"
+      ],
+      reponse: 1,
+      explication:
+        "Chaque incrémentale ne contient que les changements depuis la sauvegarde précédente : la restauration exige le full puis toutes les incrémentales dans l'ordre chronologique. Restaurer seulement la dernière serait la logique des différentielles, et le full seul perdrait trois jours de données.",
+      difficulte: 2
+    },
+    {
+      q: "A business impact analysis establishes a recovery point objective of 15 minutes for the order-processing database. Which offsite data protection strategy BEST meets this requirement?",
+      choix: [
+        "Nightly electronic vaulting",
+        "Weekly full backups stored offsite",
+        "Remote journaling or remote mirroring",
+        "Monthly tape rotation to a secure vault"
+      ],
+      reponse: 2,
+      explication:
+        "Un RPO de 15 minutes exige un transfert quasi continu : le remote journaling expédie les journaux de transactions toutes les quelques minutes, et le remote mirroring applique chaque écriture en temps réel sur le site distant. Le vaulting nocturne, les fulls hebdomadaires et la rotation mensuelle laissent des heures ou des semaines de perte potentielle.",
+      difficulte: 2
+    },
+    {
+      q: "Beyond its high cost, what is a SIGNIFICANT security drawback of operating a hot site?",
+      choix: [
+        "It cannot be tested without interrupting production",
+        "It duplicates all production data, effectively doubling the organization's attack surface",
+        "It requires weeks to activate after a disaster",
+        "It cannot support database replication"
+      ],
+      reponse: 1,
+      explication:
+        "Le hot site détient une copie répliquée en continu de toutes les données de production : c'est un second site à défendre avec le même niveau d'exigence, ce qui accroît la surface d'attaque. Il se teste au contraire facilement, s'active quasi immédiatement, et la réplication de bases de données est précisément l'une de ses fonctions.",
+      difficulte: 2
+    },
+    {
+      q: "Why can a cold site create a false sense of security for an organization?",
+      choix: [
+        "Because it is more expensive than a hot site",
+        "Because it is difficult to test realistically, so activation problems are discovered only during an actual disaster",
+        "Because it stores an outdated copy of production data",
+        "Because regulators prohibit its use for critical systems"
+      ],
+      reponse: 1,
+      explication:
+        "Un cold site n'a ni équipement ni données : il est presque impossible à tester de façon réaliste, et l'organisation découvre les problèmes d'activation — délais, matériels manquants, procédures fausses — au pire moment, pendant le vrai sinistre. Il est par ailleurs l'option la moins chère et ne stocke aucune donnée.",
+      difficulte: 2
+    },
+    {
+      q: "Which metric represents the average time required to repair a failed component and return it to service?",
+      choix: ["MTBF", "MTTF", "MTTR", "MTD"],
+      reponse: 2,
+      explication:
+        "Le MTTR (Mean Time To Repair) est le temps moyen de réparation d'un composant défaillant. Le MTBF mesure le temps moyen entre pannes, le MTTF la durée de vie fonctionnelle attendue avant défaillance, et le MTD est l'indisponibilité maximale tolérable issue du BIA — une métrique métier, pas une métrique d'équipement.",
+      difficulte: 2
+    },
+    {
+      q: "What is the minimum number of disks required for RAID 6, and how many simultaneous disk failures can it tolerate?",
+      choix: [
+        "Three disks, one failure",
+        "Four disks, two failures",
+        "Two disks, one failure",
+        "Five disks, three failures"
+      ],
+      reponse: 1,
+      explication:
+        "RAID 6 utilise deux blocs de parité répartis : il exige au minimum quatre disques et survit à la défaillance simultanée de deux d'entre eux. Trois disques et une panne correspondent au RAID 5, deux disques au RAID 1 (miroir), et aucune configuration standard ne tolère trois pannes avec cinq disques.",
+      difficulte: 1
+    },
+    {
+      q: "During a disaster recovery exercise, team members gather in a conference room and discuss their responses to a hypothetical ransomware scenario without touching any systems. What type of test is this?",
+      choix: [
+        "A tabletop exercise",
+        "A simulation test",
+        "A parallel test",
+        "A full-interruption test"
+      ],
+      reponse: 0,
+      explication:
+        "L'exercice sur table (tabletop) réunit l'équipe pour dérouler verbalement un scénario, sans aucune action technique : idéal pour valider rôles et procédures sans risque. La simulation teste réellement certaines mesures, le parallel test active le site de secours en parallèle de la production, et le full-interruption bascule réellement les opérations.",
+      difficulte: 1
+    },
+    {
+      q: "Why does senior management frequently resist authorizing a full-interruption test of the disaster recovery plan?",
+      choix: [
+        "It provides no useful information about the plan",
+        "It deliberately halts production operations, so a test failure could itself cause a real outage and business losses",
+        "It is prohibited by most insurance policies",
+        "It requires regulator approval in all industries"
+      ],
+      reponse: 1,
+      explication:
+        "Le full-interruption test arrête réellement le site principal pour basculer sur le site de secours : si le plan échoue, le test provoque lui-même un sinistre opérationnel avec pertes réelles. C'est pourtant le seul test qui prouve le plan de bout en bout — d'où la tension entre valeur probante et risque. Il n'est ni inutile, ni interdit par principe.",
+      difficulte: 2
+    },
+    {
+      q: "After a system crash, an operating system restarts and ensures that security controls are enforced and no data is exposed before allowing user access. What is this capability called?",
+      choix: ["Fail-open recovery", "Trusted recovery", "Hot swapping", "Journaling"],
+      reponse: 1,
+      explication:
+        "La trusted recovery garantit qu'après une défaillance, le système revient à un état sûr : les contrôles de sécurité restent appliqués et aucune donnée n'est exposée pendant ni après la reprise. Le fail-open sacrifie la sécurité à la disponibilité, le hot swapping remplace du matériel à chaud, et le journaling protège l'intégrité des systèmes de fichiers.",
+      difficulte: 3
+    },
+    {
+      q: "A bank teller is forced at gunpoint to open the vault. Which control allows the teller to summon help WITHOUT alerting the attacker?",
+      choix: [
+        "Refusing to comply until police arrive",
+        "Entering a duress code that opens the vault while silently alerting security",
+        "Activating the fire alarm",
+        "A CCTV camera recording the event"
+      ],
+      reponse: 1,
+      explication:
+        "Le duress code permet de coopérer en apparence — la vie humaine prime toujours sur les actifs — tout en déclenchant une alerte silencieuse. Refuser d'obtempérer met la vie de l'employé en danger, l'alarme incendie révèle l'alerte et déclenche une évacuation inadaptée, et la vidéosurveillance enregistre sans appeler de secours.",
+      difficulte: 2
+    },
+    {
+      q: "An executive is traveling to a country known for aggressive economic espionage and intrusive border inspections. Which practice provides the BEST protection for corporate information?",
+      choix: [
+        "Carrying her usual laptop protected by full-disk encryption",
+        "Issuing loaner devices containing only the minimum data needed, to be wiped upon return",
+        "Storing all files in a hidden encrypted partition",
+        "Relying on the hotel's business center computers"
+      ],
+      reponse: 1,
+      explication:
+        "L'appareil de prêt avec données minimales est la meilleure pratique : même en cas de fouille frontalière avec déverrouillage exigé, de saisie ou de compromission, l'exposition est négligeable, et l'appareil est réinitialisé au retour. Le chiffrement ne résiste pas à une injonction légale de déverrouillage, une partition cachée expose à des sanctions si elle est découverte, et les ordinateurs d'hôtel doivent être présumés compromis.",
+      difficulte: 2
     }
   ],
 
