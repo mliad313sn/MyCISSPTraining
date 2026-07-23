@@ -87,11 +87,12 @@ const Scenarios = (() => {
         document.getElementById("sc-exp").innerHTML = `
           <div class="explication">
             <strong>${good ? "✓ Bonne décision." : "✗ Décision risquée."}</strong> ${esc(e.explication)}
-            ${e.concept ? `<div style="margin-top:.5rem"><span class="badge">🧩 Concept : ${esc(e.concept)}</span></div>` : ""}
+            ${perOptionHTML(e)}
+            ${e.concept ? `<div style="margin-top:.5rem"><span class="badge">Concept : ${esc(e.concept)}</span></div>` : ""}
           </div>`;
         const nb = document.getElementById("sc-next");
         nb.style.display = "inline-flex";
-        nb.textContent = step + 1 < sc.etapes.length ? "Suite de l'histoire →" : "Débrief du scénario 🏁";
+        nb.textContent = step + 1 < sc.etapes.length ? "Suite de l'histoire →" : "Débrief du scénario";
         nb.onclick = next;
         nb.focus();
       };
