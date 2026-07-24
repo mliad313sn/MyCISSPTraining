@@ -493,6 +493,18 @@ window.CISSP_DATA.domains[3] = {
         },
         {
           "type": "standard",
+          "titre": "Clients et serveurs : code mobile, caches et data flow control",
+          "points": [
+            "Code mobile côté client (applets, scripts, extensions) : n'exécuter que du code signé, restreint et isolé (sandbox)",
+            "Caches locaux du client (navigateur, DNS, fichiers temporaires) : données sensibles résiduelles et risque d'empoisonnement (cache poisoning)",
+            "Sur postes partagés : interdire la mise en cache des contenus sensibles et purger les données locales à la fin de session",
+            "Côté serveur, data flow control : maîtriser le rythme et le chemin des échanges (files d'attente, load balancers) pour éviter surcharge, perte de données et détournement des flux"
+          ],
+          "narration": "Approfondissons les vulnérabilités propres aux clients et aux serveurs. Côté client, le code mobile, c'est-à-dire les applets, scripts et extensions téléchargés puis exécutés localement, ne doit être accepté que s'il est signé, restreint et isolé dans un bac à sable. Les caches locaux sont l'autre angle mort : le cache du navigateur, le cache DNS et les fichiers temporaires conservent des données sensibles après la session et peuvent être empoisonnés pour rediriger l'utilisateur. Sur un poste partagé, l'application doit interdire la mise en cache des contenus sensibles et purger les données locales à la déconnexion. Côté serveur, retenez le data flow control : le contrôle des flux de données régule le rythme et le chemin des échanges, grâce aux files d'attente et aux répartiteurs de charge, afin qu'un serveur saturé ne perde pas de transactions et que les flux ne soient pas détournés vers des systèmes non maîtrisés.",
+          "astuce": "💡 Conseil examen : des données lisibles après déconnexion sur un poste partagé = problème de cache local client ; des transactions perdues sous la charge = data flow control côté serveur."
+        },
+        {
+          "type": "standard",
           "titre": "Virtualisation et hyperviseurs",
           "points": [
             "Type 1 : bare metal, directement sur le matériel ; Type 2 : application sur un OS classique",
@@ -531,6 +543,18 @@ window.CISSP_DATA.domains[3] = {
             "Serverless (FaaS) : le CSP gère les serveurs, le client gère le code ; sous-catégorie du PaaS"
           ],
           "narration": "La conteneurisation élimine la duplication des éléments du système d'exploitation : chaque application embarque seulement ses dépendances et partage le noyau de l'hôte, ce qui offre une densité dix à cent fois supérieure à la virtualisation classique, mais une isolation moindre. On sécurise les conteneurs en scannant et signant les images, en contrôlant l'accès au registre et en minimisant les composants. Les microservices, dérivés de la SOA, sont des services faiblement couplés qui communiquent par API : il faut chiffrer tous les échanges, sécuriser l'authentification des API et intégrer la sécurité tôt dans le cycle de développement, ce qu'on appelle shift left. Enfin, le serverless, ou function as a service, confie les serveurs au fournisseur cloud pendant que le client gère uniquement son code."
+        },
+        {
+          "type": "standard",
+          "titre": "Microservices : l'API gateway au centre du jeu",
+          "points": [
+            "Chaque microservice expose une API : la surface d'attaque croît avec le nombre de services",
+            "API gateway : point d'entrée unique qui centralise authentification, autorisation, limitation de débit (rate limiting) et journalisation",
+            "Trafic est-ouest entre services : ne jamais faire confiance au réseau interne — mTLS, service mesh",
+            "Clés d'API et jetons gérés comme des secrets ; chaque service valide ses entrées"
+          ],
+          "narration": "Attardons-nous sur les microservices, car l'examen aime tester leur point faible : les API. Quand un monolithe est découpé en dizaines de services, chacun expose une interface, et la surface d'attaque explose. La réponse d'architecture est l'API gateway : un point d'entrée unique qui centralise l'authentification, l'autorisation, la limitation de débit et la journalisation, au lieu de laisser chaque équipe réinventer sa propre sécurité. Mais la passerelle ne suffit pas : le trafic est-ouest, c'est-à-dire les échanges entre services à l'intérieur du cluster, doit lui aussi être authentifié et chiffré, typiquement par du TLS mutuel orchestré par un service mesh. Enfin, les clés d'API et les jetons se gèrent comme des secrets, et chaque service valide ses propres entrées, fidèle au Zero Trust.",
+          "astuce": "💡 Conseil examen : « politiques d'authentification incohérentes entre dizaines d'API » = API gateway ; « sécuriser le trafic entre services » = mTLS / service mesh."
         },
         {
           "type": "standard",
@@ -588,7 +612,8 @@ window.CISSP_DATA.domains[3] = {
             "VM escape et VM sprawl : patcher l'hyperviseur, séparer le très sensible",
             "IaaS/PaaS/SaaS : le client garde toujours données, identités et configurations",
             "ICS/SCADA : segmentation avant tout ; IoT et embarqué : réseau isolé, secure boot",
-            "Distribué, HPC, edge : sécurité partout, Zero Trust, cohérence des politiques"
+            "Distribué, HPC, edge : sécurité partout, Zero Trust, cohérence des politiques",
+            "Client : code mobile et caches locaux ; serveur : data flow control ; microservices : API gateway et mTLS"
           ],
           "narration": "Retenons l'essentiel. Chaque architecture a son talon d'Achille : le poste client face au phishing, l'hyperviseur face au VM escape, la base de données face à l'inférence, le cloud face aux erreurs de configuration, le SCADA face aux protocoles legacy et l'IoT face à ses réglages d'usine. Dans presque tous les cas, la segmentation réseau, le durcissement, le chiffrement et une gestion rigoureuse des correctifs forment le socle des réponses attendues à l'examen."
         }
@@ -702,6 +727,19 @@ window.CISSP_DATA.domains[3] = {
         },
         {
           "type": "standard",
+          "titre": "Familles de hachage : MD5, SHA-1, SHA-2 et SHA-3",
+          "points": [
+            "MD5 : empreinte de 128 bits, collisions démontrées depuis longtemps — à proscrire",
+            "SHA-1 : 160 bits, collisions pratiques démontrées (attaque SHAttered, 2017) — retiré des usages de signature",
+            "SHA-2 : la famille de référence actuelle — SHA-256, SHA-384, SHA-512",
+            "SHA-3 (Keccak) : construction éponge, alternative moderne standardisée par le NIST",
+            "HMAC : hachage combiné à une clé secrète pour authentifier les messages"
+          ],
+          "narration": "Mettons des noms sur les algorithmes de hachage, car l'examen les cite explicitement. MD5 produit une empreinte de cent vingt-huit bits ; ses collisions sont démontrées depuis longtemps et il est à proscrire pour tout usage de sécurité. SHA-1, avec ses cent soixante bits, a subi le même sort : des collisions pratiques ont été démontrées en 2017 avec l'attaque SHAttered, et il est retiré des usages de signature. La référence actuelle est la famille SHA-2, qui regroupe SHA-256, SHA-384 et SHA-512, du nom de la taille de leurs empreintes. SHA-3, fondé sur l'algorithme Keccak et sa construction en éponge, offre une alternative moderne reposant sur des mathématiques différentes. Citons enfin HMAC, qui combine une fonction de hachage et une clé secrète pour authentifier un message et garantir son intégrité.",
+          "astuce": "💡 Conseil examen : MD5 et SHA-1 sont toujours de MAUVAISES réponses pour un nouveau système ; SHA-2 et SHA-3 sont les choix acceptables. Une collision démontrée condamne l'algorithme."
+        },
+        {
+          "type": "standard",
           "titre": "One-time pad et vecteurs d'initialisation",
           "points": [
             "One-time pad : théoriquement incassable si la clé est aléatoire, aussi longue que le message, utilisée une seule fois et protégée",
@@ -733,7 +771,8 @@ window.CISSP_DATA.domains[3] = {
             "AES/Rijndael : 128/192/256 bits, blocs de 128 bits ; GCM = mode authentifié",
             "Asymétrique : RSA (factorisation), DH/ElGamal (modulaire), ECC (courbes, clés courtes)",
             "Hybride : l'asymétrique échange la clé de session, le symétrique chiffre le contenu",
-            "Hachage à sens unique : salting contre rainbow tables, key stretching contre brute force"
+            "Hachage à sens unique : salting contre rainbow tables, key stretching contre brute force",
+            "Familles de hachage : MD5 et SHA-1 cassés (collisions), SHA-2 et SHA-3 recommandés, HMAC pour authentifier"
           ],
           "narration": "Résumons ce socle cryptographique. Le symétrique est rapide mais souffre de la distribution des clés ; l'asymétrique résout ce problème au prix de la lenteur ; l'hybride, comme dans TLS, combine les deux. AES est le standard symétrique, RSA et ECC dominent l'asymétrique, et les modes authentifiés comme GCM apportent l'intégrité en plus de la confidentialité. Enfin, le hachage fournit l'empreinte à sens unique, renforcée par le salting et le key stretching pour les mots de passe."
         }
@@ -773,6 +812,18 @@ window.CISSP_DATA.domains[3] = {
             ]
           },
           "narration": "La public key infrastructure est une hiérarchie de relations de confiance qui combine cryptographie asymétrique, symétrique, hachage et certificats numériques. L'autorité de certification, la CA, émet les certificats ; l'autorité d'enregistrement, la RA, vérifie l'identité des demandeurs. Le certificat numérique lie l'identité d'un utilisateur ou d'un serveur à sa clé publique. Dans une architecture à deux niveaux, la root CA reste hors ligne pour être protégée, tandis que les CA intermédiaires émettent les certificats au quotidien. Plus il y a de niveaux, plus la sécurité augmente, mais aussi la complexité et le coût. Une PKI doit aussi publier l'information de révocation des certificats et documenter ses pratiques dans une certificate policy et un certificate practice statement."
+        },
+        {
+          "type": "standard",
+          "titre": "Anatomie d'un certificat : X.509, CSR et DV/OV/EV",
+          "points": [
+            "X.509 : le format standard des certificats — sujet, émetteur, clé publique, période de validité, extensions, signature de la CA",
+            "CSR (Certificate Signing Request) : le demandeur génère sa paire de clés et transmet sa clé publique à la CA — la clé privée ne quitte JAMAIS le demandeur",
+            "DV (Domain Validation) : preuve du seul contrôle du domaine ; OV (Organization Validation) : organisation vérifiée ; EV (Extended Validation) : vérification approfondie de l'entité juridique",
+            "Certificate pinning : épingler le certificat ou la clé attendus pour détecter un certificat frauduleux émis par une CA compromise"
+          ],
+          "narration": "Regardons maintenant le certificat lui-même. Le standard X.509 définit son contenu : l'identité du sujet, celle de l'autorité émettrice, la clé publique du sujet, la période de validité, des extensions comme les noms alternatifs, et la signature numérique de la CA qui scelle le tout. Pour obtenir un certificat, le demandeur génère lui-même sa paire de clés, puis envoie une certificate signing request, la CSR, qui contient sa clé publique et ses informations d'identité. Retenez bien que la clé privée ne quitte jamais le demandeur. Les certificats de serveurs se déclinent en trois niveaux de vérification : la domain validation prouve seulement le contrôle du nom de domaine, l'organization validation ajoute la vérification de l'organisation, et l'extended validation impose une vérification approfondie de l'entité juridique. Enfin, le certificate pinning consiste à épingler côté client le certificat ou la clé attendus, pour détecter un certificat frauduleux émis par une autorité compromise.",
+          "astuce": "💡 Conseil examen : dans une CSR, seule la clé PUBLIQUE part vers la CA. Toute option où la clé privée est transmise ou générée par la CA est un piège."
         },
         {
           "type": "standard",
@@ -900,6 +951,7 @@ window.CISSP_DATA.domains[3] = {
           "titre": "Résumé de la leçon",
           "points": [
             "PKI : CA émet, RA vérifie, root CA hors ligne, révocation obligatoire",
+            "Certificat X.509 demandé via CSR (la clé privée reste chez le demandeur) ; niveaux DV < OV < EV",
             "Signature : hash chiffré avec la clé privée = intégrité + authentification + non-répudiation",
             "Gestion des clés : cycle complet, escrow, m of n, cryptographic erase",
             "Split knowledge (personne ne sait tout) et dual control (personne n'agit seul) ; Clipper/Skipjack en exemple historique",
@@ -967,6 +1019,18 @@ window.CISSP_DATA.domains[3] = {
             "Media storage et evidence storage : protégés comme des salles serveurs, chaîne de custody"
           ],
           "narration": "Les locaux techniques suivent une gradation. Le wiring closet, ou IDF, est la plus petite salle abritant du matériel réseau : son accès doit être restreint et il doit se trouver dans les zones privées du bâtiment. La salle serveurs se place au cœur du bâtiment, jamais au rez-de-chaussée, au dernier étage ou au sous-sol, avec une entrée unique et une sortie de secours, et toutes les entrées journalisées. Le datacenter ajoute gardes et mantraps. Les installations de stockage de médias protègent les sauvegardes contre le vol et la récupération de données résiduelles, idéalement avec un bibliothécaire des médias et un processus d'entrée-sortie. Le stockage des preuves, lui, existe pour préserver la chaîne de custody, avec stockage isolé hors ligne, suivi d'activité et gestion des empreintes."
+        },
+        {
+          "type": "standard",
+          "titre": "Zones restreintes et zones de travail sensibles",
+          "points": [
+            "Sécurité graduée par zones : plus la sensibilité du travail augmente, plus les contrôles d'accès se durcissent",
+            "SCIF (Sensitive Compartmented Information Facility) : enceinte accréditée pour l'information compartimentée — blindage contre les émanations (TEMPEST), aucun appareil personnel, accès strictement contrôlé",
+            "Operations centers (SOC, NOC) : accès limité au personnel autorisé, présence continue, écrans invisibles depuis les zones publiques",
+            "Règles en zone restreinte : badge porté visiblement, visiteurs escortés et journalisés, clean desk, écrans verrouillés, interdiction de photographier"
+          ],
+          "narration": "Au-delà des locaux techniques, l'examen attend que vous sachiez sécuriser les zones où des personnes travaillent sur de l'information sensible. Le principe est une sécurité graduée : on découpe le bâtiment en zones de sensibilité croissante, avec des contrôles d'accès de plus en plus stricts. Le cas extrême est le SCIF, la sensitive compartmented information facility : une enceinte formellement accréditée pour traiter de l'information compartimentée, avec blindage contre les émanations électromagnétiques selon les normes TEMPEST, interdiction totale des téléphones et appareils personnels, et contrôle strict de chaque entrée. Les centres opérationnels, comme le SOC de sécurité ou le NOC réseau, sont eux aussi des zones restreintes : accès limité au personnel autorisé, présence continue et écrans placés hors de la vue des visiteurs. Enfin, retenez les règles de vie en zone restreinte : badge porté visiblement, visiteurs escortés en permanence et journalisés, politique du bureau propre, écrans verrouillés dès qu'on s'absente et interdiction de photographier.",
+          "astuce": "💡 Conseil examen : « information compartimentée gouvernementale » ou « protection contre les émanations » = SCIF. Un visiteur en zone restreinte doit TOUJOURS être escorté."
         },
         {
           "type": "standard",
@@ -1046,6 +1110,18 @@ window.CISSP_DATA.domains[3] = {
             "Le retrait inclut l'élimination sécurisée des données"
           ],
           "narration": "Un dernier objectif du Domaine 3 : la gestion du cycle de vie des systèmes d'information, très proche du cycle de développement logiciel. Il commence par la compréhension des besoins des parties prenantes et l'analyse détaillée des exigences, se poursuit par la conception architecturale où les contrôles de sécurité sont prescrits pour traiter les risques identifiés, puis le développement, l'intégration, la vérification et la validation. Vient ensuite le déploiement en production, puis la longue phase d'exploitation et de maintenance : supervision, correctifs, gestion des changements, sauvegardes et tests de reprise. Enfin, le retrait clôt le cycle, avec l'élimination sécurisée du système et de ses données."
+        },
+        {
+          "type": "standard",
+          "titre": "Cycle de vie : V&V, transition et maintenance",
+          "points": [
+            "Verification : le système est-il construit CONFORMÉMENT aux spécifications ? Validation : répond-il au BESOIN métier réel ?",
+            "Les exigences (y compris de sécurité) se définissent en amont ; les contrôles se PRESCRIVENT à la conception ; le développement les implémente (codage sécurisé, shift left) ; l'intégration sécurise les interfaces entre composants",
+            "Transition / déploiement : configuration durcie et autorisation formelle d'exploitation (ATO) avant la mise en production",
+            "Exploitation et maintenance (sustainment) : supervision, patching, gestion des changements — anticiper les jalons end-of-life et end-of-support"
+          ],
+          "narration": "Précisons les phases que l'examen aime distinguer. La vérification et la validation ne sont pas synonymes : la verification contrôle que le système est construit conformément à ses spécifications, tandis que la validation contrôle qu'il répond au besoin métier réel. On résume en anglais : verification, build the system right ; validation, build the right system. En amont, les besoins des parties prenantes deviennent des exigences formelles et testables, y compris pour la sécurité ; les contrôles sont ensuite prescrits à la conception, implémentés pendant le développement avec des pratiques de codage sécurisé, puis l'intégration sécurise les interfaces entre composants, là où naissent comptes de service sur-privilégiés et flux non chiffrés. La transition vers la production exige une configuration durcie et, dans les environnements gouvernementaux, l'autorisation d'exploiter délivrée par l'authorizing official. Enfin, la longue phase d'exploitation et de maintenance, le sustainment, impose d'anticiper les jalons de fin de vie et de fin de support : après l'end-of-support, plus aucun correctif n'arrive.",
+          "astuce": "💡 Conseil examen : verification = conformité aux SPECS ; validation = adéquation au BESOIN. Et les contrôles de sécurité se prescrivent à la CONCEPTION, jamais après coup."
         },
         {
           "type": "resume",

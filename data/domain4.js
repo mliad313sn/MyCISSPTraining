@@ -156,11 +156,25 @@ window.CISSP_DATA.domains[4] = {
           "narration": "Il existe soixante-cinq mille cinq cent trente-six ports, numérotés de zéro à soixante-cinq mille cinq cent trente-cinq, répartis en trois plages : les ports bien connus jusqu'à mille vingt-trois, les ports enregistrés, puis les ports dynamiques utilisés temporairement par les clients. Apprenez les grands classiques : vingt-deux pour SSH, vingt-cinq pour SMTP, cinquante-trois pour DNS, quatre-cent-quarante-trois pour HTTPS ou encore trois-mille-trois-cent-quatre-vingt-neuf pour le bureau à distance. Pensez aussi aux ports des services d'authentification : RADIUS utilise l'UDP mille-huit-cent-douze et TACACS plus le TCP quarante-neuf."
         },
         {
+          "type": "standard",
+          "titre": "Implications des protocoles multicouches",
+          "points": [
+            "Un protocole peut en encapsuler un autre à répétition : HTTP dans TLS, dans TCP, dans IP — voire IP dans un tunnel SSH",
+            "Bénéfices : flexibilité, chiffrement possible à plusieurs couches, réutilisation de l'infrastructure existante",
+            "Risques : canaux cachés (covert channels) et contournement de filtrage — un trafic interdit se glisse dans un protocole autorisé",
+            "Exemples : DNS tunneling pour exfiltrer des données ; protocoles industriels Modbus/DNP3 ré-encapsulés sur TCP/IP",
+            "Parade : inspection applicative profonde (deep packet inspection), pas un simple filtrage par ports"
+          ],
+          "narration": "TCP sur IP est déjà un empilement de protocoles, mais l'encapsulation peut aller beaucoup plus loin : on glisse du HTTP dans TLS, du TLS dans TCP, et l'on peut même encapsuler IP dans un tunnel SSH. Cette souplesse est une force, car elle permet de chiffrer à plusieurs niveaux et de réutiliser l'infrastructure en place. Mais elle a un revers : un protocole interdit peut se cacher à l'intérieur d'un protocole autorisé et franchir les pare-feux, c'est le principe du canal caché. Le DNS tunneling en est l'exemple classique, avec des données exfiltrées qui voyagent dans d'innocentes requêtes DNS ; c'est aussi ainsi que des protocoles industriels comme Modbus se retrouvent exposés une fois ré-encapsulés sur TCP IP. La parade est l'inspection applicative profonde, car un filtrage fondé sur les seuls numéros de ports ne voit rien.",
+          "astuce": "💡 Conseil examen : « un protocole caché dans un autre pour franchir un filtre » égale implication des protocoles multicouches — la réponse défensive attendue est l'inspection profonde (DPI), pas le filtrage de ports."
+        },
+        {
           "type": "resume",
           "titre": "Résumé de la leçon",
           "points": [
             "OSI : 7 couches abstraites ; TCP/IP : 4 couches concrètes",
             "Encapsulation en descendant, de-encapsulation en remontant",
+            "Multicouches : l'encapsulation permet aussi canaux cachés et contournement de filtres — parade : DPI",
             "PDU : data, segment ou datagram, packet, frame, bit",
             "Équipements : hub en L1, switch en L2, routeur en L3",
             "TCP fiable avec three-way handshake, UDP rapide sans connexion"
@@ -328,6 +342,18 @@ window.CISSP_DATA.domains[4] = {
           "explication": "iSCSI encapsule les commandes SCSI dans TCP/IP : n'importe quel réseau IP standard peut ainsi porter un SAN, sans équipement spécialisé. FCoE encapsule le Fibre Channel dans des trames Ethernet (couche 2, réseau 10 Gbps dédié, pas IP), MPLS est une technique de commutation par labels, et SRTP sécurise les flux média de la VoIP."
         },
         {
+          "type": "standard",
+          "titre": "InfiniBand et Compute Express Link (CXL)",
+          "points": [
+            "InfiniBand : interconnexion à très haut débit et très faible latence des clusters HPC et du stockage — RDMA : accès direct à la mémoire d'un serveur distant sans solliciter son CPU",
+            "Sécurité InfiniBand : cloisonnement du fabric par partitions (P_Key), mais pas de chiffrement natif — isoler ce réseau des zones moins sûres",
+            "Compute Express Link (CXL) : interconnexion ouverte bâtie sur PCIe reliant CPU, accélérateurs (GPU) et modules de mémoire avec cohérence de cache",
+            "CXL permet la mutualisation de mémoire (memory pooling) entre hôtes — isolement des locataires, effacement de la mémoire réallouée, chiffrement IDE des liens"
+          ],
+          "narration": "L'outline officiel cite deux autres protocoles convergés à connaître. InfiniBand est l'interconnexion privilégiée des clusters de calcul haute performance et du stockage : un débit énorme, une latence minuscule, et surtout le RDMA, l'accès direct à la mémoire d'un serveur distant sans passer par son processeur. C'est très rapide, mais un flux qui contourne le système d'exploitation échappe aussi à une partie de ses contrôles : on cloisonne donc le fabric avec des partitions, et comme le chiffrement natif fait défaut, on isole ce réseau des zones moins sûres. Compute Express Link, ou CXL, est plus récent : bâti sur PCIe, il relie processeurs, accélérateurs et modules de mémoire en maintenant la cohérence de cache, jusqu'à mutualiser la mémoire entre plusieurs hôtes. Qui dit mémoire partagée dit risque de fuite entre locataires : il faut garantir l'isolement, effacer la mémoire avant réallocation et activer le chiffrement des liens quand il est disponible.",
+          "astuce": "💡 Conseil examen : « cluster HPC, RDMA, très faible latence » égale InfiniBand ; « mémoire cohérente mutualisée sur PCIe entre CPU et accélérateurs » égale CXL."
+        },
+        {
           "type": "resume",
           "titre": "Résumé de la leçon",
           "points": [
@@ -336,6 +362,7 @@ window.CISSP_DATA.domains[4] = {
             "TLS 1.2/1.3 et cryptographie hybride pour le web",
             "IPsec : AH pour l'authentification, ESP pour le chiffrement, transport ou tunnel",
             "Protocoles convergés : FCoE (stockage sur Ethernet), iSCSI (SCSI sur TCP/IP), MPLS, VoIP",
+            "InfiniBand (HPC, RDMA, partitions P_Key) et Compute Express Link (CXL, mémoire cohérente sur PCIe)",
             "DNSSEC, SPF, DKIM, DMARC et S/MIME sécurisent DNS et messagerie"
           ],
           "narration": "En résumé, IP fournit l'acheminement mais aucune sécurité intrinsèque. Vous savez maintenant lire une adresse IPv4 en notation CIDR, situer les plages privées, et distinguer les quatre modes de diffusion jusqu'à l'anycast des CDN. Côté protection, TLS règne sur le web, IPsec sur les VPN avec son duo AH et ESP, SSH sur l'administration, et le trio SPF, DKIM, DMARC défend la messagerie. Ces protocoles reviendront sans cesse dans les questions du domaine."
@@ -470,6 +497,31 @@ window.CISSP_DATA.domains[4] = {
           "narration": "Un réseau sécurisé doit aussi être supervisé et performant. Distinguez la bande passante, capacité théorique maximale, du débit réel effectivement transféré. La latence mesure le temps d'aller-retour d'un signal, et le jitter sa variation dans le temps : la voix sur IP déteste le jitter. On cherche donc une latence et un jitter faibles, un rapport signal sur bruit élevé et un débit élevé. Le traffic shaping priorise les flux critiques, la gestion de capacité anticipe la demande, et l'observabilité donne la visibilité nécessaire pour détecter pannes et anomalies."
         },
         {
+          "type": "standard",
+          "titre": "Virtual Private Cloud (VPC) : le réseau dans le cloud",
+          "points": [
+            "VPC : portion logiquement isolée du cloud public, avec son propre plan d'adressage privé (CIDR)",
+            "Subnets publics (route vers l'internet gateway) et privés (sortie uniquement via NAT gateway) — bases de données en subnet privé",
+            "Security group : au niveau de l'instance, stateful, règles d'AUTORISATION uniquement (le trafic retour est admis automatiquement)",
+            "NACL (network access control list) : au niveau du subnet, stateless, règles allow ET deny évaluées dans l'ordre",
+            "VPC peering : non transitif ; transit gateway en hub pour interconnecter de nombreux VPC et sites"
+          ],
+          "narration": "Le Virtual Private Cloud mérite mieux qu'une simple définition : c'est votre réseau privé découpé logiquement dans le cloud d'un fournisseur public, avec votre propre plan d'adressage. On y distingue les subnets publics, qui possèdent une route vers l'internet gateway, des subnets privés, qui ne sortent qu'à travers une passerelle NAT et où l'on place bases de données et serveurs applicatifs. Deux niveaux de filtrage se complètent. Le security group s'applique à l'instance : il est stateful, c'est-à-dire qu'il laisse automatiquement revenir les réponses, et il ne contient que des règles d'autorisation. La NACL, elle, s'applique à tout le subnet : elle est stateless, il faut donc penser au trafic retour, et elle sait explicitement interdire, ce qui la rend idéale pour bloquer une plage d'adresses hostile. Retenez enfin que le peering entre deux VPC n'est pas transitif : pour relier de nombreux VPC entre eux, on passe par un transit gateway en étoile.",
+          "astuce": "💡 Conseil examen : security group égale stateful, instance, allow uniquement ; NACL égale stateless, subnet, allow et deny. « Bloquer explicitement une plage d'adresses » égale NACL."
+        },
+        {
+          "type": "standard",
+          "titre": "Outils de supervision : NetFlow, SNMPv3 et syslog",
+          "points": [
+            "NetFlow/IPFIX : métadonnées des flux (qui parle à qui, quand, quel volume) sans capturer le contenu — détection d'exfiltration et d'anomalies",
+            "SNMP v1/v2c : community strings en clair, à proscrire ; SNMPv3 : authentification et chiffrement",
+            "Syslog centralisé vers le SIEM, horloges synchronisées par NTP, intégrité des journaux",
+            "Traffic shaping : retarder les flux non prioritaires pour garantir les flux critiques (QoS) ; capacity management : anticiper la demande ; fault detection : repérer les pannes"
+          ],
+          "narration": "Passons aux outils de supervision. NetFlow, et son standard IPFIX, exportent les métadonnées des conversations réseau : qui parle à qui, sur quel port, quel volume et à quelle heure, sans capturer le contenu des paquets. C'est un moyen précieux et économe pour repérer une exfiltration de données ou un poste qui se met soudain à balayer le réseau. Pour administrer les équipements, SNMP versions un et deux c transmettent leurs community strings en clair, autant dire un mot de passe sur une carte postale : seule la version trois, avec authentification et chiffrement, est acceptable. Les journaux partent en syslog vers un collecteur central ou un SIEM, avec des horloges synchronisées par NTP pour que les investigations tiennent la route. Ajoutez la gestion de la performance : le traffic shaping retarde les flux non prioritaires pour préserver la qualité des flux critiques, la gestion de capacité anticipe la croissance avant la saturation, et la détection de pannes s'appuie sur cette observabilité.",
+          "astuce": "💡 Conseil examen : « visibilité sur les flux sans capture complète des paquets » égale NetFlow ; « supervision d'équipements authentifiée et chiffrée » égale SNMPv3."
+        },
+        {
           "type": "resume",
           "titre": "Résumé de la leçon",
           "points": [
@@ -478,7 +530,9 @@ window.CISSP_DATA.domains[4] = {
             "Segmentation logique : VLAN en couche 2, VRF en couche 3, domaines virtuels",
             "Microsegmentation et pare-feux distribués : socle du Zero Trust",
             "SDN : contrôle centralisé ; SD-WAN pour le WAN ; VXLAN pour étirer les segments",
-            "North-south contre east-west ; edge, CDN, peering et VPC"
+            "North-south contre east-west ; edge, CDN, peering et VPC",
+            "VPC : subnets publics/privés ; security group stateful (instance) vs NACL stateless (subnet) ; peering non transitif",
+            "Supervision : NetFlow pour les flux, SNMPv3 seul acceptable, traffic shaping et capacity management"
           ],
           "narration": "Retenez la gradation : segmentation physique jusqu'à l'air gap pour les systèmes les plus critiques, segmentation logique avec VLAN et VRF pour le quotidien, et microsegmentation pour bâtir le Zero Trust en bloquant les mouvements latéraux. Le SDN centralise le plan de contrôle, le SD-WAN étend cette logique aux liaisons distantes et le VXLAN affranchit les segments des contraintes géographiques. Enfin, pensez toujours aux deux axes de trafic, nord-sud et est-ouest : les architectures modernes se jugent sur leur capacité à contrôler les deux."
         }
@@ -752,6 +806,18 @@ window.CISSP_DATA.domains[4] = {
             "Alimentation redondante sur les équipements critiques"
           ],
           "narration": "Replaçons chaque équipement sur la pile. Le répéteur et le hub régénèrent bêtement le signal en couche physique. Le bridge relie deux segments et le switch commute les trames en couche deux, créant au passage des domaines de collision séparés. Le routeur interconnecte les réseaux en couche trois. Le modem convertit les signaux analogiques en signaux numériques, tandis que le couple CSU-DSU raccorde l'équipement aux liaisons numériques de l'opérateur. Les répartiteurs de charge existent en deux modes : l'actif-actif utilise toutes les ressources en temps normal mais perd de la capacité en cas de panne, tandis que l'actif-passif garde une réserve dormante et offre une capacité constante même en incident."
+        },
+        {
+          "type": "standard",
+          "titre": "Exploiter l'infrastructure : garantie, support et cycle de vie",
+          "points": [
+            "Warranty : réparation ou remplacement du matériel défaillant — vérifier durée, périmètre et délais de retour (RMA)",
+            "Contrat de support : mises à jour logicielles, assistance et SLA de remplacement (4 heures, next business day) selon la criticité",
+            "End-of-life / end-of-support : plus AUCUN correctif de sécurité — planifier le remplacement AVANT l'échéance",
+            "Pièces de rechange (spares), alimentation redondante et maintenance préventive pour la disponibilité"
+          ],
+          "narration": "Sécuriser des composants réseau, c'est aussi les exploiter dans la durée. La garantie constructeur couvre la réparation ou l'échange du matériel défaillant : un manager en vérifie la durée, le périmètre et les délais de retour. Le contrat de support va plus loin : il donne accès aux mises à jour logicielles, à l'assistance technique et à des engagements de remplacement chiffrés, en quatre heures ou au jour ouvré suivant, à dimensionner selon la criticité de l'équipement. Le vrai signal d'alarme est la fin de support annoncée par le constructeur : un équipement end-of-support ne recevra plus aucun correctif de sécurité, chaque nouvelle vulnérabilité restera béante, il faut donc planifier son remplacement avant l'échéance. Complétez avec des pièces de rechange en stock, des alimentations redondantes et une maintenance préventive : la disponibilité se prépare, elle ne s'improvise pas.",
+          "astuce": "💡 Conseil examen : un équipement réseau end-of-support est d'abord un risque de sécurité (plus de patchs), pas seulement un risque de panne."
         },
         {
           "type": "standard",

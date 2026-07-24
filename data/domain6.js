@@ -105,6 +105,19 @@ window.CISSP_DATA.domains[6] = {
           "narration": "La stratégie d'évaluation dépend aussi de la localisation des ressources. Une évaluation on-premise se concentre sur les systèmes internes et les centres de données physiques de l'organisation. Une évaluation cloud porte sur la sécurité des données et des applications hébergées chez un fournisseur de services cloud. Enfin, l'évaluation hybride s'intéresse à ce qui relie les deux : la connectivité, les flux de données et les contrôles de sécurité aux points d'interconnexion et d'intégration."
         },
         {
+          "type": "standard",
+          "titre": "Tester selon la localisation : autorisation et responsabilité partagée",
+          "points": [
+            "On-premise : contrôle total, l'organisation autorise et conduit librement tous ses tests sur l'ensemble de la pile",
+            "Cloud : vérifier la politique de test du fournisseur et obtenir les autorisations requises avant tout pentest",
+            "Le modèle de responsabilité partagée délimite ce que le client peut tester : sa configuration et ses accès, pas l'infrastructure du fournisseur",
+            "À défaut de droit de test, s'appuyer sur les attestations du fournisseur : SOC 2 Type II, ISO 27001",
+            "Hybride : concentrer l'évaluation sur les points d'interconnexion, VPN, API et fédération d'identité"
+          ],
+          "narration": "Concrètement, la localisation change la mécanique du test. Sur site, l'organisation possède l'infrastructure : elle peut tester directement toute la pile, du physique à l'applicatif, sans demander la permission à personne. Dans le cloud, c'est différent. Avant tout test d'intrusion, il faut consulter la politique de test du fournisseur et obtenir les autorisations prévues au contrat, car le modèle de responsabilité partagée délimite ce que vous avez le droit de tester : votre configuration, vos données et vos accès, mais jamais l'infrastructure mutualisée du fournisseur. Pour ce qui échappe à vos tests, vous vous reposez sur ses attestations, comme un rapport SOC 2 de Type 2. Enfin, en environnement hybride, la stratégie doit viser en priorité les points d'interconnexion entre les deux mondes : tunnels VPN, API et fédération d'identité, car c'est là que les contrôles se fragilisent.",
+          "astuce": "💡 Conseil examen : avant un pentest visant des ressources cloud, la PREMIÈRE étape est de vérifier la politique de test du fournisseur et le modèle de responsabilité partagée — on ne teste que ce qui relève de sa propre responsabilité."
+        },
+        {
           "type": "question",
           "titre": "Vérifions vos acquis",
           "q": "Votre organisation veut fournir à ses clients l'assurance la plus fiable que ses contrôles de sécurité fonctionnent efficacement dans la durée. Quel rapport devrait-elle obtenir ?",
@@ -126,9 +139,10 @@ window.CISSP_DATA.domains[6] = {
             "Audit interne pour l'amélioration, externe pour la validité, tierce partie pour les clients et régulateurs",
             "SSAE 18 et ISAE 3402 encadrent les audits SOC : SOC 1 financier, SOC 2 confidentiel, SOC 3 public",
             "Type I : conception à un instant T ; Type II : efficacité opérationnelle sur la durée",
-            "Adapter la stratégie à la localisation : on-premise, cloud ou hybride"
+            "Adapter la stratégie à la localisation : on-premise, cloud ou hybride",
+            "Cloud : autorisation du fournisseur et responsabilité partagée avant tout test ; hybride : viser les points d'interconnexion"
           ],
-          "narration": "Résumons cette première leçon. Un assessment est une revue complète qui aboutit à un rapport pour le management. Les audits se déclinent en interne, externe et tierce partie, chacun avec ses avantages. Les audits SOC, encadrés par SSAE dix-huit et ISAE trois mille quatre cent deux, se déclinent en SOC un, deux et trois, et surtout en Type un et Type deux. Retenez que le SOC deux de Type deux est le rapport de référence pour évaluer un fournisseur de services."
+          "narration": "Résumons cette première leçon. Un assessment est une revue complète qui aboutit à un rapport pour le management. Les audits se déclinent en interne, externe et tierce partie, chacun avec ses avantages. Les audits SOC, encadrés par SSAE dix-huit et ISAE trois mille quatre cent deux, se déclinent en SOC un, deux et trois, et surtout en Type un et Type deux. Retenez que le SOC deux de Type deux est le rapport de référence pour évaluer un fournisseur de services. Enfin, adaptez la stratégie à la localisation : on-premise vous testez librement toute la pile, dans le cloud vous respectez la politique de test du fournisseur et le modèle de responsabilité partagée, et en hybride vous ciblez d'abord les points d'interconnexion."
         }
       ]
     },
@@ -260,6 +274,19 @@ window.CISSP_DATA.domains[6] = {
           "narration": "La gestion des vulnérabilités n'est pas un événement ponctuel mais un cycle continu : identifier, classifier, prioriser et atténuer les vulnérabilités. Le programme prend en entrée les résultats des tests, puis applique un processus de gestion des risques : inventaire des actifs, identification de la valeur de chaque actif, identification des vulnérabilités pour chaque actif, et enfin revue et évaluation permanentes. Sans inventaire fiable, impossible de savoir ce que l'on doit protéger."
         },
         {
+          "type": "standard",
+          "titre": "Compliance checks : vérifier la conformité aux baselines",
+          "points": [
+            "Vérifier que les contrôles restent conformes à une baseline de configuration approuvée",
+            "Référentiels de durcissement : CIS Benchmarks, guides constructeurs, baselines internes",
+            "Configuration compliance scanning : comparaison automatisée de l'état réel à la baseline, via SCAP (XCCDF, OVAL, CCE)",
+            "Exemples : vérification des politiques de mots de passe, détection de dérive de configuration",
+            "Obligations réglementaires : PCI DSS impose des scans externes trimestriels par un Approved Scanning Vendor, dit ASV"
+          ],
+          "narration": "Un contrôle correctement déployé peut se dérégler avec le temps : c'est ce qu'on appelle la dérive de configuration. Les compliance checks, ou vérifications de conformité, consistent à comparer régulièrement l'état réel des systèmes à une baseline approuvée, par exemple les CIS Benchmarks, les guides de durcissement des éditeurs, ou une baseline interne. En pratique, on utilise le configuration compliance scanning : des outils s'appuyant sur le cadre SCAP, avec les checklists XCCDF et le langage de test OVAL, vérifient automatiquement chaque paramètre, comme la politique de mots de passe, les services actifs ou les protocoles autorisés, et signalent tout écart. Certaines réglementations imposent ces vérifications : PCI DSS exige par exemple des scans trimestriels du périmètre exposé sur Internet, réalisés par un Approved Scanning Vendor, un prestataire de scan agréé. Retenez la différence : le scan de vulnérabilités cherche des failles connues, le scan de conformité cherche des écarts à la baseline.",
+          "astuce": "💡 Conseil examen : compliance check = écart à une baseline (CIS Benchmarks, SCAP), pas recherche de failles. Pour une dérive de configuration continue, la bonne réponse est le scan de conformité automatisé, pas le pentest annuel."
+        },
+        {
           "type": "question",
           "titre": "Contrôle de connaissance",
           "q": "Quel composant de SCAP fournit un système de score standardisé pour décrire la sévérité des vulnérabilités de sécurité ?",
@@ -282,9 +309,10 @@ window.CISSP_DATA.domains[6] = {
             "États de ports : open, closed, filtered ; SYN scan (half-open) plus discret que connect scan ; UDP lent ; banner grabbing identifie les versions",
             "Scan authentifié : plus profond, plus précis, compte read-only",
             "SCAP : CVE nomme, CVSS score, CCE configure, CPE identifie, XCCDF liste, OVAL teste",
+            "Compliance checks : scans de conformité à une baseline (CIS Benchmarks, ASV PCI DSS), distincts des scans de vulnérabilités",
             "Vulnerability management : cycle continu fondé sur l'inventaire des actifs"
           ],
-          "narration": "En résumé, l'évaluation des vulnérabilités suit des étapes précises, de la reconnaissance passive à la documentation des findings, l'exploitation étant réservée aux tests d'intrusion. Les scans se déclinent en quatre catégories, et le scan authentifié apporte précision et profondeur. Côté réseau, retenez les trois états de ports, open, closed et filtered, le SYN scan semi-ouvert plus discret que le connect scan, les limites du scan UDP et le banner grabbing. Le cadre SCAP standardise le vocabulaire, avec CVE pour nommer et CVSS pour scorer. Enfin, tout cela alimente un cycle continu de vulnerability management fondé sur un inventaire d'actifs à jour."
+          "narration": "En résumé, l'évaluation des vulnérabilités suit des étapes précises, de la reconnaissance passive à la documentation des findings, l'exploitation étant réservée aux tests d'intrusion. Les scans se déclinent en quatre catégories, et le scan authentifié apporte précision et profondeur. Côté réseau, retenez les trois états de ports, open, closed et filtered, le SYN scan semi-ouvert plus discret que le connect scan, les limites du scan UDP et le banner grabbing. Le cadre SCAP standardise le vocabulaire, avec CVE pour nommer et CVSS pour scorer. N'oubliez pas les compliance checks, qui vérifient la conformité des configurations à une baseline comme les CIS Benchmarks, avec les scans ASV trimestriels imposés par PCI DSS. Enfin, tout cela alimente un cycle continu de vulnerability management fondé sur un inventaire d'actifs à jour."
         }
       ]
     },
@@ -503,6 +531,18 @@ window.CISSP_DATA.domains[6] = {
         },
         {
           "type": "standard",
+          "titre": "La taxonomie 2024 : UI, network interface, API",
+          "points": [
+            "Le référentiel CISSP 2024 liste trois interfaces : user interface, network interface et API",
+            "Network interface : les communications réseau entre composants et systèmes",
+            "À tester : chiffrement TLS des flux, gestion des erreurs, comportement en cas de coupure ou de paquets malformés",
+            "Les interfaces physiques restent un cas particulier important pour les systèmes industriels"
+          ],
+          "narration": "Attention à une mise à jour de terminologie. Depuis avril deux mille vingt-quatre, le référentiel officiel du CISSP décline le test des interfaces en trois volets : l'interface utilisateur, l'interface réseau et l'API. La nouveauté, c'est la network interface : il s'agit de tester les communications réseau entre les composants d'une application ou entre systèmes. On vérifie que les flux sont chiffrés, par exemple avec TLS, que les erreurs de transmission sont correctement gérées, et que le système se comporte de façon sûre en cas de coupure réseau ou de réception de paquets malformés. Les interfaces physiques, elles, restent un cas particulier à connaître, surtout pour les systèmes industriels et les automates.",
+          "astuce": "💡 Conseil examen : taxonomie 2024 du test des interfaces = UI, network interface, API. Si le scénario parle de chiffrement des flux, de coupure réseau ou d'échanges entre systèmes, c'est la network interface qui est testée, pas l'API."
+        },
+        {
+          "type": "standard",
           "titre": "Transactions synthétiques et monitoring",
           "points": [
             "Synthetic transactions : transactions scriptées avec résultats attendus connus",
@@ -511,6 +551,19 @@ window.CISSP_DATA.domains[6] = {
           ],
           "narration": "Pour vérifier le comportement d'un système en fonctionnement, on utilise des transactions synthétiques : des transactions scriptées dont le résultat attendu est connu à l'avance. Le monitoring synthétique, dit actif, exécute ces transactions émulées ou enregistrées pour détecter des changements de temps de réponse ou de fonctionnalité. À l'inverse, le Real User Monitoring, ou RUM, est une technique passive qui observe et enregistre l'interaction des utilisateurs réels avec l'application ; il est idéal pour identifier les problèmes concrets rencontrés par les utilisateurs. Retenez l'opposition : synthétique égale actif et scripté, RUM égale passif et réel.",
           "astuce": "💡 Conseil examen : synthetic monitoring = actif, scripts ; RUM = passif, utilisateurs réels."
+        },
+        {
+          "type": "standard",
+          "titre": "Benchmarks : comparer les résultats à une référence",
+          "points": [
+            "Le référentiel 2024 associe synthetic transactions et benchmarks dans le même bullet",
+            "Benchmark : valeur ou standard de référence auquel on compare les résultats mesurés",
+            "Benchmark de performance : temps de réponse ou débit attendus, qui donnent un sens aux transactions synthétiques",
+            "Benchmark de configuration sécurisée, comme les CIS Benchmarks : rejoint les compliance checks",
+            "Un écart au benchmark déclenche l'investigation avant que les utilisateurs ne soient impactés"
+          ],
+          "narration": "Une transaction synthétique ne dit rien toute seule : trois secondes de temps de réponse, est-ce normal ou inquiétant ? C'est là qu'intervient le benchmark, un terme que le référentiel deux mille vingt-quatre associe explicitement aux transactions synthétiques. Un benchmark est une valeur ou un standard de référence auquel on compare les résultats mesurés. Côté performance, on établit une référence de temps de réponse ou de débit, souvent à partir d'une baseline historique, et tout écart significatif déclenche une investigation avant même que les utilisateurs ne s'en aperçoivent. Le mot désigne aussi les référentiels de configuration sécurisée, comme les CIS Benchmarks, qui servent alors de référence aux vérifications de conformité. Dans les deux cas, l'idée est la même : mesurer, comparer à la référence, agir sur l'écart.",
+          "astuce": "💡 Conseil examen : le bullet DCO 2024 est « synthetic transactions/benchmarks » — la transaction synthétique mesure, le benchmark fournit la référence de comparaison qui rend la mesure exploitable."
         },
         {
           "type": "question",
@@ -534,9 +587,10 @@ window.CISSP_DATA.domains[6] = {
             "SAST sans exécution, DAST à l'exécution, IAST combine les deux",
             "Fuzzing : mutation (dumb) ou generational (intelligent)",
             "Misuse case : point de vue de l'attaquant ; coverage : branch, condition, functional, loop, statement",
-            "Interfaces API, UI et physiques ; transactions synthétiques actives contre RUM passif"
+            "Interfaces API, UI et physiques ; taxonomie 2024 : UI, network interface, API",
+            "Transactions synthétiques actives contre RUM passif ; le benchmark fournit la référence de comparaison"
           ],
-          "narration": "Résumons cette leçon dense. La revue de code culmine avec l'inspection Fagan en six étapes. Le SAST analyse le code au repos, le DAST teste l'application en fonctionnement, et l'IAST combine les deux depuis l'intérieur. Le fuzzing bombarde le logiciel d'entrées inattendues, en mode mutation ou générationnel. Le misuse case testing adopte le point de vue de l'attaquant, l'analyse de couverture mesure l'exhaustivité des tests, et le test des interfaces couvre les API, les interfaces utilisateur et physiques. Enfin, distinguez le monitoring synthétique actif du monitoring passif des utilisateurs réels."
+          "narration": "Résumons cette leçon dense. La revue de code culmine avec l'inspection Fagan en six étapes. Le SAST analyse le code au repos, le DAST teste l'application en fonctionnement, et l'IAST combine les deux depuis l'intérieur. Le fuzzing bombarde le logiciel d'entrées inattendues, en mode mutation ou générationnel. Le misuse case testing adopte le point de vue de l'attaquant, l'analyse de couverture mesure l'exhaustivité des tests, et le test des interfaces couvre, selon la taxonomie deux mille vingt-quatre, l'interface utilisateur, l'interface réseau et l'API. Enfin, distinguez le monitoring synthétique actif du monitoring passif des utilisateurs réels, et rappelez-vous que le benchmark fournit la référence qui rend ces mesures exploitables."
         }
       ]
     },
@@ -2151,6 +2205,132 @@ window.CISSP_DATA.domains[6] = {
         "Techniquement vrai que la bibliothèque s'enrichit, mais la BAS rejoue des scénarios connus : elle ne modélise pas un adversaire créatif et persistant.",
         "Seul un engagement red team orienté objectifs, furtif et dans la durée, confronte l'organisation à un adversaire adaptatif ; la restitution purple team convertit l'exercice en améliorations de détection."
       ]
+    },
+    {
+      "q": "Après un durcissement initial des serveurs selon les CIS Benchmarks, le RSSI veut s'assurer en continu qu'aucun système ne dérive de la configuration approuvée. Quelle approche est la PLUS adaptée ?",
+      "choix": [
+        "Programmer un test d'intrusion annuel couvrant l'ensemble des serveurs",
+        "Demander aux administrateurs d'attester chaque trimestre que la configuration n'a pas été modifiée",
+        "Déployer un scan de conformité de configuration automatisé qui compare régulièrement chaque système à la baseline via du contenu SCAP",
+        "Examiner manuellement un échantillon de serveurs lors de l'audit interne annuel"
+      ],
+      "reponse": 2,
+      "explication": "La dérive de configuration est un phénomène continu : la réponse doit l'être aussi. Un scan de conformité automatisé, s'appuyant sur du contenu SCAP (checklists XCCDF, tests OVAL) dérivé des CIS Benchmarks, compare en permanence l'état réel à la baseline approuvée et signale chaque écart : c'est précisément la définition d'un compliance check. Le pentest annuel (A) cherche des failles exploitables une fois par an, l'attestation des administrateurs (B) est déclarative et invérifiable, et l'échantillonnage manuel annuel (D) laisse la majorité du parc sans vérification pendant un an.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Un pentest cherche des failles exploitables, pas des écarts de configuration, et sa fréquence annuelle ne détecte pas une dérive continue.",
+        "Une attestation déclarative n'est pas une vérification : elle ne détecte ni les erreurs ni les changements non documentés.",
+        "Le scan de conformité automatisé compare en continu l'état réel à la baseline CIS via SCAP : c'est la définition même du compliance check, à la bonne fréquence pour une dérive continue.",
+        "L'échantillonnage manuel annuel laisse la majorité du parc invérifiée la plupart du temps : couverture et fréquence insuffisantes."
+      ]
+    },
+    {
+      "q": "Le temps de réponse d'un service de paiement critique doit être surveillé pour détecter toute dégradation AVANT que les clients ne s'en plaignent. Quelle approche répond le MIEUX à ce besoin ?",
+      "choix": [
+        "Exécuter des transactions synthétiques scriptées à intervalles réguliers et comparer les résultats à un benchmark de performance établi",
+        "S'appuyer sur le Real User Monitoring pour enregistrer les sessions des utilisateurs réels",
+        "Lancer un scan de vulnérabilités hebdomadaire ciblant le service de paiement",
+        "Augmenter la couverture de tests unitaires du module de paiement avant chaque mise en production"
+      ],
+      "reponse": 0,
+      "explication": "Détecter une dégradation avant l'impact client exige une mesure active et une référence de comparaison : des transactions synthétiques scriptées, exécutées en continu, dont les résultats sont comparés à un benchmark de performance — exactement le couple « synthetic transactions/benchmarks » du référentiel 2024. Le RUM (B) est passif : il constate ce que vivent les utilisateurs réels, donc après qu'ils sont affectés. Le scan de vulnérabilités (C) cherche des failles de sécurité, pas des dégradations de performance, et la couverture de tests unitaires (D) valide le code avant production, pas le comportement du service en exploitation.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Transactions synthétiques actives plus benchmark de référence : on mesure en continu et on détecte l'écart avant tout impact client — le couple exact du DCO 2024.",
+        "Piège du RUM : technique passive qui observe les utilisateurs réels, donc qui détecte le problème seulement quand ils le subissent déjà.",
+        "Hors sujet : un scan de vulnérabilités cherche des failles de sécurité, pas des dégradations de temps de réponse.",
+        "Les tests unitaires valident le code avant la mise en production ; ils ne surveillent pas le comportement du service en exploitation."
+      ]
+    },
+    {
+      "q": "Lors des tests d'une application, l'équipe vérifie que les échanges entre le serveur applicatif et un service distant sont chiffrés en TLS, tolèrent une coupure réseau et rejettent les paquets malformés. Selon la taxonomie CISSP 2024 du test des interfaces, quel volet cette activité illustre-t-elle ?",
+      "choix": [
+        "Le test de l'interface utilisateur",
+        "Le test de l'API",
+        "Le test des interfaces physiques",
+        "Le test de la network interface"
+      ],
+      "reponse": 3,
+      "explication": "La taxonomie 2024 du test des interfaces distingue UI, network interface et API. Vérifier le chiffrement des flux, le comportement en cas de coupure et la résistance aux paquets malformés porte sur la communication réseau elle-même : c'est le test de la network interface. Le test d'API (B) — le distracteur le plus proche — valide le contrat programmatique et les exigences de sécurité des appels (authentification, autorisation, validation des entrées), pas le transport réseau sous-jacent. L'UI (A) concerne l'interaction avec l'utilisateur final, et les interfaces physiques (C) les systèmes pilotant des machines.",
+      "difficulte": 2,
+      "pourquoi": [
+        "L'interface utilisateur concerne l'interaction des utilisateurs finaux avec le logiciel, pas les échanges entre serveurs.",
+        "Distracteur le plus proche : le test d'API valide le contrat programmatique (authentification, validation des entrées), pas le transport réseau, son chiffrement et sa tolérance aux coupures.",
+        "Les interfaces physiques concernent les applications pilotant des machines ou automates : rien à voir avec des flux entre serveurs.",
+        "Chiffrement TLS, coupure réseau, paquets malformés : c'est la communication réseau elle-même qui est testée — la network interface de la taxonomie 2024."
+      ]
+    },
+    {
+      "q": "Avant la mise en production d'une application bancaire, les testeurs dressent la liste des actions qu'un client hostile pourrait tenter — virement d'un montant négatif, rejeu d'une transaction, contournement du plafond quotidien — puis essaient de les réaliser. Quelle technique de test appliquent-ils ?",
+      "choix": [
+        "Le mutation testing",
+        "Le misuse case testing",
+        "Le fuzzing générationnel",
+        "L'analyse de couverture de branches"
+      ],
+      "reponse": 1,
+      "explication": "Énumérer les comportements que l'organisation ne souhaite pas — les cas de mésusage — puis tenter de les exploiter du point de vue d'un acteur hostile est la définition exacte du misuse case testing (ou abuse case testing). Le mutation testing (A) modifie le programme lui-même pour vérifier que les tests détectent les mutants, le fuzzing générationnel (C) génère des entrées à partir de modèles pour provoquer des plantages sans scénario métier hostile, et la couverture de branches (D) mesure l'exhaustivité des tests, elle ne teste rien par elle-même.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Piège classique de confusion : le mutation testing modifie le programme pour créer des mutants et évaluer la qualité des tests, pas le comportement d'un utilisateur hostile.",
+        "Énumérer les cas de mésusage puis tenter de les exploiter du point de vue d'un acteur hostile : c'est la définition du misuse case testing.",
+        "Le fuzzing générationnel produit des entrées synthétiques à partir de modèles pour provoquer des comportements inattendus, sans scénarios métier hostiles prédéfinis.",
+        "La couverture de branches est une métrique d'exhaustivité des tests : elle ne constitue pas une technique de test en soi."
+      ]
+    },
+    {
+      "q": "Votre organisation veut commanditer un test d'intrusion sur son application hébergée chez un fournisseur IaaS public. Que devez-vous faire EN PREMIER ?",
+      "choix": [
+        "Vérifier la politique de test du fournisseur et obtenir les autorisations requises, en cadrant le test selon le modèle de responsabilité partagée",
+        "Planifier le test hors des heures ouvrées pour limiter l'impact sur la production",
+        "Remplacer le pentest par un scan de vulnérabilités non intrusif afin d'éviter toute démarche d'autorisation",
+        "Demander au fournisseur cloud de réaliser lui-même le test sur l'ensemble de la pile"
+      ],
+      "reponse": 0,
+      "explication": "Dans le cloud, l'organisation ne possède pas l'infrastructure : avant tout test intrusif, il faut consulter la politique de test du fournisseur, obtenir les autorisations prévues et limiter le périmètre à ce qui relève de la responsabilité du client selon le modèle de responsabilité partagée. Tester sans autorisation peut violer le contrat et affecter d'autres clients de la plateforme mutualisée. La planification horaire (B) vient après l'autorisation, dégrader le test en simple scan (C) sacrifie l'objectif pour éviter une démarche normale, et déléguer au fournisseur (D) ne teste pas la configuration du client, qui reste sa responsabilité.",
+      "difficulte": 2,
+      "pourquoi": [
+        "L'autorisation du fournisseur et le cadrage par la responsabilité partagée sont le préalable légal et contractuel : on ne teste que ce qui relève de sa propre responsabilité.",
+        "Utile mais prématuré : la fenêtre de tir se négocie après avoir obtenu l'autorisation et cadré le périmètre.",
+        "Renoncer au pentest pour esquiver l'autorisation sacrifie l'objectif d'assurance ; et même un scan peut être soumis à la politique de test du fournisseur.",
+        "Le fournisseur ne testera pas la configuration et les accès du client, qui restent sous la responsabilité de celui-ci dans le modèle partagé."
+      ]
+    },
+    {
+      "q": "Une organisation exploite son ERP on-premise, a migré la moitié de ses charges de travail en cloud public, et relie les deux environnements par VPN et fédération d'identité. En concevant la stratégie d'évaluation annuelle, quel périmètre mérite l'attention la PLUS particulière ?",
+      "choix": [
+        "Les centres de données on-premise, car l'organisation en porte l'entière responsabilité",
+        "Les services cloud, car ils sont directement exposés sur Internet",
+        "Les points d'interconnexion entre les deux environnements : tunnels VPN, flux de données et fédération d'identité",
+        "Les postes de travail des administrateurs, vecteur habituel de compromission initiale"
+      ],
+      "reponse": 2,
+      "explication": "Dans une architecture hybride, chaque environnement est généralement évalué par des mécanismes établis (audits internes on-premise, attestations SOC 2 côté cloud). Le risque spécifique de l'hybride se concentre aux points d'interconnexion : tunnels VPN, flux de données et fédération d'identité, où une compromission se propage d'un monde à l'autre et où les responsabilités se chevauchent. C'est là que la stratégie d'évaluation doit porter une attention particulière. Les réponses A, B et D désignent des périmètres réels mais couverts par les stratégies classiques ; aucun n'adresse le risque propre à l'hybridation.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Le périmètre on-premise est couvert par la stratégie d'audit interne classique ; il ne constitue pas le risque spécifique de l'architecture hybride.",
+        "L'exposition Internet des services cloud est traitée par le fournisseur et les attestations SOC 2 ; ce n'est pas le point aveugle de l'hybride.",
+        "Les points d'interconnexion — VPN, flux, fédération d'identité — sont l'endroit où les responsabilités se chevauchent et où une compromission se propage d'un environnement à l'autre : le focus propre à l'évaluation hybride.",
+        "Vrai en général mais hors sujet : les postes d'administration relèvent de l'évaluation standard, pas de la spécificité hybride de la question."
+      ]
+    },
+    {
+      "q": "En préparant le plan de tests annuel, le RSSI compare l'approche pour le centre de données on-premise et pour la solution SaaS de ressources humaines. Quelle affirmation reflète le MIEUX la différence de stratégie ?",
+      "choix": [
+        "Le SaaS n'a pas besoin d'être évalué puisque la sécurité incombe entièrement au fournisseur",
+        "On-premise, l'organisation peut tester directement toute la pile ; pour le SaaS, elle teste sa configuration et ses accès, et s'appuie sur les attestations du fournisseur comme un SOC 2 Type II pour le reste",
+        "Les deux environnements doivent recevoir exactement les mêmes tests techniques afin de garantir la comparabilité des résultats",
+        "L'organisation doit exiger de mener elle-même un pentest complet de l'infrastructure du fournisseur SaaS"
+      ],
+      "reponse": 1,
+      "explication": "La stratégie d'évaluation dépend de la localisation et du modèle de responsabilité partagée. On-premise, l'organisation possède toute la pile et peut la tester librement. En SaaS, sa responsabilité se limite à la configuration, aux comptes et aux données : c'est ce qu'elle teste directement, et elle obtient l'assurance sur l'infrastructure et l'application du fournisseur via des attestations indépendantes comme un SOC 2 Type II. Ignorer l'évaluation du SaaS (A) confond externalisation du service et externalisation de la responsabilité, appliquer des tests identiques (C) ignore le modèle partagé, et exiger un pentest de l'infrastructure du fournisseur (D) est contractuellement irréaliste et inutile face à une attestation adaptée.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Piège de l'externalisation : on délègue le service, jamais la responsabilité — la configuration, les accès et les données du client restent à évaluer.",
+        "Tester directement ce qui relève de sa responsabilité et couvrir le reste par les attestations du fournisseur : c'est exactement la stratégie d'assurance adaptée au modèle de responsabilité partagée.",
+        "L'uniformité des tests ignore le modèle de responsabilité partagée : une partie de la pile SaaS n'est ni accessible ni testable par le client.",
+        "Un pentest de l'infrastructure mutualisée du fournisseur est contractuellement irréaliste ; le SOC 2 Type II fournit cette assurance par un auditeur indépendant."
+      ]
     }
   ],
   "quizEn": [
@@ -2764,6 +2944,42 @@ window.CISSP_DATA.domains[6] = {
         "La gouvernance des données d'entraînement du fournisseur ne teste ni votre intégration ni vos garde-fous : transfert de confiance sans vérification.",
         "Préoccupation d'exploitation légitime mais sans lien avec les risques de sécurité propres au modèle.",
         "Injection de prompt, fuite de données sensibles et contournement des garde-fous sont des modes de défaillance spécifiques aux LLM, invisibles pour les tests applicatifs classiques : l'assurance à exiger."
+      ]
+    },
+    {
+      "q": "A retailer subject to PCI DSS must validate the security of its Internet-facing cardholder data environment. Which activity is specifically REQUIRED on a quarterly basis?",
+      "choix": [
+        "A full penetration test performed by the internal red team",
+        "A source code review of all payment applications",
+        "A tabletop exercise of the incident response plan",
+        "An external vulnerability scan performed by an Approved Scanning Vendor (ASV)"
+      ],
+      "reponse": 3,
+      "explication": "PCI DSS impose des scans de vulnérabilités externes trimestriels du périmètre exposé sur Internet, réalisés par un Approved Scanning Vendor, un prestataire agréé par le PCI Security Standards Council : c'est un exemple emblématique de compliance check imposé par un référentiel. Le pentest est exigé par PCI DSS mais sur un rythme annuel (et après changement significatif), pas trimestriel, et il n'a pas à être externe (A). La revue de code (B) relève du cycle de développement, et l'exercice tabletop (C) du test du plan de réponse à incident, sans exigence trimestrielle de ce type.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Le pentest PCI DSS est annuel (et après changement significatif), pas trimestriel : piège de fréquence.",
+        "La revue de code relève des exigences de développement sécurisé, sans obligation trimestrielle sur tout le parc applicatif.",
+        "Le test du plan de réponse à incident est exigé, mais ce n'est pas l'obligation trimestrielle visant le périmètre exposé.",
+        "Le scan externe trimestriel par un ASV agréé est l'exigence PCI DSS spécifique au périmètre exposé sur Internet : l'exemple type du compliance check réglementaire."
+      ]
+    },
+    {
+      "q": "A security manager is planning a penetration test of a workload hosted on a public IaaS platform. Which consideration MOST directly constrains the scope of the test?",
+      "choix": [
+        "The availability window of the internal red team",
+        "The cloud provider's testing policy and the shared responsibility model, which define what the customer is authorized to test",
+        "The CVSS scores of vulnerabilities identified in previous assessments",
+        "The network bandwidth cost generated by scanning traffic"
+      ],
+      "reponse": 1,
+      "explication": "Dans le cloud, le périmètre d'un pentest n'est pas d'abord une question technique mais une question d'autorisation : la politique de test du fournisseur et le modèle de responsabilité partagée déterminent ce que le client a le droit de tester (sa configuration, ses instances, ses applications) et ce qui est interdit (l'infrastructure mutualisée, les autres locataires). Tester au-delà viole le contrat et potentiellement la loi. La disponibilité de l'équipe (A) et les coûts de bande passante (D) sont des contraintes logistiques secondaires, et les scores CVSS antérieurs (C) aident à prioriser les cibles, pas à définir ce qui est autorisé.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Contrainte logistique réelle mais secondaire : elle affecte le calendrier, pas la définition de ce qui peut légalement être testé.",
+        "La politique de test du fournisseur et la responsabilité partagée délimitent juridiquement et contractuellement le périmètre autorisé : la contrainte première de tout pentest en cloud public.",
+        "Les scores CVSS antérieurs aident à prioriser les cibles au sein du périmètre, ils ne définissent pas ce que le client a le droit de tester.",
+        "Considération de coût marginale : elle n'encadre en rien l'autorisation ou l'interdiction de tester."
       ]
     }
   ],

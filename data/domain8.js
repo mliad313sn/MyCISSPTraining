@@ -165,6 +165,32 @@ window.CISSP_DATA.domains[8] = {
           "narration": "La gestion du changement comporte trois composantes fondamentales à connaître. Le request control offre un cadre organisé où les utilisateurs demandent des modifications, les managers font l'analyse coûts-bénéfices, et les développeurs priorisent. Le change control permet aux développeurs de recréer la situation rencontrée, puis de créer et tester une solution avant de la déployer en production. Enfin, le release control approuve formellement la mise en production, en incluant les tests d'acceptation. Un Change Advisory Board, ou CAB, examine et approuve les changements proposés. Notez aussi l'Integrated Product Team, une approche du département de la Défense américain qui réunit des équipes multifonctionnelles pour favoriser des décisions parallèles plutôt que séquentielles."
         },
         {
+          "type": "standard",
+          "titre": "Operations and Maintenance : la sécurité après le déploiement",
+          "points": [
+            "Le déploiement n'est pas la fin : la majeure partie de la vie du logiciel se passe en production",
+            "Gestion des correctifs et des vulnérabilités : évaluer, tester, appliquer, vérifier",
+            "Supervision continue : journaux, performances, incidents et alertes de sécurité",
+            "Tout changement en production passe par le processus formel de gestion du changement",
+            "Fin de vie : décommissionnement ordonné et effacement sécurisé des données"
+          ],
+          "narration": "Arrêtons-nous sur une phase souvent négligée : l'exploitation et la maintenance, en anglais operations and maintenance. Une fois le logiciel déployé, le travail de sécurité ne s'arrête pas, il change de nature. L'équipe doit maintenir une configuration durcie, appliquer les correctifs selon un processus de gestion des vulnérabilités, c'est-à-dire évaluer chaque correctif, le tester, le déployer puis vérifier son application. La supervision continue surveille les journaux, les performances et les signaux d'incident, et alimente la réponse aux incidents applicatifs. Attention : toute modification du logiciel en production, correctif compris, doit passer par le processus formel de gestion du changement, avec test et approbation. Enfin, la phase se termine par le décommissionnement : retirer proprement le système, révoquer les accès et effacer les données de façon sécurisée.",
+          "astuce": "💡 Conseil examen : si une question situe la gestion des correctifs, la supervision continue ou la réponse aux incidents applicatifs dans le SDLC, la phase attendue est Operations and Maintenance — et tout correctif en production passe par le change management."
+        },
+        {
+          "type": "standard",
+          "titre": "L'Integrated Product Team (IPT)",
+          "points": [
+            "Équipe multifonctionnelle introduite par le département de la Défense américain en 1995",
+            "Réunit développeurs, opérations, sécurité, achats, testeurs et représentants métier",
+            "Objectif : des décisions prises en PARALLÈLE plutôt qu'en revues séquentielles",
+            "Les parties prenantes, sécurité comprise, sont impliquées sur TOUT le cycle de vie",
+            "Précurseur de l'esprit DevOps : collaboration continue plutôt que silos"
+          ],
+          "narration": "Approfondissons maintenant l'Integrated Product Team, un concept que l'examen peut interroger directement. Introduite par le département de la Défense américain au milieu des années quatre-vingt-dix, l'IPT est une équipe multifonctionnelle qui rassemble autour d'un même produit toutes les parties prenantes : les développeurs, bien sûr, mais aussi les opérations, la sécurité, les achats, les testeurs et les représentants du métier ou du client. Son objectif est de remplacer les longues chaînes de validation séquentielles, où chaque fonction examine le projet l'une après l'autre, par des décisions prises en parallèle, tous les points de vue étant présents autour de la table dès le départ. La sécurité participe ainsi aux choix de conception au lieu de les découvrir trop tard. Vous remarquerez que cette philosophie annonce l'esprit DevOps : casser les silos et faire collaborer en continu toutes les fonctions sur l'ensemble du cycle de vie du produit.",
+          "astuce": "💡 Conseil examen : IPT = équipe multidisciplinaire associée au DoD, orientée décisions PARALLÈLES. Si l'énoncé décrit des parties prenantes réunies en continu autour d'un produit pour éviter les validations séquentielles, pensez Integrated Product Team."
+        },
+        {
           "type": "resume",
           "titre": "Résumé de la leçon",
           "points": [
@@ -173,9 +199,11 @@ window.CISSP_DATA.domains[8] = {
             "Agile livre en itérations courtes ; Scrum, Kanban, XP et SAFe en sont des déclinaisons",
             "DevOps unifie dev, QA et ops ; DevSecOps y intègre la sécurité en continu",
             "CI/CD automatise l'intégration et la livraison ; delivery garde une approbation humaine, deployment non",
-            "Gestion du changement : request control, change control, release control"
+            "Gestion du changement : request control, change control, release control",
+            "Operations and Maintenance : correctifs, supervision continue et gestion des vulnérabilités après le déploiement",
+            "IPT : équipe multifonctionnelle du DoD qui décide en parallèle avec toutes les parties prenantes"
           ],
-          "narration": "Récapitulons. Le SDLC structure la vie du logiciel, des exigences jusqu'au retrait, et la sécurité doit y être intégrée dès le début. Waterfall est linéaire et rigide, le modèle en spirale est itératif et piloté par le risque, et le V-Model associe chaque phase de développement à une phase de test. Agile privilégie les itérations courtes et la collaboration, avec des déclinaisons comme Scrum, Kanban et SAFe. DevOps unifie développement et opérations, DevSecOps y intègre la sécurité, et le pipeline CI/CD automatise l'ensemble. Enfin, la gestion du changement s'appuie sur trois piliers : request control, change control et release control."
+          "narration": "Récapitulons. Le SDLC structure la vie du logiciel, des exigences jusqu'au retrait, et la sécurité doit y être intégrée dès le début. Waterfall est linéaire et rigide, le modèle en spirale est itératif et piloté par le risque, et le V-Model associe chaque phase de développement à une phase de test. Agile privilégie les itérations courtes et la collaboration, avec des déclinaisons comme Scrum, Kanban et SAFe. DevOps unifie développement et opérations, DevSecOps y intègre la sécurité, et le pipeline CI/CD automatise l'ensemble. La gestion du changement s'appuie sur trois piliers : request control, change control et release control. Enfin, la sécurité continue après le déploiement pendant l'exploitation et la maintenance, et l'Integrated Product Team incarne la collaboration multifonctionnelle avec des décisions prises en parallèle."
         }
       ]
     },
@@ -445,6 +473,19 @@ window.CISSP_DATA.domains[8] = {
           "explication": "Le SBOM fournit un inventaire formel de tous les composants, bibliothèques et dépendances d'un logiciel. Il permet d'identifier immédiatement les applications contenant la bibliothèque vulnérable. Un scan réseau ne voit pas les dépendances internes, un pentest et une revue manuelle seraient beaucoup trop lents et coûteux pour cet objectif."
         },
         {
+          "type": "standard",
+          "titre": "Sécuriser les toolsets, IDE et runtime",
+          "points": [
+            "Catalogue d'outils approuvés : chaque toolset est validé, inventorié, maintenu à jour",
+            "Extensions et plugins d'IDE : un vecteur d'attaque réel (typosquatting, extensions malveillantes)",
+            "Intégrité de la chaîne de build : compilateurs et outils issus de sources officielles, signatures et sommes de contrôle vérifiées",
+            "Runtime : corriger aussi la JVM, les interpréteurs et les images de conteneurs, pas seulement l'application",
+            "Le poste développeur est un actif critique : durcissement, moindre privilège, surveillance"
+          ],
+          "narration": "Allons plus loin sur la sécurisation concrète de l'outillage. Les toolsets approuvés doivent vivre dans un catalogue géré : chaque outil est inventorié, sa version suivie, et ses correctifs appliqués comme pour n'importe quel logiciel de production. L'IDE mérite une attention particulière : ses extensions et plugins, téléchargés depuis des places de marché publiques, sont un vecteur d'attaque bien réel. Des campagnes de typosquatting ont diffusé de fausses extensions qui volaient les secrets et les variables d'environnement des développeurs ; il faut donc restreindre les extensions à une liste vérifiée. La chaîne de build elle-même doit être intègre : compilateurs et outils obtenus de sources officielles, signatures et sommes de contrôle vérifiées, car un compilateur compromis peut injecter du code malveillant dans tout ce qu'il produit. Même logique pour les environnements d'exécution : une machine virtuelle Java, un interpréteur ou une image de conteneur obsolète expose toutes les applications qui s'exécutent dessus. Enfin, le poste du développeur, qui détient des accès aux dépôts et aux pipelines, se traite comme un actif critique : durcissement, moindre privilège et surveillance.",
+          "astuce": "💡 Conseil examen : une faille dans l'IDE, le compilateur ou le runtime compromet TOUTES les applications qui en dépendent. Les outils de développement sont des logiciels comme les autres : validation par le CAB, inventaire, correctifs et surveillance."
+        },
+        {
           "type": "resume",
           "titre": "Résumé de la leçon",
           "points": [
@@ -453,9 +494,10 @@ window.CISSP_DATA.domains[8] = {
             "Les bibliothèques importent leurs vulnérabilités ; le risque majeur de l'open source est l'obsolescence",
             "Outils validés par un CAB ; secrets hors des dépôts de code ; SCM pour l'intégrité et la traçabilité",
             "SBOM : inventaire des composants, clé de la gestion de la supply chain logicielle",
-            "Code signing : intégrité et origine des exécutables via certificat — pas une preuve d'innocuité"
+            "Code signing : intégrité et origine des exécutables via certificat — pas une preuve d'innocuité",
+            "Toolsets, IDE et runtime sécurisés : catalogue approuvé, extensions vérifiées, environnements d'exécution corrigés"
           ],
-          "narration": "Résumons cette leçon. L'environnement de développement est une surface d'attaque à part entière. Côté langages, retenez la distinction entre compilé et interprété, et les vertus du typage fort. En programmation orientée objet, visez une cohésion élevée et un couplage faible. Les bibliothèques partagées font gagner du temps mais importent leurs failles, et le grand risque de l'open source est l'obsolescence des versions. Protégez les dépôts de code, sortez-en les secrets, appuyez-vous sur la gestion de configuration pour la traçabilité, et documentez vos composants dans un SBOM pour maîtriser la chaîne d'approvisionnement logicielle."
+          "narration": "Résumons cette leçon. L'environnement de développement est une surface d'attaque à part entière : outils validés et inventoriés, extensions d'IDE vérifiées et environnements d'exécution maintenus à jour en font partie. Côté langages, retenez la distinction entre compilé et interprété, et les vertus du typage fort. En programmation orientée objet, visez une cohésion élevée et un couplage faible. Les bibliothèques partagées font gagner du temps mais importent leurs failles, et le grand risque de l'open source est l'obsolescence des versions. Protégez les dépôts de code, sortez-en les secrets, appuyez-vous sur la gestion de configuration pour la traçabilité, et documentez vos composants dans un SBOM pour maîtriser la chaîne d'approvisionnement logicielle."
         }
       ]
     },
@@ -749,6 +791,46 @@ window.CISSP_DATA.domains[8] = {
           "explication": "Les standards de codage sécurisé, rigoureusement appliqués, sont le meilleur moyen de réduire les vulnérabilités du code : ils sont obligatoires, applicables à tous les développements et vérifiables. Les guidelines ne sont que des recommandations flexibles, un pentest annuel est ponctuel et détectif, et un WAF est un contrôle compensatoire qui ne corrige pas le code."
         },
         {
+          "type": "standard",
+          "titre": "Évaluer l'efficacité de la sécurité logicielle",
+          "points": [
+            "Objectif 8.3 : prouver, mesures à l'appui, que les contrôles de sécurité logicielle fonctionnent",
+            "Audit et journalisation des changements : rapprocher chaque mise en production d'une demande approuvée, d'une revue de code et d'un pipeline tracé",
+            "Des journaux de changements centralisés et protégés en intégrité révèlent les modifications non autorisées",
+            "Analyse de risque logicielle : prioriser les vulnérabilités selon impact métier et vraisemblance, pas selon le seul score technique",
+            "Atténuation : corriger, compenser, ou faire ACCEPTER formellement le risque résiduel par son propriétaire métier",
+            "Métriques : densité de défauts, vulnérabilités ouvertes par criticité, délai moyen de remédiation"
+          ],
+          "narration": "Comment savoir si votre programme de sécurité logicielle est réellement efficace ? C'est l'objet du sous-objectif huit point trois, qui repose sur deux piliers. Premier pilier : l'audit et la journalisation des changements. Chaque modification qui atteint la production doit pouvoir être rapprochée d'une demande approuvée, d'une revue de code et d'une exécution tracée du pipeline. Cette piste d'audit de bout en bout répond aux questions qui, quoi, quand et avec quelle approbation ; conservée dans des journaux centralisés et protégés en intégrité, elle permet de détecter les changements non autorisés et de fournir des preuves aux auditeurs. Second pilier : l'analyse et l'atténuation des risques. Toutes les vulnérabilités ne se valent pas : on les priorise selon leur impact métier et leur vraisemblance d'exploitation, pas seulement selon leur score technique. Pour chacune, l'organisation choisit de corriger, de mettre en place une mesure compensatoire, ou d'accepter le risque résiduel, une décision qui doit être formalisée par le propriétaire du risque métier, jamais prise silencieusement par les équipes techniques. Des métriques comme la densité de défauts, le nombre de vulnérabilités ouvertes par criticité ou le délai moyen de remédiation objectivent les progrès dans le temps.",
+          "astuce": "💡 Conseil examen : évaluer l'efficacité = PREUVES et MESURES. La piste d'audit des changements est la preuve la plus probante qu'aucun changement non autorisé n'a atteint la production, et le risque résiduel est accepté par le propriétaire du risque métier, pas par le CISO."
+        },
+        {
+          "type": "standard",
+          "titre": "Services managés : évaluer avant de déléguer",
+          "points": [
+            "Managed services : un prestataire exploite tout ou partie du service (MSP, MSSP, SaaS, PaaS, IaaS managés)",
+            "Commodité contre perte de contrôle : on délègue l'exploitation, JAMAIS la responsabilité finale",
+            "Due diligence : attestations indépendantes (SOC 2 type II, ISO 27001, FedRAMP) quand l'audit sur site est impossible",
+            "Contrat : modèle de responsabilité partagée, SLA de sécurité, notification d'incident, droit d'audit, réversibilité",
+            "Surveiller les accès du prestataire à vos données comme tout accès à privilèges"
+          ],
+          "narration": "Approfondissons l'acquisition de services managés, où un prestataire exploite tout ou partie d'un service pour votre compte : fournisseur de services managés, MSSP pour la sécurité, ou offres SaaS, PaaS et IaaS opérées par un tiers. Le marché est simple : vous gagnez en commodité et en expertise, mais vous perdez du contrôle direct. Ce que vous ne perdez jamais, en revanche, c'est la responsabilité finale envers vos données et vos clients. L'évaluation avant signature relève de la due diligence : comme un grand fournisseur refusera presque toujours un audit sur site, appuyez-vous sur des attestations indépendantes, un rapport SOC 2 de type deux, une certification ISO 27001 ou une autorisation FedRAMP. Le contrat doit ensuite figer le modèle de responsabilité partagée, qui protège quoi, des SLA de sécurité, les délais de notification d'incident, un droit d'audit ou d'accès aux rapports, et la réversibilité, c'est-à-dire votre capacité à récupérer vos données et à quitter le service. Enfin, en exploitation, traitez les accès du prestataire à vos systèmes comme n'importe quel accès à privilèges : limités, journalisés et revus.",
+          "astuce": "💡 Conseil examen : le client reste accountable de ses données quel que soit le modèle SaaS, PaaS ou IaaS. Face à un fournisseur qui refuse l'audit sur site, la bonne réponse s'appuie sur les attestations indépendantes et les clauses contractuelles, pas sur la confiance ni sur l'abandon du projet."
+        },
+        {
+          "type": "standard",
+          "titre": "Software-defined security",
+          "points": [
+            "Fonctions de sécurité (pare-feu, segmentation, détection) implémentées en LOGICIEL, découplées du matériel",
+            "Les contrôles sont définis comme du code : versionnés, testés et déployés par le pipeline CI/CD",
+            "Défenses dynamiques : repositionner un capteur ou modifier une règle en quelques minutes",
+            "Cohérence et auditabilité : la configuration de sécurité vit dans le dépôt, comme l'Infrastructure as Code",
+            "Pilier de DevSecOps, des architectures cloud et des réseaux SDN"
+          ],
+          "narration": "Terminons par un bullet explicite de l'examen : la software-defined security, ou sécurité définie par logiciel. L'idée est de découpler les fonctions de sécurité du matériel qui les portait traditionnellement : pare-feu, segmentation réseau, détection d'intrusion ou chiffrement deviennent des services logiciels, pilotés de façon centralisée. Concrètement, les contrôles sont définis comme du code : les règles de pare-feu, les politiques d'accès et le placement des capteurs sont écrits dans des fichiers versionnés dans le dépôt, testés, puis déployés automatiquement par le pipeline CI/CD, exactement comme l'Infrastructure as Code. Les bénéfices sont triples. D'abord la réactivité : face à une menace, on repositionne un capteur ou on modifie une règle en quelques minutes, sur des centaines de systèmes à la fois. Ensuite la cohérence : la même politique s'applique partout, sans dérive de configuration manuelle. Enfin l'auditabilité : l'historique du dépôt prouve qui a changé quelle règle et quand. C'est pour cela que la software-defined security est un pilier naturel de DevSecOps, des architectures cloud et des réseaux définis par logiciel.",
+          "astuce": "💡 Conseil examen : software-defined security = contrôles de sécurité implémentés en logiciel et gérés activement dans le pipeline CI/CD. Si l'énoncé décrit des défenses qui s'adaptent automatiquement au rythme des déploiements, c'est cette notion — étroitement associée à DevSecOps."
+        },
+        {
           "type": "resume",
           "titre": "Résumé de la leçon",
           "points": [
@@ -757,9 +839,12 @@ window.CISSP_DATA.domains[8] = {
             "Software escrow : code source déposé chez un tiers, libéré si l'éditeur fait faillite ou cesse le support",
             "Cloud : misconfigurations et contrôles d'accès faibles en tête des causes de brèches",
             "APIs : parameter validation, authentification de chaque appel ; microservices : passerelle API et zero trust",
-            "Standards obligatoires et vérifiables ; messages d'erreur sobres, fail secure, journalisation centralisée"
+            "Standards obligatoires et vérifiables ; messages d'erreur sobres, fail secure, journalisation centralisée",
+            "Efficacité de la sécurité logicielle : piste d'audit des changements de bout en bout, métriques, acceptation formelle du risque résiduel par le propriétaire métier",
+            "Services managés : attestations indépendantes (SOC 2, ISO 27001), responsabilité partagée, réversibilité contractuelle",
+            "Software-defined security : les contrôles de sécurité définis comme du code et pilotés dans le pipeline CI/CD"
           ],
-          "narration": "Terminons ce domaine. Pour tester la sécurité applicative, le SAST analyse le code sans l'exécuter, le DAST teste l'application en fonctionnement, l'IAST combine les deux, et la SCA inventorie les composants tiers. Pour les logiciels acquis, évaluez l'historique de sécurité et les certifications des vendeurs COTS, maîtrisez l'obsolescence de l'open source, et exigez un audit externe pour les développements tiers. Dans le cloud, les erreurs de configuration dominent les causes de brèches. Sécurisez vos APIs par la validation des paramètres et l'authentification de chaque appel. Enfin, imposez des standards de codage sécurisé, gérez les erreurs sans divulguer de détails, échouez de façon sûre, et journalisez les événements de sécurité vers un dépôt centralisé. Vous avez maintenant tous les concepts clés du Domaine 8."
+          "narration": "Terminons ce domaine. Pour tester la sécurité applicative, le SAST analyse le code sans l'exécuter, le DAST teste l'application en fonctionnement, l'IAST combine les deux, et la SCA inventorie les composants tiers. Pour les logiciels acquis, évaluez l'historique de sécurité et les certifications des vendeurs COTS, maîtrisez l'obsolescence de l'open source, et exigez un audit externe pour les développements tiers. Dans le cloud, les erreurs de configuration dominent les causes de brèches. Sécurisez vos APIs par la validation des paramètres et l'authentification de chaque appel. Enfin, imposez des standards de codage sécurisé, gérez les erreurs sans divulguer de détails, échouez de façon sûre, et journalisez les événements de sécurité vers un dépôt centralisé. Pour prouver l'efficacité de tout cela, appuyez-vous sur la piste d'audit des changements, des métriques, et une acceptation formelle du risque résiduel par son propriétaire métier. Évaluez les services managés par des attestations indépendantes et des clauses contractuelles solides, et retenez la software-defined security, où les contrôles vivent comme du code dans le pipeline. Vous avez maintenant tous les concepts clés du Domaine 8."
         }
       ]
     }

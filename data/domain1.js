@@ -434,6 +434,19 @@ window.CISSP_DATA.domains[1] = {
           "astuce": "💡 Conseil examen : adequacy = transfert libre ; SCC = clauses types dans le contrat ; BCR = intra-groupe multinational. Schrems II impose une évaluation d'impact du transfert même avec des SCC."
         },
         {
+          "type": "standard",
+          "titre": "Licences logicielles : types, conformité et audits d'éditeurs",
+          "points": [
+            "Licence commerciale : l'EULA est un contrat exécutoire — modèles perpétuel ou abonnement, par utilisateur, par poste ou par processeur",
+            "Open source : licences permissives (MIT, Apache) vs copyleft (GPL — le code dérivé doit être partagé sous la même licence)",
+            "Freeware : gratuit mais pas libre ; Shareware : essai avant achat",
+            "Conformité : Software Asset Management (SAM) — inventorier les installations et les rapprocher des droits acquis",
+            "Audits d'éditeurs : clause d'audit contractuelle ; le sur-déploiement est une violation de contrat ET de copyright"
+          ],
+          "narration": "Le volet licences logicielles complète la propriété intellectuelle. Une licence commerciale, matérialisée par l'EULA, l'accord de licence utilisateur final, est un contrat exécutoire : il précise combien de copies vous pouvez installer et selon quel modèle, perpétuel ou par abonnement, par utilisateur, par poste ou par processeur. Attention, open source ne veut pas dire sans obligations : les licences permissives comme MIT ou Apache laissent une grande liberté, mais les licences copyleft comme la GPL imposent de redistribuer le code dérivé sous la même licence, ce qui peut être incompatible avec un produit propriétaire. Le freeware est gratuit sans être libre, et le shareware s'essaie avant de s'acheter. Côté conformité, un programme de Software Asset Management inventorie les installations et les rapproche des droits réellement acquis, car les contrats des grands éditeurs contiennent presque toujours une clause d'audit : un sur-déploiement découvert lors d'un audit d'éditeur expose l'organisation à des pénalités contractuelles, à un rappel de redevances, et à une violation de copyright.",
+          "astuce": "💡 Conseil examen : utiliser plus de copies que la licence n'en accorde viole à la fois le contrat et le copyright. La parade de gouvernance est le SAM : inventorier, rapprocher, régulariser — avant que l'éditeur n'audite."
+        },
+        {
           "type": "resume",
           "titre": "Ce qu'il faut retenir",
           "points": [
@@ -442,9 +455,10 @@ window.CISSP_DATA.domains[1] = {
             "PCI DSS est contractuel, SOX vise les sociétés cotées, GLBA la finance, FISMA le fédéral",
             "Cinq types d'enquêtes avec des standards de preuve différents",
             "Cybercrime : cible, outil ou contenu ; notification selon la juridiction (GDPR 72 h, NIS2 24 h/72 h/1 mois, lois par État aux USA)",
-            "Transferts hors UE : adequacy decision, SCC, BCR — et l'impact de Schrems II"
+            "Transferts hors UE : adequacy decision, SCC, BCR — et l'impact de Schrems II",
+            "Licences logicielles : EULA contractuel, permissive vs copyleft, conformité par le SAM face aux audits d'éditeurs"
           ],
-          "narration": "Résumons cette leçon dense. Trois catégories de droit : pénal, civil et administratif, chacune avec sa logique et son standard de preuve. Le GDPR s'applique mondialement dès qu'on traite des données de résidents européens, avec notification sous soixante-douze heures. HIPAA et HITECH protègent les données de santé avec un délai de soixante jours. PCI DSS est un standard contractuel, SOX responsabilise les dirigeants des sociétés cotées, GLBA encadre la finance et FISMA le secteur fédéral américain. Sachez reconnaître les cinq types d'enquêtes et leurs niveaux d'exigence respectifs. Enfin, vous savez désormais situer les grandes familles de cybercriminalité, les obligations de notification propres à chaque juridiction, et les mécanismes de transfert transfrontière de données : décisions d'adéquation, clauses contractuelles types et règles d'entreprise contraignantes, dans le monde d'après Schrems deux."
+          "narration": "Résumons cette leçon dense. Trois catégories de droit : pénal, civil et administratif, chacune avec sa logique et son standard de preuve. Le GDPR s'applique mondialement dès qu'on traite des données de résidents européens, avec notification sous soixante-douze heures. HIPAA et HITECH protègent les données de santé avec un délai de soixante jours. PCI DSS est un standard contractuel, SOX responsabilise les dirigeants des sociétés cotées, GLBA encadre la finance et FISMA le secteur fédéral américain. Sachez reconnaître les cinq types d'enquêtes et leurs niveaux d'exigence respectifs. Enfin, vous savez désormais situer les grandes familles de cybercriminalité, les obligations de notification propres à chaque juridiction, et les mécanismes de transfert transfrontière de données : décisions d'adéquation, clauses contractuelles types et règles d'entreprise contraignantes, dans le monde d'après Schrems deux. Enfin, côté licences logicielles, retenez que l'EULA est un contrat, que le copyleft impose de partager le code dérivé, et que la conformité se pilote par un programme de Software Asset Management face aux audits d'éditeurs."
         }
       ]
     },
@@ -485,6 +499,18 @@ window.CISSP_DATA.domains[1] = {
             "RFC 1087 : gaspiller des ressources, compromettre la vie privée ou l'intégrité est « unethical »"
           ],
           "narration": "Quelques détails d'éthique qui tombent régulièrement. N'importe quel membre du public peut déposer une plainte au titre des deux premiers canons, mais pour le troisième, seul un employeur ou une personne liée par contrat le peut. Si vous travaillez sur un projet où des lois de plusieurs pays entrent en conflit, priorisez la juridiction locale depuis laquelle vous fournissez le service. Enfin, la RFC 1087 sur l'éthique d'Internet qualifie de non éthique tout acte qui cherche un accès non autorisé, perturbe l'usage prévu d'Internet, gaspille des ressources, détruit l'intégrité d'informations ou compromet la vie privée des utilisateurs. Et bien sûr, vous devez aussi soutenir et promouvoir le code d'éthique propre à votre organisation."
+        },
+        {
+          "type": "standard",
+          "titre": "Le code d'éthique de l'organisation",
+          "points": [
+            "Deux codes coexistent : le code ISC² s'impose aux certifiés, le code interne s'impose à TOUS les employés",
+            "Contenu typique : valeurs de l'entreprise, conflits d'intérêts, cadeaux et invitations, usage des ressources, canal de signalement",
+            "Le professionnel doit soutenir et promouvoir le code de son organisation, pas seulement celui d'ISC²",
+            "Mise en œuvre : intégré aux politiques, présenté dès l'onboarding, rappelé en formation, appliqué par la direction et les RH"
+          ],
+          "narration": "Ne confondez pas le code d'éthique ISC² avec le code d'éthique de l'organisation. Le premier s'impose aux professionnels certifiés, et une violation peut coûter la certification. Le second est un document interne qui s'applique à tous les employés, certifiés ou non : il formalise les valeurs de l'entreprise, encadre les conflits d'intérêts, les cadeaux et l'usage des ressources, et prévoit un canal de signalement des manquements. En tant que professionnel de la sécurité, vous avez le devoir de soutenir et de promouvoir ce code interne : le faire vivre dans les politiques, le présenter dès l'intégration des nouveaux arrivants, et montrer l'exemple. Une pratique peut être parfaitement légale tout en violant le code de l'organisation ; dans ce cas, le bon réflexe est de la signaler par le canal interne prévu, pas de l'ignorer sous prétexte que la loi est respectée.",
+          "astuce": "💡 Conseil examen : distinguez la portée — code ISC² : les certifiés, plaintes instruites par ISC² au titre des canons ; code organisationnel : tous les employés, appliqué par la direction et les RH. Légal ne veut pas dire éthique."
         },
         {
           "type": "schema",
@@ -715,6 +741,31 @@ window.CISSP_DATA.domains[1] = {
           "narration": "La gestion des risques est un cycle, pas un projet ponctuel. Le risk register, ou registre des risques, inventorie tous les risques identifiés, leur criticité, les réponses prescrites et l'avancement du traitement. Le Risk Management Framework du NIST structure ce cycle en sept étapes : préparer, catégoriser le système, sélectionner les contrôles, les implémenter, les évaluer, autoriser le système, puis surveiller en continu. La maturité du dispositif s'évalue avec un Risk Maturity Model en cinq niveaux, d'ad hoc jusqu'à optimized. Enfin, les Security Control Assessments et le monitoring continu vérifient régulièrement que les contrôles sont bien en place et réellement efficaces. Citons aussi d'autres cadres de risque : ISO 31000, FAIR, OCTAVE ou le modèle TARA."
         },
         {
+          "type": "standard",
+          "titre": "Évaluer les contrôles : SCA, PIA et DPIA",
+          "points": [
+            "Security Control Assessment (SCA) : vérifier que les contrôles sont en place, correctement implémentés et produisent l'effet attendu (démarche NIST 800-53A)",
+            "Le référentiel exige d'évaluer les contrôles de sécurité ET de vie privée",
+            "PIA (Privacy Impact Assessment) : analyse d'impact sur la vie privée d'un projet ou d'un système, terme générique et exigence du secteur public américain",
+            "DPIA : version GDPR (article 35), OBLIGATOIRE avant tout traitement à risque élevé — profilage à grande échelle, données sensibles, surveillance systématique",
+            "Risque résiduel élevé malgré les mesures prévues : consultation préalable de l'autorité de contrôle"
+          ],
+          "narration": "Sélectionner et implémenter des contrôles ne suffit pas : il faut prouver qu'ils fonctionnent. C'est l'objet du Security Control Assessment, le SCA : une évaluation formelle qui vérifie que chaque contrôle est bien en place, correctement implémenté, et qu'il produit réellement l'effet attendu, selon la démarche décrite par le NIST. Mais attention, le référentiel officiel parle des contrôles de sécurité et de vie privée. Côté vie privée, l'outil est l'analyse d'impact : le Privacy Impact Assessment, ou PIA, évalue les effets d'un projet sur les données personnelles avant son lancement. Sa déclinaison européenne, la Data Protection Impact Assessment, la DPIA, est rendue obligatoire par l'article trente-cinq du GDPR avant tout traitement susceptible d'engendrer un risque élevé pour les droits des personnes : profilage à grande échelle, données sensibles, ou surveillance systématique d'une zone accessible au public. Elle se mène avant le traitement, avec le concours du délégué à la protection des données. Et si le risque résiduel reste élevé malgré les mesures envisagées, l'organisation doit consulter l'autorité de contrôle avant de démarrer.",
+          "astuce": "💡 Conseil examen : la DPIA se mène AVANT le début du traitement, avec le DPO. Scénario de profilage à grande échelle de résidents européens = réponse DPIA, pas pentest ni SCA. Le SCA vérifie les contrôles ; la PIA/DPIA évalue l'impact sur les personnes."
+        },
+        {
+          "type": "standard",
+          "titre": "Monitoring continu, mesure et reporting du risque",
+          "points": [
+            "Continuous monitoring (NIST ISCM) : collecte automatisée, tableaux de bord, réévaluation à chaque changement majeur — l'autorisation n'est jamais définitive",
+            "KPI : mesurent la performance des contrôles ; KRI : indicateurs avancés de risque, assortis de seuils qui déclenchent une action",
+            "Reporting interne : direction, comité des risques, board — en langage business : tendances, exposition comparée à l'appétit pour le risque",
+            "Reporting externe : régulateurs (notifications obligatoires), assureurs cyber, clients et auditeurs (attestations, rapports de type SOC 2)"
+          ],
+          "narration": "Une évaluation annuelle ne suffit pas : entre deux audits, le système change, les menaces évoluent. Le monitoring continu, formalisé par le NIST sous le nom d'Information Security Continuous Monitoring, maintient une visibilité permanente : collecte automatisée d'indicateurs, tableaux de bord, et réévaluation du risque à chaque changement majeur du système ou de son environnement. Pour mesurer, distinguez deux familles d'indicateurs : les KPI, indicateurs de performance, disent si les contrôles fonctionnent, par exemple le taux de correctifs appliqués dans les délais ; les KRI, indicateurs de risque, sont des signaux avancés dotés de seuils, et le franchissement d'un seuil doit déclencher une action prédéfinie, pas une simple curiosité statistique. Ces mesures alimentent le reporting. En interne, on rend compte à la direction, au comité des risques et au conseil d'administration, en langage business : tendances, pertes potentielles quantifiées, exposition comparée à l'appétit pour le risque. En externe, on rend compte aux régulateurs à travers les notifications obligatoires, aux assureurs cyber pour la souscription, et aux clients ou auditeurs via des attestations comme les rapports SOC deux.",
+          "astuce": "💡 Conseil examen : au board, on parle risque business et argent, jamais jargon technique ni CVE. Un KRI qui franchit son seuil = déclencheur d'action. Monitoring continu = la réponse aux scénarios « entre deux évaluations annuelles »."
+        },
+        {
           "type": "resume",
           "titre": "Ce qu'il faut retenir",
           "points": [
@@ -722,9 +773,10 @@ window.CISSP_DATA.domains[1] = {
             "SLE = AV × EF ; ALE = SLE × ARO ; valeur du safeguard = (ALE1 − ALE2) − ACS",
             "Réponses : mitigate, transfer, avoid, accept, deter — jamais reject",
             "Residual risk = ce que la direction accepte ; contrôles en 3 catégories et 7 types",
-            "Cycle continu : risk register, RMF, maturité, monitoring"
+            "Cycle continu : risk register, RMF, maturité, monitoring",
+            "Évaluer et rendre compte : SCA côté sécurité, PIA/DPIA côté vie privée ; KRI avec seuils, monitoring continu, reporting interne (board) et externe (régulateurs, assureurs)"
           ],
-          "narration": "Résumons ce chapitre central. Maîtrisez la chaîne du risque : les menaces exploitent des vulnérabilités, créant une exposition qui constitue le risque, réduit par des safeguards. Sachez calculer sans hésiter SLE, ALE et la valeur d'un safeguard. Connaissez les réponses au risque, en vous rappelant que le rejet n'est jamais acceptable. Distinguez risque inhérent, résiduel et total, et sachez classer un contrôle par catégorie et par fonction. Enfin, retenez que tout cela s'inscrit dans un cycle continu, outillé par le registre des risques, le RMF du NIST et les modèles de maturité."
+          "narration": "Résumons ce chapitre central. Maîtrisez la chaîne du risque : les menaces exploitent des vulnérabilités, créant une exposition qui constitue le risque, réduit par des safeguards. Sachez calculer sans hésiter SLE, ALE et la valeur d'un safeguard. Connaissez les réponses au risque, en vous rappelant que le rejet n'est jamais acceptable. Distinguez risque inhérent, résiduel et total, et sachez classer un contrôle par catégorie et par fonction. Enfin, retenez que tout cela s'inscrit dans un cycle continu, outillé par le registre des risques, le RMF du NIST et les modèles de maturité. N'oubliez pas la boucle de contrôle : les Security Control Assessments et les analyses d'impact sur la vie privée, PIA et DPIA, vérifient les contrôles ; le monitoring continu et les KRI surveillent la posture au quotidien ; et le reporting traduit le tout en langage business, pour la direction comme pour les régulateurs, assureurs et clients."
         }
       ]
     },
@@ -981,6 +1033,17 @@ window.CISSP_DATA.domains[1] = {
           ],
           "reponse": 2,
           "explication": "La priorité absolue du BCP et du DRP est toujours la vie humaine : on met les personnes hors de danger avant toute considération technique ou financière. Le basculement, la restauration et les notifications sont importants, mais viennent après la mise en sécurité du personnel. À l'examen, quand la sécurité des personnes figure parmi les choix, c'est presque toujours la bonne réponse."
+        },
+        {
+          "type": "standard",
+          "titre": "Réviser le contenu : menaces et technologies émergentes",
+          "points": [
+            "Le contenu SETA est périssable : revue planifiée au moins annuelle, PLUS des revues déclenchées (nouvel incident, nouvelle technologie, nouvelle réglementation)",
+            "Technologies émergentes à intégrer : IA générative et deepfakes, cryptocurrency (arnaques à l'investissement, fraude, rançons), blockchain",
+            "Adapter le contenu par rôle, retirer ce qui est obsolète, puis re-mesurer l'efficacité après chaque mise à jour"
+          ],
+          "narration": "Un programme de sensibilisation n'est jamais terminé, car les attaquants, eux, mettent leur contenu à jour en permanence. La revue du contenu se fait à deux rythmes. D'abord une revue périodique planifiée, au moins une fois par an, qui vérifie que les supports restent exacts et pertinents. Ensuite des revues déclenchées par un événement : un incident interne, une nouvelle vague d'attaques dans le secteur, une nouvelle technologie adoptée par l'entreprise, ou une nouvelle réglementation. Les technologies émergentes doivent entrer dans les supports : l'intelligence artificielle générative et les deepfakes, la blockchain, et les cryptomonnaies, très présentes dans les arnaques à l'investissement, les fraudes au faux support et le paiement des rançons. À chaque révision, on adapte le contenu aux rôles concernés, on retire ce qui est obsolète, puis on mesure à nouveau l'efficacité du programme pour vérifier que la mise à jour a porté ses fruits.",
+          "astuce": "💡 Conseil examen : scénario avec une formation datée face à de nouvelles attaques non couvertes ? La réponse attendue est la revue périodique du contenu SETA — pas des sanctions, pas plus de phishing simulé à l'identique, pas un simple outil technique."
         },
         {
           "type": "resume",

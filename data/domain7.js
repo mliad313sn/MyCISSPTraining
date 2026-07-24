@@ -146,6 +146,32 @@ window.CISSP_DATA.domains[7] = {
           "explication": "On crée toujours deux copies identiques bit à bit du support original, puis on analyse une copie. Travailler sur l'original modifierait la preuve et compromettrait son admissibilité. Redémarrer détruit les preuves vivantes, et supprimer quoi que ce soit revient à altérer la preuve."
         },
         {
+          "type": "standard",
+          "titre": "Techniques d'investigation et rapport final",
+          "points": [
+            "Interview : recueillir des informations auprès de témoins coopératifs — l'entreprise interviewe, elle n'interroge pas",
+            "Interrogation : réservée aux forces de l'ordre, jamais au professionnel de sécurité",
+            "Analyse de cause racine et data analytics : corréler les logs pour reconstituer les faits",
+            "Rapport d'investigation : factuel, complet, séparant clairement les faits des opinions",
+            "Rédiger chaque rapport comme s'il devait finir devant un tribunal"
+          ],
+          "narration": "Parlons maintenant de la conduite de l'enquête et de son livrable. Pour recueillir des témoignages, l'entreprise mène des interviews, c'est-à-dire des entretiens avec des personnes coopératives qui acceptent de raconter ce qu'elles savent. L'interrogation, elle, est coercitive et appartient exclusivement aux forces de l'ordre : un professionnel de sécurité n'interroge jamais un suspect. L'enquêteur combine ces entretiens avec l'analyse de cause racine et l'analyse de données, en corrélant les journaux de sources multiples pour reconstituer la chronologie des faits, et il peut faire appel à des experts externes quand les compétences internes manquent. Tout cela aboutit au rapport d'investigation : un document factuel et complet, qui documente chaque étape, chaque preuve et chaque analyse, en distinguant clairement les faits constatés des opinions de l'enquêteur. Rédigez toujours ce rapport comme s'il devait être lu par un juge, car même une enquête interne peut basculer en procédure judiciaire.",
+          "astuce": "💡 Conseil examen : interview = volontaire, mené par l'entreprise ; interrogation = coercitive, réservée aux forces de l'ordre. Et un rapport d'investigation sépare toujours les faits des opinions."
+        },
+        {
+          "type": "standard",
+          "titre": "Artefacts : ordinateur, réseau et mobile",
+          "points": [
+            "Artefacts ordinateur : registre, journaux système, fichiers temporaires, historique et cache du navigateur",
+            "Artefacts réseau : enregistrements NetFlow, captures de paquets, journaux firewall, proxy, DNS et IDS",
+            "Le réseau garde des traces même quand l'attaquant a nettoyé l'endpoint",
+            "Artefacts mobiles : SMS, données de localisation, données d'applications, sauvegardes cloud",
+            "Corréler les trois sources pour reconstituer l'attaque de bout en bout"
+          ],
+          "narration": "Approfondissons les artefacts forensiques, ces traces que toute activité laisse derrière elle. Sur un ordinateur, on examine le registre, les journaux système, les fichiers temporaires, ainsi que l'historique et le cache du navigateur. Sur le réseau, les artefacts sont d'une autre nature : les enregistrements NetFlow qui tracent qui a parlé à qui et combien de données ont circulé, les captures de paquets, et les journaux des firewalls, des proxys, des serveurs DNS et des sondes de détection. Retenez un point clé : quand un attaquant efface soigneusement ses traces sur la machine compromise, les artefacts réseau restent souvent la seule source pour reconstituer l'exfiltration, car ils sont enregistrés hors de sa portée. Enfin, les appareils mobiles regorgent d'artefacts : messages, données de localisation, données d'applications et sauvegardes cloud. Le travail de l'analyste consiste à corréler ces trois familles pour raconter l'attaque de bout en bout.",
+          "astuce": "💡 Conseil examen : si le scénario dit que l'attaquant a effacé les logs du poste compromis, la bonne réponse s'appuie sur les artefacts RÉSEAU (NetFlow, proxy, DNS) — collectés hors de portée de l'attaquant."
+        },
+        {
           "type": "resume",
           "titre": "À retenir",
           "points": [
@@ -287,6 +313,20 @@ window.CISSP_DATA.domains[7] = {
           ],
           "reponse": 2,
           "explication": "Le playbook est le document qui définit comment répondre à un incident ; le runbook en est l'implémentation, traduisant les étapes en actions automatisées. Les autres réponses décrivent des artefacts de communication, d'historique ou de gouvernance, pas le runbook."
+        },
+        {
+          "type": "standard",
+          "titre": "Continuous monitoring : une vigilance permanente",
+          "points": [
+            "Continuous monitoring : conscience permanente de la posture de sécurité, des menaces et des vulnérabilités",
+            "S'oppose aux évaluations ponctuelles : un audit annuel n'est qu'une photo, vite périmée",
+            "Cadre de référence : NIST SP 800-137 (Information Security Continuous Monitoring)",
+            "Boucle : définir la stratégie → collecter → analyser → répondre → ajuster",
+            "S'appuie sur le SIEM, les scans de vulnérabilités, les métriques et l'alerting en temps quasi réel",
+            "Alimente les décisions de gestion du risque en continu, pas une fois par an"
+          ],
+          "narration": "Donnons maintenant son nom officiel à un concept que l'examen cite explicitement : le continuous monitoring, la supervision continue. L'idée est de maintenir une conscience permanente de la posture de sécurité de l'organisation, de ses vulnérabilités et des menaces qui la visent, afin d'éclairer les décisions de gestion du risque en continu. Opposez-le mentalement aux évaluations ponctuelles : un audit annuel ou une certification n'est qu'une photographie à un instant donné, périmée dès qu'une nouvelle vulnérabilité apparaît. Le cadre de référence est la publication NIST SP 800-137, qui décrit une boucle : définir la stratégie de supervision, collecter les données, les analyser, répondre aux constats, puis ajuster la stratégie. Concrètement, le continuous monitoring orchestre les outils que nous venons de voir : le SIEM, les scans de vulnérabilités récurrents, les métriques de sécurité et l'alerting en temps quasi réel. La supervision n'est plus un événement, c'est un processus permanent.",
+          "astuce": "💡 Conseil examen : audit ponctuel = photo, continuous monitoring = vidéo. Si le scénario décrit une compromission survenue APRÈS un audit réussi, la réponse attendue est un programme de continuous monitoring."
         },
         {
           "type": "resume",
@@ -431,6 +471,33 @@ window.CISSP_DATA.domains[7] = {
           ],
           "reponse": 0,
           "explication": "Même pour un correctif critique, on teste d'abord sur un environnement isolé pour détecter les effets de bord, puis on approuve via la gestion des changements et on déploie. Déployer sans tester peut provoquer une panne majeure ; attendre un mois laisse la vulnérabilité ouverte ; désactiver la production est disproportionné."
+        },
+        {
+          "type": "standard",
+          "titre": "Provisioning et automatisation",
+          "points": [
+            "Provisioning : déployer un nouveau système AVEC la baseline sécurisée dès son premier démarrage",
+            "Jamais de configuration manuelle « au fil de l'eau » : images durcies et scripts de déploiement",
+            "Automatisation : cohérence à grande échelle, moins d'erreur humaine, déploiements reproductibles",
+            "Personnalisation par groupes de machines (serveurs web, bases de données, postes)",
+            "Deprovisioning : révoquer les accès, récupérer les licences, sanitiser le support en fin de vie"
+          ],
+          "narration": "Approfondissons le provisioning, la mise à disposition des systèmes. Le principe est simple : un système doit naître sécurisé. Le provisioning consiste à déployer chaque nouveau serveur ou poste de travail avec la baseline durcie appliquée dès le premier démarrage, plutôt que de le configurer manuellement après coup en espérant ne rien oublier. Pour cela, on s'appuie sur des images durcies et des scripts de déploiement automatisés. L'automatisation apporte trois bénéfices majeurs : la cohérence, car chaque machine reçoit exactement les mêmes réglages, la capacité à opérer à grande échelle, et la réduction drastique de l'erreur humaine, principale cause des configurations vulnérables. On personnalise ensuite par groupes : les serveurs web, les bases de données et les postes utilisateurs reçoivent chacun les réglages complémentaires de leur rôle. Et n'oubliez pas le miroir du provisioning : le deprovisioning, qui révoque les accès, récupère les licences et sanitise le support quand le système quitte le service.",
+          "astuce": "💡 Conseil examen : face à des serveurs configurés à la main et incohérents, la MEILLEURE réponse est presque toujours le provisioning automatisé depuis une image durcie — pas une checklist manuelle supplémentaire."
+        },
+        {
+          "type": "standard",
+          "titre": "Infrastructure as Code et dérive de configuration",
+          "points": [
+            "IaC : décrire l'infrastructure dans des fichiers de code versionnés, revus et approuvés via le change management",
+            "Le code devient la source de vérité : redéploiement reproductible et auditable",
+            "Configuration drift : écart progressif entre l'état réel des systèmes et la baseline approuvée",
+            "Causes : modifications manuelles, correctifs d'urgence non répercutés, changements non autorisés",
+            "Détection : scans de conformité automatisés (SCAP, benchmarks CIS) comparant chaque système à la baseline",
+            "Remédiation : redéployer depuis le code plutôt que corriger à la main ; une dérive inexpliquée = incident potentiel"
+          ],
+          "narration": "L'Infrastructure as Code pousse l'automatisation à son terme : toute l'infrastructure, serveurs, réseaux, règles de pare-feu, est décrite dans des fichiers de code stockés dans un gestionnaire de versions. Chaque modification passe par une revue et par le processus de gestion des changements, puis le déploiement est reproductible à l'identique. Le code devient la source de vérité de la configuration. Mais la réalité s'écarte toujours du plan : c'est la dérive de configuration, le configuration drift. Au fil des modifications manuelles, des correctifs d'urgence jamais répercutés dans le code et des changements non autorisés, l'état réel des systèmes s'éloigne progressivement de la baseline approuvée. La parade est la validation automatisée des baselines : des scans de conformité réguliers, appuyés sur des standards comme SCAP ou les benchmarks CIS, comparent chaque système à sa configuration de référence et signalent tout écart. Face à une dérive, deux réflexes : vérifier d'abord si un changement approuvé l'explique, car un écart inexpliqué peut révéler une compromission, puis remédier en redéployant depuis le code plutôt qu'en bricolant à la main.",
+          "astuce": "💡 Conseil examen : une dérive de configuration sans changement approuvé correspondant se traite comme un incident de sécurité potentiel — on investigue AVANT de corriger. Et la remédiation durable passe par le redéploiement depuis la source de vérité, pas par une retouche manuelle."
         },
         {
           "type": "resume",
@@ -1000,6 +1067,34 @@ window.CISSP_DATA.domains[7] = {
           ],
           "reponse": 1,
           "explication": "Le parallel test relocalise le personnel sur le site de secours et exécute les procédures d'activation pendant que le site principal continue de fonctionner normalement. Le full-interruption arrête réellement la production ; la simulation ne teste que certaines mesures sur scénario ; le walk-through reste un exercice procédural sans relocalisation."
+        },
+        {
+          "type": "standard",
+          "titre": "Communications DR : le call tree et les moyens alternatifs",
+          "points": [
+            "Call tree (arbre d'appel) : notification en cascade — chaque personne prévient un petit groupe, qui prévient le sien",
+            "Avantage : notification rapide de tout le personnel sans reposer sur une seule personne",
+            "Prévoir des suppléants à chaque nœud et une confirmation qui remonte l'arbre (boucle fermée)",
+            "Systèmes de notification automatisés (SMS, appels de masse) : complément moderne du call tree",
+            "Moyens hors bande : téléphonie mobile personnelle, messageries externes, téléphones satellites — le réseau d'entreprise peut être détruit",
+            "Tester le call tree régulièrement : les coordonnées se périment vite"
+          ],
+          "narration": "Le DCO cite explicitement une méthode de communication de crise : le call tree, l'arbre d'appel. Le principe est une notification en cascade. Le coordinateur appelle quelques personnes, chacune appelle à son tour un petit groupe prédéfini, et ainsi de suite jusqu'à couvrir tout le personnel. L'avantage est double : la notification est rapide, et elle ne repose pas sur une seule personne qui devrait passer deux cents appels. Deux précautions rendent l'arbre robuste : des suppléants à chaque nœud, car un maillon injoignable ne doit pas couper toute une branche, et une confirmation qui remonte l'arbre, pour que le coordinateur sache qui a réellement été joint. Les systèmes de notification automatisés, par SMS ou appels de masse, complètent aujourd'hui le call tree, mais le principe reste au programme de l'examen. Pensez aussi aux moyens hors bande : en cas de sinistre, la messagerie et la téléphonie de l'entreprise peuvent être détruites, d'où l'importance des numéros personnels, des messageries externes, voire des téléphones satellites. Et comme tout le DRP, l'arbre d'appel se teste régulièrement, car les coordonnées se périment vite.",
+          "astuce": "💡 Conseil examen : pour notifier le personnel pendant un sinistre alors que les systèmes de l'entreprise sont hors service, la bonne réponse est le call tree documenté, avec suppléants, confirmation de réception et coordonnées hors bande."
+        },
+        {
+          "type": "standard",
+          "titre": "Formation DR et gestion des urgences",
+          "points": [
+            "Tout le personnel connaît son rôle DR : formation approfondie pour l'équipe, sensibilisation générale pour les autres",
+            "Les tests du DRP (walk-through, simulation) sont aussi des séances d'entraînement",
+            "Re-former après chaque embauche, changement de rôle ou révision du plan",
+            "Emergency management : évacuation, points de rassemblement, comptabiliser le personnel",
+            "Exercices d'évacuation réguliers ; coordination avec les secours externes",
+            "La vie humaine passe avant la reprise des systèmes, toujours"
+          ],
+          "narration": "Un plan de reprise n'est efficace que si les gens savent l'exécuter. La formation DR distingue deux niveaux : l'équipe de reprise reçoit une formation approfondie sur ses procédures spécifiques, tandis que l'ensemble du personnel reçoit une sensibilisation générale, chacun devant au minimum connaître son rôle et savoir où trouver les instructions. Les tests du plan jouent un double rôle : ils valident le plan et entraînent les équipes, c'est pour cela qu'un walk-through ou une simulation a une valeur pédagogique même sans révéler de défaut. La formation se renouvelle à chaque embauche, à chaque changement de rôle et à chaque révision du plan. La gestion des urgences, l'emergency management, encadre la réaction immédiate à un événement physique : procédures d'évacuation, points de rassemblement, et surtout la comptabilisation du personnel pour vérifier que personne ne manque, le tout coordonné avec les secours externes et répété lors d'exercices d'évacuation réguliers. Et rappelez-vous la hiérarchie absolue du CISSP : en urgence, on sécurise d'abord les personnes ; les serveurs, les données et la migration en cours attendront.",
+          "astuce": "💡 Conseil examen : dans tout scénario d'urgence physique (incendie, séisme), la PREMIÈRE action est toujours d'évacuer et de comptabiliser le personnel — jamais d'éteindre proprement les serveurs ni de sauver les équipements."
         },
         {
           "type": "resume",
