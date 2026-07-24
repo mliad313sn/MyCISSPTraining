@@ -1124,7 +1124,7 @@ window.CISSP_DATA.domains[2] = {
         "Identification, authentification, autorisation, audit"
       ],
       "reponse": 0,
-      "explication": "Les quatre piliers du Cloud Access Security Broker sont la visibilité, la sécurité des données, la détection des menaces et la conformité. La première proposition est la triade CIA étendue, la troisième le processus IAAA, la quatrième une typologie de contrôles — tous vrais ailleurs, mais pas les piliers du CASB.",
+      "explication": "Les quatre piliers du Cloud Access Security Broker sont la visibilité, la sécurité des données, la détection des menaces et la conformité. La deuxième proposition est une typologie de contrôles de sécurité, la troisième la triade CIA étendue, la quatrième le processus IAAA — tous vrais ailleurs, mais pas les piliers du CASB.",
       "difficulte": 2,
       "pourquoi": [
         "Bonne réponse : visibilité, sécurité des données, détection des menaces et conformité sont les quatre piliers du CASB.",
