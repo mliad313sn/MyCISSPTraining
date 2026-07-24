@@ -1207,8 +1207,8 @@ window.CISSP_DATA.domains[7] = {
       "q": "Votre organisation apprend qu'un procès va probablement être intenté contre elle. Que devez-vous faire EN PREMIER concernant les données électroniques ?",
       "choix": [
         "Purger les données au-delà de la durée de rétention",
-        "Mettre en œuvre la préservation des preuves numériques potentiellement pertinentes",
-        "Chiffrer toutes les archives pour les protéger",
+        "Déclencher un legal hold sur les données potentiellement pertinentes",
+        "Chiffrer toutes les archives concernées pour les protéger d'un accès non autorisé",
         "Transférer les données vers un tiers de confiance"
       ],
       "reponse": 1,
@@ -1296,10 +1296,10 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Quelle solution est la MIEUX adaptée pour détecter un compte compromis dont l'attaquant utilise des identifiants valides ?",
       "choix": [
-        "Une détection par signatures",
+        "Une détection fondée sur des signatures d'attaques connues",
         "Un firewall stateful",
-        "Une deny list applicative",
-        "L'UEBA (analyse comportementale des utilisateurs et entités)"
+        "Une deny list applicative bloquant les binaires malveillants connus",
+        "L'UEBA (analyse du comportement des utilisateurs)"
       ],
       "reponse": 3,
       "explication": "Avec des identifiants valides, aucune signature d'attaque ni règle firewall n'est violée. L'UEBA détecte les déviations par rapport au profil de comportement habituel de l'utilisateur (horaires, volumes, ressources accédées), signature typique d'un compte compromis ou d'une menace interne.",
@@ -1369,9 +1369,9 @@ window.CISSP_DATA.domains[7] = {
       "q": "Pourquoi est-il essentiel de surveiller les actions des comptes privilégiés ?",
       "choix": [
         "Parce que les administrateurs sont les employés les moins fiables",
-        "Pour pouvoir alléger la journalisation des comptes standards et économiser du stockage",
+        "Pour pouvoir alléger la journalisation des comptes standards et réduire les coûts de stockage à long terme",
         "Uniquement pour satisfaire les exigences des auditeurs externes",
-        "Parce que les attaquants utilisent presque toujours des privilèges élevés et que les employés de confiance peuvent en abuser"
+        "Parce que les attaquants visent les privilèges élevés et que des initiés peuvent en abuser"
       ],
       "reponse": 3,
       "explication": "La surveillance des opérations privilégiées répond à deux risques : l'abus par des employés de confiance et la détection d'attaques, car les attaquants exploitent quasi systématiquement des privilèges élevés. Il ne s'agit ni de défiance systématique, ni de simple conformité, ni d'un arbitrage de volumétrie de journalisation.",
@@ -1388,8 +1388,8 @@ window.CISSP_DATA.domains[7] = {
       "choix": [
         "La gestion des configurations (CM)",
         "L'eDiscovery",
-        "La gestion des incidents",
-        "La gestion des vulnérabilités"
+        "La gestion des incidents de sécurité",
+        "La gestion continue des vulnérabilités et des correctifs"
       ],
       "reponse": 0,
       "explication": "La configuration management identifie, contrôle et vérifie les configurations, en s'appuyant sur des baselines (souvent déployées par images) et le hardening. La gestion des vulnérabilités identifie les faiblesses, la gestion des incidents traite les compromissions, et l'eDiscovery concerne les procédures judiciaires.",
@@ -1512,10 +1512,10 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Un malware reste actif en mémoire sans jamais s'écrire sur le disque. Comment le qualifie-t-on ?",
       "choix": [
-        "Logic bomb",
+        "Une logic bomb à retardement",
         "Rootkit",
         "Fileless malware",
-        "Multipartite"
+        "Un malware multipartite"
       ],
       "reponse": 2,
       "explication": "Le fileless malware ne laisse aucune trace sur les supports de stockage tout en restant résident et actif en mémoire, ce qui complique fortement sa détection. Le rootkit s'enfouit dans l'OS pour se masquer, le multipartite se propage par plusieurs vecteurs, et la logic bomb attend une condition de déclenchement.",
@@ -1548,9 +1548,9 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Après un incident majeur, la méthode la PLUS SÛRE pour restaurer un système compromis est :",
       "choix": [
-        "Reconstruire complètement le système puis restaurer les données depuis la sauvegarde la plus récente",
+        "Reconstruire complètement le système puis restaurer les données saines",
         "Changer tous les mots de passe et surveiller le système",
-        "Supprimer le malware avec l'antivirus puis remettre en production",
+        "Supprimer le malware détecté avec l'antivirus puis remettre le serveur en production",
         "Restaurer uniquement les fichiers modifiés par l'attaquant"
       ],
       "reponse": 0,
@@ -1568,7 +1568,7 @@ window.CISSP_DATA.domains[7] = {
       "choix": [
         "Le RSSI personnellement",
         "La direction (management) qui a pris la décision",
-        "L'équipe de réponse aux incidents",
+        "L'équipe de réponse aux incidents qui a formulé la recommandation",
         "L'auditeur externe"
       ],
       "reponse": 1,
@@ -1603,9 +1603,9 @@ window.CISSP_DATA.domains[7] = {
       "q": "Votre organisation effectue un full backup le dimanche et des sauvegardes incrémentales chaque nuit. Une panne survient jeudi matin. Que devez-vous restaurer ?",
       "choix": [
         "Le full du dimanche uniquement",
-        "Le full du dimanche et l'incrémentale de mercredi uniquement",
+        "Le full du dimanche et l'incrémentale de mercredi uniquement, en ignorant lundi et mardi",
         "Uniquement l'incrémentale de mercredi",
-        "Le full du dimanche puis les incrémentales de lundi, mardi et mercredi dans l'ordre chronologique"
+        "Le full du dimanche puis les incrémentales de lundi à mercredi dans l'ordre"
       ],
       "reponse": 3,
       "explication": "Chaque incrémentale ne contient que les changements depuis la sauvegarde précédente : il faut donc le full puis TOUTES les incrémentales dans l'ordre chronologique. Restaurer une seule incrémentale est la logique des différentielles ; le full seul perdrait trois jours de données.",
@@ -1656,8 +1656,8 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Pourquoi les Mutual Assistance Agreements (MAA) sont-ils RAREMENT utilisés comme stratégie de reprise ?",
       "choix": [
-        "Ils sont difficiles à faire respecter, vulnérables au même sinistre régional et posent des problèmes de confidentialité",
-        "Ils sont interdits par la plupart des régulateurs",
+        "Difficiles à faire respecter, vulnérables au même sinistre régional et risqués pour la confidentialité",
+        "Ils sont formellement interdits par la plupart des régulateurs et des cadres de conformité internationaux",
         "Ils exigent une certification ISO préalable",
         "Ils coûtent plus cher qu'un hot site"
       ],
@@ -1746,7 +1746,7 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Quel dispositif de sécurité physique empêche le piggybacking grâce à un double jeu de portes ?",
       "choix": [
-        "Le turnstile",
+        "Le tourniquet (turnstile) de contrôle d'accès",
         "Le PIDAS",
         "Le bollard",
         "L'access control vestibule (mantrap)"
@@ -1764,10 +1764,10 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Un analyste arrive devant un poste de travail compromis encore allumé et suspecté d'héberger un malware actif. Selon l'ordre de volatilité, que doit-il collecter EN PREMIER ?",
       "choix": [
-        "Le contenu de la mémoire vive (RAM) et des connexions réseau actives",
+        "Le contenu de la RAM et des connexions réseau actives",
         "Les sauvegardes de la veille",
         "Une image bit à bit du disque dur",
-        "Les journaux archivés sur le serveur central"
+        "Les journaux déjà archivés sur le serveur de journalisation centralisé"
       ],
       "reponse": 0,
       "explication": "L'ordre de volatilité impose de collecter d'abord les données les plus éphémères : registres CPU, cache, RAM, tables de connexions réseau. La RAM disparaît à la mise hors tension et contient le malware actif, les clés de chiffrement et les sessions. Le disque, les sauvegardes et les logs archivés sont persistants et peuvent être collectés ensuite sans perte.",
@@ -1784,8 +1784,8 @@ window.CISSP_DATA.domains[7] = {
       "choix": [
         "Le tribunal ordonne une nouvelle copie du disque",
         "Aucune, tant que le hash du disque est intact",
-        "La preuve risque d'être déclarée inadmissible pour rupture de la chain of custody",
-        "L'enquêteur doit simplement signer le registre a posteriori"
+        "La preuve risque d'être jugée inadmissible pour rupture de la chain of custody",
+        "L'enquêteur doit simplement régulariser en signant le registre de scellés a posteriori"
       ],
       "reponse": 2,
       "explication": "La chain of custody exige une documentation continue de chaque manipulation et de chaque lieu de stockage. Un trou de deux jours non documenté permet à la défense d'alléguer une altération possible : la preuve risque le rejet. Le hash prouve l'intégrité des données mais pas l'absence d'accès physique non autorisé, et une signature rétroactive ou une nouvelle copie ne réparent pas la rupture.",
@@ -1800,8 +1800,8 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Avant et après la création d'une image forensique d'un disque, l'enquêteur calcule une empreinte cryptographique (hash). Quel est l'objectif PRINCIPAL ?",
       "choix": [
-        "Chiffrer l'image pour la protéger pendant le transport",
-        "Prouver que la copie est identique à l'original et que la preuve n'a pas été modifiée",
+        "Chiffrer l'image disque pour la protéger pendant son transport vers le laboratoire",
+        "Prouver que la copie est identique à l'original, preuve de son intégrité",
         "Signer numériquement le rapport d'investigation",
         "Accélérer la restauration ultérieure de l'image"
       ],
@@ -1856,8 +1856,8 @@ window.CISSP_DATA.domains[7] = {
       "choix": [
         "L'incident doit être requalifié en événement",
         "Aucun, car il possédait les droits d'administration",
-        "Les métadonnées (horodatages d'accès) ont été altérées, fragilisant l'admissibilité de la preuve",
-        "Le disque doit simplement être défragmenté avant analyse"
+        "Les horodatages d'accès ont été altérés, fragilisant l'admissibilité de la preuve",
+        "Le disque doit simplement être défragmenté puis re-scanné par l'antivirus avant analyse"
       ],
       "reponse": 2,
       "explication": "Chaque ouverture de fichier modifie les horodatages d'accès et potentiellement d'autres métadonnées : la preuve originale a été altérée, ce que la partie adverse exploitera. C'est précisément pourquoi on travaille sur des copies bit à bit avec write blocker. Les droits d'administration n'autorisent pas à manipuler une preuve, et les autres réponses sont sans rapport.",
@@ -1891,8 +1891,8 @@ window.CISSP_DATA.domains[7] = {
       "q": "Quel élément déclenche typiquement une campagne de threat hunting ?",
       "choix": [
         "Une demande de l'audit interne",
-        "La détection d'un malware par l'antivirus",
-        "Une hypothèse fondée sur la threat intelligence, en l'absence de toute alerte",
+        "La détection automatique d'un malware par l'antivirus sur un poste utilisateur",
+        "Une hypothèse issue de la threat intelligence, sans aucune alerte préalable",
         "Une alerte critique du SIEM"
       ],
       "reponse": 2,
@@ -1909,9 +1909,9 @@ window.CISSP_DATA.domains[7] = {
       "q": "Lors d'une investigation, les horodatages des logs de trois serveurs se contredisent, rendant la chronologie de l'attaque inexploitable. Quel contrôle aurait DÛ être en place ?",
       "choix": [
         "La compression des journaux",
-        "Le chiffrement des journaux en transit",
+        "Le chiffrement de bout en bout des journaux en transit vers le collecteur",
         "L'augmentation de la durée de rétention",
-        "La synchronisation de tous les systèmes sur une source de temps commune (NTP)"
+        "La synchronisation des horloges via une source de temps commune (NTP)"
       ],
       "reponse": 3,
       "explication": "Sans synchronisation NTP sur une source de temps fiable, la corrélation des événements entre systèmes devient impossible et la chronologie présentée au tribunal est contestable. La compression, le chiffrement et la rétention protègent les logs mais ne résolvent pas l'incohérence temporelle.",
@@ -1926,9 +1926,9 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Quelle est la MEILLEURE protection contre un attaquant qui efface les journaux locaux d'un serveur compromis pour couvrir ses traces ?",
       "choix": [
-        "Transmettre les logs en temps réel vers un serveur de logs centralisé en écriture seule",
+        "Transmettre les logs en temps réel vers un serveur centralisé en écriture seule",
         "Activer la rotation automatique des journaux",
-        "Restreindre la taille maximale des fichiers de logs",
+        "Restreindre la taille maximale des fichiers de logs conservés localement sur le serveur",
         "Sauvegarder les journaux chaque nuit"
       ],
       "reponse": 0,
@@ -1945,8 +1945,8 @@ window.CISSP_DATA.domains[7] = {
       "q": "Une faille critique est activement exploitée et l'équipe doit appliquer un correctif en urgence, sans passer par le circuit d'approbation habituel. Que prévoit un processus de change management mature ?",
       "choix": [
         "Laisser l'administrateur décider seul sans documentation",
-        "Interdire toute dérogation : le circuit normal doit être suivi",
-        "Une procédure de changement d'urgence : implémenter rapidement, puis documenter et faire approuver rétroactivement",
+        "Interdire toute dérogation : le circuit d'approbation habituel doit impérativement être suivi en toutes circonstances",
+        "Une procédure de changement d'urgence : agir vite, puis documenter et faire approuver après coup",
         "Attendre la prochaine réunion du comité des changements"
       ],
       "reponse": 2,
@@ -1998,8 +1998,8 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Un utilisateur signale que sa machine est « lente et bizarre ». Dans le cycle de réponse aux incidents, quelle est la PREMIÈRE action de l'équipe ?",
       "choix": [
-        "Vérifier et qualifier le signalement pour déterminer s'il s'agit d'un incident réel",
-        "Activer le plan de reprise après sinistre",
+        "Vérifier et qualifier le signalement pour confirmer qu'il s'agit d'un incident",
+        "Activer immédiatement le plan de reprise après sinistre (DRP) de l'organisation sans délai",
         "Notifier le régulateur",
         "Réinstaller immédiatement le poste"
       ],
@@ -2034,8 +2034,8 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Quand la session de lessons learned doit-elle idéalement se tenir après un incident majeur ?",
       "choix": [
-        "Pendant la phase de mitigation, tant que l'attaque est en cours",
-        "Rapidement après l'incident, avant que les souvenirs ne s'estompent, avec un facilitateur",
+        "Pendant la phase de mitigation, tant que l'attaque est encore activement en cours de traitement",
+        "Peu après l'incident, avant que les souvenirs ne s'estompent, avec un facilitateur",
         "Uniquement si l'incident a causé une perte financière",
         "Six mois plus tard, pour avoir du recul"
       ],
@@ -2071,9 +2071,9 @@ window.CISSP_DATA.domains[7] = {
       "q": "Quelle capacité distingue le MIEUX un EDR d'un antivirus traditionnel ?",
       "choix": [
         "Il filtre le spam entrant",
-        "Il compare les fichiers à une base de signatures",
-        "Il surveille en continu le comportement des endpoints, permet l'investigation et la réponse à distance (isolation, kill process)",
-        "Il chiffre les disques des postes de travail"
+        "Il compare les fichiers à une base de signatures de malwares connus, mise à jour quotidiennement",
+        "Il surveille en continu le comportement des endpoints et permet une réponse à distance",
+        "Il chiffre intégralement les disques des postes de travail de l'entreprise"
       ],
       "reponse": 2,
       "explication": "L'EDR (Endpoint Detection and Response) enregistre en continu l'activité des endpoints (processus, connexions, modifications), détecte les comportements suspects au-delà des signatures, et offre des capacités de réponse à distance : isoler la machine, tuer un processus, collecter des artefacts. L'antivirus classique se limite essentiellement aux signatures ; le chiffrement et l'anti-spam sont d'autres outils.",
@@ -2106,9 +2106,9 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Quelle différence de DÉPLOIEMENT distingue un NIPS d'un NIDS ?",
       "choix": [
-        "Le NIPS est placé en coupure (inline) sur le chemin du trafic, le NIDS analyse une copie passive du trafic",
+        "Le NIPS est en coupure (inline) sur le trafic, le NIDS en analyse une copie passive",
         "Le NIDS bloque le trafic, le NIPS se contente d'alerter",
-        "Le NIPS analyse une copie du trafic via un port SPAN, le NIDS est en coupure",
+        "Le NIPS analyse une copie du trafic reçue via un port SPAN, tandis que le NIDS est placé en coupure",
         "Les deux sont toujours installés sur les endpoints"
       ],
       "reponse": 0,
@@ -2143,9 +2143,9 @@ window.CISSP_DATA.domains[7] = {
       "q": "Sur le plan juridique, quelle distinction rend un honeypot défendable ?",
       "choix": [
         "Un honeypot est illégal dans tous les cas",
-        "L'enticement (offrir une cible tentante) est acceptable, l'entrapment (induire à commettre un délit) ne l'est pas",
+        "L'enticement (offrir une cible tentante) est acceptable, l'entrapment (induire au délit) ne l'est pas",
         "L'entrapment est acceptable, l'enticement ne l'est pas",
-        "Un honeypot doit héberger de vraies données pour être crédible juridiquement"
+        "Un honeypot doit obligatoirement héberger de vraies données de production pour être crédible juridiquement"
       ],
       "reponse": 1,
       "explication": "L'enticement consiste à laisser une opportunité visible à un attaquant qui avait déjà l'intention de s'introduire : c'est admis. L'entrapment consiste à pousser quelqu'un à commettre un délit qu'il n'aurait pas commis autrement : c'est une défense juridique valable pour l'accusé et donc à éviter. Les honeypots ne sont pas illégaux en soi et ne doivent jamais contenir de vraies données sensibles.",
@@ -2160,8 +2160,8 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Le BIA fixe un RPO de 4 heures pour la base de commandes, mais les sauvegardes actuelles s'exécutent toutes les 24 heures. Quelle est la MEILLEURE conclusion ?",
       "choix": [
-        "Il existe un écart : il faut des sauvegardes au moins toutes les 4 heures ou une réplication continue (journaling/mirroring)",
-        "La stratégie est conforme puisque les sauvegardes sont quotidiennes",
+        "Il existe un écart : il faut des sauvegardes toutes les 4 heures ou une réplication continue",
+        "La stratégie est déjà conforme puisque les sauvegardes quotidiennes couvrent tous les besoins métier",
         "Il faut augmenter le RPO à 24 heures pour s'aligner sur l'existant",
         "Le RPO ne concerne pas les sauvegardes"
       ],
@@ -2232,8 +2232,8 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Un administrateur propose de stocker la base de données financière sur un volume RAID 0 « pour la performance ». Pourquoi devez-vous refuser ?",
       "choix": [
-        "Le RAID 0 n'offre aucune redondance : la panne d'un seul disque détruit toutes les données",
-        "Le RAID 0 est incompatible avec les bases de données",
+        "Le RAID 0 n'offre aucune redondance : la panne d'un disque détruit toutes les données",
+        "Le RAID 0 est techniquement incompatible avec les moteurs de bases de données relationnelles modernes",
         "Le RAID 0 est plus lent que le RAID 5",
         "Le RAID 0 nécessite au moins cinq disques"
       ],
@@ -2251,9 +2251,9 @@ window.CISSP_DATA.domains[7] = {
       "q": "Le métier exige un RPO de quelques minutes pour la base transactionnelle, mais le budget ne permet pas de maintenir un serveur de base de données vivant sur le site distant. Quelle solution choisir ?",
       "choix": [
         "Sauvegardes différentielles hebdomadaires",
-        "Remote mirroring avec serveur actif distant",
+        "Remote mirroring synchrone reposant sur un serveur de base de données actif sur le site distant",
         "Electronic vaulting quotidien",
-        "Remote journaling : transfert fréquent des journaux de transactions vers le site distant"
+        "Remote journaling : transfert fréquent des journaux de transactions au site distant"
       ],
       "reponse": 3,
       "explication": "Le remote journaling transfère les journaux de transactions toutes les quelques minutes vers le site distant, permettant de reconstruire la base à quelques minutes près — sans le coût d'un serveur distant vivant qu'exige le remote mirroring (exclu ici par le budget). L'electronic vaulting quotidien et les différentielles hebdomadaires laissent des heures ou des jours de perte de données.",
@@ -2271,7 +2271,7 @@ window.CISSP_DATA.domains[7] = {
         "Un parallel test sur le site de secours",
         "Un read-through / tabletop pour vérifier la cohérence du plan sans aucun risque",
         "Aucun test avant un an d'existence du plan",
-        "Un full-interruption test pour une preuve immédiate"
+        "Un full-interruption test basculant réellement en production pour une preuve immédiate"
       ],
       "reponse": 1,
       "explication": "La progression des tests va toujours du moins risqué au plus probant : on commence par la relecture et l'exercice sur table pour détecter les incohérences, rôles vacants et informations obsolètes, avant d'engager des tests opérationnels. Lancer un full-interruption sur un plan jamais validé ferait courir un risque réel de sinistre auto-infligé.",
@@ -2304,7 +2304,7 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Un incendie majeur frappe le datacenter un samedi à 2 h du matin. Le DRP doit préciser SANS ambiguïté qui peut lancer la bascule vers le site de secours. Quel élément du plan répond à ce besoin ?",
       "choix": [
-        "Le registre des risques de l'organisation",
+        "Le registre des risques de l'organisation et son plan de traitement des risques associé",
         "La désignation de l'autorité habilitée à déclarer le désastre, avec ses suppléants",
         "Le contrat d'abonnement au hot site",
         "La matrice RACI du projet BCP"
@@ -2322,9 +2322,9 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Quelle affirmation compare CORRECTEMENT le BCP et le DRP ?",
       "choix": [
-        "Le DRP couvre les processus métier et le BCP la restauration technique",
+        "Le DRP couvre l'ensemble des processus métier tandis que le BCP se limite à la restauration technique des systèmes",
         "BCP et DRP sont deux noms du même document",
-        "Le BCP maintient les fonctions critiques de l'ENTREPRISE ; le DRP restaure l'infrastructure TECHNOLOGIQUE — le BCP a le périmètre le plus large",
+        "Le BCP maintient les fonctions critiques de l'entreprise ; le DRP restaure l'infrastructure technologique",
         "Le DRP englobe le BCP"
       ],
       "reponse": 2,
@@ -2342,8 +2342,8 @@ window.CISSP_DATA.domains[7] = {
       "choix": [
         "Déclencher l'alarme incendie générale",
         "Négocier avec l'agresseur pour gagner du temps",
-        "Refuser d'ouvrir et appeler la police devant l'agresseur",
-        "Un duress code : un code d'ouverture alternatif qui ouvre la porte ET déclenche une alerte silencieuse"
+        "Refuser catégoriquement d'ouvrir la porte et tenter d'appeler la police devant l'agresseur armé",
+        "Un duress code : un code alternatif qui ouvre la porte et déclenche une alerte silencieuse"
       ],
       "reponse": 3,
       "explication": "Le duress code est conçu exactement pour cette situation : l'agent coopère en apparence — la vie humaine prime sur tout actif — tout en alertant discrètement la sécurité via un code alternatif ou un geste convenu. Refuser ou négocier met sa vie en danger, et l'alarme incendie révèle l'alerte à l'agresseur tout en déclenchant une évacuation inadaptée.",
@@ -2358,8 +2358,8 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Une dirigeante part négocier un contrat dans un pays connu pour l'espionnage économique. Quelle est la MEILLEURE pratique concernant ses équipements ?",
       "choix": [
-        "Lui fournir des appareils de prêt dédiés au voyage, contenant le strict minimum de données, réinitialisés au retour",
-        "Emporter une copie chiffrée de toutes les données de l'entreprise par précaution",
+        "Lui fournir des appareils de prêt contenant le strict minimum de données, réinitialisés au retour",
+        "Emporter une copie intégralement chiffrée de toutes les données de l'entreprise, par simple précaution",
         "Utiliser uniquement le wi-fi de l'hôtel, réputé plus sûr que les réseaux mobiles",
         "Emporter son ordinateur habituel protégé par un mot de passe robuste"
       ],
@@ -2376,10 +2376,10 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Un consultant doit franchir la frontière d'un pays où les douanes peuvent légalement exiger le déverrouillage des appareils. Son disque est intégralement chiffré. Quelle est la MEILLEURE analyse ?",
       "choix": [
-        "Le chiffrement ne protège pas contre une injonction légale de déverrouillage : il faut voyager sans données sensibles et les récupérer ensuite par canal sécurisé",
+        "Voyager sans données sensibles et les récupérer ensuite par un canal sécurisé",
         "Le chiffrement suffit : les douanes ne pourront rien lire",
         "Il doit cacher les données dans une partition dissimulée",
-        "Il doit refuser le contrôle en invoquant le secret professionnel"
+        "Il doit refuser le contrôle douanier en invoquant le secret professionnel et l'immunité diplomatique"
       ],
       "reponse": 0,
       "explication": "Face à une injonction légale de déverrouillage, le voyageur devra fournir l'accès sous peine de refoulement, de saisie ou de poursuites : le chiffrement ne protège que contre l'accès non autorisé, pas contre la contrainte légale. La bonne stratégie est de ne transporter aucune donnée sensible et de la récupérer sur place via un canal sécurisé (VPN). Refuser ou dissimuler expose à des sanctions et aggrave la situation.",
@@ -2394,10 +2394,10 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Un administrateur systèmes confie qu'un inconnu le menace de révéler des informations personnelles s'il ne fournit pas ses identifiants d'accès. Quelle réponse organisationnelle est la MEILLEURE ?",
       "choix": [
-        "Ignorer l'affaire tant qu'aucun accès frauduleux n'est constaté",
+        "Ignorer l'affaire et se contenter de surveiller les journaux d'accès tant qu'aucun accès frauduleux n'est réellement constaté",
         "Le licencier immédiatement car il représente un risque",
         "Lui demander de gérer la situation en privé",
-        "Disposer d'un canal de signalement confidentiel et d'un accompagnement, afin que les employés victimes de coercition alertent sans crainte de sanction"
+        "Disposer d'un canal de signalement confidentiel et d'un accompagnement pour les employés victimes de coercition"
       ],
       "reponse": 3,
       "explication": "La coercition et l'extorsion transforment un employé loyal en menace interne involontaire. La meilleure défense est un programme qui encourage le signalement précoce — canal confidentiel, soutien, absence de représailles — permettant à la sécurité de protéger l'employé et l'organisation. Le licencier dissuaderait tout futur signalement, et ignorer ou privatiser le problème laisse l'attaquant progresser.",
@@ -2413,8 +2413,8 @@ window.CISSP_DATA.domains[7] = {
       "q": "Quelle mesure de protection est la PLUS pertinente pour des collaborateurs expatriés travaillant durablement dans une région instable ?",
       "choix": [
         "L'interdiction de tout déplacement professionnel",
-        "Un dispositif complet : itinéraires partagés, check-ins réguliers, point de contact d'urgence, veille géopolitique et plan d'évacuation",
-        "Souscrire une assurance couvrant les frais médicaux à l'étranger",
+        "Un dispositif continu : itinéraires partagés, check-ins réguliers, contact d'urgence et plan d'évacuation",
+        "Souscrire une assurance couvrant les frais médicaux et le rapatriement sanitaire à l'étranger pendant toute la durée de la mission",
         "Un simple briefing sécurité avant le départ"
       ],
       "reponse": 1,
@@ -2448,9 +2448,9 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Une attaque par ransomware avec double extorsion frappe un laboratoire pharmaceutique : les fichiers sont chiffrés ET les attaquants prouvent avoir exfiltré des données d'essais cliniques. Les sauvegardes sont intactes et la restauration est en cours. Le directeur des opérations propose de clore l'incident dès la fin de la restauration. En tant que RSSI, quelle est votre MEILLEURE réponse ?",
       "choix": [
-        "Rappeler que l'exfiltration constitue une violation de données déclenchant des obligations de notification et une gestion de crise, indépendamment de la restauration",
+        "Rappeler que l'exfiltration constitue une violation de données imposant notification et gestion de crise",
         "Demander le paiement de la rançon pour obtenir la suppression des données exfiltrées",
-        "Accepter : la restauration des sauvegardes rétablit la disponibilité, objectif du plan de reprise",
+        "Accepter la clôture : la restauration des sauvegardes rétablit la disponibilité, seul et unique objectif du plan de reprise",
         "Faire vérifier l'intégrité des systèmes restaurés avant de prononcer la clôture"
       ],
       "reponse": 0,
@@ -2467,8 +2467,8 @@ window.CISSP_DATA.domains[7] = {
       "q": "Un incident est détecté dans l'environnement IaaS d'un e-commerçant : des conteneurs compromis sont automatiquement détruits et recréés par l'auto-scaling toutes les quelques minutes. L'équipe forensique doit préserver les preuves. Que devez-vous faire EN PREMIER ?",
       "choix": [
         "Redéployer immédiatement l'environnement depuis l'infrastructure as code pour rétablir le service",
-        "Attendre le rapport d'investigation du fournisseur cloud, contractuellement responsable de l'infrastructure",
-        "Suspendre l'auto-scaling, prendre des snapshots des instances actives et préserver les journaux via les API du fournisseur avant toute destruction",
+        "Attendre le rapport d'investigation complet du fournisseur cloud, seul contractuellement responsable de l'ensemble de l'infrastructure",
+        "Suspendre l'auto-scaling, prendre des snapshots des instances actives et exporter les journaux via les API du fournisseur",
         "Demander au fournisseur cloud la saisie physique des disques des serveurs hôtes"
       ],
       "reponse": 2,
@@ -2503,9 +2503,9 @@ window.CISSP_DATA.domains[7] = {
       "q": "Le DRP technique d'un assureur est testé chaque année avec succès, mais aucun membre du comité exécutif n'a jamais participé à un exercice. Le RSSI craint qu'en cas de ransomware majeur, les décisions de direction (paiement, communication, arrêt d'activité) soient improvisées. Quelle est la MEILLEURE initiative ?",
       "choix": [
         "Faire suivre au comité exécutif une formation de sensibilisation à la cybersécurité",
-        "Organiser un exercice sur table de gestion de crise avec le comité exécutif, autour d'un scénario de ransomware exigeant leurs décisions",
+        "Organiser un exercice sur table de crise avec le comité exécutif, autour d'un scénario de ransomware exigeant leurs décisions",
         "Ajouter au DRP une annexe détaillant les décisions que la direction devra prendre en crise",
-        "Planifier un full-interruption test pour démontrer à la direction la gravité d'une crise réelle"
+        "Planifier un full-interruption test grandeur nature pour démontrer à la direction la gravité opérationnelle d'une crise réelle"
       ],
       "reponse": 1,
       "explication": "Le problème identifié n'est pas technique mais décisionnel : ce sont les arbitrages de la direction qui n'ont jamais été répétés. Un exercice sur table de crise fait travailler le comité exécutif sur ses propres décisions — payer ou non, communiquer, arrêter l'activité — sans aucun risque opérationnel. Le full-interruption teste la bascule technique déjà éprouvée, une annexe non exercée est ignorée en crise, et la sensibilisation transmet des connaissances sans entraîner la décision sous pression.",
@@ -2520,10 +2520,10 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Une violation de données touche les clients d'un groupe présent dans l'Union européenne, au Canada et à Singapour, où les délais et seuils de notification diffèrent. Le directeur juridique et le RSSI se réunissent en cellule de crise. Que doit faire le groupe EN PREMIER ?",
       "choix": [
-        "Attendre la fin complète de l'investigation pour ne communiquer que des faits définitifs",
+        "Attendre la clôture complète de l'investigation technique pour ne communiquer que des faits parfaitement établis et définitifs",
         "Notifier immédiatement toutes les autorités de tous les pays pour démontrer sa bonne foi",
         "Notifier d'abord l'autorité du pays du siège et laisser chaque filiale gérer localement",
-        "Cartographier avec le juridique les obligations de notification applicables par juridiction et bâtir un calendrier de conformité coordonné"
+        "Cartographier avec le juridique les obligations de notification par juridiction et bâtir un calendrier coordonné"
       ],
       "reponse": 3,
       "explication": "Face à des obligations divergentes, la première action est de les cartographier avec le juridique : quelles autorités, quels seuils, quels délais (dont les 72 heures du RGPD), pour bâtir un calendrier coordonné. Notifier partout sans qualification expose à des déclarations inexactes, attendre la fin de l'investigation fait dépasser les délais impératifs, et des notifications décentralisées non coordonnées produisent des messages contradictoires exploités par régulateurs et médias.",
@@ -2575,8 +2575,8 @@ window.CISSP_DATA.domains[7] = {
       "q": "Un RSSI migre les applications critiques de son organisation vers un fournisseur cloud. Sachant que les investigations futures dépendront des capacités du fournisseur (journaux, snapshots, assistance forensique), à quel moment ces exigences doivent-elles PRINCIPALEMENT être traitées ?",
       "choix": [
         "Lors du premier incident, en s'appuyant sur l'équipe de réponse du fournisseur",
-        "Lors de la configuration technique, en activant toutes les options de journalisation disponibles",
-        "Lors de la négociation du contrat, en y intégrant les clauses de journalisation, de préservation et d'assistance à l'investigation",
+        "Lors de la configuration technique initiale, en activant l'ensemble des options de journalisation détaillée disponibles sur la plateforme",
+        "Lors de la négociation du contrat, via des clauses de journalisation, de préservation et d'assistance à l'investigation",
         "Lors de l'audit annuel du fournisseur, en vérifiant ses certifications SOC 2"
       ],
       "reponse": 2,
@@ -2593,8 +2593,8 @@ window.CISSP_DATA.domains[7] = {
       "q": "Un ransomware paralyse simultanément les filiales d'un groupe industriel dans trois pays. Le RSSI groupe découvre que deux équipes locales ont entamé, chacune de leur côté, des échanges avec les attaquants, et que les communications publiques des filiales divergent. Quelle est l'action la PLUS importante ?",
       "choix": [
         "Laisser chaque filiale gérer selon son droit local, mieux adapté à son contexte",
-        "Interrompre immédiatement toute négociation avec les attaquants dans toutes les filiales",
-        "Activer la structure de commandement de crise du groupe : un décideur unique, des canaux uniques de négociation et de communication",
+        "Interrompre immédiatement et sans exception toute négociation en cours avec les attaquants dans l'ensemble des filiales concernées",
+        "Activer le commandement de crise du groupe : un décideur unique et des canaux uniques de négociation et de communication",
         "Publier un communiqué mondial unique pour reprendre le contrôle du narratif"
       ],
       "reponse": 2,
@@ -2610,8 +2610,8 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Votre PRA prévoit un basculement vers un site chaud avec un RTO de 4 h. Lors d'un exercice réel de bascule, la restauration technique réussit en 3 h, mais les équipes métier découvrent que les procédures opérationnelles ne couvrent pas la ressaisie des transactions des 45 dernières minutes (RPO), bloquant la reprise pendant 6 h supplémentaires. Quelle est la MEILLEURE conclusion à porter au comité de pilotage ?",
       "choix": [
-        "L'exercice révèle un écart entre reprise technique et reprise métier : les procédures de continuité d'activité doivent intégrer la reconstitution des données dans le périmètre testé, et le RTO global doit être re-mesuré de bout en bout",
-        "Le RPO doit être réduit à zéro en investissant dans une réplication synchrone pour éliminer toute ressaisie",
+        "L'exercice révèle un écart entre reprise technique et reprise métier : le plan de continuité doit couvrir la reconstitution des données et re-mesurer le RTO de bout en bout",
+        "Le RPO doit impérativement être réduit à zéro en investissant dans une réplication synchrone très coûteuse afin d'éliminer définitivement toute ressaisie manuelle des transactions métier",
         "Les équipes métier doivent être formées à ressaisir plus vite pour tenir le RTO",
         "L'exercice est un succès : le RTO technique de 4 h est respecté et l'infrastructure a basculé sans incident"
       ],
@@ -2628,8 +2628,8 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Une attaque détruit simultanément la production et les sauvegardes en ligne de votre filiale (compte d'administration compromis). Seules les bandes hors ligne mensuelles, stockées à 200 km, subsistent — avec jusqu'à 30 jours de perte de données. La direction exige que cela ne se reproduise « jamais ». Quelle recommandation structurelle est PRIORITAIRE ?",
       "choix": [
-        "Passer à des sauvegardes horaires répliquées en temps réel sur un second datacenter connecté",
-        "Mettre en place une architecture de sauvegarde 3-2-1 renforcée par une copie immuable (WORM) ou air-gappée, avec des comptes de sauvegarde isolés de l'administration de production et des tests de restauration réguliers",
+        "Passer à des sauvegardes horaires répliquées en quasi temps réel vers un second datacenter connecté en permanence au réseau de production avec bascule automatique",
+        "Une sauvegarde 3-2-1 avec copie immuable (WORM) ou air-gappée, comptes de sauvegarde isolés de la production et tests de restauration réguliers",
         "Chiffrer toutes les sauvegardes pour empêcher l'attaquant de les lire",
         "Souscrire une cyber-assurance couvrant la reconstruction des données"
       ],
@@ -2664,9 +2664,9 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Un scan de conformité révèle qu'un serveur de production s'écarte de la baseline durcie : un port supplémentaire est ouvert, et aucun changement approuvé ne correspond à cette modification. Que devriez-vous faire EN PREMIER ?",
       "choix": [
-        "Traiter cette dérive inexpliquée comme un incident de sécurité potentiel et investiguer l'origine de la modification",
+        "Traiter cette dérive inexpliquée comme un incident potentiel et investiguer l'origine de la modification",
         "Refermer immédiatement le port et clore le constat du scan",
-        "Mettre à jour la baseline pour refléter la configuration réellement en production",
+        "Mettre à jour la baseline durcie pour qu'elle reflète fidèlement la configuration réellement observée en production",
         "Attendre le prochain cycle d'audit pour confirmer que la dérive persiste"
       ],
       "reponse": 0,
@@ -2683,9 +2683,9 @@ window.CISSP_DATA.domains[7] = {
       "q": "L'infrastructure d'une organisation est entièrement définie en Infrastructure as Code. Pour résoudre un incident urgent, un administrateur modifie à la main un paramètre sur douze serveurs sans toucher au code. Quel est le PRINCIPAL risque de cette pratique ?",
       "choix": [
         "Les serveurs modifiés consommeront davantage de ressources cloud",
-        "Le fournisseur cloud pourrait facturer des frais de modification supplémentaires",
+        "Le fournisseur cloud pourrait facturer des frais de modification supplémentaires sur chacun des douze serveurs manuellement modifiés",
         "L'équipe réseau perdra la visibilité sur le trafic de ces serveurs",
-        "Une dérive de configuration : l'état réel ne correspond plus à la source de vérité et le prochain redéploiement écrasera silencieusement le correctif"
+        "Une dérive de configuration : l'état réel diverge de la source de vérité et le prochain redéploiement écrasera le correctif"
       ],
       "reponse": 3,
       "explication": "En IaC, le code est la source de vérité. Toute modification manuelle crée une dérive : la documentation ment, les audits de conformité échouent, et le prochain redéploiement depuis le code écrasera le correctif, faisant réapparaître l'incident. La bonne pratique est de répercuter le correctif dans le code via le change management. Les autres options n'ont aucun lien avec le mécanisme de l'IaC.",
@@ -2736,10 +2736,10 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Une plateforme de paiement vise un RTO proche de zéro et doit survivre à la perte complète d'un datacenter régional sans intervention manuelle. Quelle stratégie répond le MIEUX à cette exigence ?",
       "choix": [
-        "Un hot site par abonnement activé par l'équipe DR dès la déclaration du sinistre",
+        "Un hot site par abonnement, activé manuellement par l'équipe DR dès la déclaration officielle du sinistre par la direction de crise",
         "Des sauvegardes horaires répliquées vers un warm site géographiquement distant",
         "Un resource capacity agreement garantissant des équipements de remplacement",
-        "Plusieurs sites de traitement actifs (active-active) se répartissant la charge en permanence, chacun dimensionné pour absorber le trafic des autres"
+        "Plusieurs sites actifs (active-active) se répartissant la charge en permanence, chacun dimensionné pour absorber le trafic des autres"
       ],
       "reponse": 3,
       "explication": "Seuls des sites de traitement multiples en actif-actif offrent une continuité sans intervention : la charge est déjà répartie, et la perte d'un site est absorbée automatiquement par les autres. Un hot site exige une déclaration de sinistre et une bascule (RTO non nul), un warm site se compte en heures, et un resource capacity agreement fournit du matériel, pas une reprise instantanée.",
@@ -2754,10 +2754,10 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Un séisme rend le siège inaccessible un dimanche soir et détruit la messagerie et la téléphonie de l'entreprise. Le coordinateur DR doit notifier rapidement l'ensemble du personnel de reprise. Quelle disposition le plan aurait-il dû prévoir en PRIORITÉ ?",
       "choix": [
-        "Un call tree documenté et testé, avec suppléants, confirmation de réception et coordonnées personnelles hors bande",
+        "Un call tree documenté et testé, avec suppléants, accusés de réception et coordonnées hors bande",
         "Un e-mail groupé envoyé depuis la messagerie de l'entreprise",
         "Une annonce publiée sur l'intranet de l'organisation",
-        "Laisser chaque responsable improviser la notification de son équipe"
+        "Laisser chaque responsable de service improviser librement la notification de l'ensemble de son équipe"
       ],
       "reponse": 0,
       "explication": "Le call tree est la méthode de communication DR citée par le référentiel : notification en cascade via des coordonnées personnelles hors bande, avec des suppléants à chaque nœud et une confirmation qui remonte l'arbre. La messagerie et l'intranet de l'entreprise sont précisément indisponibles dans ce scénario, et l'improvisation garantit des oublis au pire moment.",
@@ -2790,7 +2790,7 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Votre organisation externalise l'hébergement d'une application critique et exige des garanties de disponibilité opposables, assorties de pénalités financières en cas de manquement. Quel document devez-vous négocier ?",
       "choix": [
-        "Un Memorandum of Understanding (MOU) entre les deux directions",
+        "Un Memorandum of Understanding (MOU) formalisant l'intention de coopérer entre les deux directions",
         "Une politique de sécurité commune aux deux organisations",
         "Un Service Level Agreement (SLA) avec des niveaux de service mesurables et des pénalités",
         "Une lettre d'intention décrivant le partenariat envisagé"
@@ -2826,10 +2826,10 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Un attaquant a effacé les journaux système et les fichiers temporaires du poste compromis avant de disparaître. Quelle source d'artefacts offre la MEILLEURE chance de reconstituer l'exfiltration de données ?",
       "choix": [
-        "Les artefacts réseau : enregistrements NetFlow, journaux du proxy et du DNS, captures de paquets",
+        "Les artefacts réseau : NetFlow, journaux du proxy et du DNS, captures de paquets",
         "Le registre Windows du poste compromis",
         "L'historique du navigateur de l'utilisateur",
-        "Les fichiers récupérables dans la corbeille du poste"
+        "Les fichiers potentiellement récupérables dans la corbeille et l'espace non alloué du poste"
       ],
       "reponse": 0,
       "explication": "Les artefacts réseau sont collectés par des équipements hors de portée de l'attaquant (sondes, proxy, collecteurs NetFlow) : ils survivent au nettoyage de l'endpoint et tracent les destinations et volumes des transferts sortants. Le registre, l'historique du navigateur et la corbeille résident sur la machine que l'attaquant a précisément nettoyée.",
@@ -2845,8 +2845,8 @@ window.CISSP_DATA.domains[7] = {
       "q": "Trois mois après un audit de sécurité annuel réussi, une organisation est compromise via une vulnérabilité apparue entre-temps. Quelle approche aurait le MIEUX réduit ce risque ?",
       "choix": [
         "Passer les audits d'annuels à semestriels",
-        "Un programme de continuous monitoring évaluant en permanence la posture, les vulnérabilités et les menaces",
-        "Un test d'intrusion supplémentaire immédiatement après chaque audit",
+        "Un programme de continuous monitoring évaluant en permanence posture, vulnérabilités et menaces",
+        "Un test d'intrusion supplémentaire planifié systématiquement immédiatement après chaque audit annuel de sécurité",
         "Une cyber-assurance couvrant les conséquences des compromissions"
       ],
       "reponse": 1,
@@ -2863,8 +2863,8 @@ window.CISSP_DATA.domains[7] = {
       "q": "Au terme d'une investigation interne susceptible de déboucher sur une procédure judiciaire, l'enquêteur rédige son rapport final. Quelle pratique est la PLUS importante ?",
       "choix": [
         "Limiter le rapport aux éléments favorables à la position de l'organisation",
-        "Ne présenter que les conclusions pour préserver la confidentialité des méthodes",
-        "Documenter factuellement chaque étape et chaque preuve, en distinguant clairement les faits constatés des opinions de l'enquêteur",
+        "Ne présenter que les conclusions finales de l'analyse afin de préserver la confidentialité des méthodes d'investigation employées",
+        "Documenter factuellement chaque étape et chaque preuve, en distinguant les faits constatés des opinions de l'enquêteur",
         "Diffuser le rapport uniquement à l'équipe technique qui a mené l'analyse"
       ],
       "reponse": 2,
@@ -2914,8 +2914,8 @@ window.CISSP_DATA.domains[7] = {
       ]
     }
     ,
-    {"q": "Lors d'un exercice de bascule sur le site de secours, vous constatez que la restauration technique tient le RTO mais que les équipes métier n'ont ni les procédures dégradées ni les habilitations pour reprendre l'activité sur ce site. La direction, satisfaite du volet technique, veut clore l'exercice comme un succès. Quelle est la MEILLEURE position à défendre ?", "choix": ["Approuver : le RTO technique est respecté, le reste s'improvisera le jour venu", "Documenter l'exercice comme un échec partiel et exiger que le plan de continuité intègre les procédures métier, les habilitations et une nouvelle répétition avant toute validation", "Réduire le RTO cible pour compenser le temps perdu côté métier", "Transférer la responsabilité de la reprise métier aux managers opérationnels sans revoir le plan"], "reponse": 1, "explication": "Un plan de continuité ne vaut que par la reprise du service métier de bout en bout, pas par la seule restauration technique. L'exercice a rempli son rôle : révéler que le plan est incomplet. La position professionnelle est de le documenter honnêtement et de corriger le plan avant validation.", "pourquoi": ["Complaisance dangereuse : « ça s'improvisera » est l'antithèse de la planification de continuité — l'exercice sert précisément à éviter l'improvisation le jour J.", "Bonne réponse : la valeur d'un exercice est de révéler les écarts ; on documente sans complaisance et on corrige le plan (procédures, habilitations, re-test) avant de le déclarer valide.", "Manipulation d'indicateur : abaisser le RTO ne résout pas l'absence de procédures métier — c'est masquer le problème par un chiffre.", "Fuite de responsabilité : déléguer la reprise sans fournir plan ni habilitations reporte le risque sur des équipes non préparées."], "difficulte": 3},
-    {"q": "Un ransomware a chiffré la production ET les sauvegardes en ligne d'une filiale via un compte d'administration de sauvegarde compromis. Seules des bandes hors ligne mensuelles subsistent (jusqu'à 30 jours de perte). Le comité de direction demande LA mesure structurelle prioritaire pour empêcher toute récidive. Que recommandez-vous EN PREMIER ?", "choix": ["Augmenter la fréquence des sauvegardes en ligne à toutes les heures", "Isoler les identités d'administration de sauvegarde de celles de production et ajouter une copie immuable (WORM) ou air-gappée, avec tests de restauration réguliers", "Chiffrer toutes les sauvegardes pour que l'attaquant ne puisse pas les lire", "Souscrire une cyber-assurance couvrant la reconstruction des données"], "reponse": 1, "explication": "Le facteur aggravant est que les sauvegardes partageaient la surface d'attaque de la production (mêmes identités d'administration). La réponse structurelle vise ce mode de défaillance : séparation des identités, immuabilité/air gap, et tests de restauration.", "pourquoi": ["Traite le mauvais problème : des sauvegardes plus fréquentes mais toujours en ligne et accessibles au même compte compromis auraient été chiffrées elles aussi.", "Bonne réponse : séparer les identités d'administration de sauvegarde + immuabilité/air gap + tests répondent exactement au mode de défaillance (destruction par le compte compromis).", "Hors sujet : le chiffrement protège la confidentialité des sauvegardes, pas leur disponibilité face à une destruction volontaire.", "Transfert de risque incomplet : l'assurance indemnise mais ne restaure ni les 30 jours de données ni l'activité — elle complète la résilience, elle ne la remplace pas."], "difficulte": 3}
+    {"q": "Lors d'un exercice de bascule sur le site de secours, vous constatez que la restauration technique tient le RTO mais que les équipes métier n'ont ni les procédures dégradées ni les habilitations pour reprendre l'activité sur ce site. La direction, satisfaite du volet technique, veut clore l'exercice comme un succès. Quelle est la MEILLEURE position à défendre ?", "choix": ["Approuver : le RTO technique est respecté, le reste s'improvisera le jour venu", "Documenter l'exercice comme un échec partiel et corriger le plan de continuité (procédures métier, habilitations, nouvelle répétition) avant toute validation", "Réduire le RTO cible pour compenser le temps perdu côté métier", "Transférer l'entière responsabilité de la reprise métier aux managers opérationnels de chaque service concerné, sans réviser ni re-tester le plan de continuité existant"], "reponse": 1, "explication": "Un plan de continuité ne vaut que par la reprise du service métier de bout en bout, pas par la seule restauration technique. L'exercice a rempli son rôle : révéler que le plan est incomplet. La position professionnelle est de le documenter honnêtement et de corriger le plan avant validation.", "pourquoi": ["Complaisance dangereuse : « ça s'improvisera » est l'antithèse de la planification de continuité — l'exercice sert précisément à éviter l'improvisation le jour J.", "Bonne réponse : la valeur d'un exercice est de révéler les écarts ; on documente sans complaisance et on corrige le plan (procédures, habilitations, re-test) avant de le déclarer valide.", "Manipulation d'indicateur : abaisser le RTO ne résout pas l'absence de procédures métier — c'est masquer le problème par un chiffre.", "Fuite de responsabilité : déléguer la reprise sans fournir plan ni habilitations reporte le risque sur des équipes non préparées."], "difficulte": 3},
+    {"q": "Un ransomware a chiffré la production ET les sauvegardes en ligne d'une filiale via un compte d'administration de sauvegarde compromis. Seules des bandes hors ligne mensuelles subsistent (jusqu'à 30 jours de perte). Le comité de direction demande LA mesure structurelle prioritaire pour empêcher toute récidive. Que recommandez-vous EN PREMIER ?", "choix": ["Augmenter la fréquence des sauvegardes en ligne pour qu'elles s'exécutent automatiquement toutes les heures sur le même stockage administré", "Isoler les identités d'administration de sauvegarde et ajouter une copie immuable (WORM) ou air-gappée, avec tests de restauration", "Chiffrer toutes les sauvegardes pour que l'attaquant ne puisse pas les lire", "Souscrire une cyber-assurance couvrant la reconstruction des données"], "reponse": 1, "explication": "Le facteur aggravant est que les sauvegardes partageaient la surface d'attaque de la production (mêmes identités d'administration). La réponse structurelle vise ce mode de défaillance : séparation des identités, immuabilité/air gap, et tests de restauration.", "pourquoi": ["Traite le mauvais problème : des sauvegardes plus fréquentes mais toujours en ligne et accessibles au même compte compromis auraient été chiffrées elles aussi.", "Bonne réponse : séparer les identités d'administration de sauvegarde + immuabilité/air gap + tests répondent exactement au mode de défaillance (destruction par le compte compromis).", "Hors sujet : le chiffrement protège la confidentialité des sauvegardes, pas leur disponibilité face à une destruction volontaire.", "Transfert de risque incomplet : l'assurance indemnise mais ne restaure ni les 30 jours de données ni l'activité — elle complète la résilience, elle ne la remplace pas."], "difficulte": 3}
   ],
   "quizEn": [
     {
@@ -3029,10 +3029,10 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Which term BEST describes a file hash, an IP address, or a domain name that suggests a system may have been breached?",
       "choix": [
-        "An indicator of compromise (IoC)",
+        "An indicator of compromise (IoC) artifact",
         "A threat vector",
         "An attack surface",
-        "A vulnerability signature"
+        "A published network vulnerability signature pattern"
       ],
       "reponse": 0,
       "explication": "Un indicateur de compromission (IoC) est un artefact observable — hash de fichier malveillant, adresse IP de command and control, nom de domaine — qui suggère qu'une intrusion a eu lieu. Le threat vector est le chemin d'attaque, l'attack surface l'ensemble des points exposés, et « vulnerability signature » n'est pas un terme consacré.",
@@ -3101,7 +3101,7 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "During an incident, responders discover that the attacker deleted the local security logs on the compromised host. Which control would BEST ensure that log data remains available for future investigations?",
       "choix": [
-        "Enabling verbose logging on all endpoints",
+        "Enabling verbose debug-level logging on all endpoints and workstations locally",
         "Increasing local log file size limits",
         "Real-time forwarding of logs to a centralized, write-once log server",
         "Weekly backups of local log files"
@@ -3119,7 +3119,7 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "What is the PRIMARY security benefit of a formal change management process?",
       "choix": [
-        "It transfers responsibility for outages to the change advisory board",
+        "It transfers all accountability for production outages to the change advisory board members and their managers",
         "It ensures changes are reviewed for unintended security consequences before implementation",
         "It eliminates the need for configuration baselines",
         "It accelerates the deployment of new features"
@@ -3138,7 +3138,7 @@ window.CISSP_DATA.domains[7] = {
       "q": "A security team wants to detect servers whose configurations have drifted from the approved secure baseline. Which practice BEST meets this need?",
       "choix": [
         "Automated configuration audits comparing systems against the baseline",
-        "Requiring administrators to sign a code of conduct",
+        "Requiring all system administrators to formally sign an annual code of conduct",
         "Annual penetration testing",
         "Reviewing firewall logs daily"
       ],
@@ -3156,9 +3156,9 @@ window.CISSP_DATA.domains[7] = {
       "q": "A critical vulnerability affects a legacy production system, but the vendor's patch cannot be applied because it breaks a core business application. What is the BEST course of action?",
       "choix": [
         "Immediately decommission the legacy system",
-        "Apply compensating controls such as network segmentation and enhanced monitoring until the application is remediated",
+        "Apply compensating controls such as network segmentation and enhanced monitoring until remediation",
         "Apply the patch anyway and let the business application fail",
-        "Accept the risk and document the decision without further action"
+        "Formally accept the residual risk and document the acceptance decision without applying any further mitigation"
       ],
       "reponse": 1,
       "explication": "Quand un correctif ne peut pas être appliqué, on réduit le risque par des contrôles compensatoires : isoler le système par segmentation, restreindre les accès, renforcer la surveillance, en attendant une remédiation durable. Accepter le risque sans mitigation néglige des options disponibles, et les deux dernières réponses sacrifient le métier sans analyse.",
@@ -3174,8 +3174,8 @@ window.CISSP_DATA.domains[7] = {
       "q": "Which of the following BEST distinguishes a security incident from a security event?",
       "choix": [
         "An incident is any observable occurrence on a network or system",
-        "An event involves an external attacker while an incident is internal",
-        "An incident is an event that actually or potentially jeopardizes the confidentiality, integrity, or availability of systems or data",
+        "An event always involves an external attacker, whereas an incident by definition involves only a trusted internal actor, never an outsider",
+        "An incident is an event that actually or potentially jeopardizes the confidentiality, integrity, or availability of data",
         "An event always requires regulatory notification"
       ],
       "reponse": 2,
@@ -3211,7 +3211,7 @@ window.CISSP_DATA.domains[7] = {
       "choix": [
         "The attacker may cause additional damage or exfiltrate more data while being observed",
         "The attacker may notice the monitoring tools",
-        "The observation will invalidate the chain of custody",
+        "The prolonged observation period will completely invalidate the evidentiary chain of custody",
         "The SIEM will generate too many alerts"
       ],
       "reponse": 0,
@@ -3263,10 +3263,10 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "A network IPS protecting a hospital's clinical systems fails. The security team must choose between fail-open and fail-closed behavior. Which statement BEST captures the trade-off?",
       "choix": [
-        "Fail-open maintains availability of clinical traffic but allows attacks through; fail-closed blocks attacks but interrupts patient care systems",
+        "Fail-open keeps clinical traffic flowing but lets attacks through; fail-closed blocks attacks but halts patient-care systems",
         "The choice has no impact on clinical operations",
         "Fail-closed maintains both security and availability",
-        "Fail-open is always the correct choice for security devices"
+        "Fail-open is always considered the single correct and safest choice for any inline security device deployed in a hospital network"
       ],
       "reponse": 0,
       "explication": "Un IPS en coupure qui tombe en panne doit soit laisser passer le trafic sans inspection (fail-open : disponibilité préservée, sécurité dégradée), soit tout bloquer (fail-closed : sécurité préservée, service interrompu). Dans un contexte hospitalier où la vie des patients dépend de la disponibilité, l'arbitrage penche souvent vers fail-open avec surveillance compensatoire — mais c'est une décision de gestion du risque, pas un automatisme.",
@@ -3282,7 +3282,7 @@ window.CISSP_DATA.domains[7] = {
       "q": "A malware sample remains dormant for 30 minutes and checks for virtualization artifacts before executing its payload. What is the MOST likely purpose of this behavior?",
       "choix": [
         "To reduce its memory footprint",
-        "To synchronize with the attacker's time zone",
+        "To synchronize its payload execution precisely with the attacker's command-and-control server time zone",
         "To avoid triggering full-disk encryption",
         "To evade automated sandbox analysis, which typically observes samples for only a short time"
       ],
@@ -3299,9 +3299,9 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "An organization performs a full backup on Sunday and incremental backups every weeknight. The file server fails on Thursday morning. Which restore sequence is CORRECT?",
       "choix": [
-        "Sunday's full backup, then Monday's, Tuesday's, and Wednesday's incrementals in chronological order",
+        "Sunday's full backup, then Monday's, Tuesday's and Wednesday's incrementals in order",
         "Wednesday's incremental only",
-        "Sunday's full backup, then Wednesday's incremental only",
+        "Sunday's full backup, then only Wednesday's incremental, skipping Monday's and Tuesday's",
         "Sunday's full backup only"
       ],
       "reponse": 0,
@@ -3335,7 +3335,7 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Beyond its high cost, what is a SIGNIFICANT security drawback of operating a hot site?",
       "choix": [
-        "It cannot be tested without interrupting production",
+        "It cannot realistically be tested without fully interrupting live production operations and services",
         "It duplicates all production data, effectively doubling the organization's attack surface",
         "It cannot support database replication",
         "It requires weeks to activate after a disaster"
@@ -3354,9 +3354,9 @@ window.CISSP_DATA.domains[7] = {
       "q": "Why can a cold site create a false sense of security for an organization?",
       "choix": [
         "Because it stores an outdated copy of production data",
-        "Because regulators prohibit its use for critical systems",
+        "Because industry regulators explicitly prohibit its use for any business-critical production systems and data",
         "Because it is more expensive than a hot site",
-        "Because it is difficult to test realistically, so activation problems are discovered only during an actual disaster"
+        "Because it is hard to test realistically, so activation problems surface only during a real disaster"
       ],
       "reponse": 3,
       "explication": "Un cold site n'a ni équipement ni données : il est presque impossible à tester de façon réaliste, et l'organisation découvre les problèmes d'activation — délais, matériels manquants, procédures fausses — au pire moment, pendant le vrai sinistre. Il est par ailleurs l'option la moins chère et ne stocke aucune donnée.",
@@ -3425,10 +3425,10 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "Why does senior management frequently resist authorizing a full-interruption test of the disaster recovery plan?",
       "choix": [
-        "It provides no useful information about the plan",
+        "It provides almost no genuinely useful information about the recovery plan's real-world operational effectiveness",
         "It is prohibited by most insurance policies",
         "It requires regulator approval in all industries",
-        "It deliberately halts production operations, so a test failure could itself cause a real outage and business losses"
+        "It deliberately halts production, so a test failure could itself cause a real outage and business losses"
       ],
       "reponse": 3,
       "explication": "Le full-interruption test arrête réellement le site principal pour basculer sur le site de secours : si le plan échoue, le test provoque lui-même un sinistre opérationnel avec pertes réelles. C'est pourtant le seul test qui prouve le plan de bout en bout — d'où la tension entre valeur probante et risque. Il n'est ni inutile, ni interdit par principe.",
@@ -3461,7 +3461,7 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "A bank teller is forced at gunpoint to open the vault. Which control allows the teller to summon help WITHOUT alerting the attacker?",
       "choix": [
-        "Refusing to comply until police arrive",
+        "Refusing to comply with the robber's demand until the police physically arrive on scene",
         "Activating the fire alarm",
         "A CCTV camera recording the event",
         "Entering a duress code that opens the vault while silently alerting security"
@@ -3482,7 +3482,7 @@ window.CISSP_DATA.domains[7] = {
         "Relying on the hotel's business center computers",
         "Issuing loaner devices containing only the minimum data needed, to be wiped upon return",
         "Storing all files in a hidden encrypted partition",
-        "Carrying her usual laptop protected by full-disk encryption"
+        "Carrying her usual corporate laptop protected only by standard full-disk encryption software"
       ],
       "reponse": 1,
       "explication": "L'appareil de prêt avec données minimales est la meilleure pratique : même en cas de fouille frontalière avec déverrouillage exigé, de saisie ou de compromission, l'exposition est négligeable, et l'appareil est réinitialisé au retour. Le chiffrement ne résiste pas à une injonction légale de déverrouillage, une partition cachée expose à des sanctions si elle est découverte, et les ordinateurs d'hôtel doivent être présumés compromis.",
@@ -3498,8 +3498,8 @@ window.CISSP_DATA.domains[7] = {
       "q": "A security operations center deploys a generative AI assistant that summarizes alerts and recommends dispositions. Several AI-generated summaries later prove inaccurate. Which practice BEST addresses this risk while preserving the efficiency gains?",
       "choix": [
         "Restrict the assistant to low-severity alerts only",
-        "Ask the vendor to retrain the model on the organization's historical data",
-        "Require documented human validation before any alert is closed or escalated, using the AI only to assist triage",
+        "Ask the vendor to fully retrain the underlying model on the organization's own historical incident and alert data",
+        "Require documented human validation before any alert is closed or escalated, with the AI only assisting triage",
         "Remove the AI assistant until it produces no errors"
       ],
       "reponse": 2,
@@ -3516,8 +3516,8 @@ window.CISSP_DATA.domains[7] = {
       "q": "A manufacturer restores all systems from clean backups after a double-extortion ransomware attack in which the attackers also exfiltrated customer data. Why is the incident NOT resolved?",
       "choix": [
         "The restored systems may still contain the ransomware binary",
-        "The recovery time objective may have been exceeded during the restore",
-        "The exfiltrated data constitutes a breach that still triggers notification and crisis-management obligations",
+        "The recovery time objective may well have been exceeded at several points during the lengthy full restore process",
+        "The exfiltrated data is a breach that still triggers notification and crisis-management obligations",
         "The attackers may return through the same unpatched vulnerability"
       ],
       "reponse": 2,
@@ -3534,9 +3534,9 @@ window.CISSP_DATA.domains[7] = {
       "q": "During an incident in a public cloud environment, compromised containers are being automatically terminated and replaced by the auto-scaling service. What should the incident response team do FIRST?",
       "choix": [
         "Request that the cloud provider seize the physical drives of the host servers",
-        "Rely on the cloud provider's incident response team, since it owns the infrastructure",
+        "Rely entirely on the cloud provider's own incident response team, since the provider legally owns and operates the infrastructure",
         "Redeploy the environment from infrastructure-as-code templates to restore service",
-        "Pause auto-scaling and preserve volatile evidence through provider APIs, snapshots, and centralized logs before instances are destroyed"
+        "Pause auto-scaling and preserve volatile evidence via provider APIs, snapshots and central logs before instances are destroyed"
       ],
       "reponse": 3,
       "explication": "En cloud éphémère, chaque cycle d'auto-scaling détruit des preuves : la seule préservation possible passe par les mécanismes logiques du fournisseur — suspendre le scaling, snapshotter les instances, exporter les journaux via API — avant la destruction automatique. La saisie physique est irréaliste en infrastructure mutualisée, le modèle de responsabilité partagée laisse au client l'investigation de ses charges de travail, et redéployer avant de collecter détruirait les preuves.",
@@ -3551,10 +3551,10 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "A SOAR platform automatically isolated a critical trading server based on a false positive, halting operations for two hours. Management demands both rapid containment and protection of critical services. Which approach BEST satisfies these requirements?",
       "choix": [
-        "Apply tiered automation: automatic containment for standard assets, human approval for actions affecting business-critical assets",
+        "Apply tiered automation: automatic containment for standard assets, human approval for business-critical assets",
         "Tune detection rules until false positives no longer occur",
         "Exclude all critical servers from the SOAR platform's scope",
-        "Disable automated containment and require analysts to approve every response action"
+        "Completely disable automated containment and require SOC analysts to manually approve every single response action"
       ],
       "reponse": 0,
       "explication": "L'automatisation graduée aligne le niveau de contrôle humain sur la criticité métier : confinement automatique pour les actifs standards (réactivité), approbation humaine pour les actions à fort impact sur les actifs critiques (jugement). Revenir au tout-manuel sacrifie la réactivité exigée, aucun tuning n'élimine totalement les faux positifs, et exclure les serveurs critiques les prive de tout confinement rapide alors qu'ils sont les cibles les plus attractives.",
@@ -3569,7 +3569,7 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "A weekly compliance scan shows that 40 of 500 servers no longer match the approved security baseline. Change records account for only 25 of them. What should the security manager do FIRST regarding the remaining 15 servers?",
       "choix": [
-        "Update the baseline to reflect the servers' current configuration",
+        "Immediately update the approved security baseline to reflect the fifteen servers' current running configuration",
         "Investigate the unexplained deviations as potential unauthorized changes or indicators of compromise",
         "Redeploy all 500 servers from the golden image immediately",
         "Defer the servers to the next quarterly audit for confirmation"
@@ -3606,8 +3606,8 @@ window.CISSP_DATA.domains[7] = {
       "q": "During a regional disaster, the DR coordinator must quickly notify 200 recovery staff even though corporate email and VoIP are down. Which plan element BEST supports this need?",
       "choix": [
         "Posting status updates on the company intranet",
-        "Instructing managers to improvise contact methods as the situation evolves",
-        "A tested call tree using personal out-of-band contact details, with alternates at each node and confirmation reported back up the tree",
+        "Instructing individual line managers to improvise their own ad-hoc contact methods as the emergency situation gradually evolves",
+        "A tested call tree using personal out-of-band contacts, with alternates at each node and confirmations reported back up",
         "Waiting for employees to contact the help desk for instructions"
       ],
       "reponse": 2,
@@ -3623,7 +3623,7 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "A threat intelligence report indicates that attackers targeting your industry exfiltrate stolen data through encrypted uploads to personal cloud storage services. Which control BEST addresses this specific risk?",
       "choix": [
-        "Signature-based antivirus deployed on all endpoints",
+        "Traditional signature-based antivirus software deployed uniformly across all corporate endpoints",
         "Egress monitoring with DLP and inspection of outbound traffic to unauthorized cloud services",
         "Full-disk encryption on all servers and workstations",
         "A perimeter IDS tuned for inbound exploit signatures"
