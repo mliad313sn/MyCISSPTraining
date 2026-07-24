@@ -979,7 +979,7 @@ window.CISSP_DATA.domains[8] = {
     {
       "q": "Quelle responsabilité relève spécifiquement du release control ?",
       "choix": [
-        "S'assurer que l'acceptance testing confirme que les changements sont compris et fonctionnels avant la mise en production",
+        "L'acceptance testing valide les changements avant la production",
         "Prioriser les demandes de modification des utilisateurs",
         "Permettre aux développeurs de recréer le problème signalé par un utilisateur",
         "Documenter la configuration matérielle des serveurs de production"
@@ -1018,7 +1018,7 @@ window.CISSP_DATA.domains[8] = {
         "IDEAL ne s'applique qu'aux projets Agile, SW-CMM qu'aux projets Waterfall",
         "IDEAL est maintenu par OWASP, SW-CMM par le NIST",
         "IDEAL évalue la maturité actuelle, SW-CMM décrit comment s'améliorer",
-        "IDEAL est un modèle d'amélioration des processus, SW-CMM est un modèle d'évaluation de maturité"
+        "IDEAL décrit comment s'améliorer ; SW-CMM évalue la maturité"
       ],
       "reponse": 3,
       "explication": "IDEAL (Initiating, Diagnosing, Establishing, Acting, Learning) est un modèle d'amélioration des processus : il décrit comment progresser. Le SW-CMM est un modèle d'évaluation de maturité : il situe l'organisation sur cinq niveaux. Les deux ont été développés par le SEI de Carnegie Mellon, pas par OWASP ni le NIST, et aucun n'est lié à une méthodologie particulière.",
@@ -1089,7 +1089,7 @@ window.CISSP_DATA.domains[8] = {
       "choix": [
         "L'absence de licence d'utilisation",
         "Le coût élevé du support éditeur",
-        "La dépendance à des versions obsolètes, notamment des bibliothèques partagées",
+        "La dépendance à des versions obsolètes",
         "Le code source est visible par les attaquants"
       ],
       "reponse": 2,
@@ -1105,7 +1105,7 @@ window.CISSP_DATA.domains[8] = {
     {
       "q": "Quel est le PRINCIPAL bénéfice de sécurité d'un Software Bill of Materials (SBOM) ?",
       "choix": [
-        "Il permet d'identifier rapidement les systèmes affectés lors de la divulgation d'une nouvelle vulnérabilité",
+        "Identifier vite les systèmes affectés par une vulnérabilité",
         "Il empêche l'introduction de code malveillant dans le pipeline",
         "Il remplace les tests de sécurité applicative",
         "Il chiffre les dépendances du logiciel"
@@ -1178,7 +1178,7 @@ window.CISSP_DATA.domains[8] = {
       "q": "Quelle distinction entre XSS et CSRF est CORRECTE ?",
       "choix": [
         "Les deux attaques sont identiques, seul le vecteur d'injection diffère",
-        "XSS exécute un script malveillant dans le navigateur de la victime ; CSRF fait émettre à la victime authentifiée une requête non désirée",
+        "XSS exécute un script chez la victime ; CSRF forge une requête en son nom",
         "XSS exploite la confiance du site envers le navigateur ; CSRF exécute un script chez la victime",
         "XSS ne concerne que les applications mobiles ; CSRF ne concerne que les APIs"
       ],
@@ -1214,7 +1214,7 @@ window.CISSP_DATA.domains[8] = {
       "q": "Un programme vérifie les permissions d'un utilisateur sur un fichier, puis ouvre ce fichier quelques millisecondes plus tard. Un attaquant remplace le fichier par un lien symbolique vers /etc/shadow entre ces deux opérations. Comment s'appelle cette attaque ?",
       "choix": [
         "TOCTOU (time-of-check to time-of-use)",
-        "Injection de commande",
+        "Injection de commande (command injection)",
         "Buffer overflow",
         "Dirty read"
       ],
@@ -1233,7 +1233,7 @@ window.CISSP_DATA.domains[8] = {
       "choix": [
         "L'inférence ne s'applique qu'aux bases relationnelles, l'agrégation qu'aux entrepôts de données",
         "L'inférence est un problème de sécurité, l'agrégation est l'attaque correspondante",
-        "L'agrégation est la capacité à combiner des données non sensibles en information sensible ; l'inférence est l'attaque qui en déduit une information de sensibilité supérieure",
+        "L'agrégation combine des données banales en information sensible ; l'inférence la déduit",
         "L'agrégation exige un accès privilégié, tandis que l'inférence exploite une faille d'injection"
       ],
       "reponse": 2,
@@ -1286,7 +1286,7 @@ window.CISSP_DATA.domains[8] = {
       "q": "Un développeur a laissé dans l'application de production un mécanisme caché lui permettant de contourner l'authentification « pour faciliter la maintenance ». Comment ce mécanisme est-il désigné et quelle est la position correcte de l'organisation ?",
       "choix": [
         "Un covert channel ; il est acceptable s'il est documenté",
-        "Une backdoor (maintenance hook) ; elle doit être interdite et retirée du code de production",
+        "Une backdoor (maintenance hook) à bannir de la production",
         "Un trapdoor ; il est acceptable si l'accès est chiffré",
         "Un RASP ; il doit être conservé pour la supervision"
       ],
@@ -1339,7 +1339,7 @@ window.CISSP_DATA.domains[8] = {
     {
       "q": "Votre organisation s'apprête à acheter un logiciel développé sur mesure par un prestataire externe. Quelle est la MEILLEURE pratique pour évaluer sa sécurité avant l'achat ?",
       "choix": [
-        "Prévoir contractuellement un audit de sécurité externe, dont la réussite conditionne la finalisation de l'achat",
+        "Exiger par contrat un audit de sécurité externe avant l'achat",
         "Se fier aux certifications génériques du prestataire",
         "Attendre la mise en production pour réaliser un test d'intrusion",
         "Exiger uniquement une démonstration fonctionnelle du produit"
@@ -1360,7 +1360,7 @@ window.CISSP_DATA.domains[8] = {
         "Les attaques par déni de service distribué",
         "Les vulnérabilités zero-day des hyperviseurs",
         "Les pannes matérielles des centres de données",
-        "Les erreurs de configuration, le manque de visibilité sur les accès et les contrôles d'accès insuffisants"
+        "Les erreurs de configuration côté client"
       ],
       "reponse": 3,
       "explication": "Les premières causes de brèches cloud restent les misconfigurations, le manque de visibilité sur les paramètres d'accès et les contrôles d'accès insuffisants : des erreurs côté client du modèle de responsabilité partagée. Les zero-days d'hyperviseur sont rares, les pannes matérielles relèvent de la disponibilité gérée par le fournisseur, et les DDoS, bien que réels, ne sont pas la cause principale des brèches de données.",
@@ -1378,7 +1378,7 @@ window.CISSP_DATA.domains[8] = {
         "Limiter l'API aux seuls appels internes",
         "Publier la documentation complète de l'API",
         "Attribuer une clé API statique unique partagée par tous les clients",
-        "La validation des paramètres : vérifier que chaque valeur reçue est dans les limites définies avant traitement"
+        "La validation des paramètres reçus avant traitement"
       ],
       "reponse": 3,
       "explication": "La parameter validation est la mesure fondamentale : elle garantit que tout paramètre reçu par l'API est contrôlé contre les valeurs malformées, invalides ou malveillantes avant traitement. La documentation aide les développeurs mais ne protège pas, restreindre aux appels internes n'est souvent pas possible et ne valide rien, et une clé statique partagée n'authentifie personne individuellement, ne se révoque pas sans casser tous les clients et ne valide aucune entrée.",
@@ -1395,7 +1395,7 @@ window.CISSP_DATA.domains[8] = {
       "choix": [
         "Une guideline devient automatiquement un standard après un an d'application",
         "Les deux termes sont interchangeables",
-        "Un standard est obligatoire, vérifiable et applicable à tous les développements ; une guideline est une recommandation flexible",
+        "Le standard est obligatoire ; la guideline est une recommandation flexible",
         "Un standard est recommandé, une guideline est obligatoire"
       ],
       "reponse": 2,
@@ -1411,7 +1411,7 @@ window.CISSP_DATA.domains[8] = {
     {
       "q": "Une application affiche la trace de pile complète et la requête SQL en erreur lorsqu'une exception survient. Quel est le risque PRINCIPAL et la correction appropriée ?",
       "choix": [
-        "Divulgation d'informations utiles à un attaquant ; afficher un message générique et journaliser les détails en interne",
+        "Fuite d'informations vers l'attaquant ; message générique à afficher",
         "Vulnérabilité d'injection SQL ; déployer un WAF en urgence",
         "Risque de déni de service ; augmenter les ressources serveur",
         "Perte de données ; mettre en place des sauvegardes"
@@ -1430,7 +1430,7 @@ window.CISSP_DATA.domains[8] = {
       "q": "Selon les pratiques de codage sécurisé de l'OWASP, lequel de ces événements devrait IMPÉRATIVEMENT être journalisé ?",
       "choix": [
         "Chaque affichage de page réussi de tous les utilisateurs",
-        "Les échecs de validation d'entrée, les échecs d'authentification et l'usage des privilèges d'administration",
+        "Les échecs d'authentification et les accès administrateur",
         "Uniquement les redémarrages du serveur",
         "Le contenu intégral des mots de passe saisis"
       ],
@@ -1449,7 +1449,7 @@ window.CISSP_DATA.domains[8] = {
       "choix": [
         "L'accréditation est délivrée par l'éditeur du logiciel",
         "Les deux termes désignent l'audit annuel de conformité",
-        "La certification est l'analyse technique complète de la sécurité ; l'accréditation est la déclaration formelle par l'autorité désignée que le système est approuvé pour fonctionner à un niveau de risque acceptable",
+        "Certification = analyse technique ; accréditation = décision de l'autorité désignée",
         "La certification est la décision d'exploitation ; l'accréditation est l'analyse technique"
       ],
       "reponse": 2,
@@ -1486,7 +1486,7 @@ window.CISSP_DATA.domains[8] = {
         "La désactivation du chiffrement interne pour améliorer les performances",
         "Un mot de passe partagé entre tous les services et des logs locaux",
         "L'exposition directe de chaque microservice sur Internet pour simplifier l'architecture",
-        "Une passerelle API centralisant authentification et limitation de débit, du TLS entre services et une posture zero trust"
+        "Passerelle API, TLS entre services et posture zero trust"
       ],
       "reponse": 3,
       "explication": "La bonne combinaison associe une passerelle API qui centralise l'authentification, l'autorisation et la limitation de débit, du chiffrement TLS pour les communications entre services, et une approche zero trust où aucun service ne fait confiance à un autre par défaut. Un secret partagé crée un point de compromission unique, désactiver le chiffrement interne expose les flux, et l'exposition directe multiplie les portes d'entrée.",
@@ -1502,7 +1502,7 @@ window.CISSP_DATA.domains[8] = {
       "q": "Quel terme désigne l'exécution, par la victime, d'un ensemble d'instructions choisi par l'attaquant à la suite de l'exploitation d'une vulnérabilité comme un buffer overflow ?",
       "choix": [
         "Exécution de code arbitraire",
-        "Data mining",
+        "Data mining (fouille de données)",
         "Dirty read",
         "Query attack"
       ],
@@ -1521,7 +1521,7 @@ window.CISSP_DATA.domains[8] = {
       "choix": [
         "Le code compilé garantit l'intégrité car le compilateur le signe automatiquement",
         "Le code interprété est protégé par l'obfuscation intégrée de l'interpréteur",
-        "Le code compilé est plus difficile à manipuler par un tiers, mais les backdoors y sont aussi plus difficiles à détecter faute de code source visible",
+        "Le binaire résiste mieux à la manipulation, mais masque mieux les backdoors",
         "Le code compilé est toujours moins sécurisé que le code interprété"
       ],
       "reponse": 2,
@@ -1537,7 +1537,7 @@ window.CISSP_DATA.domains[8] = {
     {
       "q": "Votre organisation dépend d'une application critique développée par un petit éditeur dont la santé financière est incertaine, et le contrat ne donne pas accès au code source. Quelle est la MEILLEURE mesure pour garantir la continuité si l'éditeur fait faillite ?",
       "choix": [
-        "Négocier un accord de software escrow avec conditions de libération du code source",
+        "Négocier un software escrow libérant le code source",
         "Exiger un SLA renforcé avec pénalités financières",
         "Souscrire une assurance couvrant les pertes d'exploitation",
         "Décompiler le logiciel pour reconstituer le code source"
@@ -1558,7 +1558,7 @@ window.CISSP_DATA.domains[8] = {
         "Le code sera automatiquement mis à jour par l'éditeur",
         "Le code a été testé et approuvé par l'autorité de certification",
         "Le code est exempt de vulnérabilités et de malveillance",
-        "Le code n'a pas été modifié depuis sa signature et provient bien de l'éditeur identifié par le certificat"
+        "Le code est intègre et provient de l'éditeur du certificat"
       ],
       "reponse": 3,
       "explication": "Le code signing garantit l'intégrité (le hash correspond, donc le code n'a pas été altéré depuis la signature) et l'origine (le certificat authentifie l'éditeur). Il ne dit rien de la qualité ni de l'innocuité du code : un binaire signé peut être vulnérable, et même malveillant si le certificat de signature a été volé. La CA délivre le certificat mais ne teste jamais le code, et la signature n'implique aucun mécanisme de mise à jour.",
@@ -1610,7 +1610,7 @@ window.CISSP_DATA.domains[8] = {
       "q": "Une équipe Scrum livre un incrément toutes les deux semaines. Le RSSI veut s'assurer que la sécurité est prise en compte sans casser le rythme des sprints. Quelle est la MEILLEURE approche ?",
       "choix": [
         "Transférer la responsabilité de la sécurité à l'équipe SOC",
-        "Intégrer des critères de sécurité dans la Definition of Done et ajouter des abuse cases au backlog",
+        "Critères de sécurité dans la Definition of Done, plus abuse cases",
         "Planifier un test d'intrusion annuel après la version majeure",
         "Insérer une phase de sécurité dédiée d'une semaine après chaque sprint"
       ],
@@ -1630,7 +1630,7 @@ window.CISSP_DATA.domains[8] = {
         "Une revue de code manuelle ligne par ligne",
         "Un scan DAST de l'environnement de préproduction",
         "Un audit de conformité PCI DSS de la production",
-        "Une modélisation des menaces (threat modeling) de l'architecture, par exemple avec STRIDE"
+        "Un threat modeling (STRIDE) de l'architecture"
       ],
       "reponse": 3,
       "explication": "Le threat modeling est l'activité de sécurité propre à la phase de conception : il identifie les menaces (Spoofing, Tampering, Repudiation, Information disclosure, Denial of service, Elevation of privilege avec STRIDE) sur l'architecture avant qu'une ligne de code ne soit écrite, quand les corrections coûtent le moins cher. Le DAST exige une application en exécution, la revue de code exige du code écrit, et un audit PCI DSS s'applique à un environnement de production existant : toutes ces activités viennent plus tard dans le cycle.",
@@ -1665,7 +1665,7 @@ window.CISSP_DATA.domains[8] = {
       "choix": [
         "Restreindre l'IaC aux environnements de test uniquement",
         "Auditer manuellement la console cloud chaque trimestre",
-        "Scanner les templates IaC dans le pipeline avant le déploiement et bloquer les configurations non conformes",
+        "Scanner les templates IaC avant déploiement",
         "Chiffrer les templates IaC dans le dépôt de code"
       ],
       "reponse": 2,
@@ -1702,7 +1702,7 @@ window.CISSP_DATA.domains[8] = {
         "Les stocker dans un fichier de configuration du dépôt, accessible aux seuls développeurs",
         "Les coder en dur dans les scripts de build pour éviter les erreurs de saisie",
         "Les transmettre par messagerie chiffrée au responsable des déploiements",
-        "Les injecter à l'exécution depuis un gestionnaire de secrets centralisé (vault), avec des identifiants à courte durée de vie et rotation automatique"
+        "Les injecter à l'exécution depuis un vault, avec identifiants éphémères et rotation"
       ],
       "reponse": 3,
       "explication": "Un secrets manager centralisé injecte les identifiants au moment de l'exécution, sans qu'ils apparaissent jamais dans le code ou le dépôt ; les identifiants dynamiques à courte durée de vie et la rotation automatique réduisent la fenêtre d'exploitation en cas de fuite et fournissent un audit centralisé. Tout stockage dans le dépôt, même « restreint », expose les secrets à chaque clone et à l'historique ; le codage en dur est l'anti-pattern classique détecté par les scanners ; et la transmission manuelle ne s'automatise pas et disperse les secrets.",
@@ -1718,7 +1718,7 @@ window.CISSP_DATA.domains[8] = {
       "q": "Après un incident de type SolarWinds, votre organisation craint qu'un attaquant compromette le serveur de build pour injecter du code malveillant dans des livrables ensuite signés légitimement. Quel ensemble de contrôles répond le MIEUX à ce risque ?",
       "choix": [
         "Chiffrer le code source au repos dans le dépôt",
-        "Durcir et isoler l'environnement de build, restreindre ses accès, et générer des attestations de provenance vérifiables pour chaque artefact",
+        "Durcir et isoler le build, avec attestations de provenance vérifiables",
         "Déployer un WAF devant les applications produites",
         "Augmenter la couverture des tests unitaires et exiger deux relecteurs par pull request"
       ],
@@ -1754,7 +1754,7 @@ window.CISSP_DATA.domains[8] = {
       "q": "Un attaquant publie sur un dépôt public de paquets une bibliothèque portant le même nom qu'une bibliothèque interne de votre entreprise, avec un numéro de version supérieur. Vos serveurs de build téléchargent automatiquement le paquet malveillant. Comment s'appelle cette attaque ?",
       "choix": [
         "Typosquatting",
-        "Watering hole",
+        "Watering hole (attaque du point d'eau)",
         "DLL hijacking",
         "Dependency confusion"
       ],
@@ -1771,7 +1771,7 @@ window.CISSP_DATA.domains[8] = {
     {
       "q": "Quelle combinaison de mesures protège le MIEUX une organisation contre les paquets open source malveillants dans sa chaîne d'approvisionnement logicielle ?",
       "choix": [
-        "Utiliser un registre interne de paquets approuvés, épingler les versions (version pinning) et vérifier l'intégrité par hash, avec analyse SCA continue",
+        "Registre interne approuvé, version pinning et SCA continue",
         "Compiler soi-même tous les paquets à partir des sources",
         "Interdire totalement l'open source et ne développer qu'en interne",
         "Ne télécharger les paquets que depuis des sites en HTTPS"
@@ -1807,7 +1807,7 @@ window.CISSP_DATA.domains[8] = {
     {
       "q": "Lors d'un test, une erreur applicative renvoie à l'utilisateur la pile d'appels complète, la version du serveur et la chaîne de connexion à la base de données. Quel principe de codage sécurisé est violé ?",
       "choix": [
-        "La gestion des erreurs doit rester sobre côté client et journaliser les détails côté serveur",
+        "Message d'erreur sobre côté client, détails côté serveur",
         "La limitation du nombre de sessions simultanées",
         "Le chiffrement des données au repos",
         "La séparation des tâches entre développeurs et opérateurs"
@@ -1826,7 +1826,7 @@ window.CISSP_DATA.domains[8] = {
       "q": "Une analyse SCA révèle que l'application e-commerce utilise une bibliothèque comportant une CVE critique activement exploitée, mais l'équipe craint des régressions. Quelle est la MEILLEURE recommandation ?",
       "choix": [
         "Attendre la prochaine version majeure de l'application pour tout mettre à jour",
-        "Mettre à jour la bibliothèque en priorité via le processus de gestion des changements, avec tests de régression, et appliquer des mesures compensatoires (WAF, virtual patching) dans l'intervalle",
+        "Corriger en priorité via le change management, avec mesures compensatoires",
         "Accepter le risque puisque l'application est derrière un pare-feu",
         "Désactiver l'analyse SCA qui génère trop d'alertes"
       ],
@@ -1864,7 +1864,7 @@ window.CISSP_DATA.domains[8] = {
         "Interdire le caractère apostrophe dans les formulaires",
         "Masquer les messages d'erreur SQL renvoyés à l'utilisateur",
         "Renommer les tables sensibles de la base de données",
-        "Utiliser des requêtes paramétrées (prepared statements) dans tout le code d'accès aux données"
+        "Des requêtes paramétrées (prepared statements) partout"
       ],
       "reponse": 3,
       "explication": "Les requêtes paramétrées séparent structurellement le code SQL des données fournies par l'utilisateur : l'entrée ne peut jamais être interprétée comme du SQL, ce qui neutralise l'injection à la racine. Filtrer l'apostrophe est un blacklisting fragile, contournable par encodages et inutilisable pour les noms légitimes contenant une apostrophe ; masquer les erreurs gêne l'attaquant (l'injection devient « blind ») mais ne l'empêche pas ; et renommer les tables n'est que de la sécurité par l'obscurité.",
@@ -1880,7 +1880,7 @@ window.CISSP_DATA.domains[8] = {
       "q": "Un attaquant poste sur un forum un commentaire contenant un script qui s'exécute dans le navigateur de chaque visiteur affichant la page et exfiltre leurs cookies de session. Quelle est cette attaque et sa MEILLEURE défense ?",
       "choix": [
         "Reflected XSS ; défense : jetons anti-CSRF",
-        "Stored XSS ; défense : validation des entrées et encodage contextuel des sorties, complétés par une Content Security Policy",
+        "Stored XSS ; encodage des sorties et CSP",
         "CSRF ; défense : encodage des sorties",
         "SQL injection ; défense : requêtes paramétrées"
       ],
@@ -1899,7 +1899,7 @@ window.CISSP_DATA.domains[8] = {
       "choix": [
         "L'encodage des sorties HTML",
         "Le chiffrement TLS de toutes les communications",
-        "Des jetons anti-CSRF uniques et imprévisibles dans chaque formulaire, complétés par l'attribut de cookie SameSite",
+        "Jetons anti-CSRF uniques et cookie SameSite",
         "Une politique de mots de passe robustes"
       ],
       "reponse": 2,
@@ -1918,7 +1918,7 @@ window.CISSP_DATA.domains[8] = {
         "Chiffrer le fichier /etc/passwd",
         "Bloquer le caractère point-virgule dans le WAF",
         "Exécuter le serveur web en tant que root pour maîtriser les permissions",
-        "Éviter l'invocation du shell en utilisant des API natives, et valider l'entrée par liste blanche stricte"
+        "Éviter le shell via des API natives et une liste blanche stricte"
       ],
       "reponse": 3,
       "explication": "C'est une OS command injection : l'entrée utilisateur est interprétée par le shell. La correction en profondeur consiste à ne jamais passer d'entrée utilisateur à un shell — utiliser des API natives du langage (ouverture de fichier directe, exécution sans shell avec arguments séparés) — et à valider l'entrée contre une liste blanche stricte. Exécuter en root aggrave dramatiquement l'impact au lieu de le réduire (violation du moindre privilège) ; bloquer le point-virgule au WAF est un pansement contournable (autres métacaractères, encodages) ; et chiffrer un fichier système ne traite qu'une cible parmi toutes celles accessibles.",
@@ -1969,7 +1969,7 @@ window.CISSP_DATA.domains[8] = {
     {
       "q": "Dans une base de données multiniveau, un utilisateur non habilité tente de créer un enregistrement pour le cargo « Aurora » et découvre qu'une clé identique existe déjà à un niveau classifié, révélant l'existence d'une mission secrète. Quelle technique prévient cette fuite ?",
       "choix": [
-        "La polyinstantiation : deux enregistrements de même clé coexistent à des niveaux de classification différents",
+        "La polyinstantiation",
         "La normalisation de la base de données",
         "Le database view filtering",
         "Le chiffrement transparent des données (TDE)"
@@ -1990,7 +1990,7 @@ window.CISSP_DATA.domains[8] = {
         "Sauvegarder la base quotidiennement sur un site distant",
         "Exiger le MFA pour accéder à l'outil de reporting",
         "Chiffrer la base de données au repos avec AES-256",
-        "Imposer une taille minimale aux ensembles de résultats, supprimer les cellules trop petites (cell suppression) et ajouter du bruit statistique (perturbation)"
+        "Cell suppression, taille minimale et bruit statistique"
       ],
       "reponse": 3,
       "explication": "Les attaques d'inférence sur bases statistiques se contrent par des contrôles spécifiques : refuser les requêtes dont le résultat porte sur un ensemble trop petit, supprimer les cellules à faibles effectifs, ajouter du bruit aléatoire calibré (perturbation, ancêtre de la differential privacy) et limiter les requêtes successives recoupables (query set overlap control). Le chiffrement au repos, le MFA et les sauvegardes sont de bons contrôles généraux, mais l'analyste est ici un utilisateur AUTORISÉ qui n'exploite que des requêtes légitimes : seuls les contrôles d'inférence traitent ce risque.",
@@ -2007,7 +2007,7 @@ window.CISSP_DATA.domains[8] = {
       "choix": [
         "Injection SQL dans les paramètres de l'API",
         "Excessive data exposure dans les réponses JSON",
-        "Broken Object Level Authorization (BOLA/IDOR) : l'API doit vérifier l'autorisation sur chaque objet à chaque appel",
+        "Broken Object Level Authorization (BOLA)",
         "Absence de chiffrement TLS sur l'API"
       ],
       "reponse": 2,
@@ -2025,7 +2025,7 @@ window.CISSP_DATA.domains[8] = {
       "choix": [
         "Faire confiance au trafic interne puisque le périmètre réseau est protégé par un pare-feu",
         "Limiter la sécurité à la passerelle API qui reçoit le trafic externe",
-        "Imposer une authentification mutuelle TLS (mTLS) entre services avec des identités et certificats propres à chaque service, souvent via un service mesh",
+        "Le mTLS entre services, avec une identité par service via un service mesh",
         "Utiliser un mot de passe partagé commun à tous les microservices"
       ],
       "reponse": 2,
@@ -2044,7 +2044,7 @@ window.CISSP_DATA.domains[8] = {
         "Elle augmente la bande passante disponible pour les clients",
         "Elle remplace le chiffrement TLS entre le client et les services",
         "Elle rend inutile la sécurisation des microservices situés derrière elle",
-        "Elle centralise l'application de l'authentification, de la limitation de débit (rate limiting) et de la validation des requêtes en un point de contrôle unique"
+        "Centraliser authentification, rate limiting et validation"
       ],
       "reponse": 3,
       "explication": "La passerelle API constitue un point d'application central des politiques : authentification et autorisation de chaque appel, rate limiting contre les abus et le déni de service, validation et filtrage des requêtes, journalisation uniforme. Cette centralisation évite que chaque microservice réimplémente (inégalement) ces contrôles. Elle n'a pas vocation à accroître la bande passante ; elle ne dispense jamais de sécuriser les services eux-mêmes (défense en profondeur, trafic est-ouest) ; et elle s'appuie sur TLS, elle ne le remplace pas.",
@@ -2059,7 +2059,7 @@ window.CISSP_DATA.domains[8] = {
     {
       "q": "Votre entreprise dispose d'un accord de software escrow pour son ERP critique. L'éditeur fait faillite, mais le code libéré par l'agent d'escrow date de trois ans et ne correspond plus à la version exploitée. Quelle disposition aurait prévenu ce problème ?",
       "choix": [
-        "Des dépôts obligatoires à chaque version majeure, avec vérification périodique indépendante que le dépôt est complet, compilable et à jour",
+        "Des dépôts à chaque version majeure, vérifiés périodiquement",
         "Une assurance cyber couvrant la défaillance des fournisseurs",
         "Une clause de pénalités financières en cas de retard de support",
         "Le choix d'un agent d'escrow disposant de coffres physiques certifiés"
@@ -2078,7 +2078,7 @@ window.CISSP_DATA.domains[8] = {
       "q": "Un malware est distribué signé avec le certificat de code signing légitime d'un éditeur connu, dérobé lors d'une intrusion. Les postes de travail l'exécutent sans alerte. Quelles mesures l'ÉDITEUR aurait-il dû prendre pour prévenir et traiter ce scénario ?",
       "choix": [
         "Utiliser un certificat auto-signé pour ne pas dépendre d'une autorité de certification",
-        "Protéger les clés de signature dans un HSM avec accès strictement contrôlé, et révoquer immédiatement le certificat dès la compromission détectée",
+        "Protéger les clés dans un HSM à accès contrôlé et révoquer le certificat si compromis",
         "Étendre la durée de validité du certificat afin d'espacer les opérations de renouvellement, jugées risquées",
         "Signer uniquement les versions majeures pour limiter l'usage des clés"
       ],
@@ -2097,7 +2097,7 @@ window.CISSP_DATA.domains[8] = {
       "choix": [
         "La promesse commerciale d'un chiffrement « de niveau militaire »",
         "Les témoignages de clients publiés sur le site du fournisseur",
-        "Un rapport SOC 2 Type II récent, attestant l'efficacité opérationnelle des contrôles sur une période, complété par un droit d'audit contractuel",
+        "Un rapport SOC 2 Type II récent et un droit d'audit contractuel",
         "Le questionnaire de sécurité auto-déclaré rempli par le fournisseur"
       ],
       "reponse": 2,
@@ -2134,7 +2134,7 @@ window.CISSP_DATA.domains[8] = {
         "Model theft par extraction de requêtes",
         "Membership inference sur les données d'entraînement",
         "Data poisoning des données d'entraînement",
-        "Adversarial example : une entrée manipulée trompe le modèle au moment de l'inférence"
+        "Adversarial example : entrée trompant le modèle"
       ],
       "reponse": 3,
       "explication": "L'adversarial example est une entrée subtilement altérée — ici des autocollants imperceptiblement significatifs pour le modèle — qui provoque une classification erronée au moment de l'INFÉRENCE, sans aucune modification du modèle ni des données d'entraînement. Le data poisoning corrompt en amont les données d'ENTRAÎNEMENT ; le model theft reconstruit un modèle équivalent en l'interrogeant massivement ; et la membership inference détermine si une donnée précise a servi à l'entraînement. La précision « modèle jamais modifié » exclut l'empoisonnement.",
@@ -2150,7 +2150,7 @@ window.CISSP_DATA.domains[8] = {
       "q": "Un régulateur bancaire exige que chaque refus de crédit automatisé puisse être expliqué précisément au client. L'équipe hésite entre un réseau de neurones profond très performant et un expert system à base de règles. Quel critère de sécurité et de conformité favorise l'expert system ?",
       "choix": [
         "L'expert system apprend seul de nouvelles fraudes sans intervention humaine",
-        "Ses décisions découlent de règles SI-ALORS explicites et traçables, offrant l'explicabilité exigée, là où le réseau de neurones agit en boîte noire",
+        "Des règles SI-ALORS explicites et traçables offrent l'explicabilité exigée",
         "L'expert system ne nécessite aucune maintenance de sa base de connaissances",
         "L'expert system est toujours plus précis qu'un réseau de neurones"
       ],
@@ -2167,7 +2167,7 @@ window.CISSP_DATA.domains[8] = {
     {
       "q": "Le CISO d'un éditeur SaaS constate qu'un assistant d'IA générative produit désormais près de 40 % du code livré. La direction refuse tout ralentissement du time-to-market. Que devrait faire le CISO EN PREMIER ?",
       "choix": [
-        "Exiger que le code généré par l'IA passe exactement les mêmes gates que le code humain : revue par un développeur, SAST, SCA et tests automatisés dans le pipeline",
+        "Soumettre le code IA aux mêmes gates que le code humain : revue, SAST, SCA et tests",
         "Former les développeurs à rédiger des prompts orientés sécurité pour réduire les défauts à la source",
         "Interdire l'usage de l'IA générative jusqu'à ce qu'un audit complet en démontre l'innocuité",
         "Acquérir un outil spécialisé de détection de code généré par IA afin d'en tracer la provenance"
@@ -2187,7 +2187,7 @@ window.CISSP_DATA.domains[8] = {
       "choix": [
         "Demander à la direction juridique d'examiner chaque cas signalé spontanément par les développeurs",
         "Exiger de l'éditeur de l'assistant une clause d'indemnisation en cas de contentieux de propriété intellectuelle",
-        "Mettre à jour la politique d'usage de l'IA et intégrer au pipeline une analyse automatisée de similarité de code et de conformité des licences avant chaque fusion",
+        "Mettre à jour la politique IA et scanner similarité et licences avant chaque fusion",
         "Désactiver l'assistant d'IA pour tout le code destiné aux produits commercialisés"
       ],
       "reponse": 2,
@@ -2222,7 +2222,7 @@ window.CISSP_DATA.domains[8] = {
       "q": "À la suite d'un incident lié à une dépendance vulnérable, le CISO doit arbitrer : l'équipe sécurité veut bloquer tout build contenant la moindre CVE, les équipes produit refusent tout gate bloquant. Quelle politique est la MEILLEURE ?",
       "choix": [
         "Ne rien bloquer, mais publier un tableau de bord mensuel des vulnérabilités par équipe",
-        "Bloquer les builds sur les vulnérabilités critiques et hautes exploitables, et gérer les autres dans un backlog avec des SLA de remédiation gradués par criticité",
+        "Bloquer sur les vulnérabilités critiques et hautes exploitables, gérer le reste par SLA",
         "Bloquer tout build contenant une CVE, quelle que soit sa criticité, car la sécurité n'est pas négociable",
         "Laisser chaque équipe produit définir ses propres seuils de blocage selon son contexte"
       ],
@@ -2241,7 +2241,7 @@ window.CISSP_DATA.domains[8] = {
       "choix": [
         "Exiger une dérogation signée par un vice-président pour chaque release bloquée",
         "Retirer le gate et le remplacer par un scan hebdomadaire hors pipeline avec revue différée des résultats",
-        "Régler l'outil, ne bloquer que sur les criticités élevées confirmées, traiter le reste en backlog avec SLA, et suivre le taux de faux positifs comme indicateur d'amélioration",
+        "Régler l'outil, bloquer sur les criticités élevées confirmées, gérer le reste par SLA",
         "Maintenir le gate en l'état : accepter des faux positifs est le prix normal de la sécurité"
       ],
       "reponse": 2,
@@ -2257,7 +2257,7 @@ window.CISSP_DATA.domains[8] = {
     {
       "q": "Une fintech doit livrer un module de vérification d'identité en quatre mois pour tenir une échéance réglementaire. Le développement interne prendrait neuf mois ; un petit éditeur propose une solution éprouvée mais refuse de céder son code source. Quelle est la MEILLEURE décision ?",
       "choix": [
-        "Acheter la solution en négociant un accord de software escrow avec vérification périodique des dépôts, un droit d'audit de sécurité et des SLA de correctifs",
+        "Acheter avec un software escrow vérifié, un droit d'audit et des SLA de correctifs",
         "Développer en interne afin de conserver la maîtrise complète du code et de sa sécurité",
         "Acheter la solution la moins chère du marché et négocier les clauses de continuité après la mise en production",
         "Exiger la cession complète du code source comme condition non négociable de l'achat"
@@ -2276,7 +2276,7 @@ window.CISSP_DATA.domains[8] = {
       "q": "Le portefeuille d'APIs d'une plateforme est passé de 20 à 300 en deux ans ; deux incidents récents impliquaient des APIs « oubliées », restées exposées après le retrait des applications qu'elles servaient. Sur quoi le responsable de la sécurité applicative devrait-il agir EN PREMIER ?",
       "choix": [
         "Renforcer les règles de rate limiting sur la passerelle API",
-        "Mettre en place la découverte continue des APIs et une gouvernance de leur cycle de vie : inventaire, propriétaire désigné et procédure de mise hors service",
+        "La découverte continue des APIs et la gouvernance de leur cycle de vie",
         "Commander un test d'intrusion annuel couvrant l'ensemble du périmètre API",
         "Généraliser le mTLS et l'authentification forte sur toutes les APIs connues"
       ],
@@ -2296,7 +2296,7 @@ window.CISSP_DATA.domains[8] = {
         "Exiger la remise du code source complet du modèle pour revue par les équipes internes",
         "Prévoir une surveillance de la dérive du modèle après sa mise en production",
         "Faire réaliser un test d'intrusion de l'API qui expose le modèle",
-        "Exiger une documentation de provenance et d'intégrité des données d'entraînement, ainsi qu'une évaluation comportementale indépendante du modèle avant son intégration"
+        "Exiger la provenance des données d'entraînement et une évaluation indépendante"
       ],
       "reponse": 3,
       "explication": "Le data poisoning se niche dans les DONNÉES d'entraînement, pas dans le code : l'assurance doit porter sur la provenance et l'intégrité de ces données et sur une évaluation comportementale indépendante (tests sur des jeux contrôlés, recherche d'angles morts) avant intégration — l'équivalent ML de la due diligence de supply chain. La revue du code source est la réponse du technicien : un modèle empoisonné a un code parfaitement sain. Le pentest de l'API teste l'enveloppe applicative, pas les décisions du modèle. Et la surveillance de dérive en production est un complément détectif, trop tardif pour être la meilleure réponse d'ACQUISITION.",
@@ -2313,7 +2313,7 @@ window.CISSP_DATA.domains[8] = {
       "choix": [
         "Chiffrer les données d'entraînement au repos et en transit",
         "Faire relire manuellement les données d'entraînement par l'équipe data science avant chaque cycle",
-        "Valider et assainir les données entrantes, contrôler l'accès et l'intégrité du pipeline de données, et comparer chaque nouveau modèle à une référence comportementale avant sa promotion",
+        "Assainir les données entrantes, sécuriser le pipeline et comparer à une référence",
         "Geler définitivement le modèle actuel et cesser tout réentraînement"
       ],
       "reponse": 2,
@@ -2329,7 +2329,7 @@ window.CISSP_DATA.domains[8] = {
     {
       "q": "À la veille d'un salon stratégique, la direction produit demande de contourner le security gate : l'analyse SCA bloque la release phare pour une vulnérabilité haute sans correctif disponible. Que devrait faire le CISO EN PREMIER ?",
       "choix": [
-        "Présenter le risque évalué au propriétaire du risque métier et formaliser une acceptation temporaire, assortie de mesures compensatoires et d'une date de remédiation",
+        "Présenter le risque au propriétaire métier et faire formaliser une acceptation temporaire",
         "Refuser le contournement : les gates de sécurité ne doivent souffrir aucune exception",
         "Autoriser le déploiement et faire corriger discrètement après le salon",
         "Retarder la release jusqu'à la publication d'un correctif par le mainteneur de la bibliothèque"
@@ -2348,7 +2348,7 @@ window.CISSP_DATA.domains[8] = {
       "q": "Une application critique vient de passer en production et le chef de projet annonce que « le volet sécurité est terminé ». En tant que responsable sécurité, que devriez-vous mettre en place EN PRIORITÉ pour la phase d'exploitation et de maintenance ?",
       "choix": [
         "Commander un test d'intrusion final pour clore formellement le projet",
-        "Instaurer la supervision continue, la gestion des correctifs et des vulnérabilités, avec tout changement soumis au change management",
+        "Supervision continue, gestion des correctifs et change management",
         "Archiver le code source et réaffecter l'équipe de développement à d'autres projets",
         "Planifier un audit de conformité annuel comme unique contrôle post-déploiement"
       ],
@@ -2383,7 +2383,7 @@ window.CISSP_DATA.domains[8] = {
     {
       "q": "Un incident révèle qu'un développeur avait installé un utilitaire de build téléchargé sur un forum, qui contenait un cheval de Troie ayant accédé au dépôt de code. Les développeurs revendiquent la liberté de choisir leurs outils pour rester productifs. Quelle mesure de gouvernance équilibre le MIEUX productivité et sécurité ?",
       "choix": [
-        "Faire valider toute demande d'outil par le change advisory board avec évaluation des risques, puis faire surveiller les outils approuvés par l'équipe sécurité",
+        "Faire valider les demandes d'outils par le CAB, puis surveiller les outils approuvés",
         "Interdire tout outil qui n'a pas été développé en interne par l'organisation",
         "Maintenir le libre choix des outils en le compensant par un antivirus sur chaque poste",
         "Limiter la revue de sécurité aux seuls outils open source, les outils commerciaux étant réputés sûrs"
@@ -2403,7 +2403,7 @@ window.CISSP_DATA.domains[8] = {
       "choix": [
         "Revenir à des éditeurs de texte minimalistes sans système d'extensions",
         "Chiffrer intégralement les disques des postes de développement",
-        "Traiter l'IDE et ses extensions comme des logiciels gouvernés : liste d'extensions vérifiées et approuvées, sources contrôlées, mises à jour gérées",
+        "Gouverner l'IDE et ses extensions : liste approuvée, sources contrôlées, mises à jour gérées",
         "Stocker les jetons d'accès directement dans le code source d'un dépôt privé plutôt que dans les variables d'environnement"
       ],
       "reponse": 2,
@@ -2438,7 +2438,7 @@ window.CISSP_DATA.domains[8] = {
       "q": "Pendant l'analyse d'un incident, l'équipe constate que le binaire en production diffère de la version validée en préproduction, sans que personne ne puisse dire quand ni par qui l'écart a été introduit. Quelle discipline, correctement appliquée, aurait empêché cette situation ?",
       "choix": [
         "Le pair programming systématique sur tout le code applicatif",
-        "La software configuration management, qui identifie chaque version des artefacts et trace tous les changements par un contrôle méthodique",
+        "La software configuration management des artefacts",
         "Une campagne de fuzzing sur l'environnement de préproduction",
         "L'analyse dynamique DAST exécutée avant chaque mise en production"
       ],
@@ -2457,7 +2457,7 @@ window.CISSP_DATA.domains[8] = {
       "choix": [
         "Les attestations écrites et signées des développeurs de l'équipe",
         "Les rapports SAST générés à chaque build du pipeline",
-        "La piste d'audit rapprochant chaque déploiement de sa demande de changement approuvée, de sa revue de code et de son exécution tracée du pipeline, sur des journaux protégés en intégrité",
+        "La piste d'audit reliant chaque déploiement à sa demande approuvée",
         "Le tableau de suivi du projet montrant les tickets clôturés sur la période"
       ],
       "reponse": 2,
@@ -2473,7 +2473,7 @@ window.CISSP_DATA.domains[8] = {
     {
       "q": "Une PME veut confier la paie à un service SaaS managé. Le fournisseur, un acteur majeur, décline la demande d'audit sur site formulée par le RSSI. Quelle est la MEILLEURE démarche avant de signer ?",
       "choix": [
-        "Exiger les rapports d'attestation indépendants (SOC 2 type II, ISO 27001), clarifier le modèle de responsabilité partagée et contractualiser SLA de sécurité, notification d'incident et réversibilité",
+        "Exiger des attestations indépendantes (SOC 2 type II, ISO 27001) et un contrat solide",
         "Abandonner le projet : sans audit sur site, aucune assurance de sécurité n'est possible",
         "Signer sans autre formalité : en SaaS, la sécurité des données relève entièrement du fournisseur",
         "Conditionner la signature au dépôt du code source de la plateforme chez un agent d'escrow"
@@ -2494,7 +2494,7 @@ window.CISSP_DATA.domains[8] = {
         "Le RASP, qui embarque la protection dans chaque application",
         "Le durcissement manuel standardisé appliqué par l'équipe infrastructure à chaque release",
         "La séparation stricte des environnements par air gap",
-        "La software-defined security : des contrôles de sécurité implémentés en logiciel, définis comme du code et pilotés par le pipeline"
+        "La software-defined security : sécurité définie comme du code, pilotée par le pipeline"
       ],
       "reponse": 3,
       "explication": "La software-defined security découple les fonctions de sécurité du matériel : pare-feu, segmentation et capteurs sont définis comme du code, versionnés dans le dépôt, puis déployés et ajustés automatiquement par le pipeline CI/CD au rythme des livraisons — le scénario décrit exactement cela. Le RASP protège l'intérieur d'une application à l'exécution mais ne pilote pas les contrôles d'infrastructure, le durcissement manuel ne peut pas suivre plusieurs déploiements par jour, et l'air gap est une mesure d'isolement sans rapport avec l'adaptation dynamique des défenses.",
@@ -2640,7 +2640,7 @@ window.CISSP_DATA.domains[8] = {
         "Requiring two-person code review on all pull requests",
         "Scanning released binaries with antivirus software",
         "Encrypting the source code repository at rest",
-        "Generating signed provenance attestations from a hardened, isolated build environment and verifying them before release"
+        "Signed provenance attestations from a hardened build"
       ],
       "reponse": 3,
       "explication": "L'attaque de type SolarWinds compromet le processus de BUILD : le code source relu est sain, mais l'artefact produit ne l'est plus. La parade est une chaîne de build de confiance : environnement durci, éphémère et isolé, et attestations de provenance signées (approche SLSA) prouvant que chaque artefact provient bien du code source examiné et du processus attendu. La revue à deux personnes ne voit pas une injection post-compilation, l'antivirus ne détecte pas un implant furtif inédit, et le chiffrement du dépôt ne protège pas le pipeline.",
@@ -2655,7 +2655,7 @@ window.CISSP_DATA.domains[8] = {
     {
       "q": "What is the PRIMARY purpose of maintaining a Software Bill of Materials (SBOM) for each application?",
       "choix": [
-        "To provide a formal inventory of all components and dependencies, enabling rapid identification of exposure when new vulnerabilities are disclosed",
+        "A formal inventory of all components and dependencies",
         "To prove compliance with open source license obligations only",
         "To estimate the development cost of the application",
         "To document the application's functional requirements for auditors"
@@ -2745,8 +2745,8 @@ window.CISSP_DATA.domains[8] = {
     {
       "q": "During testing, an application error displays a full stack trace, framework version, and SQL query text to the end user. Which secure coding principle is MOST directly violated?",
       "choix": [
-        "Error handling should present generic messages to users while logging details server-side",
-        "Separation of duties",
+        "Show generic errors to users; log details server-side only",
+        "Separation of duties between developers and the operators who deploy",
         "Defense in depth",
         "Least privilege"
       ],
@@ -2766,7 +2766,7 @@ window.CISSP_DATA.domains[8] = {
         "Parameterized queries and stored procedures",
         "TLS 1.3 with certificate pinning",
         "Anti-CSRF tokens and SameSite cookies",
-        "Input validation, context-aware output encoding, a Content Security Policy, and HttpOnly cookies"
+        "Output encoding, CSP, and HttpOnly cookies"
       ],
       "reponse": 3,
       "explication": "Il s'agit d'un stored XSS : le script persiste côté serveur et s'exécute chez chaque visiteur. La défense combine la validation des entrées, l'encodage contextuel des sorties (la mesure centrale), une Content Security Policy restreignant les scripts exécutables, et l'attribut HttpOnly qui rend les cookies inaccessibles à JavaScript. Les jetons anti-CSRF visent le CSRF, les requêtes paramétrées l'injection SQL, et TLS protège le transport — aucun n'empêche l'exécution du script dans le navigateur.",
@@ -2782,7 +2782,7 @@ window.CISSP_DATA.domains[8] = {
       "q": "Which control is SPECIFICALLY designed to prevent cross-site request forgery attacks?",
       "choix": [
         "Output encoding of user-supplied data",
-        "Unique, unpredictable anti-CSRF tokens validated with each state-changing request",
+        "Unique anti-CSRF tokens per request",
         "Password complexity requirements",
         "Database connection pooling"
       ],
@@ -2927,7 +2927,7 @@ window.CISSP_DATA.domains[8] = {
       "choix": [
         "Using a shared static API key embedded in every service's configuration",
         "Trusting all internal traffic because the perimeter firewall blocks external attackers",
-        "Requiring mutual TLS with unique cryptographic identities for each service, typically enforced through a service mesh",
+        "Mutual TLS with a unique cryptographic identity per service, via a service mesh",
         "Routing all inter-service traffic through the public API gateway"
       ],
       "reponse": 2,
@@ -2946,7 +2946,7 @@ window.CISSP_DATA.domains[8] = {
         "It guarantees the confidentiality of data stored by backend services",
         "It removes the need for TLS on backend connections",
         "It eliminates the need to authenticate individual API calls",
-        "It provides a single enforcement point for authentication, authorization, rate limiting, and request validation"
+        "A single enforcement point for authN, authZ, and rate limiting"
       ],
       "reponse": 3,
       "explication": "La passerelle API centralise l'application des politiques : authentification et autorisation de chaque appel, rate limiting contre l'abus et le déni de service, validation des requêtes et journalisation uniforme — évitant que chaque microservice réimplémente ces contrôles de façon inégale. Elle n'élimine pas l'authentification, elle l'APPLIQUE ; elle ne protège pas les données au repos des services ; et le TLS reste nécessaire de bout en bout, y compris derrière la passerelle (zero trust).",
@@ -2962,7 +2962,7 @@ window.CISSP_DATA.domains[8] = {
       "q": "An organization licenses mission-critical software from a small vendor that refuses to provide source code. Management is concerned about business continuity if the vendor goes bankrupt or discontinues support. Which contractual provision BEST addresses this risk?",
       "choix": [
         "Cyber insurance covering vendor failure",
-        "A software escrow agreement with defined release conditions and periodic deposit verification",
+        "A software escrow agreement with periodic deposit verification",
         "A right-to-audit clause covering the vendor's development practices",
         "A service level agreement with financial penalties"
       ],
@@ -2980,7 +2980,7 @@ window.CISSP_DATA.domains[8] = {
       "q": "Endpoints across several organizations execute malware that was digitally signed with a valid code-signing certificate stolen from a legitimate software vendor. What does this incident BEST illustrate about code signing?",
       "choix": [
         "Certificate authorities are responsible for testing signed code for malware",
-        "Code signing proves origin and integrity relative to the signing key, but does not guarantee the code is safe — and its assurance collapses if the private key is compromised",
+        "Code signing proves origin and integrity, not safety",
         "Code signing has no security value and should be abandoned",
         "Self-signed certificates would have prevented this incident"
       ],
@@ -3017,7 +3017,7 @@ window.CISSP_DATA.domains[8] = {
       "choix": [
         "The vendor may lack a vulnerability disclosure program",
         "The vendor may use vulnerable open source libraries",
-        "The training data may have been poisoned to create hidden blind spots in the model's decisions",
+        "Training data may be poisoned to create hidden blind spots",
         "The product may contain unpatched operating system components"
       ],
       "reponse": 2,
@@ -3036,7 +3036,7 @@ window.CISSP_DATA.domains[8] = {
         "Ban AI coding assistants until a full security evaluation has been completed",
         "Deploy a tool that watermarks AI-generated code to ensure traceability",
         "Train developers to write security-aware prompts for the AI assistant",
-        "Require AI-generated code to pass the same pipeline controls as human-written code: peer review, SAST, SCA, and automated testing"
+        "Require AI code to pass the same pipeline controls as human code"
       ],
       "reponse": 3,
       "explication": "Le code généré par IA doit être traité comme du code tiers non fiable et soumis aux mêmes contrôles vérifiables que le code humain — revue par les pairs, SAST, SCA et tests automatisés dans le pipeline : la gouvernance existante absorbe le nouveau risque sans ralentir les livraisons. L'interdiction est un absolu incompatible avec la contrainte business et pousse à l'usage clandestin ; la formation aux prompts améliore la qualité en amont mais n'est pas un contrôle vérifiable ; et le marquage de provenance trace le code sans jamais empêcher un défaut d'atteindre la production.",
@@ -3069,7 +3069,7 @@ window.CISSP_DATA.domains[8] = {
     {
       "q": "Development teams complain that the pipeline's static analysis gate blocks releases with a high false-positive rate, threatening contractual delivery dates. What is the CISO's BEST course of action?",
       "choix": [
-        "Tune the tool, block builds only on confirmed high and critical findings, and manage remaining findings in a backlog with remediation SLAs",
+        "Tune the tool, block only confirmed critical findings, backlog the rest with SLAs",
         "Remove the gate and rely on quarterly penetration testing instead",
         "Keep the gate unchanged, because security requirements must never be relaxed",
         "Escalate every blocked release to executive management for a case-by-case decision"
@@ -3089,7 +3089,7 @@ window.CISSP_DATA.domains[8] = {
       "choix": [
         "License the cheapest alternative and negotiate continuity clauses after go-live",
         "Demand full source code ownership as a non-negotiable purchase condition",
-        "License the product with a verified software escrow agreement, security audit rights, and patch service level agreements",
+        "License the product with verified escrow, audit rights, and patch SLAs",
         "Build the capability in-house to retain full control over the code"
       ],
       "reponse": 2,
