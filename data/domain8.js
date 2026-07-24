@@ -2343,6 +2343,168 @@ window.CISSP_DATA.domains[8] = {
         "Contournement de gouvernance : déployer sans trace formelle supprime la responsabilité documentée et expose l'organisation comme le CISO.",
         "Techniquement prudent mais hors rôle : retarder unilatéralement la release ignore l'enjeu commercial et court-circuite le propriétaire du risque."
       ]
+    },
+    {
+      "q": "Une application critique vient de passer en production et le chef de projet annonce que « le volet sécurité est terminé ». En tant que responsable sécurité, que devriez-vous mettre en place EN PRIORITÉ pour la phase d'exploitation et de maintenance ?",
+      "choix": [
+        "Commander un test d'intrusion final pour clore formellement le projet",
+        "Instaurer la supervision continue, la gestion des correctifs et des vulnérabilités, avec tout changement soumis au change management",
+        "Archiver le code source et réaffecter l'équipe de développement à d'autres projets",
+        "Planifier un audit de conformité annuel comme unique contrôle post-déploiement"
+      ],
+      "reponse": 1,
+      "explication": "La sécurité ne s'arrête pas au déploiement : la phase Operations and Maintenance exige une supervision continue des journaux et incidents, un processus de gestion des correctifs et des vulnérabilités, et le passage de toute modification par la gestion formelle du changement. Un pentest final est ponctuel et ne couvre pas la durée de vie, l'archivage du code ignore la maintenance, et un audit annuel seul laisse l'application exposée entre deux audits.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Ponctuel : un pentest de clôture photographie un instant, il ne protège pas l'application pendant des années d'exploitation.",
+        "Bonne réponse : supervision continue, patch et vulnerability management, et change management formel sont les activités de sécurité qui définissent la phase O&M.",
+        "Contresens : archiver le code et dissoudre l'équipe supprime la capacité même de corriger et de maintenir le logiciel.",
+        "Insuffisant : un audit annuel est détectif et espacé ; il ne remplace ni les correctifs ni la supervision au quotidien."
+      ]
+    },
+    {
+      "q": "Un programme logiciel de défense accumule des retards : chaque décision de conception est validée séquentiellement par l'ingénierie, puis la sécurité, puis les achats, puis les représentants des utilisateurs, et chaque étape renvoie le dossier en arrière. Quelle approche organisationnelle, recommandée par le DoD, corrige ce problème ?",
+      "choix": [
+        "Externaliser l'intégralité du programme à un intégrateur unique responsable de bout en bout",
+        "Revenir à un cycle Waterfall strict avec des jalons contractuels de validation",
+        "Créer un change advisory board chargé d'approuver chaque décision de conception",
+        "Constituer une Integrated Product Team réunissant toutes les parties prenantes pour décider en parallèle"
+      ],
+      "reponse": 3,
+      "explication": "L'Integrated Product Team, introduite par le DoD, est précisément conçue pour ce cas : une équipe multifonctionnelle — ingénierie, sécurité, achats, testeurs, utilisateurs — travaille ensemble sur tout le cycle de vie et prend les décisions en parallèle plutôt qu'en revues séquentielles. Externaliser déplace le problème sans le résoudre, Waterfall renforce la logique séquentielle qui cause les retards, et un CAB est un organe d'approbation des changements, pas une structure de conception collaborative.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Déplacement du problème : l'intégrateur unique reproduira les mêmes validations séquentielles en interne et réduit votre visibilité.",
+        "Aggravation : Waterfall institutionnalise justement l'enchaînement séquentiel de validations qui cause les retards.",
+        "Piège de vocabulaire : le CAB approuve des changements en exploitation ; ce n'est pas une équipe pluridisciplinaire de conception.",
+        "Bonne réponse : l'IPT du DoD réunit toutes les parties prenantes autour du produit pour des décisions parallèles, éliminant les allers-retours séquentiels."
+      ]
+    },
+    {
+      "q": "Un incident révèle qu'un développeur avait installé un utilitaire de build téléchargé sur un forum, qui contenait un cheval de Troie ayant accédé au dépôt de code. Les développeurs revendiquent la liberté de choisir leurs outils pour rester productifs. Quelle mesure de gouvernance équilibre le MIEUX productivité et sécurité ?",
+      "choix": [
+        "Faire valider toute demande d'outil par le change advisory board avec évaluation des risques, puis faire surveiller les outils approuvés par l'équipe sécurité",
+        "Interdire tout outil qui n'a pas été développé en interne par l'organisation",
+        "Maintenir le libre choix des outils en le compensant par un antivirus sur chaque poste",
+        "Limiter la revue de sécurité aux seuls outils open source, les outils commerciaux étant réputés sûrs"
+      ],
+      "reponse": 0,
+      "explication": "La bonne pratique consiste à canaliser les demandes d'outils vers un change advisory board qui évalue les risques avant approbation, puis à faire surveiller les outils approuvés par l'équipe sécurité : les développeurs obtiennent les outils dont ils ont besoin, par un canal maîtrisé. Tout interdire sauf l'interne est un absolu irréaliste qui détruit la productivité, un antivirus seul ne détecte pas les outils malveillants inconnus, et présumer les outils commerciaux sûrs est démenti par les attaques de supply chain.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Bonne réponse : la validation par le CAB avec analyse de risques, suivie de la surveillance par la sécurité, canalise le besoin des développeurs sans l'étouffer.",
+        "Absolu irréaliste : ne rien autoriser d'externe condamne l'équipe à réinventer son outillage et pousse au contournement clandestin.",
+        "Contrôle insuffisant : l'antivirus est détectif et signe-dépendant ; il laisse passer un utilitaire piégé inconnu et ne gouverne rien.",
+        "Fausse prémisse : les attaques de supply chain comme SolarWinds prouvent que les outils commerciaux ne sont pas sûrs par nature."
+      ]
+    },
+    {
+      "q": "Votre organisation découvre qu'une extension d'IDE installée par plusieurs développeurs depuis une place de marché publique exfiltrait les variables d'environnement, dont des jetons d'accès aux dépôts. Quelle est la MEILLEURE mesure préventive contre la répétition de ce scénario ?",
+      "choix": [
+        "Revenir à des éditeurs de texte minimalistes sans système d'extensions",
+        "Chiffrer intégralement les disques des postes de développement",
+        "Traiter l'IDE et ses extensions comme des logiciels gouvernés : liste d'extensions vérifiées et approuvées, sources contrôlées, mises à jour gérées",
+        "Stocker les jetons d'accès directement dans le code source d'un dépôt privé plutôt que dans les variables d'environnement"
+      ],
+      "reponse": 2,
+      "explication": "L'IDE et ses extensions font partie de l'écosystème de développement et doivent être gouvernés comme tout logiciel : catalogue d'extensions vérifiées et approuvées, installation depuis des sources contrôlées, et mises à jour gérées. Supprimer les extensions sacrifie la productivité sans traiter la cause, le chiffrement de disque protège contre le vol physique mais pas contre un code malveillant s'exécutant dans la session, et placer des secrets dans un dépôt, même privé, aggrave l'exposition.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Absolu contre-productif : priver les développeurs d'outillage moderne détruit la productivité sans gouverner le vrai problème, la provenance du code exécuté.",
+        "Hors cible : le chiffrement de disque protège les données au repos contre un vol physique, pas contre une extension malveillante s'exécutant dans la session de l'utilisateur.",
+        "Bonne réponse : liste d'extensions approuvées, sources contrôlées et mises à jour gérées appliquent à l'IDE la même gouvernance qu'à tout logiciel de l'écosystème de développement.",
+        "Aggravation : des secrets committés dans un dépôt, même privé, sont un anti-pattern majeur — exposition durable dans l'historique et à tout accès au dépôt."
+      ]
+    },
+    {
+      "q": "Une application métier est corrigée à chaque sprint, mais l'audit révèle qu'elle s'exécute sur une machine virtuelle Java qui n'a reçu aucune mise à jour depuis trois ans. Quelle est la MEILLEURE réponse à ce constat ?",
+      "choix": [
+        "Aucune action : le code applicatif étant corrigé en continu, le risque global est couvert",
+        "Réécrire l'application dans un langage compilé nativement pour supprimer la dépendance au runtime",
+        "Isoler définitivement le serveur du réseau pour neutraliser les vulnérabilités de la JVM",
+        "Intégrer les environnements d'exécution au processus de gestion des correctifs et des vulnérabilités, au même titre que les applications"
+      ],
+      "reponse": 3,
+      "explication": "Le runtime — JVM, interpréteurs, images de conteneurs — est un composant logiciel dont les vulnérabilités exposent toutes les applications qu'il héberge, quel que soit l'état du code applicatif. Il doit donc être inventorié et corrigé par le même processus de patch et vulnerability management. Corriger seulement l'application laisse la couche d'exécution vulnérable, une réécriture complète est disproportionnée et échange un runtime contre d'autres dépendances, et l'isolement total est un absolu qui casse la fonction métier.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Fausse assurance : les failles de la JVM s'exploitent indépendamment de la qualité du code applicatif — la couche d'exécution reste béante.",
+        "Disproportionné : une réécriture coûte des années et remplace simplement une dépendance par d'autres (bibliothèques, compilateur) qu'il faudra aussi maintenir.",
+        "Absolu : l'isolement réseau total neutralise l'application autant que la menace ; c'est un contournement, pas une gestion du risque.",
+        "Bonne réponse : le runtime est un actif logiciel comme un autre — inventaire, veille sur les vulnérabilités et correctifs via le processus standard."
+      ]
+    },
+    {
+      "q": "Pendant l'analyse d'un incident, l'équipe constate que le binaire en production diffère de la version validée en préproduction, sans que personne ne puisse dire quand ni par qui l'écart a été introduit. Quelle discipline, correctement appliquée, aurait empêché cette situation ?",
+      "choix": [
+        "Le pair programming systématique sur tout le code applicatif",
+        "La software configuration management, qui identifie chaque version des artefacts et trace tous les changements par un contrôle méthodique",
+        "Une campagne de fuzzing sur l'environnement de préproduction",
+        "L'analyse dynamique DAST exécutée avant chaque mise en production"
+      ],
+      "reponse": 1,
+      "explication": "La software configuration management (SCM) identifie les attributs et versions du logiciel à chaque étape, applique un contrôle de changement méthodique et maintient l'intégrité et la traçabilité des artefacts tout au long du SDLC : un écart entre préproduction et production serait détecté et attribuable. Le pair programming améliore la qualité du code écrit mais ne gouverne pas les artefacts déployés, et le fuzzing comme le DAST cherchent des vulnérabilités, pas des écarts de configuration ou des modifications non tracées.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Hors périmètre : le pair programming relit le code au moment de l'écriture ; il ne contrôle ni les versions ni ce qui est réellement déployé.",
+        "Bonne réponse : la SCM garantit l'identification des versions, l'intégrité des artefacts et la traçabilité de chaque changement — exactement ce qui manquait.",
+        "Hors sujet : le fuzzing bombarde l'application d'entrées malformées pour trouver des bugs, il ne compare pas des versions d'artefacts.",
+        "Hors sujet : le DAST détecte des vulnérabilités à l'exécution ; il ne dit rien sur la provenance ni la conformité de la version déployée."
+      ]
+    },
+    {
+      "q": "Un auditeur externe vous demande de démontrer qu'aucun changement non autorisé n'a atteint l'application de paiement en production au cours des six derniers mois. Quelle source de preuve est la PLUS probante ?",
+      "choix": [
+        "Les attestations écrites et signées des développeurs de l'équipe",
+        "Les rapports SAST générés à chaque build du pipeline",
+        "La piste d'audit rapprochant chaque déploiement de sa demande de changement approuvée, de sa revue de code et de son exécution tracée du pipeline, sur des journaux protégés en intégrité",
+        "Le tableau de suivi du projet montrant les tickets clôturés sur la période"
+      ],
+      "reponse": 2,
+      "explication": "Évaluer l'efficacité de la sécurité logicielle passe par l'audit et la journalisation des changements : la preuve la plus probante est une piste d'audit de bout en bout qui rapproche chaque déploiement d'une demande approuvée, d'une revue et d'une exécution du pipeline, sur des journaux dont l'intégrité est protégée. Les attestations sont déclaratives et invérifiables, les rapports SAST prouvent la qualité du code analysé mais pas l'autorisation des déploiements, et un tableau de projet se modifie sans trace fiable.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Déclaratif : une attestation signée reflète ce que les personnes affirment, pas ce qui s'est réellement produit — invérifiable pour un auditeur.",
+        "Hors question : les rapports SAST prouvent que le code a été analysé, pas que chaque déploiement était autorisé et tracé.",
+        "Bonne réponse : le rapprochement systématique déploiement–approbation–revue–pipeline sur des journaux intègres est la preuve d'audit de bout en bout attendue.",
+        "Preuve faible : un outil de suivi de projet se modifie a posteriori et ne couvre pas ce qui a réellement été poussé en production."
+      ]
+    },
+    {
+      "q": "Une PME veut confier la paie à un service SaaS managé. Le fournisseur, un acteur majeur, décline la demande d'audit sur site formulée par le RSSI. Quelle est la MEILLEURE démarche avant de signer ?",
+      "choix": [
+        "Exiger les rapports d'attestation indépendants (SOC 2 type II, ISO 27001), clarifier le modèle de responsabilité partagée et contractualiser SLA de sécurité, notification d'incident et réversibilité",
+        "Abandonner le projet : sans audit sur site, aucune assurance de sécurité n'est possible",
+        "Signer sans autre formalité : en SaaS, la sécurité des données relève entièrement du fournisseur",
+        "Conditionner la signature au dépôt du code source de la plateforme chez un agent d'escrow"
+      ],
+      "reponse": 0,
+      "explication": "Les grands fournisseurs cloud refusent quasi systématiquement les audits sur site individuels ; la due diligence s'appuie alors sur des attestations indépendantes comme un SOC 2 type II ou une certification ISO 27001, complétées par un contrat solide : responsabilité partagée explicite, SLA de sécurité, délais de notification d'incident et clause de réversibilité. Abandonner est un absolu disproportionné, croire que le SaaS transfère toute la responsabilité est faux — le client reste responsable de ses données —, et l'escrow protège contre la disparition d'un éditeur, pas contre les défaillances de sécurité d'un service opéré.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Bonne réponse : attestations indépendantes plus clauses contractuelles (responsabilité partagée, SLA, notification, réversibilité) — la due diligence réaliste face à un grand fournisseur.",
+        "Absolu : le refus d'audit sur site est la norme chez les grands fournisseurs ; y voir un motif d'abandon prive le métier d'une solution viable malgré des assurances alternatives crédibles.",
+        "Fausse croyance : même en SaaS, le client reste responsable de ses données, de ses accès et de sa conformité — la responsabilité ne se sous-traite pas.",
+        "Hors cible : l'escrow couvre le risque de faillite ou d'abandon du produit ; il ne fournit aucune assurance sur la sécurité opérationnelle du service managé."
+      ]
+    },
+    {
+      "q": "Une organisation DevSecOps déploie ses microservices plusieurs fois par jour et veut que les règles de pare-feu, la segmentation et le placement des capteurs de détection s'ajustent automatiquement à chaque déploiement, à partir de définitions versionnées dans le dépôt. Quel concept décrit le MIEUX cette approche ?",
+      "choix": [
+        "Le RASP, qui embarque la protection dans chaque application",
+        "Le durcissement manuel standardisé appliqué par l'équipe infrastructure à chaque release",
+        "La séparation stricte des environnements par air gap",
+        "La software-defined security : des contrôles de sécurité implémentés en logiciel, définis comme du code et pilotés par le pipeline"
+      ],
+      "reponse": 3,
+      "explication": "La software-defined security découple les fonctions de sécurité du matériel : pare-feu, segmentation et capteurs sont définis comme du code, versionnés dans le dépôt, puis déployés et ajustés automatiquement par le pipeline CI/CD au rythme des livraisons — le scénario décrit exactement cela. Le RASP protège l'intérieur d'une application à l'exécution mais ne pilote pas les contrôles d'infrastructure, le durcissement manuel ne peut pas suivre plusieurs déploiements par jour, et l'air gap est une mesure d'isolement sans rapport avec l'adaptation dynamique des défenses.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Trop étroit : le RASP instrumente une application donnée à l'exécution ; il ne définit ni ne repositionne les contrôles réseau et de détection de l'environnement.",
+        "Incompatible avec le rythme : un durcissement manuel, même standardisé, ne suit pas des déploiements pluriquotidiens et réintroduit dérive et délais.",
+        "Hors sujet : l'air gap isole physiquement des environnements ; il n'offre aucune adaptation automatique des défenses au fil des déploiements.",
+        "Bonne réponse : contrôles implémentés en logiciel, définis comme du code versionné et gérés activement dans le pipeline CI/CD — la définition même de la software-defined security."
+      ]
     }
   ],
   "quizEn": [

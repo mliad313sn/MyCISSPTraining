@@ -870,6 +870,19 @@ window.CISSP_DATA.domains[4] = {
           "narration": "Le Network Access Control applique la politique de sécurité à l'entrée du réseau : un poste non conforme, mal patché ou sans antivirus à jour, est bloqué ou mis en quarantaine. La philosophie preadmission exige la conformité avant d'accorder l'accès, la philosophie postadmission surveille l'activité après coup. Techniquement, on déploie soit un agent, permanent ou dissolvable au moment de la connexion, soit une approche agentless qui interroge l'infrastructure existante, pratique pour les imprimantes et objets connectés. L'évaluation de posture fait du NAC un contrôle d'accès fondé sur le risque, pilier d'une stratégie Zero Trust."
         },
         {
+          "type": "standard",
+          "titre": "Sécurité des endpoints : la défense host-based",
+          "points": [
+            "Le réseau ne voit pas tout : la défense doit aussi résider SUR la machine",
+            "Host-based firewall : filtre le trafic de l'hôte et reste actif même hors du réseau d'entreprise",
+            "HIDS/HIPS : détection (et prévention pour le HIPS) d'intrusion sur l'hôte — fichiers, processus, journaux",
+            "EDR : analyse comportementale, investigation et réponse à distance ; antimalware, allow-listing, durcissement et patching",
+            "Complément des contrôles réseau (défense en profondeur), jamais un remplacement"
+          ],
+          "narration": "Les contrôles réseau ne suffisent plus quand les portables voyagent et se connectent depuis n'importe où : la défense doit donc résider sur la machine elle-même. Le pare-feu host-based filtre le trafic entrant et sortant de l'hôte et continue de protéger le poste dans un hôtel ou un aéroport, là où le pare-feu de l'entreprise ne voit rien. Le HIDS surveille les fichiers, les processus et les journaux pour détecter une intrusion, et sa variante HIPS peut la bloquer. L'EDR modernise le tout avec l'analyse comportementale, la chasse aux menaces et la réponse à distance, comme l'isolement d'un poste compromis. Ajoutez l'antimalware, l'allow-listing des applications, le durcissement et les correctifs : l'endpoint devient une ligne de défense complète qui suit l'utilisateur partout, en complément, jamais en remplacement, des contrôles réseau.",
+          "astuce": "💡 Conseil examen : si l'utilisateur est mobile ou hors du périmètre, la bonne réponse est un contrôle host-based qui suit la machine."
+        },
+        {
           "type": "question",
           "titre": "Contrôle de connaissance",
           "points": [
@@ -923,6 +936,18 @@ window.CISSP_DATA.domains[4] = {
         },
         {
           "type": "standard",
+          "titre": "Visioconférence et outils collaboratifs",
+          "points": [
+            "Zoom, Teams, Webex et salles équipées (Zoom rooms) : signalisation, audio, vidéo et partage transitent par IP — mêmes exigences que la VoIP",
+            "Contre l'intrusion en réunion (meeting bombing) : salle d'attente (lobby), authentification des participants, codes de réunion uniques",
+            "Chiffrement de transport par défaut ; chiffrement de bout en bout (E2EE) pour les échanges les plus sensibles",
+            "Encadrer partage d'écran, enregistrements et messagerie instantanée : autorisations, stockage, rétention — et sensibiliser au vishing"
+          ],
+          "narration": "La collaboration ne se limite plus à la voix : visioconférence, partage d'écran et messagerie instantanée sont devenus le quotidien, y compris dans des salles de réunion équipées comme les Zoom rooms. Ces flux transitent par IP et méritent les mêmes protections que la VoIP, avec quelques risques propres. Le premier est l'intrusion en réunion, le fameux meeting bombing : on s'en protège par une salle d'attente, l'authentification des participants et des codes de réunion uniques, jamais réutilisés. Le deuxième est la confidentialité : le chiffrement de transport est généralement actif par défaut, mais les échanges les plus sensibles justifient un vrai chiffrement de bout en bout, quitte à renoncer à l'enregistrement dans le cloud. Encadrez enfin le partage d'écran, le stockage et la rétention des enregistrements, et sensibilisez les utilisateurs au vishing, cette ingénierie sociale par la voix qui prospère sur ces canaux.",
+          "astuce": "💡 Conseil examen : pour une réunion sensible, pensez d'abord « salle d'attente, authentification, code unique » — l'E2EE protège le contenu, pas l'admission des participants."
+        },
+        {
+          "type": "standard",
           "titre": "Accès distant et connectivité tierce",
           "points": [
             "Jumpbox : point d'entrée unique et durci vers une zone sensible",
@@ -941,7 +966,10 @@ window.CISSP_DATA.domains[4] = {
             "NAC : preadmission ou postadmission, agent ou agentless, posture assessment",
             "VPN : IPsec, TLS, WireGuard ; méfiance envers le split tunneling",
             "Authentification distante : PAP en clair (jamais), CHAP en challenge-response, EAP en framework",
-            "VoIP : SIPS et SRTP ; accès distant via jumpbox et VDI ; tiers encadrés par MOU et ISA"
+            "VoIP : SIPS et SRTP ; accès distant via jumpbox et VDI ; tiers encadrés par MOU et ISA",
+            "Exploitation : warranty et contrats de support (SLA), remplacement avant l'end-of-support",
+            "Endpoints : host firewall, HIDS/HIPS, EDR — la défense suit la machine hors du périmètre",
+            "Visioconférence : lobby, authentification, codes uniques ; E2EE pour les réunions sensibles"
           ],
           "narration": "Ce tour d'horizon clôt le domaine quatre. Vous savez situer chaque équipement sur la pile OSI, choisir le bon type de pare-feu selon la menace, et poser un NAC pour n'admettre que des postes conformes. Les canaux se protègent avec les bons protocoles : IPsec ou WireGuard pour les VPN, SIPS et SRTP pour la voix, et un cadre contractuel comme l'ISA pour les tiers. Gardez le réflexe du manager : défense en profondeur, moindre privilège et supervision permanente."
         }

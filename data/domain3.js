@@ -1132,7 +1132,8 @@ window.CISSP_DATA.domains[3] = {
             "Salle serveurs au cœur du bâtiment ; datacenter avec mantraps",
             "Alimentation : fault/blackout, sag/brownout, spike/surge ; UPS puis générateur",
             "Incendie : triangle du feu, classes A-K, pre-action pour les datacenters",
-            "Cycle de vie : de l'analyse des besoins au retrait sécurisé"
+            "Zones restreintes : SCIF (TEMPEST, pas d'appareils personnels), SOC/NOC, visiteurs escortés, clean desk",
+            "Cycle de vie : de l'analyse des besoins au retrait sécurisé ; verification = specs, validation = besoin métier ; ATO à la transition"
           ],
           "narration": "Concluons le Domaine 3. En sécurité physique, la vie humaine prime toujours. Le CPTED prévient le crime par l'architecture, les locaux techniques se protègent par couches successives, et l'alimentation électrique se sécurise du parasurtenseur au générateur. Face au feu, retirez un élément du triangle, choisissez la bonne classe d'extincteur et privilégiez le pre-action en salle informatique. Enfin, le cycle de vie des systèmes rappelle que la sécurité accompagne un système de sa conception jusqu'à son retrait. Vous avez maintenant toutes les cartes pour aborder les questions du domaine le plus technique de l'examen."
         }
