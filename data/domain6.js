@@ -234,12 +234,13 @@ window.CISSP_DATA.domains[6] = {
           "type": "standard",
           "titre": "SCAP : le langage commun de la vulnérabilité",
           "points": [
-            "Security Content Automation Protocol, cadre du NIST",
-            "CVE : nommer les vulnérabilités",
-            "CVSS : scorer leur sévérité",
-            "CCE, CPE, XCCDF, OVAL : configurations, plateformes, checklists, procédures de test"
+            "Security Content Automation Protocol, cadre du NIST : faire dialoguer les outils par couples de standards",
+            "Couple CVE plus CVSS : CVE donne à la faille un identifiant unique, CVSS lui attribue un score de sévérité comparable d'un outil à l'autre",
+            "Couple CPE plus CCE : CPE identifie la plateforme (OS, application, équipement), CCE nomme un réglage de configuration précis sur cette plateforme",
+            "Couple XCCDF plus OVAL : XCCDF décrit la checklist (le QUOI vérifier), OVAL décrit le test exécutable par la machine (le COMMENT), d'où un scan de conformité automatisé et reproductible"
           ],
-          "narration": "Pour que tous les outils de sécurité parlent le même langage, le NIST a défini SCAP, le Security Content Automation Protocol. Retenez ses composants. CVE, Common Vulnerabilities and Exposures, fournit un système de nommage des vulnérabilités. CVSS fournit un système de score standardisé de leur sévérité. CCE nomme les problèmes de configuration, CPE nomme les systèmes d'exploitation, applications et équipements, XCCDF est un langage pour décrire des checklists de sécurité, et OVAL est un langage pour décrire les procédures de test. À l'examen, sachez associer chaque sigle à sa fonction."
+          "narration": "Pour que tous les outils de sécurité parlent le même langage, le NIST a défini SCAP, le Security Content Automation Protocol. Sa force n'est pas d'aligner des sigles isolés, mais de les faire travailler par couples. Premier couple, CVE et CVSS : CVE, Common Vulnerabilities and Exposures, donne à chaque vulnérabilité un identifiant unique, et CVSS lui attribue un score de sévérité. Ensemble, ils garantissent que deux scanners différents désignent bien la même faille et lui donnent la même gravité. Deuxième couple, CPE et CCE : CPE identifie précisément une plateforme, un système d'exploitation, une application ou un équipement, tandis que CCE nomme un réglage de configuration donné sur cette plateforme. Le couple le plus important pour la conformité est le troisième, XCCDF et OVAL. XCCDF décrit la checklist, c'est-à-dire la liste des règles à vérifier, autrement dit le quoi. OVAL décrit, dans un format que la machine sait exécuter, comment tester chaque règle : quelle clé de registre lire, quelle version de fichier comparer, quel paramètre inspecter. Comme la checklist et les tests sont écrits dans ces formats standard, n'importe quel outil compatible SCAP peut rejouer exactement le même contrôle sur mille machines et obtenir un résultat identique, sans intervention humaine. C'est précisément ce qui rend le scan de conformité automatisé, comparable dans le temps et défendable devant un auditeur.",
+          "astuce": "💡 Conseil examen : pensez SCAP par couples — CVE plus CVSS pour nommer et scorer, CPE plus CCE pour la plateforme et sa configuration, XCCDF plus OVAL pour la checklist et le test. C'est le couple XCCDF plus OVAL qui rend un scan de conformité automatisé et reproductible."
         },
         {
           "type": "standard",
@@ -761,9 +762,9 @@ window.CISSP_DATA.domains[6] = {
       "difficulte": 1,
       "pourquoi": [
         "Hors périmètre : un assessment formule une opinion et des recommandations, il ne délivre aucune certification de conformité.",
-        "Trop étroit : les tickets relèvent de la remédiation opérationnelle qui suit le rapport, pas du livrable de l'assessment.",
+        "Les tickets relèvent de la remédiation opérationnelle qui suit le rapport, ils ne sont pas le livrable de l'assessment.",
         "Le livrable principal d'un assessment est un rapport non technique destiné au management, conclu par des recommandations : c'est la finalité managériale de l'exercice.",
-        "Piège de la réponse de technicien : une liste brute de vulnérabilités sans contexte métier n'aide pas le management à décider."
+        "Une liste brute de vulnérabilités, sans contexte métier, n'aide pas le management à décider : c'est un livrable d'exécutant, pas d'assessment."
       ]
     },
     {
@@ -796,10 +797,10 @@ window.CISSP_DATA.domains[6] = {
       "explication": "Le Type I donne l'opinion de l'auditeur sur la description du management et la pertinence de la conception des contrôles à un instant donné. Le Type II confirme en plus que les contrôles fonctionnent effectivement, sur une période d'au moins six mois. La distinction ne porte ni sur le périmètre sécurité/vie privée (B), ni sur la diffusion (A, c'est SOC 3 qui est public), ni sur l'auteur de l'audit (D).",
       "difficulte": 2,
       "pourquoi": [
-        "Confusion avec le SOC 3 : c'est lui qui est public, ce n'est pas une différence entre Type I et Type II.",
-        "Confusion de périmètre : la distinction Type I/Type II porte sur la durée d'évaluation, pas sur sécurité contre vie privée.",
-        "Exact : le Type I juge la conception à un instant donné, le Type II ajoute la preuve d'efficacité opérationnelle sur au moins six mois.",
-        "Faux : les deux types sont réalisés par un auditeur indépendant ; seule la période observée diffère."
+        "C'est le SOC 3 qui est destiné au public : la diffusion n'est pas ce qui sépare le Type I du Type II.",
+        "La distinction Type I / Type II porte sur la durée d'évaluation, pas sur le périmètre sécurité contre vie privée.",
+        "Le Type I juge la conception à un instant donné ; le Type II ajoute la preuve d'efficacité opérationnelle sur au moins six mois.",
+        "Les deux types sont réalisés par un auditeur indépendant ; seule la période observée les sépare."
       ]
     },
     {
@@ -815,7 +816,7 @@ window.CISSP_DATA.domains[6] = {
       "difficulte": 2,
       "pourquoi": [
         "Techniquement le plus riche, mais contextuellement faux : le SOC 2 est confidentiel et exige un NDA, ce que l'énoncé exclut.",
-        "Hors sujet : le SOC 1 porte sur le reporting financier et se partage de manière restreinte.",
+        "Le SOC 1 porte sur le reporting financier et se partage de manière restreinte, pas en libre accès.",
         "L'ISAE 3402 est l'équivalent international du SSAE 18 pour des rapports restreints, pas un document public.",
         "Le SOC 3 est précisément conçu pour la diffusion publique sans NDA, comme outil de confiance commercial."
       ]
@@ -888,7 +889,7 @@ window.CISSP_DATA.domains[6] = {
       "pourquoi": [
         "Multiplier des scans identiques produit plus vite les mêmes faux positifs : la fréquence ne change pas la profondeur.",
         "Le scan authentifié lit la configuration réelle depuis l'intérieur, ce qui réduit les faux positifs ; le compte en lecture seule limite le risque induit.",
-        "Trop étroit : un scan de découverte se contente de cartographier les hôtes, sans analyser les configurations.",
+        "Un scan de découverte se contente de cartographier les hôtes présents, sans analyser leurs configurations.",
         "Disproportionné et hors besoin : un pentest black box part sans information interne, à l'opposé de la précision de configuration recherchée."
       ]
     },
@@ -905,9 +906,9 @@ window.CISSP_DATA.domains[6] = {
       "difficulte": 1,
       "pourquoi": [
         "C'est la frontière essentielle : le pentest tente réellement l'exploitation, l'évaluation de vulnérabilités s'arrête avant.",
-        "Absolu et faux : une évaluation de vulnérabilités peut parfaitement être menée en interne.",
-        "Faux : les deux exercices produisent un rapport.",
-        "Faux : le pentest combine outillage automatisé et expertise manuelle."
+        "Une évaluation de vulnérabilités peut parfaitement être menée en interne : l'exclusivité tierce partie est démentie.",
+        "Les deux exercices produisent bien un rapport écrit à destination du commanditaire.",
+        "Le pentest combine au contraire outillage automatisé et expertise manuelle : il n'est pas entièrement automatisé."
       ]
     },
     {
@@ -994,10 +995,10 @@ window.CISSP_DATA.domains[6] = {
       "explication": "Une plateforme BAS combine techniques red et blue avec de l'automatisation pour simuler des menaces avancées : elle injecte des indicateurs de menace (par exemple un fichier suspect sur un serveur) afin de vérifier que les contrôles détectent et bloquent l'activité. Elle automatise certains aspects du pen testing mais ne remplace pas les testeurs humains (B) ; la formation (D) et la conformité (A) ne sont pas son objet.",
       "difficulte": 2,
       "pourquoi": [
-        "Hors sujet : la BAS peut alimenter la conformité, mais ce n'est pas son objectif premier.",
-        "Absolu : la BAS automatise des scénarios connus mais ne remplace pas la créativité des testeurs humains.",
+        "La BAS peut alimenter des preuves de conformité, mais générer des rapports PCI DSS n'est pas son objectif premier.",
+        "La BAS automatise des scénarios connus mais ne remplace pas la créativité des testeurs humains.",
         "La BAS injecte des indicateurs de menace pour vérifier en continu que les contrôles de détection et de prévention réagissent comme attendu.",
-        "Hors sujet : la formation au codage sécurisé n'est pas la vocation d'une plateforme BAS."
+        "La formation au codage sécurisé relève du programme de sensibilisation, pas de la vocation d'une plateforme BAS."
       ]
     },
     {
@@ -1102,10 +1103,10 @@ window.CISSP_DATA.domains[6] = {
       "explication": "Le mutation fuzzing (dit dumb) modifie des entrées connues pour générer des entrées synthétiques susceptibles de déclencher un comportement inattendu ; le generational fuzzing (dit intelligent) développe des entrées à partir de modèles décrivant les entrées attendues du programme. Attention au piège (C) : c'est le mutation testing, et non le mutation fuzzing, qui modifie le programme lui-même.",
       "difficulte": 3,
       "pourquoi": [
-        "Faux : les deux approches sont automatisées.",
-        "Faux : la différence de stratégie de génération d'entrées est fondamentale.",
+        "Les deux approches sont automatisées : ce n'est pas là que se joue la distinction.",
+        "La stratégie de génération des entrées les distingue précisément : ce ne sont pas de simples synonymes.",
         "Piège de vocabulaire : c'est le mutation testing, pas le mutation fuzzing, qui modifie le programme lui-même.",
-        "Exact : la mutation altère des entrées connues, la génération construit des entrées depuis un modèle de la spécification."
+        "La mutation altère des entrées connues, tandis que la génération construit les entrées depuis un modèle de la spécification."
       ]
     },
     {
@@ -1123,7 +1124,7 @@ window.CISSP_DATA.domains[6] = {
         "La loop coverage concerne les boucles : zéro, une et plusieurs itérations.",
         "La branch coverage exige que chaque condition ait été exécutée sous ses branches vraie et fausse : exactement le critère décrit.",
         "La functional coverage vérifie l'appel et le retour de chaque fonction.",
-        "Trop étroit : la statement coverage vérifie l'exécution de chaque ligne, pas des deux issues d'un IF."
+        "La statement coverage vérifie l'exécution de chaque ligne, pas les deux issues d'un IF : un critère plus faible que la branch coverage."
       ]
     },
     {
@@ -1174,7 +1175,7 @@ window.CISSP_DATA.domains[6] = {
       "explication": "Une revue complète est chronophage et souvent réservée aux comptes hautement privilégiés ; pour les autres, l'échantillonnage est acceptable seulement s'il est réellement aléatoire. Réviser uniquement les comptes récents (A) ou se contenter de confirmations verbales (D) ne détecte pas les dérives, et reporter (B) laisse la fenêtre d'exposition ouverte.",
       "difficulte": 2,
       "pourquoi": [
-        "Trop étroit : les comptes anciens sont précisément là où s'accumulent les dérives de privilèges.",
+        "Se limiter aux comptes récents laisse de côté les comptes anciens, là où s'accumulent précisément les dérives de privilèges.",
         "Reporter la revue laisse la fenêtre d'exposition ouverte pendant des mois.",
         "L'échantillonnage vraiment aléatoire est acceptable pour la masse, mais les comptes hautement privilégiés doivent être revus en totalité : approche fondée sur le risque.",
         "Une confirmation verbale ne laisse aucune trace et n'a aucune valeur d'audit."
@@ -1265,7 +1266,7 @@ window.CISSP_DATA.domains[6] = {
       "difficulte": 1,
       "pourquoi": [
         "La bascule des services attend que les personnes soient en sécurité.",
-        "Réflexe de technicien : aucun bien matériel ne passe avant les personnes.",
+        "Sauver des serveurs avant les personnes inverse la priorité : aucun bien matériel ne passe avant des vies.",
         "La vie humaine prime absolument sur toute autre considération : premier réflexe attendu à l'examen.",
         "L'assureur sera notifié plus tard, ce n'est jamais la première priorité."
       ]
@@ -1282,7 +1283,7 @@ window.CISSP_DATA.domains[6] = {
       "explication": "Quand une vulnérabilité ne peut pas être corrigée à temps, la bonne démarche est d'implémenter des compensating controls, de documenter l'exception et la décision, puis de la réexaminer régulièrement. Patcher sans accréditation (D) crée un risque réglementaire et de sécurité des patients, ignorer (B) laisse le risque sans traitement, et la déconnexion définitive (A) peut compromettre les soins.",
       "difficulte": 3,
       "pourquoi": [
-        "Absolu et disproportionné : déconnecter définitivement peut compromettre les soins aux patients.",
+        "Déconnecter définitivement peut compromettre les soins aux patients : mesure disproportionnée face au besoin clinique.",
         "Ignorer laisse un risque critique sans traitement ni traçabilité.",
         "Compensating controls, exception documentée et revue périodique : la réponse managériale complète quand la correction directe est impossible.",
         "Patcher sans ré-accréditation crée un risque réglementaire et potentiellement clinique."
@@ -1354,10 +1355,10 @@ window.CISSP_DATA.domains[6] = {
       "explication": "L'équipe interne connaît l'environnement, ce qui réduit le temps nécessaire, permet d'explorer tous les recoins des systèmes grâce à la connaissance d'initié, et offre de l'agilité pour replanifier rapidement. En revanche, l'indépendance (C), la largeur d'expérience (D) et l'acceptabilité réglementaire (A) sont des avantages des auditeurs tiers.",
       "difficulte": 2,
       "pourquoi": [
-        "Inversé : les régulateurs privilégient les attestations externes indépendantes.",
+        "Ce sont les attestations externes indépendantes, non l'audit interne, que les régulateurs acceptent le mieux.",
         "La connaissance d'initié de l'environnement réduit le temps d'audit et donne de l'agilité de planification : atout propre à l'équipe interne.",
-        "Inversé : l'indépendance est l'avantage des auditeurs externes.",
-        "Inversé : la largeur d'expérience multi-organisations caractérise les cabinets externes."
+        "L'indépendance est justement l'avantage des auditeurs externes, pas de l'équipe interne.",
+        "La largeur d'expérience acquise auprès de multiples organisations caractérise les cabinets externes."
       ]
     },
     {
@@ -1408,7 +1409,7 @@ window.CISSP_DATA.domains[6] = {
       "explication": "Le SYN scan, dit half-open, envoie un SYN, interprète le SYN/ACK comme un port ouvert puis répond par un RST : la connexion n'est jamais complétée, ce qui le rend plus rapide et plus discret. Le connect scan établit le handshake complet et est journalisé par la cible ; le scan UDP ne concerne pas les ports TCP ; le banner grabbing identifie les versions de services déjà découverts, il ne recense pas les ports.",
       "difficulte": 2,
       "pourquoi": [
-        "Hors sujet : le scan UDP ne recense pas les ports TCP.",
+        "Le scan UDP porte sur d'autres ports que les ports TCP visés par la question.",
         "Le connect scan complète le handshake : connexion journalisée par la cible, donc peu discrète.",
         "Le banner grabbing identifie les versions de services déjà découverts, il ne recense pas les ports.",
         "Le SYN scan interrompt l'échange avant l'établissement : plus rapide et plus discret, exactement le besoin."
@@ -1678,9 +1679,9 @@ window.CISSP_DATA.domains[6] = {
       "explication": "Un engagement de red team est orienté objectifs (par exemple exfiltrer des données précises), émule les tactiques d'un adversaire réaliste, se déroule sur une période étendue et privilégie la furtivité afin de tester la capacité de la blue team à détecter et répondre. Un pen test classique vise plutôt l'identification exhaustive des vulnérabilités sur un périmètre donné, dans un temps court. Les affirmations A, B et C sont fausses.",
       "difficulte": 2,
       "pourquoi": [
-        "Trop étroit : la red team ne se limite à aucune couche technique.",
-        "Faux : l'accès complet au code source décrit plutôt un test white box.",
-        "Faux : la red team privilégie l'expertise humaine et l'adaptation.",
+        "La red team ne se limite à aucune couche technique particulière, applications web comprises mais pas seulement.",
+        "L'accès complet au code source décrit plutôt un test white box, pas un engagement red team.",
+        "La red team privilégie l'expertise humaine et l'adaptation, pas le seul outillage automatisé de scan.",
         "Objectifs précis, émulation d'adversaire réaliste, durée et furtivité pour éprouver détection et réponse : la signature d'un engagement red team."
       ]
     },
@@ -1874,7 +1875,7 @@ window.CISSP_DATA.domains[6] = {
       ],
       "reponse": 0,
       "explication": "Les KGI (Key Goal Indicators) mesurent l'atteinte des objectifs et répondent à la question « avons-nous atteint le but fixé ? », typiquement pour la gouvernance. Les KPI (C) mesurent la performance des processus qui mènent au but (regard vers le passé), les KRI (D) signalent l'évolution de l'exposition au risque (regard vers le futur), et un SLA (B) est un engagement contractuel de niveau de service, pas une métrique de gouvernance.",
-      "difficulte": 3,
+      "difficulte": 2,
       "pourquoi": [
         "Le KGI répond précisément à « avons-nous atteint l'objectif fixé ? » : la métrique de gouvernance demandée.",
         "Un SLA est un engagement contractuel de niveau de service, pas une métrique de gouvernance.",
@@ -2075,7 +2076,7 @@ window.CISSP_DATA.domains[6] = {
       "difficulte": 3,
       "pourquoi": [
         "Uniforme et ingérable : 300 questionnaires détaillés dépassent la capacité de deux analystes et traitent le fournisseur critique comme le tiers anodin.",
-        "Absolu et irréaliste : l'audit sur site universel est financièrement impossible et disproportionné pour les tiers à faible risque.",
+        "Auditer chaque fournisseur sur site tous les ans est financièrement impossible et disproportionné pour les tiers à faible risque.",
         "Techniquement vrai qu'ISO 27001 apporte une assurance, mais un certificat de système de management ne couvre ni tous les services consommés ni tous les risques : insuffisant seul pour les tiers critiques.",
         "La segmentation par criticité aligne l'effort d'assurance sur le risque, exactement la proportionnalité exigée par le régulateur avec des ressources contraintes."
       ]
@@ -2095,7 +2096,7 @@ window.CISSP_DATA.domains[6] = {
         "Un questionnaire auto-déclaratif est plus faible que le rapport d'audit indépendant déjà proposé : c'est une régression d'assurance.",
         "Accepter sans analyse est le piège inverse : un SOC 2 dont le périmètre n'inclut pas vos services ne vous assure de rien.",
         "Analyser le périmètre et les critères du rapport, vérifier la couverture des services consommés et combler les écarts par contrat : la démarche d'assurance proportionnée attendue d'un responsable des tiers.",
-        "Absolu : le refus d'audit sur site est courant chez les fournisseurs cloud mutualisés et n'empêche pas une assurance robuste par d'autres moyens."
+        "Le refus d'audit sur site est courant chez les fournisseurs cloud mutualisés et n'empêche pas une assurance robuste par d'autres moyens."
       ]
     },
     {
@@ -2146,7 +2147,7 @@ window.CISSP_DATA.domains[6] = {
       "explication": "L'objectif est d'entraîner les dirigeants à décider en crise, pas de valider la technique : le tabletop exercise construit sur un scénario réaliste confronte le comité exécutif aux décisions qui lui reviennent — communication de crise, notification aux régulateurs, arbitrages de continuité, question de la rançon — sans toucher à la production et dans le délai imparti. La bascule technique (C) entraîne les mauvaises personnes, le full-interruption (A) est disproportionné pour une première fois, et le phishing simulé (D) mesure la vigilance individuelle, pas la décision collective.",
       "difficulte": 3,
       "pourquoi": [
-        "Absolu et disproportionné : interrompre la production pour une première sensibilisation de la direction est un risque injustifiable.",
+        "Interrompre la production pour une première sensibilisation de la direction est un risque injustifiable et disproportionné.",
         "Le tabletop centré sur les décisions de crise — communication, obligations légales, arbitrages métier — entraîne exactement la population visée, sans toucher à la production et dans le délai imparti.",
         "Exercice utile mais destiné aux équipes techniques : il n'entraîne pas le comité exécutif à décider.",
         "La simulation de phishing mesure la vigilance individuelle, pas la capacité collective de décision en crise : hors objectif."
@@ -2456,7 +2457,7 @@ window.CISSP_DATA.domains[6] = {
       "pourquoi": [
         "Les Rules of Engagement ne prédisent pas les findings.",
         "Périmètre, techniques autorisées, fenêtres, contacts et escalade : les Rules of Engagement encadrent légalement et opérationnellement le test.",
-        "Absolu : aucun document ne garantit l'absence d'incident.",
+        "Aucun document ne garantit qu'un système en périmètre ne tombera jamais pendant la fenêtre de test.",
         "Elles répartissent les responsabilités, elles ne les transfèrent pas toutes au prestataire."
       ]
     },
@@ -2709,7 +2710,7 @@ window.CISSP_DATA.domains[6] = {
         "Réinstaller ne corrige pas une vulnérabilité du logiciel lui-même.",
         "Accepter en silence n'est ni tracé ni autorisé : personne n'a formellement validé le risque.",
         "Compensating controls, exception formellement approuvée au bon niveau et revues périodiques : la réponse complète quand le correctif n'existe pas.",
-        "Absolu : déconnecter sans égard à l'impact métier n'est pas une décision de manager."
+        "Déconnecter sans égard à l'impact métier n'est pas une décision de manager."
       ]
     },
     {
@@ -2742,10 +2743,10 @@ window.CISSP_DATA.domains[6] = {
       "explication": "L'atout de l'audit interne est la connaissance de l'environnement, qui réduit le temps d'audit et permet de replanifier avec agilité ; sa limite est une indépendance perçue moindre, car les auditeurs appartiennent à l'organisation. Les régulateurs et investisseurs préfèrent des attestations externes (D), et pour préserver son objectivité l'audit interne doit rendre compte au comité d'audit, surtout pas au DSI dont il audite les systèmes (A).",
       "difficulte": 2,
       "pourquoi": [
-        "Absolu : l'audit interne doit justement rendre compte au comité d'audit, pas au DSI.",
+        "Un rattachement au DSI ruinerait l'indépendance : l'audit interne rend justement compte au comité d'audit, pas au DSI dont il évalue les systèmes.",
         "Connaissance de l'environnement, gain de temps et agilité de planification, au prix d'une indépendance perçue moindre : le vrai profil de l'audit interne.",
-        "Inversé : l'indépendance est l'atout des cabinets externes.",
-        "Absolu et faux : les régulateurs privilégient les attestations externes."
+        "L'indépendance est l'atout des cabinets externes ; l'équipe interne, elle, gagne surtout du temps.",
+        "Les régulateurs privilégient les attestations externes : l'acceptation universelle des rapports internes est un mythe."
       ]
     },
     {
@@ -2797,7 +2798,7 @@ window.CISSP_DATA.domains[6] = {
       "difficulte": 2,
       "pourquoi": [
         "Une sélection discrétionnaire n'est ni aléatoire ni fondée sur le risque.",
-        "Trop étroit : l'ancienneté du compte n'est pas le critère de risque.",
+        "L'ancienneté de création d'un compte n'est pas le critère de risque pertinent pour cibler la revue complète.",
         "Les comptes hautement privilégiés concentrent l'impact maximal : revue complète systématique, l'échantillonnage aléatoire étant réservé aux comptes ordinaires.",
         "Le statut de congés n'a aucun rapport avec le risque d'accès."
       ]
@@ -2922,7 +2923,7 @@ window.CISSP_DATA.domains[6] = {
       "explication": "L'assurance proportionnée au risque s'obtient en segmentant les tiers par criticité : attestations indépendantes dans la durée (SOC 2 Type II ou équivalent) pour les fournisseurs critiques, questionnaires pour la masse à faible risque, audits sur site ciblés en dernier recours. Le questionnaire unique (D) sature l'équipe sans discriminer, l'audit sur site universel (A) est irréaliste, et l'auto-déclaration (B) n'est pas une assurance vérifiée.",
       "difficulte": 3,
       "pourquoi": [
-        "Absolu et irréaliste : l'audit sur site universel est impossible avec une petite équipe et disproportionné pour les tiers mineurs.",
+        "L'audit sur site universel est impossible avec une petite équipe et disproportionné pour les tiers mineurs.",
         "L'auto-déclaration sans vérification indépendante n'est pas une assurance.",
         "La segmentation par criticité, avec rapports d'audit indépendants pour les fournisseurs critiques et questionnaires pour les autres, aligne l'assurance sur le risque : l'approche défendable devant un régulateur.",
         "Uniforme : le même questionnaire exhaustif pour tous ignore le risque et sature une petite équipe."
