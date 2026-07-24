@@ -238,7 +238,15 @@ const Account = (() => {
       progression: JSON.parse(localStorage.getItem("cissp-fr-progress-v1") || "{}"),
       exporte: new Date().toISOString(), version: 1
     };
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    const json = JSON.stringify(data, null, 2);
+    // Dans l'application Android (coque WebView), le téléchargement blob n'écrit
+    // aucun fichier : on remet le JSON au pont natif qui l'enregistre dans les
+    // Téléchargements. En navigateur web, ce pont n'existe pas → chemin standard.
+    if (window.AndroidBridge && typeof AndroidBridge.saveBackup === "function") {
+      AndroidBridge.saveBackup(json);
+      return;
+    }
+    const blob = new Blob([json], { type: "application/json" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     a.download = "cissp-en-clair-sauvegarde-" + new Date().toISOString().slice(0, 10) + ".json";

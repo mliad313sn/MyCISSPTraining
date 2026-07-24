@@ -1,0 +1,60 @@
+name: Build Android APK
+
+# Compile l'APK « CISSP en clair » sur les runners GitHub (qui ont accès au SDK
+# Android) et publie le fichier installable en artefact téléchargeable.
+# Déclenché à chaque évolution de l'app ou du contenu du cours, et manuellement.
+
+on:
+  push:
+    branches:
+      - claude/cissp-french-course-t26ruf
+    paths:
+      - 'android/**'
+      - 'index.html'
+      - 'css/**'
+      - 'js/**'
+      - 'data/**'
+      - '.github/workflows/android-apk.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install required SDK packages
+        run: |
+          yes | sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0" >/dev/null 2>&1 || true
+
+      - name: Build debug APK
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon assembleDebug
+
+      - name: Rename APK
+        working-directory: android
+        run: |
+          cp app/build/outputs/apk/debug/app-debug.apk cissp-en-clair.apk
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cissp-en-clair-apk
+          path: android/cissp-en-clair.apk
+          if-no-files-found: error
+          retention-days: 90

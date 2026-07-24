@@ -1,0 +1,4 @@
+// Racine du projet Android. Le vrai module applicatif est dans app/.
+plugins {
+    id 'com.android.application' version '8.5.2' apply false
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Thème plateforme (sans AndroidX) : plein écran clair, barre d'état bleue marque. -->
+    <style name="AppTheme" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/brandBlue</item>
+        <item name="android:windowBackground">@color/slateWhite</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

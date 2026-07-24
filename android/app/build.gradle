@@ -1,0 +1,53 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.cisspenclair.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.cisspenclair.app"
+        minSdk 26          // Android 8.0+ : icônes adaptatives vectorielles, WebView Chromium, TTS
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            // APK release non minifié : le contenu est du code web déjà lisible,
+            // aucune classe Java à obscurcir. Signature à ajouter par l'éditeur.
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Source unique de vérité : le site web à la racine du dépôt est copié dans les
+// assets de l'APK au moment du build. On ne duplique donc aucun contenu dans
+// android/ ; toute mise à jour du cours part automatiquement dans l'app.
+// ---------------------------------------------------------------------------
+def wwwOut = layout.buildDirectory.dir("generated/www").get().asFile
+
+tasks.register('syncWww', Copy) {
+    description = "Copie le site (index.html, css, js, data) dans les assets de l'APK"
+    into wwwOut
+    from(rootProject.file("../index.html"))
+    from(rootProject.file("../css"))  { into "css" }
+    from(rootProject.file("../js"))   { into "js" }
+    from(rootProject.file("../data")) { into "data"; exclude "**/*.md" }
+}
+
+android.sourceSets.main.assets.srcDir(wwwOut)
+
+// Les assets doivent être synchronisés avant leur fusion par AGP.
+tasks.matching { it.name.startsWith("merge") && it.name.endsWith("Assets") }.configureEach {
+    dependsOn 'syncWww'
+}
