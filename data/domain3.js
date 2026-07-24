@@ -604,10 +604,10 @@ window.CISSP_DATA.domains[3] = {
           "titre": "Le cœur du Domaine 3",
           "points": [
             "Vocabulaire : plaintext, ciphertext, key, algorithm, key space",
-            "Kerckhoff : la sécurité repose sur le secret de la clé, pas de l'algorithme",
+            "Kerckhoffs : la sécurité repose sur le secret de la clé, pas de l'algorithme",
             "Confusion et diffusion : les deux piliers d'un bon chiffre"
           ],
-          "narration": "Nous voici au cœur du Domaine 3 : la cryptographie. Posons d'abord le vocabulaire. Le plaintext est le message lisible, le ciphertext sa version chiffrée, l'algorithme est la fonction mathématique, et la clé est le paramètre secret qui pilote l'algorithme. Le key space, l'espace des clés, vaut deux puissance n pour une clé de n bits. Le principe de Kerckhoff est fondamental : un système doit rester sûr même si tout est public, sauf la clé. Enfin, un bon chiffre combine la confusion, qui complexifie la relation entre clé et ciphertext, et la diffusion, qui propage chaque bit du plaintext dans tout le ciphertext."
+          "narration": "Nous voici au cœur du Domaine 3 : la cryptographie. Posons d'abord le vocabulaire. Le plaintext est le message lisible, le ciphertext sa version chiffrée, l'algorithme est la fonction mathématique, et la clé est le paramètre secret qui pilote l'algorithme. Le key space, l'espace des clés, vaut deux puissance n pour une clé de n bits. Le principe de Kerckhoffs est fondamental : un système doit rester sûr même si tout est public, sauf la clé. Enfin, un bon chiffre combine la confusion, qui complexifie la relation entre clé et ciphertext, et la diffusion, qui propage chaque bit du plaintext dans tout le ciphertext."
         },
         {
           "type": "standard",
@@ -1536,16 +1536,16 @@ window.CISSP_DATA.domains[3] = {
       "q": "Quel principe énonce qu'un cryptosystème doit rester sûr même si tout, sauf la clé, est connu publiquement ?",
       "choix": [
         "La loi de Moore",
-        "Le principe de Kerckhoff",
+        "Le principe de Kerckhoffs",
         "Le principe de Locard",
         "Le work factor"
       ],
       "reponse": 1,
-      "explication": "Le principe de Kerckhoff affirme que la sécurité doit reposer uniquement sur le secret de la clé, jamais sur celui de l'algorithme — la « sécurité par l'obscurité » est une illusion. La loi de Moore concerne le doublement de la puissance des processeurs, le work factor mesure l'effort nécessaire pour casser un système, et le principe de Locard appartient à la criminalistique.",
+      "explication": "Le principe de Kerckhoffs affirme que la sécurité doit reposer uniquement sur le secret de la clé, jamais sur celui de l'algorithme — la « sécurité par l'obscurité » est une illusion. La loi de Moore concerne le doublement de la puissance des processeurs, le work factor mesure l'effort nécessaire pour casser un système, et le principe de Locard appartient à la criminalistique.",
       "difficulte": 1,
       "pourquoi": [
         "Faux : la loi de Moore décrit la croissance de la puissance de calcul — hors sujet.",
-        "Correct : le principe de Kerckhoff — la sécurité doit reposer uniquement sur le secret de la clé, pas sur celui de l'algorithme.",
+        "Correct : le principe de Kerckhoffs — la sécurité doit reposer uniquement sur le secret de la clé, pas sur celui de l'algorithme.",
         "Faux : le principe de Locard relève de la criminalistique (tout contact laisse une trace).",
         "Faux : le work factor mesure l'effort nécessaire pour casser un système, il n'énonce pas ce principe de conception."
       ]
@@ -3891,7 +3891,7 @@ window.CISSP_DATA.domains[3] = {
       "verso": "Key escrow : garde des clés par un tiers de confiance pour récupération. Contrôle m of n : sur n agents de récupération désignés, m minimum doivent coopérer — séparation des tâches appliquée aux clés."
     },
     {
-      "recto": "Kerckhoff's Principle",
+      "recto": "Kerckhoffs's Principle",
       "verso": "Un cryptosystème doit rester sûr même si tout est connu publiquement, sauf la clé. La sécurité repose sur le secret de la clé, jamais sur celui de l'algorithme."
     },
     {
