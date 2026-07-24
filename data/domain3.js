@@ -3084,6 +3084,528 @@ window.CISSP_DATA.domains[3] = {
         "Prématuré : renégocier est une option commerciale de repli, pas la première explication due à la direction sur la nature de l'écart."
       ],
       "difficulte": 3
+    },
+    {
+      "q": "Au lancement de la conception d'une nouvelle application de paiement, l'équipe sécurité veut identifier de manière structurée les risques de spoofing, de tampering et d'élévation de privilèges AVANT que le code ne soit écrit. Quelle démarche répond le MIEUX à ce besoin ?",
+      "choix": [
+        "Planifier un test d'intrusion sur l'environnement de préproduction",
+        "Lancer une analyse statique automatisée du code source",
+        "Conduire un threat modeling de type STRIDE sur l'architecture proposée",
+        "Déployer un EDR sur les serveurs de développement"
+      ],
+      "reponse": 2,
+      "explication": "Le threat modeling est l'exercice proactif qui identifie, catégorise et analyse les menaces dès la conception ; STRIDE (Spoofing, Tampering, Repudiation, Information disclosure, Denial of service, Elevation of privilege) correspond exactement aux catégories citées. Un pentest et une analyse de code exigent un système ou du code existants, et un EDR est un contrôle opérationnel, pas une démarche de conception.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Faux : un test d'intrusion exige un système déployé — il arrive trop tard pour guider la conception ; piège du contrôle a posteriori.",
+        "Faux : l'analyse statique porte sur du code déjà écrit, or la question précise que le code n'existe pas encore.",
+        "Correct : le threat modeling STRIDE identifie les menaces de façon structurée dès la phase de conception — spoofing, tampering et élévation de privilèges sont trois catégories STRIDE.",
+        "Faux : l'EDR est un contrôle de détection opérationnel — hors sujet pour une démarche d'ingénierie en amont."
+      ]
+    },
+    {
+      "q": "Un administrateur de bases de données utilise en permanence son compte à hauts privilèges, y compris pour lire ses e-mails et naviguer sur le web. Un malware exécuté dans son navigateur obtient ainsi un contrôle étendu sur les serveurs. Quel principe de conception sécurisée a été violé EN PREMIER lieu ?",
+      "choix": [
+        "Least privilege : les tâches courantes auraient dû s'effectuer avec un compte ordinaire, les privilèges d'administration étant réservés aux seules tâches qui l'exigent",
+        "Separation of duties : deux personnes auraient dû se partager l'administration",
+        "Defense in depth : il manquait un second pare-feu",
+        "Fail securely : le navigateur aurait dû se fermer en cas d'erreur"
+      ],
+      "reponse": 0,
+      "explication": "Le moindre privilège impose de n'utiliser que les droits strictement nécessaires à la tâche en cours : naviguer et lire ses e-mails ne requièrent aucun privilège d'administration. Le malware n'a hérité d'un contrôle étendu que parce que ce principe était violé. La séparation des tâches vise la fraude par une seule personne, la défense en profondeur l'empilement des contrôles, et fail securely le comportement en cas de panne.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Correct : utiliser un compte à hauts privilèges pour des tâches banales viole le least privilege — c'est cette violation qui a donné au malware ses droits étendus.",
+        "Faux : la separation of duties répartit une fonction critique entre plusieurs personnes pour prévenir la fraude — ce n'est pas le mécanisme en cause ici.",
+        "Faux : la défense en profondeur concerne l'empilement de contrôles indépendants — un pare-feu de plus n'aurait pas retiré les privilèges du compte.",
+        "Faux : fail securely décrit le comportement sûr d'un composant en panne — aucune défaillance n'est en jeu, seulement un excès de droits."
+      ]
+    },
+    {
+      "q": "Un audit révèle que des dizaines de caméras IP ont été mises en service avec leur mot de passe d'usine et tous les services de gestion à distance activés. QUELLE mesure traite la cause racine pour les déploiements futurs ?",
+      "choix": [
+        "Segmenter les caméras existantes sur un VLAN dédié",
+        "Ajouter les caméras à la supervision du SOC",
+        "Changer manuellement les mots de passe des caméras déjà installées",
+        "Exiger dans le processus d'achat et de déploiement des équipements livrés et configurés selon des secure defaults : mot de passe unique imposé au premier démarrage, services inutiles désactivés"
+      ],
+      "reponse": 3,
+      "explication": "Le principe des secure defaults veut que les équipements soient sûrs dès leur sortie de boîte : mot de passe d'usine à changer obligatoirement, services non essentiels désactivés par défaut. L'inscrire dans les exigences d'achat et le processus de déploiement traite la cause racine. La segmentation et la supervision sont des compensations, et la correction manuelle ne règle que le parc existant.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Faux : la segmentation est un contrôle compensatoire utile mais elle n'empêche pas de redéployer demain des caméras mal configurées — elle ne traite pas la cause.",
+        "Faux : la supervision détecte l'exploitation, elle ne prévient pas la configuration d'usine vulnérable.",
+        "Faux : corriger l'existant est nécessaire mais ne change rien aux FUTURS déploiements visés par la question — piège du remède ponctuel.",
+        "Correct : imposer des secure defaults à l'achat et au déploiement supprime la cause racine — la configuration la plus sûre devient l'état de départ."
+      ]
+    },
+    {
+      "q": "Des conseillers utilisent une application web métier depuis des postes partagés en agence. Un auditeur constate que des données clients restent lisibles dans le cache du navigateur et les fichiers temporaires après la déconnexion. Quelle est la MEILLEURE mesure corrective ?",
+      "choix": [
+        "Renforcer le chiffrement TLS entre les postes et le serveur",
+        "Configurer l'application pour interdire la mise en cache des contenus sensibles et purger les données locales à la fermeture de session",
+        "Installer un antivirus à jour sur les postes partagés",
+        "Remplacer l'application web par un client lourd installé localement"
+      ],
+      "reponse": 1,
+      "explication": "Le risque des systèmes client-based inclut les données résiduelles dans les caches locaux : sur un poste partagé, l'utilisateur suivant peut lire les données du précédent. La parade est applicative : en-têtes interdisant la mise en cache des contenus sensibles et purge des données locales en fin de session. TLS protège les données en transit, pas les résidus locaux, et un client lourd stocke souvent davantage en local.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Faux : TLS protège la donnée EN TRANSIT — le problème constaté est la donnée résiduelle stockée localement après la session ; piège du bon contrôle au mauvais endroit.",
+        "Correct : interdire le cache des contenus sensibles et purger les données locales à la déconnexion traite exactement la vulnérabilité client observée.",
+        "Faux : l'antivirus vise les malwares — aucun code malveillant n'est en cause, seulement des résidus de données accessibles au prochain utilisateur.",
+        "Faux : un client lourd ne supprime pas le stockage local — il tend au contraire à conserver davantage de données sur le poste."
+      ]
+    },
+    {
+      "q": "Pendant les pics d'activité, un serveur d'échanges interentreprises reçoit plus de transactions qu'il ne peut en traiter : des messages sont perdus et des partenaires redirigent leurs fichiers vers un serveur de contournement non durci. Quel concept de sécurité des systèmes serveur est EN CAUSE ?",
+      "choix": [
+        "L'attaque par agrégation",
+        "Le VM sprawl",
+        "Le data flow control : la maîtrise du rythme et du chemin des échanges (files d'attente, répartition de charge) fait défaut",
+        "Le comportement fail-open"
+      ],
+      "reponse": 2,
+      "explication": "Le contrôle des flux de données (data flow control) garantit que les échanges entre systèmes suivent un rythme soutenable et des chemins maîtrisés : files d'attente, répartiteurs de charge et régulation évitent la perte de transactions et l'apparition de circuits de contournement non sécurisés. L'agrégation est une attaque sur les bases de données, le VM sprawl une prolifération de machines virtuelles, et fail-open décrit la défaillance d'un contrôle.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Faux : l'agrégation est une attaque de bases de données combinant des enregistrements — aucun rapport avec la saturation d'un serveur.",
+        "Faux : le VM sprawl est la prolifération incontrôlée de machines virtuelles — le scénario ne parle pas de virtualisation.",
+        "Correct : perte de messages sous la charge et flux détournés vers un serveur non maîtrisé = défaut de data flow control, vulnérabilité type des systèmes serveur.",
+        "Faux : fail-open décrit un contrôle de sécurité qui laisse tout passer en panne — ici aucun contrôle ne défaille, c'est le flux qui n'est pas régulé."
+      ]
+    },
+    {
+      "q": "Une application répartit données et traitements sur des dizaines de nœuds coopérants dans trois pays. L'architecte propose de concentrer tous les contrôles de sécurité sur le serveur central d'orchestration. Pourquoi cette approche est-elle INSUFFISANTE ?",
+      "choix": [
+        "Dans un système distribué, chaque nœud et chaque lien constituent une surface d'attaque : authentification, chiffrement et durcissement doivent s'appliquer partout, pas en un point unique",
+        "Parce qu'il faudrait plutôt doubler l'orchestrateur d'un second orchestrateur de secours",
+        "Parce qu'il faudrait d'abord rapatrier l'application dans un cloud unique pour centraliser la sécurité",
+        "Parce qu'un VPN entre les nœuds suffirait à couvrir l'ensemble du risque"
+      ],
+      "reponse": 0,
+      "explication": "La règle des systèmes distribués est que la sécurité doit être traitée sur chaque composant et chaque interconnexion : un attaquant qui compromet un nœud ou un lien contourne tous les contrôles concentrés au centre. La redondance de l'orchestrateur répond à la disponibilité, la recentralisation nie l'architecture choisie, et un VPN ne chiffre que les liens sans durcir ni authentifier les nœuds.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Correct : la sécurité d'un système distribué se traite sur chaque nœud et chaque lien — un point de contrôle unique laisse toute la périphérie exposée.",
+        "Faux : un orchestrateur de secours améliore la DISPONIBILITÉ — il ne réduit en rien la surface d'attaque des nœuds ; piège de substitution d'attribut.",
+        "Faux : recentraliser dans un cloud unique dénature l'architecture sans traiter le principe — et un cloud unique a aussi des composants distribués.",
+        "Faux : un VPN chiffre les liens mais n'authentifie pas les traitements ni ne durcit les nœuds — réponse trop étroite présentée comme totale."
+      ]
+    },
+    {
+      "q": "Une application monolithique est décomposée en quarante microservices exposant chacun une API. L'équipe s'inquiète de la multiplication des points d'authentification et de l'incohérence des politiques entre services. Quelle mesure répond le MIEUX à ce problème ?",
+      "choix": [
+        "Revenir à l'architecture monolithique d'origine",
+        "Laisser chaque équipe choisir librement son mécanisme d'authentification",
+        "Considérer le réseau interne du cluster comme de confiance pour le trafic entre services",
+        "Placer une API gateway en point d'entrée unique — authentification, autorisation, rate limiting, journalisation — et chiffrer le trafic inter-services avec mTLS"
+      ],
+      "reponse": 3,
+      "explication": "L'API gateway centralise l'application des politiques de sécurité à l'entrée (authentification, autorisation, limitation de débit, journalisation) et supprime l'incohérence entre services ; le mTLS, souvent via un service mesh, sécurise le trafic est-ouest. Revenir au monolithe est une décision d'architecture, pas une mesure de sécurité, et faire confiance au réseau interne contredit le Zero Trust.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Faux : régresser vers le monolithe sacrifie les objectifs métier de la décomposition — ce n'est pas une mesure de sécurité, c'est un renoncement.",
+        "Faux : la liberté totale de chaque équipe est précisément la cause de l'incohérence des politiques — cela aggrave le problème.",
+        "Faux : la confiance implicite dans le réseau interne est l'anti-modèle « château et douves » — le trafic est-ouest doit être authentifié et chiffré.",
+        "Correct : API gateway en frontal pour centraliser les politiques + mTLS pour le trafic inter-services = le patron de sécurisation attendu des microservices."
+      ]
+    },
+    {
+      "q": "Un laboratoire loue du temps de calcul de son cluster HPC à des équipes externes. Un air gap est impossible et les pare-feux classiques dégradent trop les performances des nœuds de calcul. Quelle approche de sécurisation est la PLUS adaptée ?",
+      "choix": [
+        "Installer un agent antivirus sur chacun des nœuds de calcul",
+        "Canaliser tous les accès par des head nodes durcis servant de points d'entrée uniques, et surveiller les comportements anormaux du cluster",
+        "Chiffrer l'intégralité des interconnexions internes à haute vitesse du cluster",
+        "Cesser de louer le cluster à des équipes externes"
+      ],
+      "reponse": 1,
+      "explication": "Le modèle de sécurisation des environnements HPC consiste à router tout le trafic et toutes les connexions par des nœuds de tête durcis, qui jouent le rôle de bastions, et à compléter par une surveillance comportementale, car pare-feux et air gaps y sont peu praticables. Les agents sur les nœuds de calcul dégradent les performances, le chiffrement des interconnexions internes pénalise la latence sans contrôler l'accès, et interdire la location tue la mission.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Faux : des agents sur chaque nœud de calcul consomment les ressources que le HPC vend — et ne contrôlent pas les accès partagés ; contrainte de performance ignorée.",
+        "Correct : concentrer les accès sur des head nodes durcis et surveiller les anomalies est le compromis de référence quand pare-feux et air gap sont impraticables en HPC.",
+        "Faux : chiffrer les interconnexions internes à haute vitesse impose une latence prohibitive et ne règle pas le problème premier, le contrôle des accès externes.",
+        "Faux : renoncer à la location supprime la mission au lieu de gérer le risque — l'évitement n'est pas le meilleur arbitrage quand des contrôles raisonnables existent."
+      ]
+    },
+    {
+      "q": "Une enseigne déploie des passerelles d'edge computing dans trois cents magasins pour traiter localement vidéo et données de caisse. Ces sites n'ont aucun personnel informatique et les équipements sont physiquement accessibles. Quelle combinaison de mesures est la PLUS pertinente ?",
+      "choix": [
+        "Rapatrier tout le traitement dans le cloud central pour supprimer les équipements edge",
+        "Installer un pare-feu périmétrique dans chaque magasin et s'en tenir là",
+        "Appliquer une approche Zero Trust aux équipements : chiffrement des données au repos, secure boot et attestation, segmentation réseau, patching centralisé et automatisé",
+        "S'appuyer sur la vidéosurveillance existante des magasins pour dissuader les manipulations"
+      ],
+      "reponse": 2,
+      "explication": "L'edge computing place des équipements dans des lieux physiquement exposés et sans support local : il faut donc supposer l'accès physique possible (chiffrement au repos, secure boot, attestation), segmenter, et administrer les correctifs de façon centralisée et automatisée — une politique cohérente sur tout le parc, dans l'esprit Zero Trust. Recentraliser sacrifie la latence qui a motivé l'edge, et le périmètre seul ignore la menace physique locale.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Faux : supprimer l'edge fait perdre le bénéfice (latence, autonomie locale) qui justifiait l'architecture — on ne traite pas un risque en annulant la mission.",
+        "Faux : un pare-feu périmétrique ne protège ni contre l'accès physique aux boîtiers ni contre une compromission locale — vision « château et douves » inadaptée.",
+        "Correct : chiffrement au repos, secure boot/attestation, segmentation et patching centralisé forment la combinaison attendue pour des équipements distants exposés sans support local.",
+        "Faux : la vidéosurveillance est dissuasive et détective — elle ne protège ni les données stockées ni l'intégrité des équipements ; contrôle trop faible et isolé."
+      ]
+    },
+    {
+      "q": "Lors d'une revue d'architecture, vous découvrez qu'une application horodate et signe des documents contractuels sur la base d'empreintes SHA-1. Que devez-vous recommander ?",
+      "choix": [
+        "Migrer vers SHA-2 (SHA-256 ou plus) ou SHA-3 : des collisions SHA-1 pratiques sont démontrées, ce qui fragilise la valeur probante des signatures",
+        "Conserver SHA-1, ses collisions restant purement théoriques",
+        "Adopter MD5, plus rapide pour le traitement de gros volumes",
+        "Appliquer SHA-1 deux fois de suite pour restaurer un niveau de sécurité suffisant"
+      ],
+      "reponse": 0,
+      "explication": "Des collisions SHA-1 réelles ont été démontrées publiquement (attaque SHAttered, 2017) : un attaquant peut produire deux documents distincts de même empreinte, ce qui ruine la fiabilité d'une signature. La recommandation est de migrer vers la famille SHA-2 ou SHA-3. MD5 est encore plus faible, et composer un algorithme cassé avec lui-même ne rétablit pas la résistance aux collisions.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Correct : SHA-1 est cassé en pratique pour la résistance aux collisions — pour des signatures à valeur probante, migrer vers SHA-2/SHA-3 est la seule recommandation défendable.",
+        "Faux : les collisions SHA-1 ne sont plus théoriques depuis 2017 (SHAttered) — piège de minimisation du risque.",
+        "Faux : MD5 est cassé depuis plus longtemps encore que SHA-1 — la rapidité n'est pas un critère de sécurité.",
+        "Faux : doubler un algorithme dont la résistance aux collisions est brisée ne la restaure pas — fausse bonne idée d'ingénieur."
+      ]
+    },
+    {
+      "q": "Une banque veut que ses clients puissent vérifier l'identité juridique de l'établissement derrière son portail web, au-delà de la simple preuve de contrôle du nom de domaine. Quel type de certificat doit-elle demander à son autorité de certification ?",
+      "choix": [
+        "Un certificat auto-signé généré par ses propres équipes",
+        "Un certificat DV (Domain Validation)",
+        "Un certificat wildcard couvrant tous ses sous-domaines",
+        "Un certificat EV (Extended Validation), délivré après vérification approfondie de l'entité juridique"
+      ],
+      "reponse": 3,
+      "explication": "Les certificats se distinguent par le niveau de vérification effectué par la CA : DV prouve uniquement le contrôle du domaine, OV ajoute la vérification de l'organisation, et EV impose une vérification approfondie de l'entité juridique — exactement le besoin exprimé. Un certificat auto-signé n'apporte aucune vérification tierce, et « wildcard » décrit la portée des noms couverts, pas le niveau de validation.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Faux : un certificat auto-signé n'engage aucune autorité tierce — aucune vérification d'identité, il déclenche même des alertes navigateur.",
+        "Faux : le DV prouve seulement le contrôle du nom de domaine — c'est précisément l'insuffisance que la banque veut dépasser.",
+        "Faux : wildcard concerne la PORTÉE (tous les sous-domaines), pas le niveau de vérification d'identité — piège de dimension différente.",
+        "Correct : l'Extended Validation exige la vérification approfondie de l'entité juridique par la CA — le niveau de garantie d'identité le plus élevé."
+      ]
+    },
+    {
+      "q": "Une base de hashes de mots de passe est exfiltrée. Les mots de passe étaient hachés SANS salt avec un algorithme rapide. Quelle technique permettra à l'attaquant de récupérer le PLUS efficacement un grand nombre de mots de passe ?",
+      "choix": [
+        "Une fault injection sur les serveurs d'authentification",
+        "Des rainbow tables : la recherche inversée précalculée est rendue possible par l'absence de salt",
+        "Une attaque chosen ciphertext contre la base",
+        "Une attaque par timing contre la fonction de hachage"
+      ],
+      "reponse": 1,
+      "explication": "Sans salt, chaque mot de passe identique produit le même hash : les rainbow tables, immenses bases précalculées de correspondances mot de passe/hash, permettent une récupération massive et quasi instantanée — c'est la variante optimisée du brute force hors ligne. Le salting aurait neutralisé cette attaque. Fault injection et timing exigent d'interagir avec un dispositif en fonctionnement, et chosen ciphertext suppose un oracle de déchiffrement, inexistant pour du hachage.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Faux : la fault injection perturbe physiquement un dispositif en fonctionnement — l'attaquant travaille ici hors ligne sur des hashes volés.",
+        "Correct : sans salt, les rainbow tables précalculées inversent les hashes en masse — c'est l'attaque la plus efficace de la famille brute force/dictionnaire.",
+        "Faux : chosen ciphertext requiert de faire DÉCHIFFRER des textes choisis — le hachage est à sens unique, il n'existe pas d'oracle de déchiffrement.",
+        "Faux : une attaque par timing exige de mesurer des exécutions en direct — inutile quand on possède déjà l'intégralité des hashes."
+      ]
+    },
+    {
+      "q": "Un analyste adverse intercepte uniquement des flux chiffrés d'un protocole propriétaire, sans aucun accès au plaintext ni au système émetteur, et tente d'en déduire la clé par analyse statistique des messages captés. De quel type d'attaque cryptanalytique s'agit-il ?",
+      "choix": [
+        "Ciphertext-only",
+        "Known plaintext",
+        "Chosen plaintext",
+        "Meet-in-the-middle"
+      ],
+      "reponse": 0,
+      "explication": "Quand l'attaquant ne dispose que de messages chiffrés, sans aucune paire plaintext/ciphertext ni capacité de faire chiffrer ou déchiffrer quoi que ce soit, il mène une attaque ciphertext-only — la situation la plus défavorable pour lui, fondée sur l'accumulation et l'analyse statistique de ciphertext. Les autres attaques supposent des connaissances ou des capacités supplémentaires.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Correct : seul le ciphertext est disponible — c'est la définition de l'attaque ciphertext-only, la plus difficile à mener pour l'attaquant.",
+        "Faux : la known plaintext exige de posséder des paires plaintext/ciphertext correspondantes — la question exclut tout accès au plaintext.",
+        "Faux : la chosen plaintext suppose de pouvoir FAIRE CHIFFRER des textes choisis — l'attaquant n'a aucun accès au système émetteur.",
+        "Faux : meet-in-the-middle est une attaque de type known plaintext visant les doubles chiffrements comme 2DES — hors contexte ici."
+      ]
+    },
+    {
+      "q": "Un audit révèle qu'une application utilise AES-256, algorithme réputé sûr, mais avec une bibliothèque qui réutilise le même IV pour chaque message et journalise les clés en clair dans les logs de debug. Comment qualifier au MIEUX la faiblesse exploitée par un attaquant ?",
+      "choix": [
+        "Une faiblesse mathématique de l'algorithme AES",
+        "Une attaque par force brute sur l'espace de clés de 256 bits",
+        "Une attaque d'implémentation : c'est la mise en œuvre logicielle qui est défaillante, pas l'algorithme",
+        "Une analyse de fréquence des lettres du ciphertext"
+      ],
+      "reponse": 2,
+      "explication": "Les attaques d'implémentation exploitent les défauts de la mise en œuvre — bugs, mauvaise gestion des IV, clés exposées dans les journaux, méthodologie défaillante — sans s'attaquer aux mathématiques de l'algorithme. AES reste sûr ; c'est le code qui trahit les secrets. Le brute force sur 256 bits est infaisable et inutile puisque la clé fuit, et l'analyse de fréquence vise les chiffres de substitution historiques.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Faux : les mathématiques d'AES ne sont pas en cause — piège classique consistant à accuser l'algorithme quand c'est son usage qui est fautif.",
+        "Faux : un espace de 2 puissance 256 clés est hors de portée du brute force — et l'attaquant n'en a pas besoin, la clé est dans les logs.",
+        "Correct : IV réutilisé et clés journalisées en clair sont des défauts de MISE EN ŒUVRE — la définition même de l'implementation attack.",
+        "Faux : l'analyse de fréquence cible les chiffres de substitution simples — sans objet contre un chiffre par blocs moderne."
+      ]
+    },
+    {
+      "q": "Un laboratoire d'attaque soumet une carte à puce à des variations brutales de tension et à des températures extrêmes pendant ses opérations de signature, afin de provoquer des erreurs de calcul exploitables pour extraire la clé privée. De quelle attaque s'agit-il et quelle est la parade la PLUS adaptée ?",
+      "choix": [
+        "Timing attack — parade : exécution en temps constant",
+        "Force brute — parade : allonger la clé",
+        "Chosen ciphertext — parade : passer à un mode authentifié comme GCM",
+        "Fault injection — parade : capteurs environnementaux (tension, température) et vérification interne des résultats avant émission"
+      ],
+      "reponse": 3,
+      "explication": "Provoquer volontairement un dysfonctionnement par surtension, sous-alimentation ou température extrême pour faire produire des calculs erronés exploitables est une fault injection. Les parades sont matérielles et logiques : capteurs environnementaux qui mettent la carte en sécurité et double calcul ou vérification interne des résultats avant de les émettre. Le timing exploite la mesure passive des durées, ce qui est différent d'une perturbation active.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Faux : la timing attack MESURE passivement des durées d'exécution — ici l'attaquant PERTURBE activement le composant ; piège entre side-channel passif et injection active.",
+        "Faux : la longueur de clé ne protège pas contre des calculs rendus erronés — l'attaque contourne totalement l'espace de clés.",
+        "Faux : aucun oracle de déchiffrement n'est utilisé, et GCM ne protège pas un composant physiquement malmené.",
+        "Correct : perturbation par tension/température = fault injection ; capteurs environnementaux et vérification des résultats avant émission sont les parades de référence."
+      ]
+    },
+    {
+      "q": "Après avoir compromis un poste Windows, un attaquant extrait de la mémoire le hash NTLM d'un compte d'administration et le rejoue tel quel pour s'authentifier sur d'autres serveurs, sans jamais connaître le mot de passe. Quelle mesure limite le PLUS efficacement ce mouvement latéral ?",
+      "choix": [
+        "Imposer des mots de passe nettement plus longs et complexes",
+        "Cloisonner les comptes privilégiés (tiering, comptes d'administration dédiés par niveau), désactiver NTLM au profit de Kerberos et protéger les identifiants en mémoire",
+        "Chiffrer les disques de tous les serveurs",
+        "Augmenter la fréquence des analyses antivirus planifiées"
+      ],
+      "reponse": 1,
+      "explication": "Le pass the hash rejoue le hash sans le casser : la robustesse du mot de passe est donc indifférente — c'est le piège classique de la question. La parade structurelle est de limiter la valeur et la portée des hashes volés : cloisonnement des comptes privilégiés par niveaux, comptes d'administration dédiés, abandon de NTLM au profit de Kerberos et protection des identifiants en mémoire. Le chiffrement de disque protège les données au repos, pas les secrets en mémoire d'un système démarré.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Faux : le hash est rejoué TEL QUEL, jamais cassé — la complexité du mot de passe ne change rien ; piège favori de l'examen sur pass the hash.",
+        "Correct : tiering des comptes privilégiés, désactivation de NTLM pour Kerberos et protection des identifiants en mémoire réduisent la valeur et la portée d'un hash volé.",
+        "Faux : le chiffrement de disque protège les données AU REPOS — sur un système en fonctionnement, les hashes restent extractibles de la mémoire.",
+        "Faux : des analyses antivirus plus fréquentes relèvent de la détection générique — elles n'empêchent pas la réutilisation d'un hash valide déjà volé."
+      ]
+    },
+    {
+      "q": "Le comité de direction demande quelle mesure garantit le MIEUX la capacité de récupération face à un ransomware moderne qui chiffre les données de production et cherche aussi à détruire les sauvegardes accessibles en ligne. Que recommandez-vous EN PRIORITÉ ?",
+      "choix": [
+        "Des sauvegardes régulières dont au moins une copie hors ligne ou immuable, validées par des tests de restauration",
+        "Le paiement rapide de la rançon pour minimiser la durée d'interruption",
+        "Le déploiement d'un EDR sur l'ensemble des postes et serveurs",
+        "Le chiffrement de toutes les données au repos"
+      ],
+      "reponse": 0,
+      "explication": "Le ransomware est la cryptographie utilisée comme arme : la garantie de récupération repose sur des sauvegardes que l'attaquant ne peut pas atteindre — hors ligne ou immuables — et dont la restauration est régulièrement testée. Un EDR réduit la probabilité d'infection mais ne garantit pas la récupération, payer finance le crime sans garantie, et chiffrer ses propres données n'empêche pas un sur-chiffrement malveillant.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Correct : la question porte sur la RÉCUPÉRATION — seules des sauvegardes hors d'atteinte (hors ligne/immuables) et testées la garantissent quand les sauvegardes en ligne sont ciblées.",
+        "Faux : payer finance la criminalité, n'offre aucune garantie de déchiffrement et peut exposer à des sanctions — jamais la réponse attendue.",
+        "Faux : l'EDR est préventif et détectif — il réduit la probabilité mais ne garantit pas la capacité de restauration demandée ; piège de substitution d'objectif.",
+        "Faux : chiffrer ses données au repos protège leur confidentialité — cela n'empêche nullement le ransomware de les chiffrer une seconde fois."
+      ]
+    },
+    {
+      "q": "Lors d'une visite de site, vous constatez que le local technique d'étage (IDF) abritant les commutateurs et le brassage réseau sert de débarras au service d'entretien, avec une porte non verrouillée donnant sur un couloir accessible au public. Quel est le risque PRINCIPAL ?",
+      "choix": [
+        "La surchauffe des équipements due à l'encombrement du local",
+        "La non-conformité du local aux règles d'ergonomie du travail",
+        "Un accès physique non autorisé au réseau : pose d'un dispositif d'écoute ou raccordement direct sur les équipements de brassage",
+        "L'usure prématurée des câbles entreposés au sol"
+      ],
+      "reponse": 2,
+      "explication": "Un wiring closet doit être verrouillé et situé dans les zones privées du bâtiment : quiconque accède physiquement au brassage peut poser un tap d'écoute, se raccorder au réseau interne ou saboter la connectivité, en contournant tous les contrôles logiques. La surchauffe et l'usure sont des risques opérationnels réels mais secondaires face à l'accès physique non contrôlé.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Faux : la surchauffe est un risque opérationnel réel mais secondaire — elle menace la disponibilité, pas la compromission du réseau ; piège du risque plausible non prioritaire.",
+        "Faux : l'ergonomie est hors du périmètre sécurité de la question.",
+        "Correct : un IDF non verrouillé sur un couloir public expose le cœur du réseau à l'écoute et au raccordement pirate — l'accès physique contourne tous les contrôles logiques.",
+        "Faux : l'usure des câbles est un enjeu de maintenance mineur, sans commune mesure avec l'accès non autorisé."
+      ]
+    },
+    {
+      "q": "Votre organisation entrepose ses bandes de sauvegarde dans une armoire non verrouillée de la salle de reprographie, accessibles à tous les employés. Quelle est la MEILLEURE organisation cible pour ces supports ?",
+      "choix": [
+        "Chiffrer le contenu des bandes et les laisser au même endroit",
+        "Étiqueter les bandes et effectuer un inventaire annuel",
+        "Confier la garde des bandes à l'administrateur systèmes dans son bureau",
+        "Un local dédié protégé comme une salle serveurs, avec un responsable des médias et un processus formel de check-in/check-out tracé"
+      ],
+      "reponse": 3,
+      "explication": "Une media storage facility doit être protégée avec le même sérieux qu'une salle serveurs : accès restreint, idéalement un bibliothécaire des médias, et un processus d'entrée-sortie qui trace chaque mouvement — les sauvegardes contiennent l'intégralité des données de l'organisation. Le chiffrement est un complément précieux mais ne contrôle ni le vol ni la traçabilité, et la garde informelle par une personne ne constitue pas un contrôle.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Faux : le chiffrement protège la confidentialité mais n'empêche ni le vol, ni la destruction, ni l'absence de traçabilité des supports — contrôle partiel présenté comme suffisant.",
+        "Faux : un inventaire annuel laisse un an d'angle mort et l'armoire reste ouverte — fréquence et protection inadaptées.",
+        "Faux : la garde par une seule personne dans un bureau est un contrôle informel, sans traçabilité ni continuité — dépendance à un individu.",
+        "Correct : local dédié protégé, responsable des médias et check-in/check-out tracé = l'organisation de référence d'une media storage facility."
+      ]
+    },
+    {
+      "q": "À la suite d'un incident, des disques saisis pour analyse forensique sont entreposés sur une étagère ouverte du bureau de l'équipe sécurité, accessibles à toute l'équipe sans registre. Le juriste de l'organisation s'en alarme. Quelle est la conséquence la PLUS grave de cette pratique ?",
+      "choix": [
+        "Le risque de décharge électrostatique endommageant les disques",
+        "La rupture de la chain of custody : sans stockage dédié, verrouillé et journalisé, la recevabilité des preuves en justice est compromise",
+        "L'encombrement du bureau de l'équipe sécurité",
+        "Le non-respect du schéma interne de classification de l'information"
+      ],
+      "reponse": 1,
+      "explication": "Un evidence storage existe précisément pour préserver la chaîne de custody : stockage dédié et verrouillé, accès journalisé, intégrité démontrable (empreintes). Si n'importe qui a pu toucher les disques sans trace, la partie adverse plaidera l'altération possible et les preuves risquent d'être écartées — un dommage juridique irréversible, bien plus grave que les risques matériels ou documentaires.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Faux : le dommage électrostatique est un risque matériel réel mais accessoire — il n'anéantit pas la valeur juridique de l'ensemble du dossier.",
+        "Correct : sans continuité démontrable de la garde (local dédié, verrouillage, journal d'accès, empreintes), la recevabilité des preuves s'effondre — c'est l'enjeu du evidence storage.",
+        "Faux : l'encombrement est anecdotique — distracteur de confort.",
+        "Faux : l'écart au schéma de classification est une non-conformité interne — sérieuse, mais sans commune mesure avec la perte de valeur probante en justice."
+      ]
+    },
+    {
+      "q": "Un sous-traitant du secteur de la défense doit traiter dans ses locaux de l'information classifiée compartimentée. Le responsable des installations propose d'utiliser la salle serveurs existante, « déjà très sécurisée ». Pourquoi cette proposition est-elle INSUFFISANTE ?",
+      "choix": [
+        "Le traitement d'information compartimentée exige une zone accréditée de type SCIF : enceinte dédiée avec protection contre les émanations (TEMPEST), interdiction des appareils personnels et contrôle d'accès strict — exigences qu'une salle serveurs ordinaire ne satisfait pas",
+        "Une salle serveurs est maintenue trop froide pour y installer des postes de travail",
+        "Il suffirait d'ajouter un lecteur de badge supplémentaire à la salle serveurs",
+        "L'information compartimentée ne peut légalement être traitée que dans des bâtiments gouvernementaux"
+      ],
+      "reponse": 0,
+      "explication": "Une SCIF (Sensitive Compartmented Information Facility) est une zone de travail formellement accréditée pour l'information compartimentée : construction et blindage conformes aux exigences d'émanations (TEMPEST), interdiction des téléphones et appareils personnels, contrôle et journalisation stricts des accès, procédures de visite. Une salle serveurs, même bien protégée, n'est ni conçue ni accréditée pour cela — et un simple badge ne comble pas cet écart.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Correct : l'information compartimentée requiert une installation ACCRÉDITÉE (SCIF) avec exigences spécifiques — blindage TEMPEST, zéro appareil personnel, contrôle strict — hors de portée d'une salle serveurs ordinaire.",
+        "Faux : le confort thermique est un détail d'aménagement, pas l'écart d'exigence en cause.",
+        "Faux : un lecteur de badge ne traite ni les émanations, ni les appareils personnels, ni l'accréditation formelle — piège du contrôle unique trop étroit.",
+        "Faux : des sous-traitants peuvent parfaitement opérer des SCIF accréditées dans leurs propres locaux — l'affirmation est factuellement fausse."
+      ]
+    },
+    {
+      "q": "Au lancement d'un projet de nouveau système RH, l'équipe technique veut passer immédiatement au choix de la plateforme. En tant que responsable sécurité du projet, que devez-vous obtenir EN PREMIER ?",
+      "choix": [
+        "Le budget définitif et le calendrier détaillé du projet",
+        "La liste des correctifs de sécurité à appliquer à la plateforme",
+        "L'expression des besoins des parties prenantes — métier, juridique, RH, sécurité, utilisateurs — dont découleront toutes les exigences, y compris de sécurité",
+        "Le certificat Common Criteria de la plateforme pressentie"
+      ],
+      "reponse": 2,
+      "explication": "La première phase du cycle de vie d'un système d'information est la compréhension des besoins des parties prenantes : sans elle, ni les exigences, ni l'architecture, ni les contrôles de sécurité ne peuvent être définis. Choisir une plateforme ou examiner ses certificats avant d'avoir formalisé les besoins inverse le cycle — le piège du projet piloté par la solution.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Faux : budget et calendrier se consolident une fois le périmètre des besoins connu — les fixer avant, c'est chiffrer l'inconnu.",
+        "Faux : le patching appartient à la phase d'exploitation — totalement prématuré au lancement.",
+        "Correct : les besoins des parties prenantes sont la phase initiale du cycle de vie — tout le reste (exigences, conception, contrôles) en découle.",
+        "Faux : évaluer les certificats d'un produit suppose d'avoir déjà des exigences à comparer — c'est l'étape de sélection, pas de cadrage ; piège de la solution avant le besoin."
+      ]
+    },
+    {
+      "q": "Pendant la phase d'analyse des exigences d'un futur portail client, comment les besoins de sécurité doivent-ils être exprimés ?",
+      "choix": [
+        "Sous forme de choix de produits, par exemple « installer le WAF de l'éditeur X »",
+        "Ils seront précisés après la mise en production, à l'occasion du premier audit",
+        "Uniquement par renvoi aux textes réglementaires applicables",
+        "Comme des exigences formelles, testables et traçables — authentification forte, chiffrement des données, journalisation — au même rang que les exigences fonctionnelles"
+      ],
+      "reponse": 3,
+      "explication": "L'analyse des exigences transforme les besoins en exigences formelles, vérifiables et traçables jusqu'aux tests ; les exigences de sécurité (authentification, chiffrement, journalisation, disponibilité) s'y expriment au même rang que les exigences fonctionnelles. Nommer un produit confond exigence et solution, attendre la production contredit le secure design, et la réglementation n'est qu'un socle minimal.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Faux : « installer tel produit » est une SOLUTION, pas une exigence — le choix d'outillage relève de la conception ; confusion classique besoin/solution.",
+        "Faux : découvrir les exigences de sécurité après la mise en production est l'antithèse de la sécurité par conception — coût de correction maximal.",
+        "Faux : la conformité réglementaire est un plancher — elle ne couvre ni tous les risques métier ni les besoins opérationnels ; réponse trop étroite.",
+        "Correct : des exigences formelles, testables et traçables, au même rang que le fonctionnel, permettront de prescrire puis de vérifier les contrôles tout au long du cycle."
+      ]
+    },
+    {
+      "q": "Un auditeur reproche à un projet d'avoir choisi ses contrôles de sécurité au moment des tests d'acceptation, juste avant la mise en production. D'après le cycle de vie des systèmes d'information, à quelle phase les contrôles de sécurité auraient-ils dû être PRESCRITS ?",
+      "choix": [
+        "Pendant l'exploitation et la maintenance",
+        "Pendant la conception architecturale (architectural design)",
+        "Pendant la vérification et la validation",
+        "Pendant le retrait du système précédent"
+      ],
+      "reponse": 1,
+      "explication": "Le cycle de vie prévoit que les contrôles de sécurité sont prescrits lors de la conception architecturale, pour traiter les risques identifiés à partir des exigences : c'est là qu'ils s'intègrent au moindre coût. La V&V vérifie ensuite que les contrôles prescrits fonctionnent, l'exploitation les opère — les choisir aux tests d'acceptation, c'est les greffer après coup.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Faux : l'exploitation OPÈRE et maintient les contrôles existants — elle ne les définit pas ; trop tard dans le cycle.",
+        "Correct : les contrôles se prescrivent à la conception architecturale, en réponse aux risques identifiés — principe central de l'objectif 3.10 et du secure design.",
+        "Faux : la V&V VÉRIFIE que les contrôles prescrits sont conformes et efficaces — elle contrôle, elle ne conçoit pas ; piège d'inversion des rôles.",
+        "Faux : le retrait clôt la vie de l'ancien système (élimination sécurisée) — sans rapport avec la définition des contrôles du nouveau."
+      ]
+    },
+    {
+      "q": "Pendant la phase de développement d'un nouveau système, quelle pratique intègre le MIEUX la sécurité au fil de l'eau plutôt qu'en fin de projet ?",
+      "choix": [
+        "Des pratiques de codage sécurisé, avec revues de code et analyses statiques intégrées au pipeline de build (démarche shift left)",
+        "Un test d'intrusion unique, réalisé après la mise en production",
+        "La rédaction anticipée du dossier d'exploitation",
+        "Un audit de certification externe préalable à l'écriture du code"
+      ],
+      "reponse": 0,
+      "explication": "Pendant le développement, la sécurité s'exerce en continu : standards de codage sécurisé, revues de code, analyses statiques et tests intégrés au pipeline — c'est la démarche shift left, qui détecte les défauts quand ils coûtent le moins cher à corriger. Un pentest post-production arrive au moment où la correction est la plus coûteuse, et l'on ne certifie pas un produit qui n'existe pas.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Correct : codage sécurisé, revues et analyses statiques dans le pipeline incarnent le shift left — la sécurité s'exerce pendant le développement, défaut par défaut.",
+        "Faux : un pentest unique après la mise en production découvre les défauts au moment où ils coûtent le plus cher — c'est l'inverse du fil de l'eau.",
+        "Faux : le dossier d'exploitation est un livrable de transition — utile, mais ce n'est pas un contrôle de sécurité du développement.",
+        "Faux : on ne peut pas auditer ni certifier un code inexistant — séquence incohérente avec le cycle de vie."
+      ]
+    },
+    {
+      "q": "Lors de la phase d'intégration d'un nouveau module avec l'ERP et l'annuaire existants, quel risque de sécurité est SPÉCIFIQUE à cette phase et doit être examiné en priorité ?",
+      "choix": [
+        "L'usure matérielle des serveurs hébergeant le module",
+        "Le dépassement du budget de licences logicielles",
+        "Les interfaces entre composants : comptes de service sur-privilégiés, flux non chiffrés et hypothèses de confiance implicites entre systèmes",
+        "L'obsolescence du besoin métier initial"
+      ],
+      "reponse": 2,
+      "explication": "L'intégration est la phase où l'on connecte des composants entre eux : c'est là que naissent les interfaces — comptes de service, API, flux de données — et avec elles les défauts typiques : privilèges excessifs accordés « pour que ça marche », échanges non chiffrés, confiance implicite entre systèmes. Chaque interface doit appliquer moindre privilège, authentification mutuelle et chiffrement.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Faux : l'usure matérielle est un sujet de maintenance, présent à toutes les phases — rien de spécifique à l'intégration.",
+        "Faux : le budget de licences est un risque contractuel et financier — hors du champ sécurité de la question.",
+        "Correct : l'intégration crée les interfaces entre systèmes — comptes de service, flux, confiances implicites — le lieu typique des failles de cette phase.",
+        "Faux : l'adéquation au besoin relève de l'analyse des exigences et de la validation — pas de l'intégration ; piège de phase."
+      ]
+    },
+    {
+      "q": "Un nouveau système passe avec succès tous les tests de conformité à ses spécifications, mais lors de la recette les utilisateurs constatent qu'il ne couvre pas leur processus métier réel. Comment qualifier PRÉCISÉMENT la situation ?",
+      "choix": [
+        "La validation a réussi mais la vérification a échoué",
+        "La vérification et la validation ont toutes deux échoué",
+        "Il s'agit d'un simple défaut d'intégration entre composants",
+        "La vérification (conformité aux spécifications) a réussi, mais la validation (adéquation au besoin réel) a échoué"
+      ],
+      "reponse": 3,
+      "explication": "La verification répond à la question « le système est-il construit conformément à ses spécifications ? » — ici oui, tous les tests passent. La validation répond à « le système répond-il au besoin réel ? » — ici non. On retient : verification = build the system right ; validation = build the right system. Le vrai défaut est en amont : des spécifications qui ne reflétaient pas le besoin.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Faux : c'est l'inversion exacte des deux termes — le piège le plus fréquent sur V&V à l'examen.",
+        "Faux : la vérification a bien RÉUSSI puisque le système est conforme à ses spécifications — seul le besoin n'est pas satisfait.",
+        "Faux : l'intégration concerne l'assemblage technique des composants — le problème décrit est l'adéquation au besoin métier, pas la plomberie.",
+        "Correct : conformité aux specs acquise (verification OK) mais besoin réel manqué (validation KO) — build the system right, mais pas the right system."
+      ]
+    },
+    {
+      "q": "Avant la mise en production d'un nouveau système d'information dans une agence gouvernementale, quelle condition formelle doit être remplie lors de la phase de transition ?",
+      "choix": [
+        "La signature du contrat de maintenance matérielle avec le fournisseur",
+        "L'obtention de l'authorization to operate (ATO), par laquelle l'Authorizing Official accepte formellement les risques résiduels",
+        "Le dépôt du code source auprès d'un tiers séquestre",
+        "La formation de la totalité des utilisateurs finaux"
+      ],
+      "reponse": 1,
+      "explication": "La transition vers la production d'un système gouvernemental exige une autorisation formelle d'exploiter : l'ATO, délivrée par l'Authorizing Official après examen du dossier de sécurité, matérialise l'acceptation des risques résiduels. Elle devra être renouvelée après un changement de sécurité majeur, une brèche ou à expiration. Les autres éléments sont utiles mais ne constituent pas le jalon d'autorisation.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Faux : le contrat de maintenance est une disposition contractuelle d'exploitation — pas le jalon formel de sécurité conditionnant la mise en production.",
+        "Correct : l'ATO est l'autorisation officielle d'exploiter — l'Authorizing Official accepte formellement les risques résiduels avant la production.",
+        "Faux : le séquestre du code est une précaution de continuité vis-à-vis du fournisseur — recommandable, mais non bloquante pour la transition.",
+        "Faux : la formation est souhaitable pour l'adoption — mais ce n'est pas la condition d'autorisation formelle exigée ; piège de la bonne pratique non décisive."
+      ]
+    },
+    {
+      "q": "L'éditeur d'un middleware critique pour la production annonce sa fin de support (end-of-support) dans dix-huit mois. En tant que responsable du cycle de vie des systèmes, que faites-vous EN PREMIER ?",
+      "choix": [
+        "Inscrire dès maintenant le jalon end-of-support dans la feuille de route et l'analyse de risque, et planifier la migration ou le remplacement avant l'échéance",
+        "Attendre la date de fin de support pour évaluer les alternatives disponibles",
+        "Acheter un stock de licences supplémentaires tant qu'elles sont commercialisées",
+        "Isoler immédiatement le middleware du réseau de production"
+      ],
+      "reponse": 0,
+      "explication": "La phase d'exploitation et maintenance (sustainment) impose de suivre les jalons de fin de vie : après l'end-of-support, plus aucun correctif de sécurité n'est publié et chaque nouvelle vulnérabilité reste ouverte. La réponse managériale est d'anticiper : inscrire le jalon dans la feuille de route et l'analyse de risque, et planifier la migration avant l'échéance. L'isolement immédiat est disproportionné tant que le support existe.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Correct : anticiper le jalon EOS — feuille de route, analyse de risque, plan de migration avant l'échéance — est le réflexe attendu du gestionnaire de cycle de vie.",
+        "Faux : attendre l'échéance garantit une période d'exposition sans correctifs et une migration sous contrainte — l'inverse de la gestion de cycle de vie.",
+        "Faux : stocker des licences prolonge la dépendance à un produit condamné sans traiter le risque sécurité — réponse d'achat, pas de sécurité.",
+        "Faux : isoler immédiatement un middleware encore supporté et critique pour la production est disproportionné — c'est la mesure compensatoire de dernier recours APRÈS l'échéance, pas la première action."
+      ]
     }
   ],
   "quizEn": [
