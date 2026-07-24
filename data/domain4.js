@@ -424,9 +424,10 @@ window.CISSP_DATA.domains[4] = {
             "Zones très petites, parfois réduites à une seule machine ou un seul serveur",
             "Pare-feux distribués appliqués à l'interface de chaque VM ou conteneur",
             "IDS et IPS déployés au plus près des charges de travail",
-            "Objectif : bloquer les mouvements latéraux, vérifier chaque accès"
+            "Objectif : bloquer les mouvements latéraux, vérifier chaque accès",
+            "Pourquoi ça marche : chaque charge de travail n'autorise que ses flux légitimes ; un rebond non prévu est refusé même avec des identifiants volés"
           ],
-          "narration": "La microsegmentation pousse la logique jusqu'au bout : chaque serveur critique, voire chaque machine virtuelle, devient sa propre zone de sécurité avec ses propres règles. Au lieu d'un pare-feu central, on distribue des pare-feux virtuels directement sur l'interface réseau de chaque charge de travail. C'est la brique technique du Zero Trust : on ne fait confiance à rien, on vérifie l'identité et le contexte de chaque requête avant d'ouvrir l'accès à la micro-zone. Le grand bénéfice, c'est l'arrêt net des mouvements latéraux d'un attaquant.",
+          "narration": "La microsegmentation pousse la logique jusqu'au bout : chaque serveur critique, voire chaque machine virtuelle, devient sa propre zone de sécurité avec ses propres règles. Au lieu d'un pare-feu central, on distribue des pare-feux virtuels directement sur l'interface réseau de chaque charge de travail. C'est la brique technique du Zero Trust : on ne fait confiance à rien, on vérifie l'identité et le contexte de chaque requête avant d'ouvrir l'accès à la micro-zone. Voyons pourquoi cela bloque réellement un attaquant. Supposez qu'il compromette un serveur web et vole des identifiants valides. Dans un réseau à plat, il rebondit ensuite librement vers la base de données, car tout ce qui est à l'intérieur est réputé de confiance. Avec la microsegmentation, la politique de la base n'accepte qu'un flux précis, venant du serveur applicatif et sur un port précis : la connexion du serveur web compromis vers la base ne figure pas dans cette liste, elle est donc rejetée, que les identifiants soient volés ou non. Le mouvement latéral échoue non pas parce qu'on a détecté l'intrus, mais parce que le chemin n'existe tout simplement pas.",
           "astuce": "💡 Conseil examen : si la question associe « limiter le mouvement latéral » et « Zero Trust », pensez microsegmentation."
         },
         {
@@ -580,9 +581,10 @@ window.CISSP_DATA.domains[4] = {
             "WPA3 personal : AES CCMP 128 bits ; WPA3 enterprise : 192 bits",
             "SAE — Simultaneous Authentication of Equals — remplace le PSK",
             "Dragonfly Key Exchange : preuve à divulgation nulle dérivée de Diffie-Hellman",
-            "Protège contre les attaques par dictionnaire hors ligne"
+            "Protège contre les attaques par dictionnaire hors ligne",
+            "Pourquoi ça marche : le handshake WPA2 capturé contient un condensat dérivé de la passphrase, testable hors ligne en masse ; l'échange SAE n'expose aucun vérificateur de ce type"
           ],
-          "narration": "WPA3 est le standard actuel. Sa grande nouveauté est SAE, la Simultaneous Authentication of Equals, qui remplace le mode à clé pré-partagée de WPA2. SAE réalise un échange Dragonfly, dérivé de Diffie-Hellman, sous forme de preuve à divulgation nulle de connaissance : le mot de passe n'est jamais transmis, et un attaquant qui capture l'échange ne peut plus mener d'attaque par dictionnaire hors ligne. La version entreprise de WPA3 monte le chiffrement à cent-quatre-vingt-douze bits.",
+          "narration": "WPA3 est le standard actuel. Sa grande nouveauté est SAE, la Simultaneous Authentication of Equals, qui remplace le mode à clé pré-partagée de WPA2. Pour comprendre pourquoi c'est un vrai progrès, revenons à WPA2 : lorsqu'un attaquant capture sa poignée de main en quatre temps, il récupère un condensat calculé à partir de la passphrase. Il peut alors, tranquillement et sans jamais recontacter le réseau, tester des milliards de mots de passe contre ce condensat jusqu'à trouver le bon. C'est l'attaque par dictionnaire hors ligne. SAE ferme cette porte. Il réalise un échange Dragonfly, dérivé de Diffie-Hellman, sous forme de preuve à divulgation nulle de connaissance : rien de ce qui transite ne permet, après coup, de vérifier une hypothèse de mot de passe. Pour tester un mot de passe, l'attaquant est donc contraint de tenter un nouvel échange en direct avec le point d'accès, qui limite les essais et le repère aussitôt. L'attaque hors ligne devient tout simplement impossible. La version entreprise de WPA3 monte enfin le chiffrement à cent-quatre-vingt-douze bits.",
           "astuce": "💡 Conseil examen : associez WPA3 à SAE et Dragonfly ; c'est la réponse attendue dès qu'on parle d'authentification Wi-Fi moderne sans serveur d'entreprise."
         },
         {
@@ -989,7 +991,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "IP assure l'adressage logique et le routage des paquets, fonctions de la couche 3 (Réseau). La couche 2 manipule les trames et les adresses MAC, la couche 4 gère TCP et UDP, et la couche 5 gère les sessions de dialogue.",
       "difficulte": 1,
       "pourquoi": [
-        "Correct : IP assure l'adressage logique et le routage des paquets, fonctions définies à la couche 3 Réseau.",
+        "IP assure l'adressage logique et le routage des paquets, fonctions définies à la couche 3 Réseau.",
         "Piège de confusion : la couche 2 manipule les trames et les adresses MAC, pas l'adressage logique IP.",
         "Hors sujet : la couche 5 gère l'ouverture et la clôture des dialogues, sans aucun rôle d'adressage.",
         "Piège de voisinage : la couche 4 transporte TCP et UDP au-dessus d'IP, elle ne route pas les paquets."
@@ -1010,7 +1012,7 @@ window.CISSP_DATA.domains[4] = {
         "Piège d'une couche trop haut : le paquet est la PDU de la couche 3 Réseau.",
         "Piège d'une couche trop haut : le segment est la PDU de la couche 4 Transport.",
         "Piège d'une couche trop bas : le bit est l'unité de la couche 1 Physique.",
-        "Correct : la couche Liaison de données encapsule les paquets dans des trames porteuses des adresses MAC."
+        "En effet, la couche Liaison de données encapsule les paquets dans des trames porteuses des adresses MAC."
       ]
     },
     {
@@ -1025,7 +1027,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Le client envoie SYN, le serveur répond SYN-ACK, et le client conclut par ACK : la connexion est établie. Les autres séquences ne respectent pas ce déroulement normalisé, régulièrement testé à l'examen.",
       "difficulte": 1,
       "pourquoi": [
-        "Correct : SYN du client, SYN-ACK du serveur, ACK du client — la séquence normalisée du three-way handshake.",
+        "Réponse juste : SYN du client, SYN-ACK du serveur, ACK du client — la séquence normalisée du three-way handshake.",
         "Ordre faux : le SYN-ACK du serveur précède l'ACK final du client, pas l'inverse.",
         "Ordre inversé : la connexion commence toujours par un SYN du client, jamais par un ACK.",
         "Ordre faux : le SYN-ACK est une réponse, il ne peut pas ouvrir l'échange."
@@ -1045,7 +1047,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Confusion d'attaque : l'ARP poisoning corrompt les tables ARP mais ne modifie jamais l'adresse IP du poste.",
         "Piège de plage : 169.254.0.0/16 n'appartient pas aux plages privées RFC 1918 (10/8, 172.16/12, 192.168/16).",
-        "Correct : la plage 169.254.0.0/16 est l'auto-configuration APIPA adoptée quand aucun serveur DHCP ne répond — symptôme à reconnaître d'emblée.",
+        "Option correcte : la plage 169.254.0.0/16 est l'auto-configuration APIPA adoptée quand aucun serveur DHCP ne répond — symptôme à reconnaître d'emblée.",
         "Confusion de protocole : une adresse en notation décimale pointée est une adresse IPv4, pas IPv6."
       ]
     },
@@ -1062,7 +1064,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 2,
       "pourquoi": [
         "Piège de calcul : 256 est le nombre total d'adresses, sans retirer l'adresse de réseau ni le broadcast.",
-        "Correct : 2 puissance 8 donne 256 adresses, moins l'adresse de réseau et l'adresse de broadcast, soit 254 hôtes utilisables.",
+        "Oui — 2 puissance 8 donne 256 adresses, moins l'adresse de réseau et l'adresse de broadcast, soit 254 hôtes utilisables.",
         "Erreur de masque : 512 correspondrait à un /23, pas à un /24.",
         "Piège de calcul : 255 ne retire qu'une seule des deux adresses réservées."
       ]
@@ -1079,7 +1081,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "L'anycast route la requête vers l'instance la plus proche ou la plus performante, mécanisme au coeur des CDN et du DNS mondial. Le multicast vise un groupe abonné, le broadcast tout le segment, l'unicast un destinataire unique.",
       "difficulte": 1,
       "pourquoi": [
-        "Correct : l'anycast route vers l'instance la plus proche parmi celles partageant l'adresse — le mécanisme des CDN et du DNS racine.",
+        "À retenir : l'anycast route vers l'instance la plus proche parmi celles partageant l'adresse — le mécanisme des CDN et du DNS racine.",
         "Trop étroit : l'unicast vise un destinataire unique et déterminé.",
         "Trop large : le broadcast inonde tout le segment sans notion de proximité.",
         "Piège de proximité : le multicast livre à tous les membres d'un groupe abonné, pas au noeud le plus proche."
@@ -1098,7 +1100,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 2,
       "pourquoi": [
         "Hors rôle : IKE négocie les clés et les Security Associations, il ne protège pas les données elles-mêmes.",
-        "Correct : ESP chiffre la charge utile et apporte ainsi la confidentialité, en plus d'une intégrité et d'une authentification.",
+        "C'est bien cela : ESP chiffre la charge utile et apporte ainsi la confidentialité, en plus d'une intégrité et d'une authentification.",
         "Piège classique : AH fournit intégrité et authentification mais ne chiffre jamais, donc aucune confidentialité.",
         "Hors rôle : la SA n'est que l'enregistrement des paramètres d'une session, pas un mécanisme de protection."
       ]
@@ -1108,7 +1110,7 @@ window.CISSP_DATA.domains[4] = {
       "choix": [
         "Le chiffrement est délégué à TLS au-dessus d'IPsec",
         "Seule la charge utile du paquet est chiffrée, pour des échanges de pair à pair",
-        "Seul l'en-tête est chiffré pour masquer les adresses",
+        "Le paquet d'origine est authentifié mais transmis en clair, sans chiffrement",
         "Le paquet entier, en-tête inclus, est chiffré, typiquement entre deux passerelles"
       ],
       "reponse": 3,
@@ -1117,8 +1119,8 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Confusion de pile : TLS est un protocole distinct, IPsec ne lui délègue rien.",
         "Confusion de mode : ne chiffrer que la charge utile décrit le mode transport, utilisé de pair à pair.",
-        "Option inventée : chiffrer uniquement l'en-tête n'existe dans aucun mode IPsec.",
-        "Correct : le mode tunnel encapsule et chiffre le paquet entier, en-tête compris — le mode des VPN de site à site entre passerelles."
+        "Confusion avec AH : authentifier sans rien chiffrer décrit le comportement d'AH, pas le mode tunnel d'ESP qui chiffre le paquet entier.",
+        "Le mode tunnel encapsule et chiffre le paquet entier, en-tête d'origine compris : c'est précisément le mode des VPN de site à site entre passerelles."
       ]
     },
     {
@@ -1135,7 +1137,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Option inventée : aucune alternance aléatoire d'algorithmes n'est prévue par le protocole.",
         "Idée fausse : le double chiffrement systématique n'existe pas dans TLS et n'apporterait rien.",
-        "Correct : l'asymétrique, lent mais sans secret préalable, négocie une clé de session ; le symétrique, rapide, chiffre ensuite le trafic — c'est la définition du chiffrement hybride.",
+        "L'asymétrique, lent mais sans secret préalable, négocie une clé de session ; le symétrique, rapide, chiffre ensuite le trafic — c'est la définition du chiffrement hybride.",
         "Confusion de service : le hachage assure l'intégrité, il ne chiffre rien, et la compression a été abandonnée."
       ]
     },
@@ -1153,7 +1155,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Obsolète : TLS 1.1 est déprécié conjointement avec TLS 1.0 depuis 2021.",
         "Obsolète : SSL 3.0 est cassé depuis POODLE et totalement proscrit.",
-        "Correct : seuls TLS 1.2 et 1.3 sont considérés comme sûrs, et TLS 1.3 supprime en outre les suites faibles.",
+        "En effet, seuls TLS 1.2 et 1.3 sont considérés comme sûrs, et TLS 1.3 supprime en outre les suites faibles.",
         "Obsolète : TLS 1.0 est officiellement déprécié et interdit par les référentiels comme PCI DSS."
       ]
     },
@@ -1172,7 +1174,7 @@ window.CISSP_DATA.domains[4] = {
         "Hors domaine : DMARC protège la messagerie, pas la résolution DNS.",
         "Piège de périmètre : DoH chiffre le transport des requêtes mais n'authentifie pas le contenu des réponses.",
         "Hors domaine : LDAPS sécurise l'accès à l'annuaire LDAP, sans rapport avec le DNS.",
-        "Correct : DNSSEC signe les enregistrements, permettant au résolveur de vérifier authenticité et intégrité — la parade directe à l'empoisonnement."
+        "Réponse juste : DNSSEC signe les enregistrements, permettant au résolveur de vérifier authenticité et intégrité — la parade directe à l'empoisonnement."
       ]
     },
     {
@@ -1188,7 +1190,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 2,
       "pourquoi": [
         "Hors rôle : S/MIME chiffre et signe le contenu des messages de bout en bout, il ne publie aucune politique de domaine.",
-        "Correct : DMARC s'appuie sur SPF et DKIM et publie la politique de traitement des échecs (none, quarantine, reject) avec des rapports.",
+        "Option correcte : DMARC s'appuie sur SPF et DKIM et publie la politique de traitement des échecs (none, quarantine, reject) avec des rapports.",
         "Hors rôle : IMAPS sécurise la consultation des boîtes, pas l'authentification des domaines émetteurs.",
         "Hors rôle : STARTTLS chiffre le transport SMTP, sans lien avec SPF ou DKIM."
       ]
@@ -1205,7 +1207,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Le PAT traduit aussi le port source, ce qui permet à de nombreux clients internes de partager une seule adresse IP publique ; le NAT traduit les adresses sans toucher aux ports (un pour un ou plusieurs vers un pool). Les deux masquent également les adresses internes, les deux opèrent sur les en-têtes IP et transport (jamais en couche 7), et c'est précisément le PAT qui économise les adresses publiques, pas l'inverse.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : le PAT traduit aussi le port source, ce qui multiplexe de nombreux clients internes derrière une seule adresse publique — la vraie différence.",
+        "Oui — le PAT traduit aussi le port source, ce qui multiplexe de nombreux clients internes derrière une seule adresse publique — la vraie différence.",
         "Confusion de couches : NAT et PAT travaillent tous deux sur les en-têtes IP et transport, jamais en couche 7.",
         "Inversion : c'est justement le PAT qui économise les adresses publiques en les partageant, pas l'inverse.",
         "Faux point de différence : NAT comme PAT masquent tous deux les adresses internes derrière l'adresse traduite."
@@ -1225,8 +1227,8 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Trop bas : la couche 1 concerne les supports physiques, pas l'étiquetage logique des trames.",
         "Piège de voisinage : la couche 3 est celle du routage inter-VLAN et des VRF, pas du VLAN lui-même.",
-        "Hors sujet : la couche 7 traite le contenu applicatif, sans rôle de segmentation réseau.",
-        "Correct : le VLAN est une segmentation imposée par les switches sur les trames en couche 2 ; passer d'un VLAN à l'autre exige un routage de couche 3."
+        "Sans lien ici : la couche 7 traite le contenu applicatif, sans rôle de segmentation réseau.",
+        "À retenir : le VLAN est une segmentation imposée par les switches sur les trames en couche 2 ; passer d'un VLAN à l'autre exige un routage de couche 3."
       ]
     },
     {
@@ -1241,7 +1243,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "En découpant le réseau en zones minuscules avec des politiques propres, la microsegmentation confine une compromission et bloque la progression latérale, ce qui en fait un pilier du Zero Trust. Elle multiplie au contraire le nombre de politiques à gérer (d'où l'importance de l'automatisation), reste une isolation logique et non physique, et applique des règles de filtrage sans faire de détection d'intrusion, rôle d'un IDS/IPS.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : en confinant chaque zone avec ses propres politiques, elle bloque le mouvement latéral d'un attaquant — le bénéfice central recherché par le Zero Trust.",
+        "C'est bien cela : en confinant chaque zone avec ses propres politiques, elle bloque le mouvement latéral d'un attaquant — le bénéfice central recherché par le Zero Trust.",
         "Inversion : la microsegmentation multiplie les politiques à maintenir, elle ne simplifie pas l'administration.",
         "Confusion de fonction : elle filtre les flux mais ne fait pas de détection par signatures, rôle d'un IDS/IPS.",
         "Confusion de nature : la microsegmentation est une isolation logique et distribuée, pas une séparation physique par commutateur."
@@ -1257,10 +1259,10 @@ window.CISSP_DATA.domains[4] = {
       ],
       "reponse": 1,
       "explication": "L'interface northbound relie le contrôleur SDN aux applications et à l'orchestration au-dessus de lui ; l'interface southbound le relie aux équipements du plan de données en dessous. East-west décrit des flux de trafic entre serveurs, pas une interface SDN.",
-      "difficulte": 3,
+      "difficulte": 2,
       "pourquoi": [
         "Confusion de vocabulaire : east-west décrit des flux de trafic entre serveurs, pas une interface SDN.",
-        "Correct : l'interface northbound expose le contrôleur aux applications et à l'orchestration situées au-dessus de lui.",
+        "L'interface northbound expose le contrôleur aux applications et à l'orchestration situées au-dessus de lui.",
         "Inversion : l'interface southbound relie le contrôleur aux équipements du plan de données, en dessous de lui.",
         "Option vague : le plan de management supervise l'infrastructure mais ne désigne pas cette interface."
       ]
@@ -1275,11 +1277,11 @@ window.CISSP_DATA.domains[4] = {
       ],
       "reponse": 2,
       "explication": "VXLAN encapsule les trames de couche 2 dans des paquets de couche 3, étirant les segments à travers sous-réseaux et sites, avec un espace d'environ 16 millions d'identifiants contre 4096 pour les VLANs classiques. MPLS commute par labels et GRE est une encapsulation générique sans cet espace d'adressage de segments.",
-      "difficulte": 3,
+      "difficulte": 2,
       "pourquoi": [
         "Trop générique : GRE encapsule sans notion d'identifiants de segments à cette échelle.",
         "Trop limité : le VLAN 802.1Q reste confiné à la couche 2 locale et plafonne à 4096 identifiants.",
-        "Correct : VXLAN encapsule les trames de couche 2 dans des paquets de couche 3 et offre environ 16 millions de segments.",
+        "En effet, VXLAN encapsule les trames de couche 2 dans des paquets de couche 3 et offre environ 16 millions de segments.",
         "Confusion de rôle : MPLS commute par labels pour l'ingénierie de trafic, il n'étend pas des segments L2 avec cet espace d'identifiants."
       ]
     },
@@ -1297,8 +1299,8 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Trop étroit : l'ingress ne décrit que le trafic entrant dans un réseau.",
         "Inversion : le trafic north-south entre et sort du datacenter vers les clients et Internet.",
-        "Correct : east-west désigne les flux latéraux entre serveurs, stockage et applications au sein du datacenter — la cible de la microsegmentation.",
-        "Hors sujet : le backhaul désigne les liaisons de collecte vers un coeur de réseau."
+        "Réponse juste : east-west désigne les flux latéraux entre serveurs, stockage et applications au sein du datacenter — la cible de la microsegmentation.",
+        "À côté du sujet : le backhaul désigne les liaisons de collecte vers un coeur de réseau."
       ]
     },
     {
@@ -1313,7 +1315,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Les deux modes de WPA2 utilisent AES-CCMP ; ce qui change, c'est l'authentification : le mode personal repose sur une clé pré-partagée commune, le mode enterprise sur 802.1X/EAP avec un serveur d'authentification et des comptes individuels. Le 192 bits est propre à WPA3 enterprise, et masquer le SSID n'est pas une mesure d'authentification.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : le mode enterprise remplace la clé pré-partagée commune par 802.1X/EAP avec serveur d'authentification et identifiants individuels — traçabilité et révocation par utilisateur.",
+        "Option correcte : le mode enterprise remplace la clé pré-partagée commune par 802.1X/EAP avec serveur d'authentification et identifiants individuels — traçabilité et révocation par utilisateur.",
         "Faux point de différence : les deux modes de WPA2 utilisent AES-CCMP ; RC4 appartient au passé de WEP/WPA.",
         "Confusion de version : le chiffrement 192 bits est une option de WPA3 enterprise, pas de WPA2.",
         "Mesure cosmétique : masquer le SSID n'authentifie personne et se contourne par simple écoute radio."
@@ -1334,7 +1336,7 @@ window.CISSP_DATA.domains[4] = {
         "Faux : le WPS n'impose pas TKIP ; le problème est l'authentification du PIN, pas le chiffrement.",
         "Faux : le WPS ne diffuse jamais la clé en clair, sa faiblesse est structurelle, pas une fuite directe.",
         "Faux : le WPS n'affecte pas le chiffrement AES du réseau.",
-        "Correct : le PIN de 8 chiffres est validé en deux moitiés, réduisant l'espace de recherche à environ 11 000 essais, souvent sans verrouillage — le brute-force devient réaliste."
+        "Oui — le PIN de 8 chiffres est validé en deux moitiés, réduisant l'espace de recherche à environ 11 000 essais, souvent sans verrouillage — le brute-force devient réaliste."
       ]
     },
     {
@@ -1350,7 +1352,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 1,
       "pourquoi": [
         "Hors technologie : le bluesnarfing est un vol de données via Bluetooth, pas une usurpation Wi-Fi.",
-        "Correct : un point d'accès pirate imitant le SSID légitime pour capter les connexions est la définition de l'evil twin.",
+        "À retenir : un point d'accès pirate imitant le SSID légitime pour capter les connexions est la définition de l'evil twin.",
         "Hors catégorie : le teardrop est un déni de service par fragmentation, sans usurpation d'identité réseau.",
         "Hors technologie : le VLAN hopping vise les réseaux commutés filaires, pas le Wi-Fi."
       ]
@@ -1369,7 +1371,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Trop limité : le bluesnarfing vole des données mais ne pilote pas l'appareil.",
         "Trop bénin : le bluejacking se limite à l'envoi de messages non sollicités.",
-        "Correct : le bluebugging donne le contrôle de l'appareil, jusqu'à l'écoute des appels — le niveau d'attaque Bluetooth le plus grave.",
+        "C'est bien cela : le bluebugging donne le contrôle de l'appareil, jusqu'à l'écoute des appels — le niveau d'attaque Bluetooth le plus grave.",
         "Trop passif : le bluesniffing n'est que de l'écoute, sans prise de contrôle."
       ]
     },
@@ -1388,7 +1390,7 @@ window.CISSP_DATA.domains[4] = {
         "Hors catégorie : le wardriving est de la reconnaissance passive, il ne déconnecte personne.",
         "Confusion d'objectif : les attaques IV visent le chiffrement WEP, pas la déconnexion des clients.",
         "Hors technologie : le CAM flooding sature la table MAC d'un switch filaire.",
-        "Correct : la désassociation abuse des trames de gestion 802.11 pour déconnecter les clients, souvent afin de les rabattre vers un evil twin ou de forcer un handshake à capturer."
+        "La désassociation abuse des trames de gestion 802.11 pour déconnecter les clients, souvent afin de les rabattre vers un evil twin ou de forcer un handshake à capturer."
       ]
     },
     {
@@ -1403,7 +1405,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "C'est l'empoisonnement ARP : en corrompant les tables ARP des victimes, l'attaquant détourne vers lui le trafic destiné à la passerelle, position idéale pour une attaque on-path. Le DNS poisoning corrompt la résolution de noms, l'IP spoofing usurpe une adresse source, et le smurf est un déni de service par amplification ICMP.",
       "difficulte": 1,
       "pourquoi": [
-        "Correct : diffuser de fausses réponses ARP pour associer sa MAC à l'IP de la passerelle est l'empoisonnement ARP, position idéale pour une attaque on-path.",
+        "En effet, diffuser de fausses réponses ARP pour associer sa MAC à l'IP de la passerelle est l'empoisonnement ARP, position idéale pour une attaque on-path.",
         "Confusion de service : le DNS poisoning corrompt la résolution de noms, pas les tables ARP locales.",
         "Trop générique : l'IP spoofing usurpe une adresse source sans corrompre l'association IP-MAC des victimes.",
         "Hors catégorie : le smurf est un déni de service par amplification ICMP."
@@ -1422,7 +1424,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 2,
       "pourquoi": [
         "Hors technologie : le SSID concerne le Wi-Fi, pas la commutation filaire.",
-        "Correct : le port security limite le nombre d'adresses MAC apprises par port et bloque les violations, neutralisant la saturation de la table CAM.",
+        "Réponse juste : le port security limite le nombre d'adresses MAC apprises par port et bloque les violations, neutralisant la saturation de la table CAM.",
         "Inefficace : l'adressage IP statique n'empêche pas le switch d'apprendre des adresses MAC forgées.",
         "Hors couche : le WAF protège les applications web, il ne voit pas les trames Ethernet."
       ]
@@ -1439,7 +1441,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Le pare-feu stateful maintient une table des connexions : il sait qu'un paquet entrant répond à une requête légitime sortante. Le stateless évalue chaque paquet isolément selon adresses et ports, sans mémoire. L'inspection applicative de couche 7 est l'apanage des NGFW et des WAF, les deux types filtrent dans les deux sens, et l'authentification des utilisateurs relève d'un NAC ou d'un proxy authentifiant, pas du suivi d'état.",
       "difficulte": 1,
       "pourquoi": [
-        "Correct : le stateful maintient une table des connexions et évalue chaque paquet dans le contexte de sa session, là où le stateless juge chaque paquet isolément.",
+        "Option correcte : le stateful maintient une table des connexions et évalue chaque paquet dans le contexte de sa session, là où le stateless juge chaque paquet isolément.",
         "Faux point de différence : les deux types filtrent le trafic dans les deux sens selon leurs règles.",
         "Confusion d'équipement : l'inspection du contenu applicatif est le propre des NGFW et des WAF, pas du pare-feu stateful classique.",
         "Confusion de fonction : l'authentification des utilisateurs relève d'un NAC ou d'un proxy authentifiant, pas du suivi d'état."
@@ -1458,9 +1460,9 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 1,
       "pourquoi": [
         "Inversion : le forward proxy sert les clients internes vers l'extérieur, pas les serveurs.",
-        "Correct : le reverse proxy s'interpose devant les serveurs — répartition de charge, terminaison TLS et masquage du backend.",
+        "Oui — le reverse proxy s'interpose devant les serveurs — répartition de charge, terminaison TLS et masquage du backend.",
         "Trop générique : SOCKS est un protocole de proxy côté client, sans rôle de publication de serveurs.",
-        "Hors sujet : le proxy transparent intercepte les clients sans configuration, côté sortie."
+        "Ce n'est pas la question : le proxy transparent intercepte les clients sans configuration, côté sortie."
       ]
     },
     {
@@ -1478,7 +1480,7 @@ window.CISSP_DATA.domains[4] = {
         "Confusion de rôle : un IDS détecte des attaques mais ne conditionne pas l'admission au réseau.",
         "Hors phase : la postadmission contrôle l'activité après l'accès, elle ne vérifie rien avant.",
         "Insuffisant : un portail captif sans authentification n'évalue ni identité ni conformité.",
-        "Correct : la philosophie preadmission conditionne l'accès à une évaluation de posture préalable — patchs, antivirus, configuration."
+        "À retenir : la philosophie preadmission conditionne l'accès à une évaluation de posture préalable — patchs, antivirus, configuration."
       ]
     },
     {
@@ -1495,7 +1497,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Inversion : c'est le full tunnel qui fait transiter tout le trafic Internet par le concentrateur, le split l'en soulage.",
         "Hors sujet : la ré-authentification au changement de réseau n'est pas une caractéristique du split tunneling.",
-        "Correct : le poste, connecté à la fois à Internet en direct et au réseau interne, échappe aux contrôles de l'organisation et peut servir de pont à un attaquant.",
+        "C'est bien cela : le poste, connecté à la fois à Internet en direct et au réseau interne, échappe aux contrôles de l'organisation et peut servir de pont à un attaquant.",
         "Faux : le tunnel VPN lui-même reste chiffré ; le split tunneling ne dégrade pas la cryptographie."
       ]
     },
@@ -1514,7 +1516,7 @@ window.CISSP_DATA.domains[4] = {
         "Hors domaine : DKIM authentifie les emails ; IPsec pourrait chiffrer mais n'est pas le mécanisme dédié aux média VoIP.",
         "Confusion de rôle : SNMP supervise les équipements et RTP seul ne chiffre rien.",
         "Hors domaine : S/MIME protège la messagerie, pas la signalisation téléphonique.",
-        "Correct : SIPS protège la signalisation SIP par TLS et SRTP chiffre et authentifie les flux média — le couple standard de la VoIP sécurisée."
+        "SIPS protège la signalisation SIP par TLS et SRTP chiffre et authentifie les flux média — le couple standard de la VoIP sécurisée."
       ]
     },
     {
@@ -1527,10 +1529,10 @@ window.CISSP_DATA.domains[4] = {
       ],
       "reponse": 1,
       "explication": "L'ISA est la déclaration formelle de la posture de sécurité, des risques et des exigences techniques d'une interconnexion entre deux infrastructures. Le MOU n'exprime qu'une intention d'alignement, le SLA porte sur les niveaux de service, et la NDA sur la confidentialité des informations échangées.",
-      "difficulte": 3,
+      "difficulte": 2,
       "pourquoi": [
         "Trop faible : le MOU n'exprime qu'une intention d'alignement, sans exigences techniques opposables.",
-        "Correct : l'ISA formalise la posture de sécurité, les risques et les exigences techniques précises d'une interconnexion de réseaux.",
+        "En effet, l'ISA formalise la posture de sécurité, les risques et les exigences techniques précises d'une interconnexion de réseaux.",
         "Trop étroit : la NDA ne couvre que la confidentialité des informations échangées.",
         "Hors périmètre : le SLA porte sur les niveaux de service, pas sur les contrôles de sécurité du lien."
       ]
@@ -1548,8 +1550,8 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 3,
       "pourquoi": [
         "Insuffisant : le round-robin DNS répartit sans détection de panne fiable ni garantie de capacité.",
-        "Hors sujet : l'anycast optimise la proximité, sans promesse de capacité constante.",
-        "Correct : en active-passive, le secondaire dormant prend le relais ; la capacité servie reste celle d'un seul noeud, donc constante avant comme après l'incident.",
+        "Sans lien ici : l'anycast optimise la proximité, sans promesse de capacité constante.",
+        "Réponse juste : en active-passive, le secondaire dormant prend le relais ; la capacité servie reste celle d'un seul noeud, donc constante avant comme après l'incident.",
         "Piège séduisant : l'active-active exploite tous les noeuds mais perd de la capacité dès qu'un noeud tombe."
       ]
     },
@@ -1565,7 +1567,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "La fibre transmet de la lumière : pas d'émissions électromagnétiques exploitables, immunité aux interférences, et une écoute clandestine exige une intervention physique détectable. L'absence de diaphonie est réelle mais ne garantit pas à elle seule la confidentialité (seul le chiffrement le fait), la localisation d'une coupure n'empêche pas le sabotage, et aucun support de transmission n'authentifie quoi que ce soit par lui-même.",
       "difficulte": 1,
       "pourquoi": [
-        "Correct : la fibre n'émet pas de rayonnement électromagnétique exploitable et son écoute exige une intervention physique détectable — l'avantage de sécurité décisif sur le cuivre.",
+        "Option correcte : la fibre n'émet pas de rayonnement électromagnétique exploitable et son écoute exige une intervention physique détectable — l'avantage de sécurité décisif sur le cuivre.",
         "Confusion de fonction : aucun support de transmission n'authentifie les équipements ; c'est le rôle de 802.1X ou des certificats.",
         "Absolu : localiser une coupure n'a jamais rendu le sabotage impossible.",
         "Sur-extension : l'absence de diaphonie est réelle mais ne garantit pas la confidentialité — seul le chiffrement le fait."
@@ -1581,12 +1583,12 @@ window.CISSP_DATA.domains[4] = {
       ],
       "reponse": 3,
       "explication": "Le mode cut-through relaie la trame dès la lecture de l'adresse de destination : latence minimale mais aucune vérification d'erreur. Le store-and-forward attend la trame complète et contrôle les erreurs ; le fragment-free vérifie les 64 premiers octets, un compromis ; le token passing est une méthode d'accès au support, pas un mode de commutation.",
-      "difficulte": 3,
+      "difficulte": 2,
       "pourquoi": [
         "Piège intermédiaire : le fragment-free vérifie les 64 premiers octets, ce n'est pas une transmission immédiate.",
         "Hors catégorie : le token passing est une méthode d'accès au support, pas un mode de commutation.",
         "Inversion : le store-and-forward attend la trame complète et vérifie les erreurs avant de transmettre.",
-        "Correct : le cut-through relaie dès la lecture de l'adresse de destination — latence minimale, aucune vérification d'erreur."
+        "Oui — le cut-through relaie dès la lecture de l'adresse de destination — latence minimale, aucune vérification d'erreur."
       ]
     },
     {
@@ -1601,7 +1603,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Le chiffrement cellulaire s'arrête souvent à l'antenne et des tours peuvent être simulées pour des attaques on-path : la posture correcte est de traiter le réseau de l'opérateur comme non fiable et de chiffrer au-dessus, via TLS ou VPN. Interdire les mobiles est disproportionné, et la 5G améliore mais ne supprime pas le besoin de chiffrement applicatif.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : traiter le réseau d'opérateur comme non fiable et chiffrer de bout en bout (TLS, VPN) protège quel que soit le maillon compromis — le réflexe managérial attendu.",
+        "À retenir : traiter le réseau d'opérateur comme non fiable et chiffrer de bout en bout (TLS, VPN) protège quel que soit le maillon compromis — le réflexe managérial attendu.",
         "Trop étroit : le chiffrement radio s'arrête à l'antenne et de fausses tours peuvent s'interposer.",
         "Disproportionné : interdire les mobiles professionnels sacrifie le métier au lieu de traiter le risque.",
         "Faux sentiment de sécurité : la 5G améliore la protection mais ne dispense pas du chiffrement applicatif."
@@ -1621,14 +1623,14 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Confusion de mode : NFS est un partage de fichiers, pas un protocole de stockage en mode bloc.",
         "Hors catégorie : MPLS est une technique de commutation par labels, pas un protocole de stockage.",
-        "Correct : iSCSI encapsule les commandes SCSI dans TCP/IP et bâtit un SAN économique sur le réseau IP existant — la réponse à la contrainte budgétaire posée.",
+        "C'est bien cela : iSCSI encapsule les commandes SCSI dans TCP/IP et bâtit un SAN économique sur le réseau IP existant — la réponse à la contrainte budgétaire posée.",
         "Contresens : FCoE exige précisément une infrastructure Ethernet dédiée et du matériel compatible Fibre Channel."
       ]
     },
     {
       "q": "Quelle affirmation décrit le MIEUX FCoE (Fibre Channel over Ethernet) ?",
       "choix": [
-        "Il remplace le MPLS pour l'interconnexion des sites distants sur le réseau étendu",
+        "Il fonctionne sur n'importe quel commutateur Ethernet standard, sans exigence de réseau sans perte",
         "Il encapsule les trames Fibre Channel dans de l'Ethernet de couche 2, sur un réseau à 10 Gbps",
         "Il encapsule les commandes SCSI dans TCP/IP et traverse sans peine les routeurs IP standard actuels",
         "Il chiffre nativement tout le trafic de stockage à l'aide du protocole TLS"
@@ -1637,8 +1639,8 @@ window.CISSP_DATA.domains[4] = {
       "explication": "FCoE fait converger le stockage Fibre Channel sur l'infrastructure Ethernet : les trames Fibre Channel sont encapsulées en couche 2, ce qui exige un réseau haut débit (10 Gbps minimum) et ne traverse pas nativement les routeurs IP. C'est iSCSI qui encapsule SCSI dans TCP/IP ; ni l'un ni l'autre ne chiffre nativement, et FCoE n'a aucun rapport avec MPLS.",
       "difficulte": 3,
       "pourquoi": [
-        "Hors sujet : FCoE est un protocole de stockage, sans rapport avec l'interconnexion MPLS de sites.",
-        "Correct : FCoE encapsule les trames Fibre Channel dans Ethernet en couche 2, exige un réseau sans perte à 10 Gbps minimum et ne se route pas nativement en IP.",
+        "Faux : FCoE réclame au contraire un réseau Ethernet sans perte (Data Center Bridging) à haut débit, pas un commutateur ordinaire.",
+        "C'est bien cela : FCoE encapsule les trames Fibre Channel dans Ethernet en couche 2, exige un réseau sans perte à 10 Gbps minimum et ne se route pas nativement en IP.",
         "Confusion avec iSCSI : c'est iSCSI qui encapsule SCSI dans TCP/IP et traverse les routeurs.",
         "Faux : FCoE n'embarque aucun chiffrement natif ; la sécurité repose sur l'isolement du fabric."
       ]
@@ -1657,7 +1659,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Confusion de méthode : les certificats des deux côtés décrivent EAP-TLS, pas CHAP.",
         "Confusion de protocole : le framework multi-méthodes est EAP, pas CHAP.",
-        "Correct : l'échange challenge-response de CHAP évite toute transmission du mot de passe et ré-authentifie périodiquement — l'avantage décisif sur PAP qui envoie tout en clair.",
+        "L'échange challenge-response de CHAP évite toute transmission du mot de passe et ré-authentifie périodiquement — l'avantage décisif sur PAP qui envoie tout en clair.",
         "Sur-promesse : CHAP authentifie mais ne chiffre pas la session de données."
       ]
     },
@@ -1674,7 +1676,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 2,
       "pourquoi": [
         "Trop restrictif : EAP s'utilise aussi sur le filaire avec 802.1X et sur les liens VPN.",
-        "Correct : EAP est un framework extensible où se branchent EAP-TLS, PEAP, cartes à puce ou OTP.",
+        "En effet, EAP est un framework extensible où se branchent EAP-TLS, PEAP, cartes à puce ou OTP.",
         "Contresens : transmettre en clair décrit PAP ; EAP délègue la protection à la méthode choisie.",
         "Trop étroit : EAP n'est pas une méthode par mot de passe, c'est un cadre qui en accueille beaucoup."
       ]
@@ -1691,9 +1693,9 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Modbus et DNP3 ont été conçus sans sécurité et ne peuvent généralement pas être corrigés ni remplacés sur des équipements industriels : la réponse architecturale est l'isolement et la segmentation stricte des réseaux OT, organisés en zones selon le modèle Purdue, avec des passerelles contrôlées vers l'IT. Les automates ne supportent pas d'antivirus, le remplacement protocolaire est irréaliste, et WPA3 ne concerne que le Wi-Fi.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : quand les protocoles ne peuvent être ni corrigés ni remplacés, la réponse architecturale est l'isolement et la segmentation stricte du réseau OT selon le modèle Purdue.",
+        "Réponse juste : quand les protocoles ne peuvent être ni corrigés ni remplacés, la réponse architecturale est l'isolement et la segmentation stricte du réseau OT selon le modèle Purdue.",
         "Irréaliste : les automates industriels ne supportent généralement pas d'antivirus.",
-        "Hors sujet : WPA3 ne concerne que le Wi-Fi, pas les bus industriels filaires.",
+        "À côté du sujet : WPA3 ne concerne que le Wi-Fi, pas les bus industriels filaires.",
         "Irréaliste : remplacer les protocoles industriels sur des équipements en production est rarement possible."
       ]
     },
@@ -1712,7 +1714,7 @@ window.CISSP_DATA.domains[4] = {
         "Éliminé par le scénario : le transport fonctionne puisque la connexion par IP aboutit.",
         "Éliminé par le scénario : l'accès par IP fonctionne, donc le routage de couche 3 est opérationnel.",
         "Éliminé par le scénario : la liaison locale fonctionne, sinon rien ne passerait.",
-        "Correct : ce qui échoue est la résolution de noms, service DNS de la couche 7 Application — raisonnement par élimination des couches qui fonctionnent."
+        "Option correcte : ce qui échoue est la résolution de noms, service DNS de la couche 7 Application — raisonnement par élimination des couches qui fonctionnent."
       ]
     },
     {
@@ -1728,9 +1730,9 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 3,
       "pourquoi": [
         "Trop haut dans la pile : la table de routage n'altère pas les trames au niveau binaire.",
-        "Hors sujet : une ACL bloque ou autorise, elle ne corrompt pas les trames.",
+        "Ce n'est pas la question : une ACL bloque ou autorise, elle ne corrompt pas les trames.",
         "Hors sujet : le DHCP attribue des adresses, sans influence sur l'intégrité des trames.",
-        "Correct : les erreurs FCS trahissent presque toujours un défaut de couche 1 — câble, connectique, interférences ; le dépannage part du bas de la pile."
+        "Oui — les erreurs FCS trahissent presque toujours un défaut de couche 1 — câble, connectique, interférences ; le dépannage part du bas de la pile."
       ]
     },
     {
@@ -1747,7 +1749,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Trop bas : un répartiteur de couche 4 s'arrête aux ports TCP/UDP et ne distingue pas /api de /images.",
         "Hors rôle : la couche 5 gère les sessions, pas le contenu HTTP.",
-        "Correct : lire l'URL exige d'inspecter le contenu HTTP, donc une décision de couche 7 — c'est un load balancer applicatif.",
+        "À retenir : lire l'URL exige d'inspecter le contenu HTTP, donc une décision de couche 7 — c'est un load balancer applicatif.",
         "Trop bas : la couche 3 ne voit que les adresses IP, jamais les URL."
       ]
     },
@@ -1764,7 +1766,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 1,
       "pourquoi": [
         "Trop bas : la couche 2 manipule les adresses MAC, pas les ports.",
-        "Correct : les numéros de port sont des champs des en-têtes TCP et UDP, protocoles de la couche 4 Transport.",
+        "C'est bien cela : les numéros de port sont des champs des en-têtes TCP et UDP, protocoles de la couche 4 Transport.",
         "Piège d'association : on relie un port à une application, mais le champ lui-même appartient au transport, pas à la couche 7.",
         "Trop bas : la couche 3 traite les adresses IP, pas les ports."
       ]
@@ -1781,7 +1783,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Une adresse IPv6 fait 128 bits, notée en huit groupes hexadécimaux, contre 32 bits pour IPv4. Cet espace d'adressage colossal supprime le besoin structurel de NAT. Les 64 bits correspondent souvent à la partie préfixe ou identifiant d'interface, mais l'adresse complète fait bien 128 bits.",
       "difficulte": 1,
       "pourquoi": [
-        "Correct : une adresse IPv6 fait 128 bits, notée en huit groupes hexadécimaux.",
+        "Une adresse IPv6 fait 128 bits, notée en huit groupes hexadécimaux.",
         "Invention : aucune version d'IP n'utilise d'adresses de 256 bits.",
         "Piège partiel : 64 bits n'est que la taille usuelle du préfixe ou de l'identifiant d'interface.",
         "Confusion avec IPv4 : 32 bits est la taille d'une adresse IPv4."
@@ -1801,7 +1803,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Techniquement vrai mais gérable : la rotation d'adresses SLAAC se traite par la journalisation des baux et tables de voisinage, ce n'est pas le risque principal.",
         "Confusion classique : sans NAT, l'exposition d'adresses n'équivaut pas à une joignabilité ; c'est le pare-feu qui contrôle les accès.",
-        "Correct : un protocole actif mais ignoré des pare-feux et IDS est un canal de contournement et d'exfiltration invisible — il faut le contrôler ou le désactiver explicitement.",
+        "En effet, un protocole actif mais ignoré des pare-feux et IDS est un canal de contournement et d'exfiltration invisible — il faut le contrôler ou le désactiver explicitement.",
         "Rationalisation dangereuse : les systèmes modernes préfèrent au contraire IPv6 dès qu'il est disponible."
       ]
     },
@@ -1820,7 +1822,7 @@ window.CISSP_DATA.domains[4] = {
         "Invention : Teredo n'expose pas les adresses MAC internes sur Internet.",
         "Invention : Teredo n'a aucune interaction avec la négociation TLS.",
         "Hors sujet sécurité : la lenteur éventuelle est un enjeu de performance, pas le risque posé.",
-        "Correct : Teredo encapsule IPv6 dans UDP pour traverser les NAT, créant un tunnel que les équipements configurés pour IPv4 n'inspectent pas."
+        "Réponse juste : Teredo encapsule IPv6 dans UDP pour traverser les NAT, créant un tunnel que les équipements configurés pour IPv4 n'inspectent pas."
       ]
     },
     {
@@ -1836,7 +1838,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 3,
       "pourquoi": [
         "Confusion de protocole : IGMP gère les groupes multicast IPv4.",
-        "Correct : NDP sur ICMPv6 remplace ARP et se protège par RA Guard contre les faux Router Advertisements, et par SEND.",
+        "Option correcte : NDP sur ICMPv6 remplace ARP et se protège par RA Guard contre les faux Router Advertisements, et par SEND.",
         "Hors catégorie : OSPFv3 est un protocole de routage, pas de découverte de voisins.",
         "Confusion de rôle : DHCPv6 attribue des adresses ; le port security limite les MAC, sans lien avec la découverte de voisins."
       ]
@@ -1853,7 +1855,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "IPv6 n'a pas d'adresse de broadcast : les fonctions équivalentes reposent sur des groupes multicast bien définis (tous les noeuds, tous les routeurs), ce qui réduit le bruit sur le réseau. Le NAT devient au contraire inutile grâce à l'immensité de l'espace d'adressage, le support d'IPsec est intégré à la conception d'IPv6, et les adresses font 128 bits.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : IPv6 supprime le broadcast et le remplace par des groupes multicast bien définis, réduisant le bruit réseau.",
+        "Oui — IPv6 supprime le broadcast et le remplace par des groupes multicast bien définis, réduisant le bruit réseau.",
         "Inversion : l'immensité de l'espace d'adressage rend le NAT structurellement inutile.",
         "Erreur de taille : les adresses IPv6 font 128 bits, pas 64.",
         "Contresens : le support d'IPsec est intégré à la conception d'IPv6."
@@ -1872,7 +1874,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 3,
       "pourquoi": [
         "Inversion : ce sont plutôt les vieux navigateurs qui posent problème avec les suites modernes.",
-        "Correct : les clés éphémères d'ECDHE assurent la forward secrecy — la compromission future de la clé privée ne déchiffre pas les sessions passées capturées.",
+        "À retenir : les clés éphémères d'ECDHE assurent la forward secrecy — la compromission future de la clé privée ne déchiffre pas les sessions passées capturées.",
         "Confusion de rôle : le chiffrement des données de session reste symétrique ; ECDHE ne l'accélère pas.",
         "Faux : le certificat serveur reste indispensable pour authentifier le serveur."
       ]
@@ -1889,9 +1891,9 @@ window.CISSP_DATA.domains[4] = {
       "explication": "IKE automatise la négociation : la phase 1 authentifie les pairs et établit un canal de gestion sécurisé (IKE SA), la phase 2 négocie les SA IPsec qui protégeront réellement le trafic, avec les algorithmes et les clés. Le chiffrement des données est ensuite assuré par ESP, l'intégrité de l'en-tête par AH ; IKE ne chiffre pas les données utilisateur lui-même.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : IKE négocie les Security Associations et établit les clés — phase 1 pour le canal sécurisé, phase 2 pour les SA IPsec du trafic réel.",
+        "C'est bien cela : IKE négocie les Security Associations et établit les clés — phase 1 pour le canal sécurisé, phase 2 pour les SA IPsec du trafic réel.",
         "Confusion de rôle : le chiffrement des données utilisateur est assuré par ESP, pas par IKE.",
-        "Hors sujet : la compression n'est pas la fonction d'IKE.",
+        "Sans lien ici : la compression n'est pas la fonction d'IKE.",
         "Confusion de composant : l'intégrité de l'en-tête IP est le rôle d'AH."
       ]
     },
@@ -1909,8 +1911,8 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Faux : AH fonctionne aussi bien en IPv4 qu'en IPv6.",
         "Erreur factuelle : IKE utilise UDP 500, pas TCP, et le problème n'est pas un port bloqué.",
-        "Correct : AH couvre l'en-tête IP dans son contrôle d'intégrité ; le NAT réécrit les adresses et invalide la vérification — la solution est ESP avec NAT-T (UDP 4500).",
-        "Hors sujet : la performance n'explique en rien l'échec systématique derrière un NAT."
+        "AH couvre l'en-tête IP dans son contrôle d'intégrité ; le NAT réécrit les adresses et invalide la vérification — la solution est ESP avec NAT-T (UDP 4500).",
+        "À côté du sujet : la performance n'explique en rien l'échec systématique derrière un NAT."
       ]
     },
     {
@@ -1928,7 +1930,7 @@ window.CISSP_DATA.domains[4] = {
         "Trivialement contournable : un en-tête HTTP se forge sans effort.",
         "Fragile : une clé pré-partagée diffusée à tous les services est un secret commun impossible à révoquer proprement.",
         "Trop étroit : le TLS standard n'authentifie que le serveur, pas le client.",
-        "Correct : en mTLS, chaque partie présente et valide un certificat — l'authentification mutuelle exigée entre microservices et une brique du Zero Trust."
+        "En effet, en mTLS, chaque partie présente et valide un certificat — l'authentification mutuelle exigée entre microservices et une brique du Zero Trust."
       ]
     },
     {
@@ -1943,8 +1945,8 @@ window.CISSP_DATA.domains[4] = {
       "explication": "L'attaque de downgrade (illustrée historiquement par POODLE) manipule la négociation pour retomber sur SSL 3.0 ou TLS 1.0 et leurs vulnérabilités. La parade décisive est de ne plus proposer du tout les versions et suites faibles : ce qui n'est pas négociable ne peut pas être imposé. TLS 1.3 intègre en outre une protection cryptographique de la négociation. Les autres réponses décrivent des mécanismes sans rapport avec la manipulation de version.",
       "difficulte": 2,
       "pourquoi": [
-        "Hors sujet : la force brute vise les clés, pas la négociation de version.",
-        "Correct : forcer la négociation vers une version obsolète est une attaque de downgrade ; la parade décisive est de ne plus proposer du tout les versions faibles côté serveur.",
+        "Ce n'est pas la question : la force brute vise les clés, pas la négociation de version.",
+        "Réponse juste : forcer la négociation vers une version obsolète est une attaque de downgrade ; la parade décisive est de ne plus proposer du tout les versions faibles côté serveur.",
         "Confusion d'attaque : le rejeu réutilise des messages capturés, il ne manipule pas la négociation de version.",
         "Contresens : le certificate pinning est une défense, pas une attaque."
       ]
@@ -1964,7 +1966,7 @@ window.CISSP_DATA.domains[4] = {
         "Confusion de mécanisme : le chiffrement de session utilise une clé symétrique négociée, pas le certificat lui-même.",
         "Hors sujet : TLS moderne a abandonné la compression pour raisons de sécurité.",
         "Inversion de sens : l'utilisateur final n'est authentifié que si l'on ajoute mTLS ou un autre mécanisme.",
-        "Correct : le certificat lie l'identité du serveur à sa clé publique sous la signature d'une CA de confiance — c'est ce qui empêche l'usurpation du site."
+        "Option correcte : le certificat lie l'identité du serveur à sa clé publique sous la signature d'une CA de confiance — c'est ce qui empêche l'usurpation du site."
       ]
     },
     {
@@ -1979,8 +1981,8 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Le Zero Trust rejette le modèle où franchir le périmètre (ici le VPN) donne une confiance implicite sur tout le réseau : chaque accès doit être autorisé explicitement, par application, selon l'identité, le contexte et la posture du poste, au moindre privilège. La microsegmentation matérialise ce contrôle. Renforcer le mot de passe ou la capacité ne change pas le modèle de confiance, et le split tunneling ajoute un risque au lieu d'en retirer.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : restreindre par microsegmentation et politiques par application, selon identité et posture, matérialise le moindre privilège du Zero Trust.",
-        "Hors sujet : la capacité du concentrateur est un enjeu de performance, pas de modèle de confiance.",
+        "Oui — restreindre par microsegmentation et politiques par application, selon identité et posture, matérialise le moindre privilège du Zero Trust.",
+        "Sans lien ici : la capacité du concentrateur est un enjeu de performance, pas de modèle de confiance.",
         "Contre-productif : le split tunneling ajoute un risque de pont au lieu de réduire la confiance implicite.",
         "Réponse de technicien : renforcer le mot de passe conserve le modèle de confiance périmétrique inchangé."
       ]
@@ -1999,7 +2001,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Réponse de technicien : la puissance du NGFW ne change rien s'il ne voit jamais le trafic.",
         "Fatalisme injustifié : ce trafic est parfaitement filtrable avec les bons outils.",
-        "Correct : les flux entre VM colocalisées restent dans le switch virtuel de l'hyperviseur ; seule la microsegmentation par pare-feu distribué au niveau de l'hyperviseur les contrôle.",
+        "À retenir : les flux entre VM colocalisées restent dans le switch virtuel de l'hyperviseur ; seule la microsegmentation par pare-feu distribué au niveau de l'hyperviseur les contrôle.",
         "Inefficace : des VLAN sur le switch physique n'interceptent pas un trafic qui ne sort pas de l'hôte."
       ]
     },
@@ -2017,7 +2019,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Contresens : le périmètre défini par logiciel n'a rien de physique.",
         "Invention : le SDP conserve le chiffrement, il n'obfusque pas des adresses à la place.",
-        "Correct : le SDP applique « authenticate first, connect second » — les ressources restent invisibles tant que l'utilisateur et l'appareil ne sont pas authentifiés.",
+        "C'est bien cela : le SDP applique « authenticate first, connect second » — les ressources restent invisibles tant que l'utilisateur et l'appareil ne sont pas authentifiés.",
         "Contresens : une DMZ publique expose, le SDP cache."
       ]
     },
@@ -2033,7 +2035,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "EAP-TLS repose sur une authentification mutuelle par certificats : pas de mot de passe à voler ni à hameçonner, résistance maximale. Sa contrepartie est opérationnelle : une PKI complète pour émettre, distribuer, renouveler et révoquer les certificats de chaque poste. PEAP se contente d'un certificat côté serveur, LEAP est un protocole Cisco cassé depuis longtemps, et EAP-MD5 n'offre ni certificat ni protection sérieuse.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : EAP-TLS offre l'authentification mutuelle par certificats — pas de mot de passe à voler — au prix d'une PKI pour gérer les certificats de chaque client.",
+        "EAP-TLS offre l'authentification mutuelle par certificats — pas de mot de passe à voler — au prix d'une PKI pour gérer les certificats de chaque client.",
         "Association fausse : PEAP n'exige pas de jetons matériels, seulement un certificat serveur.",
         "Disqualifié : LEAP est cassé depuis des années, quelle que soit la complexité des mots de passe.",
         "Disqualifié : EAP-MD5 n'offre aucune protection sérieuse, redondance RADIUS ou non."
@@ -2044,7 +2046,7 @@ window.CISSP_DATA.domains[4] = {
       "choix": [
         "Il exige l'installation d'un certificat client sur chaque poste",
         "Il hache systématiquement les identifiants des utilisateurs avec l'algorithme MD5 avant tout envoi réseau",
-        "Il transmet les identifiants en clair mais sur un canal radio séparé",
+        "Il chiffre les identifiants avec la clé pré-partagée (PSK) du réseau avant de les transmettre",
         "Il monte un tunnel TLS via le certificat serveur, puis y fait passer l'authentification MSCHAPv2"
       ],
       "reponse": 3,
@@ -2053,8 +2055,8 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Confusion de méthode : le certificat client généralisé est le propre d'EAP-TLS.",
         "Confusion : MD5 n'est pas le mécanisme de PEAP et un simple hachage ne protégerait pas des attaques.",
-        "Absurde sur le fond : un canal radio séparé n'existe pas et ne protégerait rien en clair.",
-        "Correct : PEAP monte d'abord un tunnel TLS authentifié par le certificat du serveur, puis fait circuler l'authentification interne à l'abri de ce tunnel."
+        "Confusion de mécanisme : PEAP ne repose pas sur une clé pré-partagée mais sur un tunnel TLS ; un réseau enterprise n'a d'ailleurs aucune PSK à réutiliser.",
+        "PEAP monte d'abord un tunnel TLS authentifié par le certificat du serveur, puis fait circuler l'authentification interne à l'abri de ce tunnel."
       ]
     },
     {
@@ -2070,7 +2072,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 1,
       "pourquoi": [
         "Faux confort : demander une adresse email n'apporte aucune protection cryptographique.",
-        "Correct : traiter tout Wi-Fi public comme hostile et imposer un VPN full tunnel chiffre l'intégralité du trafic — la seule posture robuste.",
+        "En effet, traiter tout Wi-Fi public comme hostile et imposer un VPN full tunnel chiffre l'intégralité du trafic — la seule posture robuste.",
         "Naïf : un SSID se falsifie sans effort, le nom de l'hôtel ne prouve rien.",
         "Aggravant : désactiver le pare-feu local expose davantage le poste."
       ]
@@ -2089,7 +2091,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Cosmétique : le filtrage MAC se contourne par usurpation en quelques minutes.",
         "Cosmétique : masquer le SSID ne corrige pas une authentification cassée.",
-        "Correct : LEAP est vulnérable aux attaques par dictionnaire depuis des années ; la migration vers EAP-TLS ou PEAP s'impose.",
+        "Réponse juste : LEAP est vulnérable aux attaques par dictionnaire depuis des années ; la migration vers EAP-TLS ou PEAP s'impose.",
         "Sécurité par l'obscurité : un protocole propriétaire cassé publiquement n'est pas protégé par sa rareté."
       ]
     },
@@ -2105,7 +2107,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "L'accumulation de connexions half-open (SYN reçus jamais complétés par un ACK) est la signature du SYN flood, qui épuise la table d'états du serveur. Les SYN cookies permettent de ne pas allouer de ressources avant la validation du handshake ; on y ajoute filtrage amont et services anti-DDoS. Le smurf est une amplification ICMP, le teardrop un DoS par fragments malformés, et l'evil twin une attaque Wi-Fi.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : l'accumulation de connexions half-open est la signature du SYN flood ; les SYN cookies évitent d'allouer des ressources avant validation du handshake.",
+        "Option correcte : l'accumulation de connexions half-open est la signature du SYN flood ; les SYN cookies évitent d'allouer des ressources avant validation du handshake.",
         "Hors technologie : l'evil twin est une attaque Wi-Fi, sans rapport avec la table d'états d'un serveur.",
         "Confusion d'attaque : le smurf inonde en ICMP, il ne laisse pas de connexions à moitié ouvertes.",
         "Confusion d'attaque : le teardrop exploite des fragments malformés, pas la table de connexions."
@@ -2124,7 +2126,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 2,
       "pourquoi": [
         "Confusion d'objectif : le tunneling DNS exfiltre des données, il ne sature pas la victime.",
-        "Correct : requêtes à source usurpée vers des résolveurs ouverts dont les réponses volumineuses convergent vers la victime — la définition de la réflexion-amplification DNS.",
+        "Oui — requêtes à source usurpée vers des résolveurs ouverts dont les réponses volumineuses convergent vers la victime — la définition de la réflexion-amplification DNS.",
         "Hors catégorie : le typosquatting trompe des utilisateurs, sans volumétrie d'attaque.",
         "Confusion de mécanisme : le poisoning corrompt des caches, il ne génère pas de déluge de trafic."
       ]
@@ -2144,7 +2146,7 @@ window.CISSP_DATA.domains[4] = {
         "Hors couche : TLS chiffre les données mais ne protège pas la topologie de commutation.",
         "Sans effet : la taille des trames n'a aucun rapport avec l'empilement d'étiquettes 802.1Q.",
         "Confusion de rôle : le spanning tree prévient les boucles, pas la manipulation d'étiquettes.",
-        "Correct : dédier un VLAN natif inutilisé, l'étiqueter et désactiver DTP supprime les conditions mêmes du double tagging."
+        "À retenir : dédier un VLAN natif inutilisé, l'étiqueter et désactiver DTP supprime les conditions mêmes du double tagging."
       ]
     },
     {
@@ -2160,7 +2162,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 1,
       "pourquoi": [
         "Hors catégorie : le wardriving cartographie des réseaux sans intercepter de sessions.",
-        "Correct : s'interposer entre la victime et sa destination est une attaque on-path ; le chiffrement de bout en bout (VPN, TLS) rend l'interception inexploitable.",
+        "C'est bien cela : s'interposer entre la victime et sa destination est une attaque on-path ; le chiffrement de bout en bout (VPN, TLS) rend l'interception inexploitable.",
         "Hors domaine : l'attaque salami est une fraude financière par micro-détournements.",
         "Confusion d'attaque : le rejeu réutilise des messages capturés ; les horodatages ne protègent pas d'une interception en direct."
       ]
@@ -2177,7 +2179,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Le fraggle est le cousin UDP du smurf : il vise les services UDP echo (port 7) et chargen (port 19) en broadcast avec une source usurpée, pour que toutes les réponses convergent vers la victime. Le smurf utilise ICMP echo, le ping of death un paquet ICMP surdimensionné qui plantait les piles anciennes, et la land attack un paquet dont source et destination sont identiques.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : le fraggle vise les ports UDP 7 (echo) et 19 (chargen) en broadcast avec source usurpée — la variante UDP du smurf.",
+        "Le fraggle vise les ports UDP 7 (echo) et 19 (chargen) en broadcast avec source usurpée — la variante UDP du smurf.",
         "Confusion d'attaque : la land attack utilise un paquet dont source et destination sont identiques.",
         "Piège du cousin : le smurf utilise ICMP echo, pas les ports UDP echo et chargen.",
         "Confusion d'attaque : le ping of death exploite un paquet ICMP surdimensionné."
@@ -2197,8 +2199,8 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Absurde : la session attaquée est déjà en TCP.",
         "Destructeur : supprimer les accusés de réception casserait le protocole lui-même.",
-        "Correct : des ISN réellement aléatoires rendent la prédiction infaisable et le chiffrement authentifié fait échouer toute injection — la défense en profondeur adaptée.",
-        "Hors sujet : la MTU règle la taille des paquets, pas la prédictibilité des séquences."
+        "En effet, des ISN réellement aléatoires rendent la prédiction infaisable et le chiffrement authentifié fait échouer toute injection — la défense en profondeur adaptée.",
+        "À côté du sujet : la MTU règle la taille des paquets, pas la prédictibilité des séquences."
       ]
     },
     {
@@ -2216,7 +2218,7 @@ window.CISSP_DATA.domains[4] = {
         "Hors rôle : RADIUS authentifie, il n'analyse aucune requête applicative.",
         "Hors couche : des ACL réseau ne lisent pas le contenu des requêtes HTTP légitimes sur le port 443.",
         "Hors rôle : un concentrateur VPN chiffre des accès, il ne filtre pas le contenu web.",
-        "Correct : le WAF inspecte le contenu applicatif HTTP/S et bloque injections SQL, XSS et autres attaques du top OWASP que le pare-feu stateful laisse passer."
+        "Réponse juste : le WAF inspecte le contenu applicatif HTTP/S et bloque injections SQL, XSS et autres attaques du top OWASP que le pare-feu stateful laisse passer."
       ]
     },
     {
@@ -2231,7 +2233,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Le suivi d'état et le filtrage par adresses existent déjà sur un pare-feu stateful classique. La valeur ajoutée du next-generation firewall est l'app-awareness : reconnaître l'application réelle même sur un port non standard ou chiffré, appliquer des politiques par application et par utilisateur, avec IPS intégré et souvent inspection TLS. Il conserve bien entendu une table d'états.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : l'app-awareness — identifier l'application quel que soit le port, avec IPS intégré et connaissance des identités — est la valeur ajoutée définissant le NGFW.",
+        "Option correcte : l'app-awareness — identifier l'application quel que soit le port, avec IPS intégré et connaissance des identités — est la valeur ajoutée définissant le NGFW.",
         "Déjà acquis : le suivi d'état existe sur tout pare-feu stateful classique.",
         "Contresens : le NGFW conserve évidemment une table d'états.",
         "Déjà acquis : le filtrage par adresses est la base de tout pare-feu."
@@ -2250,9 +2252,9 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 2,
       "pourquoi": [
         "Contournable : une adresse MAC s'usurpe et ne dit rien de l'état de l'appareil.",
-        "Hors sujet : un pare-feu stateless ignore tout de la posture des appareils.",
+        "Ce n'est pas la question : un pare-feu stateless ignore tout de la posture des appareils.",
         "Insuffisant : accepter des conditions ne vérifie techniquement rien.",
-        "Correct : l'agent dissolvable s'exécute le temps de l'évaluation de posture puis s'efface, et l'agentless évalue depuis le réseau — les modes NAC conçus pour le BYOD."
+        "Oui — l'agent dissolvable s'exécute le temps de l'évaluation de posture puis s'efface, et l'agentless évalue depuis le réseau — les modes NAC conçus pour le BYOD."
       ]
     },
     {
@@ -2269,7 +2271,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Invention : aucun des deux ne chiffre le trafic analysé.",
         "Faux clivage : les deux existent en versions matérielles et logicielles.",
-        "Correct : l'IPS en coupure bloque en temps réel, l'IDS sur copie de trafic ne fait que détecter et alerter — tout tient au placement.",
+        "À retenir : l'IPS en coupure bloque en temps réel, l'IDS sur copie de trafic ne fait que détecter et alerter — tout tient au placement.",
         "Faux : l'IPS existe en version réseau (NIPS) comme en version hôte, il n'est pas limité aux postes de travail."
       ]
     },
@@ -2286,7 +2288,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 2,
       "pourquoi": [
         "Invention : PPTP n'impose aucune limite de débit de ce type.",
-        "Correct : MS-CHAPv2 se casse en un temps court et le chiffrement MPPE tombe avec lui — la confidentialité de PPTP est rompue, d'où l'urgence du remplacement.",
+        "C'est bien cela : MS-CHAPv2 se casse en un temps court et le chiffrement MPPE tombe avec lui — la confidentialité de PPTP est rompue, d'où l'urgence du remplacement.",
         "Hors sujet : le coût n'est pas le problème d'un protocole cryptographiquement cassé.",
         "Faux : PPTP fonctionne techniquement, c'est sa sécurité qui est morte."
       ]
@@ -2303,7 +2305,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Le VPN TLS clientless s'utilise depuis un simple navigateur et le portail ne publie que les applications explicitement autorisées : accès au moindre privilège, aucune installation, aucune visibilité sur le reste du réseau. Un VPN IPsec ou full tunnel donnerait aux consultants un accès réseau bien trop large depuis des machines non maîtrisées, et exposer RDP directement sur Internet est une des premières causes de compromission par ransomware.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : le portail TLS clientless fonctionne dans un navigateur et ne publie que l'application autorisée — moindre privilège sans installation.",
+        "Le portail TLS clientless fonctionne dans un navigateur et ne publie que l'application autorisée — moindre privilège sans installation.",
         "Trop large : un compte full tunnel ouvre tout le réseau, à l'opposé du besoin exprimé.",
         "Trop large : un client IPsec complet donne un accès réseau démesuré à des machines non maîtrisées.",
         "Dangereux : RDP exposé sur Internet est une cause majeure de compromission par ransomware."
@@ -2323,7 +2325,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Inversion : IPsec ajoute une surcharge de traitement, il n'accélère rien.",
         "Faux : L2TP fonctionne en IPv4 comme en IPv6.",
-        "Correct : L2TP tunnelise mais ne chiffre rien ; IPsec apporte confidentialité, intégrité et authentification au tunnel.",
+        "En effet, L2TP tunnelise mais ne chiffre rien ; IPsec apporte confidentialité, intégrité et authentification au tunnel.",
         "Confusion de rôle : l'attribution d'adresses relève d'autres mécanismes du tunnel, pas d'IPsec."
       ]
     },
@@ -2339,10 +2341,10 @@ window.CISSP_DATA.domains[4] = {
       "explication": "RTP non chiffré se réécoute avec des outils triviaux dès que le trafic est accessible. La réponse est technique et en profondeur : SRTP chiffre et authentifie les flux média, SIPS protège la signalisation, et le VLAN voix dédié réduit la surface d'écoute depuis le réseau data. La QoS améliore la qualité, pas la confidentialité ; les softphones ne changent rien au protocole ; une charte ne bloque aucune capture.",
       "difficulte": 2,
       "pourquoi": [
-        "Hors sujet : la QoS améliore la qualité des appels, pas leur confidentialité.",
+        "Sans lien ici : la QoS améliore la qualité des appels, pas leur confidentialité.",
         "Contrôle administratif seul : une charte n'empêche techniquement aucune capture.",
         "Sans effet : des softphones utilisent les mêmes protocoles, rien ne change.",
-        "Correct : SRTP chiffre les média, SIPS protège la signalisation et le VLAN voix réduit la surface d'écoute — une défense en profondeur qui traite la cause."
+        "Réponse juste : SRTP chiffre les média, SIPS protège la signalisation et le VLAN voix réduit la surface d'écoute — une défense en profondeur qui traite la cause."
       ]
     },
     {
@@ -2358,7 +2360,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 2,
       "pourquoi": [
         "Faux : les téléphones restent adressables dans leur VLAN.",
-        "Correct : la séparation voix/data complique l'écoute des flux et le rebond d'un poste compromis vers l'infrastructure téléphonique — un bénéfice de segmentation.",
+        "Option correcte : la séparation voix/data complique l'écoute des flux et le rebond d'un poste compromis vers l'infrastructure téléphonique — un bénéfice de segmentation.",
         "Sur-promesse : la segmentation ne chiffre rien ; SRTP reste nécessaire.",
         "Contresens : l'authentification des téléphones (802.1X) reste pertinente."
       ]
@@ -2377,14 +2379,14 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Aggravant : mélanger le stockage au trafic utilisateurs l'expose au sniffing et aux accès indus.",
         "Contournable : le filtrage MAC s'usurpe et ne protège ni la confidentialité ni l'authentification.",
-        "Correct : isolement du réseau de stockage, CHAP mutuel entre initiateurs et cibles, et IPsec sur les segments non maîtrisés — la combinaison couvrant les lacunes natives d'iSCSI.",
+        "Oui — isolement du réseau de stockage, CHAP mutuel entre initiateurs et cibles, et IPsec sur les segments non maîtrisés — la combinaison couvrant les lacunes natives d'iSCSI.",
         "Faux postulat : iSCSI n'a pas de chiffrement natif sur lequel se reposer."
       ]
     },
     {
       "q": "Quelle est la différence essentielle entre un SAN et un NAS ?",
       "choix": [
-        "Le SAN fonctionne exclusivement au travers d'une liaison sans fil Wi-Fi dédiée au stockage",
+        "Le SAN et le NAS présentent tous deux le stockage en mode fichier ; seule leur bande passante les sépare",
         "Le SAN revient toujours moins cher à déployer que le NAS",
         "Le NAS est strictement réservé aux opérations de sauvegarde",
         "Le SAN offre un accès en mode bloc, le NAS un accès en mode fichier via NFS ou SMB"
@@ -2393,10 +2395,10 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Le SAN (via Fibre Channel, FCoE ou iSCSI) présente aux serveurs des volumes en mode bloc, qu'ils formatent comme des disques locaux : c'est le choix des bases de données et de la virtualisation. Le NAS expose des systèmes de fichiers partagés via NFS ou SMB. Le SAN est généralement plus coûteux, le NAS sert bien au-delà des sauvegardes, et aucun des deux n'a de rapport avec le Wi-Fi.",
       "difficulte": 1,
       "pourquoi": [
-        "Absurde : aucun des deux n'a de rapport avec le Wi-Fi.",
-        "Faux : le SAN est généralement plus coûteux que le NAS.",
-        "Trop étroit : le NAS sert bien au-delà des sauvegardes.",
-        "Correct : le SAN présente des volumes en mode bloc que les serveurs formatent comme des disques ; le NAS expose des fichiers via NFS ou SMB — la distinction structurante."
+        "Faux sur le fond : le NAS présente bien du mode fichier, mais le SAN présente du mode bloc — c'est là leur vraie distinction, et la bande passante n'y change rien.",
+        "À l'envers : le SAN, avec son fabric et ses commutateurs dédiés, revient généralement plus cher que le NAS.",
+        "Réducteur : le NAS sert le partage de fichiers de production bien au-delà des seules sauvegardes.",
+        "Le SAN présente aux serveurs des volumes en mode bloc qu'ils formatent comme des disques, tandis que le NAS expose des fichiers via NFS ou SMB : c'est la distinction structurante à retenir."
       ]
     },
     {
@@ -2411,7 +2413,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Contre une attaque volumétrique, tout équipement situé derrière le lien saturé arrive trop tard : il faut absorber en amont. Un CDN en anycast disperse le trafic vers des dizaines de points de présence dont la capacité cumulée dépasse largement l'attaque, tout en servant le contenu légitime depuis le cache. Doubler la bande passante ne fait que relever marginalement le seuil, l'IDS ne bloque rien, et le blocage manuel d'adresses ne suit pas le rythme d'un botnet.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : le CDN anycast disperse et absorbe l'attaque sur des points de présence mondiaux dont la capacité cumulée dépasse l'attaque, tout en servant le cache.",
+        "À retenir : le CDN anycast disperse et absorbe l'attaque sur des points de présence mondiaux dont la capacité cumulée dépasse l'attaque, tout en servant le cache.",
         "Ingérable : bloquer les adresses une à une ne suit pas le rythme d'un botnet.",
         "Palliatif : doubler la bande passante ne fait que relever marginalement le seuil de saturation.",
         "Hors position : un IDS derrière le lien saturé détecte mais ne peut rien bloquer en amont."
@@ -2430,7 +2432,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 3,
       "pourquoi": [
         "Inversion : le traitement local réduit au contraire la bande passante consommée vers le siège.",
-        "Correct : des équipements sensibles se retrouvent hors du périmètre physique maîtrisé — sécurité physique, durcissement et gestion à distance de centaines de sites deviennent la préoccupation spécifique.",
+        "C'est bien cela : des équipements sensibles se retrouvent hors du périmètre physique maîtrisé — sécurité physique, durcissement et gestion à distance de centaines de sites deviennent la préoccupation spécifique.",
         "Absolu : la conformité reste atteignable avec des contrôles adaptés à la périphérie.",
         "Absolu : l'architecture distribuée limite justement la panne d'un noeud à son seul site."
       ]
@@ -2447,7 +2449,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Le mindset managérial impose de traiter le risque identifié (mouvement latéral) là où l'impact métier est maximal, dans la limite du budget : microsegmenter les zones critiques réduit immédiatement le risque démontré par l'incident du concurrent, tout en s'inscrivant dans la trajectoire Zero Trust demandée par le COMEX. La refonte complète est la bonne cible mais pas la bonne première étape avec ce budget ; le NGFW renforce un périmètre que le ransomware contourne justement par l'intérieur ; la MFA sur le VPN est utile mais ne traite pas le mouvement latéral interne.",
       "difficulte": 3,
       "pourquoi": [
-        "Correct : prioriser les actifs critiques identifiés par la BIA traite le risque démontré (mouvement latéral) sous contrainte budgétaire, tout en amorçant la trajectoire Zero Trust.",
+        "Prioriser les actifs critiques identifiés par la BIA traite le risque démontré (mouvement latéral) sous contrainte budgétaire, tout en amorçant la trajectoire Zero Trust.",
         "Techniquement vraie mais trop étroite : la MFA protège l'entrée par le VPN sans rien limiter une fois l'attaquant à l'intérieur.",
         "Vraie mais hors phase : c'est la cible pluriannuelle, pas la première étape finançable avec une fraction du budget.",
         "Réponse de technicien périmétrique : le ransomware progresse à l'intérieur, un meilleur pare-feu de bordure ne confine pas le mouvement latéral."
@@ -2466,7 +2468,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 3,
       "pourquoi": [
         "Vraie mais contextuellement fausse : réintroduire le backhaul sécurise au prix d'annuler la réduction de coûts qui justifie le projet.",
-        "Correct : la multiplication des sorties locales exige une politique homogène et centralisée à chaque point d'exposition — l'enjeu de conception central, que SASE adresse.",
+        "En effet, la multiplication des sorties locales exige une politique homogène et centralisée à chaque point d'exposition — l'enjeu de conception central, que SASE adresse.",
         "Techniquement vraie mais trop étroite : les tunnels chiffrés ne couvrent pas le trafic sortant localement vers le SaaS, qui est le nouveau risque.",
         "Hors sujet sécurité : la redondance des liens traite la disponibilité, pas la nouvelle surface d'attaque."
       ]
@@ -2486,7 +2488,7 @@ window.CISSP_DATA.domains[4] = {
         "Absolu : ignorer les obligations de vie privée expose la banque à un risque juridique et social supérieur au bénéfice de détection marginal.",
         "Trop étroit et discriminatoire : cibler des personnes plutôt que des catégories de trafic crée un problème juridique et laisse la majorité du trafic sans détection.",
         "Vraie mais contextuellement fausse : l'EDR est complémentaire, y renoncer à toute visibilité réseau abandonne un pan entier de détection alors qu'un compromis existe.",
-        "Correct : l'inspection sélective gouvernée avec le DPO concilie visibilité du SOC et proportionnalité légale — l'arbitrage managérial attendu."
+        "Réponse juste : l'inspection sélective gouvernée avec le DPO concilie visibilité du SOC et proportionnalité légale — l'arbitrage managérial attendu."
       ]
     },
     {
@@ -2503,7 +2505,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Absolu : imposer l'arrêt des lignes sacrifie le métier alors qu'une mesure compensatoire efficace existe.",
         "Vraie mais hors phase : la visibilité passive est un excellent second pas, mais détecter sans avoir coupé le chemin d'attaque ne réduit pas l'exposition.",
-        "Correct : la segmentation en zones et conduits coupe le chemin d'attaque immédiatement, sans arrêt de production — le contrôle compensatoire architectural de référence (Purdue, IEC 62443).",
+        "Option correcte : la segmentation en zones et conduits coupe le chemin d'attaque immédiatement, sans arrêt de production — le contrôle compensatoire architectural de référence (Purdue, IEC 62443).",
         "Hors contrainte : les PLC exigent des fenêtres de maintenance et une requalification — le scénario précise que le patch est impossible avant neuf mois."
       ]
     },
@@ -2522,7 +2524,7 @@ window.CISSP_DATA.domains[4] = {
         "Réponse de technicien hors position : les paquets ont déjà saturé le lien avant d'atteindre le pare-feu, et le botnet renouvelle ses adresses plus vite que les règles.",
         "Hors délai : un upgrade de lien prend des jours et ne fait que relever marginalement le seuil de saturation.",
         "Vraie mais contextuellement fausse : la bascule déplace la cible sans neutraliser l'attaque, qui suivra la nouvelle adresse publiée en DNS.",
-        "Correct : filtrer en amont du lien saturé est la seule action qui restaure le service dans le délai du PCA — le réflexe contractuel et architectural attendu."
+        "Oui — filtrer en amont du lien saturé est la seule action qui restaure le service dans le délai du PCA — le réflexe contractuel et architectural attendu."
       ]
     },
     {
@@ -2539,7 +2541,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Réponse de technicien pragmatique mais non gouvernée : pas de MFA d'entreprise, pas de journalisation centrale, flux sortants incontrôlés.",
         "Trop large : un tunnel permanent accorde une confiance durable à un réseau tiers non maîtrisé et expose tout le réseau OT en cas de compromission du prestataire.",
-        "Correct : le bastion en DMZ industrielle concentre authentification forte, traçabilité et moindre privilège temporel — l'exigence métier est servie sans confiance permanente.",
+        "À retenir : le bastion en DMZ industrielle concentre authentification forte, traçabilité et moindre privilège temporel — l'exigence métier est servie sans confiance permanente.",
         "Absolu : refuser l'exigence métier pousse aux contournements et n'est pas un arbitrage acceptable pour un RSSI."
       ]
     },
@@ -2556,7 +2558,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 3,
       "pourquoi": [
         "Absolu : sacrifier 15 % des clients légitimes réalise soi-même une partie du déni de service que l'on prétend éviter.",
-        "Correct : discriminer par le comportement (rate limiting, challenges) dégrade l'attaque tout en préservant le chiffre d'affaires — l'arbitrage proportionné attendu.",
+        "C'est bien cela : discriminer par le comportement (rate limiting, challenges) dégrade l'attaque tout en préservant le chiffre d'affaires — l'arbitrage proportionné attendu.",
         "Capitulation : mettre l'API hors ligne accomplit l'objectif de l'attaquant et viole la continuité métier.",
         "Réponse de technicien court-termiste : ajouter du CPU sans discriminer le trafic subventionne l'attaque et ne fait que différer l'épuisement."
       ]
@@ -2573,7 +2575,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Toute démarche Zero Trust commence par la connaissance : on ne peut définir des politiques d'accès au moindre privilège que si l'on sait quels actifs existent, quels flux sont légitimes et quelles identités y accèdent. Sans cette cartographie, la microsegmentation produit des règles fausses qui cassent la production, le ZTNA reproduit les accès trop larges existants, et le mTLS chiffre des flux dont on ignore la légitimité. Les trois autres actions sont des composantes valides du programme, mais placées en première étape elles échouent faute de fondation.",
       "difficulte": 3,
       "pourquoi": [
-        "Correct : inventaire, cartographie des flux et des identités sont la fondation — on ne protège au moindre privilège que ce que l'on connaît.",
+        "Inventaire, cartographie des flux et des identités sont la fondation — on ne protège au moindre privilège que ce que l'on connaît.",
         "Vraie mais hors phase : microsegmenter sans connaître les flux légitimes produit des règles fausses qui cassent la production.",
         "Vraie mais hors phase : déployer le ZTNA sans cartographie des accès reproduit les autorisations trop larges de l'ancien VPN.",
         "Réponse de technicien : le mTLS authentifie et chiffre des flux dont la légitimité n'a pas encore été établie."
@@ -2593,7 +2595,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Absolu ingérable : bloquer tout trafic non approuvé génère des faux positifs massifs et casse les usages légitimes.",
         "Dangereux : affaiblir délibérément la cryptographie de toute l'entreprise crée un risque supérieur à celui que l'on cherche à détecter.",
-        "Correct : métadonnées réseau plus télémétrie EDR donnent une détection réelle sans déchiffrement ni dépassement budgétaire — le contrôle compensatoire proportionné.",
+        "En effet, métadonnées réseau plus télémétrie EDR donnent une détection réelle sans déchiffrement ni dépassement budgétaire — le contrôle compensatoire proportionné.",
         "Abdication : accepter un risque « par défaut », sans analyse ni validation par la direction, n'est pas une décision de gestion des risques."
       ]
     },
@@ -2610,7 +2612,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 3,
       "pourquoi": [
         "Vraie mais contextuellement fausse : conserver le MPLS est défendable techniquement mais viole la contrainte budgétaire alors qu'une alternative sûre existe.",
-        "Correct : tunnels IPsec avec segment dédié, QoS et supervision propre satisfont sécurité et budget — le SD-WAN offre nativement cette isolation.",
+        "Réponse juste : tunnels IPsec avec segment dédié, QoS et supervision propre satisfont sécurité et budget — le SD-WAN offre nativement cette isolation.",
         "Hors phase et hors périmètre : une migration cloud du SCADA est un projet majeur distinct, pas une réponse à la décision de transport posée.",
         "Inacceptable : des flux industriels critiques en clair sur Internet, aucun gain de latence ne le justifie."
       ]
@@ -2626,7 +2628,7 @@ window.CISSP_DATA.domains[4] = {
       "reponse": 0,
       "explication": "Le chevauchement d'adressage rend le routage direct impossible : le NAT double sens sur des points de passage contrôlés répond au besoin métier dans le délai, en limitant l'exposition aux seuls flux nécessaires — et laisse le temps de traiter la renumérotation comme un projet.",
       "pourquoi": [
-        "Correct : solution de transition maîtrisée qui respecte le délai, minimise la surface d'interconnexion et n'hypothèque pas la cible.",
+        "Option correcte : solution de transition maîtrisée qui respecte le délai, minimise la surface d'interconnexion et n'hypothèque pas la cible.",
         "Inopérant : un VPN n'élimine pas le conflit d'adressage — les routes se chevauchent toujours.",
         "Dangereux et prématuré : fusionner l'administration avant d'avoir évalué la posture de sécurité de l'entité acquise étend la surface de compromission.",
         "Techniquement juste mais irréaliste dans le délai : renuméroter un /8 exploité est un projet de plusieurs mois à fort risque d'interruption."
@@ -2647,7 +2649,7 @@ window.CISSP_DATA.domains[4] = {
         "Absolu contre-productif : bloquer un service critique pour un point de visibilité inverse la hiérarchie risque/besoin métier.",
         "Généralisation abusive : renoncer à toute inspection parce qu'un domaine y échappe détruit un contrôle qui reste efficace ailleurs.",
         "Techniquement absurde : on n'installe pas sa CA chez un tiers — c'est méconnaître le fonctionnement du pinning.",
-        "Correct : exemption minimale + contrôles compensatoires + risque documenté — l'arbitrage proportionné d'un manager."
+        "Oui — exemption minimale + contrôles compensatoires + risque documenté — l'arbitrage proportionné d'un manager."
       ],
       "difficulte": 3
     },
@@ -2665,7 +2667,7 @@ window.CISSP_DATA.domains[4] = {
         "Techniquement vrai mais insuffisant : TLS protège le transport, pas la topologie — un canal chiffré direct reste un chemin d'attaque vers l'OT.",
         "Trop étroit : limiter le débit gêne l'exfiltration mais n'empêche ni l'intrusion ni la latéralisation vers les automates.",
         "Contrôle utile mais secondaire : l'authentification ne compense pas une exposition directe de la zone OT.",
-        "Correct : la rupture de zone (iDMZ) est l'exigence structurelle — elle évite qu'une compromission cloud/Internet touche directement la zone de contrôle industriel."
+        "À retenir : la rupture de zone (iDMZ) est l'exigence structurelle — elle évite qu'une compromission cloud/Internet touche directement la zone de contrôle industriel."
       ],
       "difficulte": 3
     },
@@ -2682,7 +2684,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Piège du sur-dimensionnement : doubler la capacité ne fait que repousser le seuil — l'attaquant scale plus vite que votre budget serveur.",
         "Faux : les trois options traitent des couches différentes — les mettre à égalité nie l'analyse du vecteur.",
-        "Correct : réponse alignée sur le vecteur (applicatif) — filtrage L7 en périphérie + masquage de l'origine.",
+        "C'est bien cela : réponse alignée sur le vecteur (applicatif) — filtrage L7 en périphérie + masquage de l'origine.",
         "Techniquement vrai mais décalé : l'anti-DDoS BGP vise le volumétrique réseau, pas les requêtes applicatives légitimes en apparence."
       ],
       "difficulte": 3
@@ -2699,10 +2701,10 @@ window.CISSP_DATA.domains[4] = {
       "explication": "C'est l'implication majeure des protocoles multicouches : un flux interdit s'encapsule dans un protocole autorisé (ici DNS) et franchit le filtrage par ports. Seule une inspection applicative profonde (DPI) ou l'analyse des flux détecte ce canal caché — pas un filtrage par numéros de ports.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : le DNS tunneling exploite l'encapsulation — le contenu exfiltré voyage à l'intérieur d'un protocole que le pare-feu laisse passer ; c'est le canal caché typique des protocoles multicouches.",
+        "Le DNS tunneling exploite l'encapsulation — le contenu exfiltré voyage à l'intérieur d'un protocole que le pare-feu laisse passer ; c'est le canal caché typique des protocoles multicouches.",
         "Contresens : l'absence de chiffrement de DNS aide plutôt le défenseur à inspecter les requêtes ; elle n'explique en rien le franchissement du pare-feu.",
-        "Hors sujet : la fragmentation opère en couche 3 et n'est pas le mécanisme utilisé — les données voyagent dans le contenu applicatif des requêtes DNS.",
-        "Hors sujet : DNS s'appuie majoritairement sur UDP, et le handshake TCP n'a aucun rôle dans le canal caché décrit."
+        "À côté du sujet : la fragmentation opère en couche 3 et n'est pas le mécanisme utilisé — les données voyagent dans le contenu applicatif des requêtes DNS.",
+        "Ce n'est pas la question : DNS s'appuie majoritairement sur UDP, et le handshake TCP n'a aucun rôle dans le canal caché décrit."
       ]
     },
     {
@@ -2718,7 +2720,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 2,
       "pourquoi": [
         "Piège de la même famille : FCoE est un protocole convergé de STOCKAGE sur Ethernet — il n'offre ni RDMA ni les latences exigées par le calcul distribué.",
-        "Correct : InfiniBand combine très haut débit, latence minuscule et RDMA, exactement le profil des interconnexions de clusters HPC.",
+        "En effet, infiniBand combine très haut débit, latence minuscule et RDMA, exactement le profil des interconnexions de clusters HPC.",
         "Trop lent pour le besoin : iSCSI vise un SAN économique sur IP standard, pas des échanges mémoire à latence minimale entre noeuds de calcul.",
         "Hors sujet : MPLS est une technique de commutation WAN par labels chez les opérateurs, pas une interconnexion de datacenter pour le HPC."
       ]
@@ -2737,7 +2739,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Écarté par l'énoncé : les liens sont loin de la saturation, le débit réellement atteint n'est donc pas le facteur limitant.",
         "Plausible mais secondaire : un SNR dégradé provoque des erreurs et retransmissions détectables (FCS/CRC) — ce n'est pas l'explication première d'une voix hachée sur un réseau sain par ailleurs.",
-        "Correct : la VoIP tolère mal la VARIATION de latence ; un jitter élevé hache la voix même quand la latence moyenne et le débit semblent bons.",
+        "Réponse juste : la VoIP tolère mal la VARIATION de latence ; un jitter élevé hache la voix même quand la latence moyenne et le débit semblent bons.",
         "Piège du vocabulaire : la bande passante est une capacité théorique — la question dit déjà que la capacité n'est pas atteinte."
       ]
     },
@@ -2756,7 +2758,7 @@ window.CISSP_DATA.domains[4] = {
         "Piège classique : un security group ne contient que des règles d'AUTORISATION — il est impossible d'y écrire un refus explicite visant une plage précise.",
         "Contresens : le peering interconnecte deux VPC pour des échanges légitimes ; il n'est ni transitif ni conçu pour filtrer ou détourner du trafic hostile.",
         "Bricolage incorrect : la NAT gateway sert aux sorties des subnets privés, pas au filtrage — détourner une route n'est pas un contrôle d'accès.",
-        "Correct : niveau subnet + stateless + règles deny numérotées : la NACL est exactement le mécanisme prévu pour bloquer explicitement une plage d'adresses."
+        "Option correcte : niveau subnet + stateless + règles deny numérotées : la NACL est exactement le mécanisme prévu pour bloquer explicitement une plage d'adresses."
       ]
     },
     {
@@ -2771,7 +2773,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "NetFlow/IPFIX exportent les métadonnées des conversations (adresses, ports, volumes, horaires) sans le contenu : on détecte un volume sortant anormal ou un balayage interne à faible coût de stockage et avec moins d'impact vie privée. SNMP ne donne que des compteurs globaux (et la v2c en clair est à proscrire au profit de SNMPv3), la capture intégrale est exactement ce que l'énoncé écarte, et une surveillance limitée aux heures ouvrées manque les attaques nocturnes.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : les métadonnées de flux suffisent à repérer exfiltrations et anomalies (volumes, destinations, horaires) tout en répondant aux contraintes de coût et de vie privée.",
+        "Oui — les métadonnées de flux suffisent à repérer exfiltrations et anomalies (volumes, destinations, horaires) tout en répondant aux contraintes de coût et de vie privée.",
         "Insuffisant et non sécurisé : SNMP fournit des compteurs agrégés par interface, pas la visibilité conversation par conversation — et SNMPv2c transmet ses community strings en clair.",
         "Écarté par l'énoncé : c'est précisément la capture complète jugée trop coûteuse et intrusive.",
         "Fenêtre arbitraire : les exfiltrations se programment volontiers la nuit ou le week-end — une surveillance partielle crée un angle mort prévisible."
@@ -2790,7 +2792,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 2,
       "pourquoi": [
         "Remède pire que le mal : suspendre les sauvegardes sacrifie la protection des données (disponibilité/récupération) pour un problème de performance qui a une solution technique.",
-        "Correct : prioriser les flux sensibles au délai et lisser les flux qui ne le sont pas est la fonction même du traffic shaping — réponse efficace à budget constant.",
+        "À retenir : prioriser les flux sensibles au délai et lisser les flux qui ne le sont pas est la fonction même du traffic shaping — réponse efficace à budget constant.",
         "Contournement fragile et coûteux : la 4G ajoute un lien non maîtrisé, une surface d'exposition et des coûts récurrents, sans traiter la cause.",
         "Utile mais insuffisant : la compression réduit le volume sans garantir la priorité des flux temps réel — et beaucoup de flux de sauvegarde sont déjà compressés ou chiffrés."
       ]
@@ -2809,7 +2811,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Enjeu réel mais secondaire : la garantie concerne la panne matérielle (disponibilité) ; elle se compense par des spares et un contrat de support — pas la préoccupation première d'un RSSI.",
         "Marginal : la compatibilité des optiques est un sujet d'ingénierie prévisible, sans commune mesure avec un coeur de réseau non patchable.",
-        "Correct : un équipement end-of-support ne reçoit plus de correctifs — c'est un risque de sécurité croissant et irréversible qui impose de planifier la sortie avant l'échéance.",
+        "C'est bien cela : un équipement end-of-support ne reçoit plus de correctifs — c'est un risque de sécurité croissant et irréversible qui impose de planifier la sortie avant l'échéance.",
         "Contresens managérial : étirer la durée de vie AU-DELÀ de la fin de support maximise l'exposition ; le coût se gère par la planification, pas par le report du risque."
       ]
     },
@@ -2828,7 +2830,7 @@ window.CISSP_DATA.domains[4] = {
         "Plausible mais fragile : le full tunnel dégrade les performances, dépend de l'activation effective du VPN et laisse le poste nu avant l'établissement du tunnel — l'énoncé dit justement que le VPN n'est pas toujours utilisé.",
         "Angle mort : les scans du réseau interne n'atteignent pas des portables qui n'y sont plus connectés.",
         "Périmètre inadapté : le NAC contrôle l'admission AU réseau de l'entreprise ; il ne protège pas un poste qui travaille depuis un hôtel sans jamais s'y connecter.",
-        "Correct : les contrôles host-based résident sur la machine et la protègent indépendamment du réseau utilisé — la réponse adaptée à la mobilité, en complément des contrôles réseau."
+        "Les contrôles host-based résident sur la machine et la protègent indépendamment du réseau utilisé — la réponse adaptée à la mobilité, en complément des contrôles réseau."
       ]
     },
     {
@@ -2844,7 +2846,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 2,
       "pourquoi": [
         "Piège séduisant : l'E2EE chiffre le transport du contenu, mais l'intrus était DANS la réunion — il aurait déchiffré les flux comme tout participant admis.",
-        "Correct : le problème est l'admission — code unique (le lien qui fuite expire), lobby (filtrage humain) et authentification (identité vérifiée) ferment le vecteur exact de l'incident.",
+        "En effet, le problème est l'admission — code unique (le lien qui fuite expire), lobby (filtrage humain) et authentification (identité vérifiée) ferment le vecteur exact de l'incident.",
         "Régression : le téléphone classique n'authentifie pas mieux les participants (numéro de conférence partageable) et supprime des contrôles disponibles en visioconférence.",
         "À côté du sujet : encadrer enregistrement et partage d'écran est une bonne hygiène, mais n'aurait pas empêché un inconnu d'écouter la réunion."
       ]
@@ -2864,7 +2866,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 1,
       "pourquoi": [
         "Piège de couche : la couche 3 route les paquets sans garantie de livraison.",
-        "Correct : segmentation, séquencement et contrôle de flux de bout en bout sont les fonctions de la couche 4 Transport (TCP).",
+        "Réponse juste : segmentation, séquencement et contrôle de flux de bout en bout sont les fonctions de la couche 4 Transport (TCP).",
         "Piège de couche : la couche 2 assure la liaison entre noeuds adjacents, pas la livraison de bout en bout.",
         "Piège de couche : la couche 5 gère les dialogues, pas la fiabilité du transport."
       ]
@@ -2881,7 +2883,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Recevoir des réponses ICMP echo de sources multiples sans les avoir sollicitées est la signature du smurf : l'attaquant a envoyé des echo requests en broadcast avec l'adresse source usurpée de la victime, et tous les hôtes répondent vers elle. Le SYN flood produit des connexions TCP à moitié ouvertes, l'ARP poisoning corrompt des tables locales, et le tunneling DNS exfiltre des données dans des requêtes DNS.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : des réponses ICMP echo non sollicitées convergeant de sources multiples signent le smurf — echo requests en broadcast avec la source usurpée de la victime.",
+        "Option correcte : des réponses ICMP echo non sollicitées convergeant de sources multiples signent le smurf — echo requests en broadcast avec la source usurpée de la victime.",
         "Hors objectif : le tunneling DNS exfiltre des données, il n'inonde pas la victime.",
         "Hors mécanisme : l'ARP poisoning corrompt des tables locales sans générer ce trafic.",
         "Confusion de signature : le SYN flood laisse des connexions TCP à moitié ouvertes, pas un déluge d'echo replies."
@@ -2901,7 +2903,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Disqualifié : AH couvre l'en-tête IP que le NAT modifie — échec garanti en mode transport.",
         "Non viable : sans IKE, plus de négociation automatique des clés.",
-        "Correct : ESP ne couvre pas l'en-tête externe réécrit, et NAT-T encapsule le trafic dans UDP 4500 pour franchir la traduction d'adresses.",
+        "Oui — ESP ne couvre pas l'en-tête externe réécrit, et NAT-T encapsule le trafic dans UDP 4500 pour franchir la traduction d'adresses.",
         "Disqualifié : le mode tunnel ne sauve pas AH, dont le contrôle d'intégrité reste cassé par le NAT."
       ]
     },
@@ -2917,9 +2919,9 @@ window.CISSP_DATA.domains[4] = {
       "explication": "DNSSEC signe les enregistrements DNS avec une chaîne de confiance partant de la racine : le résolveur vérifie l'authenticité et l'intégrité des réponses, ce qui bloque l'empoisonnement de cache. DoH chiffre le transport des requêtes mais ne signe pas les données, le split-horizon sert des réponses différentes selon l'origine, et le reverse lookup traduit une IP en nom.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : DNSSEC signe les enregistrements avec une chaîne de confiance vérifiable par le résolveur — authenticité et intégrité garanties.",
-        "Hors sujet : le reverse lookup traduit une IP en nom, sans aucune garantie d'authenticité.",
-        "Hors sujet : le split-horizon sert des réponses différentes selon l'origine, sans vérification cryptographique.",
+        "À retenir : DNSSEC signe les enregistrements avec une chaîne de confiance vérifiable par le résolveur — authenticité et intégrité garanties.",
+        "Sans lien ici : le reverse lookup traduit une IP en nom, sans aucune garantie d'authenticité.",
+        "À côté du sujet : le split-horizon sert des réponses différentes selon l'origine, sans vérification cryptographique.",
         "Piège de périmètre : DoH chiffre le transport des requêtes sans signer les données."
       ]
     },
@@ -2937,8 +2939,8 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Cosmétique : masquer le SSID n'empêche ni la capture du handshake ni l'attaque hors ligne.",
         "Cosmétique : le filtrage MAC se contourne par usurpation après simple écoute radio.",
-        "Hors sujet : le bail DHCP n'a aucun rapport avec l'authentification Wi-Fi.",
-        "Correct : SAE remplace le handshake attaquable de WPA2 par l'échange Dragonfly — chaque essai de mot de passe exige une interaction en ligne, tuant l'attaque par dictionnaire hors ligne."
+        "Ce n'est pas la question : le bail DHCP n'a aucun rapport avec l'authentification Wi-Fi.",
+        "C'est bien cela : SAE remplace le handshake attaquable de WPA2 par l'échange Dragonfly — chaque essai de mot de passe exige une interaction en ligne, tuant l'attaque par dictionnaire hors ligne."
       ]
     },
     {
@@ -2954,7 +2956,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 1,
       "pourquoi": [
         "Trop haut : le load balancer répartit selon des critères de couches 4 à 7.",
-        "Correct : le switch apprend les adresses MAC dans sa table CAM et commute les trames en couche 2.",
+        "Le switch apprend les adresses MAC dans sa table CAM et commute les trames en couche 2.",
         "Piège de couche : le routeur décide selon les adresses IP en couche 3.",
         "Trop haut : le pare-feu applicatif inspecte jusqu'à la couche 7."
       ]
@@ -2974,7 +2976,7 @@ window.CISSP_DATA.domains[4] = {
         "Trop large : un client full tunnel exige une installation et ouvre bien plus que l'application visée.",
         "Disproportionné : un VPN site à site ouvrirait tout un réseau tiers non maîtrisé.",
         "Dangereux : exposer RDP à travers le pare-feu est un vecteur classique de compromission.",
-        "Correct : le portail TLS clientless fonctionne dans un navigateur et ne publie que l'application autorisée — moindre privilège sans logiciel à installer."
+        "En effet, le portail TLS clientless fonctionne dans un navigateur et ne publie que l'application autorisée — moindre privilège sans logiciel à installer."
       ]
     },
     {
@@ -2989,7 +2991,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "TLS 1.3 élague le protocole : suppression des suites faibles (RSA statique, RC4, CBC anciennes, SHA-1), échange de clé exclusivement éphémère garantissant la forward secrecy, négociation raccourcie et chiffrée plus tôt. L'authentification serveur par certificat existe depuis SSL, les clés symétriques restent de 128 ou 256 bits, et les certificats demeurent le mécanisme central.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : TLS 1.3 supprime les algorithmes faibles et rend la forward secrecy obligatoire pour tous les échanges de clés.",
+        "Réponse juste : TLS 1.3 supprime les algorithmes faibles et rend la forward secrecy obligatoire pour tous les échanges de clés.",
         "Contresens : les certificats demeurent le mécanisme central d'authentification.",
         "Anachronisme : l'authentification serveur par certificat existe depuis SSL.",
         "Invention : les clés symétriques restent de 128 ou 256 bits."
@@ -3008,7 +3010,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 2,
       "pourquoi": [
         "Disqualifié : LEAP est un protocole propriétaire cassé, sans certificats.",
-        "Correct : EAP-TLS impose des certificats côté serveur ET sur chaque client — authentification mutuelle la plus robuste, au prix d'une PKI.",
+        "Option correcte : EAP-TLS impose des certificats côté serveur ET sur chaque client — authentification mutuelle la plus robuste, au prix d'une PKI.",
         "Trop étroit : PEAP n'exige un certificat que côté serveur.",
         "Trop étroit : EAP-TTLS tunnellise une authentification interne avec un seul certificat serveur."
       ]
@@ -3027,7 +3029,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Trop passif : un honeypot détecte et leurre, il ne confine pas.",
         "Hors position : le pare-feu de périmètre ne voit pas les flux east-west internes.",
-        "Correct : des politiques de filtrage par charge de travail n'autorisent que les flux strictement nécessaires et confinent la compromission — la parade directe au mouvement latéral.",
+        "Oui — des politiques de filtrage par charge de travail n'autorisent que les flux strictement nécessaires et confinent la compromission — la parade directe au mouvement latéral.",
         "Hors sujet : le chiffrement de disque protège les données au repos, pas les connexions réseau."
       ]
     },
@@ -3045,7 +3047,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Trop large : le broadcast inonde tout un segment.",
         "Piège de proximité : le multicast livre à un groupe abonné, sans notion de noeud le plus proche.",
-        "Correct : l'anycast route chaque client vers l'instance la plus proche partageant l'adresse — le mécanisme des CDN et du DNS mondial.",
+        "À retenir : l'anycast route chaque client vers l'instance la plus proche partageant l'adresse — le mécanisme des CDN et du DNS mondial.",
         "Trop étroit : l'unicast vise un destinataire unique."
       ]
     },
@@ -3061,7 +3063,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "La différence est le placement : l'IPS, en coupure sur le chemin du trafic, peut rejeter les paquets malveillants immédiatement, avec pour contrepartie le risque de bloquer du trafic légitime et de constituer un point de panne. L'IDS écoute passivement via SPAN ou TAP et alerte seulement. Les deux peuvent combiner signatures et détection d'anomalies, aucun ne chiffre, et l'IPS opère bien au-delà de la couche 2.",
       "difficulte": 1,
       "pourquoi": [
-        "Correct : l'IPS en coupure bloque en temps réel, l'IDS sur copie de trafic ne fait qu'alerter — la différence opérationnelle est le placement.",
+        "C'est bien cela : l'IPS en coupure bloque en temps réel, l'IDS sur copie de trafic ne fait qu'alerter — la différence opérationnelle est le placement.",
         "Invention : aucun des deux ne chiffre le trafic surveillé.",
         "Faux : l'IPS opère bien au-delà de la couche 2.",
         "Faux clivage : les deux peuvent combiner signatures et détection d'anomalies."
@@ -3080,7 +3082,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 2,
       "pourquoi": [
         "Insuffisant : un portail captif authentifie sans évaluer l'état du poste.",
-        "Correct : conditionner l'accès à la vérification préalable de conformité (patchs, antivirus) est l'évaluation de posture preadmission.",
+        "Conditionner l'accès à la vérification préalable de conformité (patchs, antivirus) est l'évaluation de posture preadmission.",
         "Hors rôle : la découverte agentless inventorie sans conditionner l'admission.",
         "Hors phase : la surveillance postadmission agit après l'accès, pas avant."
       ]
@@ -3100,7 +3102,7 @@ window.CISSP_DATA.domains[4] = {
         "Faux : AH ne chiffre pas, il ne peut donc pas être lent à chiffrer.",
         "Contresens : AH fournit précisément l'intégrité, c'est sa raison d'être.",
         "Faux : AH fonctionne en IPv4 comme en IPv6.",
-        "Correct : le contrôle d'intégrité d'AH couvre l'en-tête IP que tout NAT réécrit, ce qui casse la vérification — or le NAT est omniprésent, d'où l'abandon d'AH au profit d'ESP avec NAT-T."
+        "En effet, le contrôle d'intégrité d'AH couvre l'en-tête IP que tout NAT réécrit, ce qui casse la vérification — or le NAT est omniprésent, d'où l'abandon d'AH au profit d'ESP avec NAT-T."
       ]
     },
     {
@@ -3117,7 +3119,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Hors rôle : RTCP transporte des statistiques de qualité.",
         "Hors rôle : H.323 est une pile de signalisation concurrente, sans chiffrement intrinsèque.",
-        "Correct : SIPS est SIP encapsulé dans TLS — il chiffre l'établissement, la modification et la clôture des sessions VoIP.",
+        "Réponse juste : SIPS est SIP encapsulé dans TLS — il chiffre l'établissement, la modification et la clôture des sessions VoIP.",
         "Confusion de rôle : SRTP protège les flux média, pas la signalisation."
       ]
     },
@@ -3133,7 +3135,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Les trames de désauthentification forgées déconnectent les clients de force : c'est un déni de service, mais surtout un rabatteur classique vers un evil twin qui imite le SSID légitime, ou un moyen de forcer un nouveau handshake WPA2 à capturer. Ces trames ne cassent pas AES, ne touchent pas au DHCP et n'atteignent pas le serveur RADIUS. La parade est le 802.11w (Protected Management Frames).",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : déconnecter les clients de force sert le plus souvent à les rabattre vers un evil twin ou à forcer un handshake à capturer — la parade est 802.11w.",
+        "Option correcte : déconnecter les clients de force sert le plus souvent à les rabattre vers un evil twin ou à forcer un handshake à capturer — la parade est 802.11w.",
         "Hors portée : le serveur RADIUS n'est pas atteint par des trames de gestion radio.",
         "Hors mécanisme : ces trames ne consomment pas le pool DHCP.",
         "Faux : les trames de désauthentification ne cassent pas le chiffrement AES."
@@ -3152,8 +3154,8 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 1,
       "pourquoi": [
         "Confusion de stratégie : le tunneling encapsule un protocole dans l'autre, il ne les exécute pas en parallèle.",
-        "Correct : le dual stack fait tourner IPv4 et IPv6 simultanément sur les mêmes équipements — à condition de sécuriser les deux piles.",
-        "Hors sujet : la compression d'en-têtes est une optimisation, pas une stratégie de transition.",
+        "Oui — le dual stack fait tourner IPv4 et IPv6 simultanément sur les mêmes équipements — à condition de sécuriser les deux piles.",
+        "Sans lien ici : la compression d'en-têtes est une optimisation, pas une stratégie de transition.",
         "Confusion de stratégie : NAT64 traduit entre les deux familles d'adresses."
       ]
     },
@@ -3172,7 +3174,7 @@ window.CISSP_DATA.domains[4] = {
         "Hors sujet sécurité : la latence des relais est un enjeu de performance, pas le risque principal.",
         "Erreur factuelle : Teredo utilise UDP en sortie, aucune ouverture entrante de port TCP n'est requise.",
         "Invention plausible : des adresses IPv6 ne peuvent pas entrer en conflit avec un plan d'adressage IPv4 RFC 1918.",
-        "Correct : l'IPv6 encapsulé dans UDP traverse NAT et pare-feux sans être inspecté par les équipements configurés pour l'IPv4 natif — un canal de contournement et d'exfiltration."
+        "À retenir : l'IPv6 encapsulé dans UDP traverse NAT et pare-feux sans être inspecté par les équipements configurés pour l'IPv4 natif — un canal de contournement et d'exfiltration."
       ]
     },
     {
@@ -3187,7 +3189,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Suivi d'état, filtrage par adresses et NAT existent déjà sur les pare-feux stateful classiques. Le NGFW ajoute l'app-awareness : reconnaître l'application réelle même sur un port détourné, appliquer des politiques par application et par identité d'utilisateur, avec IPS intégré et souvent déchiffrement TLS pour inspection. C'est cette visibilité applicative qui le définit.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : identifier l'application quel que soit le port grâce à l'inspection profonde, avec IPS intégré et connaissance des utilisateurs, est la capacité définissant le NGFW.",
+        "C'est bien cela : identifier l'application quel que soit le port grâce à l'inspection profonde, avec IPS intégré et connaissance des utilisateurs, est la capacité définissant le NGFW.",
         "Déjà acquis : le NAT est une fonction banale des pare-feux classiques.",
         "Déjà acquis : le filtrage par adresses est la base de tout pare-feu.",
         "Déjà acquis : le suivi d'état existe sur tout pare-feu stateful."
@@ -3207,7 +3209,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Hors couche : le port security concerne les adresses MAC des switches d'accès.",
         "Hors rôle : un concentrateur VPN chiffre des accès sans filtrer le contenu applicatif.",
-        "Correct : le WAF inspecte requêtes et réponses HTTP/S et bloque XSS et injections que le pare-feu stateful, aveugle au contenu, laisse passer.",
+        "Le WAF inspecte requêtes et réponses HTTP/S et bloque XSS et injections que le pare-feu stateful, aveugle au contenu, laisse passer.",
         "Sans effet : resserrer les règles de ports ne change rien au trafic légitime du port 443."
       ]
     },
@@ -3224,7 +3226,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 2,
       "pourquoi": [
         "Trop limité : FCoE encapsule en couche 2 Ethernet, non routable en IP.",
-        "Correct : iSCSI transporte les commandes SCSI dans TCP/IP — un SAN en mode bloc sur infrastructure IP standard.",
+        "En effet, iSCSI transporte les commandes SCSI dans TCP/IP — un SAN en mode bloc sur infrastructure IP standard.",
         "Contrainte matérielle : Fibre Channel exige une infrastructure dédiée.",
         "Confusion de mode : NFS est un protocole de partage de fichiers, pas de stockage en mode bloc."
       ]
@@ -3233,7 +3235,7 @@ window.CISSP_DATA.domains[4] = {
       "q": "Which statement about Fibre Channel over Ethernet (FCoE) is CORRECT?",
       "choix": [
         "It natively encrypts all stored and in-transit storage traffic with TLS",
-        "It authenticates every storage initiator using Kerberos tickets issued by a domain controller",
+        "It runs over an ordinary best-effort Ethernet network and tolerates frame loss like normal traffic",
         "It routes storage traffic transparently across any ordinary IP network",
         "It encapsulates Fibre Channel frames at Layer 2 and needs a lossless 10 Gbps Ethernet fabric"
       ],
@@ -3242,9 +3244,9 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 3,
       "pourquoi": [
         "Faux : FCoE ne chiffre rien nativement.",
-        "Invention : FCoE n'authentifie pas par Kerberos ; la sécurité repose sur l'isolement du fabric et le zoning.",
+        "Faux : FCoE exige justement un fabric Ethernet sans perte (Data Center Bridging) ; il ne tolère pas la perte de trames comme le trafic Ethernet ordinaire.",
         "Confusion avec iSCSI : FCoE ne se route pas sur un réseau IP quelconque.",
-        "Correct : FCoE encapsule les trames Fibre Channel en couche 2 et exige un fabric Ethernet sans perte à 10 Gbps minimum."
+        "C'est l'affirmation exacte : FCoE encapsule les trames Fibre Channel en couche 2 et exige un fabric Ethernet sans perte à 10 Gbps minimum."
       ]
     },
     {
@@ -3262,7 +3264,7 @@ window.CISSP_DATA.domains[4] = {
         "Hors périmètre : le CDN ne chiffre pas la base de données de l'origine.",
         "Contresens : le CDN utilise TLS, il ne le remplace pas.",
         "Sur-promesse : le CDN ne corrige pas les vulnérabilités du code applicatif.",
-        "Correct : grâce à l'anycast et à ses points de présence mondiaux, le CDN absorbe les attaques volumétriques loin de l'origine tout en servant le cache."
+        "Réponse juste : grâce à l'anycast et à ses points de présence mondiaux, le CDN absorbe les attaques volumétriques loin de l'origine tout en servant le cache."
       ]
     },
     {
@@ -3279,7 +3281,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Contresens : la confiance par défaut à l'intérieur du périmètre est exactement ce que le Zero Trust abolit.",
         "Modèle périmé : concentrer les contrôles au périmètre décrit l'ancien modèle château-fort.",
-        "Correct : « never trust, always verify » — aucune confiance liée à l'emplacement, chaque requête authentifiée, autorisée et revalidée en continu.",
+        "Option correcte : « never trust, always verify » — aucune confiance liée à l'emplacement, chaque requête authentifiée, autorisée et revalidée en continu.",
         "Contresens : le Zero Trust chiffre aussi le trafic interne, pas seulement Internet."
       ]
     },
@@ -3296,7 +3298,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 3,
       "pourquoi": [
         "Sans effet : les jumbo frames concernent la taille des trames, pas l'empilement d'étiquettes.",
-        "Correct : VLAN natif dédié et étiqueté plus désactivation de DTP suppriment les conditions du double tagging.",
+        "Oui — VLAN natif dédié et étiqueté plus désactivation de DTP suppriment les conditions du double tagging.",
         "Confusion de rôle : le spanning tree prévient les boucles, pas la manipulation d'étiquettes.",
         "Incomplet : MACsec chiffre les liens sans corriger la logique d'étiquetage exploitée."
       ]
@@ -3313,7 +3315,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Telnet transmet identifiants et commandes en clair : toute écoute du réseau les capture. Il doit être remplacé par SSH, qui chiffre la session d'administration. SFTP transfère les fichiers au-dessus de SSH, et SNMPv3 est justement la version de SNMP qui ajoute authentification et chiffrement, contrairement aux versions 1 et 2c.",
       "difficulte": 1,
       "pourquoi": [
-        "Correct : Telnet transmet identifiants et commandes en clair — à remplacer par SSH.",
+        "À retenir : Telnet transmet identifiants et commandes en clair — à remplacer par SSH.",
         "Inversion : SFTP transfère les fichiers au-dessus de SSH, donc chiffré.",
         "Inversion : SNMPv3 est la version qui ajoute authentification et chiffrement.",
         "Inversion : SSH est justement le remplaçant chiffré."
@@ -3325,16 +3327,16 @@ window.CISSP_DATA.domains[4] = {
         "TACACS+ runs over UDP ports 1812 and 1813 like RADIUS does",
         "TACACS+ uses TCP port 49, encrypts the whole payload, and separates the three AAA functions",
         "TACACS+ encrypts only the password field of each individual packet",
-        "TACACS+ cannot be used for administering network devices such as routers and switches at all"
+        "TACACS+ merges authentication and authorization into one inseparable step, exactly as RADIUS does"
       ],
       "reponse": 1,
       "explication": "TACACS+ utilise TCP 49, chiffre l'intégralité de la charge utile et sépare les trois fonctions AAA, ce qui permet des autorisations fines commande par commande : il est privilégié pour l'administration des équipements réseau. RADIUS, lui, fonctionne en UDP 1812/1813 et ne chiffre que le mot de passe, le reste de l'échange circulant en clair.",
-      "difficulte": 3,
+      "difficulte": 2,
       "pourquoi": [
         "Confusion : UDP 1812/1813 sont les ports de RADIUS.",
-        "Correct : TCP 49, chiffrement de toute la charge utile et séparation des trois fonctions AAA — d'où sa préférence pour l'administration des équipements.",
+        "Réponse juste : TCP 49, chiffrement de toute la charge utile et séparation des trois fonctions AAA — d'où sa préférence pour l'administration des équipements.",
         "Inversion : ne chiffrer que le mot de passe est la limite de RADIUS, pas de TACACS+.",
-        "Contresens : l'administration des équipements réseau est précisément son cas d'usage phare."
+        "Inversion : séparer les fonctions AAA est justement la marque de TACACS+ ; les fusionner décrit plutôt RADIUS."
       ]
     },
     {
@@ -3352,7 +3354,7 @@ window.CISSP_DATA.domains[4] = {
         "Piège historique : avec le transport RSA statique, le vol de la clé privée déchiffre tout le trafic capturé.",
         "Contresens : des clés pré-partagées longue durée créent un secret durable dont la compromission expose l'historique.",
         "Contresens : l'escrow ajoute un dépositaire du secret, l'inverse de l'exigence.",
-        "Correct : seuls les échanges Diffie-Hellman éphémères génèrent des clés de session uniques non dérivables de la clé privée — la forward secrecy exigée."
+        "C'est bien cela : seuls les échanges Diffie-Hellman éphémères génèrent des clés de session uniques non dérivables de la clé privée — la forward secrecy exigée."
       ]
     },
     {
@@ -3367,7 +3369,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "Le SD-WAN fait transiter le trafic d'entreprise par des liens Internet non fiables et ouvre des sorties locales dans chaque agence : il faut chiffrer tous les tunnels inter-sites (IPsec) et appliquer partout une politique de sécurité homogène et centralisée, ce que le modèle SASE apporte en combinant SD-WAN et services de sécurité cloud. Désactiver le chiffrement est inacceptable, déléguer aveuglément aux FAI ne donne aucune garantie, et tout rapatrier au siège annule l'intérêt du SD-WAN.",
       "difficulte": 2,
       "pourquoi": [
-        "Correct : chiffrer tous les tunnels inter-sites et appliquer une politique homogène et centralisée à chaque sortie locale — ce que le modèle SASE industrialise.",
+        "Chiffrer tous les tunnels inter-sites et appliquer une politique homogène et centralisée à chaque sortie locale — ce que le modèle SASE industrialise.",
         "Inacceptable : désactiver le chiffrement sur des liens Internet publics expose tout le trafic.",
         "Contre-productif : tout rapatrier au siège annule le bénéfice même du SD-WAN.",
         "Abdication : déléguer aveuglément la sécurité aux FAI ne donne aucune garantie ni visibilité."
@@ -3387,7 +3389,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Sans effet : les jumbo frames n'ont aucun rapport avec ARP.",
         "Sans effet : le vieillissement de la table CAM ne valide pas les réponses ARP.",
-        "Correct : Dynamic ARP Inspection valide chaque réponse ARP contre les associations IP-MAC de confiance issues du DHCP snooping et rejette les réponses forgées.",
+        "En effet, dynamic ARP Inspection valide chaque réponse ARP contre les associations IP-MAC de confiance issues du DHCP snooping et rejette les réponses forgées.",
         "Aggravant : désactiver le spanning tree crée des risques de boucles sans bénéfice de sécurité."
       ]
     },
@@ -3404,7 +3406,7 @@ window.CISSP_DATA.domains[4] = {
       "difficulte": 3,
       "pourquoi": [
         "Techniquement vraie mais trop étroite : la MFA sécurise l'entrée sans confiner un attaquant déjà présent.",
-        "Correct : prioriser les zones critiques identifiées par la BIA traite le risque démontré sous contrainte budgétaire tout en lançant la trajectoire Zero Trust.",
+        "Réponse juste : prioriser les zones critiques identifiées par la BIA traite le risque démontré sous contrainte budgétaire tout en lançant la trajectoire Zero Trust.",
         "Vraie mais hors phase : c'est la cible pluriannuelle, infinançable en première étape avec une fraction du budget.",
         "Réponse de technicien périmétrique : le mouvement latéral se joue à l'intérieur, pas à la frontière."
       ]
@@ -3421,7 +3423,7 @@ window.CISSP_DATA.domains[4] = {
       "explication": "L'arbitrage attendu d'un manager concilie la visibilité du SOC et la proportionnalité juridique : une inspection sélective, exemptant les catégories sensibles, encadrée par une politique validée avec le DPO et notifiée aux salariés, conserve la détection sur l'essentiel du trafic sans violer la vie privée. Tout inspecter est un absolu juridiquement indéfendable ; tout abandonner sacrifie la visibilité réseau alors qu'un compromis existe ; cibler des personnes plutôt que des catégories de trafic est discriminatoire et laisse la majorité du trafic sans détection.",
       "difficulte": 3,
       "pourquoi": [
-        "Correct : l'inspection sélective gouvernée avec le DPO et transparente pour les salariés est l'équilibre proportionné entre visibilité et vie privée.",
+        "Option correcte : l'inspection sélective gouvernée avec le DPO et transparente pour les salariés est l'équilibre proportionné entre visibilité et vie privée.",
         "Vraie mais contextuellement fausse : l'EDR complète l'inspection, y renoncer abandonne toute la visibilité réseau alors qu'un compromis existe.",
         "Trop étroit et discriminatoire : viser des personnes plutôt que des catégories de trafic pose un problème juridique et laisse le reste sans détection.",
         "Absolu : ignorer la proportionnalité et la vie privée crée un risque juridique supérieur au gain marginal de détection."
@@ -3442,7 +3444,7 @@ window.CISSP_DATA.domains[4] = {
         "Absolu : imposer l'arrêt sacrifie le métier alors qu'une mesure compensatoire efficace existe.",
         "Hors contrainte : le scénario établit que le patch est impossible avant neuf mois — fenêtres de maintenance et requalification obligent.",
         "Vraie mais hors phase : la visibilité passive est le bon second pas, mais détecter sans couper le chemin d'attaque ne réduit pas l'exposition.",
-        "Correct : les zones et conduits (Purdue, IEC 62443) coupent le chemin d'attaque sans arrêt de production — le contrôle compensatoire de référence."
+        "Oui — les zones et conduits (Purdue, IEC 62443) coupent le chemin d'attaque sans arrêt de production — le contrôle compensatoire de référence."
       ]
     },
     {
@@ -3459,7 +3461,7 @@ window.CISSP_DATA.domains[4] = {
       "pourquoi": [
         "Vraie mais contextuellement fausse : la bascule déplace la cible sans neutraliser l'attaque, qui suivra la nouvelle adresse via le DNS.",
         "Hors délai : un upgrade de lien prend des jours et ne relève que marginalement le seuil de saturation.",
-        "Correct : filtrer en amont du lien saturé via le service contractuel est la seule action qui restaure le service dans le délai de continuité imposé.",
+        "À retenir : filtrer en amont du lien saturé via le service contractuel est la seule action qui restaure le service dans le délai de continuité imposé.",
         "Réponse de technicien hors position : le pare-feu est derrière le goulot d'étranglement et le botnet renouvelle ses adresses plus vite que les règles."
       ]
     }
