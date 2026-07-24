@@ -39,11 +39,12 @@ const Account = (() => {
             <option value="pratiquant" ${!p.niveau || p.niveau === "pratiquant" ? "selected" : ""}>Je travaille en IT/sécurité, je vise la certification</option>
             <option value="avance" ${p.niveau === "avance" ? "selected" : ""}>J'ai déjà commencé à préparer le CISSP</option>
           </select>
+          <p id="su-err" style="color:var(--ko);font-size:.85rem;display:none;margin-bottom:.6rem">Indiquez un prénom pour continuer.</p>
           <div style="text-align:right"><button class="btn" id="su-next1">Continuer →</button></div>
         </div>`;
       document.getElementById("su-next1").onclick = () => {
         const prenom = document.getElementById("su-prenom").value.trim();
-        if (!prenom) { document.getElementById("su-prenom").focus(); return; }
+        if (!prenom) { document.getElementById("su-err").style.display = "block"; document.getElementById("su-prenom").focus(); return; }
         saveProfil({ ...p, prenom, niveau: document.getElementById("su-niveau").value, created: p.created || Date.now() });
         signup(2);
       };
@@ -126,7 +127,7 @@ const Account = (() => {
         if (!a.done()) { items.push({ icone: "map", label: a.label, href: a.href }); break outer; }
       }
     }
-    if (due > 0) items.push({ icone: "cards", label: `Réviser ${due} flashcard(s) due(s) aujourd'hui`, href: "#/flashcards" });
+    if (due > 0) items.push({ icone: "cards", label: due > 25 ? `Réviser 20 flashcards (${due} dues au total — inutile de tout faire d'un coup)` : `Réviser ${due} flashcard(s) due(s) aujourd'hui`, href: "#/flashcards" });
     if (errs > 0) items.push({ icone: "journal", label: `Rejouer ${Math.min(20, errs)} question(s) de votre journal d'erreurs`, href: "#/rejouer-erreurs" });
     if (!items.length) items.push({ icone: "target", label: "Tout est à jour — faites un examen blanc pour confirmer !", href: "#/examen" });
     return items.slice(0, 3);
@@ -143,7 +144,8 @@ const Account = (() => {
     // garder ~2 semaines pour les examens blancs finaux
     const semainesContenu = Math.max(1, semaines - 2);
     const parSemaine = restantes.length / semainesContenu;
-    const rythmeOk = parSemaine <= (p.rythme >= 12 ? 2.2 : p.rythme >= 8 ? 1.6 : 1.1);
+    // marge de 25 % avant d'alerter : pas d'avertissement anxiogène dès le premier jour
+    const rythmeOk = parSemaine <= 1.25 * (p.rythme >= 12 ? 2.2 : p.rythme >= 8 ? 1.6 : 1.1);
     return {
       texte: `${jr} jours restants (${semaines} semaine${semaines > 1 ? "s" : ""}) pour ${restantes.length} escale${restantes.length > 1 ? "s" : ""} : ` +
         `visez ${Math.max(1, Math.ceil(parSemaine * 10) / 10)} escale(s) par semaine, en gardant les 2 dernières semaines pour les examens blancs.`,

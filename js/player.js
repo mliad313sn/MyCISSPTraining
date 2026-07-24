@@ -178,15 +178,19 @@ const Player = (() => {
   }
 
   function speak(text, onEnd) {
-    if (!("speechSynthesis" in window) || muted) { if (onEnd) revealTimers.push(setTimeout(onEnd, estimate(text))); return; }
+    // garde-fou : quoi qu'il arrive (pas de voix, événement onend jamais émis,
+    // synthèse silencieuse), la leçon avance — le TTS ne doit jamais figer le cours
+    let done = false;
+    const finish = () => { if (done) return; done = true; if (onEnd) onEnd(); };
+    if (!("speechSynthesis" in window) || muted) { revealTimers.push(setTimeout(finish, estimate(text))); return; }
     stopAudioKeepTimers();
     utter = new SpeechSynthesisUtterance(text);
     utter.lang = "fr-FR";
     if (frVoice) utter.voice = frVoice;
     utter.rate = 1.02;
-    if (onEnd) utter.onend = onEnd;
-    // repli si la synthèse échoue silencieusement
-    utter.onerror = () => { if (onEnd) revealTimers.push(setTimeout(onEnd, estimate(text))); };
+    utter.onend = finish;
+    utter.onerror = finish;
+    revealTimers.push(setTimeout(finish, Math.round(estimate(text) * 1.6) + 2000));
     speechSynthesis.speak(utter);
   }
   function stopAudioKeepTimers() { if ("speechSynthesis" in window) speechSynthesis.cancel(); }

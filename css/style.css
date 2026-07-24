@@ -381,8 +381,15 @@ h3 { font-size: 1rem; font-weight: 600; letter-spacing: -.01em; }
 .footer a { color: var(--muted); }
 
 @media (max-width: 900px) {
-  .topbar { gap: .8rem; padding: 0 1rem; }
+  /* nav sur plusieurs lignes : tous les liens restent visibles au doigt */
+  .topbar { gap: .5rem .8rem; padding: .55rem 1rem; height: auto; flex-wrap: wrap; }
+  .topnav {
+    order: 3; width: 100%; flex-wrap: wrap; justify-content: center;
+    overflow: visible; row-gap: .1rem;
+  }
+  .topnav a { padding: .3rem .55rem; font-size: .82rem; }
   .app { padding: 1.3rem 1rem 3rem; }
   .slide { padding: 1.3rem 1.2rem; }
   .grid { gap: 1rem; }
+  .player-controls button { padding: .55rem .6rem; }  /* cibles tactiles ≥ 40 px */
 }

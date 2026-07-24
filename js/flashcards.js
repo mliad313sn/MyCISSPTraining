@@ -82,13 +82,18 @@ const Flashcards = (() => {
         </div>
         <p style="text-align:center;color:var(--text-dim);font-size:.85rem;margin-top:.6rem">Cliquez sur la carte pour la retourner</p>
         <div class="fc-controls">
-          <button class="btn danger" id="fc-again">À revoir</button>
-          <button class="btn" id="fc-known" style="background:var(--ok)">✓ Je connais</button>
+          <button class="btn danger" id="fc-again" disabled title="Retournez d'abord la carte">À revoir</button>
+          <button class="btn" id="fc-known" style="background:var(--ok)" disabled title="Retournez d'abord la carte">✓ Je connais</button>
         </div>
       </div>`;
 
     const fc = document.getElementById("fc");
-    fc.onclick = () => fc.classList.toggle("flipped");
+    // on ne peut se juger qu'après avoir vu le verso : anti-triche envers soi-même
+    fc.onclick = () => {
+      fc.classList.toggle("flipped");
+      document.getElementById("fc-known").disabled = false;
+      document.getElementById("fc-again").disabled = false;
+    };
     document.getElementById("fc-known").onclick = () => {
       Progress.reviewCard(c.key, true); known++; idx++; render();
     };

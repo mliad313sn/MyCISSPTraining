@@ -69,8 +69,12 @@ const Exam = (() => {
   }
 
   /* ---------- Accueil ---------- */
+  function enCours() { return timerId != null; }
+  function resume() { render(); }
+  function abandon() { clearInterval(timerId); timerId = null; }
+
   function home() {
-    clearInterval(timerId);
+    clearInterval(timerId); timerId = null;
     const hist = Progress.exams().slice(-5).reverse();
     const enTotal = domains().reduce((s, d) => s + (d.quizEn || []).length, 0);
     document.getElementById("app").innerHTML = `
@@ -270,7 +274,7 @@ const Exam = (() => {
 
   /* ---------- Résultat ---------- */
   function finish(timeout) {
-    clearInterval(timerId);
+    clearInterval(timerId); timerId = null;
     const scored = answers.filter(a => !a.pretest);
     const score = scored.filter(a => a.good).length;
     const total = scored.length;
@@ -333,5 +337,5 @@ const Exam = (() => {
     window.scrollTo(0, 0);
   }
 
-  return { home, start };
+  return { home, start, enCours, resume, abandon };
 })();

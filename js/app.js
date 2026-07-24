@@ -12,6 +12,15 @@ const App = (() => {
     const parts = hash.replace(/^#\//, "").split("/");
     const view = parts[0] || "";
 
+    // garde-fou : ne pas perdre un examen en cours sur une navigation accidentelle
+    if (typeof Exam !== "undefined" && Exam.enCours() && view !== "examen") {
+      if (!confirm("Un examen blanc est en cours — quitter maintenant efface vos réponses. Continuer ?")) {
+        location.hash = "#/examen";
+        return;
+      }
+      Exam.abandon();
+    }
+
     setActiveNav(view);
     refreshProfilChip();
     window.scrollTo(0, 0);
@@ -32,7 +41,7 @@ const App = (() => {
         else if (parts[1] === "decoder") Mindset.startDecoder();
         else Mindset.list(parts[1]);
         break;
-      case "examen": Exam.home(); break;
+      case "examen": Exam.enCours() ? Exam.resume() : Exam.home(); break;
       case "glossaire": renderGlossary(); break;
       case "erreurs": renderErrors(); break;
       case "rejouer-erreurs": Quiz.openErrors(); break;
@@ -67,7 +76,8 @@ const App = (() => {
     const base = ds.reduce((s, d) => s + Math.min(100, 0.5 * Progress.domainPct(d) + 0.5 * Progress.quizBest(d.id)), 0) / ds.length;
     const bestFull = Math.max(0, ...exams.filter(e => e.total >= 100).map(e => e.pct));
     const readiness = Math.round(0.7 * base + 0.3 * bestFull);
-    const readyColor = readiness >= 80 ? "var(--ok)" : readiness >= 50 ? "var(--warn)" : "var(--ko)";
+    // neutre tant qu'on n'a pas commencé : un « 0 % » rouge au premier jour décourage
+    const readyColor = readiness === 0 ? "var(--faint)" : readiness >= 80 ? "var(--ok)" : readiness >= 50 ? "var(--warn)" : "var(--ko)";
 
     // prochaine leçon à suivre
     let next = null;
@@ -350,9 +360,28 @@ const App = (() => {
   }
 
   /* ---------- Initialisation ---------- */
+  /* Accessibilité clavier : toute carte cliquable (div[onclick]) devient
+     focusable et activable à Entrée/Espace — appliqué après chaque rendu. */
+  function a11yPass() {
+    document.querySelectorAll("#app [onclick]").forEach(el => {
+      if (!/^(A|BUTTON|SELECT|LABEL|INPUT)$/.test(el.tagName) && !el.hasAttribute("tabindex")) {
+        el.setAttribute("tabindex", "0");
+        el.setAttribute("role", "button");
+      }
+    });
+  }
+
   function init() {
     window.addEventListener("hashchange", route);
     refreshProfilChip();
+    const appEl = document.getElementById("app");
+    new MutationObserver(a11yPass).observe(appEl, { childList: true, subtree: true });
+    appEl.addEventListener("keydown", e => {
+      if ((e.key === "Enter" || e.key === " ") && e.target.getAttribute && e.target.getAttribute("role") === "button") {
+        e.preventDefault();
+        e.target.click();
+      }
+    });
     route();
   }
 
