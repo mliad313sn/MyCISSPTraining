@@ -185,7 +185,7 @@ const Account = (() => {
       <div class="card" style="margin-bottom:1.1rem">
         <h3 style="margin-bottom:.7rem">Mes 14 derniers jours</h3>
         <div style="display:flex;align-items:flex-end;gap:5px;height:90px">
-          ${jours.map(j => `<div title="${j.jour} : ${j.n} action(s)" style="flex:1;background:${j.n ? "linear-gradient(180deg,var(--accent),var(--accent-2))" : "var(--bg-elev)"};height:${Math.max(6, Math.round(84 * j.n / maxN))}px;border-radius:4px"></div>`).join("")}
+          ${jours.map(j => `<div title="${j.jour} : ${j.n} action(s)" style="flex:1;background:${j.n ? "var(--ok)" : "var(--bg-elev)"};height:${Math.max(6, Math.round(84 * j.n / maxN))}px;border-radius:4px"></div>`).join("")}
         </div>
         <div style="display:flex;justify-content:space-between;color:var(--text-dim);font-size:.75rem;margin-top:.3rem"><span>il y a 14 j</span><span>aujourd'hui</span></div>
       </div>
