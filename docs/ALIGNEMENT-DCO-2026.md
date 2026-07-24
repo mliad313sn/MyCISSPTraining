@@ -41,4 +41,41 @@ maintenant l'équilibre des positions de réponse. Journaux de correction par do
 (correction-d1…d8.md). Re-évaluation après la vague ; itération jusqu'à zéro ❌ et
 résorption des 🟡.
 
-Les résultats de la re-évaluation sont consignés ci-dessous à mesure des itérations.
+## Après correction (itération 1) — juillet 2026
+
+Un correcteur par domaine a refermé chaque bullet 🟡/❌ : slide d'enseignement quand
+le concept manquait, question de niveau application quand la boucle leçon↔question
+n'était pas fermée. Bilan des ajouts :
+
+| Domaine | Slides ajoutées | Questions ajoutées | Écarts refermés |
+|---|---|---|---|
+| D1 | 5 | 8 | 9 🟡 |
+| D2 | 3 | 5 | 3 🟡 |
+| D3 | 6 | 29 | 25 🟡 + 1 ❌ (SCIF) |
+| D4 | 7 | 9 | 8 🟡 |
+| D5 | 4 | 3 | 4 🟡 |
+| D6 | 4 | 9 | 5 🟡 + 1 ❌ (compliance checks) |
+| D7 | 7 | 21 | 14 🟡 |
+| D8 | 6 | 9 | 9 🟡 |
+| **Total** | **42** | **93** | **77 🟡 + 2 ❌** |
+
+Les deux ❌ sont désormais enseignés ET testés : *restricted/work area security* (slide
+SCIF/operations centers + question, D3) et *compliance checks* (slide CIS Benchmarks/SCAP/ASV
++ questions, D6).
+
+**Banque après correction : 786 questions FR + 294 EN = 1080** (contre 987), 555 diapositives.
+
+**Re-vérification automatisée (couverture 100 %) :**
+- Lint profond : distribution des réponses **25/25/25/25 %** maintenue, 0 défaut structurel.
+- VERIFY CAT : **8/8 domaines PASS** (≥ 40 % scénarisées sur l'assiette d'examen, ≥ 25 %
+  difficulté 3, 100 % corrections par option).
+- Test navigateur : 26/26 vérifications vertes.
+
+**État d'alignement DCO 2026 : 309/309 bullets enseignés, 0 ❌, boucle leçon↔question
+fermée sur les 79 items qui la laissaient ouverte.** Les notes par domaine repassent à
+9–9,5/10 de fidélité au DCO ; le niveau « CISSP en exercice » reste porté par les ~120
+questions de jugement managérial difficulté 3 et les 16 scénarios.
+
+*Limite méthodologique inchangée (voir EVALUATION-CAT.md) : auto-vérification par IA à
+plusieurs niveaux indépendants, sans relecture par un CISSP humain certifié ni calibration
+psychométrique — prochaine étape hors de portée d'une boucle logicielle.*
