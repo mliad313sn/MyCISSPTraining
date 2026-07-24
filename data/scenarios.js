@@ -70,7 +70,7 @@ window.CISSP_DATA.scenarios = [
         "situation": "Six semaines plus tard, l'évaluation technique révèle des malwares dormants sur trois serveurs de StayEasy, présents depuis avant l'acquisition. Aucune donnée ne semble avoir été exfiltrée récemment.",
         "q": "En tant que RSSI, quelle est votre MEILLEURE action ?",
         "choix": [
-          "Déclencher le processus de réponse à incident, préserver les preuves et informer la direction et le juridique pour activer les garanties contractuelles",
+          "Déclencher le processus de réponse à incident et préserver les preuves",
           "Licencier l'ancien administrateur système de StayEasy",
           "Faire nettoyer discrètement les serveurs pour ne pas inquiéter la direction",
           "Débrancher définitivement tout le réseau StayEasy"
@@ -139,7 +139,7 @@ window.CISSP_DATA.scenarios = [
         "q": "Quelle est la MEILLEURE action vis-à-vis des clients concernés ?",
         "choix": [
           "Publier l'information uniquement dans les conditions générales de vente",
-          "Informer sans retard injustifié les clients concernés, en langage clair : nature de la violation, conséquences probables, mesures prises et recommandations (opposition sur carte, vigilance)",
+          "Informer sans retard injustifié les clients, de façon claire et actionnable",
           "Ne rien communiquer tant que la CNIL n'a pas rendu ses conclusions",
           "Envoyer un e-mail générique à toute la base « par précaution » sans mentionner l'incident"
         ],
@@ -160,7 +160,7 @@ window.CISSP_DATA.scenarios = [
           "Externaliser entièrement le paiement et considérer le sujet clos",
           "Acheter la solution de sécurité web la plus complète du marché",
           "Souscrire une cyber-assurance et ne rien changer techniquement",
-          "Conduire une analyse de risque : estimer l'exposition (amendes GDPR, fraude, réputation) et comparer le coût annuel des contrôles à la réduction d'ALE attendue"
+          "Analyser le risque : coût des contrôles vs réduction d'ALE"
         ],
         "reponse": 3,
         "pourquoi": [
@@ -176,7 +176,7 @@ window.CISSP_DATA.scenarios = [
         "situation": "Vous présentez le plan. Un administrateur suggère de conserver désormais l'intégralité des logs de navigation de tous les clients pendant dix ans « pour faciliter les futures investigations ».",
         "q": "Quelle est la MEILLEURE réponse à cette suggestion ?",
         "choix": [
-          "Appliquer les principes de minimisation et de limitation de conservation : ne garder que les données nécessaires, pour une durée justifiée et documentée",
+          "Appliquer la minimisation et limiter la durée de conservation",
           "Conserver les logs mais les stocker hors d'Europe pour échapper au GDPR",
           "Accepter : plus on a de logs, mieux on investigue",
           "Refuser toute conservation de logs pour respecter la vie privée"
@@ -247,7 +247,7 @@ window.CISSP_DATA.scenarios = [
           "Elle est interdite uniquement pour des raisons budgétaires",
           "Elle ne pose aucun problème : mieux vaut trop protéger que pas assez",
           "Elle oblige à chiffrer les documents, ce qui est trop lent",
-          "Elle augmente inutilement les coûts de protection, entrave le travail et banalise les niveaux élevés, ce qui affaiblit la protection des vrais secrets"
+          "Elle coûte cher, gêne le travail et banalise les niveaux élevés"
         ],
         "reponse": 3,
         "pourquoi": [
@@ -265,7 +265,7 @@ window.CISSP_DATA.scenarios = [
         "choix": [
           "La confiance dans le prestataire de recyclage, qui « s'occupe de tout »",
           "Une suppression des fichiers et un formatage rapide avant enlèvement",
-          "Une procédure de sanitization adaptée au niveau : effacement sécurisé vérifié, dégaussage ou destruction physique pour les plus sensibles, avec certificat de destruction",
+          "Une sanitization adaptée au niveau, avec certificat de destruction",
           "Le stockage indéfini de tous les vieux disques dans une armoire fermée"
         ],
         "reponse": 2,
@@ -334,7 +334,7 @@ window.CISSP_DATA.scenarios = [
           "Ce sont des données marketing ordinaires : un simple e-mail d'excuse suffira",
           "Ce sont des données anonymes puisqu'il n'y a ni nom ni adresse postale",
           "Ce sont des données appartenant à AWS, qui est responsable de la notification",
-          "Ce sont des données de catégorie particulière (données concernant la santé) au sens du GDPR : la violation présente un risque élevé et déclenche notification à l'autorité et information des personnes"
+          "Données de santé : catégorie particulière du GDPR, donc risque élevé"
         ],
         "reponse": 3,
         "pourquoi": [
@@ -350,7 +350,7 @@ window.CISSP_DATA.scenarios = [
         "situation": "La crise est gérée. Vous vous attaquez à la cause racine : personne ne sait quelles données existent, où elles sont, ni qui en est responsable. Les exports S3 avaient été créés « temporairement » par un data engineer parti depuis.",
         "q": "Quel chantier structurel lancez-vous EN PRIORITÉ ?",
         "choix": [
-          "Établir un inventaire des données et des actifs cloud, avec désignation d'un owner pour chaque jeu de données et classification associée",
+          "Inventaire des données : ownership et classification",
           "Chiffrer tous les buckets et considérer le problème résolu",
           "Faire signer une charte de bonne conduite aux développeurs",
           "Interdire l'usage de S3 dans toute l'entreprise"
@@ -391,7 +391,7 @@ window.CISSP_DATA.scenarios = [
           "Une formation annuelle de sensibilisation au cloud",
           "Un audit manuel annuel des configurations cloud",
           "La revue de chaque déploiement par le RSSI en personne",
-          "Des guardrails préventifs (blocage du public access au niveau de l'organisation, policies) combinés à une surveillance continue de la posture cloud (CSPM) et au chiffrement par défaut"
+          "Guardrails préventifs, CSPM et chiffrement par défaut"
         ],
         "reponse": 3,
         "pourquoi": [
@@ -440,7 +440,7 @@ window.CISSP_DATA.scenarios = [
           "Un simple VLAN séparant IT et OT sur les mêmes commutateurs",
           "Le chiffrement de tous les flux entre IT et OT, sans modifier la topologie",
           "La déconnexion physique totale et définitive de l'OT, sans aucun échange de données",
-          "Une architecture en zones selon le modèle Purdue, avec une DMZ industrielle : aucun flux direct entre IT et OT, tous les échanges transitent par des serveurs relais dans la DMZ"
+          "Architecture en zones (Purdue) avec DMZ industrielle, sans flux direct IT/OT"
         ],
         "reponse": 3,
         "pourquoi": [
@@ -456,7 +456,7 @@ window.CISSP_DATA.scenarios = [
         "situation": "Vous traitez l'accès de télémaintenance de l'intégrateur : un tunnel VPN permanent, avec un compte générique partagé par ses techniciens, arrivant directement sur le réseau OT.",
         "q": "Comment sécurisez-vous cet accès distant ?",
         "choix": [
-          "Mettre en place des accès nominatifs avec MFA, activés à la demande et limités dans le temps, passant par un bastion (jump server) enregistrant les sessions",
+          "Accès nominatifs, MFA et just-in-time via un bastion",
           "Changer le mot de passe du compte générique tous les mois",
           "Supprimer purement et simplement la télémaintenance",
           "Limiter le VPN aux adresses IP de l'intégrateur"
@@ -496,7 +496,7 @@ window.CISSP_DATA.scenarios = [
         "choix": [
           "Il suffit de souscrire une assurance couvrant les arrêts de production",
           "Il faut toujours couper la production au moindre incident IT",
-          "Une segmentation robuste et éprouvée entre IT et OT permet de continuer à opérer en confiance même quand l'IT est compromis, et doit être validée par des exercices",
+          "Une segmentation IT/OT robuste, éprouvée par des exercices",
           "Il faut supprimer le réseau IT pour ne garder que l'OT"
         ],
         "reponse": 2,
@@ -545,7 +545,7 @@ window.CISSP_DATA.scenarios = [
         "choix": [
           "Un audit des causes de l'incendie",
           "Une réunion de retour d'expérience (lessons learned)",
-          "Le plan de continuité/reprise : cellule de crise, plan de communication, et déclenchement du disaster recovery vers DC2 selon les priorités définies par le BIA",
+          "Activer le BCP/DRP : cellule de crise et bascule vers DC2 selon le BIA",
           "Rien de formel : on gère au fil de l'eau, l'urgence prime sur la procédure"
         ],
         "reponse": 2,
@@ -563,7 +563,7 @@ window.CISSP_DATA.scenarios = [
         "q": "Quel principe fondamental a été violé ?",
         "choix": [
           "La rotation des supports de sauvegarde",
-          "La règle de séparation géographique des sauvegardes : une copie hors site doit être réellement distante pour survivre à un sinistre majeur du site principal",
+          "La séparation géographique des copies",
           "Le principe du moindre privilège",
           "Le chiffrement des sauvegardes"
         ],
@@ -584,7 +584,7 @@ window.CISSP_DATA.scenarios = [
           "Remplacer le système d'extinction et considérer le dossier clos",
           "Transférer toute l'infrastructure dans le cloud public",
           "Fermer DC1 définitivement",
-          "Instaurer un programme de maintenance et de test réguliers : contrôles périodiques des systèmes de protection incendie ET exercices de DRP planifiés (du walkthrough au test de bascule)"
+          "Maintenance et exercices réguliers (incendie et DRP)"
         ],
         "reponse": 3,
         "pourquoi": [
@@ -602,7 +602,7 @@ window.CISSP_DATA.scenarios = [
         "choix": [
           "Des extincteurs portatifs uniquement, pour laisser le personnel gérer",
           "Un sprinkler à eau classique déclenché en premier",
-          "Un système à agent gazeux propre (clean agent, type inergen/FM-200) sans danger pour les personnes et non destructeur pour les équipements, avec temporisation d'évacuation",
+          "Un agent gazeux propre (clean agent, type FM-200/inergen)",
           "Du dioxyde de carbone (CO2) à saturation, le plus efficace"
         ],
         "reponse": 2,
@@ -652,7 +652,7 @@ window.CISSP_DATA.scenarios = [
           "Un chiffrement de tous les flux internes, réseau inchangé",
           "Un antivirus renforcé sur tous les équipements, réseau inchangé",
           "Un réseau Wi-Fi dédié aux prestataires",
-          "Des zones segmentées par fonction (paiement, bureautique, IoT/CVC, vidéo) séparées par des pare-feux avec règles de filtrage en deny by default entre zones"
+          "Des zones par fonction avec filtrage deny by default"
         ],
         "reponse": 3,
         "pourquoi": [
@@ -709,7 +709,7 @@ window.CISSP_DATA.scenarios = [
           "Doubler la bande passante des magasins",
           "Interdire l'accès Internet à tous les magasins",
           "Revenir à un réseau à plat, plus simple à administrer, puisque le SOC détecte bien",
-          "Évoluer vers une approche Zero Trust : micro-segmentation, vérification continue de l'identité et de la posture des équipements, accès par application plutôt que par réseau"
+          "Évoluer vers le Zero Trust : micro-segmentation et vérification continue"
         ],
         "reponse": 3,
         "pourquoi": [
@@ -756,7 +756,7 @@ window.CISSP_DATA.scenarios = [
         "q": "Comment interprétez-vous cette concomitance ?",
         "choix": [
           "Une coïncidence : les deux événements sont indépendants",
-          "Le DDoS sert probablement d'écran de fumée (smokescreen) pour une intrusion ciblée : il faut traiter les deux comme un incident coordonné et renforcer la surveillance des accès critiques",
+          "Le DDoS masque probablement une intrusion ciblée",
           "Une erreur de configuration du VPN",
           "Un test de charge lancé par un prestataire"
         ],
@@ -794,7 +794,7 @@ window.CISSP_DATA.scenarios = [
         "q": "Quel ensemble de mesures constitue le MEILLEUR plan de résilience réseau ?",
         "choix": [
           "Doubler tous les équipements réseau du terminal principal",
-          "Redondance des liens et des équipements sans point unique de défaillance (SPOF), diversité des opérateurs, segmentation stricte des réseaux critiques, protection DDoS permanente et exercices de crise réguliers avec les parties prenantes",
+          "Redondance sans SPOF, diversité et segmentation stricte",
           "Migrer tous les systèmes de l'aéroport vers un cloud public unique",
           "Recruter deux analystes SOC supplémentaires"
         ],
@@ -814,7 +814,7 @@ window.CISSP_DATA.scenarios = [
         "choix": [
           "Riposter techniquement contre l'infrastructure du groupe hacktiviste",
           "Gérer l'incident en interne et ne communiquer qu'en cas de fuite dans la presse",
-          "Notifier les incidents significatifs à l'ANSSI conformément aux obligations OIV/NIS2, entretenir des canaux d'échange avec les autorités et intégrer l'État dans les exercices de crise",
+          "Notifier les incidents à l'ANSSI (OIV/NIS2) et coopérer avec l'État",
           "Confier la gestion de crise à un prestataire étranger"
         ],
         "reponse": 2,
@@ -881,7 +881,7 @@ window.CISSP_DATA.scenarios = [
         "q": "Quel modèle de contrôle d'accès recommandez-vous ?",
         "choix": [
           "Le DAC (Discretionary Access Control) : chaque propriétaire de ressource décide qui y accède",
-          "Le RBAC (Role-Based Access Control) : des rôles métiers définis avec les métiers, intégrant les contraintes de séparation des tâches, et l'attribution des droits par affectation à un rôle",
+          "Le RBAC : rôles métiers intégrant la séparation des tâches (SoD)",
           "Donner les mêmes droits à tout le monde et surveiller les logs",
           "Continuer l'attribution individuelle mais avec un double niveau d'approbation"
         ],
@@ -901,7 +901,7 @@ window.CISSP_DATA.scenarios = [
         "choix": [
           "L'enregistrement vidéo des écrans du back-office",
           "Un simple e-mail d'alerte au manager après chaque opération",
-          "Le dual control (validation par une seconde personne) pour les opérations au-delà des seuils, complété par des rotations de poste et des congés obligatoires pour faire émerger les fraudes dissimulées",
+          "Dual control, rotation de poste et congés obligatoires",
           "L'interdiction des virements supérieurs au seuil"
         ],
         "reponse": 2,
@@ -921,7 +921,7 @@ window.CISSP_DATA.scenarios = [
           "Demander aux managers de penser à signaler les départs",
           "Supprimer tous les comptes inactifs une fois par an",
           "Faire signer aux partants un engagement de ne plus se connecter",
-          "Automatiser le cycle de vie des identités (joiner-mover-leaver) en connectant l'IAM au SIRH : désactivation immédiate au départ, comptes prestataires à durée limitée avec propriétaire interne responsable"
+          "Automatiser le cycle de vie des identités (JML) via le SIRH"
         ],
         "reponse": 3,
         "pourquoi": [
@@ -968,7 +968,7 @@ window.CISSP_DATA.scenarios = [
         "q": "Quelle approche recommandez-vous pour encadrer le BYOD ?",
         "choix": [
           "Acheter des téléphones professionnels pour toute l'entreprise",
-          "Une politique BYOD formalisée avec MDM/MAM : conteneur professionnel chiffré et séparé, exigences minimales (code, chiffrement, verrouillage), et effacement à distance limité aux données de l'entreprise",
+          "Une politique BYOD avec MDM/MAM : conteneur chiffré et selective wipe",
           "Interdire immédiatement tout usage professionnel des téléphones personnels",
           "Faire confiance aux salariés : ce sont leurs téléphones"
         ],
@@ -986,7 +986,7 @@ window.CISSP_DATA.scenarios = [
         "situation": "Vous analysez l'e-mail frauduleux : l'adresse imitait celle du dirigeant à une lettre près, et le message exploitait l'urgence et la confidentialité. La comptable explique qu'elle a « juste eu de la chance » d'avoir un doute.",
         "q": "Quel contrôle organisationnel mettez-vous en place contre la fraude au président (BEC) ?",
         "choix": [
-          "Une procédure de vérification hors bande (out-of-band) obligatoire : tout virement inhabituel ou changement de RIB est confirmé par un canal différent (appel au numéro connu), complétée par un double regard au-delà d'un seuil",
+          "Vérification out-of-band de tout virement inhabituel",
           "Punir tout employé qui se ferait piéger, pour responsabiliser",
           "L'interdiction pour la comptabilité d'utiliser la messagerie",
           "Un filtre anti-spam plus strict, qui réglera le problème"
@@ -1007,7 +1007,7 @@ window.CISSP_DATA.scenarios = [
         "choix": [
           "Envoyer une fois par e-mail les 30 pages de la nouvelle politique de sécurité",
           "Une journée de formation unique à l'embauche",
-          "Un programme continu et adapté : sessions courtes et concrètes par métier, exercices de phishing simulé bienveillants, gestionnaire de mots de passe fourni, et rappels réguliers",
+          "Un programme continu : sessions par métier et phishing simulé bienveillant",
           "Un règlement intérieur prévoyant des sanctions"
         ],
         "reponse": 2,
@@ -1025,7 +1025,7 @@ window.CISSP_DATA.scenarios = [
         "q": "Comment interprétez-vous ces résultats en tant que consultant ?",
         "choix": [
           "C'est une réussite totale : on peut arrêter les campagnes",
-          "C'est une progression réelle : le taux de signalement est un indicateur clé de la détection humaine ; on poursuit le programme en ciblant les populations à risque, sachant que le risque ne sera jamais nul — d'où l'importance des contrôles techniques en profondeur",
+          "Une progression réelle : on poursuit, le risque n'étant jamais nul",
           "C'est un échec : il reste 18 % de clics, il faut sanctionner les cliqueurs",
           "Les statistiques de phishing ne veulent rien dire"
         ],
@@ -1054,7 +1054,7 @@ window.CISSP_DATA.scenarios = [
         "situation": "Avant toute chose, vous préparez le cadre contractuel de la mission avec le cabinet retenu.",
         "q": "Quel document est INDISPENSABLE avant le premier paquet envoyé par les pentesteurs ?",
         "choix": [
-          "Les Rules of Engagement signées : périmètre précis (systèmes inclus/exclus), fenêtres horaires, techniques autorisées et interdites, contacts d'urgence et autorisation écrite formelle de la direction",
+          "Les Rules of Engagement signées",
           "Le rapport du précédent audit",
           "La liste des vulnérabilités déjà connues",
           "Le certificat ISO 27001 du prestataire"
@@ -1075,7 +1075,7 @@ window.CISSP_DATA.scenarios = [
         "choix": [
           "Refuser : on teste tout en production sans restriction, sinon le test ne vaut rien",
           "Annuler le pentest et se contenter d'un scan de vulnérabilités automatique",
-          "Négocier une approche par les risques : tests sur la production avec précautions (fenêtres creuses, exclusion des techniques destructives, supervision renforcée, procédure d'arrêt d'urgence), les scénarios dangereux étant joués en recette",
+          "Approche par les risques : production encadrée, scénarios dangereux en recette",
           "Accepter : la stabilité de la production passe avant tout"
         ],
         "reponse": 2,
@@ -1095,7 +1095,7 @@ window.CISSP_DATA.scenarios = [
           "On efface les traces suspectes pour garder le test « propre »",
           "Les pentesteurs corrigent eux-mêmes la vulnérabilité",
           "Les pentesteurs continuent leur mission et mentionneront tout dans le rapport final",
-          "Arrêt sur ce périmètre et notification immédiate au contact d'escalade : la vulnérabilité critique est signalée sans délai, et l'indice de compromission antérieure déclenche le processus de réponse à incident"
+          "Arrêt sur ce périmètre, escalade immédiate et bascule en réponse à incident"
         ],
         "reponse": 3,
         "pourquoi": [
@@ -1113,7 +1113,7 @@ window.CISSP_DATA.scenarios = [
         "choix": [
           "Corriger uniquement les 3 critiques et archiver le rapport",
           "Transmettre le rapport brut au comité d'audit sans plan d'action",
-          "Prioriser par le risque métier : criticité contextualisée (exposabilité, données concernées, exploitabilité), plan de remédiation avec responsables et échéances, puis tests de re-validation (retest) des correctifs",
+          "Prioriser par le risque métier, puis retester les correctifs",
           "Corriger les 34 vulnérabilités dans l'ordre où le rapport les liste"
         ],
         "reponse": 2,
@@ -1131,7 +1131,7 @@ window.CISSP_DATA.scenarios = [
         "q": "Que proposez-vous ?",
         "choix": [
           "Faire confiance aux correctifs appliqués : le SI est maintenant sécurisé",
-          "Un programme d'assurance continue : scans de vulnérabilités réguliers automatisés, pentests périodiques et à chaque évolution majeure, exercices ciblés (red team) à maturité, et indicateurs suivis en comité",
+          "Un programme continu : scans, pentests périodiques et red team",
           "Un pentest identique tous les cinq ans",
           "Remplacer les pentests par la certification des développeurs"
         ],
@@ -1160,7 +1160,7 @@ window.CISSP_DATA.scenarios = [
         "situation": "L'alerte sur la vulnérabilité critique (CVSS 9.8, exploitée activement) tombe un vendredi. L'e-mail mensuel de votre équipe partirait normalement dans douze jours.",
         "q": "Que faites-vous EN PREMIER ?",
         "choix": [
-          "Déclencher une procédure d'urgence : identifier immédiatement tous les systèmes exposés utilisant le composant vulnérable, et appliquer le correctif ou des mesures de mitigation (virtual patching via WAF) sans attendre",
+          "Urgence : patcher ou mitiger (WAF) les systèmes exposés",
           "Demander à l'éditeur du framework des garanties écrites",
           "Attendre l'e-mail mensuel : le processus doit être respecté",
           "Commander un audit complet du portail"
@@ -1182,7 +1182,7 @@ window.CISSP_DATA.scenarios = [
           "Un abonnement à des flux de threat intelligence pour être alerté plus tôt",
           "Un contrat de support étendu avec l'éditeur du framework",
           "Des scans de vulnérabilités plus fréquents sur le périmètre déjà connu",
-          "Un inventaire des actifs et des composants logiciels maintenu en continu (asset inventory, SBOM), sans lequel aucune gestion des vulnérabilités n'est fiable"
+          "Un inventaire des actifs et composants logiciels (SBOM) maintenu en continu"
         ],
         "reponse": 3,
         "pourquoi": [
@@ -1198,7 +1198,7 @@ window.CISSP_DATA.scenarios = [
         "situation": "Le correctif est déployé sur les serveurs identifiés. Un ingénieur affirme : « C'est bon, tout est patché. » Vous vous souvenez que dans l'affaire du secteur, les équipes croyaient aussi avoir tout corrigé.",
         "q": "Quelle étape INDISPENSABLE reste-t-il à réaliser ?",
         "choix": [
-          "Vérifier la remédiation par un scan indépendant : contrôler que la vulnérabilité n'est effectivement plus détectable sur l'ensemble du parc, y compris les systèmes qui auraient échappé à l'inventaire",
+          "Vérifier la remédiation par un scan indépendant sur l'ensemble du parc",
           "Planifier la vérification lors du prochain cycle mensuel de scans",
           "Documenter le correctif dans l'outil de gestion des changements et informer les équipes",
           "Clore le ticket et passer à la CVE suivante"
@@ -1220,7 +1220,7 @@ window.CISSP_DATA.scenarios = [
           "La délégation complète du sujet à chaque équipe applicative",
           "Un scan annuel et un rapport à la direction",
           "L'abonnement à un flux de renseignement sur les menaces",
-          "Un cycle continu : découverte des actifs, scans réguliers authentifiés, priorisation par le risque (criticité, exposition, exploitation active), remédiation avec SLA par sévérité, vérification, et reporting d'indicateurs (délai moyen de correction, taux de couverture)"
+          "Un cycle continu : scans, priorisation, SLA, vérification"
         ],
         "pourquoi": [
           "La délégation sans cadre central reproduit les serveurs oubliés du marketing.",
@@ -1238,7 +1238,7 @@ window.CISSP_DATA.scenarios = [
         "choix": [
           "Le nombre total de vulnérabilités détectées depuis six mois",
           "Le nombre d'e-mails envoyés aux équipes",
-          "Des indicateurs orientés risque et tendance : délai moyen de remédiation (MTTR) par sévérité vs SLA, pourcentage du parc couvert par les scans, nombre de vulnérabilités critiques exposées au-delà du SLA, et évolution dans le temps",
+          "Des indicateurs orientés risque : MTTR vs SLA et couverture",
           "La liste brute des 4 000 CVE ouvertes"
         ],
         "reponse": 2,
@@ -1267,7 +1267,7 @@ window.CISSP_DATA.scenarios = [
         "q": "Quelle est votre PREMIÈRE priorité absolue ?",
         "choix": [
           "Payer la rançon rapidement pour tout débloquer",
-          "La sécurité des patients : activation immédiate du plan de continuité métier (procédures dégradées papier, transferts si nécessaire) et déclenchement du plan blanc avec la direction médicale",
+          "La sécurité des patients : activer les procédures dégradées et le plan blanc",
           "Identifier la souche du ransomware",
           "Éteindre tous les systèmes de l'hôpital, y compris les équipements biomédicaux en service"
         ],
@@ -1288,7 +1288,7 @@ window.CISSP_DATA.scenarios = [
           "Formater immédiatement les serveurs déjà chiffrés",
           "Restaurer immédiatement toutes les sauvegardes sur l'infrastructure actuelle",
           "Négocier avec les attaquants pour gagner du temps",
-          "Isoler les segments touchés : coupure ciblée des liens réseau concernés, déconnexion des sauvegardes pour les protéger, en préservant les systèmes critiques pour les soins et les preuves pour l'investigation"
+          "Isoler les segments touchés et mettre les sauvegardes hors d'atteinte"
         ],
         "reponse": 3,
         "explication": "Le containment doit être chirurgical : isoler les segments compromis pour stopper la propagation, mettre les sauvegardes hors d'atteinte (les ransomwares modernes les ciblent en priorité), tout en maintenant les systèmes vitaux et en préservant les preuves. Formater (A) détruit preuves et données peut-être récupérables. Restaurer sur une infrastructure encore compromise (B) offrirait les sauvegardes au chiffrement — on ne restaure que sur un environnement assaini.",
@@ -1304,7 +1304,7 @@ window.CISSP_DATA.scenarios = [
         "situation": "Dimanche, la propagation est stoppée. L'analyse révèle une exfiltration de données avant chiffrement : dossiers médicaux de patients français et américains. Les attaquants menacent de publier (double extorsion). Le directeur demande qui prévenir et quand.",
         "q": "Quelles sont vos obligations de notification ?",
         "choix": [
-          "Notification multiple et coordonnée avec le juridique : CNIL sous 72 h et information des patients (GDPR, risque élevé sur données de santé), obligations HIPAA pour les patients américains via le partenaire, signalement à l'ANSSI/CERT Santé, et dépôt de plainte",
+          "Notifier CNIL, patients, HIPAA et ANSSI/CERT Santé",
           "Un communiqué de presse global qui vaut notification",
           "Aucune tant que la publication n'a pas eu lieu",
           "Uniquement la compagnie d'assurance cyber"
@@ -1324,7 +1324,7 @@ window.CISSP_DATA.scenarios = [
         "q": "Quelle position recommandez-vous au comité sur le paiement de la rançon ?",
         "choix": [
           "Payer la moitié pour tester la bonne foi des attaquants",
-          "Recommander de ne pas payer : les sauvegardes sont exploitables, le paiement ne garantit ni le déchiffrement ni la destruction des données déjà volées, il finance la criminalité et peut poser des problèmes légaux (sanctions) — tout en laissant la décision finale à la direction, éclairée par les autorités",
+          "Recommander de ne pas payer ; la direction décide",
           "Payer : c'est plus rapide que dix jours de restauration",
           "Ignorer totalement la question et couper tout contact"
         ],
@@ -1344,7 +1344,7 @@ window.CISSP_DATA.scenarios = [
         "choix": [
           "Établir les responsabilités individuelles et sanctionner les fautifs",
           "Clore administrativement l'incident au plus vite",
-          "Améliorer durablement le dispositif : analyser la chronologie complète sans blâme, identifier les causes racines (accès tiers sans MFA, segmentation insuffisante, détection tardive) et transformer chaque constat en action suivie qui met à jour plans, procédures et contrôles",
+          "Améliorer durablement : causes racines sans blâme et actions suivies",
           "Produire un rapport confidentiel pour la direction et le classer"
         ],
         "reponse": 2,
@@ -1375,7 +1375,7 @@ window.CISSP_DATA.scenarios = [
           "Supprimer la mise à jour suspecte des serveurs et effacer l'environnement de build pour repartir sur une base saine",
           "Publier immédiatement un démenti public : votre chaîne de build est certifiée",
           "Attendre que la société de sécurité publie ses preuves complètes",
-          "Activer la cellule de crise et vérifier l'allégation : analyse comparative des binaires distribués (hash, rétro-ingénierie de la mise à jour suspecte), en préservant l'environnement de build pour l'investigation forensique"
+          "Activer la cellule de crise et vérifier l'allégation en préservant l'environnement de build"
         ],
         "reponse": 3,
         "explication": "Première étape : vérifier techniquement l'allégation — comparer les binaires distribués aux sources, analyser la mise à jour suspecte — tout en gelant l'environnement de build comme scène de crime numérique. Un démenti (B) avant vérification peut devenir une faute grave. Effacer l'environnement de build (A) détruirait les preuves de la compromission et empêcherait de comprendre le mode opératoire. Attendre passivement (C) laisse la backdoor active chez 8 000 clients.",
@@ -1393,7 +1393,7 @@ window.CISSP_DATA.scenarios = [
         "choix": [
           "Porter plainte et attendre les conclusions de l'enquête judiciaire",
           "Corriger le serveur de build et publier discrètement une mise à jour propre",
-          "Retirer les mises à jour compromises de la distribution, révoquer le certificat de signature compromis, isoler la chaîne de build, et préparer la notification aux clients et aux autorités",
+          "Retirer les versions piégées, révoquer le certificat, isoler le build",
           "Surveiller le C2 quelques semaines pour étudier les attaquants avant d'agir"
         ],
         "reponse": 2,
@@ -1411,7 +1411,7 @@ window.CISSP_DATA.scenarios = [
         "q": "Quelle stratégie de communication recommandez-vous ?",
         "choix": [
           "La communication est prématurée tant que l'enquête n'est pas terminée",
-          "Une divulgation rapide, coordonnée et complète : notification à tous les clients avec indicateurs de compromission (IoC), versions touchées et instructions de remédiation, information des autorités (ANSSI, CERT), et communication publique transparente",
+          "Divulgation rapide et coordonnée : IoC, versions et remédiation aux clients",
           "Le silence : ne communiquer que si des clients découvrent le problème",
           "Une notification limitée aux 30 plus gros clients sous accord de confidentialité"
         ],
@@ -1429,7 +1429,7 @@ window.CISSP_DATA.scenarios = [
         "situation": "La notification est publiée, la crise est gérée avec les CERT. L'investigation révèle que les attaquants étaient présents depuis neuf mois : entrés par le VPN d'un développeur sans MFA, ils ont patiemment étudié puis piégé le processus de build sans déclencher aucune alerte.",
         "q": "Neuf mois sans détection : quelle capacité opérationnelle a le PLUS manqué ?",
         "choix": [
-          "La détection des comportements anormaux en interne : surveillance de l'intégrité de la chaîne de build, détection d'anomalies sur les comptes et les mouvements latéraux, et chasse proactive aux menaces (threat hunting)",
+          "Détection comportementale et threat hunting",
           "Un pare-feu de nouvelle génération",
           "Un plus grand nombre d'alertes remontées au SOC",
           "Des mots de passe plus longs"
@@ -1448,7 +1448,7 @@ window.CISSP_DATA.scenarios = [
         "situation": "Six mois après, vous reconstruisez la chaîne de build. Le comité exécutif veut des garanties : « Comment être sûrs que cela ne se reproduira jamais ? »",
         "q": "Quelle architecture de build sécurisée présentez-vous ?",
         "choix": [
-          "Une chaîne durcie et vérifiable : environnements de build isolés et éphémères, intégrité vérifiée à chaque étape, builds reproductibles permettant de comparer les binaires aux sources, signature dans un HSM avec accès contrôlé, SBOM publié, et surveillance continue de l'intégrité",
+          "Une chaîne de build vérifiable et reproductible (HSM)",
           "La même chaîne, avec un antivirus sur le serveur de build",
           "L'arrêt des mises à jour automatiques pour tous les clients",
           "L'externalisation complète du build chez un prestataire"
@@ -1479,7 +1479,7 @@ window.CISSP_DATA.scenarios = [
         "q": "Que faites-vous EN PREMIER ?",
         "choix": [
           "Rendre le dépôt privé",
-          "Révoquer immédiatement la clé compromise et la remplacer, en coordination avec le prestataire de paiement pour bloquer la fraude en cours",
+          "Révoquer et remplacer immédiatement la clé compromise",
           "Supprimer le fichier du dépôt GitHub : la clé ne sera plus visible",
           "Chercher quel développeur a commis l'erreur"
         ],
@@ -1500,7 +1500,7 @@ window.CISSP_DATA.scenarios = [
           "Une règle écrite interdisant les secrets dans le code",
           "Le chiffrement de tous les dépôts Git",
           "La limitation de l'accès aux dépôts aux seuls développeurs seniors",
-          "Un gestionnaire de secrets centralisé (vault) : les applications récupèrent leurs secrets à l'exécution, rotation automatisée, et détection de secrets (secret scanning) intégrée à la CI et aux hooks de commit pour bloquer les fuites à la source"
+          "Un vault centralisé avec rotation et secret scanning en CI"
         ],
         "reponse": 3,
         "explication": "La réponse combine le remède et la prévention : un secrets manager centralisé sort les secrets du code (injection à l'exécution, rotation automatique, audit des accès), et le secret scanning en pre-commit et dans la CI bloque mécaniquement les fuites avant qu'elles n'atteignent le dépôt. Une règle écrite (A) sans outillage sera violée par accident, comme on vient de le voir. Chiffrer les dépôts (B) ne change rien pour ceux qui y ont accès. L'ancienneté (C) ne protège pas de l'erreur.",
@@ -1518,7 +1518,7 @@ window.CISSP_DATA.scenarios = [
         "choix": [
           "Faire confiance aux tests unitaires des développeurs",
           "Recruter dix analystes sécurité pour relire tout le code",
-          "Le shift-left automatisé : SAST, analyse des dépendances (SCA) et secret scanning intégrés au pipeline avec des seuils bloquants pour les vulnérabilités critiques, DAST sur les environnements de test, et revue manuelle réservée aux changements à haut risque",
+          "Le shift-left : SAST, SCA, secret scanning et DAST dans le pipeline",
           "Réduire les déploiements à un par semaine pour permettre les revues manuelles"
         ],
         "reponse": 2,
@@ -1537,7 +1537,7 @@ window.CISSP_DATA.scenarios = [
         "choix": [
           "Figer toutes les versions pour toujours afin d'éviter les régressions",
           "Ignorer les alertes sur les dépendances indirectes, trop nombreuses",
-          "Une gouvernance des dépendances : SBOM généré à chaque build, mise à jour continue priorisée par l'exploitabilité réelle, et politique d'approbation des nouvelles dépendances",
+          "Gouvernance des dépendances : SBOM et priorisation par le risque",
           "Interdire l'open source et tout redévelopper en interne"
         ],
         "reponse": 2,
@@ -1557,7 +1557,7 @@ window.CISSP_DATA.scenarios = [
           "Faire valider chaque spécification par le RSSI",
           "Imposer un framework unique qui « gère la sécurité tout seul »",
           "Ajouter encore plus d'outils de scan dans le pipeline",
-          "Instaurer le threat modeling sur les fonctionnalités sensibles dès la conception, des exigences de sécurité dans les user stories, la formation au code sécurisé, et un réseau de security champions dans les équipes"
+          "Threat modeling dès la conception et security champions"
         ],
         "reponse": 3,
         "explication": "Les outils détectent des défauts d'implémentation, pas des erreurs de conception : un défaut d'architecture (mauvais flux d'authentification, données sensibles au mauvais endroit) passe tous les scanners. Le vrai shift-left est humain et méthodologique — threat modeling (STRIDE) sur les features sensibles, critères de sécurité dans la definition of done, formation, et security champions qui portent le sujet au quotidien dans chaque équipe. Le RSSI-goulot (A) ne passe pas à l'échelle ; aucun framework (B) ne « gère la sécurité tout seul ».",
@@ -1584,7 +1584,7 @@ window.CISSP_DATA.scenarios = [
         "situation": "L'alerte mondiale est lancée. Les scans d'exploitation massifs balaient déjà Internet. Vos 600 applications sont potentiellement concernées, et aucun inventaire des dépendances n'existe.",
         "q": "Que faites-vous EN PREMIER ?",
         "choix": [
-          "Activer une cellule de crise et mener de front : identification des usages de la bibliothèque (scan des artefacts et des dépendances), priorisation des applications exposées à Internet, et mitigation immédiate en périphérie (règles WAF sur les motifs d'exploitation connus)",
+          "Cellule de crise : identifier les usages et mitiger en WAF",
           "Demander à chaque équipe de vérifier son code lundi matin",
           "Attendre le correctif officiel définitif de la fondation open source",
           "Éteindre les 600 applications par précaution"
@@ -1604,7 +1604,7 @@ window.CISSP_DATA.scenarios = [
         "q": "Quelle stratégie de remédiation appliquez-vous ?",
         "choix": [
           "Tout confier aux équipes sans coordination : elles connaissent leurs applications",
-          "Une remédiation par vagues pilotée par le risque : d'abord les 60 applications exposées (mise à jour, ou mitigations documentées si la mise à jour immédiate est impossible : désactivation de la fonctionnalité vulnérable, isolation), puis l'interne, avec suivi centralisé de l'avancement",
+          "Remédiation par vagues pilotée par le risque : exposés d'abord, suivi centralisé",
           "Mettre à jour uniquement les applications où c'est facile",
           "Réécrire les applications concernées sans la bibliothèque"
         ],
@@ -1624,7 +1624,7 @@ window.CISSP_DATA.scenarios = [
         "choix": [
           "On suspend toute la remédiation pour se consacrer à l'incident",
           "On patche l'application compromise et on passe à la suivante",
-          "L'application compromise bascule en réponse à incident complète : isolation, investigation forensique (étendue de l'intrusion, mouvement latéral, exfiltration), éradication et reconstruction — pendant que la remédiation de masse continue en parallèle, et on recherche rétroactivement des indices de compromission sur toutes les applications vulnérables exposées",
+          "Réponse à incident dédiée, remédiation de masse en parallèle",
           "On surveille le web shell sans y toucher"
         ],
         "reponse": 2,
@@ -1642,7 +1642,7 @@ window.CISSP_DATA.scenarios = [
         "q": "Quelle réponse structurelle apportez-vous à cette question ?",
         "choix": [
           "C'est inévitable : l'open source est incontrôlable par nature",
-          "Une gouvernance de la supply chain logicielle : SBOM systématique pour chaque application, évaluation des composants critiques (maintenance, santé du projet), capacité de réponse rapide (savoir en quelques minutes « qui utilise quoi »), et contribution au financement des projets open source critiques",
+          "Une gouvernance de la supply chain : SBOM systématique et réponse rapide",
           "L'interdiction des bibliothèques maintenues par moins de dix développeurs",
           "Le remplacement de tout l'open source par des solutions commerciales"
         ],
@@ -1660,7 +1660,7 @@ window.CISSP_DATA.scenarios = [
         "situation": "Dernière réunion du retour d'expérience : les équipes veulent savoir comment réagir plus vite la prochaine fois, car « il y aura une prochaine fois ».",
         "q": "Quel dispositif pérenne proposez-vous pour les futures alertes de ce type ?",
         "choix": [
-          "Une capacité de réponse organisée : inventaire des dépendances requêtable en temps réel, veille sur les vulnérabilités branchée sur cet inventaire pour l'auto-identification des applications touchées, playbook de crise « vulnérabilité critique massive » testé par exercice, et canaux d'urgence établis avec les équipes",
+          "Capacité organisée : inventaire requêtable, veille corrélée et playbook testé",
           "Le gel des dépendances entre novembre et janvier pour éviter les crises de fin d'année",
           "Une équipe dédiée qui patcherait tout en 24 h quoi qu'il arrive",
           "Un abonnement à davantage de newsletters de sécurité"
