@@ -25,7 +25,16 @@ const Player = (() => {
 
   function open(domainId, lessonId) {
     domain = CISSP_DATA.domains[domainId];
-    lesson = domain.lecons.find(l => l.id === lessonId);
+    lesson = domain && domain.lecons.find(l => l.id === lessonId);
+    if (!domain || !lesson) {
+      document.getElementById("app").innerHTML =
+        `<div class="card" style="max-width:560px;margin:2rem auto;text-align:center">
+          <h1 class="page-title">Leçon introuvable</h1>
+          <p style="color:var(--text-dim);margin:.6rem 0 1rem">Cette leçon n'existe pas ou a été déplacée.</p>
+          <a class="btn" href="#/domaines">Voir les domaines</a>
+        </div>`;
+      return;
+    }
     idx = 0;
     playing = true;
     active = true;

@@ -2,6 +2,14 @@
 const Progress = (() => {
   const KEY = "cissp-fr-progress-v1";
 
+  // Date locale (AAAA-MM-JJ) — surtout pas UTC, sinon une étude du soir peut
+  // compter pour le lendemain selon le fuseau et casser le streak.
+  function ymd(ts) {
+    const d = ts != null ? new Date(ts) : new Date();
+    const p = n => String(n).padStart(2, "0");
+    return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+  }
+
   function load() {
     try { return JSON.parse(localStorage.getItem(KEY)) || {}; }
     catch { return {}; }
@@ -9,7 +17,7 @@ const Progress = (() => {
   function save(state) {
     // toute sauvegarde = une action d'étude : alimente le suivi quotidien
     state.activity = state.activity || {};
-    const t = new Date().toISOString().slice(0, 10);
+    const t = ymd();
     state.activity[t] = (state.activity[t] || 0) + 1;
     localStorage.setItem(KEY, JSON.stringify(state));
   }
@@ -30,7 +38,7 @@ const Progress = (() => {
     return s;
   }
 
-  function today() { return new Date().toISOString().slice(0, 10); }
+  function today() { return ymd(); }
 
   function qKey(text) {
     let h = 5381;
@@ -95,7 +103,7 @@ const Progress = (() => {
     activityByDay(nbJours) {
       const s = state(), out = [];
       for (let i = nbJours - 1; i >= 0; i--) {
-        const d = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10);
+        const d = ymd(Date.now() - i * 86400000);
         out.push({ jour: d, n: s.activity[d] || 0 });
       }
       return out;
@@ -105,7 +113,7 @@ const Progress = (() => {
       let n = 0;
       // la journée en cours compte si elle a de l'activité, sinon on part d'hier
       for (let i = s.activity[today()] ? 0 : 1; ; i++) {
-        const d = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10);
+        const d = ymd(Date.now() - i * 86400000);
         if (s.activity[d]) n++; else break;
       }
       return n;

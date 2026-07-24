@@ -14,6 +14,15 @@ const Quiz = (() => {
 
   function open(domainId, count) {
     domain = CISSP_DATA.domains[domainId];
+    if (!domain || !Array.isArray(domain.quiz) || !domain.quiz.length) {
+      document.getElementById("app").innerHTML =
+        `<div class="card" style="max-width:560px;margin:2rem auto;text-align:center">
+          <h1 class="page-title">Quiz indisponible</h1>
+          <p style="color:var(--text-dim);margin:.6rem 0 1rem">Ce domaine n'existe pas ou n'a pas encore de questions.</p>
+          <a class="btn" href="#/domaines">Voir les domaines</a>
+        </div>`;
+      return;
+    }
     custom = null;
     questions = shuffle(domain.quiz).slice(0, count || 15);
     idx = 0; score = 0; answers = [];

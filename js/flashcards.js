@@ -75,12 +75,12 @@ const Flashcards = (() => {
         </div>
         ${aheadMode ? `<p style="text-align:center;color:var(--ok);font-size:.88rem;margin-bottom:.6rem">Aucune carte due aujourd'hui — vous révisez en avance.</p>` : ""}
         <div class="flashcard-scene">
-          <div class="flashcard" id="fc" style="border-color:${c.couleur}">
+          <div class="flashcard" id="fc" style="border-color:${c.couleur}" tabindex="0" role="button" aria-label="Carte : cliquez ou appuyez sur Entrée pour la retourner">
             <div class="face front">${esc(c.recto)}</div>
             <div class="face back">${esc(c.verso)}</div>
           </div>
         </div>
-        <p style="text-align:center;color:var(--text-dim);font-size:.85rem;margin-top:.6rem">Cliquez sur la carte pour la retourner</p>
+        <p style="text-align:center;color:var(--text-dim);font-size:.85rem;margin-top:.6rem">Cliquez sur la carte (ou Entrée) pour la retourner</p>
         <div class="fc-controls">
           <button class="btn danger" id="fc-again" disabled title="Retournez d'abord la carte">À revoir</button>
           <button class="btn" id="fc-known" style="background:var(--ok)" disabled title="Retournez d'abord la carte">✓ Je connais</button>
@@ -89,11 +89,15 @@ const Flashcards = (() => {
 
     const fc = document.getElementById("fc");
     // on ne peut se juger qu'après avoir vu le verso : anti-triche envers soi-même
-    fc.onclick = () => {
+    const flip = () => {
       fc.classList.toggle("flipped");
       document.getElementById("fc-known").disabled = false;
       document.getElementById("fc-again").disabled = false;
     };
+    fc.onclick = flip;
+    // accessibilité clavier : Entrée ou Espace retourne la carte
+    fc.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } };
+    fc.focus();
     document.getElementById("fc-known").onclick = () => {
       Progress.reviewCard(c.key, true); known++; idx++; render();
     };

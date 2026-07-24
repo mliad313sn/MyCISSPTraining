@@ -287,8 +287,10 @@ const Exam = (() => {
       b.n++; if (a.good) b.ok++;
     });
     const failed = answers.filter(a => !a.good);
-    const passe = pct >= (mode === "cat" ? 72 : 80);
-    const scaled = Math.min(1000, Math.round(pct * 10.5));
+    // CAT : seuil unique et cohérent — 70 % de bonnes réponses ≈ 700/1000 (standard de passage).
+    // Entraînements FR : barre « prêt » plus exigeante à 80 %.
+    const scaled = Math.min(1000, Math.round(pct * 10));
+    const passe = mode === "cat" ? scaled >= 700 : pct >= 80;
 
     document.getElementById("app").innerHTML = `
       <div style="max-width:840px;margin:0 auto">
