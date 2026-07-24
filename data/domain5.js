@@ -1692,18 +1692,18 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "Un utilisateur exécute par mégarde un cheval de Troie qui partage silencieusement ses documents avec un attaquant, en utilisant les propres permissions de l'utilisateur. Quel modèle de contrôle d'accès est INTRINSÈQUEMENT vulnérable à ce scénario ?",
       "choix": [
-        "ABAC, car les attributs sont dynamiques",
+        "ABAC, car la décision dépend d'attributs contextuels évalués à la volée",
         "DAC : tout programme hérite des droits du propriétaire",
-        "MAC, car les labels peuvent être modifiés par le malware",
-        "RBAC, car les rôles sont trop larges"
+        "MAC, car c'est le propriétaire qui attribue les étiquettes de sensibilité",
+        "RBAC, car un rôle large accorde trop de permissions de re-partage"
       ],
       "reponse": 1,
-      "explication": "C'est la faiblesse classique du DAC face aux chevaux de Troie : un programme s'exécute avec les droits de l'utilisateur, et comme le propriétaire peut re-partager ses objets à discrétion, le malware le peut aussi. Le MAC contre précisément ce risque : les labels sont imposés par le système et ni l'utilisateur ni ses programmes ne peuvent déclasser une information ou étendre les accès. RBAC et ABAC centralisent les décisions et ne donnent pas ce pouvoir discrétionnaire au propriétaire.",
+      "explication": "C'est la faiblesse classique du DAC face aux chevaux de Troie : un programme s'exécute avec les droits de l'utilisateur, et comme le propriétaire peut re-partager ses objets à discrétion, le malware le peut aussi. Le MAC contre précisément ce risque, car ce n'est PAS le propriétaire mais le système qui impose les étiquettes : ni l'utilisateur ni ses programmes ne peuvent déclasser une information ou étendre les accès. RBAC et ABAC centralisent la décision et ne confèrent pas ce pouvoir discrétionnaire de re-partage.",
       "pourquoi": [
-        "Hors mécanisme : le dynamisme des attributs ABAC n'est pas en cause.",
+        "Distracteur plausible mais faux : ABAC évalue la décision selon des attributs contrôlés par le système, il ne laisse pas le programme re-partager librement.",
         "Bonne réponse : en DAC, tout programme hérite des droits du propriétaire, y compris celui de re-partager — la faiblesse classique face aux chevaux de Troie.",
-        "Inversion : le MAC contre précisément ce risque — les labels ne sont modifiables ni par l'utilisateur ni par ses programmes.",
-        "Hors mécanisme : la largeur des rôles n'est pas ce que le malware exploite."
+        "Attribution erronée : en MAC ce n'est justement pas le propriétaire mais le système qui fixe les étiquettes — c'est pourquoi le MAC bloque ce scénario au lieu d'y être vulnérable.",
+        "Fausse piste : même un rôle large en RBAC n'accorde pas au programme le pouvoir discrétionnaire de re-partager les objets du propriétaire."
       ],
       "difficulte": 3
     },

@@ -1685,18 +1685,18 @@ window.CISSP_DATA.domains[3] = {
       "q": "Un attaquant a obtenu le hash du compte de service KRBTGT d'un domaine Active Directory. Quelle est la conséquence la PLUS grave ?",
       "choix": [
         "Il peut créer des tickets Kerberos à volonté : c'est un golden ticket",
-        "Il peut désactiver l'antivirus des postes clients",
-        "Il peut lire les e-mails de l'administrateur",
-        "Il peut uniquement usurper un compte de service applicatif"
+        "Il devra d'abord recompromettre un contrôleur de domaine à chaque forge de ticket",
+        "Il peut déchiffrer rétroactivement tout le trafic TLS interne du domaine",
+        "Il peut uniquement usurper un compte de service applicatif (silver ticket)"
       ],
       "reponse": 0,
-      "explication": "Le hash du compte KRBTGT permet de forger des tickets Kerberos à volonté dans tout l'Active Directory : c'est le golden ticket, qui confère un contrôle quasi total et durable du domaine. L'usurpation d'un seul compte de service correspond au silver ticket (hash d'un compte de service ordinaire). Les deux autres réponses sous-estiment gravement l'impact.",
-      "difficulte": 3,
+      "explication": "Le hash du compte KRBTGT permet de forger des tickets Kerberos (TGT) à volonté et hors ligne dans tout l'Active Directory : c'est le golden ticket, qui confère un contrôle quasi total et durable du domaine, sans nouvel accès au contrôleur. L'usurpation d'un seul compte de service correspond au silver ticket. Le hash KRBTGT ne casse pas TLS, et la forge ne nécessite aucun accès ultérieur au DC — d'où sa gravité.",
+      "difficulte": 2,
       "pourquoi": [
-        "Correct : avec le hash KRBTGT, l'attaquant forge des TGT arbitraires (golden ticket) : contrôle durable de tout le domaine.",
-        "Faux : la désactivation d'antivirus n'est pas la conséquence propre de ce vol — hors sujet.",
-        "Faux : trop étroit — la lecture d'e-mails est anecdotique face à la compromission totale du domaine.",
-        "Faux : trop étroit — usurper un compte de service décrit le silver ticket, bien moins grave."
+        "Correct : avec le hash KRBTGT, l'attaquant forge des TGT arbitraires hors ligne (golden ticket) — contrôle durable de tout le domaine sans nouvel accès au DC.",
+        "Justement l'inverse : le golden ticket se forge hors ligne, sans recompromettre le contrôleur — c'est ce qui le rend si dangereux et persistant.",
+        "Confusion de périmètre : le hash KRBTGT sert à forger des tickets Kerberos, pas à déchiffrer le trafic TLS, qui repose sur d'autres clés.",
+        "Sous-estimation : usurper un seul compte de service est le silver ticket, bien moins grave que le contrôle total offert par le golden ticket."
       ]
     },
     {

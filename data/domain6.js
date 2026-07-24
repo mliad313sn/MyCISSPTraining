@@ -961,7 +961,7 @@ window.CISSP_DATA.domains[6] = {
         "Un prestataire offensif externe reste une red team, quelle que soit sa provenance.",
         "La purple team est un mode de collaboration : la red team partage ses techniques pendant que la blue team améliore ses détections.",
         "Décrit plutôt un rôle d'arbitrage (white team), pas la purple team.",
-        "C'est la mission de la blue team, l'équipe défensive."
+        "Rôle inversé : détecter et défendre est la mission de la blue team, pas de la purple team."
       ]
     },
     {
@@ -1390,10 +1390,10 @@ window.CISSP_DATA.domains[6] = {
       "explication": "Filtered signifie que les sondes du scanner sont interceptées par un dispositif de filtrage (firewall, ACL) et qu'aucune réponse exploitable ne revient : le scanner ne peut pas conclure. Closed (D) signifie que le port répond mais qu'aucun service n'écoute ; open (A) signifie qu'un service accepte les connexions ; l'option B ne correspond à aucun état nmap.",
       "difficulte": 2,
       "pourquoi": [
-        "C'est la définition de open : un service accepte les connexions.",
+        "Confusion d'état : un service qui accepte les connexions décrit un port open, pas l'état demandé ici.",
         "Cet état n'existe pas dans la nomenclature nmap.",
         "Filtered signifie qu'un dispositif de filtrage intercepte les sondes : le scanner ne peut pas conclure sur l'état réel.",
-        "C'est la définition de closed : le port répond mais rien n'écoute."
+        "Confusion d'état : un port qui répond mais sans service à l'écoute est closed, pas l'état demandé ici."
       ]
     },
     {
@@ -2616,7 +2616,7 @@ window.CISSP_DATA.domains[6] = {
       "explication": "Les transactions synthétiques sont scriptées avec des résultats attendus connus : elles s'exécutent de manière proactive, y compris en l'absence de trafic réel, et détectent les dégradations avant que les utilisateurs ne les subissent. Le RUM (A) est au contraire passif et dépend du trafic réel. Les transactions synthétiques ne remplacent pas les autres tests (B) et leur coût (C) n'est pas leur avantage distinctif.",
       "difficulte": 2,
       "pourquoi": [
-        "C'est la définition du RUM, l'inverse des transactions synthétiques.",
+        "Confusion de méthode : observer le trafic d'utilisateurs réels décrit le RUM, l'inverse des transactions synthétiques attendues ici.",
         "Absolu : aucune technique n'élimine le besoin des autres tests.",
         "Le coût n'est pas leur avantage caractéristique.",
         "Scriptées avec un résultat attendu connu, elles vérifient proactivement le comportement même sans trafic réel : leur avantage distinctif."
