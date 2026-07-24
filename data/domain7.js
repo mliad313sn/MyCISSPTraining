@@ -296,9 +296,10 @@ window.CISSP_DATA.domains[7] = {
             "Egress monitoring : surveiller le trafic SORTANT, détecter l'exfiltration",
             "Outils : DLP, détection de stéganographie, NetFlow",
             "Log management : collecter, traiter, analyser, protéger les logs",
-            "Rollover logging : écrase les événements les plus anciens à taille max"
+            "Rollover logging : écrase les événements les plus anciens à taille max",
+            "Transfert temps réel vers un collecteur en écriture seule : les logs quittent l'hôte avant tout effacement"
           ],
-          "narration": "On surveille souvent ce qui entre, mais il faut aussi surveiller ce qui sort. L'egress monitoring détecte les transferts non autorisés de données vers l'extérieur, autrement dit l'exfiltration. Les outils classiques sont le DLP, Data Loss Prevention, et la détection de stéganographie. Le NetFlow, qui enregistre source, destination et volume de chaque communication, est précieux pour ces analyses. Enfin, la gestion des logs couvre leur collecte, leur traitement, leur analyse et leur protection ; le rollover logging écrase les événements les plus anciens quand le journal atteint sa taille maximale."
+          "narration": "On surveille souvent ce qui entre, mais il faut aussi surveiller ce qui sort. L'egress monitoring détecte les transferts non autorisés de données vers l'extérieur, autrement dit l'exfiltration. Les outils classiques sont le DLP, Data Loss Prevention, et la détection de stéganographie. Le NetFlow, qui enregistre source, destination et volume de chaque communication, est précieux pour ces analyses. Enfin, la gestion des logs couvre leur collecte, leur traitement, leur analyse et leur protection. Pourquoi faut-il envoyer les journaux ailleurs plutôt que de les garder sur la machine ? Parce qu'un attaquant qui prend le contrôle d'un serveur en devient administrateur : il peut alors modifier ou effacer les journaux locaux pour couvrir ses traces. Si chaque événement est transmis en temps réel vers un collecteur centralisé en écriture seule, la preuve a déjà quitté l'hôte avant qu'il ne soit compromis ; l'attaquant ne peut plus la réécrire, car elle réside sur un système qu'il ne contrôle pas. Attention aussi au rollover logging, qui écrase les événements les plus anciens quand le journal atteint sa taille maximale."
         },
         {
           "type": "question",
@@ -885,9 +886,10 @@ window.CISSP_DATA.domains[7] = {
             "RAID 1 — mirroring : disponibilité par duplication",
             "RAID 5 — parité : min. 3 disques, tolère 1 panne",
             "RAID 6 — double parité : min. 4 disques, tolère 2 pannes",
-            "RAID 10 — mirroring + striping : min. 4 disques, rapide et fiable, coûteux"
+            "RAID 10 — mirroring + striping : min. 4 disques, rapide et fiable, coûteux",
+            "Parité = XOR des blocs de données : un disque perdu se recalcule à partir des survivants"
           ],
-          "narration": "Le RAID combine plusieurs disques pour la vitesse ou la disponibilité. RAID zéro, le striping, répartit les données pour la performance mais n'offre aucune redondance : un disque tombe, tout est perdu. RAID un, le mirroring, duplique intégralement les données. RAID cinq utilise un bit de parité calculé par opération XOR, exige au moins trois disques et tolère la panne d'un seul. RAID six ajoute un second bloc de parité, exige quatre disques et tolère deux pannes simultanées. RAID dix combine miroir et striping sur au moins quatre disques : rapide et fiable, mais c'est l'option la plus coûteuse."
+          "narration": "Le RAID combine plusieurs disques pour la vitesse ou la disponibilité. RAID zéro, le striping, répartit les données pour la performance mais n'offre aucune redondance : un disque tombe, tout est perdu. RAID un, le mirroring, duplique intégralement les données. RAID cinq utilise un bit de parité, exige au moins trois disques et tolère la panne d'un seul. Pourquoi une seule parité suffit-elle à survivre à une panne ? La parité est le résultat d'un OU exclusif, le XOR, appliqué aux blocs de données répartis sur les autres disques. Cette opération a une propriété clé : si un disque disparaît, on recalcule son bloc manquant en refaisant le XOR de tous les blocs survivants et de la parité. Le tableau reconstruit ainsi la donnée perdue à la volée, sans copie complète. RAID six ajoute un second calcul de parité, indépendant du premier, ce qui permet de reconstituer deux disques manquants en même temps ; il exige quatre disques et tolère deux pannes simultanées. RAID dix combine miroir et striping sur au moins quatre disques : rapide et fiable, mais c'est l'option la plus coûteuse."
         },
         {
           "type": "question",
@@ -1126,7 +1128,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 1,
       "pourquoi": [
         "Hors rôle : la culpabilité est établie par le tribunal, pas par l'entreprise.",
-        "Bonne réponse : l'entreprise préserve les preuves et assiste la police, qui mène l'enquête criminelle.",
+        "L'entreprise préserve les preuves et assiste la police, qui mène l'enquête criminelle.",
         "Réponse dangereuse : on ne négocie jamais avec un attaquant, quel que soit le contexte.",
         "Hors rôle : l'interrogatoire des suspects appartient aux forces de l'ordre, jamais au professionnel de sécurité."
       ]
@@ -1143,7 +1145,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Le civil exige seulement la prépondérance des preuves, un niveau bien plus faible que le « beyond a reasonable doubt » réservé au criminel. La certitude absolue n'est un standard nulle part, et la preuve directe n'est jamais la seule forme admissible.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : le civil se contente de la prépondérance des preuves, un standard bien plus faible que le criminel.",
+        "C'est l'option correcte. Le civil se contente de la prépondérance des preuves, un standard bien plus faible que le criminel.",
         "Confusion de standard : « beyond a reasonable doubt » est le niveau exigé au criminel, pas au civil.",
         "Trop étroit : la preuve directe n'est jamais la seule forme admissible.",
         "Absolu irréaliste : la certitude absolue n'est un standard de preuve dans aucune juridiction."
@@ -1159,11 +1161,11 @@ window.CISSP_DATA.domains[7] = {
       ],
       "reponse": 0,
       "explication": "Les tribunaux ont appliqué la règle du hearsay aux logs systèmes : ils ne peuvent être introduits comme preuves que s'ils sont authentifiés par un administrateur système. Le parol evidence concerne les contrats écrits, le best evidence rule impose l'original plutôt que la copie, et Locard traite des traces laissées sur une scène de crime.",
-      "difficulte": 3,
+      "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : les logs sont du ouï-dire tant qu'un administrateur système ne les authentifie pas devant le tribunal.",
-        "Hors sujet : le principe de Locard décrit les traces laissées sur une scène de crime, pas l'admissibilité.",
-        "Hors sujet : le parol evidence rule concerne les contrats écrits, pas les journaux systèmes.",
+        "Les logs sont du ouï-dire tant qu'un administrateur système ne les authentifie pas devant le tribunal.",
+        "Le principe de Locard décrit les traces laissées sur une scène de crime, pas l'admissibilité.",
+        "Le parol evidence rule concerne les contrats écrits, pas les journaux systèmes.",
         "Techniquement plausible mais hors cible : le best evidence rule impose l'original plutôt que la copie, il ne traite pas de l'authentification des logs."
       ]
     },
@@ -1179,9 +1181,9 @@ window.CISSP_DATA.domains[7] = {
       "explication": "La chain of custody documente le contrôle de la preuve : qui l'a collectée et manipulée, quand et où, à chaque transfert (tag, bag, carry). Sans elle, la preuve réelle perd son admissibilité. Les autres réponses décrivent l'analyse d'attaque ou la gestion des changements.",
       "difficulte": 1,
       "pourquoi": [
-        "Hors sujet : l'approbation des changements d'urgence relève du change management.",
+        "Cela concerne un autre sujet. L'approbation des changements d'urgence relève du change management.",
         "Confusion : la liste des vulnérabilités relève de l'analyse technique de l'incident, pas du contrôle de la preuve.",
-        "Bonne réponse : la chain of custody trace qui a collecté et manipulé chaque preuve, quand et où, à chaque transfert.",
+        "Exact. La chain of custody trace qui a collecté et manipulé chaque preuve, quand et où, à chaque transfert.",
         "Confusion : la chronologie de l'attaque est la timeline d'investigation, pas la chaîne de contrôle de la preuve."
       ]
     },
@@ -1200,7 +1202,7 @@ window.CISSP_DATA.domains[7] = {
         "Piège de vocabulaire : « authentic » signifie que la preuve n'est pas fabriquée.",
         "Piège de vocabulaire : « admissible » signifie pertinente, matérielle et collectée légalement.",
         "Piège de vocabulaire : « convincing » signifie que la preuve est claire et compréhensible pour le tribunal.",
-        "Bonne réponse : « complete » exige de produire la preuve entière, y compris les éléments défavorables à votre cause."
+        "« complete » exige de produire la preuve entière, y compris les éléments défavorables à votre cause."
       ]
     },
     {
@@ -1216,7 +1218,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 2,
       "pourquoi": [
         "Réponse illégale : purger des données quand un litige est anticipé constitue une destruction de preuves.",
-        "Bonne réponse : l'anticipation d'un litige déclenche l'obligation de préservation (legal hold, phase Preservation de l'EDRM).",
+        "C'est le bon choix. L'anticipation d'un litige déclenche l'obligation de préservation (legal hold, phase Preservation de l'EDRM).",
         "Réponse de technicien : chiffrer protège la confidentialité mais ne répond pas à l'obligation légale de préservation.",
         "Fausse bonne idée : transférer les données ne crée aucune préservation opposable et complique la production."
       ]
@@ -1234,8 +1236,8 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 2,
       "pourquoi": [
         "Contresens : collecter plus de logs augmente le bruit, ce n'est pas l'objectif du tuning.",
-        "Bonne réponse : le tuning réduit les faux positifs, cause de la fatigue des analystes, sans créer de faux négatifs.",
-        "Hors sujet : la rotation des journaux relève du log management, pas du tuning de la détection.",
+        "Le tuning réduit les faux positifs, cause de la fatigue des analystes, sans créer de faux négatifs.",
+        "La rotation des journaux relève du log management, pas du tuning de la détection.",
         "Absolu dangereux : éliminer toutes les alertes reviendrait à s'aveugler volontairement."
       ]
     },
@@ -1251,7 +1253,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Le SOAR (Security Orchestration, Automation, and Response) automatise la réponse aux incidents définis dans des playbooks, implémentés par des runbooks, réduisant la charge des administrateurs et l'erreur humaine. Le SIEM corrèle et alerte mais ne répond pas, l'UEBA analyse les comportements, et l'IDS détecte sans agir.",
       "difficulte": 1,
       "pourquoi": [
-        "Bonne réponse : le SOAR exécute des playbooks implémentés en runbooks pour répondre automatiquement aux incidents définis.",
+        "Le SOAR exécute des playbooks implémentés en runbooks pour répondre automatiquement aux incidents définis.",
         "Trop étroit : l'IDS détecte et alerte sans jamais agir.",
         "Trop étroit : l'UEBA analyse les comportements pour détecter, sans capacité de réponse.",
         "Techniquement plausible mais incomplet : le SIEM corrèle et alerte, il ne déclenche pas de réponse automatisée."
@@ -1270,9 +1272,9 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 2,
       "pourquoi": [
         "Confusion : IoC et NetFlow sont des données observables, pas un couple de standards de description et de transport.",
-        "Hors sujet : SCAP automatise la conformité et SNMP supervise les équipements.",
+        "Autre périmètre. SCAP automatise la conformité et SNMP supervise les équipements.",
         "Piège d'inversion classique : les rôles de STIX et TAXII sont ici échangés.",
-        "Bonne réponse : STIX est le langage qui décrit la threat intelligence, TAXII le protocole qui la transporte."
+        "C'est l'option correcte. STIX est le langage qui décrit la threat intelligence, TAXII le protocole qui la transporte."
       ]
     },
     {
@@ -1289,7 +1291,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Hors phase : la weaponization est la préparation de l'exploit, avant tout envoi.",
         "Hors phase : l'installation implante le malware une fois l'exploitation réussie.",
-        "Bonne réponse : la delivery est la transmission de l'arme à la cible, typiquement par phishing.",
+        "La delivery est la transmission de l'arme à la cible, typiquement par phishing.",
         "Hors phase : l'exploitation est le déclenchement de la vulnérabilité après réception."
       ]
     },
@@ -1308,7 +1310,7 @@ window.CISSP_DATA.domains[7] = {
         "Inefficace ici : aucune signature d'attaque n'est violée quand l'attaquant utilise des identifiants valides.",
         "Inefficace ici : un firewall stateful laisse passer une session légitimement authentifiée.",
         "Inefficace ici : une deny list bloque des applications, pas l'usage anormal d'un compte légitime.",
-        "Bonne réponse : l'UEBA détecte les écarts au profil comportemental habituel — la signature d'un compte compromis."
+        "Exact. L'UEBA détecte les écarts au profil comportemental habituel — la signature d'un compte compromis."
       ]
     },
     {
@@ -1323,7 +1325,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Need-to-know restreint QUELLES informations un sujet peut connaître pour accomplir sa tâche ; least privilege restreint l'ÉTENDUE des privilèges accordés (permissions sur les données et droits d'exécuter des tâches systèmes). Les deux s'appliquent à tous les sujets, y compris processus et services.",
       "difficulte": 1,
       "pourquoi": [
-        "Bonne réponse : need-to-know limite l'accès à l'information, least privilege limite l'étendue des droits et permissions.",
+        "Need-to-know limite l'accès à l'information, least privilege limite l'étendue des droits et permissions.",
         "Faux clivage : les deux principes se déclinent à la fois techniquement et administrativement.",
         "Trop étroit : least privilege s'applique à tous les sujets et à toutes les sensibilités, pas seulement au classifié.",
         "Faux clivage : les deux principes s'appliquent à tous les sujets, administrateurs comme utilisateurs."
@@ -1342,8 +1344,8 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 1,
       "pourquoi": [
         "Piège temporel : les congés obligatoires révèlent la fraude pendant l'absence, sans coopération simultanée.",
-        "Bonne réponse : le two-person control impose l'action conjointe de deux individus pour une tâche critique.",
-        "Hors sujet : le clipping est un seuil d'échantillonnage de logs.",
+        "C'est le bon choix. Le two-person control impose l'action conjointe de deux individus pour une tâche critique.",
+        "Le clipping est un seuil d'échantillonnage de logs.",
         "Piège temporel : la job rotation détecte la fraude dans la durée, elle n'exige pas deux personnes simultanément."
       ]
     },
@@ -1361,7 +1363,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Absolu : la rotation complète la séparation des tâches mais ne l'élimine jamais.",
         "Vrai mais pas sécurité : la satisfaction des employés est un bénéfice RH, pas un contrôle de sécurité.",
-        "Bonne réponse : la rotation apporte revue par les pairs, détection de la fraude et polyvalence (cross-training).",
+        "La rotation apporte revue par les pairs, détection de la fraude et polyvalence (cross-training).",
         "Vrai mais pas sécurité : la continuité de service est un bénéfice opérationnel, pas le bénéfice de sécurité recherché."
       ]
     },
@@ -1380,7 +1382,7 @@ window.CISSP_DATA.domains[7] = {
         "Contresens : la surveillance ne présume pas la malveillance des administrateurs, elle gère un risque.",
         "Réponse de technicien : un arbitrage de stockage ne justifie pas la surveillance des comptes privilégiés.",
         "Trop étroit : la conformité est un bénéfice secondaire, pas la raison principale.",
-        "Bonne réponse : les attaquants utilisent presque toujours des privilèges élevés, et l'abus par des initiés de confiance reste possible."
+        "Les attaquants utilisent presque toujours des privilèges élevés, et l'abus par des initiés de confiance reste possible."
       ]
     },
     {
@@ -1395,9 +1397,9 @@ window.CISSP_DATA.domains[7] = {
       "explication": "La configuration management identifie, contrôle et vérifie les configurations, en s'appuyant sur des baselines (souvent déployées par images) et le hardening. La gestion des vulnérabilités identifie les faiblesses, la gestion des incidents traite les compromissions, et l'eDiscovery concerne les procédures judiciaires.",
       "difficulte": 1,
       "pourquoi": [
-        "Bonne réponse : la configuration management déploie des baselines sécurisées et vérifie qu'elles sont maintenues dans le temps.",
-        "Hors sujet : l'eDiscovery concerne les procédures judiciaires.",
-        "Hors sujet : la gestion des incidents traite les compromissions, pas l'état de déploiement.",
+        "C'est l'option correcte. La configuration management déploie des baselines sécurisées et vérifie qu'elles sont maintenues dans le temps.",
+        "L'eDiscovery concerne les procédures judiciaires.",
+        "Cela concerne un autre sujet. La gestion des incidents traite les compromissions, pas l'état de déploiement.",
         "Piège de périmètre : la gestion des vulnérabilités identifie les faiblesses, elle ne maintient pas l'état des systèmes."
       ]
     },
@@ -1414,8 +1416,8 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 1,
       "pourquoi": [
         "Hors phase : le rapport post-implémentation intervient après le changement, pas avant.",
-        "Bonne réponse : un plan de rollback prêt avant l'implémentation permet d'annuler le changement en cas de problème.",
-        "Hors sujet : la sauvegarde des logs SIEM n'est pas le prérequis critique d'un changement d'infrastructure.",
+        "Un plan de rollback prêt avant l'implémentation permet d'annuler le changement en cas de problème.",
+        "La sauvegarde des logs SIEM n'est pas le prérequis critique d'un changement d'infrastructure.",
         "Absolu irréaliste : on informe les parties prenantes clés, on ne recueille pas l'accord de chaque utilisateur."
       ]
     },
@@ -1433,7 +1435,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Métrique creuse : le nombre de patchs publiés ne dit rien de leur déploiement effectif.",
         "Contrôle faible : une attestation écrite est déclarative, sans vérification technique.",
-        "Bonne réponse : les scans de vulnérabilités et les audits vérifient techniquement que les correctifs sont réellement appliqués.",
+        "Exact. Les scans de vulnérabilités et les audits vérifient techniquement que les correctifs sont réellement appliqués.",
         "Piège d'étape : télécharger un patch n'est ni l'installer ni le vérifier."
       ]
     },
@@ -1449,7 +1451,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Le WAF est un firewall applicatif de couche 7 qui inspecte le contenu du trafic web et bloque les attaques comme l'injection SQL ou le XSS. Le filtrage statique reste en couche 3, le circuit-level en couche 5 valide les sessions sans inspecter le contenu, et le stateful (couches 3-4) n'inspecte pas la couche applicative.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : le WAF inspecte le trafic applicatif en couche 7 et bloque injections SQL et XSS.",
+        "Le WAF inspecte le trafic applicatif en couche 7 et bloque injections SQL et XSS.",
         "Hors couche : le stateful suit l'état des connexions en couches 3-4 sans analyse applicative.",
         "Hors couche : le circuit-level gateway valide les sessions en couche 5 sans inspecter le contenu.",
         "Hors couche : le filtrage statique opère en couche 3 et ignore le contenu applicatif."
@@ -1468,7 +1470,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 2,
       "pourquoi": [
         "Faux : il exige au contraire la construction d'une baseline initiale.",
-        "Bonne réponse : la comparaison à une baseline permet de détecter des attaques nouvelles, invisibles aux signatures.",
+        "C'est le bon choix. La comparaison à une baseline permet de détecter des attaques nouvelles, invisibles aux signatures.",
         "Confusion IDS/IPS : un IDS détecte et alerte, il ne bloque pas.",
         "Faux : l'analyse comportementale consomme généralement plus de ressources que les signatures."
       ]
@@ -1488,7 +1490,7 @@ window.CISSP_DATA.domains[7] = {
         "Contresens dangereux : un honeypot ne doit jamais héberger de données réelles de valeur.",
         "Réponse illégale : la riposte automatique (hackback) est proscrite.",
         "Absolu : le honeypot complète l'IDS, il ne le remplace pas.",
-        "Bonne réponse : le leurre détourne l'attaquant de la production et permet d'étudier ses techniques sans risque."
+        "Le leurre détourne l'attaquant de la production et permet d'étudier ses techniques sans risque."
       ]
     },
     {
@@ -1505,7 +1507,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Faux : un système applique une seule liste, jamais les deux simultanément.",
         "Inversion : la deny list autorise par défaut et ne bloque que ce qui est listé — l'inverse du deny by default.",
-        "Bonne réponse : l'allow list n'exécute que l'approuvé et refuse tout le reste par défaut (implicit deny).",
+        "L'allow list n'exécute que l'approuvé et refuse tout le reste par défaut (implicit deny).",
         "Confusion : le sandboxing isole l'exécution, il ne décide pas de ce qui a le droit de s'exécuter."
       ]
     },
@@ -1521,10 +1523,10 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Le fileless malware ne laisse aucune trace sur les supports de stockage tout en restant résident et actif en mémoire, ce qui complique fortement sa détection. Le rootkit s'enfouit dans l'OS pour se masquer, le multipartite se propage par plusieurs vecteurs, et la logic bomb attend une condition de déclenchement.",
       "difficulte": 2,
       "pourquoi": [
-        "Hors sujet : la logic bomb attend une condition de déclenchement.",
+        "Autre périmètre. La logic bomb attend une condition de déclenchement.",
         "Piège plausible : le rootkit se dissimule dans l'OS mais s'écrit généralement sur le disque.",
-        "Bonne réponse : le fileless malware réside uniquement en mémoire, sans trace sur les supports de stockage.",
-        "Hors sujet : le multipartite se propage par plusieurs vecteurs."
+        "C'est l'option correcte. Le fileless malware réside uniquement en mémoire, sans trace sur les supports de stockage.",
+        "Le multipartite se propage par plusieurs vecteurs."
       ]
     },
     {
@@ -1542,7 +1544,7 @@ window.CISSP_DATA.domains[7] = {
         "Hors phase : le rapport appartient à la phase reporting.",
         "Hors phase : corriger la vulnérabilité relève de la remediation, après le confinement.",
         "Hors phase : la restauration appartient à la phase recovery.",
-        "Bonne réponse : la mitigation contient l'incident et empêche des dégâts supplémentaires."
+        "La mitigation contient l'incident et empêche des dégâts supplémentaires."
       ]
     },
     {
@@ -1557,7 +1559,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "La reconstruction complète depuis zéro, guidée par la documentation de configuration, garantit qu'aucun composant compromis (backdoor, rootkit) ne subsiste, avant restauration des données. Un simple nettoyage antivirus ou une restauration partielle peut laisser des portes dérobées, et changer les mots de passe ne suffit pas.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : la reconstruction complète garantit l'élimination de toute persistance avant restauration des données.",
+        "Exact. La reconstruction complète garantit l'élimination de toute persistance avant restauration des données.",
         "Insuffisant : changer les mots de passe ne retire pas les implants de l'attaquant.",
         "Insuffisant : un nettoyage antivirus peut laisser backdoors et rootkits en place.",
         "Insuffisant : restaurer les seuls fichiers connus ignore les modifications non détectées."
@@ -1576,7 +1578,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 2,
       "pourquoi": [
         "Piège de responsabilité : le RSSI conseille, mais la responsabilité ultime du risque ne lui incombe pas personnellement.",
-        "Bonne réponse : la direction qui rejette une recommandation assume le risque résiduel de sa décision.",
+        "La direction qui rejette une recommandation assume le risque résiduel de sa décision.",
         "Piège de responsabilité : l'équipe IR recommande, elle ne porte pas le risque des décisions de la direction.",
         "Hors rôle : l'auditeur évalue, il ne porte jamais le risque de l'organisation."
       ]
@@ -1594,8 +1596,8 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 3,
       "pourquoi": [
         "Règle inventée : aucun principe n'exige l'égalité du WRT et du RTO.",
-        "Hors sujet : le RPO mesure la perte de données, il n'entre pas dans ce calcul d'indisponibilité.",
-        "Bonne réponse : RTO + WRT (4 + 2 = 6 h) reste inférieur au MTD de 8 h, la configuration est acceptable.",
+        "Le RPO mesure la perte de données, il n'entre pas dans ce calcul d'indisponibilité.",
+        "C'est le bon choix. RTO + WRT (4 + 2 = 6 h) reste inférieur au MTD de 8 h, la configuration est acceptable.",
         "Inversion : c'est le MTD qui doit englober RTO + WRT, pas l'inverse."
       ]
     },
@@ -1614,7 +1616,7 @@ window.CISSP_DATA.domains[7] = {
         "Incomplet : le full seul perdrait trois jours de modifications.",
         "Piège différentiel : ne restaurer que la dernière sauvegarde vaut pour les différentielles, pas pour les incrémentales.",
         "Incomplet : une incrémentale seule ne contient ni le socle ni les jours précédents.",
-        "Bonne réponse : chaque incrémentale ne contient que les changements depuis la précédente — il faut le full puis toutes les incrémentales dans l'ordre."
+        "Chaque incrémentale ne contient que les changements depuis la précédente — il faut le full puis toutes les incrémentales dans l'ordre."
       ]
     },
     {
@@ -1629,7 +1631,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Le remote mirroring, solution la plus avancée et la plus coûteuse, applique les modifications à un serveur de secours actif simultanément à la production. L'electronic vaulting transfère les sauvegardes en masse, le remote journaling transfère les journaux de transactions sans les appliquer à une base vivante, et le rollover logging concerne la rotation des logs.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : le remote mirroring maintient un serveur de secours vivant, mis à jour en même temps que la production.",
+        "Le remote mirroring maintient un serveur de secours vivant, mis à jour en même temps que la production.",
         "Trop lent : l'electronic vaulting transfère des sauvegardes en masse, sans serveur distant vivant.",
         "Terme piège : le « rollover logging » renvoie à la rotation des journaux, pas à une stratégie de site distant.",
         "Piège proche : le remote journaling transfère les journaux de transactions mais ne maintient pas une base active."
@@ -1648,7 +1650,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 1,
       "pourquoi": [
         "Surdimensionné : un site actif-actif est l'option la plus onéreuse, injustifiable ici.",
-        "Bonne réponse : le cold site, simple bâtiment alimenté et climatisé, est l'option la moins chère adaptée à un RTO en semaines.",
+        "C'est l'option correcte. Le cold site, simple bâtiment alimenté et climatisé, est l'option la moins chère adaptée à un RTO en semaines.",
         "Surdimensionné : le hot site est très coûteux pour des applications tolérant des semaines d'arrêt.",
         "Surdimensionné : le warm site reste plus cher que nécessaire pour un RTO aussi souple."
       ]
@@ -1657,18 +1659,18 @@ window.CISSP_DATA.domains[7] = {
       "q": "Pourquoi les Mutual Assistance Agreements (MAA) sont-ils RAREMENT utilisés comme stratégie de reprise ?",
       "choix": [
         "Difficiles à faire respecter, vulnérables au même sinistre régional et risqués pour la confidentialité",
-        "Ils sont formellement interdits par la plupart des régulateurs et des cadres de conformité internationaux",
-        "Ils exigent une certification ISO préalable",
-        "Ils coûtent plus cher qu'un hot site"
+        "Ils sont interdits par la plupart des régulateurs sectoriels dès qu'ils portent sur des données à caractère personnel",
+        "Ils imposent que les deux partenaires partagent exactement les mêmes matériels, logiciels et versions de configuration",
+        "Ils reviennent en pratique plus cher qu'un abonnement à un hot site commercial"
       ],
       "reponse": 0,
       "explication": "Les MAA sont peu contraignants juridiquement (difficiles à faire appliquer), les deux organisations peuvent être touchées par le même sinistre régional, et l'hébergement mutuel soulève des questions de confidentialité. Ils ne sont ni interdits, ni plus chers qu'un hot site — c'est même leur faible coût qui les rend tentants.",
       "difficulte": 3,
       "pourquoi": [
-        "Bonne réponse : difficiles à faire respecter juridiquement, exposés au même sinistre régional et problématiques pour la confidentialité.",
-        "Faux : les MAA ne sont pas interdits, ils sont simplement peu fiables.",
-        "Règle inventée : aucune certification ISO n'est exigée pour un MAA.",
-        "Inversé : leur faible coût est précisément leur attrait face au hot site."
+        "Difficiles à faire respecter juridiquement, exposés au même sinistre régional et problématiques pour la confidentialité.",
+        "Aucune règle générale n'interdit les MAA ; ils sont seulement peu fiables et encadrent mal la confidentialité.",
+        "Une compatibilité stricte aide, mais elle n'est pas exigée : c'est l'absence de contrainte juridique qui pose problème, pas l'uniformité technique.",
+        "Leur faible coût est au contraire leur principal attrait face au hot site payant."
       ]
     },
     {
@@ -1686,7 +1688,7 @@ window.CISSP_DATA.domains[7] = {
         "Piège proche : RAID 5 n'a qu'une parité simple et ne survit qu'à une seule panne.",
         "Insuffisant : RAID 1 est un miroir qui ne tolère la perte que d'un disque du couple.",
         "Piège proche : RAID 10 combine miroir et striping, sans double parité.",
-        "Bonne réponse : RAID 6 utilise une double parité et tolère la panne simultanée de deux disques."
+        "Exact. RAID 6 utilise une double parité et tolère la panne simultanée de deux disques."
       ]
     },
     {
@@ -1703,7 +1705,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Insuffisant : le walk-through reste une revue procédurale sur papier.",
         "Insuffisant : le parallel test active le site de secours sans arrêter la production, donc sans preuve complète.",
-        "Bonne réponse : seul le full-interruption bascule réellement les opérations et prouve le plan de bout en bout — d'où son risque.",
+        "Seul le full-interruption bascule réellement les opérations et prouve le plan de bout en bout — d'où son risque.",
         "Insuffisant : la simulation ne teste que certaines mesures sur scénario, sans bascule réelle."
       ]
     },
@@ -1720,7 +1722,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 2,
       "pourquoi": [
         "Bénéfice réel : elle met en évidence les informations obsolètes du plan.",
-        "Bonne réponse : un read-through ne teste jamais le basculement réel — seuls les tests parallel et full-interruption activent le site de secours.",
+        "C'est le bon choix. Un read-through ne teste jamais le basculement réel — seuls les tests parallel et full-interruption activent le site de secours.",
         "Bénéfice réel du read-through : la relecture rafraîchit les responsabilités des personnels clés.",
         "Bénéfice réel : elle révèle les rôles laissés vacants par des départs."
       ]
@@ -1738,7 +1740,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 2,
       "pourquoi": [
         "Réponse catastrophique : approuver donne l'accès à l'attaquant, qui possède déjà le mot de passe.",
-        "Bonne réponse : ne jamais approuver une demande non sollicitée et signaler immédiatement — le mot de passe est compromis.",
+        "Ne jamais approuver une demande non sollicitée et signaler immédiatement — le mot de passe est compromis.",
         "Fausse échappatoire : éteindre le téléphone n'adresse pas la compromission du mot de passe.",
         "Réponse dangereuse : désactiver la MFA supprimerait la dernière barrière protégeant le compte."
       ]
@@ -1756,9 +1758,9 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 1,
       "pourquoi": [
         "Piège proche : le tourniquet limite le passage à une personne mais sans double porte ni capacité de rétention.",
-        "Hors sujet : le PIDAS est un système de clôtures de détection périmétrique.",
-        "Hors sujet : le bollard arrête les véhicules.",
-        "Bonne réponse : le sas à double porte empêche le piggybacking et peut retenir un individu suspect."
+        "Cela concerne un autre sujet. Le PIDAS est un système de clôtures de détection périmétrique.",
+        "Le bollard arrête les véhicules.",
+        "Le sas à double porte empêche le piggybacking et peut retenir un individu suspect."
       ]
     },
     {
@@ -1773,7 +1775,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "L'ordre de volatilité impose de collecter d'abord les données les plus éphémères : registres CPU, cache, RAM, tables de connexions réseau. La RAM disparaît à la mise hors tension et contient le malware actif, les clés de chiffrement et les sessions. Le disque, les sauvegardes et les logs archivés sont persistants et peuvent être collectés ensuite sans perte.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : RAM et connexions actives disparaissent à l'extinction — l'ordre de volatilité impose de les capturer d'abord.",
+        "C'est l'option correcte. RAM et connexions actives disparaissent à l'extinction — l'ordre de volatilité impose de les capturer d'abord.",
         "Hors ordre : les sauvegardes sont parmi les données les plus durables.",
         "Hors ordre : le disque est persistant, son image peut être réalisée après la capture des données volatiles.",
         "Hors ordre : les journaux archivés sont persistants et récupérables à tout moment."
@@ -1793,7 +1795,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Inutile : une nouvelle copie hériterait du même doute sur l'original.",
         "Piège technique : le hash prouve l'intégrité logique, pas l'absence d'accès physique pendant la période non tracée.",
-        "Bonne réponse : une période non documentée rompt la chain of custody et expose la preuve au rejet.",
+        "Une période non documentée rompt la chain of custody et expose la preuve au rejet.",
         "Illusoire : une signature rétroactive ne répare pas une rupture de traçabilité."
       ]
     },
@@ -1810,9 +1812,9 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 1,
       "pourquoi": [
         "Confusion cryptographique : un hash ne chiffre rien, il produit une empreinte.",
-        "Bonne réponse : des empreintes identiques avant et après prouvent que la copie est fidèle et la preuve intacte (règle « accurate »).",
+        "Exact. Des empreintes identiques avant et après prouvent que la copie est fidèle et la preuve intacte (règle « accurate »).",
         "Usage distinct : la signature du rapport est une autre application de la cryptographie.",
-        "Hors sujet : le hash n'a aucun effet sur la vitesse de restauration."
+        "Autre périmètre. Le hash n'a aucun effet sur la vitesse de restauration."
       ]
     },
     {
@@ -1827,9 +1829,9 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Le write blocker (bloqueur d'écriture) s'intercale entre le disque saisi et la station d'analyse : il laisse passer les lectures mais bloque physiquement toute écriture, préservant l'intégrité de l'original. Le HSM protège des clés cryptographiques, le TPM est une puce de sécurité de la carte mère, et un duplicateur RAID n'offre aucune garantie de non-écriture.",
       "difficulte": 1,
       "pourquoi": [
-        "Bonne réponse : le write blocker laisse passer les lectures et bloque physiquement toute écriture vers le disque saisi.",
-        "Hors sujet : le TPM est une puce de sécurité de la carte mère.",
-        "Hors sujet : le HSM protège des clés cryptographiques.",
+        "Le write blocker laisse passer les lectures et bloque physiquement toute écriture vers le disque saisi.",
+        "Le TPM est une puce de sécurité de la carte mère.",
+        "Le HSM protège des clés cryptographiques.",
         "Insuffisant : un duplicateur RAID copie sans garantir l'absence d'écriture."
       ]
     },
@@ -1848,7 +1850,7 @@ window.CISSP_DATA.domains[7] = {
         "Désordonné : les structures réseau disparaissent avant les fichiers persistants.",
         "Inversé en tête : les registres CPU s'évanouissent avant les tables réseau.",
         "Inversé : les fichiers sur disque sont bien moins volatils que les registres et le réseau.",
-        "Bonne réponse : registres et cache CPU, puis structures réseau, puis fichiers sur disque, enfin sauvegardes — du plus éphémère au plus durable."
+        "C'est le bon choix. Registres et cache CPU, puis structures réseau, puis fichiers sur disque, enfin sauvegardes — du plus éphémère au plus durable."
       ]
     },
     {
@@ -1863,9 +1865,9 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Chaque ouverture de fichier modifie les horodatages d'accès et potentiellement d'autres métadonnées : la preuve originale a été altérée, ce que la partie adverse exploitera. C'est précisément pourquoi on travaille sur des copies bit à bit avec write blocker. Les droits d'administration n'autorisent pas à manipuler une preuve, et les autres réponses sont sans rapport.",
       "difficulte": 2,
       "pourquoi": [
-        "Hors sujet : la qualification incident/événement ne dépend pas de cette manipulation.",
+        "Cela concerne un autre sujet. La qualification incident/événement ne dépend pas de cette manipulation.",
         "Faux : les droits d'administration n'autorisent pas la manipulation d'une preuve.",
-        "Bonne réponse : chaque ouverture altère les horodatages d'accès, fragilisant l'admissibilité de l'original.",
+        "Chaque ouverture altère les horodatages d'accès, fragilisant l'admissibilité de l'original.",
         "Absurde techniquement : défragmenter détruirait davantage de métadonnées."
       ]
     },
@@ -1882,8 +1884,8 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 1,
       "pourquoi": [
         "Prérequis, pas analyse : l'agrégation collecte et regroupe sans détecter de schéma.",
-        "Bonne réponse : la corrélation relie des événements isolément anodins pour révéler le schéma d'attaque.",
-        "Hors sujet : la rétention conserve les logs dans le temps.",
+        "La corrélation relie des événements isolément anodins pour révéler le schéma d'attaque.",
+        "La rétention conserve les logs dans le temps.",
         "Prérequis, pas analyse : la normalisation convertit les formats sans relier les événements."
       ]
     },
@@ -1899,9 +1901,9 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Le threat hunting est proactif : l'analyste formule une hypothèse (« si le groupe X nous ciblait avec ses TTP connues, quelles traces trouverait-on ? ») et cherche des preuves de compromission qui ont échappé aux outils. Une alerte SIEM ou antivirus déclenche la réponse aux incidents, pas la chasse ; l'audit poursuit d'autres objectifs.",
       "difficulte": 2,
       "pourquoi": [
-        "Hors sujet : une demande d'audit poursuit des objectifs de conformité.",
+        "Autre périmètre. Une demande d'audit poursuit des objectifs de conformité.",
         "Piège réactif : une détection antivirus relève de la réponse aux incidents.",
-        "Bonne réponse : le threat hunting part d'une hypothèse fondée sur la threat intelligence, sans aucune alerte préalable.",
+        "C'est l'option correcte. Le threat hunting part d'une hypothèse fondée sur la threat intelligence, sans aucune alerte préalable.",
         "Piège réactif : une alerte SIEM déclenche la réponse aux incidents, pas la chasse proactive."
       ]
     },
@@ -1917,10 +1919,10 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Sans synchronisation NTP sur une source de temps fiable, la corrélation des événements entre systèmes devient impossible et la chronologie présentée au tribunal est contestable. La compression, le chiffrement et la rétention protègent les logs mais ne résolvent pas l'incohérence temporelle.",
       "difficulte": 2,
       "pourquoi": [
-        "Hors sujet : la compression économise l'espace sans corriger les horloges.",
-        "Hors sujet : le chiffrement protège la confidentialité en transit, pas la cohérence temporelle.",
-        "Hors sujet : la rétention allonge la conservation sans aligner les horloges.",
-        "Bonne réponse : la synchronisation NTP sur une source commune rend les horodatages corrélables et opposables."
+        "La compression économise l'espace sans corriger les horloges.",
+        "Le chiffrement protège la confidentialité en transit, pas la cohérence temporelle.",
+        "Cela concerne un autre sujet. La rétention allonge la conservation sans aligner les horloges.",
+        "La synchronisation NTP sur une source commune rend les horodatages corrélables et opposables."
       ]
     },
     {
@@ -1935,7 +1937,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "L'envoi en temps réel vers un collecteur centralisé, idéalement en écriture seule (WORM), garantit qu'une copie des événements existe hors de portée de l'attaquant, même s'il purge les logs locaux. Une sauvegarde nocturne laisse une fenêtre d'effacement, et la rotation ou la limitation de taille détruisent elles-mêmes des données.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : l'envoi en temps réel vers un serveur centralisé en écriture seule met les logs hors de portée de l'attaquant.",
+        "Exact. L'envoi en temps réel vers un serveur centralisé en écriture seule met les logs hors de portée de l'attaquant.",
         "Contre-productif : la rotation détruit elle-même des données.",
         "Contre-productif : limiter la taille provoque l'écrasement des événements.",
         "Fenêtre d'exposition : une sauvegarde nocturne laisse à l'attaquant toute la journée pour effacer."
@@ -1955,7 +1957,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Anarchie : agir sans documentation détruit la maîtrise des configurations.",
         "Rigidité dangereuse : interdire toute dérogation laisse la faille activement exploitée ouverte.",
-        "Bonne réponse : l'emergency change permet d'agir sans délai puis de documenter et faire approuver rétroactivement.",
+        "L'emergency change permet d'agir sans délai puis de documenter et faire approuver rétroactivement.",
         "Trop lent : attendre le comité laisse la fenêtre d'exploitation ouverte."
       ]
     },
@@ -1974,7 +1976,7 @@ window.CISSP_DATA.domains[7] = {
         "Précipité : supprimer aveuglément peut casser un service ou alerter un attaquant qui utilise cette règle.",
         "Dangereux : régulariser sans enquête masquerait un incident potentiel.",
         "Prématuré : sanctionner sans faits établis est injuste et contre-productif.",
-        "Bonne réponse : enquêter d'abord — la règle peut être une erreur bénigne ou la persistance d'une compromission."
+        "C'est le bon choix. Enquêter d'abord — la règle peut être une erreur bénigne ou la persistance d'une compromission."
       ]
     },
     {
@@ -1990,7 +1992,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 1,
       "pourquoi": [
         "Hors rôle : le service desk enregistre les demandes sans pouvoir d'approbation.",
-        "Bonne réponse : le CAB évalue impact, risques et planification des changements, puis les approuve ou les rejette.",
+        "Le CAB évalue impact, risques et planification des changements, puis les approuve ou les rejette.",
         "Hors rôle : l'équipe IR gère les incidents, pas les changements.",
         "Hors rôle : le comité d'audit supervise le contrôle interne."
       ]
@@ -2007,7 +2009,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Nous sommes en phase de détection : une alerte ou une plainte n'est pas forcément un incident. Il faut d'abord trier et vérifier (triage) — la lenteur peut venir d'un disque plein comme d'un malware. Le DRP concerne les sinistres majeurs, la réinstallation détruirait les preuves, et la notification réglementaire n'intervient qu'après qualification d'un incident avec exposition de données.",
       "difficulte": 1,
       "pourquoi": [
-        "Bonne réponse : en phase de détection, on trie et vérifie d'abord — une lenteur n'est pas forcément un incident.",
+        "En phase de détection, on trie et vérifie d'abord — une lenteur n'est pas forcément un incident.",
         "Disproportionné : le DRP se déclenche pour un sinistre déclaré, pas pour un signalement non qualifié.",
         "Hors phase : la notification réglementaire suppose un incident qualifié avec exposition de données.",
         "Destructeur : réinstaller efface les preuves avant toute qualification."
@@ -2025,7 +2027,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "La notification aux autorités (comme l'exigence RGPD de 72 heures) et aux personnes concernées relève de la phase Reporting, qui couvre les obligations légales, réglementaires et la communication aux parties prenantes. La détection identifie l'incident, la mitigation le contient, et la remédiation traite la cause racine.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : la notification aux autorités (dont l'exigence RGPD de 72 heures) relève de la phase Reporting.",
+        "C'est l'option correcte. La notification aux autorités (dont l'exigence RGPD de 72 heures) relève de la phase Reporting.",
         "Hors phase : la remediation traite la cause racine.",
         "Hors phase : la mitigation contient l'incident.",
         "Hors phase : la détection identifie l'incident, elle ne notifie pas."
@@ -2044,7 +2046,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 1,
       "pourquoi": [
         "Hors phase : pendant la mitigation, l'équipe contient l'attaque, elle ne l'analyse pas rétrospectivement.",
-        "Bonne réponse : NIST SP 800-61 recommande une revue rapide, animée par un facilitateur, avant que les souvenirs ne s'estompent.",
+        "NIST SP 800-61 recommande une revue rapide, animée par un facilitateur, avant que les souvenirs ne s'estompent.",
         "Trop étroit : tout incident majeur mérite une revue, avec ou sans perte financière.",
         "Trop tard : six mois d'attente dégradent la qualité des enseignements."
       ]
@@ -2064,7 +2066,7 @@ window.CISSP_DATA.domains[7] = {
         "Disproportionné : éteindre tout le datacenter détruit les preuves volatiles et étend l'indisponibilité.",
         "Jamais la réponse attendue : payer n'arrête pas le chiffrement en cours et n'offre aucune garantie.",
         "Prématuré : restaurer sur des systèmes encore compromis exposerait les sauvegardes au chiffrement.",
-        "Bonne réponse : isoler les serveurs et segments touchés stoppe la propagation tout en préservant les preuves volatiles."
+        "Exact. Isoler les serveurs et segments touchés stoppe la propagation tout en préservant les preuves volatiles."
       ]
     },
     {
@@ -2079,10 +2081,10 @@ window.CISSP_DATA.domains[7] = {
       "explication": "L'EDR (Endpoint Detection and Response) enregistre en continu l'activité des endpoints (processus, connexions, modifications), détecte les comportements suspects au-delà des signatures, et offre des capacités de réponse à distance : isoler la machine, tuer un processus, collecter des artefacts. L'antivirus classique se limite essentiellement aux signatures ; le chiffrement et l'anti-spam sont d'autres outils.",
       "difficulte": 2,
       "pourquoi": [
-        "Hors sujet : le filtrage du spam relève de la passerelle de messagerie.",
+        "Le filtrage du spam relève de la passerelle de messagerie.",
         "Trop étroit : la comparaison à des signatures est le propre de l'antivirus classique.",
-        "Bonne réponse : l'EDR surveille en continu le comportement des endpoints et permet investigation et réponse à distance.",
-        "Hors sujet : le chiffrement de disque est un autre contrôle."
+        "L'EDR surveille en continu le comportement des endpoints et permet investigation et réponse à distance.",
+        "Autre périmètre. Le chiffrement de disque est un autre contrôle."
       ]
     },
     {
@@ -2099,7 +2101,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Vraie mais sous-optimale : externaliser déplace le coût du triage répétitif sans l'éliminer — l'automatisation reste le meilleur gain.",
         "Dangereux : relever les seuils crée des faux négatifs en masquant de vrais phishings.",
-        "Bonne réponse : un playbook SOAR automatise le triage répétitif et libère les analystes pour les cas complexes.",
+        "C'est le bon choix. Un playbook SOAR automatise le triage répétitif et libère les analystes pour les cas complexes.",
         "Coûteux et non scalable : recruter ne supprime pas la répétitivité des tâches."
       ]
     },
@@ -2115,7 +2117,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Pour bloquer le trafic malveillant, l'IPS doit être inline, en coupure sur le chemin des paquets. L'IDS, purement détectif, analyse une copie du trafic reçue via un port SPAN ou un TAP réseau, sans pouvoir intervenir. Les versions réseau (NIDS/NIPS) sont des équipements ou sondes réseau, pas des agents endpoint, et la dernière proposition inverse les rôles.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : le NIPS doit être inline pour bloquer, le NIDS observe passivement une copie du trafic.",
+        "Le NIPS doit être inline pour bloquer, le NIDS observe passivement une copie du trafic.",
         "Inversion des rôles : c'est l'IPS qui bloque, l'IDS se contente d'alerter.",
         "Inversion : c'est le NIDS qui analyse une copie via un port SPAN, et le NIPS qui est en coupure.",
         "Faux : les versions réseau sont des sondes ou équipements, pas des agents endpoint."
@@ -2136,7 +2138,7 @@ window.CISSP_DATA.domains[7] = {
         "Vrai mais secondaire : l'impact sur les métriques d'audit est négligeable face à une intrusion non détectée.",
         "Inversion : la surcharge d'alertes et la fatigue sont le symptôme des faux positifs.",
         "Inversion : des réponses injustifiées sur des systèmes sains sont une conséquence des faux positifs.",
-        "Bonne réponse : le faux négatif laisse une attaque réelle progresser sans alerte ni réponse, parfois pendant des mois."
+        "Le faux négatif laisse une attaque réelle progresser sans alerte ni réponse, parfois pendant des mois."
       ]
     },
     {
@@ -2152,7 +2154,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 3,
       "pourquoi": [
         "Absolu faux : les honeypots ne sont pas illégaux en soi.",
-        "Bonne réponse : l'enticement (opportunité offerte à qui avait déjà l'intention) est admis, l'entrapment (induire au délit) ne l'est pas.",
+        "C'est l'option correcte. L'enticement (opportunité offerte à qui avait déjà l'intention) est admis, l'entrapment (induire au délit) ne l'est pas.",
         "Inversion exacte des deux notions juridiques.",
         "Contresens dangereux : un honeypot ne doit jamais contenir de vraies données sensibles."
       ]
@@ -2169,7 +2171,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Avec des sauvegardes quotidiennes, une panne peut faire perdre jusqu'à 24 heures de données, soit six fois le RPO de 4 heures fixé par le métier. Il faut combler l'écart par des sauvegardes plus fréquentes ou une réplication quasi continue. Ajuster le RPO à la contrainte technique inverserait la logique : c'est le besoin métier qui dicte la solution, pas l'inverse.",
       "difficulte": 3,
       "pourquoi": [
-        "Bonne réponse : il faut aligner la solution sur le besoin métier — sauvegardes toutes les 4 heures ou réplication continue.",
+        "Il faut aligner la solution sur le besoin métier — sauvegardes toutes les 4 heures ou réplication continue.",
         "Illusion de conformité : des sauvegardes quotidiennes exposent à 24 heures de perte, six fois le RPO.",
         "Logique inversée : c'est le besoin métier qui dicte la solution technique, pas l'inverse.",
         "Faux : le RPO définit précisément la fréquence de protection des données requise."
@@ -2190,7 +2192,7 @@ window.CISSP_DATA.domains[7] = {
         "RTO non tenu : un cold site demande des semaines d'activation.",
         "Vrai mais trop cher : le hot site tient le RTO mais dépasse le budget contraint.",
         "Vrai mais trop cher : le site actif-actif est l'option la plus onéreuse, surdimensionnée ici.",
-        "Bonne réponse : le warm site s'active en une douzaine d'heures et satisfait le RTO de 12 heures au meilleur coût."
+        "Exact. Le warm site s'active en une douzaine d'heures et satisfait le RTO de 12 heures au meilleur coût."
       ]
     },
     {
@@ -2206,7 +2208,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 2,
       "pourquoi": [
         "Incomplet : la différentielle seule ne contient pas le socle du full.",
-        "Bonne réponse : la différentielle cumule tout depuis le full — le full de dimanche plus la différentielle de mardi soir suffisent.",
+        "La différentielle cumule tout depuis le full — le full de dimanche plus la différentielle de mardi soir suffisent.",
         "Inutile : la différentielle de lundi est déjà incluse dans celle de mardi.",
         "Piège incrémental : rejouer chaque différentielle successivement est la logique des incrémentales."
       ]
@@ -2225,7 +2227,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Piège RAID 0 : 8 To supposerait l'absence de tout bloc de parité.",
         "Aucune configuration standard ne donne 2 To utiles avec quatre disques de 2 To.",
-        "Bonne réponse : (n − 1) × taille = 3 × 2 To = 6 To, l'équivalent d'un disque étant consommé par la parité répartie.",
+        "C'est le bon choix. (n − 1) × taille = 3 × 2 To = 6 To, l'équivalent d'un disque étant consommé par la parité répartie.",
         "Piège RAID 10 : 4 To correspondrait à un miroir de deux paires."
       ]
     },
@@ -2241,7 +2243,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Le RAID 0 (striping) répartit les données sur plusieurs disques uniquement pour la vitesse : sans miroir ni parité, la défaillance d'un seul disque rend l'ensemble du volume irrécupérable. Pour des données financières critiques, il faut au minimum du RAID 1, 5, 6 ou 10. Le RAID 0 est justement rapide, fonctionne dès deux disques, et n'a pas d'incompatibilité applicative particulière.",
       "difficulte": 1,
       "pourquoi": [
-        "Bonne réponse : le striping sans redondance perd tout le volume à la première panne — inacceptable pour des données financières.",
+        "Le striping sans redondance perd tout le volume à la première panne — inacceptable pour des données financières.",
         "Faux : aucune incompatibilité applicative particulière.",
         "Faux : le RAID 0 est précisément le plus rapide, sans calcul de parité.",
         "Faux : le RAID 0 fonctionne dès deux disques."
@@ -2262,7 +2264,7 @@ window.CISSP_DATA.domains[7] = {
         "RPO non tenu : des différentielles hebdomadaires laissent des jours de perte.",
         "Vrai mais hors budget : le mirroring tient le RPO mais exige le serveur distant actif exclu par la contrainte.",
         "RPO non tenu : un vaulting quotidien laisse jusqu'à 24 heures de perte.",
-        "Bonne réponse : le transfert fréquent des journaux de transactions tient un RPO de quelques minutes sans serveur distant vivant."
+        "Le transfert fréquent des journaux de transactions tient un RPO de quelques minutes sans serveur distant vivant."
       ]
     },
     {
@@ -2278,7 +2280,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 2,
       "pourquoi": [
         "Prématuré : le parallel test suppose un plan déjà validé sur papier.",
-        "Bonne réponse : la progression va du moins risqué au plus probant — on commence par la relecture et l'exercice sur table.",
+        "C'est l'option correcte. La progression va du moins risqué au plus probant — on commence par la relecture et l'exercice sur table.",
         "Négligence : un plan non testé n'offre aucune assurance, attendre un an est indéfendable.",
         "Risque inacceptable : basculer réellement sur un plan jamais validé peut créer un sinistre auto-infligé."
       ]
@@ -2297,7 +2299,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Insuffisant : la simulation déroule un scénario sans activer réellement le site de secours.",
         "Insuffisant : le walk-through reste une revue procédurale.",
-        "Bonne réponse : le parallel test active réellement le site de secours pendant que la production continue sur le site principal.",
+        "Le parallel test active réellement le site de secours pendant que la production continue sur le site principal.",
         "Trop loin : le full-interruption aurait arrêté la production du site principal."
       ]
     },
@@ -2314,8 +2316,8 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 2,
       "pourquoi": [
         "Outil amont : le registre des risques ne confère aucune autorité opérationnelle.",
-        "Bonne réponse : le DRP doit nommer l'autorité habilitée à déclarer le désastre, avec des suppléants joignables à tout moment.",
-        "Hors sujet : le contrat de hot site ne dit pas qui décide de basculer.",
+        "Exact. Le DRP doit nommer l'autorité habilitée à déclarer le désastre, avec des suppléants joignables à tout moment.",
+        "Le contrat de hot site ne dit pas qui décide de basculer.",
         "Outil amont : la matrice RACI du projet BCP ne désigne pas l'autorité d'activation en pleine nuit."
       ]
     },
@@ -2333,7 +2335,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Inversion des définitions : le BCP couvre le métier et le DRP la technique, pas l'inverse.",
         "Faux : ce sont deux documents distincts aux périmètres différents.",
-        "Bonne réponse : le BCP maintient les fonctions critiques de l'entreprise, le DRP restaure l'infrastructure technologique.",
+        "Le BCP maintient les fonctions critiques de l'entreprise, le DRP restaure l'infrastructure technologique.",
         "Inversion de périmètre : c'est le BCP qui englobe le DRP."
       ]
     },
@@ -2352,7 +2354,7 @@ window.CISSP_DATA.domains[7] = {
         "Contre-productif : l'alarme incendie révèle l'alerte et déclenche une évacuation inadaptée.",
         "Risqué : négocier expose l'agent sans alerter la sécurité.",
         "Danger de mort : refuser devant un agresseur armé met la vie de l'agent en jeu — la vie humaine prime sur tout actif.",
-        "Bonne réponse : le duress code ouvre la porte en apparence tout en déclenchant une alerte silencieuse."
+        "C'est le bon choix. Le duress code ouvre la porte en apparence tout en déclenchant une alerte silencieuse."
       ]
     },
     {
@@ -2367,7 +2369,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "L'appareil de prêt (loaner/burner device) avec données minimales limite l'exposition en cas de fouille, de saisie, de vol ou de compromission par des dispositifs de surveillance ; il est réinitialisé au retour. L'ordinateur habituel transporte trop de données, en emporter une copie complète aggrave le risque, et le wi-fi d'hôtel à l'étranger doit être considéré comme hostile.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : des appareils de prêt au contenu minimal, réinitialisés au retour, réduisent l'exposition à la fouille, au vol ou à la surveillance.",
+        "Des appareils de prêt au contenu minimal, réinitialisés au retour, réduisent l'exposition à la fouille, au vol ou à la surveillance.",
         "Aggravant : emporter une copie complète maximise l'impact d'une saisie.",
         "Faux : le wi-fi d'hôtel à l'étranger doit être présumé hostile.",
         "Exposition excessive : l'ordinateur habituel transporte l'historique complet des données de l'entreprise."
@@ -2379,16 +2381,16 @@ window.CISSP_DATA.domains[7] = {
         "Voyager sans données sensibles et les récupérer ensuite par un canal sécurisé",
         "Le chiffrement suffit : les douanes ne pourront rien lire",
         "Il doit cacher les données dans une partition dissimulée",
-        "Il doit refuser le contrôle douanier en invoquant le secret professionnel et l'immunité diplomatique"
+        "Il doit emporter les données mais négocier sur place un accès douanier supervisé et limité au strict nécessaire"
       ],
       "reponse": 0,
-      "explication": "Face à une injonction légale de déverrouillage, le voyageur devra fournir l'accès sous peine de refoulement, de saisie ou de poursuites : le chiffrement ne protège que contre l'accès non autorisé, pas contre la contrainte légale. La bonne stratégie est de ne transporter aucune donnée sensible et de la récupérer sur place via un canal sécurisé (VPN). Refuser ou dissimuler expose à des sanctions et aggrave la situation.",
+      "explication": "Face à une injonction légale de déverrouillage, le voyageur devra fournir l'accès sous peine de refoulement, de saisie ou de poursuites : le chiffrement ne protège que contre l'accès non autorisé, pas contre la contrainte légale. La bonne stratégie est de ne transporter aucune donnée sensible et de la récupérer sur place via un canal sécurisé (VPN). Dissimuler ou espérer négocier avec les douanes expose à des sanctions et aggrave la situation.",
       "difficulte": 3,
       "pourquoi": [
-        "Bonne réponse : voyager sans données sensibles et les récupérer sur place par canal sécurisé neutralise la contrainte légale.",
+        "Voyager sans données sensibles et les récupérer sur place par canal sécurisé neutralise la contrainte légale.",
         "Illusion technique : le chiffrement cède devant une injonction légale de déverrouillage.",
         "Aggravant : une partition dissimulée découverte expose à des sanctions.",
-        "Risqué : refuser expose au refoulement, à la saisie ou aux poursuites."
+        "Un voyageur n'a aucun levier pour imposer un accès partiel aux douanes : soit il déverrouille tout, soit il subit refoulement ou saisie."
       ]
     },
     {
@@ -2406,7 +2408,7 @@ window.CISSP_DATA.domains[7] = {
         "Négligence : attendre un accès frauduleux laisse l'attaquant progresser.",
         "Contre-productif : licencier la victime dissuaderait tout signalement futur.",
         "Abandon : privatiser le problème isole l'employé face à l'extorsion.",
-        "Bonne réponse : un canal confidentiel sans représailles permet aux victimes de coercition d'alerter tôt et de protéger l'organisation."
+        "C'est l'option correcte. Un canal confidentiel sans représailles permet aux victimes de coercition d'alerter tôt et de protéger l'organisation."
       ]
     },
     {
@@ -2422,7 +2424,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 2,
       "pourquoi": [
         "Irréaliste : l'interdiction générale des déplacements est rarement tenable pour le métier.",
-        "Bonne réponse : un dispositif continu — itinéraires, check-ins, contact d'urgence, veille et plan d'évacuation — protège dans la durée.",
+        "Un dispositif continu — itinéraires, check-ins, contact d'urgence, veille et plan d'évacuation — protège dans la durée.",
         "Vrai mais trop étroit : l'assurance indemnise après coup, elle ne prévient ni ne protège.",
         "Insuffisant : un briefing unique ne couvre pas une présence durable en zone instable."
       ]
@@ -2441,7 +2443,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Réponse de technicien : améliorer le modèle réduit l'erreur sans jamais l'éliminer — l'enjeu du manager est le contrôle du processus, pas la précision.",
         "Vraie mais contextuellement fausse : la sévérité est elle-même une estimation — une alerte « faible » mal clôturée peut être le premier signal d'une intrusion majeure.",
-        "Bonne réponse : maintenir l'humain dans la boucle sur la décision de clôture traite le risque de faux négatif tout en conservant le bénéfice de l'automatisation.",
+        "Exact. Maintenir l'humain dans la boucle sur la décision de clôture traite le risque de faux négatif tout en conservant le bénéfice de l'automatisation.",
         "Absolu irréaliste : aucun modèle n'atteindra un taux d'erreur nul, et retirer l'outil sacrifie le gain de productivité sans traiter le problème de gouvernance."
       ]
     },
@@ -2457,7 +2459,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "La double extorsion transforme un incident de disponibilité en violation de confidentialité : les données exfiltrées imposent notification aux autorités et aux personnes concernées, analyse juridique et gestion de crise, que la restauration ne traite pas. Payer n'offre aucune garantie de suppression et n'éteint pas ces obligations ; vérifier l'intégrité est une bonne pratique de recovery mais ne règle pas davantage le volet divulgation.",
       "difficulte": 3,
       "pourquoi": [
-        "Bonne réponse : les données exfiltrées imposent notification, évaluation juridique et gestion de crise — la restauration ne traite qu'un des deux volets de l'attaque.",
+        "Les données exfiltrées imposent notification, évaluation juridique et gestion de crise — la restauration ne traite qu'un des deux volets de l'attaque.",
         "Jamais la réponse attendue : payer n'offre aucune garantie de suppression et n'éteint pas les obligations légales de notification.",
         "Vraie mais contextuellement fausse : la restauration règle la disponibilité, mais la double extorsion fait de l'incident une violation de confidentialité que la reprise ne résout pas.",
         "Vraie mais trop étroite : vérifier l'intégrité est une bonne pratique de recovery qui ne traite pas le volet divulgation des données."
@@ -2477,7 +2479,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Hors phase : restaurer avant d'avoir préservé détruirait les preuves — la recovery vient après la collecte.",
         "Piège de responsabilité partagée : le CSP gère l'infrastructure, mais l'investigation des charges de travail du client incombe au client.",
-        "Bonne réponse : en environnement éphémère, figer l'auto-scaling, snapshotter et exporter les logs via API est la seule préservation possible avant destruction automatique.",
+        "C'est le bon choix. En environnement éphémère, figer l'auto-scaling, snapshotter et exporter les logs via API est la seule préservation possible avant destruction automatique.",
         "Irréaliste en cloud mutualisé : le CSP ne saisira pas des disques physiques partagés entre clients — la préservation passe par ses mécanismes logiques."
       ]
     },
@@ -2496,7 +2498,7 @@ window.CISSP_DATA.domains[7] = {
         "Dangereux : exclure le serveur de paiement le prive de tout confinement rapide alors qu'il est précisément la cible la plus attractive.",
         "Vraie mais insuffisante : affiner les règles réduit les faux positifs sans jamais les éliminer — le prochain isolera encore un actif critique.",
         "Sur-réaction : abandonner toute automatisation sacrifie la réactivité exigée par la direction pour un incident unique.",
-        "Bonne réponse : l'automatisation graduée aligne le contrôle humain sur la criticité métier — réactivité préservée, jugement humain là où l'impact l'exige."
+        "L'automatisation graduée aligne le contrôle humain sur la criticité métier — réactivité préservée, jugement humain là où l'impact l'exige."
       ]
     },
     {
@@ -2512,7 +2514,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 3,
       "pourquoi": [
         "Vraie mais trop générique : la sensibilisation transmet des connaissances, elle n'entraîne pas la prise de décision sous pression.",
-        "Bonne réponse : le tabletop de crise fait répéter à la direction ses propres arbitrages — paiement, communication, arrêt — sans aucun risque opérationnel.",
+        "Le tabletop de crise fait répéter à la direction ses propres arbitrages — paiement, communication, arrêt — sans aucun risque opérationnel.",
         "Vraie mais insuffisante : documenter les décisions ne remplace pas leur répétition — en crise, un document jamais exercé est ignoré.",
         "Hors cible : le full-interruption teste la bascule technique, déjà éprouvée — il n'exerce pas la prise de décision des dirigeants."
       ]
@@ -2532,7 +2534,7 @@ window.CISSP_DATA.domains[7] = {
         "Dangereux : attendre la fin de l'investigation fait dépasser les délais impératifs comme les 72 heures du RGPD.",
         "Précipité : notifier partout sans qualification expose à des déclarations inexactes ou non requises, difficiles à corriger ensuite.",
         "Piège de décentralisation : des notifications non coordonnées produisent des messages contradictoires exploités par les régulateurs et les médias.",
-        "Bonne réponse : les obligations divergent par juridiction — seule une cartographie juridique coordonnée permet de tenir chaque délai sans contradiction entre pays."
+        "C'est l'option correcte. Les obligations divergent par juridiction — seule une cartographie juridique coordonnée permet de tenir chaque délai sans contradiction entre pays."
       ]
     },
     {
@@ -2547,7 +2549,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Le besoin d'efficacité des analystes est réel : la réponse managériale consiste à le canaliser vers un service approuvé, encadré par une politique claire, plutôt qu'à le nier. Le blocage total pousse l'usage vers des canaux personnels incontrôlés (shadow AI), la sanction sans alternative rend la pratique clandestine, et les journaux révèlent l'architecture interne et peuvent contenir des données personnelles ou sensibles.",
       "difficulte": 3,
       "pourquoi": [
-        "Bonne réponse : canaliser le besoin vers un service approuvé, encadré par une politique, traite la cause — le besoin d'efficacité — tout en protégeant les données.",
+        "Canaliser le besoin vers un service approuvé, encadré par une politique, traite la cause — le besoin d'efficacité — tout en protégeant les données.",
         "Vraie mais contre-productive en premier recours : sanctionner sans offrir d'alternative pousse la pratique dans la clandestinité au lieu de l'éliminer.",
         "Faux : journaux, adresses internes et noms de comptes révèlent l'architecture et peuvent contenir des données personnelles ou sensibles.",
         "Réflexe de blocage : l'interdiction totale pousse l'usage vers des canaux personnels non maîtrisés (shadow AI) et prive le SOC d'un gain réel."
@@ -2565,8 +2567,8 @@ window.CISSP_DATA.domains[7] = {
       "explication": "La promesse d'un criminel n'est pas vérifiable, et surtout l'exfiltration constitue déjà une violation de données : les obligations de notification s'imposent que la rançon soit payée ou non. Le calcul coût-bénéfice du DAF repose donc sur une prémisse fausse, la prise en charge par l'assurance ne change ni la fiabilité de la promesse ni le droit applicable, et le risque de sanctions internationales est réel mais n'est pas la seule raison de refuser.",
       "difficulte": 3,
       "pourquoi": [
-        "Hors sujet : le financement par l'assurance ne change ni la fiabilité de la promesse ni les obligations légales.",
-        "Bonne réponse : la promesse d'un criminel n'est pas vérifiable, et l'exfiltration constitue une violation dont la notification s'impose indépendamment du paiement.",
+        "Le financement par l'assurance ne change ni la fiabilité de la promesse ni les obligations légales.",
+        "Exact. La promesse d'un criminel n'est pas vérifiable, et l'exfiltration constitue une violation dont la notification s'impose indépendamment du paiement.",
         "Piège du calcul court-termiste : l'analyse coût-bénéfice ignore que la violation reste juridiquement notifiable, payée ou non.",
         "Vraie mais trop étroite : le risque de sanctions est réel, mais la notification resterait due même si le paiement était licite."
       ]
@@ -2585,7 +2587,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Trop tard : découvrir en pleine crise que le contrat ne prévoit ni préservation ni assistance laisse l'investigation sans recours.",
         "Réponse de technicien : activer la journalisation ne crée aucun droit d'accès, de rétention ni d'assistance opposable au fournisseur.",
-        "Bonne réponse : sans clause contractuelle, le client n'a aucun levier pour exiger préservation, journaux ou assistance pendant une crise — ces capacités se négocient avant la signature.",
+        "Sans clause contractuelle, le client n'a aucun levier pour exiger préservation, journaux ou assistance pendant une crise — ces capacités se négocient avant la signature.",
         "Vraie mais insuffisante : les certifications attestent des contrôles du fournisseur, pas des droits d'investigation du client."
       ]
     },
@@ -2603,7 +2605,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Piège de décentralisation : le droit local s'applique aux notifications, mais des négociations parallèles non coordonnées affaiblissent le groupe face à l'attaquant.",
         "Vraie mais prématurée : arrêter ou poursuivre la négociation est une décision de la cellule de crise — qui doit d'abord exister et parler d'une seule voix.",
-        "Bonne réponse : en crise multi-entités, la première urgence est l'unité de commandement — sans décideur et canaux uniques, négociations et communication se sabotent mutuellement.",
+        "C'est le bon choix. En crise multi-entités, la première urgence est l'unité de commandement — sans décideur et canaux uniques, négociations et communication se sabotent mutuellement.",
         "Hors priorité : communiquer avant d'avoir unifié le commandement et les faits risque d'aggraver les contradictions."
       ]
     },
@@ -2618,7 +2620,7 @@ window.CISSP_DATA.domains[7] = {
       "reponse": 0,
       "explication": "Le RTO qui compte est celui de la reprise du SERVICE métier, pas de la seule infrastructure. L'exercice a précisément rempli son rôle : révéler que le plan technique et les procédures métier ne sont pas alignés. La conclusion managériale est de corriger le périmètre du plan et de re-mesurer le RTO réel de bout en bout.",
       "pourquoi": [
-        "Correct : la bonne conclusion relie reprise technique et reprise métier, corrige le plan et ré-évalue l'objectif de bout en bout — la lecture d'un manager de la continuité.",
+        "La bonne conclusion relie reprise technique et reprise métier, corrige le plan et ré-évalue l'objectif de bout en bout — la lecture d'un manager de la continuité.",
         "Techniquement vrai mais disproportionné : la réplication synchrone répond à un problème de procédures par un investissement lourd, sans analyse coût/bénéfice ni validation que le RPO actuel est inacceptable pour le métier.",
         "Trop étroit : « ressaisir plus vite » traite le symptôme par la pression sur les équipes au lieu de corriger le défaut structurel du plan.",
         "Piège de l'indicateur partiel : déclarer le succès sur le seul RTO technique masque une indisponibilité métier réelle de 9 h — c'est exactement l'angle mort que l'exercice devait révéler."
@@ -2637,8 +2639,8 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Le facteur aggravant est que les sauvegardes en ligne partageaient la surface d'attaque de la production (même plan d'administration). La réponse structurelle : immuabilité/air gap, séparation des identités d'administration de sauvegarde, et tests de restauration — le cœur de la résilience anti-ransomware.",
       "pourquoi": [
         "Piège du « plus fréquent = mieux » : une réplication temps réel connectée aurait été détruite elle aussi — elle réduit le RPO mais pas le risque de destruction simultanée, qui est le problème posé.",
-        "Correct : immuabilité/air gap + isolation des comptes de sauvegarde + tests répondent exactement au mode de défaillance observé.",
-        "Hors sujet : le chiffrement protège la confidentialité des sauvegardes, pas leur disponibilité face à une destruction volontaire.",
+        "C'est l'option correcte. Immuabilité/air gap + isolation des comptes de sauvegarde + tests répondent exactement au mode de défaillance observé.",
+        "Cela concerne un autre sujet. Le chiffrement protège la confidentialité des sauvegardes, pas leur disponibilité face à une destruction volontaire.",
         "Transfert de risque incomplet : l'assurance indemnise financièrement mais ne restaure ni les données ni l'activité — elle complète, elle ne remplace pas la résilience."
       ],
       "difficulte": 3
@@ -2657,7 +2659,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Insuffisant : une checklist manuelle dépend toujours de la rigueur de chacun — l'erreur humaine, cause du problème, subsiste.",
         "Détectif seulement : l'audit a posteriori découvre les écarts après une semaine d'exposition, il ne les prévient pas.",
-        "Bonne réponse : le provisioning automatisé depuis une image durcie applique la baseline de façon cohérente dès le premier démarrage et élimine l'erreur humaine.",
+        "Le provisioning automatisé depuis une image durcie applique la baseline de façon cohérente dès le premier démarrage et élimine l'erreur humaine.",
         "Faux remède : concentrer les déploiements sur une personne crée un goulot d'étranglement et un point unique de défaillance, sans garantir la cohérence."
       ]
     },
@@ -2673,7 +2675,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Une dérive de configuration sans changement approuvé correspondant peut être la trace d'un changement non autorisé ou d'une compromission : on investigue avant de corriger. Refermer le port immédiatement détruirait un indice précieux sans comprendre la cause ; aligner la baseline sur la réalité valide un état non approuvé ; attendre laisse une exposition potentielle ouverte.",
       "difficulte": 3,
       "pourquoi": [
-        "Bonne réponse : un écart inexpliqué par le change management est un signal de changement non autorisé, voire de compromission — on investigue d'abord.",
+        "Un écart inexpliqué par le change management est un signal de changement non autorisé, voire de compromission — on investigue d'abord.",
         "Prématuré : corriger sans comprendre efface l'indice et laisse la cause racine (ou l'attaquant) en place.",
         "Inversion dangereuse : adapter la baseline à la réalité revient à approuver rétroactivement un état non autorisé.",
         "Inacceptable : attendre des semaines laisse une exposition potentielle (ou un attaquant) en place sans analyse."
@@ -2691,10 +2693,10 @@ window.CISSP_DATA.domains[7] = {
       "explication": "En IaC, le code est la source de vérité. Toute modification manuelle crée une dérive : la documentation ment, les audits de conformité échouent, et le prochain redéploiement depuis le code écrasera le correctif, faisant réapparaître l'incident. La bonne pratique est de répercuter le correctif dans le code via le change management. Les autres options n'ont aucun lien avec le mécanisme de l'IaC.",
       "difficulte": 2,
       "pourquoi": [
-        "Hors sujet : la consommation de ressources n'est pas liée au fait que la modification soit manuelle ou codée.",
+        "La consommation de ressources n'est pas liée au fait que la modification soit manuelle ou codée.",
         "Invention : les fournisseurs cloud ne facturent pas les modifications de configuration des systèmes clients.",
-        "Hors sujet : la visibilité réseau n'est pas affectée par une modification de paramètre hors du code.",
-        "Bonne réponse : la modification manuelle crée une dérive vis-à-vis de la source de vérité — le prochain déploiement depuis le code écrasera le correctif et l'incident réapparaîtra."
+        "Autre périmètre. La visibilité réseau n'est pas affectée par une modification de paramètre hors du code.",
+        "C'est l'option correcte. La modification manuelle crée une dérive vis-à-vis de la source de vérité — le prochain déploiement depuis le code écrasera le correctif et l'incident réapparaîtra."
       ]
     },
     {
@@ -2710,7 +2712,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 2,
       "pourquoi": [
         "Partiel : le failover couvre la panne, mais le serveur en attente n'absorbe aucune charge en temps normal — les pics saisonniers ne sont pas traités.",
-        "Bonne réponse : des nœuds actifs derrière un load balancer permettent la maintenance sans interruption ET répartissent la charge des pics.",
+        "Des nœuds actifs derrière un load balancer permettent la maintenance sans interruption ET répartissent la charge des pics.",
         "Point unique de défaillance : le scale-up améliore la capacité mais toute maintenance ou panne interrompt le service.",
         "Hors échelle de temps : un warm site répond à un sinistre en plusieurs heures, pas à la disponibilité continue ni aux pics de charge."
       ]
@@ -2729,7 +2731,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Mauvais problème : la fault tolerance protège contre les défaillances matérielles — ici aucun composant n'est en panne, le lien est saturé.",
         "Mauvais goulot : ajouter des serveurs n'élargit pas le lien WAN saturé par les sauvegardes.",
-        "Bonne réponse : la QoS gère la contention en priorisant le flux sensible à la latence (la voix) sur le flux tolérant aux délais (les sauvegardes).",
+        "Exact. La QoS gère la contention en priorisant le flux sensible à la latence (la voix) sur le flux tolérant aux délais (les sauvegardes).",
         "Détournement d'outil : l'IPS bloque le trafic malveillant ; il n'est pas conçu pour arbitrer la bande passante entre flux légitimes."
       ]
     },
@@ -2748,7 +2750,7 @@ window.CISSP_DATA.domains[7] = {
         "RTO non nul : même un hot site exige la déclaration du sinistre et une bascule orchestrée — il y a interruption et intervention humaine.",
         "Trop lent : un warm site s'active en une douzaine d'heures au mieux, incompatible avec un RTO proche de zéro.",
         "Mauvaise nature : cet accord garantit la fourniture de ressources après sinistre, il ne fournit aucune continuité de traitement.",
-        "Bonne réponse : l'architecture multi-sites active-active absorbe la perte d'un site automatiquement, sans bascule ni intervention — le seul modèle à RTO quasi nul."
+        "L'architecture multi-sites active-active absorbe la perte d'un site automatiquement, sans bascule ni intervention — le seul modèle à RTO quasi nul."
       ]
     },
     {
@@ -2763,7 +2765,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Le call tree est la méthode de communication DR citée par le référentiel : notification en cascade via des coordonnées personnelles hors bande, avec des suppléants à chaque nœud et une confirmation qui remonte l'arbre. La messagerie et l'intranet de l'entreprise sont précisément indisponibles dans ce scénario, et l'improvisation garantit des oublis au pire moment.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : le call tree avec suppléants, accusés de réception et coordonnées hors bande fonctionne même quand toute l'infrastructure de l'entreprise est détruite.",
+        "C'est le bon choix. Le call tree avec suppléants, accusés de réception et coordonnées hors bande fonctionne même quand toute l'infrastructure de l'entreprise est détruite.",
         "Indisponible : la messagerie de l'entreprise fait partie des systèmes détruits par le sinistre.",
         "Indisponible et passif : l'intranet est hors service, et une annonce suppose que chacun pense à la consulter.",
         "Improvisation : sans procédure prédéfinie ni coordonnées à jour, des pans entiers du personnel ne seront jamais joints."
@@ -2782,9 +2784,9 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 2,
       "pourquoi": [
         "Mauvaise direction : un IDS centré sur le trafic entrant ne voit pas les données qui sortent.",
-        "Bonne réponse : l'egress monitoring avec DLP est précisément le contrôle qui inspecte le trafic sortant pour détecter et bloquer l'exfiltration.",
+        "L'egress monitoring avec DLP est précisément le contrôle qui inspecte le trafic sortant pour détecter et bloquer l'exfiltration.",
         "Mauvais scénario : le chiffrement au repos protège un disque volé, pas des données envoyées par une session légitime authentifiée.",
-        "Hors sujet : le honeypot attire et occupe l'attaquant, il ne surveille pas la sortie des données de production."
+        "Le honeypot attire et occupe l'attaquant, il ne surveille pas la sortie des données de production."
       ]
     },
     {
@@ -2801,7 +2803,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Sans dents : le MOU exprime une intention de coopérer, il ne porte ni engagement mesurable ni pénalité opposable.",
         "Mauvais instrument : une politique gouverne des comportements internes, elle ne contractualise pas un niveau de service avec un tiers.",
-        "Bonne réponse : le SLA contractualise des niveaux de service mesurables avec pénalités — le seul document opposable pour la disponibilité.",
+        "Le SLA contractualise des niveaux de service mesurables avec pénalités — le seul document opposable pour la disponibilité.",
         "Sans force contraignante : la lettre d'intention précède un contrat, elle ne garantit rien."
       ]
     },
@@ -2820,7 +2822,7 @@ window.CISSP_DATA.domains[7] = {
         "Trop limité : le circuit-level gateway valide les sessions en couche 5 sans jamais inspecter le contenu ni reconnaître les applications.",
         "Mauvais périmètre : le WAF protège spécifiquement des applications web, il ne remplace pas le firewall de périmètre pour tous les flux.",
         "Régression : le filtrage statique de couche 3 est encore moins capable que le stateful à remplacer.",
-        "Bonne réponse : le NGFW cumule stateful, DPI, contrôle applicatif indépendant du port et IPS dans un seul équipement."
+        "C'est l'option correcte. Le NGFW cumule stateful, DPI, contrôle applicatif indépendant du port et IPS dans un seul équipement."
       ]
     },
     {
@@ -2835,7 +2837,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Les artefacts réseau sont collectés par des équipements hors de portée de l'attaquant (sondes, proxy, collecteurs NetFlow) : ils survivent au nettoyage de l'endpoint et tracent les destinations et volumes des transferts sortants. Le registre, l'historique du navigateur et la corbeille résident sur la machine que l'attaquant a précisément nettoyée.",
       "difficulte": 3,
       "pourquoi": [
-        "Bonne réponse : NetFlow, proxy et DNS sont enregistrés hors de portée de l'attaquant et tracent destinations et volumes — la seule source intacte après nettoyage de l'endpoint.",
+        "NetFlow, proxy et DNS sont enregistrés hors de portée de l'attaquant et tracent destinations et volumes — la seule source intacte après nettoyage de l'endpoint.",
         "Compromis : le registre réside sur la machine nettoyée et documente surtout la configuration locale, pas les flux sortants.",
         "Compromis : l'historique du navigateur est un artefact local que l'attaquant a pu effacer avec le reste.",
         "Compromis : la corbeille est sur le poste nettoyé et ne dit rien des données parties sur le réseau."
@@ -2854,7 +2856,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 2,
       "pourquoi": [
         "Même défaut : des audits semestriels restent des photos ponctuelles — la fenêtre d'exposition passe de 12 à 6 mois, elle ne disparaît pas.",
-        "Bonne réponse : la supervision continue détecte les nouvelles vulnérabilités à leur apparition, au lieu d'attendre la prochaine évaluation ponctuelle.",
+        "Exact. La supervision continue détecte les nouvelles vulnérabilités à leur apparition, au lieu d'attendre la prochaine évaluation ponctuelle.",
         "Même défaut : un pentest post-audit est encore un instantané, aveugle à ce qui apparaît le mois suivant.",
         "Aucune prévention : l'assurance transfère l'impact financier, elle ne réduit pas la probabilité de compromission."
       ]
@@ -2873,7 +2875,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Violation de complétude : une preuve doit être « complete », éléments défavorables inclus — un rapport partial s'effondre au tribunal.",
         "Indéfendable : sans méthodologie documentée, impossible de démontrer la fiabilité des conclusions devant un juge.",
-        "Bonne réponse : documentation factuelle exhaustive et séparation faits/opinions sont ce qui rend le rapport crédible et exploitable en justice.",
+        "Documentation factuelle exhaustive et séparation faits/opinions sont ce qui rend le rapport crédible et exploitable en justice.",
         "Mauvaise audience : la direction et le juridique doivent décider sur la base du rapport — le confiner à la technique le rend inutile."
       ]
     },
@@ -2892,7 +2894,7 @@ window.CISSP_DATA.domains[7] = {
         "Traçabilité seulement : le bordereau dit qui avait les bandes, il ne rend pas leur contenu illisible pour un voleur.",
         "Contre-productif seul : le marquage aide la manipulation correcte mais n'empêche aucune lecture — il peut même signaler la valeur du support.",
         "Sans effet technique : une clause contractuelle offre un recours après coup, elle ne protège pas les données déjà volées.",
-        "Bonne réponse : chiffrées au repos, les bandes perdues ou volées restent illisibles — la confidentialité ne dépend plus de la possession physique."
+        "C'est le bon choix. Chiffrées au repos, les bandes perdues ou volées restent illisibles — la confidentialité ne dépend plus de la possession physique."
       ]
     },
     {
@@ -2908,14 +2910,14 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 2,
       "pourquoi": [
         "Inversion des priorités : rester pour arrêter des serveurs expose des vies pour protéger des données.",
-        "Bonne réponse : évacuer et comptabiliser le personnel applique la règle absolue — la sécurité des personnes avant tout actif.",
+        "Évacuer et comptabiliser le personnel applique la règle absolue — la sécurité des personnes avant tout actif.",
         "Rôle des systèmes et des pompiers : l'extinction est automatique ou relève des secours, pas d'un responsable qui devrait évacuer.",
         "Prématuré : les notifications administratives attendent que les personnes soient en sécurité."
       ]
     }
     ,
-    {"q": "Lors d'un exercice de bascule sur le site de secours, vous constatez que la restauration technique tient le RTO mais que les équipes métier n'ont ni les procédures dégradées ni les habilitations pour reprendre l'activité sur ce site. La direction, satisfaite du volet technique, veut clore l'exercice comme un succès. Quelle est la MEILLEURE position à défendre ?", "choix": ["Approuver : le RTO technique est respecté, le reste s'improvisera le jour venu", "Documenter l'exercice comme un échec partiel et corriger le plan de continuité (procédures métier, habilitations, nouvelle répétition) avant toute validation", "Réduire le RTO cible pour compenser le temps perdu côté métier", "Transférer l'entière responsabilité de la reprise métier aux managers opérationnels de chaque service concerné, sans réviser ni re-tester le plan de continuité existant"], "reponse": 1, "explication": "Un plan de continuité ne vaut que par la reprise du service métier de bout en bout, pas par la seule restauration technique. L'exercice a rempli son rôle : révéler que le plan est incomplet. La position professionnelle est de le documenter honnêtement et de corriger le plan avant validation.", "pourquoi": ["Complaisance dangereuse : « ça s'improvisera » est l'antithèse de la planification de continuité — l'exercice sert précisément à éviter l'improvisation le jour J.", "Bonne réponse : la valeur d'un exercice est de révéler les écarts ; on documente sans complaisance et on corrige le plan (procédures, habilitations, re-test) avant de le déclarer valide.", "Manipulation d'indicateur : abaisser le RTO ne résout pas l'absence de procédures métier — c'est masquer le problème par un chiffre.", "Fuite de responsabilité : déléguer la reprise sans fournir plan ni habilitations reporte le risque sur des équipes non préparées."], "difficulte": 3},
-    {"q": "Un ransomware a chiffré la production ET les sauvegardes en ligne d'une filiale via un compte d'administration de sauvegarde compromis. Seules des bandes hors ligne mensuelles subsistent (jusqu'à 30 jours de perte). Le comité de direction demande LA mesure structurelle prioritaire pour empêcher toute récidive. Que recommandez-vous EN PREMIER ?", "choix": ["Augmenter la fréquence des sauvegardes en ligne pour qu'elles s'exécutent automatiquement toutes les heures sur le même stockage administré", "Isoler les identités d'administration de sauvegarde et ajouter une copie immuable (WORM) ou air-gappée, avec tests de restauration", "Chiffrer toutes les sauvegardes pour que l'attaquant ne puisse pas les lire", "Souscrire une cyber-assurance couvrant la reconstruction des données"], "reponse": 1, "explication": "Le facteur aggravant est que les sauvegardes partageaient la surface d'attaque de la production (mêmes identités d'administration). La réponse structurelle vise ce mode de défaillance : séparation des identités, immuabilité/air gap, et tests de restauration.", "pourquoi": ["Traite le mauvais problème : des sauvegardes plus fréquentes mais toujours en ligne et accessibles au même compte compromis auraient été chiffrées elles aussi.", "Bonne réponse : séparer les identités d'administration de sauvegarde + immuabilité/air gap + tests répondent exactement au mode de défaillance (destruction par le compte compromis).", "Hors sujet : le chiffrement protège la confidentialité des sauvegardes, pas leur disponibilité face à une destruction volontaire.", "Transfert de risque incomplet : l'assurance indemnise mais ne restaure ni les 30 jours de données ni l'activité — elle complète la résilience, elle ne la remplace pas."], "difficulte": 3}
+    {"q": "Lors d'un exercice de bascule sur le site de secours, vous constatez que la restauration technique tient le RTO mais que les équipes métier n'ont ni les procédures dégradées ni les habilitations pour reprendre l'activité sur ce site. La direction, satisfaite du volet technique, veut clore l'exercice comme un succès. Quelle est la MEILLEURE position à défendre ?", "choix": ["Approuver : le RTO technique est respecté, le reste s'improvisera le jour venu", "Documenter l'exercice comme un échec partiel et corriger le plan de continuité (procédures métier, habilitations, nouvelle répétition) avant toute validation", "Réduire le RTO cible pour compenser le temps perdu côté métier", "Transférer l'entière responsabilité de la reprise métier aux managers opérationnels de chaque service concerné, sans réviser ni re-tester le plan de continuité existant"], "reponse": 1, "explication": "Un plan de continuité ne vaut que par la reprise du service métier de bout en bout, pas par la seule restauration technique. L'exercice a rempli son rôle : révéler que le plan est incomplet. La position professionnelle est de le documenter honnêtement et de corriger le plan avant validation.", "pourquoi": ["Complaisance dangereuse : « ça s'improvisera » est l'antithèse de la planification de continuité — l'exercice sert précisément à éviter l'improvisation le jour J.", "La valeur d'un exercice est de révéler les écarts ; on documente sans complaisance et on corrige le plan (procédures, habilitations, re-test) avant de le déclarer valide.", "Manipulation d'indicateur : abaisser le RTO ne résout pas l'absence de procédures métier — c'est masquer le problème par un chiffre.", "Fuite de responsabilité : déléguer la reprise sans fournir plan ni habilitations reporte le risque sur des équipes non préparées."], "difficulte": 3},
+    {"q": "Un ransomware a chiffré la production ET les sauvegardes en ligne d'une filiale via un compte d'administration de sauvegarde compromis. Seules des bandes hors ligne mensuelles subsistent (jusqu'à 30 jours de perte). Le comité de direction demande LA mesure structurelle prioritaire pour empêcher toute récidive. Que recommandez-vous EN PREMIER ?", "choix": ["Augmenter la fréquence des sauvegardes en ligne pour qu'elles s'exécutent automatiquement toutes les heures sur le même stockage administré", "Isoler les identités d'administration de sauvegarde et ajouter une copie immuable (WORM) ou air-gappée, avec tests de restauration", "Chiffrer toutes les sauvegardes pour que l'attaquant ne puisse pas les lire", "Souscrire une cyber-assurance couvrant la reconstruction des données"], "reponse": 1, "explication": "Le facteur aggravant est que les sauvegardes partageaient la surface d'attaque de la production (mêmes identités d'administration). La réponse structurelle vise ce mode de défaillance : séparation des identités, immuabilité/air gap, et tests de restauration.", "pourquoi": ["Traite le mauvais problème : des sauvegardes plus fréquentes mais toujours en ligne et accessibles au même compte compromis auraient été chiffrées elles aussi.", "C'est l'option correcte. Séparer les identités d'administration de sauvegarde + immuabilité/air gap + tests répondent exactement au mode de défaillance (destruction par le compte compromis).", "Le chiffrement protège la confidentialité des sauvegardes, pas leur disponibilité face à une destruction volontaire.", "Transfert de risque incomplet : l'assurance indemnise mais ne restaure ni les 30 jours de données ni l'activité — elle complète la résilience, elle ne la remplace pas."], "difficulte": 3}
   ],
   "quizEn": [
     {
@@ -2933,7 +2935,7 @@ window.CISSP_DATA.domains[7] = {
         "Hors ordre : les logs distants sont persistants et récupérables après la phase volatile.",
         "Hors ordre : le disque est persistant, son image peut attendre.",
         "Hors ordre : les bandes de sauvegarde sont les données les plus durables.",
-        "Bonne réponse : RAM et connexions actives disparaissent à l'extinction — à capturer en premier selon l'ordre de volatilité."
+        "RAM et connexions actives disparaissent à l'extinction — à capturer en premier selon l'ordre de volatilité."
       ]
     },
     {
@@ -2949,7 +2951,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 1,
       "pourquoi": [
         "Piège technique : des hashes concordants prouvent l'intégrité logique, pas l'absence d'accès physique pendant la période non tracée.",
-        "Bonne réponse : une période non documentée rompt la chain of custody et expose la preuve au rejet.",
+        "Exact. Une période non documentée rompt la chain of custody et expose la preuve au rejet.",
         "Inutile : réimager le disque n'efface pas le doute créé sur l'original.",
         "Disproportionné : le tribunal écarte la preuve, il n'ordonne pas de nouvelle enquête pour autant."
       ]
@@ -2966,7 +2968,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Un fileless malware ne réside qu'en mémoire : éteindre la machine détruirait la seule preuve existante. Il faut d'abord capturer la RAM pendant que le système tourne. Le write blocker concerne l'acquisition du disque (inutile ici puisque rien n'est écrit sur le disque), et un scan antivirus modifierait l'état du système.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : capturer la RAM pendant que le système tourne préserve la seule preuve existante.",
+        "Capturer la RAM pendant que le système tourne préserve la seule preuve existante.",
         "Destructeur : éteindre efface la mémoire, seule localisation d'un fileless malware.",
         "Altérant : un scan antivirus modifie l'état du système et peut détruire des preuves.",
         "Hors cible : le write blocker sert à l'acquisition disque — or rien n'est écrit sur le disque ici."
@@ -2986,7 +2988,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Piège de vocabulaire : le hearsay concerne le ouï-dire.",
         "Piège de vocabulaire : l'exclusionary rule écarte les preuves collectées illégalement.",
-        "Bonne réponse : le best evidence rule exige l'original plutôt qu'une copie lorsqu'il est disponible.",
+        "C'est le bon choix. Le best evidence rule exige l'original plutôt qu'une copie lorsqu'il est disponible.",
         "Piège de vocabulaire : le parol evidence rule protège les contrats écrits des accords oraux contradictoires."
       ]
     },
@@ -3005,7 +3007,7 @@ window.CISSP_DATA.domains[7] = {
         "Hors périmètre : l'investigation administrative est interne à l'organisation.",
         "Hors périmètre : la civile oppose deux parties privées.",
         "Hors périmètre : la criminelle est menée par les forces de l'ordre pour un crime.",
-        "Bonne réponse : une agence gouvernementale qui vérifie le respect de règles sectorielles mène une investigation réglementaire."
+        "Une agence gouvernementale qui vérifie le respect de règles sectorielles mène une investigation réglementaire."
       ]
     },
     {
@@ -3020,8 +3022,8 @@ window.CISSP_DATA.domains[7] = {
       "explication": "La normalisation convertit les journaux de formats hétérogènes vers un format commun exploitable. L'agrégation collecte et centralise les logs de sources multiples, la corrélation relie les événements entre eux pour détecter des schémas d'attaque, et la rétention assure leur conservation dans le temps.",
       "difficulte": 2,
       "pourquoi": [
-        "Hors sujet : la rétention conserve les logs dans le temps.",
-        "Bonne réponse : la normalisation convertit les logs hétérogènes vers un format commun exploitable.",
+        "Cela concerne un autre sujet. La rétention conserve les logs dans le temps.",
+        "La normalisation convertit les logs hétérogènes vers un format commun exploitable.",
         "Piège d'étape : l'agrégation collecte et centralise, sans convertir les formats.",
         "Hors phase : la corrélation relie des événements déjà normalisés."
       ]
@@ -3038,7 +3040,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Un indicateur de compromission (IoC) est un artefact observable — hash de fichier malveillant, adresse IP de command and control, nom de domaine — qui suggère qu'une intrusion a eu lieu. Le threat vector est le chemin d'attaque, l'attack surface l'ensemble des points exposés, et « vulnerability signature » n'est pas un terme consacré.",
       "difficulte": 1,
       "pourquoi": [
-        "Bonne réponse : hash, adresse IP ou domaine suspects sont des indicateurs de compromission (IoC).",
+        "C'est l'option correcte. Hash, adresse IP ou domaine suspects sont des indicateurs de compromission (IoC).",
         "Confusion : le threat vector est le chemin d'attaque, pas l'artefact observé.",
         "Confusion : l'attack surface est l'ensemble des points exposés.",
         "Terme piège : « vulnerability signature » n'est pas un concept consacré."
@@ -3056,10 +3058,10 @@ window.CISSP_DATA.domains[7] = {
       "explication": "MITRE ATT&CK est une base de connaissances des tactiques, techniques et procédures (TTP) observées chez les attaquants réels : c'est l'outil de référence pour formuler des hypothèses de chasse. Le modèle OSI décrit les couches réseau, les benchmarks CIS servent au hardening, et ISO 27001 encadre le système de management de la sécurité.",
       "difficulte": 2,
       "pourquoi": [
-        "Hors sujet : le modèle OSI décrit des couches réseau.",
-        "Hors sujet : ISO/IEC 27001 encadre le système de management de la sécurité.",
-        "Hors sujet : les benchmarks CIS guident le hardening.",
-        "Bonne réponse : MITRE ATT&CK catalogue les TTP réels des groupes adverses — la base idéale des hypothèses de chasse."
+        "Le modèle OSI décrit des couches réseau.",
+        "Autre périmètre. ISO/IEC 27001 encadre le système de management de la sécurité.",
+        "Les benchmarks CIS guident le hardening.",
+        "MITRE ATT&CK catalogue les TTP réels des groupes adverses — la base idéale des hypothèses de chasse."
       ]
     },
     {
@@ -3076,7 +3078,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Confusion : une règle de corrélation relie plusieurs sources d'événements.",
         "Confusion : le sampling est un échantillonnage statistique sans notion de seuil.",
-        "Bonne réponse : le clipping level n'enregistre que les dépassements d'un seuil prédéfini, séparant l'erreur humaine normale de l'attaque.",
+        "Exact. Le clipping level n'enregistre que les dépassements d'un seuil prédéfini, séparant l'erreur humaine normale de l'attaque.",
         "Confusion : la déviation de baseline relève de la détection comportementale."
       ]
     },
@@ -3092,10 +3094,10 @@ window.CISSP_DATA.domains[7] = {
       "explication": "NetFlow enregistre les métadonnées des flux réseau — source, destination, volume — sans le contenu, ce qui permet de repérer des transferts sortants anormaux, signes d'exfiltration. Les traps SNMP signalent des événements d'équipements, le DHCP snooping protège l'attribution d'adresses, et syslog transporte des messages de logs.",
       "difficulte": 2,
       "pourquoi": [
-        "Hors sujet : le DHCP snooping protège l'attribution d'adresses.",
-        "Hors sujet : les traps SNMP signalent des événements d'équipements.",
-        "Hors sujet : syslog transporte des messages de logs, pas des métadonnées de flux.",
-        "Bonne réponse : NetFlow enregistre source, destination et volume des flux — idéal pour repérer une exfiltration."
+        "Le DHCP snooping protège l'attribution d'adresses.",
+        "Cela concerne un autre sujet. Les traps SNMP signalent des événements d'équipements.",
+        "Syslog transporte des messages de logs, pas des métadonnées de flux.",
+        "NetFlow enregistre source, destination et volume des flux — idéal pour repérer une exfiltration."
       ]
     },
     {
@@ -3112,7 +3114,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Contre-productif : la verbosité accroît le volume sans protéger contre la suppression.",
         "Inefficace : augmenter la taille locale n'empêche pas l'effacement par l'attaquant.",
-        "Bonne réponse : l'envoi en temps réel vers un serveur centralisé en écriture seule met les logs hors de portée de l'attaquant.",
+        "C'est le bon choix. L'envoi en temps réel vers un serveur centralisé en écriture seule met les logs hors de portée de l'attaquant.",
         "Fenêtre d'exposition : des sauvegardes hebdomadaires laissent des jours de logs effaçables."
       ]
     },
@@ -3129,7 +3131,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 1,
       "pourquoi": [
         "Faux : la responsabilité des pannes n'est pas transférée au CAB.",
-        "Bonne réponse : la revue préalable détecte les conséquences de sécurité involontaires avant l'implémentation.",
+        "La revue préalable détecte les conséquences de sécurité involontaires avant l'implémentation.",
         "Faux : les baselines de configuration restent indispensables.",
         "Contresens : le change management ralentit plutôt qu'il n'accélère les déploiements."
       ]
@@ -3146,7 +3148,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "La détection de dérive de configuration (configuration drift) repose sur des audits automatisés qui comparent en continu l'état réel des systèmes à la baseline approuvée et signalent tout écart. Le pentest annuel est trop ponctuel, les logs firewall ne couvrent pas les configurations systèmes, et un code de conduite est un contrôle administratif sans vérification technique.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : des audits automatisés comparent en continu l'état réel des systèmes à la baseline et signalent toute dérive.",
+        "Des audits automatisés comparent en continu l'état réel des systèmes à la baseline et signalent toute dérive.",
         "Contrôle administratif : un code de conduite ne vérifie pas techniquement l'état des systèmes.",
         "Trop ponctuel : un pentest annuel laisse la dérive invisible entre deux tests.",
         "Hors périmètre : les logs firewall ne couvrent pas les configurations systèmes."
@@ -3165,7 +3167,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 3,
       "pourquoi": [
         "Disproportionné : décommissionner brutalement sacrifie une application métier critique.",
-        "Bonne réponse : segmentation, restriction d'accès et surveillance renforcée réduisent le risque en attendant la remédiation.",
+        "C'est l'option correcte. Segmentation, restriction d'accès et surveillance renforcée réduisent le risque en attendant la remédiation.",
         "Inacceptable : casser sciemment l'application métier inverse les priorités du manager.",
         "Négligent : accepter le risque sans mitigation ignore les options de réduction disponibles."
       ]
@@ -3184,7 +3186,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Piège de définition : toute occurrence observable est un event, pas un incident.",
         "Faux clivage : la distinction interne/externe n'entre pas dans la définition.",
-        "Bonne réponse : l'incident est l'événement qui menace réellement ou potentiellement la CIA des systèmes ou des données.",
+        "L'incident est l'événement qui menace réellement ou potentiellement la CIA des systèmes ou des données.",
         "Faux : seuls certains incidents exigent une notification réglementaire."
       ]
     },
@@ -3203,7 +3205,7 @@ window.CISSP_DATA.domains[7] = {
         "Bonne pratique, pas un risque : isoler du réseau contient l'attaque sans détruire la mémoire.",
         "Bonne pratique : photographier l'écran documente l'état visible.",
         "Bonne pratique : documenter les processus fait partie de la préservation.",
-        "Bonne réponse : la mise hors tension efface la RAM — processus, connexions, clés — des preuves volatiles irremplaçables."
+        "Exact. La mise hors tension efface la RAM — processus, connexions, clés — des preuves volatiles irremplaçables."
       ]
     },
     {
@@ -3212,16 +3214,16 @@ window.CISSP_DATA.domains[7] = {
         "The attacker may cause additional damage or exfiltrate more data while being observed",
         "The attacker may notice the monitoring tools",
         "The prolonged observation period will completely invalidate the evidentiary chain of custody",
-        "The SIEM will generate too many alerts"
+        "Delaying containment may breach a regulatory duty to act on a known breach without undue delay"
       ],
       "reponse": 0,
-      "explication": "Observer un attaquant actif peut enrichir le renseignement, mais chaque minute d'accès supplémentaire lui permet de voler davantage de données ou de causer plus de dégâts — un arbitrage risqué qui doit être décidé par la direction en connaissance de cause. Les autres réponses sont des considérations secondaires ou sans fondement.",
+      "explication": "Observer un attaquant actif peut enrichir le renseignement, mais chaque minute d'accès supplémentaire lui permet de voler davantage de données ou de causer plus de dégâts — un arbitrage risqué qui doit être décidé par la direction en connaissance de cause. Le risque réglementaire existe mais reste second face à la perte de données en cours ; les autres réponses sont mineures ou sans fondement.",
       "difficulte": 3,
       "pourquoi": [
-        "Bonne réponse : chaque minute d'accès supplémentaire permet à l'attaquant d'exfiltrer ou de détruire davantage — un arbitrage qui appartient à la direction.",
+        "Chaque minute d'accès supplémentaire permet à l'attaquant d'exfiltrer ou de détruire davantage — un arbitrage qui appartient à la direction.",
         "Secondaire : la découverte des outils de surveillance est un risque mineur comparé aux dégâts possibles.",
         "Sans fondement : l'observation n'affecte pas la chain of custody.",
-        "Anecdotique : le volume d'alertes n'est pas un risque de sécurité."
+        "Le risque juridique de retarder le confinement est réel, mais il découle justement du dommage qui s'aggrave pendant l'observation : la perte de données reste le risque premier."
       ]
     },
     {
@@ -3238,7 +3240,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Hors phase : la mitigation contient l'incident.",
         "Hors phase : le reporting couvre notifications et communication.",
-        "Bonne réponse : la remediation analyse la cause racine et implémente les changements empêchant la récidive.",
+        "C'est le bon choix. La remediation analyse la cause racine et implémente les changements empêchant la récidive.",
         "Hors phase : la recovery restaure les systèmes en état opérationnel."
       ]
     },
@@ -3254,8 +3256,8 @@ window.CISSP_DATA.domains[7] = {
       "explication": "L'allow listing n'autorise que les applications explicitement approuvées et bloque tout le reste par défaut (deny by default) : idéal pour des terminaux à usage fixe comme les caisses. La deny list laisse passer tout ce qui n'est pas listé, le HIDS détecte sans empêcher l'exécution, et le chiffrement protège la confidentialité, pas l'exécution.",
       "difficulte": 1,
       "pourquoi": [
-        "Hors sujet : le chiffrement protège la confidentialité, pas le contrôle d'exécution.",
-        "Bonne réponse : l'allow list n'autorise que l'approuvé et bloque tout le reste par défaut — idéal pour des terminaux à usage fixe.",
+        "Autre périmètre. Le chiffrement protège la confidentialité, pas le contrôle d'exécution.",
+        "L'allow list n'autorise que l'approuvé et bloque tout le reste par défaut — idéal pour des terminaux à usage fixe.",
         "Détectif seulement : le HIDS alerte sans empêcher l'exécution.",
         "Insuffisant : la deny list laisse s'exécuter tout ce qui n'est pas listé."
       ]
@@ -3264,7 +3266,7 @@ window.CISSP_DATA.domains[7] = {
       "q": "A network IPS protecting a hospital's clinical systems fails. The security team must choose between fail-open and fail-closed behavior. Which statement BEST captures the trade-off?",
       "choix": [
         "Fail-open keeps clinical traffic flowing but lets attacks through; fail-closed blocks attacks but halts patient-care systems",
-        "The choice has no impact on clinical operations",
+        "Fail-open blocks all traffic until the IPS is restored, while fail-closed lets it pass uninspected",
         "Fail-closed maintains both security and availability",
         "Fail-open is always considered the single correct and safest choice for any inline security device deployed in a hospital network"
       ],
@@ -3272,8 +3274,8 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Un IPS en coupure qui tombe en panne doit soit laisser passer le trafic sans inspection (fail-open : disponibilité préservée, sécurité dégradée), soit tout bloquer (fail-closed : sécurité préservée, service interrompu). Dans un contexte hospitalier où la vie des patients dépend de la disponibilité, l'arbitrage penche souvent vers fail-open avec surveillance compensatoire — mais c'est une décision de gestion du risque, pas un automatisme.",
       "difficulte": 3,
       "pourquoi": [
-        "Bonne réponse : l'arbitrage oppose disponibilité des soins (fail-open) et sécurité (fail-closed) — une décision de gestion du risque.",
-        "Faux : bloquer le trafic clinique impacte directement les soins aux patients.",
+        "L'arbitrage oppose disponibilité des soins (fail-open) et sécurité (fail-closed) — une décision de gestion du risque.",
+        "Définitions inversées : c'est le fail-open qui laisse passer le trafic non inspecté et le fail-closed qui bloque, pas l'inverse.",
         "Faux : le fail-closed sacrifie la disponibilité, il ne préserve pas les deux.",
         "Absolu : aucun choix n'est « toujours » correct, tout dépend du contexte de risque."
       ]
@@ -3281,19 +3283,19 @@ window.CISSP_DATA.domains[7] = {
     {
       "q": "A malware sample remains dormant for 30 minutes and checks for virtualization artifacts before executing its payload. What is the MOST likely purpose of this behavior?",
       "choix": [
-        "To reduce its memory footprint",
-        "To synchronize its payload execution precisely with the attacker's command-and-control server time zone",
-        "To avoid triggering full-disk encryption",
+        "To detect and disable the host's endpoint protection before executing",
+        "To wait until a genuine, interactive user is present, since automated analysis systems are typically left idle and unattended",
+        "To fingerprint the host CPU so the payload runs only on its intended geographic target",
         "To evade automated sandbox analysis, which typically observes samples for only a short time"
       ],
       "reponse": 3,
-      "explication": "Les sandboxes d'analyse n'observent un échantillon que quelques minutes : un malware qui dort longtemps et détecte les artefacts de virtualisation (sandbox evasion) paraît inoffensif pendant l'analyse et n'exécute sa charge que sur une machine réelle. Les autres réponses ne correspondent à aucune technique documentée.",
+      "explication": "Les sandboxes d'analyse n'observent un échantillon que quelques minutes : un malware qui dort longtemps et détecte les artefacts de virtualisation (sandbox evasion) paraît inoffensif pendant l'analyse et n'exécute sa charge que sur une machine réelle. Les autres réponses décrivent des techniques réelles mais que la temporisation combinée à la détection de virtualisation ne vise pas ici.",
       "difficulte": 3,
       "pourquoi": [
-        "Sans rapport : dormir ne réduit pas l'empreinte mémoire.",
-        "Fantaisiste : aucun lien avec le fuseau horaire de l'attaquant.",
-        "Sans rapport : le chiffrement de disque n'interagit pas avec ce comportement.",
-        "Bonne réponse : dormir et détecter la virtualisation permet d'échapper aux sandboxes, qui n'observent un échantillon que quelques minutes."
+        "Désactiver l'antivirus est une autre technique, mais elle ne passe pas par une temporisation ni par la recherche d'artefacts de virtualisation.",
+        "Attendre une activité utilisateur est un leurre plausible, mais c'est la détection de virtualisation qui trahit la cible réelle : échapper au bac à sable.",
+        "Le ciblage géographique existe, mais il repose sur la géolocalisation, pas sur la détection d'un environnement virtualisé.",
+        "C'est l'option correcte. Dormir et détecter la virtualisation permet d'échapper aux sandboxes, qui n'observent un échantillon que quelques minutes."
       ]
     },
     {
@@ -3308,7 +3310,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Chaque incrémentale ne contient que les changements depuis la sauvegarde précédente : la restauration exige le full puis toutes les incrémentales dans l'ordre chronologique. Restaurer seulement la dernière serait la logique des différentielles, et le full seul perdrait trois jours de données.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : le full puis chaque incrémentale dans l'ordre chronologique reconstituent l'état complet.",
+        "Le full puis chaque incrémentale dans l'ordre chronologique reconstituent l'état complet.",
         "Incomplet : une incrémentale seule ne contient ni le socle ni les jours précédents.",
         "Piège différentiel : sauter les incrémentales intermédiaires perdrait les changements de lundi et mardi.",
         "Incomplet : le full seul perd trois jours de changements."
@@ -3328,7 +3330,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "RPO non tenu : des fulls hebdomadaires exposent à une semaine de perte.",
         "RPO non tenu : un vaulting nocturne expose à 24 heures de perte.",
-        "Bonne réponse : journaling ou mirroring distants transfèrent les transactions en quasi-continu — seuls compatibles avec 15 minutes.",
+        "Exact. Journaling ou mirroring distants transfèrent les transactions en quasi-continu — seuls compatibles avec 15 minutes.",
         "RPO non tenu : une rotation mensuelle expose à des semaines de perte."
       ]
     },
@@ -3345,7 +3347,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 2,
       "pourquoi": [
         "Faux : le hot site se teste justement sans interrompre la production.",
-        "Bonne réponse : la réplication complète des données double la surface d'attaque — un second site à défendre au même niveau d'exigence.",
+        "La réplication complète des données double la surface d'attaque — un second site à défendre au même niveau d'exigence.",
         "Faux : la réplication de bases de données est l'une de ses fonctions natives.",
         "Faux : le hot site s'active quasi immédiatement."
       ]
@@ -3365,7 +3367,7 @@ window.CISSP_DATA.domains[7] = {
         "Faux : un cold site ne stocke aucune donnée.",
         "Faux : aucune interdiction réglementaire générale n'existe.",
         "Faux : le cold site est l'option la moins chère.",
-        "Bonne réponse : quasi impossible à tester de façon réaliste, il révèle ses défaillances au pire moment — pendant le vrai sinistre."
+        "C'est le bon choix. Quasi impossible à tester de façon réaliste, il révèle ses défaillances au pire moment — pendant le vrai sinistre."
       ]
     },
     {
@@ -3380,7 +3382,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Le MTTR (Mean Time To Repair) est le temps moyen de réparation d'un composant défaillant. Le MTBF mesure le temps moyen entre pannes, le MTTF la durée de vie fonctionnelle attendue avant défaillance, et le MTD est l'indisponibilité maximale tolérable issue du BIA — une métrique métier, pas une métrique d'équipement.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : le MTTR est le temps moyen de réparation et de remise en service d'un composant défaillant.",
+        "Le MTTR est le temps moyen de réparation et de remise en service d'un composant défaillant.",
         "Piège de sigle : le MTTF est la durée de vie attendue avant défaillance.",
         "Piège de sigle : le MTD est une métrique métier issue du BIA, pas une métrique d'équipement.",
         "Piège de sigle : le MTBF mesure le temps moyen entre pannes."
@@ -3400,7 +3402,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Aucune configuration standard ne correspond à cinq disques et trois pannes.",
         "Piège RAID 1 : deux disques et une panne décrivent le miroir.",
-        "Bonne réponse : RAID 6 exige quatre disques minimum et sa double parité tolère deux pannes simultanées.",
+        "RAID 6 exige quatre disques minimum et sa double parité tolère deux pannes simultanées.",
         "Piège RAID 5 : trois disques et une seule panne tolérée décrivent le RAID 5."
       ]
     },
@@ -3417,7 +3419,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 1,
       "pourquoi": [
         "Trop loin : la simulation teste réellement certaines mesures.",
-        "Bonne réponse : discuter un scénario en salle sans toucher aux systèmes est l'exercice sur table (tabletop).",
+        "C'est l'option correcte. Discuter un scénario en salle sans toucher aux systèmes est l'exercice sur table (tabletop).",
         "Trop loin : le full-interruption bascule réellement les opérations.",
         "Trop loin : le parallel test active le site de secours."
       ]
@@ -3437,7 +3439,7 @@ window.CISSP_DATA.domains[7] = {
         "Faux : c'est au contraire le test le plus probant.",
         "Inventé : les polices d'assurance ne l'interdisent pas par principe.",
         "Inventé : aucune approbation réglementaire universelle n'est requise.",
-        "Bonne réponse : arrêter volontairement la production fait courir le risque d'une panne réelle et de pertes si le plan échoue."
+        "Arrêter volontairement la production fait courir le risque d'une panne réelle et de pertes si le plan échoue."
       ]
     },
     {
@@ -3452,10 +3454,10 @@ window.CISSP_DATA.domains[7] = {
       "explication": "La trusted recovery garantit qu'après une défaillance, le système revient à un état sûr : les contrôles de sécurité restent appliqués et aucune donnée n'est exposée pendant ni après la reprise. Le fail-open sacrifie la sécurité à la disponibilité, le hot swapping remplace du matériel à chaud, et le journaling protège l'intégrité des systèmes de fichiers.",
       "difficulte": 3,
       "pourquoi": [
-        "Bonne réponse : la trusted recovery ramène le système dans un état sûr, contrôles appliqués et données protégées, avant tout accès utilisateur.",
+        "Exact. La trusted recovery ramène le système dans un état sûr, contrôles appliqués et données protégées, avant tout accès utilisateur.",
         "Contresens : le fail-open sacrifie la sécurité au profit de la disponibilité.",
         "Trop étroit : le journaling protège l'intégrité du système de fichiers, pas l'état de sécurité global.",
-        "Hors sujet : le hot swapping remplace du matériel à chaud."
+        "Le hot swapping remplace du matériel à chaud."
       ]
     },
     {
@@ -3473,7 +3475,7 @@ window.CISSP_DATA.domains[7] = {
         "Danger de mort : refuser face à une arme viole la primauté de la vie humaine.",
         "Contre-productif : l'alarme incendie révèle l'alerte à l'agresseur.",
         "Passif : la vidéosurveillance enregistre sans appeler de secours.",
-        "Bonne réponse : le duress code ouvre le coffre en apparence tout en alertant silencieusement la sécurité."
+        "Le duress code ouvre le coffre en apparence tout en alertant silencieusement la sécurité."
       ]
     },
     {
@@ -3489,7 +3491,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 2,
       "pourquoi": [
         "Dangereux : les ordinateurs d'hôtel doivent être présumés compromis.",
-        "Bonne réponse : des appareils de prêt au contenu minimal, effacés au retour, réduisent l'exposition au strict nécessaire.",
+        "C'est le bon choix. Des appareils de prêt au contenu minimal, effacés au retour, réduisent l'exposition au strict nécessaire.",
         "Risqué : une partition cachée découverte expose à des sanctions.",
         "Illusion : le chiffrement cède devant une injonction de déverrouillage à la frontière."
       ]
@@ -3508,7 +3510,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Vraie mais contextuellement fausse : la sévérité est une estimation — une alerte « faible » mal clôturée peut être le premier signal d'une intrusion majeure.",
         "Réponse de technicien : réentraîner améliore la précision sans jamais éliminer le risque résiduel — l'enjeu est le contrôle du processus.",
-        "Bonne réponse : maintenir l'humain dans la boucle sur les décisions de clôture et d'escalade traite le risque d'erreur de l'IA tout en conservant son apport au triage.",
+        "Maintenir l'humain dans la boucle sur les décisions de clôture et d'escalade traite le risque d'erreur de l'IA tout en conservant son apport au triage.",
         "Absolu irréaliste : aucun modèle n'atteindra un taux d'erreur nul, et retirer l'outil sacrifie le gain d'efficacité sans traiter la gouvernance du processus."
       ]
     },
@@ -3525,8 +3527,8 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 3,
       "pourquoi": [
         "Vraie mais hors sujet ici : le risque de réinfection concerne la qualité de la recovery, pas la raison pour laquelle l'incident reste ouvert.",
-        "Hors sujet : le dépassement du RTO est un enjeu de performance de la reprise, pas d'obligations résiduelles.",
-        "Bonne réponse : la double extorsion fait de l'incident une violation de confidentialité — notification et gestion de crise restent dues malgré la restauration.",
+        "Le dépassement du RTO est un enjeu de performance de la reprise, pas d'obligations résiduelles.",
+        "La double extorsion fait de l'incident une violation de confidentialité — notification et gestion de crise restent dues malgré la restauration.",
         "Vraie mais secondaire : corriger la vulnérabilité relève de la remediation ; ce n'est pas ce qui distingue la double extorsion."
       ]
     },
@@ -3545,7 +3547,7 @@ window.CISSP_DATA.domains[7] = {
         "Irréaliste en cloud mutualisé : le fournisseur ne saisira pas des disques physiques partagés entre clients.",
         "Piège de responsabilité partagée : le fournisseur gère l'infrastructure, mais l'investigation des charges de travail du client incombe au client.",
         "Hors phase : restaurer avant d'avoir préservé détruirait les preuves — la recovery vient après la collecte.",
-        "Bonne réponse : figer l'auto-scaling, snapshotter et exporter les journaux via API est la seule préservation possible avant la destruction automatique des instances."
+        "C'est l'option correcte. Figer l'auto-scaling, snapshotter et exporter les journaux via API est la seule préservation possible avant la destruction automatique des instances."
       ]
     },
     {
@@ -3560,7 +3562,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "L'automatisation graduée aligne le niveau de contrôle humain sur la criticité métier : confinement automatique pour les actifs standards (réactivité), approbation humaine pour les actions à fort impact sur les actifs critiques (jugement). Revenir au tout-manuel sacrifie la réactivité exigée, aucun tuning n'élimine totalement les faux positifs, et exclure les serveurs critiques les prive de tout confinement rapide alors qu'ils sont les cibles les plus attractives.",
       "difficulte": 3,
       "pourquoi": [
-        "Bonne réponse : l'automatisation graduée aligne le contrôle humain sur la criticité métier — réactivité sur les actifs standards, jugement humain là où l'impact l'exige.",
+        "L'automatisation graduée aligne le contrôle humain sur la criticité métier — réactivité sur les actifs standards, jugement humain là où l'impact l'exige.",
         "Vraie mais insuffisante : le tuning réduit les faux positifs sans jamais les éliminer — l'objectif « zéro faux positif » est un absolu inatteignable.",
         "Dangereux : exclure les serveurs critiques les prive de tout confinement rapide alors qu'ils sont précisément les cibles les plus attractives.",
         "Sur-réaction : exiger une approbation humaine pour chaque action sacrifie la réactivité que la direction veut conserver."
@@ -3579,7 +3581,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 3,
       "pourquoi": [
         "Inversion dangereuse : aligner la baseline sur la réalité approuve rétroactivement des changements dont l'origine est inconnue.",
-        "Bonne réponse : 15 dérives sans trace de change management sont des changements non autorisés potentiels — on investigue avant de corriger.",
+        "Exact. 15 dérives sans trace de change management sont des changements non autorisés potentiels — on investigue avant de corriger.",
         "Disproportionné et destructeur : un redéploiement massif efface les indices avant toute analyse et perturbe 460 serveurs sains.",
         "Inacceptable : reporter au trimestre suivant laisse une possible compromission en place pendant des mois."
       ]
@@ -3596,7 +3598,7 @@ window.CISSP_DATA.domains[7] = {
       "explication": "Un cluster actif-actif derrière un load balancer avec health checks retire automatiquement le nœud défaillant de la rotation : pas d'interruption, pas d'intervention, et la capacité cumulée absorbe les pics. Le cold standby impose des heures d'indisponibilité, les alimentations redondantes ne couvrent qu'un mode de panne d'un serveur unique, et un warm site relève du DR en heures, pas de la continuité en secondes.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : le load balancer détecte la panne via les health checks et redistribue le trafic automatiquement — zéro interruption, zéro intervention, capacité partagée.",
+        "Le load balancer détecte la panne via les health checks et redistribue le trafic automatiquement — zéro interruption, zéro intervention, capacité partagée.",
         "Trop lent : restaurer un cold standby depuis les sauvegardes nocturnes prend des heures et exige une intervention manuelle.",
         "Point unique de défaillance : les alimentations redondantes ne protègent ni du crash OS, ni de la carte mère, ni de la maintenance.",
         "Mauvaise échelle de temps : un warm site répond à un sinistre en une douzaine d'heures, pas à la panne d'un serveur en continuité de service."
@@ -3616,7 +3618,7 @@ window.CISSP_DATA.domains[7] = {
       "pourquoi": [
         "Indisponible et passif : l'intranet dépend de l'infrastructure sinistrée et suppose que chacun pense à le consulter.",
         "Improvisation : sans arbre prédéfini ni coordonnées à jour, des équipes entières ne seront jamais jointes à temps.",
-        "Bonne réponse : le call tree testé, hors bande, avec suppléants et remontée de confirmations, notifie 200 personnes rapidement sans dépendre des systèmes détruits.",
+        "C'est le bon choix. Le call tree testé, hors bande, avec suppléants et remontée de confirmations, notifie 200 personnes rapidement sans dépendre des systèmes détruits.",
         "Inversion de responsabilité : la notification incombe au plan DR, pas à l'initiative de chaque employé — et le help desk est probablement hors service."
       ]
     },
@@ -3633,7 +3635,7 @@ window.CISSP_DATA.domains[7] = {
       "difficulte": 3,
       "pourquoi": [
         "Mauvais objet : l'antivirus détecte du code malveillant connu, pas des données légitimes qui sortent vers un cloud personnel.",
-        "Bonne réponse : l'egress monitoring avec DLP inspecte précisément le trafic sortant et bloque les destinations cloud non autorisées — le contrôle aligné sur la menace décrite.",
+        "L'egress monitoring avec DLP inspecte précisément le trafic sortant et bloque les destinations cloud non autorisées — le contrôle aligné sur la menace décrite.",
         "Mauvais état des données : le chiffrement au repos ne protège en rien des uploads effectués depuis une session authentifiée.",
         "Mauvaise direction : un IDS orienté exploits entrants ne voit pas l'exfiltration sortante."
       ]
