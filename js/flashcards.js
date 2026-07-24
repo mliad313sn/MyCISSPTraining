@@ -8,7 +8,7 @@ const Flashcards = (() => {
     let cards = [];
     const push = d => d.flashcards.forEach((c, i) =>
       cards.push({ ...c, dom: d.code, couleur: d.couleur, key: `d${d.id}:${i}:${c.recto.slice(0, 40)}` }));
-    if (domainId === "all") Object.values(CISSP_DATA.domains).forEach(push);
+    if (domainId === "all") Object.values(CISSP_DATA.domains).filter(d => d.id >= 1).forEach(push);
     else push(CISSP_DATA.domains[domainId]);
     return cards;
   }

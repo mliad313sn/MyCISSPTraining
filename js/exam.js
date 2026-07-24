@@ -30,7 +30,7 @@ const Exam = (() => {
     return a;
   };
 
-  function domains() { return Object.values(CISSP_DATA.domains); }
+  function domains() { return Object.values(CISSP_DATA.domains).filter(d => d.id >= 1); }
 
   function tagged(d, q) { return { ...q, domId: d.id, domCode: d.code, domTitre: d.titre }; }
 

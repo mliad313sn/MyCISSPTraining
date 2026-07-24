@@ -163,7 +163,7 @@ const Account = (() => {
     const maxN = Math.max(1, ...jours.map(j => j.n));
     const exams = Progress.exams().slice(-8);
     const pl = plan();
-    const ds = Object.values(CISSP_DATA.domains).sort((a, b) => a.id - b.id);
+    const ds = Object.values(CISSP_DATA.domains).filter(d => d.id >= 1).sort((a, b) => a.id - b.id);
 
     document.getElementById("app").innerHTML = `
       <h1 class="page-title">Suivi — ${esc(p.prenom)}</h1>

@@ -2,7 +2,7 @@
 const App = (() => {
 
   function domains() {
-    return Object.values(CISSP_DATA.domains).sort((a, b) => a.id - b.id);
+    return Object.values(CISSP_DATA.domains).filter(d => d.id >= 1).sort((a, b) => a.id - b.id);
   }
 
   /* ---------- Routage ---------- */

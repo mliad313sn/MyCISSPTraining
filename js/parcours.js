@@ -5,7 +5,7 @@ const Parcours = (() => {
 
   // Une activité = { label, href, done() }
   function buildEtapes() {
-    const ds = Object.values(CISSP_DATA.domains).sort((a, b) => a.id - b.id);
+    const ds = Object.values(CISSP_DATA.domains).filter(d => d.id >= 1).sort((a, b) => a.id - b.id);
     const etapes = [];
 
     etapes.push({
@@ -15,7 +15,8 @@ const Parcours = (() => {
         { label: "Lire la Méthode (plan d'étude + stratégie jour J)", href: "#/methode", done: () => Progress.visited("methode") },
         { label: "Découvrir les 10 principes du Mindset CISSP", href: "#/mindset", done: () => Progress.visited("mindset") },
         { label: "Réussir 3 drills « éliminez les 2 pièges »", href: "#/mindset/drills", done: () => Progress.mindsetCount("drills") >= 3 },
-        { label: "Réussir 3 décodages de question (repérer le mot-opérateur)", href: "#/mindset/decoder", done: () => Progress.mindsetCount("decoder") >= 3 }
+        { label: "Réussir 3 décodages de question (repérer le mot-opérateur)", href: "#/mindset/decoder", done: () => Progress.mindsetCount("decoder") >= 3 },
+        ...(CISSP_DATA.domains[0] ? [{ label: "Si vous débutez en IT : suivre les leçons Fondations techniques (optionnel mais recommandé)", href: "#/domaine/0", done: () => CISSP_DATA.domains[0].lecons.every(l => Progress.lessonDone(l.id)) }] : [])
       ]
     });
 

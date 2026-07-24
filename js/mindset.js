@@ -176,7 +176,7 @@ const Mindset = (() => {
   function startDecoder() {
     // question tirée de toute la banque, contenant un opérateur détectable
     const pool = [];
-    Object.values(CISSP_DATA.domains).forEach(d =>
+    Object.values(CISSP_DATA.domains).filter(d => d.id >= 1).forEach(d =>
       d.quiz.forEach(q => { if (detectOperateur(q.q)) pool.push({ ...q, domCode: d.code }); }));
     if (!pool.length) return list("principes");
     const q = rand(pool);
