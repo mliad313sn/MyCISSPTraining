@@ -2731,10 +2731,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Which of the following BEST describes the PRIMARY risk created by shadow IT?",
       "choix": [
-        "Duplicated tooling across departments increasing integration complexity",
+        "Duplicated tooling across many departments, significantly increasing overall integration and maintenance complexity",
         "Corporate data flows into services that are not inventoried, assessed, or protected by organizational controls",
-        "Increased software licensing costs",
-        "Reduced network bandwidth for approved applications"
+        "Increased and uncontrolled overall software licensing costs",
+        "Reduced available network bandwidth for approved business applications"
       ],
       "reponse": 1,
       "explication": "Le shadow IT — services et actifs adoptés sans approbation de l'IT — crée avant tout un problème de VISIBILITÉ : des données d'entreprise partent vers des services ni inventoriés, ni évalués, ni couverts par les contrôles (DLP, sauvegarde, conformité). Les coûts et la bande passante sont des préoccupations mineures en comparaison.",
@@ -2767,10 +2767,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "When decommissioning a server that stored Confidential data, which sequence BEST describes a defensible process?",
       "choix": [
-        "Revoke its credentials and certificates, sanitize the media per policy and classification, update the inventory, and document the disposal",
-        "Remove it from the inventory, then delete all user accounts",
-        "Power off the server and ship it to a recycler immediately",
-        "Reformat the drives and reinstall the operating system before resale"
+        "Revoke credentials and certificates, sanitize the media per classification, update the inventory, and document disposal",
+        "Remove it from the inventory first, then delete all associated user accounts",
+        "Power off the server and ship it directly to an external recycler immediately",
+        "Reformat all the drives and cleanly reinstall the full operating system before any external resale of the server hardware"
       ],
       "reponse": 0,
       "explication": "Un déprovisioning défendable enchaîne : révocation des accès et certificats, assainissement des supports selon la classification et la politique (NIST SP 800-88), mise à jour de l'inventaire, et documentation de l'élimination — la trace écrite rend la destruction légalement défendable. Expédier ou reformater sans assainir laisse une rémanence exploitable.",
@@ -2785,10 +2785,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "During a merger, the acquiring company uses a four-level data classification scheme while the acquired company uses three levels. Business teams must exchange documents immediately after closing. What should the CISO do FIRST?",
       "choix": [
-        "Have the data owners of both entities establish a governance-approved mapping between the schemes, defaulting to the higher equivalent protection level",
-        "Reclassify every acquired document under the parent company's scheme",
-        "Suspend all inter-entity data sharing until a full reclassification is completed",
-        "Instruct IT to apply the parent company's technical labels across all acquired repositories"
+        "Have both entities' data owners establish a governance-approved mapping between the schemes, defaulting to the higher level",
+        "Reclassify every single acquired document under the parent company's four-level scheme",
+        "Suspend absolutely all inter-entity data sharing until a full reclassification is completed",
+        "Instruct the IT department to apply the parent company's technical classification labels across all of the acquired data repositories"
       ],
       "reponse": 0,
       "explication": "Le besoin d'échange est immédiat : la réponse managériale est un pont de gouvernance — une table de correspondance décidée par les data owners, validée par la gouvernance et protectrice par défaut (niveau équivalent le plus élevé). La reclassification exhaustive viendra ensuite, l'application technique sans mapping court-circuite les owners, et le blocage total sacrifie l'objectif de la fusion.",
@@ -2803,10 +2803,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "A multinational's HR application automatically replicates employee data across cloud regions in three jurisdictions for resilience. The privacy officer raises concerns about European employee data. What should the CISO do FIRST?",
       "choix": [
-        "Enable the provider's default at-rest encryption in all three regions",
-        "Execute standard contractual clauses with the provider to cover all transfers",
+        "Enable the provider's default at-rest encryption across all three cloud regions",
+        "Execute standard contractual clauses (SCC) with the provider to fully cover all cross-border international data transfers",
         "Map where the data is actually stored and replicated, then restrict European employee data to approved jurisdictions",
-        "Migrate the workload to a cloud provider headquartered in the European Union"
+        "Migrate the entire workload to a cloud provider headquartered within the European Union"
       ],
       "reponse": 2,
       "explication": "Avant tout instrument technique ou juridique, il faut la visibilité : cartographier les localisations et les flux réels, puis restreindre la réplication aux juridictions autorisées. Les clauses contractuelles couvrent des transferts qu'il faut d'abord identifier et minimiser, le chiffrement par défaut laisse les clés au fournisseur, et changer de fournisseur est disproportionné avant l'analyse.",
@@ -2821,10 +2821,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "A data science team sponsored by executive leadership plans to fine-tune an internal generative AI model on customer support transcripts that contain personal data and contract excerpts. Which requirement should the CISO impose FIRST?",
       "choix": [
-        "Host the model on internal infrastructure rather than in the cloud",
+        "Host the trained model on internal infrastructure rather than in the public cloud",
         "Inventory, classify, and minimize the training corpus, with data owner approval, before any training begins",
-        "Filter the model's outputs through a DLP solution before release",
-        "Require the team to sign an acceptable-use policy for artificial intelligence"
+        "Filter all of the model's outputs through a DLP solution before any release",
+        "Require the entire data science team to sign a formal acceptable-use policy for artificial intelligence use"
       ],
       "reponse": 1,
       "explication": "Le corpus d'entraînement est un actif de données : il doit être inventorié, classifié et minimisé avant l'entraînement, avec l'accord des data owners — car un modèle mémorise, et revenir en arrière après coup est très difficile. L'hébergement, la charte et le filtrage des sorties sont des contrôles utiles mais situés en aval de l'ingestion.",
@@ -2839,9 +2839,9 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "An organization's retention schedule automatically deletes email after 18 months. Legal counsel advises that litigation related to a past project is reasonably anticipated, and the next automated purge runs next month. What should be done FIRST?",
       "choix": [
-        "Export every employee mailbox to an isolated long-term archive",
-        "Allow the scheduled purge to proceed, because the approved retention policy governs",
-        "Wait for formal service of the lawsuit before altering the deletion schedule",
+        "Export every single employee mailbox to an isolated long-term archive store",
+        "Allow the scheduled automated purge to proceed, because the approved corporate retention policy governs the case",
+        "Wait for the formal service of the lawsuit before altering the deletion schedule at all",
         "Place a legal hold suspending automated deletion for the relevant data and document its scope with legal counsel"
       ],
       "reponse": 3,
