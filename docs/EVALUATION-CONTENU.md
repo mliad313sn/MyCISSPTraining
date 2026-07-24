@@ -93,6 +93,33 @@ stéréotypées, « mode catalogue » D3/D6/D8, quelques difficulté 3 = rappel 
 réels mais de second ordre — prochaine itération. La limite de fond demeure : sans relecture
 humaine CISSP ni calibration sur cohorte réelle, ces notes sont auto-évaluées.
 
+## 6. Défauts de second ordre — traités (itération 2)
+
+Après le length tell, l'audit avait listé cinq défauts secondaires. Tous adressés,
+un agent par domaine (sans conflit de fichier), vérifiés indépendamment :
+
+| Défaut (audit) | Traitement | Portée |
+|---|---|---|
+| Distracteurs « joke » (auto-éliminables) | remplacés par des distracteurs plausibles exigeant le mécanisme | ~30 sur 8 domaines |
+| « Difficulté 3 » = rappel rallongé | recalibrées honnêtement en 2 | ~30 recalibrées |
+| Ratio diff-3 maintenu ≥ 25 % | **+13 vraies questions d'arbitrage** à longueurs équilibrées (D1 ×10, D6 ×1, …) | 8/8 domaines ≥ 25 % |
+| Formule « governance first » devinable | variée (parfois la mesure technique prime) | D1, D8 |
+| Rationales stéréotypées | vocabulaire des `pourquoi` diversifié (réfutation par le fond) | ~700 ouvertures |
+| Item ambigu « FIRST » (IoT) | énoncé resserré, une seule meilleure réponse | D3 |
+| Mode catalogue | **le POURQUOI du mécanisme montré** : no-write-down BLP, requête paramétrée vs injection, encodage de sortie vs XSS, OVAL+XCCDF, XOR de parité RAID, SAE anti-dictionnaire | 15 slides |
+| Narrations saturées | scindées | D1, D5 |
+
+**Effet mesuré sur le length tell (défaut n°1) :** global **75 % → 21 %**, et surtout
+**difficulté 3 : 91 % → 14 %** — la bonne réponse n'est plus devinable par sa longueur,
+y compris sur les items les plus durs.
+
+**Portes de sortie (itération 2) :** lint 26/25/25/25 · **0 P1** · VERIFY CAT **8/8 PASS** ·
+navigateur 26/26 · banque **1091 questions**.
+
+**Notes révisées :** qualité d'items **6,5 → 8/10**, authenticité CAT **6 → 8/10**,
+pédagogie **7,5 → 8/10**. Restent des points de troisième ordre (léger sur-poids IA/LLM ;
+recoupement FR/EN de certains items).
+
 ---
 *Limite méthodologique inchangée : évaluation et correction par IA à plusieurs niveaux
 indépendants, sans relecture par un CISSP humain certifié ni calibration psychométrique sur

@@ -1568,7 +1568,7 @@ window.CISSP_DATA.domains[8] = {
       "pourquoi": [
         "Signer un exécutable ne déclenche aucune mise à jour : c'est un mécanisme inexistant dans le code signing.",
         "L'autorité de certification délivre et valide l'identité du certificat, mais n'inspecte jamais le contenu du code.",
-        "C'est la surestimation classique : la signature ne dit rien de la qualité ni de l'innocuité du binaire.",
+        "Surestimation classique : la signature garantit l'origine et l'intégrité, mais ne dit rien de la qualité ni de l'innocuité du binaire.",
         "La vérification atteste deux choses et deux seulement : l'intégrité depuis la signature et l'origine identifiée par le certificat."
       ]
     },
