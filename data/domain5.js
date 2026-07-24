@@ -21,7 +21,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "id": "d5-l1",
       "titre": "Contrôle d'accès aux actifs et modèle IAAA",
-      "duree": 10,
+      "duree": 11,
       "slides": [
         {
           "type": "intro",
@@ -55,6 +55,19 @@ window.CISSP_DATA.domains[5] = {
           ],
           "narration": "On distingue deux grandes familles de contrôles d'accès. Les contrôles physiques protègent le périmètre, l'environnement et les locaux. Les contrôles logiques sont des systèmes automatisés qui accordent ou refusent l'accès après vérification de l'identité : authentification, autorisation et permissions. Retenez ce principe d'examen : il n'y a pas de sécurité sans sécurité physique. Les meilleurs contrôles techniques ne servent à rien si n'importe qui peut entrer dans la salle serveur.",
           "astuce": "💡 Conseil examen : si une question oppose contrôles techniques sophistiqués et absence de sécurité physique, la sécurité physique prime toujours."
+        },
+        {
+          "type": "standard",
+          "titre": "Accès physique aux installations : badges, PACS et visiteurs",
+          "points": [
+            "PACS (Physical Access Control System) : badges, lecteurs, contrôleurs — des identités à gérer comme les autres",
+            "Le cycle de vie IAM s'applique au badge : provisioning à l'arrivée, désactivation immédiate au départ",
+            "Tailgating / piggybacking : contré par sas (mantrap), tourniquets et sensibilisation",
+            "Visiteurs : enregistrement, badge temporaire à durée limitée, escorte, journal des entrées",
+            "Détail des contrôles physiques (clôtures, éclairage, gardes) : voir le Domaine 3"
+          ],
+          "narration": "Concrétisons le contrôle d'accès aux installations. Les bâtiments modernes s'appuient sur un système de contrôle d'accès physique, ou PACS : des badges, des lecteurs et des contrôleurs de portes, souvent reliés à l'annuaire de l'entreprise. Pour l'examen, retenez que le badge est une identité comme une autre : il suit le même cycle de vie que le compte logique, provisionné à l'arrivée et désactivé immédiatement au départ ou à la fin d'un contrat. Un badge oublié dans le PACS est l'équivalent physique d'un compte orphelin. Le badge ne protège pas contre le tailgating, où un intrus suit un employé légitime à travers la porte : on y répond par des sas mantrap, des tourniquets et la sensibilisation. Enfin, les visiteurs doivent être enregistrés, recevoir un badge temporaire à durée limitée, être escortés, et leurs entrées journalisées pour l'accountability. Les détails des contrôles physiques, clôtures, éclairage, gardiens, sont couverts dans le Domaine 3.",
+          "astuce": "💡 Conseil examen : le deprovisioning ne s'arrête pas au compte logique — le badge physique doit être désactivé en même temps, par le même processus."
         },
         {
           "type": "standard",
@@ -280,7 +293,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "id": "d5-l3",
       "titre": "SSO et fédération : Kerberos, SAML, OAuth 2.0 et OIDC",
-      "duree": 14,
+      "duree": 17,
       "slides": [
         {
           "type": "intro",
@@ -303,6 +316,18 @@ window.CISSP_DATA.domains[5] = {
             "Repose souvent sur un directory service (LDAP)"
           ],
           "narration": "Le single sign-on est une technique centralisée qui permet à un sujet de s'authentifier une seule fois puis d'accéder à plusieurs ressources sans se ré-authentifier. Les avantages sont clairs : moins de mots de passe à mémoriser, donc moins de mots de passe notés sur des post-it, et une administration allégée. Mais le SSO crée un point de compromission unique : si l'identifiant SSO est volé, toutes les ressources liées sont exposées. C'est pourquoi il faut impérativement protéger le compte SSO par du MFA. En interne, le SSO s'appuie souvent sur un service d'annuaire centralisé, généralement basé sur LDAP."
+        },
+        {
+          "type": "standard",
+          "titre": "Services d'annuaire : LDAP et Active Directory",
+          "points": [
+            "Directory service : référentiel central des identités, comptes et groupes — le socle de l'IdM",
+            "LDAP (TCP 389) : protocole d'interrogation ; arborescence hiérarchique, entrées désignées par un DN (Distinguished Name), organisées en OU (Organizational Units)",
+            "Active Directory : annuaire LDAP + authentification Kerberos ; groupes pour attribuer les droits à l'échelle (jamais individu par individu)",
+            "Sécurisation : LDAPS (TCP 636) ou StartTLS — proscrire le simple bind en clair et le bind anonyme"
+          ],
+          "narration": "Avant Kerberos, posons le socle : le service d'annuaire. C'est le référentiel central qui stocke les identités, les comptes, les groupes et leurs attributs ; c'est la pièce maîtresse de toute implémentation de gestion des identités. On l'interroge avec LDAP, le lightweight directory access protocol, sur le port TCP trois cent quatre-vingt-neuf. L'annuaire est organisé en arborescence hiérarchique : chaque entrée possède un nom distinctif unique, le distinguished name, et les entrées sont rangées dans des unités d'organisation, les OU, qui reflètent souvent la structure de l'entreprise. Active Directory de Microsoft est l'exemple dominant : un annuaire compatible LDAP couplé à Kerberos pour l'authentification. Bonne pratique de conception : on attribue les droits à des groupes correspondant aux rôles métier, jamais utilisateur par utilisateur, sinon la gestion devient ingérable à l'échelle. Enfin, LDAP en clair expose les identifiants lors du bind : il faut imposer LDAPS sur le port six cent trente-six, ou StartTLS, et proscrire le bind anonyme.",
+          "astuce": "💡 Conseil examen : LDAP 389 en clair, LDAPS 636 chiffré. L'annuaire est le socle de l'IdM ; les droits se donnent aux groupes, pas aux individus."
         },
         {
           "type": "standard",
@@ -357,6 +382,19 @@ window.CISSP_DATA.domains[5] = {
             "Déploiement on-premise (contrôle maximal), cloud (IDaaS), ou hybride (le plus complexe)"
           ],
           "narration": "La fédération d'identités, ou federated identity management, étend le SSO au-delà des frontières de l'organisation. Plusieurs organisations forment une fédération et acceptent de partager des informations d'identité : l'utilisateur s'authentifie une fois dans sa propre organisation et accède aux ressources des partenaires. Trois acteurs interviennent : le principal, c'est-à-dire l'utilisateur, l'identity provider qui détient l'identité et réalise l'authentification, et le relying party, aussi appelé service provider, qui fournit le service. La fédération peut être hébergée on-premise, ce qui donne le plus de contrôle, dans le cloud via un service IDaaS, ou en hybride, le scénario le plus complexe à gérer. Le provisioning just-in-time, souvent via SAML, crée automatiquement les comptes chez le partenaire lors de la première connexion."
+        },
+        {
+          "type": "standard",
+          "titre": "Identité hybride : relier l'annuaire on-premise au cloud",
+          "points": [
+            "Password hash synchronization : un hash dérivé (re-haché) est copié vers l'IdP cloud — simple, résiste à une panne on-premise",
+            "Pass-through authentication : le cloud délègue la vérification à des agents on-premise — le hash ne quitte jamais l'annuaire",
+            "Fédération (relation de confiance, ex. AD FS) : authentification entièrement on-premise — contrôle maximal, mais infrastructure et complexité en plus",
+            "Vigilance : le serveur de synchronisation est un actif critique (niveau contrôleur de domaine) ; certificats de fédération ciblés par les attaques type Golden SAML",
+            "Cas fréquent : acquisition d'entreprise → relier deux annuaires via confiance ou synchronisation, le temps de converger"
+          ],
+          "narration": "Le scénario hybride mérite qu'on ouvre le capot, car l'examen le teste. Quand l'organisation garde son annuaire on-premise tout en consommant des services cloud, trois mécanismes relient les deux mondes. Premier mécanisme, la synchronisation de hash de mots de passe : un hash dérivé du hash local, jamais le mot de passe lui-même, est copié vers le fournisseur d'identité cloud ; c'est la solution la plus simple, et l'authentification cloud continue de fonctionner même si le site local tombe. Deuxième mécanisme, l'authentification pass-through : le cloud transmet la vérification à des agents installés on-premise ; aucun hash ne quitte l'annuaire, mais l'authentification dépend de la disponibilité du site. Troisième mécanisme, la fédération via une relation de confiance, par exemple avec AD FS : l'authentification reste entièrement on-premise et l'organisation garde le contrôle maximal, au prix d'une infrastructure supplémentaire à sécuriser. Points de vigilance : le serveur de synchronisation détient des secrets équivalents à ceux d'un contrôleur de domaine, il doit être protégé au même niveau ; et les certificats de signature de la fédération sont une cible de choix, comme l'ont montré les attaques de type Golden SAML. Enfin, l'hybride est le quotidien des fusions-acquisitions : on relie temporairement deux annuaires par confiance ou synchronisation, le temps de converger vers une identité unique.",
+          "astuce": "💡 Conseil examen : hash sync = simplicité et résilience ; pass-through = le hash reste chez vous ; fédération = contrôle maximal mais complexité maximale. Le serveur de synchro se protège comme un contrôleur de domaine."
         },
         {
           "type": "standard",
@@ -541,7 +579,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "id": "d5-l5",
       "titre": "Cycle de vie des identités, PAM et attaques sur l'IAM",
-      "duree": 12,
+      "duree": 13,
       "slides": [
         {
           "type": "intro",
@@ -628,6 +666,19 @@ window.CISSP_DATA.domains[5] = {
             "Éviter le compte système local : privilèges excessifs ; limiter et auditer sudo"
           ],
           "narration": "Le privileged access management est un composant critique du cycle de vie : les solutions PAM gèrent, surveillent et auditent l'usage des comptes à privilèges. Elles offrent le coffre-fort d'identifiants, l'enregistrement des sessions et l'accès privilégié just-in-time, où les droits élevés ne sont accordés que temporairement, au moment du besoin. Les comptes de service, utilisés par les applications pour dialoguer avec d'autres ressources sans intervention humaine, doivent eux aussi être gérés et revus : évitez d'utiliser le compte système local comme compte de service, car il accorde généralement bien plus d'accès que nécessaire. Enfin, limitez et auditez l'usage de sudo."
+        },
+        {
+          "type": "standard",
+          "titre": "Managed service accounts et bonnes pratiques sudo",
+          "points": [
+            "Managed Service Account (MSA) : compte de service géré par l'annuaire — mot de passe long, aléatoire, rotation automatique, pas d'ouverture de session interactive",
+            "gMSA (group Managed Service Account) : partageable entre plusieurs serveurs ; aucun humain ne connaît le mot de passe",
+            "La rotation automatique contre le Kerberoasting : un mot de passe de 240 caractères changé régulièrement est incassable hors ligne",
+            "sudo : accorder des commandes précises (jamais ALL), journaliser chaque commande, interdire l'ouverture d'un shell root persistant",
+            "Minimiser l'usage de sudo : moins d'exécutions privilégiées = moins de surface d'escalade"
+          ],
+          "narration": "Le DCO cite nommément les managed service accounts, alors nommons-les. Sur Windows, un managed service account est un compte de service dont l'annuaire gère lui-même le mot de passe : long, aléatoire, et pivoté automatiquement à intervalle régulier, sans intervention humaine et sans ouverture de session interactive possible. Sa version de groupe, le group managed service account ou gMSA, peut être utilisée par plusieurs serveurs, par exemple une ferme web. L'intérêt sécurité est double : aucun humain ne connaît le mot de passe, donc il ne peut être ni noté ni partagé, et la rotation automatique neutralise le Kerberoasting, car un mot de passe de deux cent quarante caractères renouvelé régulièrement est incassable hors ligne. Côté Unix et Linux, la bonne pratique équivalente concerne sudo : accordez des commandes précises plutôt que le droit ALL, journalisez chaque commande exécutée pour l'accountability, et interdisez l'ouverture d'un shell root persistant qui échappe à la journalisation. Et surtout, minimisez l'usage de sudo lui-même : chaque exécution privilégiée évitée est une opportunité d'escalade en moins.",
+          "astuce": "💡 Conseil examen : gMSA = rotation automatique du mot de passe par l'annuaire, aucun humain ne le connaît — la réponse attendue face à des comptes de service à mot de passe fixe. sudo = minimiser et journaliser."
         },
         {
           "type": "standard",
@@ -2123,6 +2174,60 @@ window.CISSP_DATA.domains[5] = {
         "Bonne réponse : inventaire et ownership, priorisés par le niveau de privilège — le prérequis de toute gouvernance ; on ne protège pas ce qu'on ne connaît pas."
       ],
       "difficulte": 3
+    },
+    {
+      "q": "Une nouvelle application interne doit authentifier les utilisateurs auprès de l'annuaire Active Directory. L'équipe projet propose un simple bind LDAP vers le port 389 du contrôleur de domaine. Quelle est la MEILLEURE recommandation ?",
+      "choix": [
+        "Accepter la proposition, car le réseau interne est considéré comme de confiance",
+        "Exiger LDAPS (ou StartTLS) afin que les identifiants transmis lors du bind ne circulent jamais en clair",
+        "Faire réaliser le bind avec un compte administrateur du domaine pour simplifier les autorisations",
+        "Autoriser le bind anonyme afin d'éviter de stocker des identifiants dans l'application"
+      ],
+      "reponse": 1,
+      "explication": "Un simple bind LDAP sur le port 389 transmet le DN et le mot de passe en clair : n'importe quel attaquant en position d'écoute sur le réseau interne les capture. La bonne réponse est d'imposer LDAPS (TCP 636) ou StartTLS pour chiffrer la session. Considérer le réseau interne comme de confiance contredit le Zero Trust ; un compte Domain Admin pour un bind applicatif viole le least privilege ; et le bind anonyme supprime l'authentification, donc l'accountability.",
+      "pourquoi": [
+        "Piège périmétrique : « le réseau interne est de confiance » contredit le Zero Trust — un attaquant déjà interne capturerait les identifiants en clair.",
+        "Bonne réponse : LDAPS (TCP 636) ou StartTLS chiffre la session et protège les identifiants transmis lors du bind.",
+        "Violation du least privilege : un bind applicatif n'a besoin que de droits de lecture ciblés, jamais des privilèges d'administrateur du domaine.",
+        "Pire encore : le bind anonyme supprime l'authentification elle-même, donc toute accountability sur les requêtes annuaire."
+      ],
+      "difficulte": 2
+    },
+    {
+      "q": "Un audit révèle qu'un prestataire est entré plusieurs fois dans le bâtiment après la fin de son contrat : son badge n'avait jamais été désactivé dans le système de contrôle d'accès physique (PACS). Quelle mesure corrective traite la cause RACINE ?",
+      "choix": [
+        "Intégrer la désactivation des badges du PACS au processus de deprovisioning IAM déclenché par la fin de contrat",
+        "Installer des caméras de surveillance supplémentaires aux entrées du bâtiment",
+        "Diffuser une note interne rappelant l'interdiction du tailgating aux employés",
+        "Exiger que tous les visiteurs signent le registre à l'accueil et portent un badge visiteur"
+      ],
+      "reponse": 0,
+      "explication": "La cause racine est un badge resté actif après la fin du contrat : l'accès physique n'était pas couvert par le processus de deprovisioning. La correction consiste à traiter le badge comme toute autre identité et à intégrer sa désactivation au workflow d'offboarding déclenché par la fin de contrat, exactement comme pour les comptes logiques. Les caméras sont un contrôle détectif qui n'empêche pas l'entrée ; une note de sensibilisation ne corrige pas le badge actif ; et le prestataire n'était pas un visiteur — il entrait avec un badge valide.",
+      "pourquoi": [
+        "Bonne réponse : le badge est une identité comme une autre — sa désactivation doit être déclenchée par le même processus de deprovisioning que les comptes logiques.",
+        "Contrôle détectif : les caméras enregistrent l'intrusion mais ne l'empêchent pas, et ne corrigent pas le badge resté actif.",
+        "Contrôle faible et hors cible : la sensibilisation au tailgating ne traite pas la cause — le prestataire entrait avec un badge valide.",
+        "Hors sujet : le prestataire n'était pas un visiteur ; un registre d'accueil n'aurait rien changé à un badge actif."
+      ],
+      "difficulte": 2
+    },
+    {
+      "q": "Une revue de sécurité montre que plusieurs comptes de service Windows utilisent des mots de passe fixes définis il y a des années, exposés au Kerberoasting. Quelle est la MEILLEURE mesure corrective ?",
+      "choix": [
+        "Planifier une rotation manuelle trimestrielle des mots de passe par les administrateurs",
+        "Basculer les services concernés vers le compte système local pour supprimer les mots de passe de domaine",
+        "Imposer le MFA sur ces comptes de service",
+        "Migrer ces services vers des group Managed Service Accounts (gMSA), dont le mot de passe long et aléatoire est géré et pivoté automatiquement par l'annuaire"
+      ],
+      "reponse": 3,
+      "explication": "Les gMSA répondent exactement au problème : l'annuaire génère un mot de passe de 240 caractères, le renouvelle automatiquement et aucun humain ne le connaît — le Kerberoasting devient inopérant car le hash est incassable hors ligne. La rotation manuelle trimestrielle dépend de la discipline humaine et laisse des fenêtres d'exposition ; le compte système local accorde des privilèges excessifs sur la machine, ce que la leçon déconseille explicitement ; et le MFA ne s'applique pas aux comptes de service, qui s'authentifient sans interaction humaine.",
+      "pourquoi": [
+        "Palliatif fragile : la rotation manuelle dépend de la discipline des administrateurs, laisse des fenêtres d'exposition et des mots de passe connus des humains.",
+        "Fausse bonne idée : le compte système local accorde bien plus de privilèges que nécessaire — un remède pire que le mal.",
+        "Inapplicable : un compte de service s'authentifie sans interaction humaine ; il ne peut pas répondre à un défi MFA.",
+        "Bonne réponse : le gMSA délègue la gestion du mot de passe à l'annuaire — long, aléatoire, rotation automatique, inconnu des humains — ce qui neutralise le Kerberoasting."
+      ],
+      "difficulte": 2
     }
   ],
   "quizEn": [
