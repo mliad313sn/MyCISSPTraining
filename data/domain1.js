@@ -228,9 +228,10 @@ window.CISSP_DATA.domains[1] = {
           "points": [
             "Due Diligence : savoir ce qui doit être fait et le planifier — comprendre, évaluer, documenter",
             "Due Care : faire ce qui doit être fait — appliquer les contrôles et agir raisonnablement",
-            "Formule mémo : Due Diligence pense, Due Care agit"
+            "Formule mémo : Due Diligence pense, Due Care agit",
+            "Pourquoi c'est vital : la trace écrite produite par la Due Diligence est la preuve qui démontre la Due Care devant un juge (prudent person standard)"
           ],
-          "narration": "Voici deux termes incontournables. La Due Diligence, c'est savoir ce qui doit être fait et le planifier : collecter l'information, évaluer les risques, établir les politiques et les structures de sécurité. La Due Care, c'est la pratique quotidienne de ces activités : appliquer les contrôles, suivre les politiques, agir en personne raisonnable et prudente. Un moyen mnémotechnique efficace : la Due Diligence réfléchit et prépare, la Due Care agit. On dit aussi que la Due Care est la protection responsable des actifs, et que la Due Diligence permet de prouver cette Due Care.",
+          "narration": "Voici deux termes incontournables, et surtout comprenons pourquoi ils comptent autant. La Due Diligence, c'est savoir ce qui doit être fait et le planifier : collecter l'information, évaluer les risques, établir les politiques et les structures de sécurité. La Due Care, c'est la pratique quotidienne de ces activités : appliquer les contrôles, suivre les politiques, agir en personne raisonnable et prudente. Un moyen mnémotechnique efficace : la Due Diligence réfléchit et prépare, la Due Care agit. Maintenant, la raison profonde. En cas d'incident et de procès, le juge ne demande pas si l'organisation a tout empêché, mais si elle s'est comportée comme une personne raisonnable et prudente l'aurait fait : c'est le prudent person standard. Or c'est précisément la Due Diligence qui produit la trace écrite, les analyses de risque, les politiques datées, les décisions documentées, sans laquelle il devient impossible de prouver que la Due Care a bien été exercée. Voilà pourquoi les deux sont indissociables : agir sans documenter ne protège pas juridiquement, et documenter sans agir n'est qu'un affichage. C'est cette combinaison qui met les dirigeants à l'abri d'une mise en cause personnelle pour négligence.",
           "astuce": "💡 Conseil examen : Due Diligence = « Do Detect » (comprendre et planifier), Due Care = « Do Correct » (agir). Les managers qui négligent ces devoirs engagent leur responsabilité personnelle."
         },
         {
@@ -755,15 +756,24 @@ window.CISSP_DATA.domains[1] = {
         },
         {
           "type": "standard",
-          "titre": "Monitoring continu, mesure et reporting du risque",
+          "titre": "Monitoring continu et indicateurs (KPI, KRI)",
           "points": [
             "Continuous monitoring (NIST ISCM) : collecte automatisée, tableaux de bord, réévaluation à chaque changement majeur — l'autorisation n'est jamais définitive",
-            "KPI : mesurent la performance des contrôles ; KRI : indicateurs avancés de risque, assortis de seuils qui déclenchent une action",
+            "KPI : mesurent la performance des contrôles (ex. taux de correctifs appliqués dans les délais)",
+            "KRI : indicateurs avancés de risque, dotés de seuils dont le franchissement déclenche une action prédéfinie"
+          ],
+          "narration": "Une évaluation annuelle ne suffit pas. Entre deux audits, le système change et les menaces évoluent. Le monitoring continu, que le NIST formalise sous le nom d'Information Security Continuous Monitoring, maintient une visibilité permanente : collecte automatisée d'indicateurs, tableaux de bord, et réévaluation du risque à chaque changement majeur du système ou de son environnement. L'autorisation d'un système n'est donc jamais définitive. Pour mesurer, distinguez deux familles d'indicateurs. Les KPI, indicateurs de performance, disent si les contrôles fonctionnent, par exemple le taux de correctifs appliqués dans les délais. Les KRI, indicateurs de risque, sont des signaux avancés dotés de seuils : franchir un seuil doit déclencher une action prédéfinie, pas une simple curiosité statistique.",
+          "astuce": "💡 Conseil examen : un KRI qui franchit son seuil est un déclencheur d'action. Le monitoring continu est la réponse aux scénarios « entre deux évaluations annuelles »."
+        },
+        {
+          "type": "standard",
+          "titre": "Rendre compte du risque : reporting interne et externe",
+          "points": [
             "Reporting interne : direction, comité des risques, board — en langage business : tendances, exposition comparée à l'appétit pour le risque",
             "Reporting externe : régulateurs (notifications obligatoires), assureurs cyber, clients et auditeurs (attestations, rapports de type SOC 2)"
           ],
-          "narration": "Une évaluation annuelle ne suffit pas : entre deux audits, le système change, les menaces évoluent. Le monitoring continu, formalisé par le NIST sous le nom d'Information Security Continuous Monitoring, maintient une visibilité permanente : collecte automatisée d'indicateurs, tableaux de bord, et réévaluation du risque à chaque changement majeur du système ou de son environnement. Pour mesurer, distinguez deux familles d'indicateurs : les KPI, indicateurs de performance, disent si les contrôles fonctionnent, par exemple le taux de correctifs appliqués dans les délais ; les KRI, indicateurs de risque, sont des signaux avancés dotés de seuils, et le franchissement d'un seuil doit déclencher une action prédéfinie, pas une simple curiosité statistique. Ces mesures alimentent le reporting. En interne, on rend compte à la direction, au comité des risques et au conseil d'administration, en langage business : tendances, pertes potentielles quantifiées, exposition comparée à l'appétit pour le risque. En externe, on rend compte aux régulateurs à travers les notifications obligatoires, aux assureurs cyber pour la souscription, et aux clients ou auditeurs via des attestations comme les rapports SOC deux.",
-          "astuce": "💡 Conseil examen : au board, on parle risque business et argent, jamais jargon technique ni CVE. Un KRI qui franchit son seuil = déclencheur d'action. Monitoring continu = la réponse aux scénarios « entre deux évaluations annuelles »."
+          "narration": "Ces mesures alimentent ensuite le reporting, et le public change tout. En interne, on rend compte à la direction, au comité des risques et au conseil d'administration, en langage business : tendances, pertes potentielles quantifiées, exposition comparée à l'appétit pour le risque. En externe, on rend compte aux régulateurs à travers les notifications obligatoires, aux assureurs cyber pour la souscription, et aux clients ou auditeurs via des attestations comme les rapports SOC deux.",
+          "astuce": "💡 Conseil examen : au board, on parle risque business et argent, jamais jargon technique ni CVE."
         },
         {
           "type": "resume",
@@ -1234,7 +1244,7 @@ window.CISSP_DATA.domains[1] = {
       "explication": "La responsabilité ultime de la sécurité incombe toujours à la direction générale : c'est elle qui approuve les politiques, alloue les ressources et assume les conséquences. Le CISO a une responsabilité fonctionnelle, le data owner classifie ses données, et l'équipe sécurité exécute, mais aucun d'eux ne porte la responsabilité finale.",
       "difficulte": 1,
       "pourquoi": [
-        "Correcte : la direction générale porte la responsabilité ultime (accountability) de la sécurité, même lorsqu'elle en délègue l'exécution.",
+        "Accountability finale : la direction générale répond de la sécurité de toute l'organisation, même lorsqu'elle en délègue l'exécution.",
         "Trop étroit : le propriétaire des données répond de la classification et des règles d'accès de ses données, pas de la sécurité de toute l'organisation.",
         "Réponse de technicien-manager intermédiaire : le CISO dirige le programme au quotidien, mais la responsabilité ultime ne se délègue pas.",
         "Réponse opérationnelle : l'équipe sécurité met en œuvre les contrôles, elle n'assume pas la responsabilité ultime devant les actionnaires et les régulateurs."
@@ -1252,7 +1262,7 @@ window.CISSP_DATA.domains[1] = {
       "explication": "Le chiffrement empêche la divulgation du contenu aux personnes non autorisées : c'est la confidentialité. Il ne garantit pas à lui seul l'intégrité (il faudrait un hachage ou un MAC), ne contribue pas à la disponibilité, et la non-répudiation exige des signatures numériques associées à une identité.",
       "difficulte": 1,
       "pourquoi": [
-        "Hors sujet : la disponibilité concerne l'accès fiable des utilisateurs autorisés, pas la protection contre la lecture.",
+        "Mauvais pilier : la disponibilité concerne l'accès fiable des utilisateurs autorisés, pas la protection contre la lecture.",
         "Correcte : empêcher toute lecture non autorisée pendant la transmission est précisément la définition de la confidentialité.",
         "Piège d'association : l'intégrité protège contre la modification non autorisée, pas contre la lecture des données.",
         "Hors périmètre : la non-répudiation empêche de nier une action, elle ne protège pas le contenu contre la lecture."
@@ -1272,7 +1282,7 @@ window.CISSP_DATA.domains[1] = {
       "pourquoi": [
         "Mélange de variables : l'ARO mesure une fréquence annuelle et n'entre pas dans le calcul d'une perte unique.",
         "Inversion de formule : c'est l'ALE qui se calcule à partir du SLE (ALE = SLE × ARO), pas l'inverse.",
-        "Correcte : la Single Loss Expectancy est la valeur de l'actif multipliée par le facteur d'exposition (SLE = AV × EF).",
+        "C'est la formule exacte : la Single Loss Expectancy est la valeur de l'actif multipliée par le facteur d'exposition (SLE = AV × EF).",
         "Formule incomplète : EF × ARO combine un pourcentage et une fréquence sans jamais intégrer la valeur de l'actif."
       ]
     },
@@ -1308,7 +1318,7 @@ window.CISSP_DATA.domains[1] = {
       "pourquoi": [
         "Contresens économique : le coût (30 000 €) est bien inférieur à la réduction d'ALE obtenue (70 000 €), le safeguard est donc rentable.",
         "Hors phase du processus : le transfert est une option de réponse, mais l'analyse démontre déjà qu'une atténuation rentable existe ; l'assurance n'annulerait pas ce calcul.",
-        "Correcte : la valeur du safeguard = (120 000 − 50 000) − 30 000 = 40 000 € par an ; un bénéfice net positif justifie l'implémentation.",
+        "Le calcul tranche : valeur du safeguard = (120 000 − 50 000) − 30 000 = 40 000 € par an ; un bénéfice net positif justifie l'implémentation.",
         "Décision non étayée : accepter un risque dont l'atténuation est financièrement rentable contredit l'analyse coût/bénéfice qui vient d'être menée."
       ]
     },
@@ -1343,7 +1353,7 @@ window.CISSP_DATA.domains[1] = {
       "difficulte": 1,
       "pourquoi": [
         "Piège temporel : le risque inhérent est celui qui existe avant tout contrôle, pas après.",
-        "Correcte : le risque résiduel est ce qui subsiste après l'application des contrôles et que la direction accepte formellement.",
+        "C'est bien le résiduel : ce qui subsiste après l'application des contrôles et que la direction accepte formellement.",
         "Trop large : le risque total est l'exposition globale avant traitement, pas ce qui reste après contrôles.",
         "Concept voisin mais distinct : le controls gap est la portion de risque éliminée par les contrôles (risque total − controls gap = risque résiduel), pas le risque assumé après traitement."
       ]
@@ -1398,7 +1408,7 @@ window.CISSP_DATA.domains[1] = {
       "pourquoi": [
         "Techniquement utile mais inadapté à la contrainte : en brainstorming ouvert, la hiérarchie et les personnalités dominantes influencent les avis.",
         "Hors périmètre : un audit externe évalue la conformité, il ne construit pas un consensus interne d'experts sur les risques.",
-        "Correcte : la technique Delphi recueille les avis de façon anonyme et itérative, précisément pour neutraliser l'influence hiérarchique et dégager un consensus.",
+        "Anonymat et itération : la technique Delphi recueille les avis sans les nommer et par tours successifs, précisément pour neutraliser l'influence hiérarchique et dégager un consensus.",
         "Hors sujet : SLE/ALE est un calcul monétaire, pas une technique de consensus d'experts."
       ]
     },
@@ -1433,7 +1443,7 @@ window.CISSP_DATA.domains[1] = {
       "difficulte": 2,
       "pourquoi": [
         "Hors sujet : la récupération vise le retour à l'état normal après sinistre, pas la couverture d'une défaillance ponctuelle d'un contrôle.",
-        "Correcte : le gardien remplace temporairement un contrôle principal défaillant en offrant une protection équivalente — définition du contrôle compensatoire.",
+        "Substitution temporaire : le gardien remplace un contrôle principal défaillant en offrant une protection équivalente — définition du contrôle compensatoire.",
         "Piège de phase : un contrôle correctif répare après un incident (ex. restauration), il ne se substitue pas à un contrôle en panne.",
         "Trop étroit : un contrôle directif oriente les comportements (panneaux, politiques), il ne vérifie pas les identités."
       ]
@@ -1452,7 +1462,7 @@ window.CISSP_DATA.domains[1] = {
       "pourquoi": [
         "Hors périmètre : SOX encadre l'information financière des sociétés cotées, pas les violations de données personnelles.",
         "Piège de régime : HIPAA/HITECH impose 60 jours pour les données de santé américaines, pas 72 heures.",
-        "Correcte : l'article 33 du GDPR impose la notification à l'autorité de contrôle dans les 72 heures suivant la découverte.",
+        "C'est le bon régime : l'article 33 du GDPR impose la notification à l'autorité de contrôle dans les 72 heures suivant la découverte.",
         "Hors sujet : PCI DSS est un standard contractuel de protection des cartes de paiement, sans délai légal de notification de 72 heures."
       ]
     },
@@ -1505,7 +1515,7 @@ window.CISSP_DATA.domains[1] = {
       "difficulte": 1,
       "pourquoi": [
         "Fausse source d'autorité : aucune loi fédérale américaine n'impose PCI DSS, c'est un standard privé.",
-        "Correcte : PCI DSS s'impose par le contrat entre le commerçant et sa banque acquéreuse, sous peine de pénalités et de perte du droit d'encaisser les cartes.",
+        "Force contractuelle : PCI DSS s'impose par le contrat entre le commerçant et sa banque acquéreuse, sous peine de pénalités et de perte du droit d'encaisser les cartes.",
         "Fausse source d'autorité : les banques centrales ne réglementent pas PCI DSS.",
         "Confusion d'organismes : ISO n'a aucun rôle dans PCI DSS, géré par le PCI Security Standards Council et appliqué contractuellement."
       ]
@@ -1577,7 +1587,7 @@ window.CISSP_DATA.domains[1] = {
       "difficulte": 2,
       "pourquoi": [
         "Techniquement vrai mais juridiquement fatal : la propriété des e-mails n'autorise pas leur destruction lorsqu'une enquête réglementaire est ouverte (obstruction).",
-        "Correcte : dès l'ouverture d'une enquête réglementaire, l'organisation doit préserver les preuves (legal hold) ; détruire des e-mails constituerait une obstruction pénalement sanctionnable.",
+        "Obligation de préserver : dès l'ouverture d'une enquête réglementaire, l'organisation active un legal hold ; détruire des e-mails constituerait une obstruction pénalement sanctionnable.",
         "Faux garde-fou : un accord verbal du juridique ne rend pas licite la destruction de preuves sous enquête.",
         "Hors délai : reporter la décision maintient le risque de destruction ; l'obligation de préservation s'applique immédiatement."
       ]
@@ -1610,7 +1620,7 @@ window.CISSP_DATA.domains[1] = {
       ],
       "reponse": 0,
       "explication": "Pour le canon III, seuls un employeur ou une personne ayant une relation contractuelle avec le professionnel peuvent porter plainte, car ce canon protège les mandants. Tout membre du public peut porter plainte au titre des canons I et II, et toute personne soumise à un code d'éthique professionnel peut le faire pour le canon IV.",
-      "difficulte": 3,
+      "difficulte": 2,
       "pourquoi": [
         "Correcte : seules les personnes liées par une relation d'emploi ou de contrat (les principals) peuvent se plaindre d'un manquement au devoir de service diligent.",
         "Critère erroné : la qualité de professionnel soumis à un code d'éthique est exigée pour les plaintes du canon IV, pas du canon III.",
@@ -1667,7 +1677,7 @@ window.CISSP_DATA.domains[1] = {
       "difficulte": 2,
       "pourquoi": [
         "Réponse de technicien : déployer un EDR est une mesure opérationnelle qui ne se décide qu'après l'évaluation des risques et la conclusion de l'opération.",
-        "Correcte : avant de finaliser l'acquisition, il faut évaluer les risques de la cible (dettes de sécurité, compromissions, conformité) — c'est la Due Diligence.",
+        "Priorité de séquence : avant de finaliser l'acquisition, on évalue les risques de la cible (dettes de sécurité, compromissions, conformité) — c'est la Due Diligence.",
         "Décision non étayée : résilier les contrats fournisseurs sans évaluation préalable pourrait détruire de la valeur et n'est pas une étape de Due Diligence.",
         "Hors phase : fusionner les identités est une action d'intégration post-acquisition, prématurée avant toute évaluation."
       ]
@@ -1722,7 +1732,7 @@ window.CISSP_DATA.domains[1] = {
       "pourquoi": [
         "Mauvais modèle : DREAD est une grille de notation en cinq critères, pas une méthodologie séquentielle.",
         "Mauvais modèle : VAST vise le passage à l'échelle en environnement agile, sans structure canonique en sept étapes.",
-        "Correcte : PASTA (Process for Attack Simulation and Threat Analysis) déroule sept étapes, des objectifs métier à la gestion du risque en passant par la simulation d'attaques.",
+        "Sept étapes centrées risque : PASTA (Process for Attack Simulation and Threat Analysis) va des objectifs métier à la gestion du risque en passant par la simulation d'attaques.",
         "Mauvais modèle : STRIDE est une taxonomie de six catégories de menaces, pas un processus en sept étapes."
       ]
     },
@@ -1738,7 +1748,7 @@ window.CISSP_DATA.domains[1] = {
       "explication": "Le Supply Chain Risk Management (SCRM) vise à garantir que chaque maillon de la chaîne d'approvisionnement est fiable, auditable et responsable devant le suivant, précisément pour prévenir contrefaçons, sabotages et implants. Le BCP traite la continuité d'activité, le SCA évalue les contrôles internes, et le DLP prévient les fuites de données.",
       "difficulte": 1,
       "pourquoi": [
-        "Hors sujet : le BCP maintient l'activité en cas de perturbation, il ne prévient pas l'introduction de composants contrefaits.",
+        "Mauvaise discipline : le BCP maintient l'activité en cas de perturbation, il ne prévient pas l'introduction de composants contrefaits.",
         "Hors sujet : le DLP prévient la fuite de données, pas l'entrée de matériel contrefait.",
         "Correcte : le Supply Chain Risk Management couvre précisément les risques issus des fournisseurs et sous-traitants de tous rangs, dont la contrefaçon de composants.",
         "Trop étroit : l'évaluation des contrôles mesure l'efficacité de contrôles existants, elle ne gouverne pas les risques fournisseurs."
@@ -1831,7 +1841,7 @@ window.CISSP_DATA.domains[1] = {
         "Mesure d'activité, pas d'efficacité : envoyer plus de campagnes ne prouve aucun changement de comportement.",
         "Mesure de présence : assister à une formation ne démontre pas l'acquisition des bons réflexes.",
         "Mesure de moyens : le budget ne dit rien des résultats obtenus.",
-        "Correcte : la baisse du taux de clic et la hausse du taux de signalement mesurent un changement de comportement réel, donc l'efficacité du programme."
+        "Indicateur de résultat : la baisse du taux de clic et la hausse du taux de signalement traduisent un changement de comportement réel, donc l'efficacité du programme."
       ]
     },
     {
@@ -1880,7 +1890,7 @@ window.CISSP_DATA.domains[1] = {
       ],
       "reponse": 0,
       "explication": "Les sept étapes du RMF sont : Prepare, Categorize, Select, Implement, Assess, Authorize, Monitor. Après l'implémentation, on évalue (Assess) que les contrôles sont correctement mis en œuvre et produisent les résultats attendus, avant d'autoriser le système (Authorize) puis de le surveiller en continu (Monitor).",
-      "difficulte": 3,
+      "difficulte": 2,
       "pourquoi": [
         "Correcte : après Implement vient Assess — l'évaluation de la bonne mise en œuvre et de l'efficacité des contrôles.",
         "Trop tôt : l'autorisation (Authorize) ne peut être prononcée qu'après l'évaluation des contrôles.",
@@ -1898,7 +1908,7 @@ window.CISSP_DATA.domains[1] = {
       ],
       "reponse": 3,
       "explication": "Au niveau Preliminary, des tentatives de suivre des processus de gestion des risques existent, mais chaque département procède à sa façon, sans cadre standardisé. Ad hoc désigne le chaos initial sans aucune démarche, Defined marque l'adoption d'un cadre commun à toute l'organisation, et Integrated l'intégration du risque dans les processus métier avec des métriques.",
-      "difficulte": 3,
+      "difficulte": 2,
       "pourquoi": [
         "Trop avancé : Defined suppose justement un cadre commun standardisé à toute l'organisation, absent ici.",
         "Piège de niveau : ad hoc désigne le point de départ chaotique où rien n'est formalisé ; ici, des évaluations existent déjà, mais sans cadre commun.",
@@ -1920,7 +1930,7 @@ window.CISSP_DATA.domains[1] = {
       "pourquoi": [
         "Hors sujet : la BIA analyse l'impact des interruptions, elle ne trace pas le suivi des risques dans la durée.",
         "Hors sujet : le SBOM inventorie les composants logiciels, pas les risques.",
-        "Correcte : le risk register consigne chaque risque, sa criticité, son propriétaire, la réponse retenue et l'avancement du traitement.",
+        "C'est bien le risk register : il consigne chaque risque, sa criticité, son propriétaire, la réponse retenue et l'avancement du traitement.",
         "Mauvais grain : la policy fixe les orientations, elle n'assure pas le suivi opérationnel des risques."
       ]
     },
@@ -2132,7 +2142,7 @@ window.CISSP_DATA.domains[1] = {
       ],
       "reponse": 3,
       "explication": "Pour le canon IV, la plainte peut être déposée par toute personne elle-même soumise à un code d'éthique professionnel (certifiés ISC² ou autres professionnels sous code de déontologie). Rappel des autres règles : tout membre du public peut porter plainte au titre des canons I et II, et seuls un employeur ou une personne sous relation contractuelle peuvent le faire pour le canon III.",
-      "difficulte": 3,
+      "difficulte": 2,
       "pourquoi": [
         "Trop large : le grand public peut agir pour les canons I et II, mais pas pour le canon IV.",
         "Mauvais canon : les clients sous contrat sont les plaignants légitimes du canon III, pas du IV.",
@@ -2207,7 +2217,7 @@ window.CISSP_DATA.domains[1] = {
       "difficulte": 2,
       "pourquoi": [
         "Hors séquence : l'évaluation de probabilité (likelihood assessment) vient après l'identification des priorités.",
-        "Correcte : la BIA commence par identifier les priorités de l'organisation, en recensant les processus métier et leur criticité.",
+        "Point de départ de la BIA : identifier les priorités de l'organisation en recensant les processus métier et leur criticité.",
         "Hors séquence : les calculs d'ALE relèvent des étapes d'évaluation d'impact, une fois les priorités posées.",
         "Hors phase : la sélection d'un site de repli appartient à la stratégie de continuité, bien après la BIA."
       ]
@@ -2240,7 +2250,7 @@ window.CISSP_DATA.domains[1] = {
       ],
       "reponse": 0,
       "explication": "Le COOP décrit comment l'organisation assurera ses fonctions critiques dès la survenue d'une perturbation et jusqu'à un mois d'opérations soutenues. La restauration technique des sauvegardes relève du DRP, qui complète le COOP sans être remplacé par lui, et la politique de sécurité est un document de gouvernance distinct.",
-      "difficulte": 3,
+      "difficulte": 2,
       "pourquoi": [
         "Correcte : le COOP décrit le maintien des fonctions critiques depuis la perturbation jusqu'à environ un mois d'opérations soutenues.",
         "Hors sujet : la politique de sécurité est un document de gouvernance indépendant du BCP.",
@@ -2384,7 +2394,7 @@ window.CISSP_DATA.domains[1] = {
       ],
       "reponse": 3,
       "explication": "VAST (Visual, Agile, and Simple Threat modeling) a été pensé pour passer à l'échelle dans les organisations agiles et DevOps, en s'intégrant aux outils et aux sprints des équipes. STRIDE est une grille de catégorisation, PASTA une méthodologie en sept étapes centrée sur le risque, et Trike une méthodologie open source fondée sur le risque et l'audit des exigences.",
-      "difficulte": 3,
+      "difficulte": 2,
       "pourquoi": [
         "Mauvais modèle : PASTA est un processus d'analyse en sept étapes centré sur le risque, pas sur l'intégration DevOps.",
         "Mauvais modèle : Trike est centré sur l'évaluation des risques à partir d'exigences, pas sur l'agilité à grande échelle.",
@@ -2402,7 +2412,7 @@ window.CISSP_DATA.domains[1] = {
       ],
       "reponse": 1,
       "explication": "TAXII (Trusted Automated eXchange of Intelligence Information) est le protocole de transport et d'échange du renseignement sur les menaces. STIX est le langage structuré qui décrit ce renseignement (on dit souvent : STIX décrit, TAXII transporte), CAPEC est un dictionnaire de patterns d'attaque, et SAML est un standard de fédération d'identité sans rapport avec la threat intelligence.",
-      "difficulte": 3,
+      "difficulte": 2,
       "pourquoi": [
         "Piège de paire : STIX décrit le contenu du renseignement (le format), il ne le transporte pas.",
         "Correcte : TAXII est le protocole d'échange et de transport du renseignement exprimé en STIX.",
@@ -2420,7 +2430,7 @@ window.CISSP_DATA.domains[1] = {
       ],
       "reponse": 0,
       "explication": "La Physically Unclonable Function exploite les micro-variations physiques de fabrication pour créer une empreinte électronique unique et non reproductible, qui permet d'authentifier individuellement chaque puce et de détecter les contrefaçons. Le silicon root of trust sécurise le démarrage mais n'identifie pas chaque exemplaire de façon unique, le SBOM inventorie des composants logiciels, et le chiffrement de disque protège des données au repos.",
-      "difficulte": 3,
+      "difficulte": 2,
       "pourquoi": [
         "Correcte : la PUF exploite les micro-variations physiques de fabrication pour donner à chaque puce une empreinte unique et inclonable, idéale pour l'authentification matérielle.",
         "Hors sujet : le chiffrement de disque protège les données stockées, il n'authentifie pas la puce elle-même.",
@@ -2514,7 +2524,7 @@ window.CISSP_DATA.domains[1] = {
       "pourquoi": [
         "Sans fondement : aucun délai de 7 jours n'existe dans le dispositif de notification NIS2.",
         "Piège de régime : 60 jours correspond à la notification HIPAA/HITECH américaine.",
-        "Correcte : NIS2 impose l'alerte précoce sous 24 heures, suivie d'une notification détaillée sous 72 heures et d'un rapport final sous un mois.",
+        "Le bon délai : NIS2 impose l'alerte précoce sous 24 heures, suivie d'une notification détaillée sous 72 heures et d'un rapport final sous un mois.",
         "Piège d'étape : 72 heures est le délai de la notification d'incident détaillée sous NIS2 (et celui du GDPR), pas de l'early warning."
       ]
     },
@@ -3022,6 +3032,18 @@ window.CISSP_DATA.domains[1] = {
         "Mauvais destinataire : ISC² instruit les plaintes visant des certifiés au titre de ses canons, pas les pratiques commerciales d'une entreprise."
       ]
     }
+    ,
+    {"q": "Une analyse quantitative estime l'ALE d'une panne majeure à 400 000 € par an. Le contrôle qui l'éliminerait coûte 550 000 € par an ; un contrôle partiel coûtant 120 000 € réduirait l'ALE de 60 %. La direction veut la décision la plus défendable économiquement. Que recommandez-vous ?", "choix": ["Déployer le contrôle complet, car supprimer entièrement le risque protège au mieux l'organisation", "Retenir le contrôle partiel, dont le coût est bien inférieur à la perte évitée", "Accepter le risque tel quel, puisque aucun contrôle n'a un coût strictement nul", "Transférer l'intégralité du risque à un assureur, sans comparer la prime annuelle à l'ALE ni au coût des contrôles disponibles"], "reponse": 1, "explication": "La décision se juge sur la valeur du contrôle : bénéfice = réduction d'ALE − coût. Le contrôle complet coûte 550 000 € pour éviter 400 000 € : valeur négative. Le contrôle partiel réduit l'ALE de 240 000 € (60 % de 400 000) pour 120 000 € : valeur nette de +120 000 €. C'est l'option rationnelle ; l'assurance ou l'acceptation ne sont pas comparées ici sur leur coût.", "pourquoi": ["Un contrôle qui coûte plus cher que le risque qu'il élimine détruit de la valeur — dépenser 550 000 € pour éviter 400 000 € n'est pas défendable.", "Exact : réduire l'ALE de 240 000 € pour 120 000 € dégage une valeur nette positive — c'est l'arbitrage coût-bénéfice attendu d'un manager.", "Ne rien faire ignore qu'un contrôle rentable existe : l'acceptation ne se justifie que si le coût de traitement dépasse le risque.", "Transférer sans regarder la prime peut coûter plus que le risque lui-même ; le transfert n'est pas automatiquement l'option la moins chère."], "difficulte": 3},
+    {"q": "Lors de l'acquisition d'une PME, la due diligence révèle qu'elle a subi une violation de données non divulguée il y a huit mois. La signature est prévue dans deux semaines et la direction tient à l'opération. Quelle est votre priorité de conseil ?", "choix": ["Chiffrer l'exposition et l'intégrer au prix ou aux garanties avant la signature", "Bloquer définitivement l'acquisition, une violation passée rendant la cible trop risquée", "Signer comme prévu et traiter la violation après la clôture pour ne pas retarder l'opération", "Exiger le remplacement de l'équipe dirigeante de la cible et un nouvel audit complet avant toute poursuite de l'opération"], "reponse": 0, "explication": "Le rôle du RSSI est d'éclairer la décision d'affaires par le risque, pas de la prendre. Une violation non divulguée crée un passif (notifications, sanctions, remédiation) qui doit être quantifié et intégré au prix, aux clauses de garantie (representations & warranties) ou à une clause d'earn-out. Bloquer ou signer en aveugle sont deux extrêmes ; remanier la direction n'est pas la question immédiate.", "pourquoi": ["Exact : quantifier le passif et le porter dans le prix ou les garanties est la contribution du RSSI à une décision d'acquisition éclairée.", "Un veto absolu outrepasse le rôle de conseil : le risque se gère et se price, il ne justifie pas mécaniquement d'abandonner une opération stratégique.", "Signer sans avoir chiffré l'exposition fait hériter d'un passif inconnu — l'inverse de la due diligence.", "Changer la direction de la cible ne répond pas à la question immédiate du passif de la violation avant signature."], "difficulte": 3},
+    {"q": "Un fournisseur SaaS critique refuse toute clause d'audit et ne fournit qu'une attestation ancienne. Le migrer coûterait très cher et prendrait un an. La direction accepte de continuer. Quelle est la MEILLEURE façon de traiter ce risque résiduel ?", "choix": ["Documenter une acceptation formelle par le propriétaire, avec contrôles compensatoires et revue datée", "Interrompre immédiatement l'usage du fournisseur jusqu'à l'obtention d'un droit d'audit", "Considérer le risque comme nul puisque la direction a validé la poursuite", "Reporter indéfiniment la décision en espérant que le fournisseur change spontanément sa politique d'audit un jour"], "reponse": 0, "explication": "Quand un risque ne peut être ni éliminé ni transféré à un coût raisonnable, on l'accepte formellement : une acceptation signée par le propriétaire du risque, des contrôles compensatoires (surveillance renforcée, limitation des données confiées, clauses contractuelles alternatives) et une date de réexamen. Couper un service critique est disproportionné ; « validé donc nul » confond acceptation et disparition du risque.", "pourquoi": ["Exact : acceptation formelle par le propriétaire + contrôles compensatoires + revue datée, c'est la façon rigoureuse de porter un risque résiduel assumé.", "Couper un service critique pour une clause d'audit inverse la hiérarchie entre le besoin métier et le risque.", "Une validation de la direction ne fait pas disparaître le risque : elle l'accepte, ce qui doit être tracé et surveillé.", "Attendre un revirement du fournisseur laisse le risque ouvert sans décision — ce n'est pas un traitement."], "difficulte": 3},
+    {"q": "Votre entreprise, présente en Europe et aux États-Unis, reçoit d'une autorité américaine une demande d'accès à des données personnelles hébergées dans l'UE. Le juridique alerte sur un conflit potentiel avec le droit européen. Quelle est la première démarche appropriée ?", "choix": ["Saisir le conseil juridique pour analyser le conflit de lois avant toute transmission", "Transmettre les données sans délai pour se conformer à l'autorité qui a émis la demande", "Refuser toute coopération et détruire les données concernées pour clore la question", "Déléguer la décision à l'équipe technique qui détient l'accès, puisqu'elle peut extraire les données rapidement"], "reponse": 0, "explication": "Un conflit entre une injonction extraterritoriale (type CLOUD Act) et le RGPD (qui encadre strictement les transferts, notamment l'article 48) est d'abord une question juridique : on ne transmet ni ne refuse en aveugle. La voie appropriée passe par l'analyse du conseil et les mécanismes de coopération judiciaire (MLAT). Détruire des données visées peut constituer une entrave, et l'équipe technique n'a pas ce mandat.", "pourquoi": ["Exact : un conflit de lois se tranche avec le conseil juridique et les voies de coopération, pas par une réaction unilatérale.", "Transmettre sans analyse peut violer le RGPD et engager la responsabilité de l'entreprise.", "Détruire des données visées par une demande peut constituer une entrave à la justice — une aggravation, pas une solution.", "L'équipe qui détient l'accès technique n'a ni le mandat ni la compétence pour arbitrer un conflit de lois."], "difficulte": 3},
+    {"q": "Le BIA identifie deux processus : la paie (RTO 72 h, forte visibilité sociale) et la prise de commandes en ligne (RTO 4 h, cœur du chiffre d'affaires). Le budget de continuité ne permet de sécuriser en priorité qu'un seul. Sur quelle base tranchez-vous ?", "choix": ["Prioriser selon l'impact mission et le RTO le plus court : la prise de commandes", "Prioriser la paie, car l'impact social et la pression syndicale sont les plus visibles", "Répartir le budget également entre les deux pour ne léser personne", "Laisser chaque directeur métier défendre son processus en réunion et retenir celui qui se montre le plus insistant"], "reponse": 0, "explication": "La priorisation de continuité découle du BIA : impact sur la mission et RTO. La prise de commandes, avec un RTO de 4 heures et un lien direct au chiffre d'affaires, l'emporte sur la paie (RTO 72 h). La visibilité sociale est un facteur, mais ne renverse pas une analyse d'impact ; répartir également ou suivre le plus insistant ignore les données du BIA.", "pourquoi": ["Exact : impact mission et RTO le plus court commandent la priorité — la logique même du BIA.", "La visibilité sociale compte, mais ne prime pas sur l'impact business et le RTO objectivés par le BIA.", "Diviser également ignore que les deux processus n'ont ni le même RTO ni le même impact.", "Retenir « le plus insistant » substitue le rapport de force à l'analyse d'impact."], "difficulte": 3},
+    {"q": "Après un exercice de phishing simulé, le taux de clic reste élevé malgré deux campagnes de sensibilisation classiques. La direction demande une amélioration mesurable pour le prochain trimestre. Quelle approche est la PLUS susceptible de réduire le risque réel ?", "choix": ["Cibler les populations exposées par des simulations répétées et un accompagnement, et suivre le taux de clic", "Sanctionner financièrement chaque collaborateur qui clique afin de créer un effet dissuasif immédiat", "Rendre la formation annuelle plus longue et la diffuser à toute l'entreprise en une session", "Bloquer techniquement tous les liens externes entrants dans la messagerie, pour toute l'entreprise et sans exception"], "reponse": 0, "explication": "La sensibilisation efficace est continue, ciblée et mesurée : on concentre l'effort sur les populations à risque, on répète les simulations, on accompagne, et on suit un indicateur comportemental (taux de clic) dans le temps. La sanction dégrade la culture de signalement, une session annuelle plus longue est peu efficace, et le blocage total des liens n'est ni réaliste ni suffisant seul.", "pourquoi": ["Exact : ciblage des populations à risque, répétition, accompagnement et suivi d'un indicateur comportemental font baisser le risque réel.", "Sanctionner les cliqueurs tue la remontée d'information et pousse à cacher les incidents — contre-productif.", "Rallonger une session annuelle unique change peu le comportement : la fréquence et le ciblage comptent plus que la durée.", "Bloquer tous les liens externes est irréaliste pour l'activité et ne traite pas le facteur humain."], "difficulte": 3},
+    {"q": "Un projet stratégique doit livrer dans un mois, mais l'analyse de risque révèle une vulnérabilité sérieuse dont la correction retarderait la mise en production de six semaines. Le sponsor exige la livraison à date. Quelle est la posture appropriée du RSSI ?", "choix": ["Présenter le risque chiffré et les options, et faire décider par écrit le propriétaire du risque", "Autoriser la mise en production à date pour ne pas s'opposer au sponsor du projet", "Interdire unilatéralement la mise en production tant que la vulnérabilité n'est pas corrigée", "Corriger discrètement la vulnérabilité après la mise en production, sans en informer le sponsor ni la direction"], "reponse": 0, "explication": "Le RSSI conseille et éclaire ; c'est le propriétaire du risque (le métier) qui décide, sur une base documentée. On présente le risque quantifié et les options — report, mitigation temporaire (contrôle compensatoire), ou acceptation formelle. Céder en silence ou opposer un veto unilatéral sortent tous deux du rôle ; corriger « discrètement » masque une décision qui doit être tracée.", "pourquoi": ["Exact : quantifier, exposer les options et faire décider le propriétaire du risque par écrit est la posture juste du RSSI.", "Approuver pour éviter le conflit fait porter au RSSI une décision qui n'est pas la sienne, sans traçabilité.", "Un veto unilatéral outrepasse le rôle de conseil : la décision d'accepter un risque appartient au métier.", "Corriger en cachette prive la direction d'une décision éclairée et laisse un risque non tracé en production."], "difficulte": 3},
+    {"q": "Une multinationale veut une politique de sécurité unique pour toutes ses filiales, mais celles-ci opèrent sous des réglementations locales différentes et parfois contradictoires. Comment concevez-vous le corpus documentaire ?", "choix": ["Une politique-cadre globale de principes, déclinée en standards et procédures locaux par pays", "Une politique unique identique partout, en ignorant les particularités locales pour garantir l'uniformité", "Une politique différente et indépendante par filiale, sans référentiel commun", "Aucune politique écrite : s'en remettre entièrement au jugement des responsables locaux de chaque filiale"], "reponse": 0, "explication": "La hiérarchie documentaire répond exactement à ce besoin : une politique-cadre énonce les principes durables et communs, tandis que les standards et procédures — plus faciles à adapter — absorbent les exigences locales. Une politique identique partout viole des lois locales ; des politiques totalement indépendantes perdent la cohérence de groupe ; l'absence d'écrit supprime toute gouvernance.", "pourquoi": ["Exact : politique-cadre commune + standards/procédures locaux est la structure qui concilie cohérence de groupe et conformité locale.", "Une politique identique partout entrera en conflit avec des obligations légales propres à certains pays.", "Des politiques indépendantes sans socle commun font perdre la cohérence et la gouvernance de groupe.", "Sans document écrit, il n'y a ni référence ni redevabilité — l'inverse d'une gouvernance."], "difficulte": 3}
+    ,
+    {"q": "Votre tableau de bord de risques utilise des KRI avec des seuils d'alerte. Un KRI (comptes à privilèges dormants) franchit son seuil rouge, mais le propriétaire du risque juge la situation acceptable ce trimestre pour des raisons opérationnelles. Quelle est la bonne conduite ?", "choix": ["Enregistrer une acceptation de risque datée et motivée, et rapprocher la date de la prochaine revue du KRI", "Ignorer le franchissement, puisque le propriétaire du risque a tranché en faveur de l'exploitation", "Abaisser le seuil du KRI pour qu'il ne se déclenche plus et éviter de fausses alertes", "Escalader immédiatement au conseil d'administration tout franchissement de seuil, sans exception ni analyse préalable"], "reponse": 0, "explication": "Un KRI qui vire au rouge n'impose pas une action technique automatique, mais il ne se contourne pas : on trace une acceptation de risque motivée par le propriétaire et on resserre la fréquence de revue. Ignorer l'alerte annule l'intérêt du KRI ; déplacer le seuil pour éteindre l'alarme masque le risque ; escalader tout au conseil sans filtre le noie sous le bruit.", "pourquoi": ["Exact : tracer l'acceptation motivée et rapprocher la revue respecte à la fois la décision du métier et la valeur d'alerte du KRI.", "Ignorer un seuil rouge vide le KRI de son sens : la décision doit être tracée, pas passée sous silence.", "Déplacer le seuil pour éteindre l'alarme masque le risque au lieu de le traiter.", "Escalader tout franchissement au conseil sans analyse noie l'instance sous des alertes non filtrées."], "difficulte": 3},
+    {"q": "Un grand fournisseur vous sous-traite à son tour une partie de la prestation à un tiers de rang 2 que vous n'avez pas évalué. Ce tiers manipulera des données personnelles de vos clients. Quelle exigence portez-vous EN PREMIER dans le contrat avec votre fournisseur direct ?", "choix": ["Une clause de flow-down imposant au sous-traitant les mêmes obligations de sécurité et un droit d'audit en cascade", "L'interdiction absolue et définitive pour le fournisseur de recourir à un quelconque sous-traitant", "Une simple obligation d'information a posteriori en cas d'incident chez le tiers de rang 2", "La confiance dans la certification globale du fournisseur direct, en supposant qu'elle couvre implicitement l'ensemble de sa chaîne de sous-traitance jusqu'au rang 2"], "reponse": 0, "explication": "Le risque de la supply chain se gère par la propagation contractuelle des exigences : une clause de flow-down oblige le fournisseur à imposer à ses propres sous-traitants les mêmes obligations de sécurité et de protection des données, avec un droit d'audit en cascade. Interdire tout sous-traitant est souvent irréaliste ; l'information a posteriori arrive trop tard ; la certification du fournisseur direct ne couvre pas automatiquement un tiers non évalué.", "pourquoi": ["Exact : la clause de flow-down propage les obligations et le droit d'audit jusqu'au rang 2 — le bon levier contractuel.", "Interdire tout recours à la sous-traitance est rarement réaliste et n'est pas la première exigence pertinente.", "Une information a posteriori n'empêche rien : elle constate l'incident au lieu de le prévenir.", "La certification du fournisseur direct ne s'étend pas d'office à un tiers de rang 2 non évalué."], "difficulte": 3}
   ],
   "quizEn": [
     {
@@ -3038,7 +3060,7 @@ window.CISSP_DATA.domains[1] = {
       "pourquoi": [
         "Correcte : modifier des données en transit est une atteinte directe à l'intégrité.",
         "Hors sujet : la disponibilité concerne l'interruption d'accès au service.",
-        "Piège d'association : la confidentialité serait violée par une lecture non autorisée, pas par une modification.",
+        "Confusion de pilier : la confidentialité serait violée par une lecture non autorisée, pas par une modification.",
         "Proche mais distinct : l'authenticité concerne l'origine du message, pas la préservation de son contenu."
       ]
     },
@@ -3075,7 +3097,7 @@ window.CISSP_DATA.domains[1] = {
         "Réponse tentante de technicien-manager : le CISO dirige le programme, mais la responsabilité ultime ne se délègue pas.",
         "Rôle consultatif : le comité de pilotage coordonne et arbitre, il n'assume pas la responsabilité ultime.",
         "Réponse opérationnelle : les custodians appliquent les protections décidées par d'autres.",
-        "Correcte : la direction générale porte l'accountability finale de la sécurité des actifs informationnels."
+        "Accountability finale : la direction générale répond en dernier ressort de la sécurité des actifs informationnels."
       ]
     },
     {
@@ -3129,7 +3151,7 @@ window.CISSP_DATA.domains[1] = {
         "Erreur de combinaison : 25 000 $ ne correspond à aucune application correcte des formules.",
         "Erreur d'ARO : 200 000 $ supposerait deux occurrences par an au lieu d'une tous les deux ans.",
         "Piège de calcul : 100 000 $ est le SLE (400 000 × 25 %), pas la perte annualisée.",
-        "Correcte : ALE = SLE × ARO = 100 000 × 0,5 = 50 000 $."
+        "Résultat exact : ALE = SLE × ARO = 100 000 × 0,5 = 50 000 $."
       ]
     },
     {
@@ -3201,7 +3223,7 @@ window.CISSP_DATA.domains[1] = {
         "Techniquement pertinent mais pas prioritaire : le basculement attend que les personnes soient en sécurité.",
         "Hors délai : l'assureur sera notifié bien après la mise en sécurité.",
         "Réponse de technicien : la restauration des données n'a aucun sens tant que des vies sont en jeu.",
-        "Correcte : la vie humaine prime sur toute autre considération — règle absolue de l'examen comme du terrain."
+        "La vie humaine prime sur toute autre considération — règle absolue de l'examen comme du terrain, et donc la bonne réponse."
       ]
     },
     {
@@ -3308,7 +3330,7 @@ window.CISSP_DATA.domains[1] = {
       "pourquoi": [
         "Piège de régime : 60 jours correspond à HIPAA/HITECH aux États-Unis.",
         "Sans fondement dans le GDPR : aucun délai de 30 jours n'y figure.",
-        "Correcte : l'article 33 du GDPR impose la notification de l'autorité de contrôle dans les 72 heures suivant la découverte.",
+        "C'est le délai du GDPR : l'article 33 impose la notification de l'autorité de contrôle dans les 72 heures suivant la découverte.",
         "Trop court : 24 heures est le délai de l'early warning NIS2, pas celui du GDPR."
       ]
     },
@@ -3540,7 +3562,7 @@ window.CISSP_DATA.domains[1] = {
       "explication": "Un message frauduleux personnalisé ciblant un dirigeant (ici le CFO) est du whaling, la variante du spear phishing réservée aux « gros poissons », typique de la fraude BEC (Business Email Compromise). Le vishing passe par le téléphone, le pharming redirige les victimes vers de faux sites en manipulant la résolution DNS, et le tailgating est une intrusion physique en suivant un employé.",
       "difficulte": 1,
       "pourquoi": [
-        "Correcte : un e-mail ciblant un dirigeant (CFO) en usurpant le CEO pour obtenir un virement est du whaling — le spear phishing des hautes cibles.",
+        "Cible « gros poisson » : un e-mail visant un dirigeant (CFO) en usurpant le CEO pour obtenir un virement est du whaling — le spear phishing des hautes cibles.",
         "Mauvais canal : le vishing passe par la voix (téléphone).",
         "Hors sujet : le tailgating est une intrusion physique derrière un porteur de badge.",
         "Mauvais mécanisme : le pharming détourne la résolution DNS vers de faux sites."
@@ -3601,21 +3623,21 @@ window.CISSP_DATA.domains[1] = {
       ]
     },
     {
-      "q": "An organization plans to embed a third-party large language model into a customer-facing application. Which action should the CISO take FIRST?",
+      "q": "An organization's AI governance board has ALREADY approved a use case and set its risk appetite: a third-party large language model will be embedded in a public support chatbot that can query live customer account data. Go-live is next week. Which action should the CISO ensure is completed FIRST?",
       "choix": [
-        "Require the vendor to provide a complete inventory of the model's training data sources",
-        "Bring the initiative under the existing enterprise governance framework",
-        "Conduct adversarial testing of the model against prompt injection and jailbreak techniques",
-        "Develop an incident response playbook for AI-specific failure scenarios"
+        "Re-open the already-concluded governance review to reconfirm the risk appetite for this approved use case",
+        "Validate the input/output guardrails against prompt injection and data leakage before go-live",
+        "Publish an acceptable-use policy governing employees who experiment with public generative-AI chatbots",
+        "Add AI-specific scenarios to next quarter's security-awareness refresh for all staff"
       ],
       "reponse": 1,
-      "explication": "Le réflexe managérial face à une technologie émergente est de la rattacher d'abord à la gouvernance existante : qui décide, quel appétit pour le risque, quels cas d'usage autorisés. Les tests adversariaux, l'examen des données d'entraînement du fournisseur et le playbook de réponse à incident sont tous nécessaires, mais ce sont des livrables qui découlent du cadre de gouvernance, pas des points de départ.",
+      "explication": "Attention à l'automatisme « gouvernance d'abord » : ici la gouvernance a déjà tranché — cas d'usage autorisé, appétit pour le risque fixé. Le problème n'est donc plus une question de cadre mais de mise en production. Avant d'ouvrir à des clients un modèle branché sur des données de comptes en direct, la mesure prioritaire est de valider les garde-fous d'entrée et de sortie : sans filtrage de la prompt injection et sans contrôle des sorties, le modèle peut être manipulé pour divulguer les données d'autres clients. C'est le dernier verrou technique qui conditionne le go-live. Rouvrir une revue déjà conclue ne réduit aucun risque, la politique d'usage employé vise un autre périmètre, et la sensibilisation ne garde pas l'accès au modèle.",
       "difficulte": 3,
       "pourquoi": [
-        "Vraie mais prématurée : l'examen des sources d'entraînement est un point de due diligence fournisseur qui s'inscrit dans le cadre défini par la gouvernance.",
-        "Correcte : la gouvernance vient d'abord — appétit pour le risque, classification des cas d'usage, rôles d'approbation — avant toute mesure technique.",
-        "Techniquement nécessaire mais hors phase : les tests adversariaux s'exécutent une fois le cas d'usage autorisé et encadré.",
-        "Vraie mais en aval : le playbook de réponse à incident se construit après que le déploiement a été autorisé et cadré."
+        "Revue déjà close : l'appétit pour le risque a été arrêté par la gouvernance ; rouvrir le débat retarde le projet sans traiter le risque technique qui reste ouvert.",
+        "Le vrai verrou avant go-live : un modèle exposé au public et connecté à des données de comptes en direct doit d'abord prouver que ses garde-fous entrée/sortie bloquent l'injection de prompt et l'exfiltration de données.",
+        "Autre périmètre : encadrer l'usage d'outils d'IA publics par les employés ne protège en rien le chatbot client sur le point d'être déployé.",
+        "Hors du chemin critique : la sensibilisation nourrit la culture mais ne remplace pas le contrôle technique qui filtre les échanges avec le modèle."
       ]
     },
     {

@@ -443,11 +443,12 @@ window.CISSP_DATA.domains[2] = {
           "titre": "Protéger chaque état",
           "points": [
             "At rest : chiffrer volumes, sauvegardes, et tous les supports (USB, SAN, NAS...)",
+            "Pourquoi : un contrôle d'accès ne garde que le chemin logique ; un disque volé le contourne, mais sans la clé il reste illisible",
             "In transit : chiffrer partout, TLS et IPsec, même en interne",
             "In use : moins d'options — patching, builds standardisés, antimalware",
             "Les applications doivent purger les buffers mémoire après usage"
           ],
-          "narration": "Pour la donnée au repos, la réponse est le chiffrement : volumes système, volumes de données, sauvegardes, sans oublier tous les supports comme les bandes, clés USB, disques externes, baies RAID, SAN et NAS. Pour la donnée en transit, chiffrez partout : certificats TLS sur les serveurs web, IPsec pour les sessions, y compris pour les applications internes. La donnée en cours d'utilisation est la plus difficile à protéger, car les options sont limitées : maintenir les systèmes à jour, utiliser des builds standardisés, exécuter des antimalwares, et s'assurer que les applications purgent les buffers mémoire dès que la donnée n'est plus nécessaire.",
+          "narration": "Pour la donnée au repos, la réponse est le chiffrement : volumes système, volumes de données, sauvegardes, sans oublier tous les supports comme les bandes, clés USB, disques externes, baies RAID, SAN et NAS. Comprenons pourquoi le chiffrement l'emporte ici sur un simple contrôle d'accès. Un contrôle d'accès, comme des droits de fichiers ou un mot de passe, ne garde que le chemin logique : il suppose que l'on passe par le système d'exploitation qui pose les questions. Mais un voleur qui emporte le disque contourne entièrement ce chemin, branche le support ailleurs et lit les plateaux directement. Le chiffrement, lui, protège la donnée elle-même : sans la clé, le contenu du disque n'est qu'une suite de bruit, quel que soit le système par lequel on l'ouvre. Pour la donnée en transit, chiffrez partout : certificats TLS sur les serveurs web, IPsec pour les sessions, y compris pour les applications internes. La donnée en cours d'utilisation est la plus difficile à protéger, car les options sont limitées : maintenir les systèmes à jour, utiliser des builds standardisés, exécuter des antimalwares, et s'assurer que les applications purgent les buffers mémoire dès que la donnée n'est plus nécessaire.",
           "astuce": "💡 Conseil examen : le chiffrement fort est la MEILLEURE protection de la confidentialité pour les données at rest et in transit."
         },
         {
@@ -565,11 +566,12 @@ window.CISSP_DATA.domains[2] = {
           "titre": "Degaussing et destruction physique",
           "points": [
             "Degaussing : champ magnétique puissant, efface bandes et disques magnétiques",
+            "Pourquoi : un disque magnétique code le bit par l'orientation d'une région ; un SSD par une charge piégée qu'un aimant ne déplace pas",
             "Sans effet sur les SSD et les supports optiques",
             "Destruction physique : broyage, incinération, pulvérisation, désintégration",
             "Méthode privilégiée pour les SSD et composants électroniques"
           ],
-          "narration": "Le degaussing, ou démagnétisation, applique un champ magnétique puissant pour effacer les supports magnétiques : bandes et disques durs classiques. Attention, piège d'examen : le degaussing n'a aucun effet sur les supports optiques ni sur les SSD, qui ne stockent pas l'information magnétiquement. Pour les SSD et composants électroniques, on privilégie la destruction physique : broyage, incinération, pulvérisation ou désintégration, éventuellement combinée à d'autres méthodes. Quand la donnée doit absolument disparaître, la destruction physique reste la valeur sûre.",
+          "narration": "Le degaussing, ou démagnétisation, applique un champ magnétique puissant pour effacer les supports magnétiques : bandes et disques durs classiques. Voyons pourquoi cela marche : un disque dur enregistre chaque bit sous la forme de l'orientation magnétique d'une minuscule région de sa surface, et un champ intense réaligne d'un coup toutes ces régions, effaçant l'information. Mais attention, piège d'examen : le degaussing n'a aucun effet sur les SSD ni sur les supports optiques. Un SSD ne stocke rien magnétiquement : chaque bit y est une charge électrique piégée dans une cellule de mémoire flash, et un champ magnétique ne déplace pas cette charge, si bien que les données survivent intactes. C'est pour cette raison que, sur un SSD ou un composant électronique, on privilégie la destruction physique : broyage, incinération, pulvérisation ou désintégration. Quand la donnée doit absolument disparaître, la destruction physique reste la valeur sûre.",
           "astuce": "💡 Conseil examen : degaussing + SSD = mauvaise réponse. Pour un SSD, pensez destruction physique ou crypto-shredding."
         },
         {
@@ -577,11 +579,12 @@ window.CISSP_DATA.domains[2] = {
           "titre": "Crypto-shredding et destruction défendable",
           "points": [
             "Cryptographic erasure : chiffrer fort, puis détruire la clé",
+            "Pourquoi : sans la clé, le chiffré est un bruit inintelligible ; détruire une clé minuscule neutralise toutes les copies d'un coup",
             "Meilleure méthode contre la rémanence dans le cloud",
             "Defensible destruction : contrôlée, légalement défendable, conforme",
             "File carving : technique forensique qui récupère les fichiers non détruits"
           ],
-          "narration": "Le crypto-shredding, ou cryptographic erasure, consiste à chiffrer les données avec un chiffrement fort, puis à détruire la clé de chiffrement : sans la clé, les données deviennent logiquement irrécupérables. C'est la meilleure méthode pour traiter la rémanence dans le cloud, où vous ne contrôlez pas physiquement les disques. Pensez aussi à la destruction défendable : éliminer les données de manière contrôlée, légalement défendable et conforme aux réglementations. Et souvenez-vous que si la destruction est bâclée, des techniques forensiques comme le file carving peuvent reconstruire des fichiers à partir des données brutes du support, même sans index du système de fichiers."
+          "narration": "Le crypto-shredding, ou cryptographic erasure, consiste à chiffrer les données avec un chiffrement fort, puis à détruire la clé de chiffrement. Pourquoi est-ce si efficace ? Un chiffrement fort transforme la donnée en une suite indiscernable d'un bruit aléatoire, et la seule chose au monde capable de l'inverser est la clé. Détruire une clé de quelques dizaines d'octets est instantané et certain, là où réécrire des téraoctets prend des heures sans garantie. Surtout, effacer la clé neutralise d'un seul geste toutes les copies à la fois, y compris les sauvegardes et les réplicas que vous ne pouvez même pas atteindre. Voilà pourquoi le crypto-shredding est la meilleure réponse à la rémanence dans le cloud, où vous ne contrôlez pas physiquement les disques. Pensez aussi à la destruction défendable : éliminer les données de manière contrôlée, légalement défendable et conforme aux réglementations. Et souvenez-vous que si la destruction est bâclée, des techniques forensiques comme le file carving peuvent reconstruire des fichiers à partir des données brutes du support, même sans index du système de fichiers."
         },
         {
           "type": "question",
@@ -795,8 +798,8 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 1,
       "pourquoi": [
         "Piège du transfert : l'assurance couvre le risque financier résiduel, elle ne protège aucune donnée et se souscrit après l'analyse.",
-        "Bonne réponse : on ne protège que ce que l'on connaît — l'identification et la classification précèdent tout choix de contrôle.",
-        "Réponse de technicien : déployer un DLP sans savoir quelles données protéger revient à configurer un outil à l'aveugle.",
+        "On ne protège que ce que l'on connaît — l'identification et la classification précèdent tout choix de contrôle.",
+        "Déployer un DLP sans savoir quelles données protéger revient à configurer un outil à l'aveugle.",
         "Techniquement vrai mais hors phase : le chiffrement se dimensionne APRÈS la classification, et tout chiffrer sans discernement gaspille les ressources."
       ]
     },
@@ -812,10 +815,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le data owner — typiquement un cadre dirigeant ou chef de département — est la personne la plus familière avec l'importance de la donnée pour le métier ; c'est lui qui classifie et autorise l'accès. Le custodian exécute des tâches déléguées, l'administrateur applique les contrôles, et l'utilisateur consomme la donnée : aucun d'eux ne porte l'accountability de la classification.",
       "difficulte": 1,
       "pourquoi": [
-        "Bonne réponse : le data owner connaît la valeur de la donnée pour le métier et porte l'accountability — c'est lui qui classifie.",
+        "Le data owner connaît la valeur de la donnée pour le métier et porte l'accountability — c'est lui qui classifie.",
         "Piège du rôle d'exécution : le custodian applique des protections déléguées, il ne détermine pas la valeur métier de la donnée.",
-        "Trop étroit : l'utilisateur manipule la donnée au quotidien mais n'a ni la vision d'ensemble ni l'autorité pour la classifier.",
-        "Réponse de technicien : l'administrateur configure les contrôles mais n'a pas la vision métier nécessaire pour classifier."
+        "L'utilisateur manipule la donnée au quotidien mais n'a ni la vision d'ensemble ni l'autorité pour la classifier.",
+        "L'administrateur configure les contrôles ; il applique la classification décidée par le owner, il ne la détermine pas."
       ]
     },
     {
@@ -830,10 +833,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le data controller décide quelles données traiter, pourquoi et comment : c'est l'entreprise. Le data processor traite les données pour le compte et sous la direction du controller : c'est le tiers mandaté. Owner/custodian et steward sont des rôles internes de gouvernance, pas les rôles GDPR demandés ici.",
       "difficulte": 1,
       "pourquoi": [
-        "Hors périmètre : le steward gère la qualité métier des données, ce n'est pas un rôle GDPR.",
+        "En réalité, le steward gère la qualité métier des données, ce n'est pas un rôle GDPR.",
         "Inversion des rôles : c'est l'entreprise qui décide des finalités du traitement (controller), pas le tiers mandaté.",
-        "Hors périmètre : owner et custodian sont des rôles de gouvernance interne, pas les rôles définis par le GDPR.",
-        "Bonne réponse : celui qui décide quelles données traiter et pourquoi est le controller ; celui qui traite pour son compte est le processor."
+        "Owner et custodian sont des rôles de gouvernance interne, pas les rôles définis par le GDPR.",
+        "Voilà le bon choix. Celui qui décide quelles données traiter et pourquoi est le controller ; celui qui traite pour son compte est le processor."
       ]
     },
     {
@@ -850,8 +853,8 @@ window.CISSP_DATA.domains[2] = {
       "pourquoi": [
         "Piège du contrôle détectif : la journalisation constate l'accès après coup, elle n'empêche rien.",
         "Techniquement vrai mais insuffisant : le RBAC protège le chemin d'accès logique, pas le support physique volé ou copié.",
-        "Bonne réponse : le chiffrement fort rend la donnée illisible même si le support est volé ou les contrôles d'accès contournés.",
-        "Trop étroit : les mots de passe protègent l'authentification, pas la donnée elle-même sur le support."
+        "Le chiffrement fort rend la donnée illisible même si le support est volé ou les contrôles d'accès contournés.",
+        "Les mots de passe protègent l'authentification, pas la donnée elle-même sur le support."
       ]
     },
     {
@@ -866,9 +869,9 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le data custodian reçoit par délégation les responsabilités quotidiennes de stockage et de protection : sauvegardes, archivage, restauration, prévention de la perte. Le steward porte la qualité métier, le controller décide du traitement (contexte GDPR) et le processor traite pour le compte d'un controller.",
       "difficulte": 1,
       "pourquoi": [
-        "Hors périmètre : le controller est un rôle GDPR qui décide des finalités du traitement, pas un rôle de sauvegarde interne.",
-        "Bonne réponse : le custodian reçoit par délégation les tâches opérationnelles de protection — sauvegardes, restauration, stockage.",
-        "Hors périmètre : le processor traite des données pour le compte d'un controller au sens GDPR, ce n'est pas une délégation interne.",
+        "Ici, le controller est un rôle GDPR qui décide des finalités du traitement, pas un rôle de sauvegarde interne.",
+        "C’est l’option correcte. Le custodian reçoit par délégation les tâches opérationnelles de protection — sauvegardes, restauration, stockage.",
+        "Le processor traite des données pour le compte d'un controller au sens GDPR, ce n'est pas une délégation interne.",
         "Piège métier/technique : le steward porte la qualité et la gouvernance métier, pas les tâches techniques quotidiennes."
       ]
     },
@@ -884,9 +887,9 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le labeling associe des attributs de sécurité lisibles par le système (métadonnées, codes-barres, RFID), permettant une application automatique des politiques. Le marking est la forme lisible par l'humain (tampon, bandeau), qui permet une application par les processus. Le marking s'applique aussi bien au physique qu'à l'électronique.",
       "difficulte": 2,
       "pourquoi": [
-        "Trop étroit : le marking s'applique aussi bien aux supports électroniques qu'au papier.",
+        "En réalité, le marking s'applique aussi bien aux supports électroniques qu'au papier.",
         "Inversion classique : c'est exactement le contraire — le piège joue sur la confusion entre les deux termes.",
-        "Bonne réponse : le labeling est lisible par le système (métadonnées, RFID) pour l'application automatique des politiques ; le marking est lisible par l'humain.",
+        "Le labeling est lisible par le système (métadonnées, RFID) pour l'application automatique des politiques ; le marking est lisible par l'humain.",
         "Piège de la simplification : les deux notions se distinguent par leur destinataire — système ou humain — elles ne sont pas synonymes."
       ]
     },
@@ -904,8 +907,8 @@ window.CISSP_DATA.domains[2] = {
       "pourquoi": [
         "Absolu et contraire au moindre privilège : élever toute une population pour un besoin individuel est exactement ce qu'il faut éviter.",
         "Piège administratif : une décharge ne remplace pas l'autorisation formelle et ne vérifie pas le besoin d'en connaître.",
-        "Réponse de technicien : le DLP est un contrôle de surveillance, il n'autorise rien et vient après la décision d'accès.",
-        "Bonne réponse : tout accès passe par l'approbation formelle du data owner fondée sur le need-to-know — le processus avant l'outil."
+        "Le DLP est un contrôle de surveillance, il n'autorise rien et vient après la décision d'accès.",
+        "À retenir. Tout accès passe par l'approbation formelle du data owner fondée sur le need-to-know — le processus avant l'outil."
       ]
     },
     {
@@ -920,10 +923,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "La gestion des actifs — tangibles et intangibles — commence par l'inventaire et vise avant tout à prévenir les pertes, en suivant les actifs et en les protégeant tout au long de leur vie. Les bénéfices financiers ou d'audit sont secondaires par rapport à cet objectif de protection.",
       "difficulte": 1,
       "pourquoi": [
-        "Bonne réponse : inventorier, suivre et protéger les actifs pour prévenir les pertes est la finalité première de l'asset management.",
-        "Trop étroit : la satisfaction des auditeurs est une conséquence heureuse, pas l'objectif principal.",
+        "Inventorier, suivre et protéger les actifs pour prévenir les pertes est la finalité première de l'asset management.",
+        "La satisfaction des auditeurs est une conséquence heureuse, pas l'objectif principal.",
         "Techniquement vrai mais accessoire : l'optimisation des coûts est un bénéfice secondaire, pas l'objectif de sécurité.",
-        "Hors sujet : la vitesse de déploiement est un objectif d'exploitation, pas de gestion des actifs."
+        "La vitesse de déploiement est un objectif d'exploitation, pas de gestion des actifs."
       ]
     },
     {
@@ -941,7 +944,7 @@ window.CISSP_DATA.domains[2] = {
         "Techniquement vrai mais partiel : la pseudonymisation reste réversible et suppose que la donnée existe déjà.",
         "Techniquement vrai mais second : le chiffrement protège une donnée déjà collectée, donc déjà exposée à un risque.",
         "Contresens : la réplication protège la disponibilité mais multiplie les copies, donc la surface d'exposition.",
-        "Bonne réponse : une donnée jamais collectée ne peut ni fuiter ni être volée — la minimisation de la collecte est la défense la plus simple et la plus efficace."
+        "Le raisonnement tient. Une donnée jamais collectée ne peut ni fuiter ni être volée — la minimisation de la collecte est la défense la plus simple et la plus efficace."
       ]
     },
     {
@@ -956,9 +959,9 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Conserver des données plus longtemps que nécessaire accroît la responsabilité juridique (tout e-mail conservé est produisible en justice) et la surface d'exposition en cas de compromission. C'est pourquoi la tendance est aux politiques de rétention courtes pour les e-mails. Le coût et la performance sont des considérations réelles mais secondaires face au risque juridique.",
       "difficulte": 2,
       "pourquoi": [
-        "Réponse de technicien : la lenteur des sauvegardes est un détail opérationnel face à la responsabilité juridique.",
-        "Bonne réponse : tout e-mail conservé est produisible en justice (eDiscovery) et élargit la surface d'exposition — le risque juridique prime.",
-        "Trop étroit : la difficulté de recherche est un problème d'exploitation, pas un risque majeur.",
+        "En réalité, la lenteur des sauvegardes est un détail opérationnel face à la responsabilité juridique.",
+        "Tout e-mail conservé est produisible en justice (eDiscovery) et élargit la surface d'exposition — le risque juridique prime.",
+        "Ici, la difficulté de recherche est un problème d'exploitation, pas un risque majeur.",
         "Vrai mais secondaire pour un manager : le coût de stockage est une conséquence opérationnelle, pas le risque principal."
       ]
     },
@@ -976,8 +979,8 @@ window.CISSP_DATA.domains[2] = {
       "pourquoi": [
         "Piège de la décentralisation : sans cadre commun, la rétention devient incohérente et juridiquement indéfendable.",
         "Absolu inverse : supprimer tout après un an violerait les obligations légales de conservation plus longues.",
-        "Bonne réponse : la rétention est bornée dans les deux sens — pas moins que l'exigence légale ou métier, pas plus que nécessaire.",
-        "Absolu : une durée uniforme de dix ans ignore la diversité des exigences légales et métier."
+        "La rétention est bornée dans les deux sens — pas moins que l'exigence légale ou métier, pas plus que nécessaire.",
+        "Une durée uniforme de dix ans ignore la diversité des exigences légales et métier."
       ]
     },
     {
@@ -992,7 +995,7 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Certains systèmes d'exploitation remplissent le slack space (espace inutilisé des clusters) avec des données provenant de la mémoire : des fragments de données classifiées peuvent donc persister sur le disque à l'insu de l'utilisateur. C'est un problème de rémanence — ni le NDA, ni la fréquence d'audit, ni même le chiffrement du système ne traitent ces résidus issus de la mémoire.",
       "difficulte": 3,
       "pourquoi": [
-        "Bonne réponse : l'OS peut écrire des données de la mémoire dans le slack space, créant une rémanence invisible de données classifiées sur un système non habilité.",
+        "L'OS peut écrire des données de la mémoire dans le slack space, créant une rémanence invisible de données classifiées sur un système non habilité.",
         "Techniquement vrai mais à côté : même chiffré, le système peut laisser des résidus en clair issus de la mémoire — le chiffrement ne traite pas ce risque.",
         "Plausible mais hors sujet : le NDA est un contrôle administratif, il n'explique pas l'interdiction technique de mélanger les niveaux.",
         "Piège de la conformité : la fréquence d'audit ne change rien au fond du problème, qui est la rémanence des données."
@@ -1010,8 +1013,8 @@ window.CISSP_DATA.domains[2] = {
       "explication": "La data remanence est la donnée résiduelle qui subsiste après un effacement — flux magnétique résiduel ou fragments dans le slack space. Le slack space est un lieu où la rémanence se cache (pas le phénomène lui-même), le file carving est la technique forensique qui exploite cette rémanence, et le masking est une technique d'anonymisation.",
       "difficulte": 1,
       "pourquoi": [
-        "Bonne réponse : la data remanence désigne précisément les données résiduelles qui subsistent après un effacement supposé.",
-        "Hors sujet : le masking est une technique d'obscurcissement de données, sans rapport avec l'effacement.",
+        "Voilà le bon choix. La data remanence désigne précisément les données résiduelles qui subsistent après un effacement supposé.",
+        "En réalité, le masking est une technique d'obscurcissement de données, sans rapport avec l'effacement.",
         "Piège de la technique : le file carving est la méthode forensique qui exploite la rémanence, pas la rémanence elle-même.",
         "Piège du lieu et du phénomène : le slack space est un endroit où la rémanence se loge, pas le phénomène lui-même."
       ]
@@ -1029,7 +1032,7 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 2,
       "pourquoi": [
         "Piège du faux effacement : le reformatage ne détruit que les index, la rémanence reste totale.",
-        "Bonne réponse : pour du Top Secret, seule la destruction physique offre l'assurance requise contre toute récupération.",
+        "Pour du Top Secret, seule la destruction physique offre l'assurance requise contre toute récupération.",
         "Trop faible : le clearing résiste aux outils logiciels standards mais pas aux techniques de laboratoire — inacceptable pour du Top Secret.",
         "Techniquement vrai mais insuffisant : même le purging n'est pas jugé assez sûr pour la classification la plus élevée."
       ]
@@ -1048,7 +1051,7 @@ window.CISSP_DATA.domains[2] = {
       "pourquoi": [
         "Efficace : le broyage est une forme de destruction physique valable pour les SSD.",
         "Efficace : la destruction physique fonctionne sur tout support, y compris les SSD.",
-        "Bonne réponse : le degaussing agit sur le magnétisme et n'a aucun effet sur la mémoire flash d'un SSD.",
+        "C’est l’option correcte. Le degaussing agit sur le magnétisme et n'a aucun effet sur la mémoire flash d'un SSD.",
         "Efficace : le crypto-shredding rend les données logiquement irrécupérables quel que soit le support."
       ]
     },
@@ -1067,7 +1070,7 @@ window.CISSP_DATA.domains[2] = {
         "Piège du mot « shredding » : il ne s'agit pas de broyage physique mais de destruction logique par la clé.",
         "Invention plausible : fragmenter un fichier ne détruit rien tant que les fragments et la clé existent.",
         "Confusion avec le clearing : la réécriture par motifs est une autre méthode d'assainissement, pas le crypto-shredding.",
-        "Bonne réponse : chiffrer puis détruire la clé rend les données logiquement irrécupérables — idéal quand on ne contrôle pas les supports physiques."
+        "Chiffrer puis détruire la clé rend les données logiquement irrécupérables — idéal quand on ne contrôle pas les supports physiques."
       ]
     },
     {
@@ -1085,7 +1088,7 @@ window.CISSP_DATA.domains[2] = {
         "Contresens : le crypto-shredding rend les données irrécupérables — l'inverse de l'objectif.",
         "Contresens : le clearing efface par réécriture, il ne récupère rien.",
         "Contresens : le degaussing détruit les données au lieu de les récupérer.",
-        "Bonne réponse : le file carving reconstruit les fichiers à partir des données brutes, sans dépendre de l'index corrompu du système de fichiers."
+        "À retenir. Le file carving reconstruit les fichiers à partir des données brutes, sans dépendre de l'index corrompu du système de fichiers."
       ]
     },
     {
@@ -1101,7 +1104,7 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 2,
       "pourquoi": [
         "Hors sujet sécurité : le prix des licences ne traite pas le risque des vulnérabilités non corrigées.",
-        "Bonne réponse : la posture managériale est proactive — planifier la migration avant l'échéance, tant que le support existe encore.",
+        "La posture managériale est proactive — planifier la migration avant l'échéance, tant que le support existe encore.",
         "Techniquement vrai mais pas une stratégie : l'isolation est une mesure compensatoire temporaire, pas une réponse durable.",
         "Piège réactif : attendre une vulnérabilité laisse une fenêtre d'exposition qui ne se refermera jamais après l'EOS."
       ]
@@ -1119,8 +1122,8 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 2,
       "pourquoi": [
         "Piège comptable : la durée d'amortissement financier n'a aucun lien avec l'exploitabilité future des archives.",
-        "Trop étroit : renégocier la maintenance est un moyen ponctuel, pas la raison de fond d'inclure matériel et personnel dans la rétention.",
-        "Bonne réponse : des données conservées sont inutiles sans matériel capable de les lire ni personnel sachant les restaurer — la rétention couvre les trois.",
+        "Renégocier la maintenance est un moyen ponctuel, pas la raison de fond d'inclure matériel et personnel dans la rétention.",
+        "Le raisonnement tient. Des données conservées sont inutiles sans matériel capable de les lire ni personnel sachant les restaurer — la rétention couvre les trois.",
         "Absolu inventé : aucune règle n'exige les administrateurs d'origine ; il faut des compétences maintenues, pas des personnes précises."
       ]
     },
@@ -1136,10 +1139,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le DLP endpoint-based s'exécute sur les postes : il scanne les fichiers stockés et peut bloquer l'impression ou la copie vers un support amovible. Le DLP réseau ne voit que le trafic sortant du réseau, le CASB gouverne l'accès au cloud, et le DRM protège les contenus soumis au droit d'auteur.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : seul le DLP endpoint, exécuté sur le poste, peut intercepter la copie locale vers un support amovible.",
+        "Seul le DLP endpoint, exécuté sur le poste, peut intercepter la copie locale vers un support amovible.",
         "Techniquement vrai ailleurs : le DLP réseau inspecte le trafic en bordure, il ne voit jamais le port USB d'un poste.",
-        "Hors périmètre : le DRM protège des contenus soumis au droit d'auteur, il ne bloque pas la copie USB de documents internes.",
-        "Hors périmètre : le CASB gouverne l'accès aux services cloud, pas les périphériques locaux."
+        "Dans ce cas, le DRM protège des contenus soumis au droit d'auteur, il ne bloque pas la copie USB de documents internes.",
+        "Le CASB gouverne l'accès aux services cloud, pas les périphériques locaux."
       ]
     },
     {
@@ -1154,10 +1157,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Scanner les données sur le fil et bloquer une transmission selon un motif (pattern) est la fonction typique d'un DLP réseau, placé en bordure du réseau pour inspecter le trafic sortant. Le DRM protège le copyright, le CASB gouverne l'accès aux ressources cloud, et un WAF protège les applications web entrantes.",
       "difficulte": 2,
       "pourquoi": [
-        "Hors périmètre : le DRM protège des œuvres, il n'inspecte pas le trafic sortant.",
+        "À noter, le DRM protège des œuvres, il n'inspecte pas le trafic sortant.",
         "Contresens de direction : un WAF protège les applications web contre le trafic entrant, il ne filtre pas l'exfiltration sortante.",
         "Plausible mais inexact : le CASB gouverne l'accès au cloud, il ne scanne pas des motifs de données dans tout le trafic sortant.",
-        "Bonne réponse : bloquer une transmission selon un motif (pattern) sur le fil est la fonction typique du DLP réseau sur la donnée en transit."
+        "Bloquer une transmission selon un motif (pattern) sur le fil est la fonction typique du DLP réseau sur la donnée en transit."
       ]
     },
     {
@@ -1172,7 +1175,7 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Les quatre piliers du Cloud Access Security Broker sont la visibilité, la sécurité des données, la détection des menaces et la conformité. La deuxième proposition est une typologie de contrôles de sécurité, la troisième la triade CIA étendue, la quatrième le processus IAAA — tous vrais ailleurs, mais pas les piliers du CASB.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : visibilité, sécurité des données, détection des menaces et conformité sont les quatre piliers du CASB.",
+        "Visibilité, sécurité des données, détection des menaces et conformité sont les quatre piliers du CASB.",
         "Piège du déjà-vu : c'est une typologie de contrôles de sécurité, pas les piliers du CASB.",
         "Piège du déjà-vu : c'est la triade CIA étendue — vraie ailleurs, mais pas les piliers du CASB.",
         "Piège du déjà-vu : IAAA décrit le processus de contrôle d'accès, pas le CASB."
@@ -1191,7 +1194,7 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 2,
       "pourquoi": [
         "Techniquement vrai mais réversible : la table de correspondance permet toujours la ré-identification.",
-        "Bonne réponse : seule l'anonymisation bien réalisée est permanente et irréversible — aucune identité ne pourra jamais être reconstituée.",
+        "Voilà le bon choix. Seule l'anonymisation bien réalisée est permanente et irréversible — aucune identité ne pourra jamais être reconstituée.",
         "Techniquement vrai mais réversible : le vault de tokenisation conserve la correspondance avec les identités.",
         "Techniquement vrai mais réversible : quiconque détient la clé peut déchiffrer et reconstituer les identités."
       ]
@@ -1210,7 +1213,7 @@ window.CISSP_DATA.domains[2] = {
       "pourquoi": [
         "Faux : si le POS détenait le numéro chiffré et la clé, sa compromission exposerait les cartes.",
         "Piège de la réversibilité locale : une pseudonymisation réversible sur le terminal exposerait la table en cas de compromission.",
-        "Bonne réponse : le POS ne manipule qu'un jeton sans valeur intrinsèque ; la correspondance n'existe que dans le vault sécurisé.",
+        "Le POS ne manipule qu'un jeton sans valeur intrinsèque ; la correspondance n'existe que dans le vault sécurisé.",
         "Plausible mais impraticable : un hash irréversible empêcherait de retrouver la carte pour traiter le paiement."
       ]
     },
@@ -1227,9 +1230,9 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 1,
       "pourquoi": [
         "Contresens : la baseline est un plancher, pas un plafond de sécurité.",
-        "Hors sujet : un rapport d'audit constate un état, il ne définit pas un niveau minimal autorisé.",
-        "Bonne réponse : la baseline est le niveau minimal documenté de configuration de sécurité, point de départ du tailoring.",
-        "Absolu : une baseline sélectionne des contrôles pertinents, elle n'est jamais exhaustive."
+        "Un rapport d'audit constate un état, il ne définit pas un niveau minimal autorisé.",
+        "C’est l’option correcte. La baseline est le niveau minimal documenté de configuration de sécurité, point de départ du tailoring.",
+        "Formulation trop tranchée, une baseline sélectionne des contrôles pertinents, elle n'est jamais exhaustive."
       ]
     },
     {
@@ -1244,10 +1247,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le scoping se limite à retirer de la baseline les contrôles inapplicables. Le tailoring englobe le scoping mais ajoute l'identification des contrôles communs, la spécification des paramètres définis par l'organisation, l'assignation de valeurs aux contrôles et la sélection de contrôles compensatoires — c'est l'ajustement complet à la mission.",
       "difficulte": 3,
       "pourquoi": [
-        "Hors phase : le choix de la baseline précède le tailoring, il n'en fait pas partie.",
-        "Hors sujet : l'inventaire relève de la gestion des actifs, pas du tailoring.",
+        "Le choix de la baseline précède le tailoring, il n'en fait pas partie.",
+        "Ici, l'inventaire relève de la gestion des actifs, pas du tailoring.",
         "Piège de la confusion : retirer les contrôles sans objet, c'est précisément le scoping, pas ce qui va au-delà.",
-        "Bonne réponse : le tailoring ajoute au scoping la sélection de contrôles compensatoires et la fixation des paramètres définis par l'organisation."
+        "Le tailoring ajoute au scoping la sélection de contrôles compensatoires et la fixation des paramètres définis par l'organisation."
       ]
     },
     {
@@ -1263,7 +1266,7 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 2,
       "pourquoi": [
         "Piège de la subjectivité : l'expérience personnelle est un biais, pas un critère de processus bien conçu.",
-        "Bonne réponse : la reproductibilité — une autre équipe aboutirait au même choix — prouve que le processus est objectif et mesurable.",
+        "À retenir. La reproductibilité — une autre équipe aboutirait au même choix — prouve que le processus est objectif et mesurable.",
         "Conflit d'intérêts : le fournisseur retenu ne peut pas valider le processus qui l'a choisi.",
         "Piège du critère unique : le prix le plus bas n'est un indicateur ni d'objectivité ni de pertinence."
       ]
@@ -1280,10 +1283,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "La force du DRM est que ses restrictions accompagnent le fichier indépendamment de son emplacement ou de son état — particulièrement utile quand le chiffrement de volume est impossible. Le DLP, les ACL et le VPN protègent des périmètres ou des canaux, pas le document lui-même une fois sorti.",
       "difficulte": 3,
       "pourquoi": [
-        "Bonne réponse : les restrictions du DRM voyagent avec le document quel que soit son emplacement ou son état — exactement le besoin exprimé.",
+        "Les restrictions du DRM voyagent avec le document quel que soit son emplacement ou son état — exactement le besoin exprimé.",
         "Piège du canal : le VPN chiffre le transport, il ne restreint pas l'usage du document à l'arrivée.",
         "Techniquement vrai mais périmétrique : le DLP bloque des sorties, il ne protège plus le fichier une fois celui-ci sorti.",
-        "Trop étroit : une ACL protège l'emplacement d'origine, pas le document en circulation."
+        "Dans ce cas, une ACL protège l'emplacement d'origine, pas le document en circulation."
       ]
     },
     {
@@ -1298,7 +1301,7 @@ window.CISSP_DATA.domains[2] = {
       "explication": "TEMPEST vise à limiter la capture des émanations électromagnétiques : cages de Faraday, bruit blanc, zones de contrôle et blindage en sont les contre-mesures. Le degaussing est une méthode d'assainissement de supports magnétiques, sans rapport avec les émanations.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : le degaussing est une méthode d'assainissement des supports magnétiques, sans rapport avec les émanations électromagnétiques.",
+        "Le raisonnement tient. Le degaussing est une méthode d'assainissement des supports magnétiques, sans rapport avec les émanations électromagnétiques.",
         "Contre-mesure TEMPEST : la cage de Faraday bloque les émanations électromagnétiques.",
         "Contre-mesure TEMPEST : les zones de contrôle éloignent physiquement les capteurs potentiels.",
         "Contre-mesure TEMPEST : le bruit blanc noie les émanations dans un signal parasite."
@@ -1316,9 +1319,9 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le suivi des actifs logiciels vise deux risques : l'usage au-delà des licences acquises, source de contentieux juridique, et la présence de logiciels non autorisés, source de vulnérabilités. Les gains d'achat ou de performance sont accessoires par rapport à ces enjeux de conformité et de sécurité.",
       "difficulte": 2,
       "pourquoi": [
-        "Hors sujet : la vitesse de déploiement n'est pas l'objet du suivi des licences.",
-        "Hors sujet : la consommation des serveurs relève de l'exploitation, pas de la gestion des actifs logiciels.",
-        "Bonne réponse : le suivi des licences prévient le contentieux juridique et révèle les logiciels non autorisés, source de vulnérabilités.",
+        "La vitesse de déploiement n'est pas l'objet du suivi des licences.",
+        "Dans ce cas, la consommation des serveurs relève de l'exploitation, pas de la gestion des actifs logiciels.",
+        "Le suivi des licences prévient le contentieux juridique et révèle les logiciels non autorisés, source de vulnérabilités.",
         "Techniquement vrai mais accessoire : la négociation des prix est un bénéfice d'achat, pas l'enjeu de sécurité."
       ]
     },
@@ -1334,10 +1337,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "La data localization est l'exigence LÉGALE de conserver les données dans les frontières du pays (ex. Russie, Chine). La data sovereignty est le principe général selon lequel la donnée est soumise aux lois du pays où elle réside ; la data residency est le CHOIX par l'organisation du lieu de stockage ; la data remanence concerne les résidus de données après effacement.",
       "difficulte": 2,
       "pourquoi": [
-        "Piège du terme voisin : la residency est un CHOIX de l'organisation, pas une obligation imposée par la loi.",
-        "Bonne réponse : la data localization est l'obligation LÉGALE de conserver les données sur le territoire national.",
-        "Piège du terme voisin : la sovereignty est le principe général de soumission aux lois locales, pas l'exigence légale de stockage national.",
-        "Hors sujet : la remanence concerne les résidus de données après effacement."
+        "Terme voisin mais distinct : la residency est un CHOIX de l'organisation, pas une obligation imposée par la loi.",
+        "La data localization est l'obligation LÉGALE de conserver les données sur le territoire national.",
+        "La sovereignty est le principe général de soumission aux lois locales, pas l'exigence légale de stockage national.",
+        "La remanence concerne les résidus de données après effacement."
       ]
     },
     {
@@ -1355,7 +1358,7 @@ window.CISSP_DATA.domains[2] = {
         "Absolu et disproportionné : interdire le cloud sacrifie le besoin métier au lieu de traiter le risque.",
         "Impossible juridiquement : la responsabilité de conformité du controller ne se transfère jamais au fournisseur.",
         "Piège de la fausse assurance : le CLOUD Act s'applique au fournisseur américain quelle que soit la localisation des données.",
-        "Bonne réponse : des clés détenues par le client rendent inexploitables les données remises, et les clauses contractuelles encadrent les transferts — défense proportionnée."
+        "Des clés détenues par le client rendent inexploitables les données remises, et les clauses contractuelles encadrent les transferts — défense proportionnée."
       ]
     },
     {
@@ -1373,7 +1376,7 @@ window.CISSP_DATA.domains[2] = {
         "Piège de la correspondance : Secret correspond au dommage « sérieux » (serious damage), pas exceptionnellement grave.",
         "Piège de la correspondance : Confidential correspond au simple « dommage » (damage).",
         "Hors échelle : SBU désigne des données non classifiées méritant des précautions, sans niveau de dommage associé.",
-        "Bonne réponse : Top Secret est défini par le dommage « exceptionnellement grave » (exceptionally grave damage) à la sécurité nationale."
+        "Voilà le bon choix. Top Secret est défini par le dommage « exceptionnellement grave » (exceptionally grave damage) à la sécurité nationale."
       ]
     },
     {
@@ -1388,9 +1391,9 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Contrairement au secteur gouvernemental, les étiquettes du privé (Confidential/Proprietary, Private, Sensitive, Public…) ne sont pas normalisées : chaque organisation choisit ses niveaux et leur granularité, du moment que la politique de sécurité les définit clairement. La classification s'applique à tous les supports, papier comme électronique.",
       "difficulte": 1,
       "pourquoi": [
-        "Trop étroit : la classification s'applique à tous les supports, papier compris.",
-        "Absolu : rien n'oblige le privé à reprendre les niveaux gouvernementaux.",
-        "Bonne réponse : chaque organisation définit librement ses niveaux, à condition de les documenter dans sa politique de sécurité.",
+        "La classification s'applique à tous les supports, papier compris.",
+        "Rien n'oblige le privé à reprendre les niveaux gouvernementaux.",
+        "Chaque organisation définit librement ses niveaux, à condition de les documenter dans sa politique de sécurité.",
         "Faux : aucune norme n'impose des niveaux identiques dans le secteur privé."
       ]
     },
@@ -1406,8 +1409,8 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Les exigences sur les PHI s'appliquent à tout organisme qui manipule des informations de santé rattachables à une personne, pas seulement aux hôpitaux : le prestataire (business associate au sens HIPAA) y est également soumis. Le changement de support ne change rien à la nature de la donnée, et les PHI sont une catégorie spécifique qui ne « devient » pas de simples PII.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : tout organisme qui manipule des PHI — y compris le prestataire — est soumis aux exigences applicables.",
-        "Trop étroit : HIPAA s'applique aussi aux business associates qui manipulent des PHI pour le compte de l'entité couverte.",
+        "C’est l’option correcte. Tout organisme qui manipule des PHI — y compris le prestataire — est soumis aux exigences applicables.",
+        "À noter, HIPAA s'applique aussi aux business associates qui manipulent des PHI pour le compte de l'entité couverte.",
         "Piège du support : la nature de la donnée ne change pas avec son support.",
         "Confusion de catégories : les PHI sont une catégorie spécifique de données de santé, elles ne se transforment pas en simples PII."
       ]
@@ -1418,16 +1421,16 @@ window.CISSP_DATA.domains[2] = {
         "Il est automatiquement chiffré et sauvegardé par le système d'exploitation",
         "Les exigences de manipulation (handling) et de stockage sont déterminées",
         "Son prix d'assurance et de couverture augmente sensiblement",
-        "Il doit être remplacé beaucoup plus fréquemment"
+        "Tous les accès en place sont automatiquement révoqués puis redemandés"
       ],
       "reponse": 1,
-      "explication": "La classification détermine directement les exigences de handling : comment déplacer, stocker, transmettre et détruire l'actif. C'est tout l'intérêt de classifier — proportionner les contrôles à la sensibilité. Le chiffrement peut être l'une de ces exigences, mais rien n'est « automatique » : les contrôles découlent de la politique associée au niveau.",
+      "explication": "La classification détermine directement les exigences de handling : comment déplacer, stocker, transmettre et détruire l'actif. C'est tout l'intérêt de classifier — proportionner les contrôles à la sensibilité. Le chiffrement peut être l'une de ces exigences, mais rien n'est « automatique » : les contrôles découlent de la politique associée au niveau, et la classification ne déclenche pas à elle seule une révocation des accès.",
       "difficulte": 1,
       "pourquoi": [
         "Piège de l'automatisme : le chiffrement peut découler de la politique du niveau, mais rien n'est automatique.",
-        "Bonne réponse : la classification détermine les exigences de manipulation, stockage, transmission et destruction — sa finalité pratique première.",
-        "Hors sujet : le prix d'assurance n'est pas une conséquence directe de la classification.",
-        "Hors sujet : la fréquence de remplacement relève du cycle de vie matériel, pas de la classification."
+        "La classification détermine les exigences de manipulation, stockage, transmission et destruction — sa finalité pratique première.",
+        "Le coût d'assurance peut évoluer indirectement, mais ce n'est pas la conséquence pratique immédiate de la classification.",
+        "Classifier un actif ne révoque aucun accès en soi : cela fixe d'abord le cadre de manipulation, puis les accès se réévaluent selon le need-to-know."
       ]
     },
     {
@@ -1436,7 +1439,7 @@ window.CISSP_DATA.domains[2] = {
         "Oui, mais uniquement en lecture seule et sans copie",
         "Non, il doit d'abord obtenir une clearance de niveau Top Secret plus élevé",
         "Non, il lui faut aussi le besoin d'en connaître et l'approbation formelle",
-        "Oui, la clearance seule suffit toujours largement"
+        "Oui, une clearance au niveau de la donnée ouvre l'accès à ce niveau"
       ],
       "reponse": 2,
       "explication": "La clearance est une condition nécessaire mais pas suffisante : l'accès exige aussi le need-to-know — la donnée doit être nécessaire à la mission — et une approbation formelle impliquant le data owner. C'est un principe fondamental : détenir l'habilitation au niveau n'ouvre jamais l'accès à tout le niveau.",
@@ -1444,7 +1447,7 @@ window.CISSP_DATA.domains[2] = {
       "pourquoi": [
         "Invention plausible : aucune règle générale ne limite la clearance à la lecture seule.",
         "Contresens : une clearance supérieure ne remplace pas le need-to-know sur les données Secret.",
-        "Bonne réponse : l'accès exige la clearance ET le besoin d'en connaître ET l'approbation formelle — trois conditions cumulatives.",
+        "À retenir. L'accès exige la clearance ET le besoin d'en connaître ET l'approbation formelle — trois conditions cumulatives.",
         "Piège classique : la clearance est une condition nécessaire mais jamais suffisante."
       ]
     },
@@ -1460,9 +1463,9 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le system owner est responsable du système qui traite la donnée : il développe et maintient le System Security Plan, s'assure du déploiement des contrôles, du patching et de la formation des utilisateurs (NIST SP 800-18). Le data owner possède la donnée, le custodian exécute les tâches déléguées, et le DPO supervise la conformité vie privée.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : selon NIST SP 800-18, le system owner développe et maintient le System Security Plan.",
+        "Selon NIST SP 800-18, le system owner développe et maintient le System Security Plan.",
         "Piège du rôle voisin : le data owner possède la donnée, mais le SSP relève du responsable du système.",
-        "Hors périmètre : le DPO supervise la conformité vie privée, pas les plans de sécurité système.",
+        "Le DPO supervise la conformité vie privée, pas les plans de sécurité système.",
         "Rôle d'exécution : le custodian applique des tâches déléguées, il ne rédige pas le SSP."
       ]
     },
@@ -1479,9 +1482,9 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 1,
       "pourquoi": [
         "Piège technique/métier : le custodian assure les tâches techniques (sauvegardes), pas la qualité métier.",
-        "Hors périmètre : le system owner sécurise le système, pas le contenu métier des données.",
-        "Réponse de technicien : l'administrateur sécurité protège l'infrastructure, il ne gouverne pas la donnée métier.",
-        "Bonne réponse : le data steward porte la qualité, la gouvernance métier et la définition des métadonnées."
+        "En réalité, le system owner sécurise le système, pas le contenu métier des données.",
+        "L'administrateur sécurité protège l'infrastructure, il ne gouverne pas la donnée métier.",
+        "Le raisonnement tient. Le data steward porte la qualité, la gouvernance métier et la définition des métadonnées."
       ]
     },
     {
@@ -1496,10 +1499,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Un subject est toute entité active qui accède à un objet (la ressource passive) : les utilisateurs en sont, mais aussi les programmes, processus et services. Tous les users sont des subjects, mais tous les subjects ne sont pas des users — nuance que l'examen aime tester.",
       "difficulte": 2,
       "pourquoi": [
-        "Absolu : les processus et services sont aussi des subjects, pas seulement les humains.",
-        "Bonne réponse : un subject est toute entité active qui accède à un objet — utilisateur, processus ou service.",
+        "Généralisation excessive, les processus et services sont aussi des subjects, pas seulement les humains.",
+        "Un subject est toute entité active qui accède à un objet — utilisateur, processus ou service.",
         "Inversion : la ressource accédée est l'objet, pas le subject.",
-        "Trop étroit : tous les users sont des subjects, mais l'inverse est faux."
+        "Tous les users sont des subjects, mais l'inverse est faux."
       ]
     },
     {
@@ -1514,7 +1517,7 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le DPO est un rôle de leadership indépendant qui supervise la conformité vie privée. Le rattacher à une fonction qui exploite intensivement les données personnelles (marketing) et qui fixe ses objectifs compromet son indépendance — le GDPR exige justement que le DPO exerce ses missions sans conflit d'intérêts et rapporte au plus haut niveau de direction.",
       "difficulte": 3,
       "pourquoi": [
-        "Bonne réponse : le DPO doit être indépendant et sans conflit d'intérêts — être évalué par une fonction grande consommatrice de données personnelles compromet sa mission.",
+        "Le DPO doit être indépendant et sans conflit d'intérêts — être évalué par une fonction grande consommatrice de données personnelles compromet sa mission.",
         "Plausible mais hors sujet : l'externalisation est une option d'organisation, pas la réponse au conflit d'intérêts décrit.",
         "Piège du rattachement alternatif : le DSI est aussi une partie prenante opérationnelle — le vrai problème est l'indépendance, pas le choix d'un autre chef.",
         "Faux : le GDPR exige que le DPO rapporte au plus haut niveau de direction et exerce sans conflit d'intérêts."
@@ -1532,10 +1535,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le cycle de vie commence par la création ou la collecte de la donnée, suivie de la classification, du stockage, de l'utilisation, de l'archivage et enfin de la destruction. La classification intervient juste après la création — on ne peut classifier une donnée qui n'existe pas encore.",
       "difficulte": 1,
       "pourquoi": [
-        "Hors phase : l'archivage intervient en fin de cycle, juste avant la destruction.",
-        "Bonne réponse : le cycle de vie commence par la création ou la collecte de la donnée.",
-        "Hors phase : on ne peut classifier une donnée qui n'existe pas encore — la classification vient juste après.",
-        "Hors phase : le stockage suit la classification."
+        "À noter, l'archivage intervient en fin de cycle, juste avant la destruction.",
+        "Le cycle de vie commence par la création ou la collecte de la donnée.",
+        "On ne peut classifier une donnée qui n'existe pas encore — la classification vient juste après.",
+        "En réalité, le stockage suit la classification."
       ]
     },
     {
@@ -1544,16 +1547,16 @@ window.CISSP_DATA.domains[2] = {
         "Uniquement sur site, pour garantir un accès rapide aux restaurations",
         "Dans le même bâtiment mais répartis sur des étages différents",
         "Sur site ET hors site, avec une distance suffisante entre les deux emplacements",
-        "Uniquement hors site, le stockage sur site étant jugé coûteux et totalement inutile"
+        "Uniquement hors site, pour écarter tout risque lié aux locaux principaux"
       ],
       "reponse": 2,
-      "explication": "La bonne pratique combine une copie sur site (restauration rapide) et une copie hors site, séparées par une distance suffisante pour qu'un même sinistre — incendie, inondation, tempête — ne détruise pas l'original et la sauvegarde. Un autre étage du même bâtiment ne protège pas d'un incendie généralisé.",
+      "explication": "La bonne pratique combine une copie sur site (restauration rapide) et une copie hors site, séparées par une distance suffisante pour qu'un même sinistre — incendie, inondation, tempête — ne détruise pas l'original et la sauvegarde. Un autre étage du même bâtiment ne protège pas d'un incendie généralisé, et le tout-hors-site sacrifie la rapidité de restauration courante.",
       "difficulte": 1,
       "pourquoi": [
-        "Trop étroit : une copie uniquement sur site disparaît avec le site en cas de sinistre majeur.",
+        "En réalité, une copie uniquement sur site disparaît avec le site en cas de sinistre majeur.",
         "Fausse séparation : un même incendie ou une même inondation peut détruire tous les étages d'un bâtiment.",
-        "Bonne réponse : combiner sur site (restauration rapide) et hors site distant (survie au sinistre) couvre les deux besoins.",
-        "Absolu : sans copie locale, chaque restauration devient lente et coûteuse."
+        "Combiner sur site (restauration rapide) et hors site distant (survie au sinistre) couvre les deux besoins.",
+        "Écarter le site principal protège du sinistre, mais le tout-hors-site rend chaque restauration courante plus lente et plus coûteuse."
       ]
     },
     {
@@ -1571,7 +1574,7 @@ window.CISSP_DATA.domains[2] = {
         "Piège du cumul : aucune obligation légale n'existe dans le scénario, la localization ne s'applique donc pas.",
         "Piège du principe : la sovereignty s'appliquera aux données une fois stockées, mais ne décrit pas le choix effectué.",
         "Piège de l'obligation : la localization est une exigence légale — ici l'entreprise choisit librement.",
-        "Bonne réponse : choisir volontairement le lieu de stockage pour des raisons de latence ou de conformité est la data residency."
+        "Choisir volontairement le lieu de stockage pour des raisons de latence ou de conformité est la data residency."
       ]
     },
     {
@@ -1589,7 +1592,7 @@ window.CISSP_DATA.domains[2] = {
         "Considération de coût, pas de sécurité.",
         "Plausible mais opérationnel : la fiabilité des datacenters relève de la disponibilité contractuelle, pas de l'enjeu juridique principal.",
         "Considération de performance, pas de sécurité.",
-        "Bonne réponse : la région choisie détermine les juridictions applicables aux données (data sovereignty) — réquisitions et obligations locales comprises."
+        "C’est l’option correcte. La région choisie détermine les juridictions applicables aux données (data sovereignty) — réquisitions et obligations locales comprises."
       ]
     },
     {
@@ -1606,7 +1609,7 @@ window.CISSP_DATA.domains[2] = {
       "pourquoi": [
         "Cas particulier du repos : l'archive relève du chiffrement at rest.",
         "Piège de l'état : la donnée in use se protège par le patching et la purge des buffers mémoire.",
-        "Bonne réponse : TLS et IPsec chiffrent la donnée qui circule sur le réseau — l'état in transit.",
+        "TLS et IPsec chiffrent la donnée qui circule sur le réseau — l'état in transit.",
         "Piège de l'état : la donnée au repos se protège par le chiffrement des supports, pas par TLS."
       ]
     },
@@ -1622,7 +1625,7 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Considérer le réseau interne comme sûr est une erreur : après une intrusion, un attaquant peut écouter le trafic interne (mouvement latéral, sniffing). Chiffrer partout — y compris en interne — limite ce risque ; c'est aussi l'esprit du Zero Trust. Le coût comparé, la conformité et le cloisonnement sont des considérations annexes : la raison de fond est le risque d'interception interne.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : après une intrusion, un attaquant peut intercepter le trafic interne en clair ; chiffrer partout limite le mouvement latéral — l'esprit Zero Trust.",
+        "À retenir. Après une intrusion, un attaquant peut intercepter le trafic interne en clair ; chiffrer partout limite le mouvement latéral — l'esprit Zero Trust.",
         "Piège de la conformité : certains référentiels l'exigent, mais la raison de fond est le risque d'interception, pas la case à cocher.",
         "Faux arbitrage : le coût comparé de la segmentation ne justifie pas le chiffrement — les deux contrôles se complètent.",
         "Plausible mais secondaire : le cloisonnement des flux entre applications est un bénéfice annexe, pas la motivation principale."
@@ -1641,7 +1644,7 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 2,
       "pourquoi": [
         "Volatile : la RAM dynamique perd son contenu hors tension.",
-        "Bonne réponse : l'EEPROM est non volatile — elle conserve les données hors tension et doit être assainie avant mise au rebut.",
+        "L'EEPROM est non volatile — elle conserve les données hors tension et doit être assainie avant mise au rebut.",
         "Volatile : le cache processeur s'efface à la coupure d'alimentation.",
         "Volatile : la RAM statique aussi, malgré sa stabilité en fonctionnement."
       ]
@@ -1659,9 +1662,9 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 2,
       "pourquoi": [
         "Piège du canal : le sniffing capture le trafic réseau, pas les émanations électromagnétiques.",
-        "Bonne réponse : le Van Eck phreaking reconstitue l'affichage à partir des émanations électromagnétiques — contré par TEMPEST.",
-        "Hors sujet : le file carving est une technique forensique sur support de stockage.",
-        "Piège du terme voisin : une attaque par canal auxiliaire temporel exploite les durées de calcul, pas les émanations d'un écran."
+        "Le raisonnement tient. Le Van Eck phreaking reconstitue l'affichage à partir des émanations électromagnétiques — contré par TEMPEST.",
+        "À noter, le file carving est une technique forensique sur support de stockage.",
+        "Proche mais à ne pas confondre : une attaque par canal auxiliaire temporel exploite les durées de calcul, pas les émanations d'un écran."
       ]
     },
     {
@@ -1679,7 +1682,7 @@ window.CISSP_DATA.domains[2] = {
         "Ordre faux : le purging est plus fort que le clearing, pas l'inverse.",
         "Ordre faux : la destruction est l'assurance maximale — elle termine l'échelle, et l'erasing la commence.",
         "Ordre faux : le clearing offre plus d'assurance que l'erasing, il ne peut pas le précéder.",
-        "Bonne réponse : erasing (simple suppression) < clearing (réécriture) < purging (irrécupérable même en laboratoire) < destruction physique."
+        "Erasing (simple suppression) < clearing (réécriture) < purging (irrécupérable même en laboratoire) < destruction physique."
       ]
     },
     {
@@ -1694,9 +1697,9 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le reformatage reconstruit les structures du système de fichiers mais laisse les données elles-mêmes sur le support : c'est la data remanence, exploitable par des outils de récupération ou par file carving. Avant don ou mise au rebut, il faut au minimum un clearing, et une méthode proportionnée à la classification.",
       "difficulte": 1,
       "pourquoi": [
-        "Trop étroit : le slack space est un lieu de rémanence, pas le principe illustré par un formatage insuffisant.",
+        "Le slack space est un lieu de rémanence, pas le principe illustré par un formatage insuffisant.",
         "Piège du terme séduisant : la defensible destruction est la documentation d'une destruction correcte — ce qui a manqué, pas le phénomène observé.",
-        "Bonne réponse : le formatage reconstruit les index sans toucher aux données — c'est la data remanence, exploitable par des outils de récupération.",
+        "Le formatage reconstruit les index sans toucher aux données — c'est la data remanence, exploitable par des outils de récupération.",
         "Contresens : le crypto-shredding aurait justement rendu les données irrécupérables."
       ]
     },
@@ -1710,12 +1713,12 @@ window.CISSP_DATA.domains[2] = {
       ],
       "reponse": 0,
       "explication": "NIST SP 800-88 (Guidelines for Media Sanitization) est la référence pour définir les méthodes d'assainissement acceptables selon le support et la classification. SP 800-53 catalogue les contrôles de sécurité, SP 800-18 traite des System Security Plans, et SP 800-122 définit la protection des PII.",
-      "difficulte": 3,
+      "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : NIST SP 800-88, Guidelines for Media Sanitization, est LA référence pour l'assainissement des supports.",
+        "NIST SP 800-88, Guidelines for Media Sanitization, est LA référence pour l'assainissement des supports.",
         "Piège du catalogue : SP 800-53 recense les contrôles de sécurité, pas les méthodes d'assainissement.",
-        "Hors sujet : SP 800-122 traite de la protection des PII.",
-        "Hors sujet : SP 800-18 traite des System Security Plans."
+        "Mauvaise cible : SP 800-122 traite de la protection des PII, pas de l'effacement des supports.",
+        "Autre domaine : SP 800-18 encadre les System Security Plans."
       ]
     },
     {
@@ -1731,7 +1734,7 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 3,
       "pourquoi": [
         "Plausible mais inadapté : le crypto-shredding suppose des données chiffrées dès l'origine et n'apporte rien de plus pour une réutilisation interne.",
-        "Bonne réponse : pour une réutilisation au même niveau de classification, un clearing ou un degaussing est suffisant et économique.",
+        "Voilà le bon choix. Pour une réutilisation au même niveau de classification, un clearing ou un degaussing est suffisant et économique.",
         "Négligence : sans assainissement, le prochain utilisateur accéderait aux données résiduelles.",
         "Disproportionné : détruire des supports destinés à être réutilisés en interne gaspille des actifs sans gain de sécurité."
       ]
@@ -1751,7 +1754,7 @@ window.CISSP_DATA.domains[2] = {
         "Plausible mais dérivé : une éventuelle exclusion d'assurance serait la conséquence du risque, pas le risque lui-même.",
         "Vrai mais financier : le surcoût de maintenance étendue est un argument budgétaire, pas le risque de sécurité principal.",
         "Vrai mais disponibilité : la rareté des pièces menace les délais de réparation, pas la sécurité en premier lieu.",
-        "Bonne réponse : après l'EOS, aucune vulnérabilité découverte ne sera plus corrigée — une exposition définitive et croissante."
+        "Après l'EOS, aucune vulnérabilité découverte ne sera plus corrigée — une exposition définitive et croissante."
       ]
     },
     {
@@ -1766,7 +1769,7 @@ window.CISSP_DATA.domains[2] = {
       "explication": "La rétention couvre les données, mais aussi le MATÉRIEL capable de les lire et le PERSONNEL compétent : dans quinze ans, les lecteurs actuels seront obsolètes et les experts partis. Sans plan de migration des supports et de maintien des compétences, les archives deviennent illisibles — donc inutiles.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : maintenir pendant quinze ans des lecteurs compatibles et du personnel sachant restaurer est la dimension la plus souvent négligée.",
+        "C’est l’option correcte. Maintenir pendant quinze ans des lecteurs compatibles et du personnel sachant restaurer est la dimension la plus souvent négligée.",
         "Considération évidente : le coût des supports est budgété dès le départ, il est rarement oublié.",
         "Considération standard : le chiffrement des bandes fait partie des pratiques courantes dès la mise en place.",
         "Considération planifiée : la volumétrie se calcule au dimensionnement initial, elle est rarement oubliée."
@@ -1784,9 +1787,9 @@ window.CISSP_DATA.domains[2] = {
       "explication": "L'impression se déclenche sur le poste de travail : seul le DLP endpoint-based, qui s'exécute localement, peut l'intercepter, comme il bloque la copie vers USB. Le DLP réseau ne voit que le trafic en bordure de réseau et le DLP cloud protège les environnements cloud natifs.",
       "difficulte": 2,
       "pourquoi": [
-        "Hors périmètre : le DLP cloud protège les environnements cloud natifs.",
+        "Le DLP cloud protège les environnements cloud natifs.",
         "Faux : le blocage de l'impression est une capacité classique des DLP endpoint.",
-        "Bonne réponse : l'impression se déclenche localement — seul le DLP endpoint peut l'intercepter.",
+        "L'impression se déclenche localement — seul le DLP endpoint peut l'intercepter.",
         "Mauvais point d'observation : le DLP réseau ne voit que le trafic en bordure, pas le spooler d'impression du poste."
       ]
     },
@@ -1802,9 +1805,9 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le Digital Rights Management protège les contenus soumis au droit d'auteur : il empêche l'usage, la modification et la distribution non autorisés, et la protection voyage avec le fichier même après sa vente. Le DLP protège les données de l'ORGANISATION contre l'exfiltration — pas des œuvres vendues à des tiers.",
       "difficulte": 1,
       "pourquoi": [
-        "Bonne réponse : le DRM contrôle l'usage, la copie et la redistribution d'un contenu soumis au droit d'auteur, même après sa vente.",
-        "Hors sujet : la tokenisation substitue des valeurs sensibles, elle ne contrôle pas l'usage d'un contenu.",
-        "Hors sujet : le CASB gouverne l'accès aux services cloud.",
+        "À retenir. Le DRM contrôle l'usage, la copie et la redistribution d'un contenu soumis au droit d'auteur, même après sa vente.",
+        "La tokenisation substitue des valeurs sensibles, elle ne contrôle pas l'usage d'un contenu.",
+        "En réalité, le CASB gouverne l'accès aux services cloud.",
         "Piège du périmètre : le DLP protège les données de l'organisation contre l'exfiltration, pas des œuvres vendues à des tiers."
       ]
     },
@@ -1820,10 +1823,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "La visibilité est le premier pilier du CASB : placé entre les utilisateurs et le cloud, il révèle quels services cloud sont réellement utilisés — y compris le shadow IT — puis permet d'y appliquer les politiques de sécurité. Le DRM protège le copyright et l'antivirus les endpoints ; aucun ne cartographie l'usage du cloud.",
       "difficulte": 2,
       "pourquoi": [
-        "Trop étroit : un gestionnaire de mots de passe ne voit que les services que les utilisateurs y déclarent.",
-        "Hors sujet : le DRM protège des contenus, il ne cartographie pas l'usage du cloud.",
-        "Réponse de technicien : l'antivirus protège les endpoints, il ne recense pas les services SaaS utilisés.",
-        "Bonne réponse : la visibilité — y compris sur le shadow IT — est le premier pilier du CASB, placé entre les utilisateurs et le cloud."
+        "Un gestionnaire de mots de passe ne voit que les services que les utilisateurs y déclarent.",
+        "Le DRM protège des contenus, il ne cartographie pas l'usage du cloud.",
+        "L'antivirus protège les endpoints, il ne recense pas les services SaaS utilisés.",
+        "La visibilité — y compris sur le shadow IT — est le premier pilier du CASB, placé entre les utilisateurs et le cloud."
       ]
     },
     {
@@ -1832,16 +1835,16 @@ window.CISSP_DATA.domains[2] = {
         "Chiffrement symétrique ; la clé de déchiffrement est perdue",
         "Anonymisation irréversible ; strictement aucun risque résiduel de ré-identification",
         "Pseudonymisation ; la ré-identification reste possible pour qui détient la table",
-        "Tokenisation ; le vault de correspondance est public"
+        "Tokenisation ; le vault conserve la correspondance, donc réversible"
       ],
       "reponse": 2,
-      "explication": "Remplacer les identités par des alias avec conservation d'une table de correspondance est la pseudonymisation : elle est réversible, donc les données restent des données personnelles au sens du GDPR, et une fuite de la table permettrait la ré-identification. Seule l'anonymisation véritable est irréversible.",
+      "explication": "Remplacer les identités par des alias avec conservation d'une table de correspondance est la pseudonymisation : elle est réversible, donc les données restent des données personnelles au sens du GDPR, et une fuite de la table permettrait la ré-identification. La tokenisation est proche mais substitue une valeur par un jeton aléatoire sans lien, généralement sur des données structurées (un numéro de carte), pas sur des noms aliasés. Seule l'anonymisation véritable est irréversible.",
       "difficulte": 2,
       "pourquoi": [
         "Incohérent avec le scénario : rien n'indique un chiffrement ni une clé perdue.",
-        "Faux et absolu : une table de correspondance existe, donc ce n'est pas de l'anonymisation et le risque n'est pas nul.",
-        "Bonne réponse : alias + table de correspondance conservée = pseudonymisation, réversible pour qui détient la table.",
-        "Invention incohérente : un vault de tokenisation n'est jamais public, et le scénario décrit des alias, pas des jetons."
+        "Une table de correspondance existe : ce n'est donc pas de l'anonymisation, et le risque résiduel n'est pas nul.",
+        "Alias + table de correspondance conservée = pseudonymisation, réversible pour qui détient la table.",
+        "Distinction fine mais décisive : la tokenisation remplace une valeur par un jeton aléatoire sans lien, typiquement sur des données structurées ; substituer des noms par des alias reliés à une table est la définition même de la pseudonymisation."
       ]
     },
     {
@@ -1857,7 +1860,7 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 3,
       "pourquoi": [
         "Absolu et faux : les données véritablement anonymisées sortent du champ du GDPR.",
-        "Bonne réponse : la ré-identification restant possible via la table, les personnes demeurent identifiables — les données restent personnelles.",
+        "La ré-identification restant possible via la table, les personnes demeurent identifiables — les données restent personnelles.",
         "Contresens : le GDPR encourage la pseudonymisation comme mesure de protection.",
         "Confusion clé de l'examen : pseudonymiser n'est pas anonymiser — la réversibilité fait toute la différence."
       ]
@@ -1874,10 +1877,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Tout programme de gestion d'actifs commence par l'inventaire : matériel, logiciels, licences, machines virtuelles, mais aussi actifs intangibles (brevets, réputation). Sans inventaire, l'outil, les procédures et la formation n'ont pas d'objet — on ne protège que ce que l'on connaît.",
       "difficulte": 1,
       "pourquoi": [
-        "Hors phase : la mise au rebut est la fin du cycle de vie, pas le point de départ du programme.",
-        "Hors phase : la formation au tagging suppose un cadre d'inventaire déjà défini.",
+        "La mise au rebut est la fin du cycle de vie, pas le point de départ du programme.",
+        "Ici, la formation au tagging suppose un cadre d'inventaire déjà défini.",
         "Piège de l'outil d'abord : un ITAM sans inventaire initial n'a rien à gérer — l'outil sert le processus, pas l'inverse.",
-        "Bonne réponse : tout commence par l'inventaire complet des actifs tangibles et intangibles — on ne protège que ce que l'on connaît."
+        "Tout commence par l'inventaire complet des actifs tangibles et intangibles — on ne protège que ce que l'on connaît."
       ]
     },
     {
@@ -1892,7 +1895,7 @@ window.CISSP_DATA.domains[2] = {
       "explication": "La Configuration Management Database recense les actifs ET leurs relations : quel service dépend de quel serveur, quelle application de quelle base. Cette cartographie des dépendances permet d'évaluer l'impact d'un incident ou d'un changement — ce qu'un tableur statique ne fait pas. Elle se nourrit de la découverte automatisée, elle ne la remplace pas.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : la CMDB modélise les dépendances entre actifs, ce qui permet d'évaluer l'impact d'un incident ou d'un changement.",
+        "La CMDB modélise les dépendances entre actifs, ce qui permet d'évaluer l'impact d'un incident ou d'un changement.",
         "Faux : une CMDB coûte plus cher à maintenir qu'un tableur — sa valeur est ailleurs.",
         "Invention : aucune CMDB ne chiffre les actifs qu'elle recense.",
         "Inversion : la CMDB se nourrit de la découverte automatisée, elle ne la remplace pas."
@@ -1912,7 +1915,7 @@ window.CISSP_DATA.domains[2] = {
       "pourquoi": [
         "Techniquement vrai mais hors objectif : bloquer des ports limite les branchements, mais n'inventorie rien.",
         "Piège du même processus en mieux : une campagne annuelle, même rigoureuse, se périme entre deux passages.",
-        "Bonne réponse : seule la découverte automatisée et continue détecte en permanence les actifs non déclarés.",
+        "Voilà le bon choix. Seule la découverte automatisée et continue détecte en permanence les actifs non déclarés.",
         "Piège de la cause humaine : sanctionner ne corrige pas un processus structurellement lacunaire."
       ]
     },
@@ -1929,9 +1932,9 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 2,
       "pourquoi": [
         "Utile mais hors sujet : un snapshot facilite la restauration, pas l'accountability.",
-        "Bonne réponse : taguer la VM (owner, classification, environnement) et l'inscrire à l'inventaire garantit un responsable identifiable toute sa vie.",
+        "Taguer la VM (owner, classification, environnement) et l'inscrire à l'inventaire garantit un responsable identifiable toute sa vie.",
         "Utile mais hors sujet : l'antivirus protège la VM, il n'établit pas la responsabilité.",
-        "Réponse de technicien : une IP fixe identifie la machine sur le réseau, pas son responsable."
+        "Une IP fixe identifie la machine sur le réseau, pas son responsable."
       ]
     },
     {
@@ -1946,9 +1949,9 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le déprovisioning ne se limite pas à supprimer l'actif : il faut retirer l'actif de l'inventaire, révoquer ses accès, comptes de service et certificats, et assainir les données selon leur classification. Des credentials orphelins sont une porte d'entrée classique — ils ne sont plus surveillés mais restent valides.",
       "difficulte": 2,
       "pourquoi": [
-        "Hors sujet : aucun enjeu de droit d'auteur dans ce scénario.",
-        "Trop étroit : le coût de licences est marginal face au risque d'accès résiduel.",
-        "Bonne réponse : un déprovisioning incomplet laisse des credentials orphelins — valides, non surveillés, exploitables par un attaquant.",
+        "Ici, aucun enjeu de droit d'auteur dans ce scénario.",
+        "Le coût de licences est marginal face au risque d'accès résiduel.",
+        "C’est l’option correcte. Un déprovisioning incomplet laisse des credentials orphelins — valides, non surveillés, exploitables par un attaquant.",
         "Piège du support : une VM supprimée pose la question des credentials et des données logiques, pas de rémanence magnétique matérielle."
       ]
     },
@@ -1964,10 +1967,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le shadow IT désigne les actifs et services adoptés sans approbation de l'IT. Le danger principal est la perte de visibilité : des données d'entreprise (ici, des listes de clients) partent vers un service ni inventorié, ni évalué, ni protégé par les contrôles de l'organisation. La réponse combine découverte (CASB), politique claire et processus de demande simple.",
       "difficulte": 1,
       "pourquoi": [
-        "Bonne réponse : un service adopté sans approbation de l'IT est du shadow IT — les données échappent à l'inventaire et aux contrôles.",
+        "Un service adopté sans approbation de l'IT est du shadow IT — les données échappent à l'inventaire et aux contrôles.",
         "Vrai ailleurs : le lock-in est un risque contractuel, pas le phénomène décrit.",
-        "Hors sujet : le scope creep est une dérive de périmètre projet.",
-        "Piège du terme voisin : le BYOD concerne les appareils personnels, pas les services souscrits."
+        "Le scope creep est une dérive de périmètre projet.",
+        "Le BYOD concerne les appareils personnels, pas les services souscrits."
       ]
     },
     {
@@ -1982,10 +1985,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le shadow IT naît souvent d'un besoin métier légitime face à un processus IT trop lourd : la réponse durable est de rendre la voie officielle plus facile que le contournement — catalogue de services approuvés, approbation rapide. Le blocage total et la sanction traitent les symptômes et poussent les usages encore plus loin dans l'ombre ; un CASB détecte mais ne supprime pas la cause.",
       "difficulte": 3,
       "pourquoi": [
-        "Absolu : interdire le cloud nie le besoin métier et sera contourné.",
+        "Interdire le cloud nie le besoin métier et sera contourné.",
         "Piège répressif : la sanction traite le symptôme et dégrade la coopération sans supprimer le besoin métier.",
         "Absolu et contre-productif : le blocage massif pousse les usages encore plus loin dans l'ombre.",
-        "Bonne réponse : rendre la voie officielle plus simple que le contournement traite la cause racine du shadow IT."
+        "À retenir. Rendre la voie officielle plus simple que le contournement traite la cause racine du shadow IT."
       ]
     },
     {
@@ -2001,9 +2004,9 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 3,
       "pourquoi": [
         "Techniquement vrai mais hors phase : la reclassification exhaustive est l'étape suivante — la lancer d'abord ne répond pas au besoin d'échange immédiat.",
-        "Bonne réponse : la table de correspondance validée par la gouvernance, protectrice par défaut, permet l'échange immédiat sans sacrifier la sécurité.",
-        "Absolu : bloquer tout partage sacrifie l'objectif business de la fusion alors qu'une mesure de gouvernance provisoire suffit.",
-        "Réponse de technicien : appliquer des étiquettes sans mapping décidé par les data owners inverse la gouvernance — la classification est une décision métier."
+        "La table de correspondance validée par la gouvernance, protectrice par défaut, permet l'échange immédiat sans sacrifier la sécurité.",
+        "Bloquer tout partage sacrifie l'objectif business de la fusion alors qu'une mesure de gouvernance provisoire suffit.",
+        "Dans ce cas, appliquer des étiquettes sans mapping décidé par les data owners inverse la gouvernance — la classification est une décision métier."
       ]
     },
     {
@@ -2019,9 +2022,9 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 3,
       "pourquoi": [
         "Techniquement vrai mais illusoire : après la fusion, l'acquéreur devient responsable de fait — la conformité ne s'externalise pas par clause contractuelle.",
-        "Réponse de technicien : chiffrer sans connaître le contenu ne dit ni ce qui est migré ni quelles obligations s'appliquent — le contrôle précéderait la connaissance.",
-        "Hors sujet : l'ordonnancement de la migration est une décision de planification qui ne résout pas l'absence d'inventaire.",
-        "Bonne réponse : la découverte et la classification donnent la visibilité indispensable pour décider quoi migrer, purger ou protéger, et sous quelles obligations."
+        "Chiffrer sans connaître le contenu ne dit ni ce qui est migré ni quelles obligations s'appliquent — le contrôle précéderait la connaissance.",
+        "Dans ce cas, l'ordonnancement de la migration est une décision de planification qui ne résout pas l'absence d'inventaire.",
+        "Le raisonnement tient. La découverte et la classification donnent la visibilité indispensable pour décider quoi migrer, purger ou protéger, et sous quelles obligations."
       ]
     },
     {
@@ -2036,8 +2039,8 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Avant tout instrument technique ou juridique, il faut la visibilité : cartographier les flux et les localisations réelles révèle quels transferts existent, puis on restreint la réplication aux juridictions autorisées. Les SCC sont utiles mais s'appliquent à des transferts qu'il faut d'abord identifier et minimiser ; le chiffrement par défaut laisse les clés au fournisseur ; changer de fournisseur est disproportionné avant l'analyse.",
       "difficulte": 3,
       "pourquoi": [
-        "Réponse de technicien : le chiffrement natif laisse les clés chez le fournisseur et ne traite pas la question juridictionnelle de la réplication.",
-        "Bonne réponse : cartographier les flux d'abord, restreindre ensuite — la gouvernance des localisations précède le choix des instruments juridiques et techniques.",
+        "À noter, le chiffrement natif laisse les clés chez le fournisseur et ne traite pas la question juridictionnelle de la réplication.",
+        "Cartographier les flux d'abord, restreindre ensuite — la gouvernance des localisations précède le choix des instruments juridiques et techniques.",
         "Techniquement vrai mais hors phase : les SCC couvrent des transferts qu'il faut d'abord avoir identifiés et réduits au nécessaire.",
         "Absolu et disproportionné : changer de fournisseur avant d'avoir analysé les flux traite le symptôme au prix fort — et le siège du fournisseur ne règle pas tout."
       ]
@@ -2054,10 +2057,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le rôle du CISO est de permettre le business en réduisant le risque : minimiser les données exposées à la juridiction et garder les clés hors de portée du régulateur local limite ce qu'une réquisition peut réellement produire. Refuser bloque l'activité ; le chiffrement managé localement laisse les clés saisissables avec les données ; un engagement de notification ne prime jamais sur une loi locale, souvent assortie d'une interdiction de notifier.",
       "difficulte": 3,
       "pourquoi": [
-        "Bonne réponse : minimisation des données exposées et clés hors juridiction — une réquisition ne produirait qu'un périmètre réduit de données chiffrées.",
-        "Absolu : refuser sacrifie une obligation commerciale alors que des mesures de réduction du risque existent — le risque se gère avant de se fuir.",
+        "Minimisation des données exposées et clés hors juridiction — une réquisition ne produirait qu'un périmètre réduit de données chiffrées.",
+        "Formulation trop tranchée, refuser sacrifie une obligation commerciale alors que des mesures de réduction du risque existent — le risque se gère avant de se fuir.",
         "Techniquement vrai mais insuffisant : la notification est utile, mais un contrat ne fait pas obstacle à une obligation légale locale.",
-        "Réponse de technicien : un chiffrement dont les clés sont gérées par le fournisseur dans la même juridiction reste saisissable avec les données."
+        "Un chiffrement dont les clés sont gérées par le fournisseur dans la même juridiction reste saisissable avec les données."
       ]
     },
     {
@@ -2074,8 +2077,8 @@ window.CISSP_DATA.domains[2] = {
       "pourquoi": [
         "Techniquement vrai mais hors phase : filtrer les sorties intervient après coup et ne garantit pas l'absence de régurgitation de données sensibles.",
         "Gouvernance de façade : une charte encadre les comportements mais ne contrôle pas le contenu du corpus.",
-        "Bonne réponse : classifier et minimiser AVANT l'entraînement, avec l'accord des owners — un modèle ne « désapprend » pas facilement ce qu'il a mémorisé.",
-        "Réponse de technicien : le lieu d'hébergement ne change rien au fait d'ingérer des données personnelles et contractuelles non maîtrisées."
+        "Classifier et minimiser AVANT l'entraînement, avec l'accord des owners — un modèle ne « désapprend » pas facilement ce qu'il a mémorisé.",
+        "En réalité, le lieu d'hébergement ne change rien au fait d'ingérer des données personnelles et contractuelles non maîtrisées."
       ]
     },
     {
@@ -2090,9 +2093,9 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Un modèle peut mémoriser puis restituer des données d'entraînement : supprimer le corpus source ne purge pas le modèle, et l'argument de l'agrégation anonyme ne tient pas si des données personnelles restent régurgitables. La réponse managériale est une évaluation de risque documentée débouchant sur une mesure proportionnée — réentraînement, machine unlearning ou filtrage des sorties. Le retrait immédiat, avant toute évaluation, est disproportionné.",
       "difficulte": 3,
       "pourquoi": [
-        "Absolu : retirer le modèle avant toute évaluation sacrifie le service sans mesure du risque réel — la proportionnalité est le cœur de l'arbitrage managérial.",
-        "Trop étroit : la purge du corpus source laisse intactes les représentations mémorisées par le modèle, potentiellement régurgitables.",
-        "Bonne réponse : évaluation du risque de régurgitation puis mesure proportionnée et documentée — la démarche de risque attendue d'un data controller.",
+        "Retirer le modèle avant toute évaluation sacrifie le service sans mesure du risque réel — la proportionnalité est le cœur de l'arbitrage managérial.",
+        "Dans ce cas, la purge du corpus source laisse intactes les représentations mémorisées par le modèle, potentiellement régurgitables.",
+        "Voilà le bon choix. Évaluation du risque de régurgitation puis mesure proportionnée et documentée — la démarche de risque attendue d'un data controller.",
         "Absolu et juridiquement fragile : si le modèle peut restituer des données personnelles, il ne s'agit pas d'une anonymisation irréversible."
       ]
     },
@@ -2108,10 +2111,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Dès qu'un litige est raisonnablement anticipé, l'obligation de préservation naît : le legal hold suspend la destruction pour le périmètre concerné, défini avec le juridique et documenté. Appliquer la politique malgré tout exposerait à une accusation de destruction de preuves (spoliation) ; tout exporter est disproportionné et accroît l'exposition ; attendre l'assignation formelle arriverait trop tard.",
       "difficulte": 3,
       "pourquoi": [
-        "Bonne réponse : le legal hold ciblé et documenté, déclenché dès l'anticipation raisonnable du litige, prime sur le calendrier de rétention.",
+        "Le legal hold ciblé et documenté, déclenché dès l'anticipation raisonnable du litige, prime sur le calendrier de rétention.",
         "Piège de la politique-refuge : une politique interne ne protège pas contre une accusation de spoliation — l'obligation légale de préservation prime.",
         "Disproportionné : préserver tout le parc élargit inutilement le périmètre, les coûts et la surface d'exposition, au lieu du périmètre défini avec le juridique.",
-        "Hors phase : l'obligation de préservation naît à l'anticipation raisonnable du litige, pas à la réception de l'assignation — attendre détruirait des preuves."
+        "L'obligation de préservation naît à l'anticipation raisonnable du litige, pas à la réception de l'assignation — attendre détruirait des preuves."
       ]
     },
     {
@@ -2126,9 +2129,9 @@ window.CISSP_DATA.domains[2] = {
       "explication": "L'arbitrage défendable concilie le besoin métier et la conformité : une conservation étendue exige une base légale documentée et une finalité précise, et l'usage d'entraînement se satisfait souvent de données minimisées ou anonymisées — qui sortent alors du champ de la limitation de conservation. Accepter sans condition ignore la loi, refuser par principe invente une règle absolue, et déléguer au fournisseur abandonne une responsabilité qui ne se transfère pas.",
       "difficulte": 3,
       "pourquoi": [
-        "Absolu : aucune règle ne fixe un plafond universel d'un an — la bonne durée découle de la finalité et de la base légale, pas d'un chiffre inventé.",
-        "Bonne réponse : base légale documentée et minimisation ou anonymisation pour l'entraînement — l'arbitrage qui sert le métier tout en restant défendable.",
-        "Hors périmètre : la durée de rétention est une décision du controller — un fournisseur ne peut pas porter cette responsabilité.",
+        "Généralisation excessive, aucune règle ne fixe un plafond universel d'un an — la bonne durée découle de la finalité et de la base légale, pas d'un chiffre inventé.",
+        "C’est l’option correcte. Base légale documentée et minimisation ou anonymisation pour l'entraînement — l'arbitrage qui sert le métier tout en restant défendable.",
+        "Ici, la durée de rétention est une décision du controller — un fournisseur ne peut pas porter cette responsabilité.",
         "Piège du business d'abord : la valeur métier ne constitue pas une base légale — accepter exposerait l'organisation à une non-conformité caractérisée."
       ]
     },
@@ -2147,7 +2150,7 @@ window.CISSP_DATA.domains[2] = {
         "Techniquement vrai mais déclaratif : le certificat documente un engagement, il ne prouve pas l'effacement réel dans tous les systèmes et sauvegardes du fournisseur.",
         "Disproportionné et peu probant : un audit ponctuel ne peut pas vérifier l'absence de copies dans l'ensemble des systèmes et des sauvegardes.",
         "Irréaliste en environnement mutualisé : les disques hébergent les données de nombreux clients — aucun fournisseur ne les détruira pour un seul contrat.",
-        "Bonne réponse : la destruction des clés détenues par le client rend les données irrécupérables partout — y compris dans les sauvegardes du fournisseur — sans dépendre de sa bonne exécution."
+        "La destruction des clés détenues par le client rend les données irrécupérables partout — y compris dans les sauvegardes du fournisseur — sans dépendre de sa bonne exécution."
       ]
     },
     {
@@ -2164,7 +2167,7 @@ window.CISSP_DATA.domains[2] = {
       "pourquoi": [
         "Vrai mais générique : la certification atteste d'un système de management, elle ne garantit pas l'effacement effectif de vos données en fin de contrat.",
         "Techniquement vrai mais partiel : la réversibilité assure de récupérer ses données, pas de rendre irrécupérables les copies restées chez le fournisseur.",
-        "Bonne réponse : des clés client dès le premier jour rendent le crypto-shredding possible à la sortie — la décision d'architecture qui conditionne tout le reste.",
+        "À retenir. Des clés client dès le premier jour rendent le crypto-shredding possible à la sortie — la décision d'architecture qui conditionne tout le reste.",
         "Réactif : une pénalité indemnise après coup un manquement — elle ne prouve ni n'assure l'irrécupérabilité."
       ]
     },
@@ -2181,7 +2184,7 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 2,
       "pourquoi": [
         "Objectif opérationnel, pas de sécurité : respecter la fenêtre de maintenance ne protège en rien la donnée pendant la conversion.",
-        "Bonne réponse : les contrôles doivent voyager avec la donnée — les maintenir pendant et après la migration, puis vérifier l'intégrité du résultat, est le cœur de la data maintenance.",
+        "Les contrôles doivent voyager avec la donnée — les maintenir pendant et après la migration, puis vérifier l'intégrité du résultat, est le cœur de la data maintenance.",
         "Fausse sécurité : l'obscurité d'un format propriétaire n'est pas un contrôle — la confidentialité repose sur le chiffrement et les accès, pas sur l'illisibilité supposée.",
         "Contre-productif : conserver le legacy en ligne indéfiniment multiplie les copies non maîtrisées, la rémanence et la surface d'attaque — il faut le migrer, vérifier, puis l'assainir."
       ]
@@ -2198,7 +2201,7 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le transport de supports classifiés combine quatre mesures : le chiffrement rend la perte inoffensive, l'emballage inviolable révèle toute manipulation, le coursier agréé est un tiers de confiance, et la chain of custody documente chaque détenteur et chaque transfert. Le format propriétaire n'est pas un contrôle, un employé quelconque sans traçabilité ne constitue pas une chain of custody, et un étiquetage visible sans autre protection signale surtout la valeur du colis à un voleur.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : la défense en profondeur du transport — chiffrement, tamper-evident, transporteur de confiance et traçabilité de bout en bout.",
+        "Le raisonnement tient. La défense en profondeur du transport — chiffrement, tamper-evident, transporteur de confiance et traçabilité de bout en bout.",
         "Fausse sécurité : un format de sauvegarde se lit avec des outils courants — sans chiffrement, une bande perdue est une fuite de données.",
         "Absence de contrôle : sans habilitation ni traçabilité signée des remises, il n'y a ni chain of custody ni détection possible d'un détournement.",
         "Contre-productif : un marquage visible sans chiffrement ni emballage inviolable attire l'attention sur le support le plus précieux du lot."
@@ -2219,7 +2222,7 @@ window.CISSP_DATA.domains[2] = {
         "Disproportionné : SP 800-53 est un catalogue exhaustif pensé pour le fédéral américain — sans priorisation, une petite équipe s'y noie, et il ne fournit pas de certification.",
         "Hors séquence : la certification atteste un ISMS qui fonctionne — la viser avant toute mesure technique laisse le risque réel intact pendant des mois.",
         "Attentisme : l'exigence est annoncée — anticiper la trajectoire de certification est exactement le rôle du CISO ; attendre le contrat crée l'urgence subie.",
-        "Bonne réponse : gains rapides et priorisés avec les CIS Controls, puis montée vers l'ISMS certifiable ISO 27001 — la trajectoire qui sert le risque ET l'exigence client."
+        "Gains rapides et priorisés avec les CIS Controls, puis montée vers l'ISMS certifiable ISO 27001 — la trajectoire qui sert le risque ET l'exigence client."
       ]
     }
   ],
@@ -2236,9 +2239,9 @@ window.CISSP_DATA.domains[2] = {
       "explication": "La classification attribue à chaque donnée un niveau de sensibilité fondé sur sa valeur et l'impact d'une compromission, ce qui détermine ensuite le niveau de protection requis. Les audits, la réduction des coûts de stockage et l'attribution de clés sont au mieux des bénéfices secondaires ou des contrôles en aval, pas l'objectif premier.",
       "difficulte": 1,
       "pourquoi": [
-        "Bonne réponse : la classification proportionne la protection à la valeur et à la sensibilité de la donnée.",
-        "Trop étroit : la conformité d'audit est un bénéfice dérivé, pas l'objectif premier de la classification.",
-        "Réponse de technicien : l'attribution de clés est un contrôle en aval, pas le but de la classification.",
+        "La classification proportionne la protection à la valeur et à la sensibilité de la donnée.",
+        "La conformité d'audit est un bénéfice dérivé, pas l'objectif premier de la classification.",
+        "L'attribution de clés est un contrôle en aval, pas le but de la classification.",
         "Vrai mais accessoire : identifier l'obsolète est un sous-produit, pas la finalité."
       ]
     },
@@ -2254,10 +2257,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le data owner — typiquement un cadre dirigeant — porte l'accountability ultime de la protection de la donnée : il classifie, autorise l'accès et s'assure que les contrôles sont en place. Il peut déléguer les tâches (au custodian, à l'administrateur), mais jamais la responsabilité. Les utilisateurs n'ont qu'une responsabilité d'usage conforme.",
       "difficulte": 1,
       "pourquoi": [
-        "Trop étroit : les utilisateurs ont un devoir d'usage conforme, pas l'accountability.",
-        "Réponse de technicien : l'administrateur configure les contrôles sans porter la responsabilité ultime.",
+        "À noter, les utilisateurs ont un devoir d'usage conforme, pas l'accountability.",
+        "Ici, l'administrateur configure les contrôles sans porter la responsabilité ultime.",
         "Rôle d'exécution : le custodian réalise des tâches déléguées, il ne porte pas l'accountability.",
-        "Bonne réponse : le data owner porte l'accountability ultime — il peut déléguer les tâches, jamais la responsabilité."
+        "Le data owner porte l'accountability ultime — il peut déléguer les tâches, jamais la responsabilité."
       ]
     },
     {
@@ -2272,9 +2275,9 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le tiers traite les données pour le compte et sous la direction de l'entreprise cliente : c'est le data processor. L'entreprise, qui décide quelles données traiter, pourquoi et comment, reste le data controller. Le DPO est un rôle interne de supervision de la conformité, et « data owner » est un rôle de gouvernance interne, pas un rôle GDPR.",
       "difficulte": 1,
       "pourquoi": [
-        "Hors périmètre : « data owner » est un rôle de gouvernance interne, pas un rôle GDPR.",
-        "Bonne réponse : le tiers traite pour le compte et sous la direction du client — c'est le data processor.",
-        "Hors sujet : le DPO est une fonction interne de supervision de la conformité.",
+        "« data owner » est un rôle de gouvernance interne, pas un rôle GDPR.",
+        "Voilà le bon choix. Le tiers traite pour le compte et sous la direction du client — c'est le data processor.",
+        "Le DPO est une fonction interne de supervision de la conformité.",
         "Inversion : le controller est l'entreprise qui décide des finalités, pas le sous-traitant."
       ]
     },
@@ -2290,8 +2293,8 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le marking associe des attributs de sécurité sous forme lisible par l'humain (tampon, bandeau) et guide les processus manuels ; le labeling est lisible par le système (métadonnées, RFID, QR codes) et permet l'application automatique des politiques. Les deux s'appliquent à tous les supports, physiques comme numériques.",
       "difficulte": 2,
       "pourquoi": [
-        "Trop étroit : les deux s'appliquent à tous les supports, physiques comme numériques.",
-        "Bonne réponse : le marking est lisible par l'humain (tampon, bandeau) et le labeling par le système (métadonnées).",
+        "Les deux s'appliquent à tous les supports, physiques comme numériques.",
+        "Le marking est lisible par l'humain (tampon, bandeau) et le labeling par le système (métadonnées).",
         "Invention : aucune règle générale ne rend l'un obligatoire et l'autre optionnel.",
         "Invention : la distinction porte sur le destinataire (humain ou système), pas sur qui l'applique."
       ]
@@ -2311,7 +2314,7 @@ window.CISSP_DATA.domains[2] = {
         "Invention : créer un niveau intermédiaire ne protégerait pas la donnée la plus sensible.",
         "Faux : le matériel qui traite des données classifiées est lui-même classifié.",
         "Contresens dangereux : classer au plus bas exposerait les données Secret à des contrôles insuffisants.",
-        "Bonne réponse : un actif hérite de la classification de la donnée la plus sensible qu'il traite ou stocke."
+        "C’est l’option correcte. Un actif hérite de la classification de la donnée la plus sensible qu'il traite ou stocke."
       ]
     },
     {
@@ -2326,8 +2329,8 @@ window.CISSP_DATA.domains[2] = {
       "explication": "La clearance ne suffit jamais : l'accès exige aussi le need-to-know — la donnée doit être nécessaire à la mission — et une approbation formelle impliquant le data owner. C'est le piège classique de l'examen : niveau d'habilitation égal ne signifie pas accès automatique.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : la clearance seule ne suffit jamais — il faut le need-to-know et l'approbation formelle du data owner.",
-        "Trop étroit : le NDA est un contrôle administratif, pas l'autorisation d'accès.",
+        "La clearance seule ne suffit jamais — il faut le need-to-know et l'approbation formelle du data owner.",
+        "En réalité, le NDA est un contrôle administratif, pas l'autorisation d'accès.",
         "Contresens : une clearance supérieure n'est pas requise et ne remplace pas le need-to-know.",
         "Piège classique : niveau d'habilitation égal ne signifie pas accès automatique."
       ]
@@ -2346,8 +2349,8 @@ window.CISSP_DATA.domains[2] = {
       "pourquoi": [
         "Piège du transfert : l'assurance transfère un risque financier, elle ne protège aucune donnée.",
         "Techniquement vrai mais hors phase : le chiffrement se dimensionne après la classification.",
-        "Bonne réponse : identifier et classifier d'abord — les contrôles se choisissent en fonction de la classification.",
-        "Réponse de technicien : déployer un DLP sans classification revient à protéger à l'aveugle."
+        "À retenir. Identifier et classifier d'abord — les contrôles se choisissent en fonction de la classification.",
+        "Déployer un DLP sans classification revient à protéger à l'aveugle."
       ]
     },
     {
@@ -2365,7 +2368,7 @@ window.CISSP_DATA.domains[2] = {
         "Bien protégeable : TLS et IPsec chiffrent robustement le transit.",
         "Bien protégeable : la donnée au repos se chiffre efficacement (volumes, supports).",
         "Cas particulier du repos, bien couvert par le chiffrement.",
-        "Bonne réponse : la donnée en cours de traitement est en clair en mémoire — les protections (patching, purge des buffers) restent limitées."
+        "La donnée en cours de traitement est en clair en mémoire — les protections (patching, purge des buffers) restent limitées."
       ]
     },
     {
@@ -2382,8 +2385,8 @@ window.CISSP_DATA.domains[2] = {
       "pourquoi": [
         "Piège du contrôle détectif : la journalisation constate, elle n'empêche pas.",
         "Techniquement vrai mais contournable : le RBAC ne protège pas le support volé.",
-        "Bonne réponse : le chiffrement fort rend la donnée illisible même en cas de vol du support ou de contournement des contrôles.",
-        "Trop étroit : la politique de mots de passe protège l'authentification, pas le support."
+        "Le raisonnement tient. Le chiffrement fort rend la donnée illisible même en cas de vol du support ou de contournement des contrôles.",
+        "La politique de mots de passe protège l'authentification, pas le support."
       ]
     },
     {
@@ -2398,7 +2401,7 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Conserver des données au-delà du nécessaire accroît la responsabilité juridique — tout e-mail conservé est produisible en justice (eDiscovery) — et augmente la surface d'exposition en cas de compromission. La règle d'or : conserver aussi longtemps que le métier ou la loi l'exige, mais pas plus. Les coûts sont secondaires face au risque juridique, et le legal hold suspend la suppression.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : conserver au-delà du nécessaire accroît la responsabilité juridique (eDiscovery) et la surface d'exposition.",
+        "Conserver au-delà du nécessaire accroît la responsabilité juridique (eDiscovery) et la surface d'exposition.",
         "Généralisation abusive : certains e-mails anciens gardent une valeur — ce n'est pas la logique de la politique.",
         "Détail opérationnel sans rapport avec la logique juridique de la politique.",
         "Vrai mais secondaire : le coût de stockage n'est pas le moteur principal d'une rétention courte."
@@ -2417,8 +2420,8 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 3,
       "pourquoi": [
         "Invention : les licences logicielles ne régissent pas la classification.",
-        "Bonne réponse : l'OS peut écrire le contenu mémoire dans le slack space, créant une rémanence cachée de données classifiées.",
-        "Hors sujet : la puissance de calcul n'a aucun lien avec l'interdiction.",
+        "L'OS peut écrire le contenu mémoire dans le slack space, créant une rémanence cachée de données classifiées.",
+        "À noter, la puissance de calcul n'a aucun lien avec l'interdiction.",
         "Faux : les systèmes non classifiés exécutent parfaitement du chiffrement — le problème est la rémanence."
       ]
     },
@@ -2434,7 +2437,7 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le clearing — réécriture des données avec un motif — protège contre la récupération par les utilitaires logiciels standards, mais des techniques de laboratoire avancées peuvent encore restaurer les données. Le purging vise l'irrécupérabilité même en laboratoire ; l'erasing (simple suppression) ne protège de rien ; la destruction élimine le support.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : le clearing résiste aux outils logiciels standards mais pas aux techniques de laboratoire avancées.",
+        "Le clearing résiste aux outils logiciels standards mais pas aux techniques de laboratoire avancées.",
         "Trop faible : l'erasing (suppression simple) ne résiste même pas aux outils standards.",
         "Hors définition : la destruction élimine le support lui-même.",
         "Trop fort pour la définition : le purging vise l'irrécupérabilité même en laboratoire."
@@ -2454,7 +2457,7 @@ window.CISSP_DATA.domains[2] = {
       "pourquoi": [
         "Efficace sur SSD : l'incinération est une destruction physique.",
         "Efficace sur SSD : le broyage détruit physiquement les puces mémoire.",
-        "Bonne réponse : le degaussing n'agit que sur les supports magnétiques — aucun effet sur la mémoire flash.",
+        "Voilà le bon choix. Le degaussing n'agit que sur les supports magnétiques — aucun effet sur la mémoire flash.",
         "Efficace sur SSD : le crypto-shredding rend les données logiquement irrécupérables."
       ]
     },
@@ -2471,7 +2474,7 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 2,
       "pourquoi": [
         "Piège du faux effacement : la suppression logique laisse une rémanence totale chez le fournisseur.",
-        "Bonne réponse : détruire les clés rend les données logiquement irrécupérables où qu'elles résident — la seule méthode maîtrisée par le client.",
+        "Détruire les clés rend les données logiquement irrécupérables où qu'elles résident — la seule méthode maîtrisée par le client.",
         "Irréaliste en cloud : les baies mutualisées du fournisseur ne peuvent pas être dégaussées pour un seul client.",
         "Vrai mais déclaratif : un certificat n'est qu'une attestation, et la destruction physique de disques mutualisés est irréaliste pour un seul client."
       ]
@@ -2491,7 +2494,7 @@ window.CISSP_DATA.domains[2] = {
         "Inversion des définitions : c'est exactement le contraire.",
         "Faux : les deux termes désignent des jalons distincts du cycle de vie.",
         "Faux : les deux jalons s'appliquent au matériel comme au logiciel.",
-        "Bonne réponse : EOL = fin de commercialisation ; EOS = fin des correctifs et de l'assistance."
+        "C’est l’option correcte. EOL = fin de commercialisation ; EOS = fin des correctifs et de l'assistance."
       ]
     },
     {
@@ -2508,7 +2511,7 @@ window.CISSP_DATA.domains[2] = {
       "pourquoi": [
         "Réactif et dangereux : après l'EOS, toute vulnérabilité restera ouverte à jamais.",
         "Mesure compensatoire temporaire au mieux, jamais une stratégie pérenne.",
-        "Bonne réponse : la posture managériale proactive est de planifier la migration avant l'échéance.",
+        "La posture managériale proactive est de planifier la migration avant l'échéance.",
         "Hors sujet sécurité : le prix ne réduit pas le risque de vulnérabilités non corrigées."
       ]
     },
@@ -2525,9 +2528,9 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 2,
       "pourquoi": [
         "Mauvais point d'observation : le DLP réseau ne voit pas les ports USB des postes.",
-        "Hors sujet : le WAF protège les applications web contre le trafic entrant.",
-        "Hors périmètre : le DLP cloud protège les environnements cloud natifs.",
-        "Bonne réponse : seul le DLP endpoint, exécuté sur le poste, peut bloquer la copie vers un support amovible."
+        "Le WAF protège les applications web contre le trafic entrant.",
+        "Dans ce cas, le DLP cloud protège les environnements cloud natifs.",
+        "À retenir. Seul le DLP endpoint, exécuté sur le poste, peut bloquer la copie vers un support amovible."
       ]
     },
     {
@@ -2543,9 +2546,9 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 1,
       "pourquoi": [
         "Contrôle détectif réseau : l'IDS n'applique pas de politiques d'accès cloud.",
-        "Bonne réponse : le CASB s'interpose entre les utilisateurs et le cloud pour appliquer uniformément les politiques de l'organisation.",
+        "Le CASB s'interpose entre les utilisateurs et le cloud pour appliquer uniformément les politiques de l'organisation.",
         "Le SIEM centralise et corrèle les journaux, il n'applique pas de politiques cloud.",
-        "Hors sujet : le DRM protège des contenus soumis au droit d'auteur."
+        "En réalité, le DRM protège des contenus soumis au droit d'auteur."
       ]
     },
     {
@@ -2560,7 +2563,7 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Les quatre piliers du CASB sont : visibilité, sécurité des données (data security), détection des menaces et conformité. La non-répudiation est un service de sécurité générique, le load balancing une fonction réseau et le patch management une pratique d'exploitation — aucun n'est un pilier du CASB.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : la sécurité des données est l'un des quatre piliers, avec la visibilité, la détection des menaces et la conformité.",
+        "Le raisonnement tient. La sécurité des données est l'un des quatre piliers, avec la visibilité, la détection des menaces et la conformité.",
         "Fonction réseau sans rapport avec le CASB.",
         "Pratique d'exploitation, pas un pilier du CASB.",
         "Service de sécurité générique, pas un pilier du CASB."
@@ -2579,7 +2582,7 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 2,
       "pourquoi": [
         "Réversible : la clé permet toujours le déchiffrement.",
-        "Bonne réponse : l'anonymisation par masquage aléatoire est irréversible, y compris pour l'émetteur.",
+        "L'anonymisation par masquage aléatoire est irréversible, y compris pour l'émetteur.",
         "Réversible : la table de correspondance permet la ré-identification, même protégée.",
         "Réversible : le vault conserve la correspondance avec les identités."
       ]
@@ -2598,7 +2601,7 @@ window.CISSP_DATA.domains[2] = {
       "pourquoi": [
         "Faux : détenir localement le numéro chiffré et la clé exposerait les cartes en cas de compromission.",
         "Impraticable : un hash irréversible empêcherait de retrouver la carte pour traiter le paiement.",
-        "Bonne réponse : le terminal ne voit que des jetons aléatoires ; les vrais numéros restent dans le vault sécurisé.",
+        "Le terminal ne voit que des jetons aléatoires ; les vrais numéros restent dans le vault sécurisé.",
         "Dangereux : une pseudonymisation réversible locale exposerait la correspondance sur le terminal."
       ]
     },
@@ -2614,10 +2617,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Retirer d'une baseline les contrôles qui ne s'appliquent pas aux systèmes visés, c'est le scoping. Il fait partie du processus plus large de tailoring, qui ajoute l'ajustement des paramètres définis par l'organisation et les contrôles compensatoires — mais l'action décrite ici est précisément le scoping. Le hardening durcit une configuration, la categorization évalue l'impact.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : retirer les contrôles sans objet pour les systèmes visés est précisément le scoping.",
+        "Retirer les contrôles sans objet pour les systèmes visés est précisément le scoping.",
         "Piège du processus englobant : l'ajustement des paramètres est du tailoring, mais l'action décrite est le retrait de contrôles inapplicables.",
-        "Hors sujet : le hardening durcit une configuration existante.",
-        "Hors phase : la categorization évalue l'impact avant le choix de la baseline."
+        "Le hardening durcit une configuration existante.",
+        "Dans ce cas, la categorization évalue l'impact avant le choix de la baseline."
       ]
     },
     {
@@ -2632,10 +2635,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le tailoring englobe le scoping mais va plus loin : il ajuste l'ensemble des contrôles à la mission de l'organisation — identification des contrôles communs, spécification des paramètres définis par l'organisation, sélection de contrôles compensatoires. Le scoping seul se limite à retirer l'inapplicable.",
       "difficulte": 3,
       "pourquoi": [
-        "Hors sujet : l'inventaire relève de la gestion des actifs.",
-        "Hors phase : le choix de la baseline précède le tailoring.",
-        "Trop étroit : retirer l'inapplicable n'est que le scoping.",
-        "Bonne réponse : le tailoring ajuste les contrôles à la mission — paramètres définis par l'organisation et contrôles compensatoires inclus."
+        "L'inventaire relève de la gestion des actifs, pas du tailoring.",
+        "Le choix de la baseline précède le tailoring.",
+        "Retirer l'inapplicable n'est que le scoping — le tailoring va plus loin.",
+        "Voilà le bon choix. Le tailoring ajuste les contrôles à la mission — paramètres définis par l'organisation et contrôles compensatoires inclus."
       ]
     },
     {
@@ -2650,10 +2653,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "La data localization est l'exigence LÉGALE de conserver (et parfois traiter) les données dans les frontières du pays — comme en Russie ou en Chine. La sovereignty est le principe général selon lequel la donnée est soumise aux lois du pays où elle réside ; la residency est le CHOIX du lieu de stockage par l'organisation ; la minimization limite la collecte.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : l'obligation légale de stocker et traiter sur le territoire national est la data localization.",
-        "Piège du terme voisin : la sovereignty est le principe général de soumission aux lois locales, pas l'obligation décrite.",
-        "Hors sujet : la minimisation limite la collecte, pas la localisation.",
-        "Piège du terme voisin : la residency est un choix volontaire de l'organisation, pas une contrainte légale."
+        "L'obligation légale de stocker et traiter sur le territoire national est la data localization.",
+        "Terme voisin mais distinct : la sovereignty est le principe général de soumission aux lois locales, pas l'obligation décrite.",
+        "La minimisation limite la collecte, pas la localisation.",
+        "La residency est un choix volontaire de l'organisation, pas une contrainte légale."
       ]
     },
     {
@@ -2671,7 +2674,7 @@ window.CISSP_DATA.domains[2] = {
         "Absolu et disproportionné face au besoin métier.",
         "Fausse assurance : le CLOUD Act s'applique au fournisseur américain indépendamment de la localisation des données.",
         "Impossible juridiquement : la responsabilité de conformité du controller ne se transfère jamais.",
-        "Bonne réponse : des clés gérées par le client rendent les données remises inexploitables, complétées par des clauses contractuelles solides."
+        "C’est l’option correcte. Des clés gérées par le client rendent les données remises inexploitables, complétées par des clauses contractuelles solides."
       ]
     },
     {
@@ -2688,7 +2691,7 @@ window.CISSP_DATA.domains[2] = {
       "pourquoi": [
         "Bénéfice d'achat sans lien avec la sécurité.",
         "Bénéfice comptable accessoire, sans lien avec la sécurité.",
-        "Bonne réponse : on ne peut pas protéger un actif dont on ignore l'existence — l'inventaire précède tout contrôle.",
+        "On ne peut pas protéger un actif dont on ignore l'existence — l'inventaire précède tout contrôle.",
         "Généralisation abusive : les licences ne l'exigent pas toutes, et ce n'est pas l'enjeu de sécurité."
       ]
     },
@@ -2705,7 +2708,7 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 2,
       "pourquoi": [
         "Techniquement vrai mais hors objectif : couper des ports n'inventorie rien.",
-        "Bonne réponse : la découverte continue alimente la CMDB et détecte en permanence les actifs non déclarés.",
+        "À retenir. La découverte continue alimente la CMDB et détecte en permanence les actifs non déclarés.",
         "Piège du même processus en mieux : une campagne manuelle se périme entre deux passages.",
         "Piège de la cause humaine : la sanction ne corrige pas le processus défaillant."
       ]
@@ -2723,8 +2726,8 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 2,
       "pourquoi": [
         "Utile mais hors sujet : un snapshot facilite la restauration, pas l'accountability.",
-        "Réponse de technicien : une IP fixe identifie la machine, pas son responsable.",
-        "Bonne réponse : inventaire + tags (owner, classification, environnement) garantissent un responsable identifiable durant tout le cycle de vie.",
+        "Dans ce cas, une IP fixe identifie la machine, pas son responsable.",
+        "Inventaire + tags (owner, classification, environnement) garantissent un responsable identifiable durant tout le cycle de vie.",
         "Utile mais hors sujet : l'antivirus protège la VM sans établir de responsabilité."
       ]
     },
@@ -2741,7 +2744,7 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 1,
       "pourquoi": [
         "Vrai mais architectural : la complexité d'intégration est un problème d'urbanisation, pas le risque de sécurité principal.",
-        "Bonne réponse : le risque premier est la perte de visibilité — des données partent vers des services non inventoriés, non évalués et non protégés.",
+        "Le raisonnement tient. Le risque premier est la perte de visibilité — des données partent vers des services non inventoriés, non évalués et non protégés.",
         "Vrai mais mineur : le coût des licences est un enjeu financier secondaire.",
         "Préoccupation opérationnelle marginale face au risque sur les données."
       ]
@@ -2758,10 +2761,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "La visibilité est le premier pilier du CASB : en analysant les flux vers le cloud, il révèle les services réellement utilisés — y compris le shadow IT — puis permet d'y appliquer les politiques. Le DRM protège le copyright, le HIPS protège un hôte, et le gestionnaire de mots de passe ne voit que les services déclarés.",
       "difficulte": 2,
       "pourquoi": [
-        "Trop étroit : le HIPS protège un hôte, sans vision des flux cloud.",
-        "Trop étroit : le gestionnaire de mots de passe ne voit que les services déclarés par les utilisateurs.",
-        "Hors sujet : le DRM protège des contenus, il ne cartographie rien.",
-        "Bonne réponse : la visibilité sur les services cloud réellement utilisés — shadow IT compris — est le premier pilier du CASB."
+        "Le HIPS protège un hôte, sans vision des flux cloud.",
+        "Le gestionnaire de mots de passe ne voit que les services déclarés par les utilisateurs.",
+        "Le DRM protège des contenus, il ne cartographie rien.",
+        "La visibilité sur les services cloud réellement utilisés — shadow IT compris — est le premier pilier du CASB."
       ]
     },
     {
@@ -2776,7 +2779,7 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Un déprovisioning défendable enchaîne : révocation des accès et certificats, assainissement des supports selon la classification et la politique (NIST SP 800-88), mise à jour de l'inventaire, et documentation de l'élimination — la trace écrite rend la destruction légalement défendable. Expédier ou reformater sans assainir laisse une rémanence exploitable.",
       "difficulte": 3,
       "pourquoi": [
-        "Bonne réponse : révocation des accès, assainissement selon la classification (SP 800-88), mise à jour de l'inventaire et documentation — la trace écrite rend la destruction défendable.",
+        "Révocation des accès, assainissement selon la classification (SP 800-88), mise à jour de l'inventaire et documentation — la trace écrite rend la destruction défendable.",
         "Incomplet et hors ordre : rien sur l'assainissement des supports ni la révocation des certificats.",
         "Négligence : expédier sans assainir livre la rémanence au recycleur.",
         "Piège du faux effacement : le reformatage laisse une rémanence exploitable avant revente."
@@ -2794,10 +2797,10 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le besoin d'échange est immédiat : la réponse managériale est un pont de gouvernance — une table de correspondance décidée par les data owners, validée par la gouvernance et protectrice par défaut (niveau équivalent le plus élevé). La reclassification exhaustive viendra ensuite, l'application technique sans mapping court-circuite les owners, et le blocage total sacrifie l'objectif de la fusion.",
       "difficulte": 3,
       "pourquoi": [
-        "Bonne réponse : le mapping validé par la gouvernance, protecteur par défaut, permet l'échange immédiat sans sacrifier la sécurité.",
+        "Le mapping validé par la gouvernance, protecteur par défaut, permet l'échange immédiat sans sacrifier la sécurité.",
         "Techniquement vrai mais hors phase : la reclassification complète est l'étape suivante, elle ne répond pas au besoin d'échange immédiat.",
-        "Absolu : bloquer tout partage sacrifie l'objectif business alors qu'une mesure provisoire de gouvernance suffit.",
-        "Réponse de technicien : appliquer des étiquettes sans décision des data owners inverse la gouvernance de la classification."
+        "Bloquer tout partage sacrifie l'objectif business alors qu'une mesure provisoire de gouvernance suffit.",
+        "Appliquer des étiquettes sans décision des data owners inverse la gouvernance de la classification."
       ]
     },
     {
@@ -2812,9 +2815,9 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Avant tout instrument technique ou juridique, il faut la visibilité : cartographier les localisations et les flux réels, puis restreindre la réplication aux juridictions autorisées. Les clauses contractuelles couvrent des transferts qu'il faut d'abord identifier et minimiser, le chiffrement par défaut laisse les clés au fournisseur, et changer de fournisseur est disproportionné avant l'analyse.",
       "difficulte": 3,
       "pourquoi": [
-        "Réponse de technicien : le chiffrement par défaut, clés chez le fournisseur, ne traite pas la question juridictionnelle de la réplication.",
+        "À noter, le chiffrement par défaut, clés chez le fournisseur, ne traite pas la question juridictionnelle de la réplication.",
         "Techniquement vrai mais hors phase : les SCC s'appliquent à des transferts qu'il faut d'abord avoir identifiés et minimisés.",
-        "Bonne réponse : cartographier d'abord, restreindre ensuite — la gouvernance des localisations précède les instruments contractuels et techniques.",
+        "Voilà le bon choix. Cartographier d'abord, restreindre ensuite — la gouvernance des localisations précède les instruments contractuels et techniques.",
         "Absolu et disproportionné : changer de fournisseur avant l'analyse traite le symptôme au prix fort."
       ]
     },
@@ -2830,8 +2833,8 @@ window.CISSP_DATA.domains[2] = {
       "explication": "Le corpus d'entraînement est un actif de données : il doit être inventorié, classifié et minimisé avant l'entraînement, avec l'accord des data owners — car un modèle mémorise, et revenir en arrière après coup est très difficile. L'hébergement, la charte et le filtrage des sorties sont des contrôles utiles mais situés en aval de l'ingestion.",
       "difficulte": 3,
       "pourquoi": [
-        "Réponse de technicien : le lieu d'hébergement ne change rien à l'ingestion de données non maîtrisées.",
-        "Bonne réponse : gouvernance des données AVANT l'entraînement — un modèle ne « désapprend » pas facilement ce qu'il a mémorisé.",
+        "Le lieu d'hébergement ne change rien à l'ingestion de données non maîtrisées.",
+        "Gouvernance des données AVANT l'entraînement — un modèle ne « désapprend » pas facilement ce qu'il a mémorisé.",
         "Techniquement vrai mais hors phase : le filtrage des sorties intervient après l'ingestion et ne garantit pas l'absence de régurgitation.",
         "Gouvernance de façade : une charte encadre les usages, pas le contenu du corpus."
       ]
@@ -2850,8 +2853,8 @@ window.CISSP_DATA.domains[2] = {
       "pourquoi": [
         "Disproportionné : préserver la totalité des boîtes élargit coûts et exposition au lieu du périmètre pertinent.",
         "Piège de la politique-refuge : la politique interne ne protège pas d'une accusation de destruction de preuves — l'obligation légale prime.",
-        "Hors phase : l'obligation naît avant l'assignation — attendre détruirait des preuves potentielles.",
-        "Bonne réponse : le legal hold ciblé et documenté, déclenché dès l'anticipation raisonnable, est l'action immédiate attendue."
+        "À noter, l'obligation naît avant l'assignation — attendre détruirait des preuves potentielles.",
+        "C’est l’option correcte. Le legal hold ciblé et documenté, déclenché dès l'anticipation raisonnable, est l'action immédiate attendue."
       ]
     },
     {
@@ -2866,9 +2869,9 @@ window.CISSP_DATA.domains[2] = {
       "explication": "La déclassification est un processus formel, approuvé par le data owner : la sensibilité diminue souvent avec le temps, et maintenir des protections coûteuses sur des données devenues banales est de la sur-classification. Détruire des documents encore utiles n'est pas une réponse à une classification obsolète, conserver le niveau par prudence gaspille des ressources, et laisser les custodians ré-étiqueter au fil de l'eau court-circuite l'autorité du owner et tout processus formel.",
       "difficulte": 2,
       "pourquoi": [
-        "Hors sujet : l'obsolescence de la classification ne signifie pas que la donnée n'a plus de valeur — la destruction relève de la politique de rétention, pas de la déclassification.",
+        "L'obsolescence de la classification ne signifie pas que la donnée n'a plus de valeur — la destruction relève de la politique de rétention, pas de la déclassification.",
         "Piège de la fausse prudence : sur-classifier gaspille des ressources et pousse au contournement — la réponse CISSP est la protection proportionnée, pas maximale.",
-        "Bonne réponse : la déclassification est un processus formel décidé par le data owner — jamais un ajustement improvisé.",
+        "La déclassification est un processus formel décidé par le data owner — jamais un ajustement improvisé.",
         "Violation des rôles : le custodian applique les protections, il ne décide pas du niveau de classification — seul le owner a cette autorité."
       ]
     },
@@ -2885,7 +2888,7 @@ window.CISSP_DATA.domains[2] = {
       "difficulte": 3,
       "pourquoi": [
         "Techniquement utile mais non certifiable : le NIST CSF structure et communique un programme de gestion des risques, il n'offre aucune certification formelle.",
-        "Bonne réponse : ISO/IEC 27001 est l'ISMS certifiable et internationalement reconnu — la preuve formelle attendue par des clients et régulateurs de plusieurs pays.",
+        "À retenir. ISO/IEC 27001 est l'ISMS certifiable et internationalement reconnu — la preuve formelle attendue par des clients et régulateurs de plusieurs pays.",
         "Mauvais niveau : les CIS Controls priorisent des mesures techniques — excellents pour agir, mais ils ne certifient pas un système de management.",
         "Mauvais contexte : SP 800-53 est un catalogue de contrôles orienté fédéral américain, pas un standard de certification international du management de la sécurité."
       ]
