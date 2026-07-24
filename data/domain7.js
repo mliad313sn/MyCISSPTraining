@@ -2642,6 +2642,276 @@ window.CISSP_DATA.domains[7] = {
         "Transfert de risque incomplet : l'assurance indemnise financièrement mais ne restaure ni les données ni l'activité — elle complète, elle ne remplace pas la résilience."
       ],
       "difficulte": 3
+    },
+    {
+      "q": "Vos équipes déploient les nouveaux serveurs en les configurant manuellement après l'installation. Les audits révèlent des réglages incohérents et des services inutiles restés actifs. Quelle est la MEILLEURE amélioration ?",
+      "choix": [
+        "Rédiger une checklist de durcissement que chaque administrateur devra suivre à la main",
+        "Auditer chaque nouveau serveur une semaine après sa mise en service",
+        "Provisionner les serveurs depuis une image durcie qui applique automatiquement la baseline approuvée",
+        "Réserver le déploiement des serveurs au seul administrateur le plus expérimenté"
+      ],
+      "reponse": 2,
+      "explication": "Le provisioning automatisé depuis une image durcie garantit que chaque système naît avec la baseline complète, de façon cohérente et sans dépendre de la rigueur individuelle. Une checklist manuelle reste sujette à l'erreur humaine, l'audit a posteriori détecte sans prévenir, et concentrer le travail sur une personne crée un goulot d'étranglement sans supprimer l'erreur.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Insuffisant : une checklist manuelle dépend toujours de la rigueur de chacun — l'erreur humaine, cause du problème, subsiste.",
+        "Détectif seulement : l'audit a posteriori découvre les écarts après une semaine d'exposition, il ne les prévient pas.",
+        "Bonne réponse : le provisioning automatisé depuis une image durcie applique la baseline de façon cohérente dès le premier démarrage et élimine l'erreur humaine.",
+        "Faux remède : concentrer les déploiements sur une personne crée un goulot d'étranglement et un point unique de défaillance, sans garantir la cohérence."
+      ]
+    },
+    {
+      "q": "Un scan de conformité révèle qu'un serveur de production s'écarte de la baseline durcie : un port supplémentaire est ouvert, et aucun changement approuvé ne correspond à cette modification. Que devriez-vous faire EN PREMIER ?",
+      "choix": [
+        "Traiter cette dérive inexpliquée comme un incident de sécurité potentiel et investiguer l'origine de la modification",
+        "Refermer immédiatement le port et clore le constat du scan",
+        "Mettre à jour la baseline pour refléter la configuration réellement en production",
+        "Attendre le prochain cycle d'audit pour confirmer que la dérive persiste"
+      ],
+      "reponse": 0,
+      "explication": "Une dérive de configuration sans changement approuvé correspondant peut être la trace d'un changement non autorisé ou d'une compromission : on investigue avant de corriger. Refermer le port immédiatement détruirait un indice précieux sans comprendre la cause ; aligner la baseline sur la réalité valide un état non approuvé ; attendre laisse une exposition potentielle ouverte.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Bonne réponse : un écart inexpliqué par le change management est un signal de changement non autorisé, voire de compromission — on investigue d'abord.",
+        "Prématuré : corriger sans comprendre efface l'indice et laisse la cause racine (ou l'attaquant) en place.",
+        "Inversion dangereuse : adapter la baseline à la réalité revient à approuver rétroactivement un état non autorisé.",
+        "Inacceptable : attendre des semaines laisse une exposition potentielle (ou un attaquant) en place sans analyse."
+      ]
+    },
+    {
+      "q": "L'infrastructure d'une organisation est entièrement définie en Infrastructure as Code. Pour résoudre un incident urgent, un administrateur modifie à la main un paramètre sur douze serveurs sans toucher au code. Quel est le PRINCIPAL risque de cette pratique ?",
+      "choix": [
+        "Les serveurs modifiés consommeront davantage de ressources cloud",
+        "Le fournisseur cloud pourrait facturer des frais de modification supplémentaires",
+        "L'équipe réseau perdra la visibilité sur le trafic de ces serveurs",
+        "Une dérive de configuration : l'état réel ne correspond plus à la source de vérité et le prochain redéploiement écrasera silencieusement le correctif"
+      ],
+      "reponse": 3,
+      "explication": "En IaC, le code est la source de vérité. Toute modification manuelle crée une dérive : la documentation ment, les audits de conformité échouent, et le prochain redéploiement depuis le code écrasera le correctif, faisant réapparaître l'incident. La bonne pratique est de répercuter le correctif dans le code via le change management. Les autres options n'ont aucun lien avec le mécanisme de l'IaC.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Hors sujet : la consommation de ressources n'est pas liée au fait que la modification soit manuelle ou codée.",
+        "Invention : les fournisseurs cloud ne facturent pas les modifications de configuration des systèmes clients.",
+        "Hors sujet : la visibilité réseau n'est pas affectée par une modification de paramètre hors du code.",
+        "Bonne réponse : la modification manuelle crée une dérive vis-à-vis de la source de vérité — le prochain déploiement depuis le code écrasera le correctif et l'incident réapparaîtra."
+      ]
+    },
+    {
+      "q": "Une application web critique doit rester disponible pendant la maintenance de n'importe quel serveur ET absorber des pics de charge saisonniers importants. Quelle architecture répond le MIEUX à ces deux besoins ?",
+      "choix": [
+        "Un serveur principal avec un serveur secondaire en attente qui prend le relais en cas de panne (failover)",
+        "Un cluster de serveurs actifs répartis derrière un load balancer",
+        "Un serveur unique surdimensionné en mémoire et en processeurs",
+        "Un warm site prêt à être activé en une douzaine d'heures"
+      ],
+      "reponse": 1,
+      "explication": "Le clustering avec répartition de charge répond aux deux exigences : chaque nœud peut être retiré pour maintenance pendant que les autres servent le trafic, et la capacité cumulée des nœuds actifs absorbe les pics. Un couple actif-passif n'ajoute aucune capacité en fonctionnement normal, un serveur unique reste un point unique de défaillance, et un warm site relève du DR, pas de la disponibilité au quotidien.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Partiel : le failover couvre la panne, mais le serveur en attente n'absorbe aucune charge en temps normal — les pics saisonniers ne sont pas traités.",
+        "Bonne réponse : des nœuds actifs derrière un load balancer permettent la maintenance sans interruption ET répartissent la charge des pics.",
+        "Point unique de défaillance : le scale-up améliore la capacité mais toute maintenance ou panne interrompt le service.",
+        "Hors échelle de temps : un warm site répond à un sinistre en plusieurs heures, pas à la disponibilité continue ni aux pics de charge."
+      ]
+    },
+    {
+      "q": "Les appels VoIP de l'entreprise se dégradent chaque soir lorsque les sauvegardes réseau saturent le lien WAN. Quel mécanisme traite ce problème le PLUS directement ?",
+      "choix": [
+        "La tolérance aux pannes (fault tolerance) sur les serveurs VoIP",
+        "L'ajout de serveurs VoIP supplémentaires en cluster",
+        "La qualité de service (QoS) pour prioriser le trafic voix, sensible à la latence",
+        "Un IPS configuré pour limiter le trafic de sauvegarde"
+      ],
+      "reponse": 2,
+      "explication": "Le problème est une contention de bande passante entre deux flux légitimes : la QoS priorise le trafic voix, sensible à la latence et à la gigue, sur le trafic de sauvegarde qui tolère les délais. La fault tolerance et le clustering traitent les pannes de serveurs, pas la saturation du lien ; un IPS est un outil de sécurité, pas de gestion de la bande passante.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Mauvais problème : la fault tolerance protège contre les défaillances matérielles — ici aucun composant n'est en panne, le lien est saturé.",
+        "Mauvais goulot : ajouter des serveurs n'élargit pas le lien WAN saturé par les sauvegardes.",
+        "Bonne réponse : la QoS gère la contention en priorisant le flux sensible à la latence (la voix) sur le flux tolérant aux délais (les sauvegardes).",
+        "Détournement d'outil : l'IPS bloque le trafic malveillant ; il n'est pas conçu pour arbitrer la bande passante entre flux légitimes."
+      ]
+    },
+    {
+      "q": "Une plateforme de paiement vise un RTO proche de zéro et doit survivre à la perte complète d'un datacenter régional sans intervention manuelle. Quelle stratégie répond le MIEUX à cette exigence ?",
+      "choix": [
+        "Un hot site par abonnement activé par l'équipe DR dès la déclaration du sinistre",
+        "Des sauvegardes horaires répliquées vers un warm site géographiquement distant",
+        "Un resource capacity agreement garantissant des équipements de remplacement",
+        "Plusieurs sites de traitement actifs (active-active) se répartissant la charge en permanence, chacun dimensionné pour absorber le trafic des autres"
+      ],
+      "reponse": 3,
+      "explication": "Seuls des sites de traitement multiples en actif-actif offrent une continuité sans intervention : la charge est déjà répartie, et la perte d'un site est absorbée automatiquement par les autres. Un hot site exige une déclaration de sinistre et une bascule (RTO non nul), un warm site se compte en heures, et un resource capacity agreement fournit du matériel, pas une reprise instantanée.",
+      "difficulte": 3,
+      "pourquoi": [
+        "RTO non nul : même un hot site exige la déclaration du sinistre et une bascule orchestrée — il y a interruption et intervention humaine.",
+        "Trop lent : un warm site s'active en une douzaine d'heures au mieux, incompatible avec un RTO proche de zéro.",
+        "Mauvaise nature : cet accord garantit la fourniture de ressources après sinistre, il ne fournit aucune continuité de traitement.",
+        "Bonne réponse : l'architecture multi-sites active-active absorbe la perte d'un site automatiquement, sans bascule ni intervention — le seul modèle à RTO quasi nul."
+      ]
+    },
+    {
+      "q": "Un séisme rend le siège inaccessible un dimanche soir et détruit la messagerie et la téléphonie de l'entreprise. Le coordinateur DR doit notifier rapidement l'ensemble du personnel de reprise. Quelle disposition le plan aurait-il dû prévoir en PRIORITÉ ?",
+      "choix": [
+        "Un call tree documenté et testé, avec suppléants, confirmation de réception et coordonnées personnelles hors bande",
+        "Un e-mail groupé envoyé depuis la messagerie de l'entreprise",
+        "Une annonce publiée sur l'intranet de l'organisation",
+        "Laisser chaque responsable improviser la notification de son équipe"
+      ],
+      "reponse": 0,
+      "explication": "Le call tree est la méthode de communication DR citée par le référentiel : notification en cascade via des coordonnées personnelles hors bande, avec des suppléants à chaque nœud et une confirmation qui remonte l'arbre. La messagerie et l'intranet de l'entreprise sont précisément indisponibles dans ce scénario, et l'improvisation garantit des oublis au pire moment.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Bonne réponse : le call tree avec suppléants, accusés de réception et coordonnées hors bande fonctionne même quand toute l'infrastructure de l'entreprise est détruite.",
+        "Indisponible : la messagerie de l'entreprise fait partie des systèmes détruits par le sinistre.",
+        "Indisponible et passif : l'intranet est hors service, et une annonce suppose que chacun pense à la consulter.",
+        "Improvisation : sans procédure prédéfinie ni coordonnées à jour, des pans entiers du personnel ne seront jamais joints."
+      ]
+    },
+    {
+      "q": "La direction craint que des données clients quittent l'entreprise par des canaux non autorisés, comme des dépôts sur des services web ou des messageries personnelles. Quel contrôle répond le PLUS directement à cette préoccupation ?",
+      "choix": [
+        "Un IDS surveillant le trafic entrant au périmètre",
+        "L'egress monitoring, appuyé sur un DLP, inspectant le trafic sortant",
+        "Le chiffrement intégral des disques des postes de travail",
+        "Un honeypot pour détourner et observer les attaquants"
+      ],
+      "reponse": 1,
+      "explication": "L'exfiltration est un problème de trafic SORTANT : l'egress monitoring, typiquement outillé par un DLP et l'analyse NetFlow, détecte et bloque les transferts non autorisés de données vers l'extérieur. Un IDS orienté trafic entrant regarde dans la mauvaise direction, le chiffrement des disques protège contre le vol physique mais pas contre un envoi par un utilisateur authentifié, et le honeypot ne surveille rien de la sortie des données.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Mauvaise direction : un IDS centré sur le trafic entrant ne voit pas les données qui sortent.",
+        "Bonne réponse : l'egress monitoring avec DLP est précisément le contrôle qui inspecte le trafic sortant pour détecter et bloquer l'exfiltration.",
+        "Mauvais scénario : le chiffrement au repos protège un disque volé, pas des données envoyées par une session légitime authentifiée.",
+        "Hors sujet : le honeypot attire et occupe l'attaquant, il ne surveille pas la sortie des données de production."
+      ]
+    },
+    {
+      "q": "Votre organisation externalise l'hébergement d'une application critique et exige des garanties de disponibilité opposables, assorties de pénalités financières en cas de manquement. Quel document devez-vous négocier ?",
+      "choix": [
+        "Un Memorandum of Understanding (MOU) entre les deux directions",
+        "Une politique de sécurité commune aux deux organisations",
+        "Un Service Level Agreement (SLA) avec des niveaux de service mesurables et des pénalités",
+        "Une lettre d'intention décrivant le partenariat envisagé"
+      ],
+      "reponse": 2,
+      "explication": "Le SLA est le document contractuel qui fixe des niveaux de service mesurables (disponibilité, temps de réponse) et prévoit des pénalités en cas de manquement — exactement l'exigence exprimée. Le MOU et la lettre d'intention documentent une volonté de coopérer sans force contraignante forte, et une politique de sécurité relève de la gouvernance interne, pas d'un engagement de service opposable.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Sans dents : le MOU exprime une intention de coopérer, il ne porte ni engagement mesurable ni pénalité opposable.",
+        "Mauvais instrument : une politique gouverne des comportements internes, elle ne contractualise pas un niveau de service avec un tiers.",
+        "Bonne réponse : le SLA contractualise des niveaux de service mesurables avec pénalités — le seul document opposable pour la disponibilité.",
+        "Sans force contraignante : la lettre d'intention précède un contrat, elle ne garantit rien."
+      ]
+    },
+    {
+      "q": "Un RSSI veut remplacer au périmètre un firewall stateful vieillissant par un équipement unique capable d'identifier les applications indépendamment du port utilisé, d'inspecter le contenu des flux et de bloquer les intrusions. Quelle technologie correspond à ce besoin ?",
+      "choix": [
+        "Un circuit-level gateway validant l'établissement des sessions",
+        "Un WAF déployé devant les serveurs web",
+        "Un filtre de paquets statique haute performance",
+        "Un next-generation firewall (NGFW)"
+      ],
+      "reponse": 3,
+      "explication": "Le NGFW combine en un équipement l'inspection stateful, le deep packet inspection, la reconnaissance applicative indépendante du port et des fonctions IPS — exactement le cahier des charges. Le circuit-level gateway (couche 5) n'inspecte pas le contenu, le WAF ne protège que les applications web derrière lui, et le filtre statique (couche 3) est aveugle au contexte et au contenu.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Trop limité : le circuit-level gateway valide les sessions en couche 5 sans jamais inspecter le contenu ni reconnaître les applications.",
+        "Mauvais périmètre : le WAF protège spécifiquement des applications web, il ne remplace pas le firewall de périmètre pour tous les flux.",
+        "Régression : le filtrage statique de couche 3 est encore moins capable que le stateful à remplacer.",
+        "Bonne réponse : le NGFW cumule stateful, DPI, contrôle applicatif indépendant du port et IPS dans un seul équipement."
+      ]
+    },
+    {
+      "q": "Un attaquant a effacé les journaux système et les fichiers temporaires du poste compromis avant de disparaître. Quelle source d'artefacts offre la MEILLEURE chance de reconstituer l'exfiltration de données ?",
+      "choix": [
+        "Les artefacts réseau : enregistrements NetFlow, journaux du proxy et du DNS, captures de paquets",
+        "Le registre Windows du poste compromis",
+        "L'historique du navigateur de l'utilisateur",
+        "Les fichiers récupérables dans la corbeille du poste"
+      ],
+      "reponse": 0,
+      "explication": "Les artefacts réseau sont collectés par des équipements hors de portée de l'attaquant (sondes, proxy, collecteurs NetFlow) : ils survivent au nettoyage de l'endpoint et tracent les destinations et volumes des transferts sortants. Le registre, l'historique du navigateur et la corbeille résident sur la machine que l'attaquant a précisément nettoyée.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Bonne réponse : NetFlow, proxy et DNS sont enregistrés hors de portée de l'attaquant et tracent destinations et volumes — la seule source intacte après nettoyage de l'endpoint.",
+        "Compromis : le registre réside sur la machine nettoyée et documente surtout la configuration locale, pas les flux sortants.",
+        "Compromis : l'historique du navigateur est un artefact local que l'attaquant a pu effacer avec le reste.",
+        "Compromis : la corbeille est sur le poste nettoyé et ne dit rien des données parties sur le réseau."
+      ]
+    },
+    {
+      "q": "Trois mois après un audit de sécurité annuel réussi, une organisation est compromise via une vulnérabilité apparue entre-temps. Quelle approche aurait le MIEUX réduit ce risque ?",
+      "choix": [
+        "Passer les audits d'annuels à semestriels",
+        "Un programme de continuous monitoring évaluant en permanence la posture, les vulnérabilités et les menaces",
+        "Un test d'intrusion supplémentaire immédiatement après chaque audit",
+        "Une cyber-assurance couvrant les conséquences des compromissions"
+      ],
+      "reponse": 1,
+      "explication": "Le problème structurel est l'évaluation ponctuelle : toute photo est périmée dès qu'une nouvelle vulnérabilité apparaît. Le continuous monitoring (NIST SP 800-137) maintient une conscience permanente de la posture — scans récurrents, SIEM, alerting — et aurait détecté la vulnérabilité à son apparition. Densifier les évaluations ponctuelles laisse toujours des fenêtres d'exposition, et l'assurance indemnise sans rien prévenir.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Même défaut : des audits semestriels restent des photos ponctuelles — la fenêtre d'exposition passe de 12 à 6 mois, elle ne disparaît pas.",
+        "Bonne réponse : la supervision continue détecte les nouvelles vulnérabilités à leur apparition, au lieu d'attendre la prochaine évaluation ponctuelle.",
+        "Même défaut : un pentest post-audit est encore un instantané, aveugle à ce qui apparaît le mois suivant.",
+        "Aucune prévention : l'assurance transfère l'impact financier, elle ne réduit pas la probabilité de compromission."
+      ]
+    },
+    {
+      "q": "Au terme d'une investigation interne susceptible de déboucher sur une procédure judiciaire, l'enquêteur rédige son rapport final. Quelle pratique est la PLUS importante ?",
+      "choix": [
+        "Limiter le rapport aux éléments favorables à la position de l'organisation",
+        "Ne présenter que les conclusions pour préserver la confidentialité des méthodes",
+        "Documenter factuellement chaque étape et chaque preuve, en distinguant clairement les faits constatés des opinions de l'enquêteur",
+        "Diffuser le rapport uniquement à l'équipe technique qui a mené l'analyse"
+      ],
+      "reponse": 2,
+      "explication": "Un rapport d'investigation doit être complet et factuel, documenter la méthodologie et la manipulation des preuves, et séparer explicitement les faits des interprétations — c'est ce qui lui permet de résister à un examen judiciaire. Omettre les éléments défavorables viole la règle de complétude de la preuve, masquer la méthodologie détruit la crédibilité, et le rapport doit atteindre la direction et le juridique, pas rester chez les techniciens.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Violation de complétude : une preuve doit être « complete », éléments défavorables inclus — un rapport partial s'effondre au tribunal.",
+        "Indéfendable : sans méthodologie documentée, impossible de démontrer la fiabilité des conclusions devant un juge.",
+        "Bonne réponse : documentation factuelle exhaustive et séparation faits/opinions sont ce qui rend le rapport crédible et exploitable en justice.",
+        "Mauvaise audience : la direction et le juridique doivent décider sur la base du rapport — le confiner à la technique le rend inutile."
+      ]
+    },
+    {
+      "q": "Des bandes de sauvegarde contenant des données clients sont transportées chaque semaine vers un site de stockage externe par un prestataire. Quel contrôle protège le MIEUX la confidentialité des données en cas de perte ou de vol pendant le transport ?",
+      "choix": [
+        "Un bordereau de suivi signé à chaque transfert de responsabilité",
+        "Le marquage des bandes selon leur niveau de classification",
+        "Une clause de confidentialité dans le contrat du prestataire",
+        "Le chiffrement des données au repos sur les bandes avant leur départ"
+      ],
+      "reponse": 3,
+      "explication": "Seul le chiffrement des données au repos rend les bandes illisibles pour quiconque les dérobe : la confidentialité survit à la perte physique du support. Le bordereau trace la responsabilité mais ne protège pas le contenu, le marquage signale la sensibilité (et peut même attirer l'attention), et la clause contractuelle crée un recours juridique sans effet technique sur des bandes volées.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Traçabilité seulement : le bordereau dit qui avait les bandes, il ne rend pas leur contenu illisible pour un voleur.",
+        "Contre-productif seul : le marquage aide la manipulation correcte mais n'empêche aucune lecture — il peut même signaler la valeur du support.",
+        "Sans effet technique : une clause contractuelle offre un recours après coup, elle ne protège pas les données déjà volées.",
+        "Bonne réponse : chiffrées au repos, les bandes perdues ou volées restent illisibles — la confidentialité ne dépend plus de la possession physique."
+      ]
+    },
+    {
+      "q": "Un incendie se déclare dans le datacenter pendant les heures ouvrées, alors qu'une migration critique est en cours. En tant que responsable présent sur place, que faites-vous EN PREMIER ?",
+      "choix": [
+        "Lancer l'arrêt propre des serveurs pour éviter la corruption des données",
+        "Déclencher l'évacuation et faire comptabiliser le personnel aux points de rassemblement",
+        "Superviser le système d'extinction pour limiter les dégâts matériels",
+        "Notifier la direction et l'assureur de l'interruption de la migration"
+      ],
+      "reponse": 1,
+      "explication": "La gestion des urgences obéit à une hiérarchie absolue : la vie humaine d'abord. La première action est l'évacuation et la comptabilisation du personnel aux points de rassemblement. Les serveurs, l'extinction et les notifications viennent après — et toute réponse d'examen qui fait passer un actif avant les personnes est fausse.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Inversion des priorités : rester pour arrêter des serveurs expose des vies pour protéger des données.",
+        "Bonne réponse : évacuer et comptabiliser le personnel applique la règle absolue — la sécurité des personnes avant tout actif.",
+        "Rôle des systèmes et des pompiers : l'extinction est automatique ou relève des secours, pas d'un responsable qui devrait évacuer.",
+        "Prématuré : les notifications administratives attendent que les personnes soient en sécurité."
+      ]
     }
   ],
   "quizEn": [

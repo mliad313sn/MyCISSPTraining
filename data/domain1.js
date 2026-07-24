@@ -2877,6 +2877,150 @@ window.CISSP_DATA.domains[1] = {
         "Réponse d'architecte : la régionalisation est une solution possible, mais la choisir avant d'avoir cartographié les obligations revient à concevoir sans exigences.",
         "Correcte : le manager établit d'abord les faits — traitements, données, obligations par juridiction — puis arbitre avec le juridique selon le risque : c'est la démarche de gouvernance."
       ]
+    },
+    {
+      "q": "Un éditeur américain s'apprête à vendre à des clients étrangers une appliance de sécurité intégrant un chiffrement fort, utilisable aussi bien en contexte civil que militaire. Quel régime encadre PRINCIPALEMENT cette exportation ?",
+      "choix": [
+        "ITAR, car tout produit à usage potentiellement militaire est un article d'armement",
+        "EAR, le régime américain des biens commerciaux à double usage",
+        "L'arrangement de Wassenaar, traité contraignant qui autorise directement l'export",
+        "Aucun régime : les logiciels commerciaux sont librement exportables"
+      ],
+      "reponse": 1,
+      "explication": "Un produit commercial à double usage, civil et militaire, comme un équipement intégrant de la cryptographie forte, relève de l'Export Administration Regulations (EAR). L'ITAR est réservé aux articles de défense inscrits sur l'US Munitions List. L'arrangement de Wassenaar est un accord multinational volontaire qui coordonne les politiques nationales d'export : il n'a pas force de loi et n'autorise rien par lui-même. Et la cryptographie forte reste un bien contrôlé à l'export, même dans un produit commercial.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Piège de sur-classification : l'ITAR vise les articles de défense de l'US Munitions List ; un produit commercial à double usage relève de l'EAR.",
+        "Correcte : l'Export Administration Regulations régit précisément les biens commerciaux à double usage, dont la cryptographie forte destinée à l'export.",
+        "Contresens sur sa nature : Wassenaar est un arrangement multinational volontaire qui harmonise les politiques d'export ; il n'a pas force de loi et ne délivre aucune autorisation.",
+        "Faux : la cryptographie forte est le cas d'école du bien contrôlé à l'exportation, même intégrée à un produit commercial grand public."
+      ]
+    },
+    {
+      "q": "Un grand éditeur exerce sa clause d'audit contractuelle. Votre inventaire interne révèle 1 200 installations d'un logiciel pour 800 licences acquises. En tant que responsable, que devriez-vous faire EN PREMIER ?",
+      "choix": [
+        "Désinstaller discrètement les 400 copies excédentaires avant l'arrivée des auditeurs",
+        "Contester la validité de la clause d'audit pour gagner du temps",
+        "Attendre les conclusions de l'éditeur avant toute action interne",
+        "Valider l'écart via le programme SAM, informer la direction et le juridique, et préparer une régularisation transparente"
+      ],
+      "reponse": 3,
+      "explication": "Face à un audit d'éditeur, la démarche de gouvernance consiste à établir les faits avec le Software Asset Management, à informer la direction et le juridique, puis à coopérer et régulariser : c'est ce qui limite à la fois le risque contractuel et le risque de violation de copyright. Désinstaller discrètement revient à dissimuler des preuves face à un audit contractuel, contester la clause librement acceptée est dilatoire, et attendre passivement prive la direction de toute capacité d'anticipation et de négociation.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Dissimulation de preuves face à un audit contractuel : contraire à la Due Care et à l'éthique, et les journaux d'installation trahiraient la manœuvre.",
+        "Dilatoire : la clause d'audit a été librement acceptée au contrat ; la contester sans base juridique aggrave la position de l'organisation.",
+        "Passive : attendre prive la direction de la possibilité d'anticiper l'impact financier et de négocier une régularisation.",
+        "Correcte : établir les faits avec le SAM, informer la direction et le juridique, puis coopérer et régulariser — la démarche honnête qui limite le risque contractuel et de copyright."
+      ]
+    },
+    {
+      "q": "Le meilleur candidat pour un poste d'administrateur de bases de données financières refuse la vérification d'antécédents prévue par la politique de recrutement, en invoquant sa vie privée. Quelle est la MEILLEURE décision ?",
+      "choix": [
+        "Maintenir l'exigence : le screening, proportionné à la sensibilité du poste et conforme au droit local, est une condition d'embauche",
+        "L'embaucher en compensant par une période d'essai prolongée et un encadrement renforcé",
+        "L'embaucher avec des accès restreints pendant six mois avant de lui accorder les droits complets",
+        "Remplacer la vérification par une attestation sur l'honneur signée par le candidat"
+      ],
+      "reponse": 0,
+      "explication": "Pour un poste à accès privilégié sur des données financières, la vérification d'antécédents prévue par la politique est un contrôle de personnel non négociable, mené dans le respect du droit local et proportionné au poste. Aucune des alternatives ne révèle un éventuel passé de fraude : la période d'essai n'observe que le comportement futur, les accès restreints sont incompatibles avec la fonction d'administrateur et ne font que différer le risque, et l'attestation sur l'honneur repose sur la bonne foi de la personne qu'on cherche précisément à vérifier.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Correcte : pour un poste à accès privilégié sur des données financières, le screening prévu par la politique est un contrôle de personnel non négociable, mené dans le respect du droit local.",
+        "Substitution illusoire : une période d'essai observe le comportement futur ; elle ne révèle rien d'un passé de fraude que la vérification d'antécédents aurait détecté.",
+        "Incompatible avec le poste : un administrateur de bases de données a besoin d'accès privilégiés pour travailler ; restreindre ses droits ne fait que retarder le risque sans le traiter.",
+        "Contrôle déclaratif sans valeur probante : l'attestation sur l'honneur repose sur la bonne foi de la personne qu'on cherche justement à vérifier."
+      ]
+    },
+    {
+      "q": "Un ingénieur démissionne pour rejoindre un concurrent direct et affirme pouvoir désormais parler librement des projets confidentiels puisqu'il n'est plus salarié. Quel document donne à l'organisation le MEILLEUR recours ?",
+      "choix": [
+        "L'Acceptable Use Policy (AUP) qu'il avait signée à son arrivée",
+        "Son contrat de travail, même arrivé à terme",
+        "Le Non-Disclosure Agreement (NDA), dont les obligations survivent à la fin de l'emploi",
+        "La politique de classification des données de l'entreprise"
+      ],
+      "reponse": 2,
+      "explication": "Le NDA est précisément conçu pour que l'obligation de confidentialité survive à la fin de la relation d'emploi : c'est lui qui fonde un recours juridique contre la divulgation d'informations confidentielles par un ancien salarié. L'AUP encadre l'usage des ressources informatiques pendant l'emploi, les obligations générales du contrat de travail cessent pour l'essentiel avec la relation, et la politique de classification est un document interne qui n'engage pas contractuellement un ex-employé.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Hors périmètre : l'AUP encadre l'usage acceptable des ressources informatiques pendant l'emploi, pas la confidentialité après le départ.",
+        "Insuffisant : les obligations générales du contrat de travail s'éteignent pour l'essentiel avec la relation d'emploi, sauf clauses spécifiques de survie.",
+        "Correcte : le NDA est conçu pour que l'obligation de confidentialité survive à la fin du contrat, offrant un recours juridique contre la divulgation.",
+        "Document interne : la politique de classification organise la protection des données dans l'entreprise, elle ne lie pas contractuellement un ancien salarié."
+      ]
+    },
+    {
+      "q": "La direction marketing veut lancer un profilage à grande échelle des clients européens combinant géolocalisation et historique d'achats. Avec le DPO, qu'exigez-vous AVANT le démarrage du traitement ?",
+      "choix": [
+        "Un Security Control Assessment complet de l'infrastructure d'hébergement",
+        "Une Data Protection Impact Assessment (DPIA), le traitement présentant un risque élevé pour les droits des personnes",
+        "Une notification préalable du projet à l'autorité de contrôle sous 72 heures",
+        "Un test d'intrusion de l'application de profilage"
+      ],
+      "reponse": 1,
+      "explication": "Un profilage à grande échelle de résidents européens est un traitement à risque élevé : l'article 35 du GDPR impose une DPIA menée avant le début du traitement, avec le concours du DPO ; si le risque résiduel reste élevé, une consultation préalable de l'autorité de contrôle s'ajoute. Le SCA vérifie les contrôles de sécurité mais n'évalue pas l'impact sur les droits des personnes, le délai de 72 heures concerne la notification d'une violation et non le lancement d'un traitement, et le pentest est un contrôle technique ponctuel qui ne remplace pas l'analyse d'impact.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Angle incomplet : le SCA vérifie les contrôles de sécurité, mais n'évalue pas l'impact du traitement sur les droits et libertés des personnes — l'objet même de l'exigence GDPR.",
+        "Correcte : profilage à grande échelle de résidents européens = traitement à risque élevé ; l'article 35 du GDPR impose une DPIA avant le début du traitement, menée avec le DPO.",
+        "Confusion de mécanismes : les 72 heures concernent la notification d'une violation de données ; seule une DPIA au risque résiduel élevé impose une consultation préalable de l'autorité.",
+        "Contrôle technique ponctuel : utile plus tard, mais il ne remplace pas l'analyse d'impact juridique et organisationnelle exigée avant le traitement."
+      ]
+    },
+    {
+      "q": "Un système critique vient d'être autorisé en production. La direction demande comment garantir que sa posture de sécurité restera acceptable entre deux évaluations annuelles. Quelle est la MEILLEURE réponse ?",
+      "choix": [
+        "Mettre en place un monitoring continu : collecte automatisée, KRI assortis de seuils déclencheurs, réévaluation à chaque changement majeur",
+        "Doubler la fréquence des audits en passant à des évaluations semestrielles",
+        "Programmer un test d'intrusion complet après chaque incident de sécurité",
+        "S'appuyer sur les scans de vulnérabilités mensuels déjà en place"
+      ],
+      "reponse": 0,
+      "explication": "Le continuous monitoring comble précisément l'angle mort entre deux évaluations ponctuelles : visibilité permanente par collecte automatisée, indicateurs de risque dotés de seuils qui déclenchent une action prédéfinie, et réévaluation dès qu'un changement majeur modifie le profil de risque. Des audits semestriels restent du ponctuel avec des mois d'angle mort, un pentest post-incident est réactif par construction, et les scans mensuels ne couvrent qu'une famille de faiblesses techniques sans mesurer l'efficacité globale des contrôles.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Correcte : le monitoring continu maintient une visibilité permanente, déclenche des actions au franchissement des seuils de KRI, et réévalue le risque à chaque changement majeur — exactement la demande.",
+        "Toujours du ponctuel : des audits semestriels laissent encore des mois d'angle mort et ne détectent ni dérive de configuration ni évolution de la menace en temps utile.",
+        "Réactif par construction : attendre l'incident pour évaluer revient à constater l'échec au lieu de le prévenir.",
+        "Fragmentaire : les scans mensuels ne couvrent qu'une famille de faiblesses techniques, sans mesurer l'efficacité d'ensemble des contrôles ni la dérive du risque."
+      ]
+    },
+    {
+      "q": "Les employés d'une fintech subissent des arnaques à l'investissement en cryptomonnaie et des deepfakes vocaux imitant leur direction, mais la formation de sensibilisation, conçue il y a trois ans, ne couvre que le phishing par e-mail. Que devrait faire le responsable du programme ?",
+      "choix": [
+        "Augmenter la fréquence des campagnes de phishing simulé existantes",
+        "Attendre la prochaine revue annuelle planifiée pour modifier les supports",
+        "Compenser par un durcissement des filtres de messagerie",
+        "Déclencher une revue du contenu pour intégrer les menaces émergentes, puis re-mesurer l'efficacité du programme"
+      ],
+      "reponse": 3,
+      "explication": "Le contenu SETA est un contenu vivant : la revue périodique planifiée se complète de revues déclenchées par l'évolution des menaces. Face à des attaques émergentes avérées — cryptomonnaie, deepfakes — non couvertes par des supports vieux de trois ans, on déclenche la revue du contenu, on l'adapte aux nouveaux vecteurs, puis on mesure l'effet de la mise à jour. Intensifier les simulations de phishing e-mail n'apprend rien sur ces vecteurs, attendre la revue annuelle laisse les employés exposés, et les filtres de messagerie n'arrêtent ni un appel deepfake ni une arnaque hors des canaux de l'entreprise.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Plus de la même chose : intensifier des simulations de phishing par e-mail n'apprend rien aux employés sur des vecteurs que le programme ne couvre pas.",
+        "Trop lent : la revue planifiée se complète de revues déclenchées par l'évolution des menaces ; attendre laisse les employés exposés pendant des mois.",
+        "Contrôle technique inadapté : les filtres de messagerie n'arrêtent ni un appel deepfake ni une arnaque à l'investissement menée hors des canaux de l'entreprise.",
+        "Correcte : un programme SETA se révise sur déclencheur face à des menaces émergentes avérées — mise à jour du contenu, adaptation aux nouveaux vecteurs, puis nouvelle mesure d'efficacité."
+      ]
+    },
+    {
+      "q": "Un analyste certifié CISSP constate qu'une pratique commerciale de son entreprise est parfaitement légale, mais contraire au code d'éthique interne de l'organisation. Quelle est la MEILLEURE conduite ?",
+      "choix": [
+        "Ne rien faire : seul le code d'éthique ISC² s'impose à un certifié",
+        "Démissionner afin de ne pas compromettre sa certification",
+        "Signaler la pratique par le canal prévu par le code interne, qu'il a le devoir de soutenir et de promouvoir",
+        "Déposer une plainte éthique formelle auprès d'ISC² contre son employeur"
+      ],
+      "reponse": 2,
+      "explication": "Le professionnel doit soutenir et promouvoir le code d'éthique de son organisation en plus du code ISC². Une pratique peut être légale et néanmoins contraire à l'éthique interne : le levier approprié est alors le dispositif prévu par l'organisation elle-même, c'est-à-dire le signalement par le canal interne. Ignorer la violation contredit les deux codes, la démission est un dernier recours quand les canaux internes ont échoué, et ISC² instruit les plaintes contre des certifiés au titre de ses canons, pas contre les pratiques commerciales d'une entreprise.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Faux : le professionnel doit soutenir et promouvoir le code d'éthique de son organisation en plus du code ISC² ; ignorer une violation interne contredit les deux.",
+        "Disproportionnée : la démission n'est envisagée qu'en dernier recours, quand les canaux internes ont échoué ou qu'on exige de lui un acte contraire à l'éthique.",
+        "Correcte : la pratique étant légale, le levier approprié est le dispositif interne — signalement par le canal prévu par le code de l'organisation, que chaque employé doit faire vivre.",
+        "Mauvais destinataire : ISC² instruit les plaintes visant des certifiés au titre de ses canons, pas les pratiques commerciales d'une entreprise."
+      ]
     }
   ],
   "quizEn": [
