@@ -340,7 +340,7 @@ window.CISSP_DATA.domains[0] = {
             "Panne, erreur humaine, rançongiciel : sans sauvegarde, la perte peut être définitive",
             "Une sauvegarde jamais testée est une promesse, pas une protection"
           ],
-          narration: "Terminons par le filet de sécurité de toute cette belle mécanique : la sauvegarde, en anglais backup. C'est une copie des données, faite régulièrement et conservée dans un autre endroit, pour pouvoir tout restaurer en cas de coup dur. Un disque qui meurt, une erreur de manipulation, un logiciel malveillant qui chiffre tout : sans sauvegarde, les données sont perdues pour de bon. Et retenez ce réflexe de professionnel : une sauvegarde qu'on n'a jamais testée en la restaurant réellement n'est qu'une promesse. Le CISSP y consacre une bonne partie du Domaine 7."
+          narration: "Terminons par le filet de sécurité de toute cette belle mécanique : la sauvegarde, en anglais backup. C'est une copie des données, faite régulièrement et conservée dans un autre endroit, pour pouvoir tout restaurer en cas de coup dur. Un disque qui meurt, une erreur de manipulation, un logiciel malveillant qui chiffre tout : sans sauvegarde, les données sont perdues pour de bon. Et retenez ce réflexe de professionnel : une sauvegarde qu'on n'a jamais testée en la restaurant pour de vrai n'est qu'une promesse. Le CISSP y consacre une bonne partie du Domaine 7."
         },
         {
           type: "question",
