@@ -89,7 +89,7 @@ const App = (() => {
         const p = Account.profil();
         if (!p) return `
       <section class="hero">
-        <div class="eyebrow"><span class="dot"></span> Gratuit · 8 domaines · Aligné ISC2 2024</div>
+        <div class="eyebrow"><span class="dot"></span> Gratuit · 8 domaines · Référentiel ISC2 en vigueur 2026</div>
         <h1>Réussissez le <span>CISSP</span> du premier coup,<br>en français.</h1>
         <p>Formation complète et interactive : leçons narrées, quiz corrigés en détail, scénarios réels,
         simulation CAT en conditions d'examen et suivi de progression personnalisé — sans e-mail, sans serveur, sans frais.</p>
@@ -351,6 +351,7 @@ const App = (() => {
         <h3>6. Jour J & logistique (à connaître absolument)</h3>
         <ul>
           <li><strong>L'examen est en ANGLAIS</strong> : le CISSP n'est plus proposé en français (langues 2025-2026 : anglais, chinois, allemand, japonais, espagnol). Un francophone passe le <strong>CAT anglais</strong> — entraînez-vous avec notre simulation CAT EN, sans temps additionnel.</li>
+          <li><strong>Référentiel</strong> : l'outline officiel effectif depuis avril 2024 (pondérations 16/10/13/13/13/12/13/10) reste celui des examens 2026 — les refreshes ISC2 annoncés pour 2026 concernent le CCSP et le CC, pas le CISSP.</li>
           <li><strong>Format CAT</strong> : 100 à 150 questions en 3 h, dont 25 items pré-test non notés (indétectables) ; l'examen peut s'arrêter dès 100 questions si le moteur est statistiquement sûr de votre niveau. Standard de passage : 700/1000.</li>
           <li><strong>Centre Pearson VUE</strong> : pièce d'identité, signature du NDA d'ISC2, effets personnels au casier ; les pauses sont possibles mais le chrono ne s'arrête pas.</li>
           <li><strong>En cas d'échec</strong> : nouvelle tentative après 30 jours, puis 60, puis 90 (maximum 4 tentatives sur 12 mois). Tarif de l'examen : ≈ 749 US$.</li>
