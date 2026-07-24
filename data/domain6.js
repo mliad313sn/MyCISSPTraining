@@ -751,10 +751,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Quel est le PRINCIPAL livrable d'un security assessment ?",
       "choix": [
-        "Une certification de conformité réglementaire",
-        "Un ticket de remédiation pour chaque faille trouvée",
-        "Un rapport d'évaluation destiné au management, en langage non technique, avec des recommandations",
-        "Une liste technique exhaustive des vulnérabilités détectées"
+        "Une certification officielle de conformité réglementaire",
+        "Un ticket de remédiation ouvert pour chaque faille trouvée",
+        "Un rapport non technique au management, avec recommandations",
+        "Une liste technique brute et exhaustive des vulnérabilités détectées"
       ],
       "reponse": 2,
       "explication": "Le produit principal d'un security assessment est un rapport adressé au management, rédigé en langage non technique, qui présente les résultats et se conclut par des recommandations d'amélioration. Une liste brute de vulnérabilités (D) n'a que peu de valeur sans contexte, les tickets (B) relèvent de la remédiation opérationnelle, et un assessment ne délivre pas de certification (A).",
@@ -787,10 +787,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Quelle est la différence FONDAMENTALE entre un rapport SOC 2 Type I et Type II ?",
       "choix": [
-        "Le Type I est public, le Type II est confidentiel",
-        "Le Type I couvre la sécurité, le Type II couvre la vie privée",
-        "Le Type I évalue la conception des contrôles à un instant donné, le Type II évalue aussi leur efficacité opérationnelle sur une période étendue",
-        "Le Type I est réalisé en interne, le Type II par un tiers"
+        "Le Type I est rendu public alors que le Type II reste strictement confidentiel",
+        "Le Type I couvre la sécurité et le Type II couvre en plus la vie privée des données",
+        "Le Type I juge la conception à un instant donné ; le Type II teste aussi l'efficacité",
+        "Le Type I est réalisé en interne, le Type II obligatoirement par un cabinet indépendant"
       ],
       "reponse": 2,
       "explication": "Le Type I donne l'opinion de l'auditeur sur la description du management et la pertinence de la conception des contrôles à un instant donné. Le Type II confirme en plus que les contrôles fonctionnent effectivement, sur une période d'au moins six mois. La distinction ne porte ni sur le périmètre sécurité/vie privée (B), ni sur la diffusion (A, c'est SOC 3 qui est public), ni sur l'auteur de l'audit (D).",
@@ -841,10 +841,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Lors d'une évaluation de vulnérabilités SANS test d'intrusion, quelle étape ne devrait PAS être réalisée ?",
       "choix": [
-        "L'énumération des adresses et ports",
-        "La reconnaissance passive",
-        "La documentation des findings",
-        "L'exploitation des vulnérabilités identifiées"
+        "L'énumération des adresses IP et des ports",
+        "La reconnaissance passive des cibles",
+        "La documentation détaillée des findings",
+        "L'exploitation des failles identifiées"
       ],
       "reponse": 3,
       "explication": "L'étape d'exécution, c'est-à-dire la tentative d'exploitation des vulnérabilités, ne s'applique que dans le cadre d'un penetration test. Une évaluation de vulnérabilités comprend la reconnaissance (B), l'énumération (A), l'analyse des vulnérabilités et la documentation des findings (C), mais n'exploite jamais les failles.",
@@ -877,10 +877,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Un analyste veut réduire les faux positifs de ses scans et obtenir une vision plus profonde des configurations des serveurs. QUELLE approche est la MEILLEURE ?",
       "choix": [
-        "Augmenter la fréquence des scans réseau non authentifiés",
+        "Augmenter la fréquence des scans réseau non authentifiés déjà en place",
         "Réaliser des scans authentifiés avec un compte en lecture seule",
-        "Passer à un scan de découverte réseau",
-        "Lancer un test d'intrusion black box"
+        "Passer à un simple scan de découverte réseau des hôtes actifs",
+        "Lancer un test d'intrusion black box complet sans information préalable"
       ],
       "reponse": 1,
       "explication": "Un scan authentifié (credentialed) utilise des identifiants valides pour accéder aux couches profondes du système, lire les fichiers de configuration et produire une évaluation plus précise ; la bonne pratique est un compte en lecture seule. Multiplier les scans non authentifiés (A) ne réduit pas les faux positifs, un scan de découverte (C) ne fait que cartographier, et un pen test black box (D) ne répond pas au besoin de précision de configuration.",
@@ -895,10 +895,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Quelle est la PRINCIPALE différence entre un vulnerability assessment et un penetration test ?",
       "choix": [
-        "Le penetration test tente réellement d'exploiter les vulnérabilités, pas le vulnerability assessment",
-        "Le vulnerability assessment est toujours réalisé par des tiers",
-        "Le vulnerability assessment ne produit pas de rapport",
-        "Le penetration test est entièrement automatisé"
+        "Le pen test tente réellement d'exploiter les failles, pas le vulnerability assessment",
+        "Le vulnerability assessment est toujours réalisé exclusivement par des tiers indépendants",
+        "Le vulnerability assessment ne produit aucun rapport écrit pour le management",
+        "Le penetration test est toujours entièrement automatisé de bout en bout"
       ],
       "reponse": 0,
       "explication": "Les évaluations de vulnérabilités sont généralement plus automatisées, rapides, et ne tentent jamais d'exploiter les failles ; le pen test, lui, tente activement de contourner les défenses. Le vulnerability assessment peut être interne (B), le pen test combine outils manuels et automatisés (D), et les deux produisent des rapports (C).",
@@ -913,10 +913,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Avant de démarrer un test d'intrusion, quelle action est la PLUS importante pour protéger juridiquement les testeurs et l'organisation ?",
       "choix": [
-        "Obtenir un accord écrit sur le périmètre et les Rules of Engagement, avec autorisation explicite du management",
-        "Informer tous les employés de la date du test",
-        "Effectuer une sauvegarde complète des systèmes cibles",
-        "Installer les outils d'exploitation sur un poste dédié"
+        "Obtenir un accord écrit sur le périmètre et les Rules of Engagement",
+        "Informer tous les employés de la date exacte du test d'intrusion planifié",
+        "Effectuer une sauvegarde complète et vérifiée des systèmes cibles avant tout",
+        "Installer les outils d'exploitation sur un poste dédié isolé du réseau"
       ],
       "reponse": 0,
       "explication": "La phase de planning du processus NIST inclut l'accord sur le périmètre et les Rules of Engagement, garantissant que le test est explicitement autorisé ; c'est ce qui distingue le test légal du piratage et établit les limites de responsabilité. Les sauvegardes (C) sont prudentes mais secondaires, prévenir tous les employés (B) fausserait certains tests, et l'outillage (D) est une considération technique.",
@@ -949,10 +949,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Quelle affirmation décrit CORRECTEMENT la purple team ?",
       "choix": [
-        "Une équipe externe de pen testeurs certifiés",
-        "La collaboration et le partage d'informations entre la red team et la blue team",
-        "Une équipe indépendante chargée d'arbitrer les exercices",
-        "L'équipe qui gère la réponse aux incidents pendant l'attaque"
+        "Une équipe externe de pen testeurs certifiés et indépendants de l'organisation",
+        "La collaboration et le partage d'informations entre red team et blue team",
+        "Une équipe indépendante chargée d'arbitrer et de noter les exercices menés",
+        "L'équipe qui gère la réponse aux incidents pendant l'attaque simulée"
       ],
       "reponse": 1,
       "explication": "La purple team n'est pas une équipe distincte : elle représente la collaboration entre la red team (offensive) et la blue team (défensive), avec partage d'informations et compétition saine. Les réponses A, C et D décrivent respectivement un prestataire externe (qui reste une red team), un rôle d'arbitrage relevant plutôt de la white team, et une mission de la blue team.",
@@ -967,9 +967,9 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Parmi les activités suivantes, laquelle relève de la BLUE team ?",
       "choix": [
-        "Social engineering",
-        "Threat intelligence offensive",
-        "Exploitation de vulnérabilités web",
+        "Social engineering téléphonique avancé",
+        "Threat intelligence offensive appliquée",
+        "Exploitation de vulnérabilités web courantes",
         "Digital forensics et incident response"
       ],
       "reponse": 3,
@@ -985,10 +985,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Quel est l'objectif PRINCIPAL d'une plateforme de Breach and Attack Simulation (BAS) ?",
       "choix": [
-        "Générer les rapports de conformité PCI DSS",
-        "Remplacer entièrement les pen testeurs humains",
-        "Automatiser l'injection d'indicateurs de menace pour vérifier que les contrôles de détection et de prévention réagissent",
-        "Former les développeurs au codage sécurisé"
+        "Générer automatiquement les rapports de conformité PCI DSS",
+        "Remplacer entièrement les pen testeurs humains par de l'automatisation continue",
+        "Injecter des indicateurs de menace pour vérifier que la détection réagit",
+        "Former en continu les développeurs internes au codage sécurisé"
       ],
       "reponse": 2,
       "explication": "Une plateforme BAS combine techniques red et blue avec de l'automatisation pour simuler des menaces avancées : elle injecte des indicateurs de menace (par exemple un fichier suspect sur un serveur) afin de vérifier que les contrôles détectent et bloquent l'activité. Elle automatise certains aspects du pen testing mais ne remplace pas les testeurs humains (B) ; la formation (D) et la conformité (A) ne sont pas son objet.",
@@ -1021,10 +1021,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Comment les logs archivés devraient-ils être protégés contre la modification ?",
       "choix": [
-        "En les répliquant en continu vers un serveur secondaire modifiable par l'équipe d'exploitation",
-        "En réduisant leur durée de rétention à trente jours",
-        "En les chiffrant avec la clé publique de l'administrateur",
-        "En les centralisant, en restreignant l'accès par permissions et en les passant en lecture seule"
+        "En les répliquant en continu vers un serveur secondaire modifiable par l'exploitation",
+        "En réduisant fortement leur durée de rétention à seulement trente jours",
+        "En les chiffrant uniquement avec la clé publique de l'administrateur système",
+        "En les centralisant, en restreignant l'accès et en les passant en lecture seule"
       ],
       "reponse": 3,
       "explication": "Les logs doivent être stockés de manière centralisée, protégés par des permissions restrictives, et les archives placées en lecture seule pour prévenir toute modification. Le chiffrement seul (C) ne gère pas l'intégrité d'accès de bout en bout, une réplique modifiable (A) n'empêche aucune altération, et raccourcir la rétention (B) détruit la preuve au lieu de la protéger.",
@@ -1094,9 +1094,9 @@ window.CISSP_DATA.domains[6] = {
       "q": "Quelle est la différence entre mutation fuzzing et generational fuzzing ?",
       "choix": [
         "Le mutation fuzzing est manuel ; le generational fuzzing est automatisé",
-        "Ils sont identiques, seuls les outils diffèrent",
+        "Ils sont strictement identiques, seuls les noms des outils utilisés diffèrent",
         "Le mutation fuzzing modifie le code source ; le generational fuzzing modifie les données",
-        "Le mutation fuzzing modifie des entrées connues ; le generational fuzzing crée des entrées à partir de modèles des entrées attendues"
+        "Le mutation fuzzing modifie des entrées connues ; le generational les crée par modèle"
       ],
       "reponse": 3,
       "explication": "Le mutation fuzzing (dit dumb) modifie des entrées connues pour générer des entrées synthétiques susceptibles de déclencher un comportement inattendu ; le generational fuzzing (dit intelligent) développe des entrées à partir de modèles décrivant les entrées attendues du programme. Attention au piège (C) : c'est le mutation testing, et non le mutation fuzzing, qui modifie le programme lui-même.",
@@ -1147,9 +1147,9 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Pourquoi les interfaces PHYSIQUES méritent-elles une attention particulière lors des tests d'interface ?",
       "choix": [
-        "Leur défaillance peut avoir des conséquences graves lorsqu'elles pilotent des machines ou des automates",
-        "Elles échappent souvent à la couverture des scanners de vulnérabilités classiques",
-        "Leur test exige des équipements spécialisés coûteux",
+        "Leur défaillance peut avoir des conséquences graves sur les machines pilotées",
+        "Elles échappent souvent aux scanners de vulnérabilités classiques faute de signatures",
+        "Leur test exige des équipements et des sondes spécialisés très coûteux",
         "Elles reposent souvent sur des protocoles propriétaires peu documentés"
       ],
       "reponse": 0,
@@ -1165,9 +1165,9 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Une organisation n'a pas le temps de réviser tous les comptes utilisateurs. QUELLE approche est acceptable pour la revue de gestion des comptes ?",
       "choix": [
-        "Ne réviser que les comptes créés le mois dernier",
-        "Reporter la revue à l'audit externe annuel",
-        "Utiliser un échantillonnage, à condition qu'il soit véritablement aléatoire, et réviser en totalité les comptes hautement privilégiés",
+        "Ne réviser que les comptes utilisateurs créés durant le mois dernier",
+        "Reporter entièrement la revue des accès à l'audit externe annuel du prochain exercice",
+        "Échantillonner de façon aléatoire, mais réviser en totalité les comptes privilégiés",
         "Demander à chaque manager de confirmer verbalement les accès de son équipe"
       ],
       "reponse": 2,
@@ -1183,10 +1183,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Dans la boucle Plan-Do-Check-Act appliquée à un ISMS, à quelle phase correspond l'évaluation et les tests de sécurité ?",
       "choix": [
-        "Do",
-        "Check",
-        "Act",
-        "Plan"
+        "Do (réaliser les actions planifiées)",
+        "Check (mesurer et vérifier les écarts)",
+        "Act (corriger et standardiser les acquis)",
+        "Plan (planifier et cadrer toute la démarche)"
       ],
       "reponse": 1,
       "explication": "Dans le modèle PDCA des normes ISO 9000, le Plan fixe les objectifs et les politiques, le Do correspond aux opérations de sécurité, le Check correspond précisément à l'évaluation et aux tests de sécurité (l'objet du domaine 6), et le Act est la revue formelle de direction.",
@@ -1201,9 +1201,9 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Lequel des indicateurs suivants est un KRI plutôt qu'un KPI ?",
       "choix": [
-        "Le nombre de comptes compromis l'an passé",
+        "Le nombre de comptes compromis au cours de l'année passée",
         "Le pourcentage de fournisseurs tiers sans évaluation de sécurité à jour",
-        "Le nombre de findings récurrents du dernier audit",
+        "Le nombre de findings récurrents relevés lors du dernier audit interne annuel",
         "Le temps moyen de résolution des vulnérabilités le trimestre dernier"
       ],
       "reponse": 1,
@@ -1220,9 +1220,9 @@ window.CISSP_DATA.domains[6] = {
       "q": "Quelle est la MEILLEURE façon de vérifier qu'un processus de sauvegarde protège réellement les données de l'organisation ?",
       "choix": [
         "Consulter le contrat du fournisseur de sauvegarde",
-        "Chiffrer les supports de sauvegarde",
+        "Chiffrer systématiquement tous les supports de sauvegarde au repos",
         "Vérifier que la tâche de sauvegarde se termine sans code d'erreur",
-        "Demander périodiquement une restauration réelle d'un système ou d'un fichier"
+        "Demander périodiquement une restauration réelle d'un fichier"
       ],
       "reponse": 3,
       "explication": "Les managers doivent inspecter périodiquement les résultats des sauvegardes, et la vérification la plus probante est de demander une restauration réelle : c'est la seule preuve que les données sont récupérables. Un code de retour sans erreur (C) ne garantit pas la restaurabilité, le contrat (A) ne prouve rien techniquement, et le chiffrement (B) protège la confidentialité, pas la capacité de restauration.",
@@ -1237,10 +1237,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Comment une organisation devrait-elle MESURER l'efficacité de son programme de sensibilisation à la sécurité ?",
       "choix": [
-        "En suivant des métriques comme l'évolution du taux de clic aux simulations de phishing",
+        "En suivant l'évolution du taux de clic aux simulations de phishing",
         "En suivant le taux de complétion des modules e-learning obligatoires",
-        "En comptant le nombre d'heures de formation dispensées",
-        "En vérifiant que chaque employé a signé la politique de sécurité"
+        "En comptant le nombre total d'heures de formation dispensées aux équipes",
+        "En vérifiant que chaque employé a bien signé la politique de sécurité"
       ],
       "reponse": 0,
       "explication": "Les simulations de phishing permettent d'évaluer l'efficacité réelle du programme de sensibilisation, et il faut la mesurer par des métriques comme l'évolution du taux de clic dans le temps. Les heures dispensées (C), les signatures (D) et le taux de complétion (B) mesurent l'effort ou la conformité, pas le changement de comportement réel.",
@@ -1273,10 +1273,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Un scanner détecte une vulnérabilité critique sur un dispositif médical qui ne peut pas être patché sans une longue ré-accréditation. QUE devriez-vous faire ?",
       "choix": [
-        "Déconnecter définitivement le dispositif du réseau",
-        "Ignorer la vulnérabilité jusqu'à la prochaine accréditation",
-        "Mettre en place des compensating controls (micro-segmentation, restrictions d'accès, monitoring), documenter l'exception et la réexaminer périodiquement",
-        "Patcher immédiatement malgré l'absence d'accréditation"
+        "Déconnecter définitivement le dispositif du réseau de production",
+        "Ignorer la vulnérabilité jusqu'à la prochaine accréditation formelle du système entier",
+        "Mettre en place des compensating controls, documenter l'exception et la réexaminer",
+        "Patcher immédiatement malgré l'absence d'accréditation validée"
       ],
       "reponse": 2,
       "explication": "Quand une vulnérabilité ne peut pas être corrigée à temps, la bonne démarche est d'implémenter des compensating controls, de documenter l'exception et la décision, puis de la réexaminer régulièrement. Patcher sans accréditation (D) crée un risque réglementaire et de sécurité des patients, ignorer (B) laisse le risque sans traitement, et la déconnexion définitive (A) peut compromettre les soins.",
@@ -1291,10 +1291,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Un chercheur en sécurité découvre une vulnérabilité inconnue dans un produit commercial. Selon le principe d'ethical disclosure, QUE doit-il faire EN PREMIER ?",
       "choix": [
-        "Notifier le vendeur en privé et lui laisser un délai raisonnable pour corriger",
-        "Exploiter la faille pour en démontrer l'impact",
-        "Vendre l'information sur un marché de vulnérabilités",
-        "Publier immédiatement les détails pour alerter la communauté"
+        "Notifier le vendeur en privé et lui laisser un délai raisonnable",
+        "Exploiter la faille en production pour en démontrer concrètement l'impact réel",
+        "Vendre l'information sur un marché de vulnérabilités au plus offrant",
+        "Publier immédiatement tous les détails techniques pour alerter la communauté"
       ],
       "reponse": 0,
       "explication": "La divulgation éthique impose de signaler la vulnérabilité au vendeur de manière privée, en lui laissant un délai raisonnable pour la corriger. Ce n'est que si le vendeur ne corrige pas que la divulgation publique devient légitime, afin que les professionnels puissent décider en connaissance de cause. La publication immédiate (D), la vente (C) et l'exploitation (B) sont contraires à l'éthique.",
@@ -1309,10 +1309,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "D'où proviennent la MAJORITÉ des vulnérabilités dans une organisation moyenne ?",
       "choix": [
-        "De défauts dans les logiciels commerciaux",
-        "De systèmes mal configurés, de politiques inadaptées, de processus métier défaillants et de personnel non sensibilisé",
-        "De défaillances matérielles",
-        "D'attaques zero-day sophistiquées"
+        "De simples défauts logiciels présents dans les produits commerciaux du marché",
+        "De systèmes mal configurés, de processus défaillants, de personnel non formé",
+        "De défaillances purement matérielles des serveurs et équipements réseau",
+        "D'attaques zero-day particulièrement sophistiquées et ciblées"
       ],
       "reponse": 1,
       "explication": "Plutôt que des défauts logiciels, la plupart des vulnérabilités des organisations moyennes proviennent de systèmes mal configurés, de politiques inadéquates, de processus métier peu sûrs ou de personnel insuffisamment sensibilisé. C'est pourquoi la remédiation doit impliquer toutes les parties prenantes, pas seulement l'IT.",
@@ -1345,10 +1345,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Quel est un AVANTAGE d'une équipe d'audit interne par rapport à un auditeur tiers ?",
       "choix": [
-        "Une meilleure acceptabilité par les régulateurs",
-        "La connaissance de l'environnement interne, qui réduit le temps d'audit et permet une plus grande agilité",
-        "Une plus grande indépendance vis-à-vis de la politique interne",
-        "Une expérience plus large de nombreux types d'organisations"
+        "Une meilleure acceptabilité du rapport par les régulateurs du secteur",
+        "La connaissance de l'environnement, qui réduit le temps d'audit",
+        "Une plus grande indépendance vis-à-vis de la politique interne de l'entité",
+        "Une expérience plus large acquise auprès de nombreux types d'organisations"
       ],
       "reponse": 1,
       "explication": "L'équipe interne connaît l'environnement, ce qui réduit le temps nécessaire, permet d'explorer tous les recoins des systèmes grâce à la connaissance d'initié, et offre de l'agilité pour replanifier rapidement. En revanche, l'indépendance (C), la largeur d'expérience (D) et l'acceptabilité réglementaire (A) sont des avantages des auditeurs tiers.",
@@ -1363,10 +1363,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Un partenaire commercial exige de conduire un audit chez vous dans le cadre de votre contrat. Comment cet audit devrait-il être délimité ?",
       "choix": [
-        "Il doit être limité aux obligations contractuelles entre les deux organisations",
-        "Il doit couvrir l'ensemble du système d'information",
-        "Il doit couvrir les mêmes éléments que le dernier audit interne",
-        "Le partenaire décide librement du périmètre sans limite"
+        "Il doit être limité aux obligations contractuelles entre les deux parties",
+        "Il doit obligatoirement couvrir l'ensemble du système d'information de l'entité",
+        "Il doit couvrir exactement les mêmes éléments que le dernier audit interne",
+        "Le partenaire décide seul et librement du périmètre, sans aucune limite fixée"
       ],
       "reponse": 0,
       "explication": "Un audit conduit par ou pour le compte d'un partenaire commercial (audit tierce partie dans la terminologie ISC2, parfois appelé second-party audit dans d'autres référentiels) est lié au contrat : par définition, son périmètre doit se limiter aux obligations contractuelles de l'organisation. Ouvrir tout le SI ou laisser le partenaire décider seul (B, D) excède le besoin et crée des risques de confidentialité ; aligner sur l'audit interne (C) n'a pas de fondement contractuel.",
@@ -1381,10 +1381,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Lors d'un scan de découverte, nmap rapporte un port en état « filtered ». Que devez-vous en conclure ?",
       "choix": [
-        "Un service écoute et accepte les connexions",
-        "Le port est ouvert mais le service est en panne",
-        "Un firewall ou un filtre empêche le scanner de déterminer l'état du port",
-        "Aucun service n'écoute sur ce port"
+        "Un service écoute activement et accepte les connexions",
+        "Le port est ouvert mais le service associé est temporairement en panne",
+        "Un firewall ou un filtre empêche de déterminer l'état du port",
+        "Aucun service réseau n'écoute actuellement sur ce port"
       ],
       "reponse": 2,
       "explication": "Filtered signifie que les sondes du scanner sont interceptées par un dispositif de filtrage (firewall, ACL) et qu'aucune réponse exploitable ne revient : le scanner ne peut pas conclure. Closed (D) signifie que le port répond mais qu'aucun service n'écoute ; open (A) signifie qu'un service accepte les connexions ; l'option B ne correspond à aucun état nmap.",
@@ -1399,10 +1399,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Un testeur souhaite identifier les ports TCP ouverts d'un serveur en restant le PLUS discret possible, sans établir de connexion complète. Quelle technique devrait-il utiliser ?",
       "choix": [
-        "UDP scan",
-        "TCP connect scan",
-        "Banner grabbing",
-        "TCP SYN scan (half-open)"
+        "Scan UDP des ports ouverts",
+        "Scan TCP connect complet",
+        "Banner grabbing applicatif",
+        "Scan TCP SYN (half-open)"
       ],
       "reponse": 3,
       "explication": "Le SYN scan, dit half-open, envoie un SYN, interprète le SYN/ACK comme un port ouvert puis répond par un RST : la connexion n'est jamais complétée, ce qui le rend plus rapide et plus discret. Le connect scan établit le handshake complet et est journalisé par la cible ; le scan UDP ne concerne pas les ports TCP ; le banner grabbing identifie les versions de services déjà découverts, il ne recense pas les ports.",
@@ -1417,9 +1417,9 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Un analyste veut représenter une intrusion en reliant l'adversaire, ses capacités, son infrastructure et la victime. Quel modèle d'analyse devrait-il utiliser ?",
       "choix": [
-        "La Cyber Kill Chain de Lockheed Martin",
-        "La matrice MITRE ATT&CK",
-        "Le modèle STRIDE",
+        "La Cyber Kill Chain de Lockheed Martin en sept étapes",
+        "La matrice MITRE ATT&CK des techniques",
+        "Le modèle de menaces STRIDE de Microsoft",
         "Le Diamond Model of Intrusion Analysis"
       ],
       "reponse": 3,
@@ -1453,10 +1453,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Un régulateur bancaire exige une attestation indépendante de l'efficacité de vos contrôles de sécurité. QUELLE approche répond le MIEUX à cette exigence ?",
       "choix": [
-        "Un scan de vulnérabilités trimestriel avec rapport exécutif",
-        "Un audit tierce partie mené par un cabinet accrédité, selon un référentiel reconnu",
-        "Une auto-évaluation annuelle validée par le RSSI",
-        "Un rapport d'audit interne présenté au comité de direction"
+        "Un scan de vulnérabilités trimestriel accompagné d'un rapport exécutif",
+        "Un audit tierce partie mené par un cabinet accrédité indépendant",
+        "Une auto-évaluation annuelle documentée puis validée par le RSSI",
+        "Un rapport d'audit interne présenté au comité de direction annuel"
       ],
       "reponse": 1,
       "explication": "Une exigence réglementaire d'attestation indépendante appelle un audit tierce partie (third-party audit) réalisé par un cabinet accrédité selon un référentiel reconnu : c'est la seule option offrant l'indépendance et l'acceptabilité attendues par un régulateur. L'auto-évaluation (C) et l'audit interne (D) manquent d'indépendance, et un scan de vulnérabilités (A) est un test technique, pas une attestation formelle de conformité.",
@@ -1489,10 +1489,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Une jeune société SaaS vient de déployer ses contrôles de sécurité il y a deux mois. Un client stratégique exige un rapport SOC 2 sous six semaines. QUELLE est la MEILLEURE réponse du management ?",
       "choix": [
-        "Refuser toute forme d'audit tant que les contrôles n'ont pas un an",
-        "Faire réaliser un SOC 2 Type I maintenant, puis planifier un Type II après une période d'observation suffisante",
-        "Produire immédiatement un SOC 2 Type II sur les deux derniers mois",
-        "Fournir un SOC 3 à la place, car il est plus rapide à produire"
+        "Refuser toute forme d'audit tant que les contrôles n'ont pas au moins un an",
+        "Produire un SOC 2 Type I maintenant, puis un Type II après observation",
+        "Produire immédiatement un SOC 2 Type II couvrant seulement les deux derniers mois",
+        "Fournir un SOC 3 à la place, car il est bien plus rapide à produire"
       ],
       "reponse": 1,
       "explication": "Un Type II exige une période d'observation d'au moins six mois : impossible ici. La démarche classique est de produire d'abord un SOC 2 Type I, qui évalue la conception des contrôles à un instant donné, puis d'enchaîner sur un Type II une fois la période d'observation écoulée. Le Type II sur deux mois (C) ne respecte pas la période minimale, refuser (A) fait perdre le client, et le SOC 3 (D) est un dérivé public d'un audit SOC 2 déjà réalisé, pas un raccourci.",
@@ -1543,10 +1543,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Deux vulnérabilités sont détectées : CVSS 9.1 sur un serveur de développement isolé sans données sensibles, et CVSS 7.5 sur un serveur web de production exposé à Internet traitant des données personnelles. QUE devriez-vous corriger EN PREMIER ?",
       "choix": [
-        "La vulnérabilité CVSS 7.5, car l'exposition et la criticité de l'actif rendent le risque réel plus élevé",
-        "Aucune, tant que le comité de changement n'a pas statué",
-        "La vulnérabilité CVSS 9.1, car le score de base est plus élevé",
-        "Les deux simultanément, sans priorisation"
+        "La vulnérabilité CVSS 7.5, car exposition et criticité élèvent le risque réel",
+        "Aucune des deux, tant que le comité de changement n'a pas formellement statué sur le cas",
+        "La vulnérabilité CVSS 9.1, car son score de base CVSS est plus élevé",
+        "Les deux vulnérabilités en même temps, sans aucune priorisation par le risque"
       ],
       "reponse": 0,
       "explication": "Le score CVSS de base mesure la sévérité intrinsèque, pas le risque pour votre organisation. La priorisation doit intégrer le contexte : exposition à Internet, criticité de l'actif, données traitées et exploitation active. Le serveur de production exposé traitant des données personnelles présente un risque métier supérieur malgré un score plus bas ; c'est exactement le rôle des métriques Environmental. Suivre aveuglément le score de base (C) est un piège classique de l'examen, et l'attentisme (B) laisse le risque ouvert.",
@@ -1579,10 +1579,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Votre équipe ne peut pas patcher toutes les vulnérabilités détectées ce mois-ci. Au-delà du score CVSS de base, QUEL facteur devrait le PLUS influencer la priorisation ?",
       "choix": [
-        "Le nombre brut de vulnérabilités détectées sur chaque serveur",
-        "L'ancienneté du CVE, les plus récents d'abord",
-        "L'exploitation active observée dans la nature et la criticité métier des actifs concernés",
-        "La facilité d'installation du correctif"
+        "Le nombre brut de vulnérabilités détectées sur chaque serveur analysé",
+        "L'ancienneté de chaque CVE publié, en traitant les plus récents d'abord",
+        "L'exploitation active observée dans la nature et la criticité métier",
+        "La facilité et la rapidité d'installation du correctif"
       ],
       "reponse": 2,
       "explication": "Une priorisation mature combine le score de sévérité avec des renseignements sur l'exploitation réelle (catalogues de vulnérabilités exploitées connues, threat intelligence) et la criticité métier des actifs : une faille moyenne activement exploitée sur un actif critique passe avant une faille critique théorique sur un actif isolé. L'ancienneté (B) et la facilité d'installation (D) sont des critères secondaires, et le volume brut de failles par serveur (A) mesure une charge de travail, pas un risque.",
@@ -1597,10 +1597,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Pendant un test d'intrusion autorisé, le testeur découvre des indices d'une compromission RÉELLE préexistante par un attaquant tiers. QUE doit-il faire ?",
       "choix": [
-        "Éradiquer lui-même l'attaquant pour protéger le client",
-        "Suspendre le test et notifier immédiatement le contact désigné, conformément à la procédure d'escalade des Rules of Engagement",
-        "Publier un avis de sécurité pour alerter les autres clients du même secteur",
-        "Poursuivre le test et mentionner la découverte dans le rapport final"
+        "Éradiquer lui-même l'attaquant pour protéger immédiatement le client",
+        "Suspendre le test et notifier le contact désigné selon les Rules of Engagement",
+        "Publier un avis de sécurité pour alerter les autres clients du même secteur d'activité",
+        "Poursuivre le test et mentionner simplement la découverte dans le rapport final"
       ],
       "reponse": 1,
       "explication": "Les Rules of Engagement doivent prévoir une procédure d'escalade pour ce cas précis : le testeur suspend ses activités et notifie sans délai le contact désigné, car une compromission réelle relève de la réponse à incident, pas du test. Attendre le rapport (D) laisse l'attaquant agir, éradiquer soi-même (A) dépasse le mandat et peut détruire des preuves, et publier (C) violerait la confidentialité contractuelle.",
@@ -1633,9 +1633,9 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "En pleine phase d'attaque, un pen testeur découvre un sous-réseau inconnu, absent du périmètre convenu, qui semble contenir des systèmes vulnérables. QUE doit-il faire ?",
       "choix": [
-        "S'abstenir de le tester et demander une autorisation écrite d'extension de périmètre avant toute action",
-        "L'ignorer définitivement et ne pas le mentionner",
-        "Arrêter tout le test jusqu'à la fin du contrat",
+        "S'abstenir de le tester et demander une extension de périmètre écrite",
+        "L'ignorer définitivement et ne rien en mentionner dans le rapport de test",
+        "Arrêter la totalité du test jusqu'à la fin du contrat en cours",
         "Le tester immédiatement, car il est connecté au périmètre autorisé"
       ],
       "reponse": 0,
@@ -1669,10 +1669,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "QUELLE caractéristique distingue le MIEUX un engagement de red team d'un test d'intrusion classique ?",
       "choix": [
-        "La red team se limite aux applications web",
-        "La red team travaille toujours avec un accès complet au code source",
-        "La red team utilise uniquement des outils automatisés",
-        "La red team poursuit des objectifs précis en émulant un adversaire réaliste, dans la durée et en furtivité, pour éprouver aussi la détection et la réponse"
+        "La red team se limite exclusivement aux applications web exposées sur Internet",
+        "La red team travaille toujours avec un accès complet au code source de la cible",
+        "La red team utilise uniquement des outils automatisés de scan de vulnérabilités",
+        "La red team émule un adversaire réaliste, dans la durée et en furtivité"
       ],
       "reponse": 3,
       "explication": "Un engagement de red team est orienté objectifs (par exemple exfiltrer des données précises), émule les tactiques d'un adversaire réaliste, se déroule sur une période étendue et privilégie la furtivité afin de tester la capacité de la blue team à détecter et répondre. Un pen test classique vise plutôt l'identification exhaustive des vulnérabilités sur un périmètre donné, dans un temps court. Les affirmations A, B et C sont fausses.",
@@ -1687,10 +1687,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Après un exercice red team, le SOC n'a détecté AUCUNE des techniques employées. QUELLE est la MEILLEURE prochaine étape ?",
       "choix": [
-        "Acheter immédiatement un nouveau SIEM",
-        "Organiser des sessions purple team où la red team rejoue ses techniques pendant que la blue team construit et valide ses détections",
-        "Remplacer les analystes du SOC",
-        "Renoncer aux exercices offensifs, jugés trop décourageants"
+        "Acheter immédiatement un nouveau SIEM plus performant que l'actuel",
+        "Organiser des sessions purple team où la red team rejoue ses techniques",
+        "Remplacer purement et simplement les analystes du SOC jugés défaillants",
+        "Renoncer définitivement aux exercices offensifs, jugés trop décourageants"
       ],
       "reponse": 1,
       "explication": "L'approche purple team transforme l'échec de détection en apprentissage : la red team rejoue ses tactiques, techniques et procédures de façon transparente pendant que la blue team développe, teste et affine ses règles de détection en boucle courte. C'est la voie la plus directe vers une amélioration mesurable. Sanctionner les analystes (C) ou abandonner les exercices (D) ne corrige rien, et changer d'outil (A) sans comprendre les lacunes de détection est prématuré.",
@@ -1723,10 +1723,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Une faille de configuration d'authentification n'apparaît que lorsque l'application est déployée avec son serveur web et son reverse proxy. QUELLE technique a le PLUS de chances de la détecter ?",
       "choix": [
-        "Analyse de couverture des instructions",
-        "SAST sur le code source",
-        "DAST contre l'application déployée en environnement de test",
-        "Revue de code par pull request"
+        "Analyse de couverture des instructions du code",
+        "SAST exécuté sur le code source au repos",
+        "DAST contre l'application déployée en test",
+        "Revue de code par pull request entre pairs"
       ],
       "reponse": 2,
       "explication": "Les défauts qui n'existent qu'à l'exécution, comme les erreurs de configuration du serveur, des en-têtes ou de la chaîne d'authentification, échappent à l'analyse statique : seul un test dynamique (DAST) contre l'application réellement déployée, avec sa pile complète, peut les révéler. Le SAST (B) et la revue de code (D) ne voient que le code, et la couverture d'instructions (A) mesure l'exhaustivité des tests, pas la sécurité de la configuration.",
@@ -1741,10 +1741,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Vous devez tester la robustesse du parseur d'un protocole binaire propriétaire dont vous connaissez la spécification. QUELLE approche de fuzzing est la PLUS efficace ?",
       "choix": [
-        "Generational fuzzing fondé sur un modèle de la spécification du protocole",
-        "Scan de vulnérabilités authentifié",
-        "Mutation fuzzing à partir de captures de trafic aléatoires",
-        "Test d'interface utilisateur automatisé"
+        "Generational fuzzing fondé sur un modèle du protocole",
+        "Scan de vulnérabilités authentifié avec un compte en lecture seule",
+        "Mutation fuzzing à partir de captures de trafic prises au hasard",
+        "Test d'interface utilisateur entièrement automatisé"
       ],
       "reponse": 0,
       "explication": "Le generational fuzzing (intelligent) construit des entrées à partir d'un modèle décrivant le format attendu : pour un protocole propriétaire structuré, il atteint des couches profondes du parseur que des mutations aléatoires n'atteindraient presque jamais, car elles échoueraient dès les premières validations de format. Le mutation fuzzing (C) reste utile mais moins efficace ici, et les options B et D ne testent pas la robustesse d'un parseur.",
@@ -1759,10 +1759,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "QUELLE catégorie de défauts le fuzzing est-il le MOINS susceptible de détecter ?",
       "choix": [
-        "Les erreurs de gestion d'exceptions sur entrées inattendues",
-        "Les erreurs de logique métier, comme un contournement de règle d'approbation",
-        "Les crashs liés au traitement d'entrées malformées",
-        "Les débordements de mémoire tampon"
+        "Les erreurs de gestion d'exceptions déclenchées sur des entrées inattendues",
+        "Les erreurs de logique métier, comme un contournement d'approbation",
+        "Les crashs applicatifs liés au traitement d'entrées malformées",
+        "Les débordements de mémoire tampon potentiellement exploitables"
       ],
       "reponse": 1,
       "explication": "Le fuzzing excelle à découvrir les défauts de traitement des entrées : crashs, débordements de tampon, exceptions non gérées. En revanche, il détecte mal les défauts de logique métier ou de conception, car l'application répond alors « correctement » du point de vue technique tout en violant une règle métier ; ces défauts exigent du misuse case testing ou une revue manuelle. C'est une limite classique demandée à l'examen.",
@@ -1777,10 +1777,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Vos analystes SOC ignorent désormais les alertes du SIEM, noyées sous les faux positifs. QUELLE est la MEILLEURE action de management ?",
       "choix": [
-        "Réduire le nombre de sources de logs envoyées au SIEM",
-        "Conduire un programme de tuning : réviser les cas d'usage, ajuster seuils et corrélations, et mesurer le taux de faux positifs",
-        "Désactiver les règles les plus bruyantes sans analyse",
-        "Augmenter le nombre d'analystes pour traiter toutes les alertes"
+        "Réduire le nombre de sources de logs envoyées au SIEM pour baisser le bruit",
+        "Conduire un tuning : réviser les cas d'usage et ajuster seuils et corrélations",
+        "Désactiver purement et simplement les règles les plus bruyantes sans aucune analyse",
+        "Augmenter le nombre d'analystes pour traiter manuellement toutes les alertes"
       ],
       "reponse": 1,
       "explication": "L'alert fatigue est un risque opérationnel majeur : la réponse managériale est un programme de tuning structuré, qui repart des cas d'usage de détection, ajuste les seuils et les règles de corrélation, et suit des métriques comme le taux de faux positifs. Ajouter des analystes (D) traite le symptôme à coût croissant, désactiver sans analyse (C) crée des angles morts, et couper des sources (A) réduit la visibilité.",
@@ -1795,10 +1795,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Un auditeur constate qu'un serveur critique n'apparaît plus dans le SIEM depuis trois semaines. QUE vérifier EN PREMIER ?",
       "choix": [
-        "Les règles de corrélation appliquées aux événements de ce serveur",
-        "La licence du SIEM",
-        "Le bon fonctionnement de l'agent ou du mécanisme de collecte et d'acheminement des logs de ce serveur",
-        "La durée de rétention configurée pour les logs de ce serveur"
+        "Les règles de corrélation appliquées aux événements de ce serveur précis",
+        "La licence commerciale et le nombre de sources du SIEM",
+        "Le bon fonctionnement de l'agent de collecte et d'acheminement des logs",
+        "La durée de rétention configurée pour les logs de ce serveur particulier"
       ],
       "reponse": 2,
       "explication": "Une interruption de réception des logs d'une source est d'abord un problème de chaîne de collecte : agent arrêté, file d'acheminement en erreur, changement de configuration ou filtrage réseau. La bonne pratique est d'ailleurs de superviser la santé des sources de logs et d'alerter automatiquement quand une source devient silencieuse, car un attaquant peut couper la journalisation pour masquer ses traces. La licence (B) et la rétention (D) n'expliquent pas un arrêt brutal de réception, et les règles de corrélation (A) sont sans objet si les logs n'arrivent même plus.",
@@ -1813,10 +1813,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Vos logs pourraient servir de PREUVE dans une procédure judiciaire. QUELLE combinaison de mesures renforce le MIEUX leur recevabilité ?",
       "choix": [
-        "Stockage inaltérable (WORM), contrôles d'intégrité par hachage et chaîne de custody documentée",
-        "Chiffrement des archives avec une clé détenue par le seul administrateur système",
-        "Compression et déduplication pour réduire les coûts",
-        "Conservation sur le poste de l'administrateur avec mot de passe"
+        "Stockage inaltérable (WORM), contrôle d'intégrité par hachage et chaîne de custody",
+        "Chiffrement des archives avec une clé détenue par le seul administrateur système en poste",
+        "Compression et déduplication systématiques pour réduire les coûts de stockage",
+        "Conservation sur le poste de l'administrateur, protégée par un simple mot de passe"
       ],
       "reponse": 0,
       "explication": "La valeur probante des logs repose sur la démonstration qu'ils n'ont pas été altérés : stockage en écriture unique (WORM), vérification d'intégrité par hachage, horodatage fiable et chaîne de custody documentée depuis la collecte jusqu'à la présentation. La compression (C) n'apporte rien à l'intégrité, le stockage individuel (D) affaiblit la preuve, et un chiffrement dont la clé est détenue par une seule personne (B) protège la confidentialité mais concentre le pouvoir d'altération au lieu de démontrer l'intégrité.",
@@ -1849,10 +1849,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "En gestion des journaux, QU'EST-CE qu'un « clipping level » ?",
       "choix": [
-        "La durée maximale de rétention des logs",
-        "Un seuil prédéfini au-delà duquel les événements sont signalés, pour ignorer le bruit des erreurs occasionnelles",
-        "Le niveau de compression appliqué aux archives",
-        "Le nombre maximal de sources connectées au SIEM"
+        "La durée maximale de rétention des logs avant leur archivage puis suppression",
+        "Un seuil au-delà duquel les événements sont signalés, pour ignorer le bruit",
+        "Le niveau de compression appliqué aux archives de logs stockées à froid",
+        "Le nombre maximal de sources de logs connectées au SIEM"
       ],
       "reponse": 1,
       "explication": "Le clipping level est un seuil : en dessous, les événements ordinaires (par exemple quelques échecs de connexion isolés) sont ignorés ; au-delà (par exemple cinq échecs en dix minutes), l'événement est signalé pour analyse. C'est une forme d'échantillonnage non statistique qui concentre l'attention sur les motifs anormaux. Les options A, C et D décrivent d'autres paramètres de gestion des logs.",
@@ -1885,10 +1885,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "QUEL indicateur est le PLUS pertinent pour mesurer la performance de votre programme de gestion des correctifs ?",
       "choix": [
-        "Le nombre total de serveurs de l'organisation",
-        "Le nombre de licences de l'outil de scan",
+        "Le nombre total de serveurs présents dans l'organisation",
+        "Le nombre de licences détenues pour l'outil de scan de vulnérabilités",
         "Le temps moyen de remédiation (MTTR) des vulnérabilités critiques",
-        "Le budget annuel de l'équipe infrastructure"
+        "Le budget annuel alloué à l'équipe infrastructure"
       ],
       "reponse": 2,
       "explication": "Le temps moyen de remédiation des vulnérabilités critiques mesure directement l'efficacité du processus de patching : il relie la détection à la correction et peut être suivi dans le temps et comparé à des cibles. Le nombre de serveurs (A), le budget (D) et les licences (B) sont des mesures de volume ou de moyens, pas de performance du processus.",
@@ -1903,10 +1903,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Pour un tableau de bord destiné au conseil d'administration, QUEL indicateur est un bon KRI, orienté vers le FUTUR ?",
       "choix": [
-        "Le nombre d'incidents résolus le trimestre dernier",
-        "Le temps moyen de détection des incidents l'an passé",
-        "Le nombre de sessions de formation dispensées",
-        "Le pourcentage de systèmes critiques arrivant en fin de support éditeur dans les douze prochains mois"
+        "Le nombre d'incidents de sécurité résolus au cours du trimestre dernier",
+        "Le temps moyen de détection des incidents observé au cours de l'an passé",
+        "Le nombre total de sessions de sensibilisation dispensées aux employés",
+        "Le pourcentage de systèmes critiques arrivant en fin de support éditeur"
       ],
       "reponse": 3,
       "explication": "Un KRI signale une exposition au risque à venir : la proportion de systèmes critiques bientôt privés de correctifs de sécurité annonce une augmentation prévisible de la surface d'attaque et appelle une décision (migration, budget, exception). Les incidents résolus (A), le temps de détection passé (B) et les formations dispensées (C) mesurent la performance passée : ce sont des KPI.",
@@ -1921,10 +1921,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "QUEL type de test de reprise après sinistre est le MOINS perturbant pour les opérations ?",
       "choix": [
-        "Le parallel test",
-        "Le full-interruption test",
-        "La read-through (revue documentaire par chaque responsable)",
-        "Le test de bascule du datacenter"
+        "Le parallel test des installations de secours",
+        "Le full-interruption test complet du site",
+        "La read-through, revue documentaire par responsable",
+        "Le test de bascule complet vers le datacenter secondaire"
       ],
       "reponse": 2,
       "explication": "La read-through, ou revue documentaire, consiste à distribuer le plan aux responsables concernés pour qu'ils le relisent et signalent les éléments obsolètes : aucune opération n'est touchée, c'est le test le moins perturbant et le moins coûteux. Le parallel test (A) mobilise le site de repli, et le full-interruption comme la bascule de datacenter (B, D) interrompent réellement la production, avec le risque le plus élevé.",
@@ -1957,10 +1957,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Un test DR échoue : la restauration a dépassé le RTO de plusieurs heures. QUELLE est la PREMIÈRE action de management appropriée ?",
       "choix": [
-        "Documenter les constats dans un rapport de lessons learned et mettre à jour le plan et les procédures en conséquence",
-        "Classer le test comme réussi pour ne pas inquiéter la direction",
-        "Sanctionner l'équipe d'exploitation responsable du retard",
-        "Reprogrammer immédiatement le même test sans rien changer"
+        "Documenter les constats en lessons learned et mettre à jour le plan",
+        "Classer le test comme réussi pour ne pas inquiéter inutilement la direction",
+        "Sanctionner l'équipe d'exploitation jugée responsable du retard constaté",
+        "Reprogrammer immédiatement exactement le même test sans rien changer"
       ],
       "reponse": 0,
       "explication": "Un test DR qui révèle des écarts a précisément rempli son rôle : la valeur vient du processus de lessons learned, qui documente les causes, met à jour le plan, les procédures et éventuellement l'architecture, puis planifie une nouvelle validation. Sanctionner (C) décourage la transparence, maquiller le résultat (B) est contraire à l'éthique professionnelle, et retester sans corriger (D) reproduira l'échec.",
@@ -1975,10 +1975,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Après un audit, QUI devrait être PROPRIÉTAIRE de la remédiation d'un finding portant sur une application métier ?",
       "choix": [
-        "Le prestataire de scan de vulnérabilités",
-        "Exclusivement l'équipe sécurité",
-        "L'auditeur qui a identifié le finding",
-        "Le propriétaire métier ou système de l'application concernée, avec le conseil de l'équipe sécurité"
+        "Le prestataire externe ayant réalisé le scan de vulnérabilités initial",
+        "Exclusivement l'équipe sécurité interne de l'organisation",
+        "L'auditeur indépendant qui a initialement identifié le finding",
+        "Le propriétaire métier de l'application, conseillé par la sécurité"
       ],
       "reponse": 3,
       "explication": "La responsabilité de la remédiation revient au propriétaire du système ou du processus concerné : lui seul peut arbitrer les impacts métier, planifier les changements et engager les ressources, l'équipe sécurité jouant un rôle de conseil et de suivi. L'auditeur (C) doit rester indépendant de la remédiation pour préserver son objectivité, et les options A et B diluent la responsabilité loin de ceux qui possèdent le risque.",
@@ -1993,10 +1993,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Un contrôle exigé par la politique ne peut pas être appliqué sur un système hérité. QUELLES conditions rendent une exception ACCEPTABLE ?",
       "choix": [
-        "L'exception est accordée définitivement, sans limite de durée",
-        "L'équipe sécurité la refuse systématiquement, sans processus d'exception",
-        "L'administrateur du système la valide oralement",
-        "L'exception est approuvée formellement par le niveau de management approprié, assortie de compensating controls, d'une date d'expiration et d'une revue périodique"
+        "L'exception est accordée définitivement, sans aucune limite de durée fixée",
+        "L'équipe sécurité la refuse systématiquement, sans aucun processus formel d'exception",
+        "L'administrateur du système concerné la valide oralement, sans trace écrite",
+        "Le management approprié l'approuve formellement, avec contrôles et expiration"
       ],
       "reponse": 3,
       "explication": "Un processus d'exception mûr exige une approbation formelle par le management habilité à accepter le risque, des compensating controls qui réduisent l'exposition, une durée limitée avec date d'expiration et une réévaluation périodique. Une validation orale (C) n'engage personne et ne laisse pas de trace, une exception permanente (A) devient une vulnérabilité oubliée, et l'absence de tout processus (B) pousse les équipes au contournement non documenté.",
@@ -2011,10 +2011,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Un chercheur a notifié en privé une vulnérabilité à un éditeur qui ne répond plus depuis plus de 90 jours malgré plusieurs relances. QUELLE est la démarche la PLUS conforme à l'ethical disclosure ?",
       "choix": [
-        "Garder le silence indéfiniment pour éviter tout conflit",
-        "Vendre la vulnérabilité au plus offrant",
-        "Recourir à un organisme de coordination (comme un CERT) pour une divulgation coordonnée, puis publier de façon responsable les informations nécessaires à la protection des utilisateurs",
-        "Publier immédiatement un exploit fonctionnel complet"
+        "Garder le silence indéfiniment pour éviter tout conflit avec l'éditeur concerné",
+        "Vendre la vulnérabilité découverte au plus offrant sur un marché parallèle",
+        "Passer par un organisme de coordination (CERT) pour une divulgation coordonnée",
+        "Publier immédiatement un exploit fonctionnel complet accessible à tous"
       ],
       "reponse": 2,
       "explication": "Quand l'éditeur reste silencieux malgré une notification privée et un délai raisonnable, la divulgation coordonnée via un organisme tiers de confiance, tel qu'un CERT de coordination, est la voie éthique : elle maintient la pression sur l'éditeur tout en préparant une publication responsable qui permet aux utilisateurs de se protéger, sans fournir d'arme clé en main. Publier un exploit complet (D) et vendre (B) sont contraires à l'éthique ; se taire indéfiniment (A) laisse les utilisateurs exposés à leur insu.",
@@ -2029,9 +2029,9 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Un RSSI dispose d'un budget limité pour les tests offensifs d'une plateforme SaaS mature, déjà couverte par le pentest annuel exigé par PCI DSS. Son objectif est de maximiser la découverte CONTINUE de vulnérabilités réelles sur le périmètre exposé au public. QUELLE est la MEILLEURE allocation du budget restant ?",
       "choix": [
-        "Lancer un programme de bug bounty ciblé sur le périmètre public, avec règles d'engagement et processus de triage définis",
-        "Passer le pentest à un rythme semestriel",
-        "Acquérir une plateforme de Breach and Attack Simulation pour rejouer des scénarios d'attaque connus",
+        "Lancer un bug bounty ciblé sur le périmètre public, avec règles et triage",
+        "Passer le pentest à un rythme semestriel au lieu d'annuel, sans autre changement",
+        "Acquérir une plateforme de Breach and Attack Simulation pour rejouer des scénarios",
         "Financer un engagement red team furtif de six mois pour éprouver la détection du SOC"
       ],
       "reponse": 0,
@@ -2047,10 +2047,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "La direction veut annoncer publiquement un programme de bug bounty au prochain salon professionnel, dans six semaines. En tant que RSSI, QUE devez-vous vérifier EN PREMIER avant le lancement ?",
       "choix": [
-        "Que la plateforme de bug bounty retenue est la plus reconnue du secteur",
-        "Que l'organisation dispose d'un processus de triage et de remédiation capable d'absorber le flux de rapports, et de règles d'engagement avec safe harbor",
-        "Que le montant des récompenses est compétitif par rapport au marché",
-        "Que le pentest annuel a bien été réalisé avant l'ouverture du programme"
+        "Que la plateforme de bug bounty retenue est la plus reconnue du secteur d'activité",
+        "Que le processus de triage peut absorber le flux et que des règles safe harbor existent",
+        "Que le montant des récompenses proposées reste compétitif par rapport à celui du marché actuel",
+        "Que le pentest annuel a bien été réalisé juste avant l'ouverture du programme"
       ],
       "reponse": 1,
       "explication": "Un bug bounty public génère immédiatement un flux de rapports de qualité variable : sans capacité de triage, de qualification et de remédiation, le programme s'effondre et la réputation avec. Les règles d'engagement avec clause de safe harbor protègent juridiquement les chercheurs et l'organisation. Les récompenses (C) et le choix de plateforme (A) sont des paramètres secondaires, et le pentest préalable (D) est une bonne pratique non bloquante.",
@@ -2066,9 +2066,9 @@ window.CISSP_DATA.domains[6] = {
       "q": "Votre programme de gestion des tiers doit évaluer 300 fournisseurs avec deux analystes, et le régulateur exige une assurance proportionnée au risque. QUELLE approche est la PLUS défendable ?",
       "choix": [
         "Envoyer à tous les fournisseurs le même questionnaire détaillé de 400 questions",
-        "Exiger un audit sur site annuel de chaque fournisseur",
+        "Exiger un audit sur site annuel et approfondi de chacun de ses fournisseurs",
         "Accepter la certification ISO 27001 comme assurance suffisante pour tous les fournisseurs",
-        "Segmenter les fournisseurs par criticité : rapports d'audit indépendants (SOC 2 Type II ou équivalent) pour les tiers critiques, questionnaires pour les tiers à faible risque, audits sur site réservés aux risques élevés non couverts"
+        "Segmenter par criticité : SOC 2 Type II pour les tiers critiques, questionnaires sinon"
       ],
       "reponse": 3,
       "explication": "La proportionnalité exigée par le régulateur s'obtient en alignant le niveau d'assurance sur la criticité du tiers : attestations indépendantes dans la durée pour les fournisseurs critiques, auto-évaluations questionnaires pour la masse à faible risque, audits sur site en dernier recours ciblé. Le questionnaire unique (A) sature l'équipe sans discriminer le risque, l'audit sur site universel (B) est irréaliste, et la certification ISO 27001 seule (C) atteste un système de management sans couvrir tous les services ni tous les risques.",
@@ -2083,10 +2083,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Un fournisseur cloud critique refuse votre clause d'audit sur site en invoquant la mutualisation de son environnement, et propose à la place son rapport SOC 2 Type II sous NDA, ses attestations de pentest et une clause de notification d'incident. QUELLE est la MEILLEURE réponse du responsable de la gestion des tiers ?",
       "choix": [
-        "Exiger la complétion de votre questionnaire interne détaillé en remplacement de l'audit",
-        "Accepter le rapport SOC 2 tel quel, puisque c'est le standard du marché",
-        "Évaluer si le périmètre et les critères du SOC 2 Type II couvrent les services consommés et les obligations réglementaires, puis combler les écarts par des exigences contractuelles ciblées",
-        "Refuser le contrat : sans droit d'audit sur site, aucune assurance n'est possible"
+        "Exiger la complétion de votre questionnaire interne très détaillé en remplacement complet de l'audit",
+        "Accepter le rapport SOC 2 tel quel, puisque c'est le standard reconnu du marché",
+        "Vérifier que le SOC 2 Type II couvre les services consommés, puis combler les écarts par contrat",
+        "Refuser le contrat : sans droit d'audit sur site, aucune assurance n'est jamais possible"
       ],
       "reponse": 2,
       "explication": "Le refus d'audit sur site est courant et légitime chez les fournisseurs cloud mutualisés : l'assurance passe alors par l'analyse critique du rapport d'audit indépendant. Il faut vérifier que le périmètre (services, sites, période) et les Trust Services Criteria couverts correspondent aux services réellement consommés et aux obligations réglementaires, puis traiter les écarts par contrat. Refuser en bloc (D) est un absolu contre-productif, accepter sans analyse (B) revient à une assurance de façade, et un questionnaire auto-déclaratif (A) est plus faible que l'attestation indépendante déjà proposée.",
@@ -2101,10 +2101,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Votre entreprise s'apprête à déployer un assistant conversationnel fondé sur un LLM, connecté à la base clients, pour le support de premier niveau. Le pentest applicatif classique n'a rien relevé. En tant que RSSI, QUELLE assurance supplémentaire devez-vous exiger EN PRIORITÉ avant la mise en production ?",
       "choix": [
-        "Des tests adversariaux ciblant les risques propres aux LLM : injection de prompt, exfiltration de données clients via les réponses, contournement des garde-fous",
-        "Une nouvelle passe d'analyse statique (SAST) sur le code d'intégration",
-        "Un test de charge validant la tenue aux pics de trafic",
-        "Une attestation de l'éditeur du modèle sur la sécurité de son entraînement"
+        "Des tests adversariaux ciblant les risques LLM : injection de prompt, exfiltration",
+        "Une nouvelle passe d'analyse statique (SAST) sur le seul code d'intégration applicatif",
+        "Un test de charge validant la tenue de la solution aux pics de trafic utilisateur",
+        "Une attestation de l'éditeur du modèle sur la sécurité de son entraînement initial"
       ],
       "reponse": 0,
       "explication": "Les systèmes fondés sur des LLM présentent des modes de défaillance spécifiques — injection de prompt directe ou indirecte, divulgation de données sensibles dans les réponses, contournement des garde-fous — qu'aucun pentest applicatif classique ni SAST ne couvre. Avant de connecter un modèle à des données clients, des tests adversariaux dédiés (red teaming IA) sont l'assurance manquante. Le test de charge (C) est une préoccupation d'exploitation, le SAST (B) ne voit pas le comportement du modèle, et l'attestation de l'éditeur (D) ne teste ni votre intégration ni vos données.",
@@ -2119,10 +2119,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Votre équipe de gestion des vulnérabilités traite 2 000 findings par mois en les classant par score CVSS décroissant, mais les vulnérabilités réellement exploitées dans votre secteur restent ouvertes plusieurs semaines. QUELLE évolution du processus est la PLUS pertinente ?",
       "choix": [
-        "Abaisser le seuil de traitement pour couvrir aussi les scores moyens",
-        "Intégrer la probabilité d'exploitation (EPSS) et les catalogues de vulnérabilités activement exploitées (type KEV) comme premiers critères, pondérés par la criticité des actifs",
+        "Abaisser le seuil de traitement pour couvrir aussi tous les scores moyens détectés",
+        "Intégrer la probabilité d'exploitation (EPSS/KEV) pondérée par la criticité des actifs",
         "Recruter des analystes supplémentaires pour traiter davantage de findings chaque mois",
-        "Basculer la priorisation sur le score CVSS environnemental recalculé pour chaque actif"
+        "Basculer la priorisation sur le score CVSS environnemental recalculé pour chacun des actifs"
       ],
       "reponse": 1,
       "explication": "Le symptôme décrit — des failles exploitées qui attendent derrière des failles critiques théoriques — est la limite connue du tri par CVSS brut. Les scores de probabilité d'exploitation (EPSS) et les catalogues d'exploitation avérée (comme le KEV de la CISA), croisés avec la criticité métier des actifs, concentrent l'effort sur le risque réel. Élargir le volume (A) ou recruter (C) aggravent ou compensent l'engorgement sans corriger le critère de tri, et le score environnemental (D), utile en théorie, ne capture pas l'exploitation active et serait impraticable à cette échelle.",
@@ -2137,10 +2137,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Le comité exécutif n'a jamais participé à un exercice de crise cyber ; le conseil d'administration en demande un premier dans le trimestre, sans perturber la production. QUEL format devriez-vous proposer ?",
       "choix": [
-        "Un test full-interruption pour démontrer la réalité du risque à la direction",
-        "Un exercice sur table (tabletop) fondé sur un scénario de ransomware, centré sur les décisions du comité exécutif : communication, obligations légales, arbitrages métier",
-        "Un exercice technique de bascule du datacenter avec les équipes d'exploitation",
-        "Une campagne de phishing simulée ciblant les membres du comité exécutif"
+        "Un test full-interruption pour démontrer la réalité du risque à la direction générale",
+        "Un tabletop ransomware centré sur les décisions du comité exécutif et les arbitrages",
+        "Un exercice technique de bascule du datacenter mené avec les équipes d'exploitation",
+        "Une campagne de phishing simulée ciblant spécifiquement les membres du comité exécutif"
       ],
       "reponse": 1,
       "explication": "L'objectif est d'entraîner les dirigeants à décider en crise, pas de valider la technique : le tabletop exercise construit sur un scénario réaliste confronte le comité exécutif aux décisions qui lui reviennent — communication de crise, notification aux régulateurs, arbitrages de continuité, question de la rançon — sans toucher à la production et dans le délai imparti. La bascule technique (C) entraîne les mauvaises personnes, le full-interruption (A) est disproportionné pour une première fois, et le phishing simulé (D) mesure la vigilance individuelle, pas la décision collective.",
@@ -2155,10 +2155,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Le conseil d'administration juge le reporting sécurité « illisible » : quarante métriques techniques présentées chaque trimestre. QUELLE refonte du tableau de bord est la PLUS adaptée ?",
       "choix": [
-        "Présenter un petit nombre d'indicateurs reliés au risque métier : exposition des actifs critiques, tendances dans le temps, comparaison aux seuils d'appétence au risque validés par le conseil",
-        "Conserver les métriques et ajouter une annexe méthodologique expliquant chacune d'elles",
-        "Réduire le nombre de métriques en conservant les indicateurs techniques les plus précis, comme le taux de patching par système d'exploitation",
-        "Confier la présentation au prestataire du SOC, qui maîtrise le détail des indicateurs"
+        "Un petit nombre d'indicateurs reliés au risque métier et à l'appétence validée",
+        "Conserver toutes les métriques et ajouter une annexe méthodologique les expliquant une à une",
+        "Réduire les métriques en gardant les indicateurs techniques les plus précis, comme le patching",
+        "Confier la présentation au prestataire du SOC, qui maîtrise le détail fin des indicateurs"
       ],
       "reponse": 0,
       "explication": "Un conseil d'administration exerce une surveillance : il a besoin de peu d'indicateurs, exprimés en termes de risque métier, montrant des tendances et situés par rapport à l'appétence au risque qu'il a lui-même validée. C'est ce qui rend un tableau de bord « board-ready ». Réduire sans changer d'altitude (C) laisse des métriques de technicien, l'annexe méthodologique (B) documente l'illisible au lieu de le rendre décisionnel, et déléguer au prestataire (D) ajoute du détail technique tout en diluant la responsabilité du RSSI devant le conseil.",
@@ -2173,10 +2173,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Après trois ans de pentests annuels aux findings récurrents, la direction demande si le programme d'évaluation apporte encore de la valeur. QUEL indicateur démontrerait le MIEUX l'efficacité du programme dans la durée ?",
       "choix": [
-        "Le coût journalier du cabinet de pentest comparé aux tarifs du marché",
-        "Le nombre de systèmes couverts par chaque campagne de test",
-        "La tendance du taux de findings récurrents et du délai de remédiation entre deux cycles de test",
-        "Le nombre total de vulnérabilités découvertes à chaque campagne de test"
+        "Le coût journalier du cabinet de pentest comparé aux tarifs du marché actuel",
+        "Le nombre de systèmes couverts par chaque campagne de test successive",
+        "La tendance des findings récurrents et du délai de remédiation entre deux cycles",
+        "Le nombre total de vulnérabilités découvertes lors de chaque nouvelle campagne de test"
       ],
       "reponse": 2,
       "explication": "L'efficacité d'un programme d'évaluation ne se mesure pas au volume de découvertes mais à sa capacité à produire un changement durable : si le taux de findings récurrents baisse et que le délai de remédiation se réduit de cycle en cycle, le programme transforme réellement la posture de sécurité. Le comptage brut (D) peut rester stable pour de mauvaises raisons, le coût journalier (A) mesure la compétitivité de l'achat, et la couverture (B) est une condition de qualité du test, pas une preuve d'amélioration.",
@@ -2191,10 +2191,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Votre SOC détecte désormais la plupart des scénarios rejoués par votre plateforme BAS. Le RSSI veut éprouver la résilience face à un adversaire créatif et persistant, avec un budget n'autorisant qu'un seul engagement majeur. QUEL choix est le PLUS cohérent avec cet objectif ?",
       "choix": [
-        "Un audit de maturité du SOC selon un référentiel reconnu",
-        "Un pentest white box exhaustif de l'infrastructure interne",
-        "Renouveler l'abonnement BAS en élargissant la bibliothèque de scénarios",
-        "Un engagement red team orienté objectifs, mené en furtivité sur plusieurs semaines, suivi d'une restitution purple team"
+        "Un audit de maturité du SOC mené selon un référentiel reconnu du secteur",
+        "Un pentest white box exhaustif de l'ensemble de l'infrastructure interne critique du SI",
+        "Renouveler l'abonnement BAS en élargissant fortement la bibliothèque de scénarios",
+        "Un engagement red team furtif orienté objectifs, suivi d'une restitution purple team"
       ],
       "reponse": 3,
       "explication": "La BAS a atteint sa limite : elle rejoue des scénarios connus, or l'objectif est désormais de confronter l'organisation à un adversaire adaptatif. Seul un engagement red team orienté objectifs, furtif et étalé dans le temps, simule cette créativité ; la restitution purple team convertit ensuite l'exercice en améliorations concrètes de détection. Élargir la BAS (C) reste dans le connu, le pentest white box (B) inventorie des vulnérabilités sans éprouver la résilience face à un intrus furtif, et l'audit de maturité (A) évalue des processus sur dossier sans confrontation réelle.",
@@ -2209,10 +2209,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Après un durcissement initial des serveurs selon les CIS Benchmarks, le RSSI veut s'assurer en continu qu'aucun système ne dérive de la configuration approuvée. Quelle approche est la PLUS adaptée ?",
       "choix": [
-        "Programmer un test d'intrusion annuel couvrant l'ensemble des serveurs",
-        "Demander aux administrateurs d'attester chaque trimestre que la configuration n'a pas été modifiée",
-        "Déployer un scan de conformité de configuration automatisé qui compare régulièrement chaque système à la baseline via du contenu SCAP",
-        "Examiner manuellement un échantillon de serveurs lors de l'audit interne annuel"
+        "Programmer un test d'intrusion annuel couvrant l'ensemble des serveurs de production",
+        "Demander aux administrateurs d'attester chaque trimestre l'absence de changement de config",
+        "Déployer un scan de conformité automatisé comparant chaque système à la baseline SCAP",
+        "Examiner manuellement un échantillon de serveurs lors du seul audit interne annuel"
       ],
       "reponse": 2,
       "explication": "La dérive de configuration est un phénomène continu : la réponse doit l'être aussi. Un scan de conformité automatisé, s'appuyant sur du contenu SCAP (checklists XCCDF, tests OVAL) dérivé des CIS Benchmarks, compare en permanence l'état réel à la baseline approuvée et signale chaque écart : c'est précisément la définition d'un compliance check. Le pentest annuel (A) cherche des failles exploitables une fois par an, l'attestation des administrateurs (B) est déclarative et invérifiable, et l'échantillonnage manuel annuel (D) laisse la majorité du parc sans vérification pendant un an.",
@@ -2227,9 +2227,9 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Le temps de réponse d'un service de paiement critique doit être surveillé pour détecter toute dégradation AVANT que les clients ne s'en plaignent. Quelle approche répond le MIEUX à ce besoin ?",
       "choix": [
-        "Exécuter des transactions synthétiques scriptées à intervalles réguliers et comparer les résultats à un benchmark de performance établi",
+        "Exécuter des transactions synthétiques régulières comparées à un benchmark",
         "S'appuyer sur le Real User Monitoring pour enregistrer les sessions des utilisateurs réels",
-        "Lancer un scan de vulnérabilités hebdomadaire ciblant le service de paiement",
+        "Lancer un scan de vulnérabilités hebdomadaire ciblant le seul service de paiement en ligne",
         "Augmenter la couverture de tests unitaires du module de paiement avant chaque mise en production"
       ],
       "reponse": 0,
@@ -2281,10 +2281,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Votre organisation veut commanditer un test d'intrusion sur son application hébergée chez un fournisseur IaaS public. Que devez-vous faire EN PREMIER ?",
       "choix": [
-        "Vérifier la politique de test du fournisseur et obtenir les autorisations requises, en cadrant le test selon le modèle de responsabilité partagée",
-        "Planifier le test hors des heures ouvrées pour limiter l'impact sur la production",
-        "Remplacer le pentest par un scan de vulnérabilités non intrusif afin d'éviter toute démarche d'autorisation",
-        "Demander au fournisseur cloud de réaliser lui-même le test sur l'ensemble de la pile"
+        "Vérifier la politique de test du fournisseur et obtenir les autorisations requises",
+        "Planifier le test hors des heures ouvrées pour limiter l'impact sur la production métier",
+        "Remplacer le pentest par un scan non intrusif afin d'éviter toute démarche d'autorisation",
+        "Demander au fournisseur cloud de réaliser lui-même le test sur l'ensemble de la pile applicative"
       ],
       "reponse": 0,
       "explication": "Dans le cloud, l'organisation ne possède pas l'infrastructure : avant tout test intrusif, il faut consulter la politique de test du fournisseur, obtenir les autorisations prévues et limiter le périmètre à ce qui relève de la responsabilité du client selon le modèle de responsabilité partagée. Tester sans autorisation peut violer le contrat et affecter d'autres clients de la plateforme mutualisée. La planification horaire (B) vient après l'autorisation, dégrader le test en simple scan (C) sacrifie l'objectif pour éviter une démarche normale, et déléguer au fournisseur (D) ne teste pas la configuration du client, qui reste sa responsabilité.",
@@ -2299,10 +2299,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Une organisation exploite son ERP on-premise, a migré la moitié de ses charges de travail en cloud public, et relie les deux environnements par VPN et fédération d'identité. En concevant la stratégie d'évaluation annuelle, quel périmètre mérite l'attention la PLUS particulière ?",
       "choix": [
-        "Les centres de données on-premise, car l'organisation en porte l'entière responsabilité",
-        "Les services cloud, car ils sont directement exposés sur Internet",
-        "Les points d'interconnexion entre les deux environnements : tunnels VPN, flux de données et fédération d'identité",
-        "Les postes de travail des administrateurs, vecteur habituel de compromission initiale"
+        "Les centres de données on-premise, dont l'organisation porte l'entière responsabilité",
+        "Les services cloud, car ils sont directement exposés sur le réseau Internet public",
+        "Les points d'interconnexion entre les deux : tunnels VPN, flux et fédération d'identité",
+        "Les postes des administrateurs, vecteur habituel de compromission initiale des attaquants"
       ],
       "reponse": 2,
       "explication": "Dans une architecture hybride, chaque environnement est généralement évalué par des mécanismes établis (audits internes on-premise, attestations SOC 2 côté cloud). Le risque spécifique de l'hybride se concentre aux points d'interconnexion : tunnels VPN, flux de données et fédération d'identité, où une compromission se propage d'un monde à l'autre et où les responsabilités se chevauchent. C'est là que la stratégie d'évaluation doit porter une attention particulière. Les réponses A, B et D désignent des périmètres réels mais couverts par les stratégies classiques ; aucun n'adresse le risque propre à l'hybridation.",
@@ -2318,9 +2318,9 @@ window.CISSP_DATA.domains[6] = {
       "q": "En préparant le plan de tests annuel, le RSSI compare l'approche pour le centre de données on-premise et pour la solution SaaS de ressources humaines. Quelle affirmation reflète le MIEUX la différence de stratégie ?",
       "choix": [
         "Le SaaS n'a pas besoin d'être évalué puisque la sécurité incombe entièrement au fournisseur",
-        "On-premise, l'organisation peut tester directement toute la pile ; pour le SaaS, elle teste sa configuration et ses accès, et s'appuie sur les attestations du fournisseur comme un SOC 2 Type II pour le reste",
-        "Les deux environnements doivent recevoir exactement les mêmes tests techniques afin de garantir la comparabilité des résultats",
-        "L'organisation doit exiger de mener elle-même un pentest complet de l'infrastructure du fournisseur SaaS"
+        "On-premise on teste toute la pile ; pour le SaaS on teste sa configuration et ses accès",
+        "Les deux environnements doivent recevoir exactement les mêmes tests techniques comparables",
+        "L'organisation doit exiger de mener elle-même un pentest complet de l'infrastructure SaaS du fournisseur"
       ],
       "reponse": 1,
       "explication": "La stratégie d'évaluation dépend de la localisation et du modèle de responsabilité partagée. On-premise, l'organisation possède toute la pile et peut la tester librement. En SaaS, sa responsabilité se limite à la configuration, aux comptes et aux données : c'est ce qu'elle teste directement, et elle obtient l'assurance sur l'infrastructure et l'application du fournisseur via des attestations indépendantes comme un SOC 2 Type II. Ignorer l'évaluation du SaaS (A) confond externalisation du service et externalisation de la responsabilité, appliquer des tests identiques (C) ignore le modèle partagé, et exiger un pentest de l'infrastructure du fournisseur (D) est contractuellement irréaliste et inutile face à une attestation adaptée.",
@@ -2337,10 +2337,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "During an authorized penetration test, the tester obtains credentials that grant access to a system explicitly excluded from the agreed scope. What should the tester do NEXT?",
       "choix": [
-        "Refrain from accessing the system and report the finding to the designated client contact per the rules of engagement",
-        "Use the credentials to demonstrate maximum business impact",
-        "Access the system briefly to confirm the credentials are valid",
-        "Delete the credentials and omit them from the report"
+        "Refrain from accessing the system and report the finding to the client contact",
+        "Use the harvested credentials to demonstrate maximum business impact to the client",
+        "Access the system briefly just to confirm that the credentials are actually valid",
+        "Delete the credentials and omit them entirely from the final report"
       ],
       "reponse": 0,
       "explication": "Le périmètre et les Rules of Engagement définissent la limite de l'autorisation légale du testeur : un système explicitement exclu ne doit pas être touché, même avec des identifiants valides. La conduite correcte est de s'abstenir et de signaler la découverte au contact désigné, qui décidera d'une éventuelle extension de périmètre écrite. Utiliser les identifiants (B) ou même « vérifier brièvement » (C) constitue un accès non autorisé, et omettre l'information du rapport (D) prive le client d'un finding important.",
@@ -2355,10 +2355,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "An organization needs assurance that a SaaS provider's security controls operated effectively over the past nine months. Which report BEST meets this requirement?",
       "choix": [
-        "SOC 2 Type I",
-        "SOC 3",
-        "SOC 1 Type I",
-        "SOC 2 Type II"
+        "A SOC 2 Type I design report",
+        "A SOC 3 general-use report",
+        "A SOC 1 Type I financial report",
+        "A SOC 2 Type II report"
       ],
       "reponse": 3,
       "explication": "Le SOC 2 Type II couvre à la fois la conception ET l'efficacité opérationnelle des contrôles sur une période étendue (au moins six mois) : c'est le rapport adapté quand on veut une assurance sur le fonctionnement dans la durée. Le Type I (A) n'évalue la conception qu'à un instant donné, le SOC 3 (B) est une version publique résumée sans le détail des tests, et le SOC 1 (C) porte sur les contrôles affectant le reporting financier.",
@@ -2391,10 +2391,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "A security manager must prioritize remediation of dozens of vulnerabilities. Beyond the CVSS base score, which factor should MOST influence the prioritization?",
       "choix": [
-        "The raw number of vulnerabilities found on each host",
-        "Evidence of active exploitation in the wild combined with the business criticality of the affected assets",
-        "The age of each CVE identifier",
-        "The availability of a vendor-supplied patch for each finding"
+        "The raw number of vulnerabilities found on each scanned host",
+        "Evidence of active exploitation in the wild plus asset business criticality",
+        "The age of each CVE identifier, oldest published entries first",
+        "The availability of a vendor-supplied security patch for each reported finding"
       ],
       "reponse": 1,
       "explication": "Le score CVSS de base mesure une sévérité intrinsèque, pas le risque contextuel. Une priorisation efficace croise ce score avec l'exploitation active observée (threat intelligence, catalogues de vulnérabilités exploitées) et la criticité métier des actifs touchés : une faille moyennement notée mais activement exploitée sur un actif critique passe avant une faille critique théorique sur un système isolé. Le volume brut par hôte (A) mesure une charge de travail, l'ancienneté du CVE (C) est un critère secondaire, et la disponibilité d'un correctif (D) influence le mode de traitement, pas la priorité du risque.",
@@ -2445,10 +2445,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "What is the PRIMARY purpose of the rules of engagement in a penetration test?",
       "choix": [
-        "To list every vulnerability the testers expect to find",
-        "To define the scope, authorized techniques, time windows, communication and escalation procedures that legally frame the test",
-        "To guarantee that no system will ever fail during the test",
-        "To transfer all legal liability to the testing firm"
+        "To list every vulnerability the testers expect to find in advance",
+        "To define scope, authorized techniques, timing and escalation procedures",
+        "To guarantee that no in-scope system will ever fail during the test window",
+        "To transfer all legal liability for the engagement to the testing firm"
       ],
       "reponse": 1,
       "explication": "Les Rules of Engagement encadrent juridiquement et opérationnellement le test : périmètre exact, techniques autorisées ou interdites, fenêtres horaires, contacts, procédures de communication et d'escalade en cas d'incident. C'est ce document, avec l'autorisation écrite du management, qui distingue le test légal du piratage. Elles ne garantissent pas l'absence d'incident (C), ne prédisent pas les findings (A) et ne transfèrent pas toute la responsabilité (D).",
@@ -2463,10 +2463,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "A red team emulates the tactics of a specific threat actor over several weeks without notifying the SOC. What is the PRIMARY objective of this engagement?",
       "choix": [
-        "To evaluate the organization's real-world detection and response capabilities against a realistic adversary",
-        "To train developers in secure coding practices",
-        "To produce an exhaustive inventory of all technical vulnerabilities",
-        "To verify compliance with ISO 27001 controls"
+        "To evaluate real-world detection and response against a realistic adversary",
+        "To train the organization's developers in secure coding practices",
+        "To produce an exhaustive inventory of every technical vulnerability that is present",
+        "To verify formal compliance with the full ISO 27001 control set"
       ],
       "reponse": 0,
       "explication": "Un engagement de red team est orienté objectifs : il émule un adversaire réaliste, dans la durée et en furtivité, précisément pour éprouver la capacité réelle de l'organisation (personnes, processus, technologies) à détecter et répondre. L'inventaire exhaustif des vulnérabilités (C) relève du vulnerability assessment ou du pen test classique, la conformité (D) relève de l'audit, et la formation des développeurs (B) n'est pas l'objet de l'exercice.",
@@ -2517,10 +2517,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "An organization deploys a commercial application without any access to its source code. Which security testing technique remains available?",
       "choix": [
-        "Static code analysis",
+        "Static source-code analysis at rest",
         "Dynamic application security testing",
-        "Branch coverage analysis",
-        "Fagan inspection"
+        "Branch and statement coverage analysis",
+        "Formal Fagan code inspection"
       ],
       "reponse": 1,
       "explication": "Le DAST évalue l'application en cours d'exécution, de l'extérieur, sans nécessiter le code source : c'est souvent la seule option pour les logiciels tiers. L'inspection Fagan (D), l'analyse statique (A) et l'analyse de couverture des branches (C) requièrent toutes l'accès au code source ou aux artefacts internes du développement.",
@@ -2571,10 +2571,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "An auditor correlating events across multiple systems notices that timestamps differ by several minutes between servers. Which control MOST LIKELY failed?",
       "choix": [
-        "Log compression before archiving",
-        "Role-based access control on the SIEM",
+        "Log compression applied before long-term archiving",
+        "Strict role-based access control on the SIEM management console",
         "Network Time Protocol synchronization across systems",
-        "Log encryption at rest"
+        "Encryption of the stored log files at rest on disk"
       ],
       "reponse": 2,
       "explication": "Des horodatages incohérents entre systèmes empêchent de reconstituer une chronologie fiable des événements : la cause la plus probable est un défaut de synchronisation NTP. Tous les systèmes émetteurs et le SIEM doivent être synchronisés sur des sources de temps fiables pour permettre la corrélation. Le chiffrement (D), le contrôle d'accès (B) et la compression (A) n'ont aucun effet sur la cohérence temporelle.",
@@ -2607,10 +2607,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "What is the PRIMARY advantage of synthetic transactions over real user monitoring?",
       "choix": [
-        "They passively capture the experience of actual users",
-        "They eliminate the need for any other form of testing",
-        "They are always less expensive to operate",
-        "They proactively verify system behavior against known expected results, even with no user traffic"
+        "They passively capture the real experience of actual production users",
+        "They completely remove the need for every other form of software testing entirely",
+        "They are always considerably less expensive to build and to operate",
+        "They proactively check behavior against expected results, even without traffic"
       ],
       "reponse": 3,
       "explication": "Les transactions synthétiques sont scriptées avec des résultats attendus connus : elles s'exécutent de manière proactive, y compris en l'absence de trafic réel, et détectent les dégradations avant que les utilisateurs ne les subissent. Le RUM (A) est au contraire passif et dépend du trafic réel. Les transactions synthétiques ne remplacent pas les autres tests (B) et leur coût (C) n'est pas leur avantage distinctif.",
@@ -2625,10 +2625,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Which of the following metrics is BEST classified as a key risk indicator (KRI)?",
       "choix": [
-        "The number of security awareness sessions delivered",
-        "The percentage of critical systems running software that will lose vendor support within twelve months",
-        "The number of incidents closed last quarter",
-        "The mean time to detect incidents over the past year"
+        "The number of security awareness sessions delivered to all staff last quarter",
+        "The percentage of critical systems whose software loses vendor support soon",
+        "The number of security incidents formally closed during the last quarter",
+        "The mean time to detect security incidents measured over the past year"
       ],
       "reponse": 1,
       "explication": "Un KRI regarde vers l'avenir et signale une exposition croissante au risque : la proportion de systèmes critiques bientôt privés de support éditeur annonce une accumulation prévisible de vulnérabilités non corrigeables et appelle une décision. Les incidents clos (C), le temps de détection passé (D) et les formations dispensées (A) mesurent la performance passée du programme : ce sont des KPI.",
@@ -2679,10 +2679,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "A business continuity manager gathers the recovery team in a conference room and walks through a simulated disaster scenario without touching any system. Which type of test is this?",
       "choix": [
-        "Structured walkthrough (tabletop exercise)",
-        "Parallel test",
-        "Full-interruption test",
-        "Simulation with live failover"
+        "Structured walkthrough (tabletop)",
+        "Parallel processing failover test",
+        "Full-interruption failover test",
+        "Simulation with live production failover"
       ],
       "reponse": 0,
       "explication": "Le structured walkthrough, ou tabletop exercise, réunit l'équipe autour d'un scénario de sinistre joué sur table : chacun déroule son rôle et le plan est confronté au scénario, sans toucher aux systèmes. C'est peu coûteux et révélateur des lacunes de coordination. Le parallel test (B) et le full-interruption (C) mobilisent réellement les infrastructures, et une bascule réelle (D) dépasse le cadre décrit.",
@@ -2697,10 +2697,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "A critical vulnerability cannot be patched because the vendor no longer supports the system, which must remain in production for two more years. What should the security manager do FIRST?",
       "choix": [
-        "Reinstall the operating system to remove the vulnerability",
-        "Accept the risk silently and take no further action",
-        "Implement compensating controls, document a formal risk exception approved by the appropriate management level, and schedule periodic reviews",
-        "Disconnect the system immediately regardless of business impact"
+        "Reinstall the operating system to remove the vulnerability entirely",
+        "Accept the residual risk silently and take no further documented remediation action",
+        "Add compensating controls and a formal, time-bound risk exception with reviews",
+        "Disconnect the affected system immediately regardless of any business impact"
       ],
       "reponse": 2,
       "explication": "Quand la correction est impossible, la démarche correcte combine des compensating controls (segmentation, restriction d'accès, surveillance renforcée), une exception formellement approuvée par le niveau de management habilité à accepter le risque, et une revue périodique de la décision. L'acceptation silencieuse (B) n'est ni tracée ni autorisée, la déconnexion brutale (D) ignore l'impact métier, et la réinstallation (A) ne corrige pas une vulnérabilité du logiciel lui-même.",
@@ -2715,10 +2715,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "A security researcher privately reported a vulnerability to a vendor. After repeated attempts over a reasonable period, the vendor has not responded. What is the MOST ethical next step?",
       "choix": [
-        "Engage a coordination body such as a CERT to pursue coordinated disclosure",
-        "Publish a fully weaponized exploit to force the vendor to react",
-        "Take no further action and keep the flaw secret indefinitely",
-        "Sell the vulnerability details to the highest bidder"
+        "Engage a coordination body such as a CERT for coordinated disclosure",
+        "Publish a fully weaponized exploit at once to force the vendor to react",
+        "Take no action whatsoever and keep the flaw secret indefinitely from all",
+        "Sell the vulnerability details quietly to the highest private bidder"
       ],
       "reponse": 0,
       "explication": "Face à un éditeur silencieux malgré une notification privée et un délai raisonnable, l'ethical disclosure recommande de passer par un organisme de coordination, tel qu'un CERT, pour organiser une divulgation coordonnée : cela maintient la pression sur l'éditeur et prépare une publication responsable permettant aux utilisateurs de se protéger. Publier un exploit armé (B) et vendre la faille (D) sont contraires à l'éthique, et le silence perpétuel (C) laisse les utilisateurs exposés à leur insu.",
@@ -2733,9 +2733,9 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Which statement about an INTERNAL audit team is TRUE?",
       "choix": [
-        "It must always report administratively to the CIO",
-        "Its familiarity with the environment reduces audit time and increases scheduling agility, at the cost of lower perceived independence",
-        "It offers greater independence than an external audit firm",
+        "It must always report administratively to the organization's CIO directly",
+        "Its familiarity with the environment cuts audit time but lowers independence",
+        "It offers far greater independence than any external audit firm ever could",
         "Its reports are universally accepted by regulators as independent attestations"
       ],
       "reponse": 1,
@@ -2751,9 +2751,9 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "During a port scan, nmap reports a port as 'closed'. What does this state indicate?",
       "choix": [
-        "A service is accepting connections on the port",
-        "A firewall is blocking the scanner's probes",
-        "The host is powered off",
+        "A service is actively accepting connections on the scanned port",
+        "A firewall is silently blocking the scanner's probe packets",
+        "The target host is currently powered off or unreachable",
         "The port is reachable but no service is listening on it"
       ],
       "reponse": 3,
@@ -2787,10 +2787,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "An organization cannot review every user account each quarter. Which account population should ALWAYS receive a full, non-sampled review?",
       "choix": [
-        "Service accounts only, chosen at the reviewer's discretion",
-        "Accounts created during the last month",
+        "Service accounts only, chosen at the reviewer's own discretion",
+        "Only accounts created during the last calendar month before the review date",
         "Highly privileged accounts such as domain and system administrators",
-        "Accounts of employees on vacation"
+        "Accounts of employees who are currently away on vacation"
       ],
       "reponse": 2,
       "explication": "Les comptes hautement privilégiés (administrateurs de domaine, de systèmes, comptes root) doivent être revus en totalité à chaque cycle, car leur compromission ou leur dérive a l'impact maximal. Pour les comptes ordinaires, un échantillonnage est acceptable à condition d'être véritablement aléatoire. Les populations proposées en A, B et D ne correspondent pas à une approche fondée sur le risque.",
@@ -2805,10 +2805,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "A required security control cannot be implemented on a business-critical system. Who should formally APPROVE the resulting policy exception?",
       "choix": [
-        "The system administrator who discovered the constraint",
-        "A management level with the authority to accept the residual risk on behalf of the organization",
-        "The vendor of the affected product",
-        "The penetration tester who validated the finding"
+        "The system administrator who first discovered the technical constraint on site",
+        "A management level with authority to accept the residual risk formally",
+        "The external vendor of the affected product or component",
+        "The penetration tester who originally validated the finding"
       ],
       "reponse": 1,
       "explication": "Accepter un risque résiduel est une décision de gouvernance : seule une autorité de management habilitée (propriétaire du risque, direction, selon la politique de l'organisation) peut approuver formellement l'exception, avec compensating controls, durée limitée et revue périodique. L'administrateur (A) et le testeur (D) n'ont pas cette autorité, et le fournisseur (C) est extérieur à la décision de risque de l'organisation.",
@@ -2823,10 +2823,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Which method provides the STRONGEST evidence that an organization's backup process actually protects its data?",
       "choix": [
-        "Encrypting all backup media",
-        "Confirming that backup jobs complete without error codes",
-        "Reviewing the backup vendor's marketing documentation",
-        "Periodically performing an actual restoration of systems or files from backup media"
+        "Encrypting all of the backup media at rest with strong keys",
+        "Confirming that backup jobs complete without any error codes",
+        "Reviewing the backup vendor's product marketing documentation in detail",
+        "Periodically performing an actual restoration from backup media"
       ],
       "reponse": 3,
       "explication": "Seule une restauration réelle périodique prouve que les données sont effectivement récupérables : c'est le test ultime du processus de sauvegarde. Un code de retour sans erreur (B) ne garantit ni l'intégrité ni la restaurabilité des données, la documentation du fournisseur (C) n'est pas une preuve, et le chiffrement (A) protège la confidentialité des supports, pas la capacité de restauration.",
@@ -2841,10 +2841,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "In an ISO management system context, what is the PRIMARY purpose of the formal management review?",
       "choix": [
-        "To tune SIEM correlation rules",
-        "To replace internal audits entirely",
-        "For senior leadership to evaluate the effectiveness of the security management system and direct necessary changes",
-        "To assign blame for security incidents to specific employees"
+        "To automatically tune the SIEM correlation rules",
+        "To replace the internal audit function entirely",
+        "For leadership to judge the security program and direct changes",
+        "To assign blame for security incidents to specific named employees"
       ],
       "reponse": 2,
       "explication": "La revue de direction, qui correspond à la phase Act du cycle Plan-Do-Check-Act, permet à la direction d'évaluer l'efficacité du système de management de la sécurité à partir des résultats d'audits, de tests et de métriques, puis de décider des changements et des ressources nécessaires. Elle ne cherche pas de coupables (D), ne remplace pas les audits (B) qui l'alimentent, et le tuning du SIEM (A) est une tâche opérationnelle.",
@@ -2859,10 +2859,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "During the attack phase of a penetration test, a critical production system becomes unresponsive. What should the testing team do FIRST?",
       "choix": [
-        "Continue testing other systems to stay on schedule",
-        "Attempt to restore the system themselves before anyone notices",
-        "Document the outage and disclose it only in the final report",
-        "Follow the notification and escalation procedure defined in the rules of engagement and inform the designated client contact immediately"
+        "Continue testing other in-scope systems to stay on the agreed schedule",
+        "Attempt to restore the affected system themselves before anyone notices",
+        "Document the outage quietly and disclose it only within the final written report",
+        "Follow the escalation procedure and inform the client contact immediately"
       ],
       "reponse": 3,
       "explication": "Les Rules of Engagement définissent la procédure de communication et d'escalade en cas d'incident : la première action est de notifier immédiatement le contact désigné afin que l'organisation déclenche ses procédures de reprise, le test étant suspendu si nécessaire. Continuer comme si de rien n'était (A) aggrave le risque, restaurer soi-même en cachette (B) dépasse le mandat et peut empirer la situation, et attendre le rapport final (C) retarde une information critique.",
@@ -2877,10 +2877,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "A CISO already funds a compliance-mandated annual penetration test of a public-facing platform. With a fixed budget, the board now asks for CONTINUOUS discovery of exploitable flaws. Which option BEST meets this goal?",
       "choix": [
-        "Commission a six-month covert red team engagement",
-        "Launch a scoped bug bounty program with defined rules of engagement and an internal triage process",
-        "Deploy a breach and attack simulation platform to replay known attack scenarios",
-        "Schedule the annual penetration test twice a year instead"
+        "Commission a six-month covert red team engagement against the estate",
+        "Launch a scoped bug bounty with defined rules and internal triage",
+        "Deploy a breach and attack simulation platform to replay known scenarios",
+        "Schedule the existing annual penetration test twice a year instead"
       ],
       "reponse": 1,
       "explication": "L'exigence de conformité est déjà couverte par le pentest annuel ; le besoin est une découverte continue sur le périmètre public. Le bug bounty cadré mobilise en permanence une diversité de chercheurs payés au résultat : c'est la réponse la plus efficiente à budget constant. Le pentest semestriel (D) reste ponctuel, la red team (A) évalue la détection et la réponse — un objectif différent —, et la BAS (C) valide les contrôles contre des scénarios connus sans découvrir de failles nouvelles.",
@@ -2895,10 +2895,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "A vulnerability management team patches strictly in descending CVSS base score order, yet vulnerabilities listed in known exploited vulnerabilities catalogs remain open for weeks. What should the security manager do FIRST?",
       "choix": [
-        "Reprioritize remediation so that actively exploited vulnerabilities on business-critical assets are addressed ahead of higher-scored but unexploited ones",
-        "Increase scanning frequency to detect new vulnerabilities sooner",
-        "Recompute environmental CVSS scores for every asset before changing the process",
-        "Lower the CVSS threshold so that medium-severity findings are also patched"
+        "Reprioritize so actively exploited flaws on critical assets come first",
+        "Increase scanning frequency to detect brand-new vulnerabilities much sooner",
+        "Recompute environmental CVSS scores for every asset before any change",
+        "Lower the CVSS threshold so medium-severity findings are also patched"
       ],
       "reponse": 0,
       "explication": "Le tri par score CVSS brut est la cause du symptôme : des failles activement exploitées attendent derrière des failles critiques théoriques. La première action du manager est de corriger le critère de priorisation en plaçant l'exploitation avérée (catalogues type KEV, scores EPSS) et la criticité métier des actifs en tête. Abaisser le seuil (D) et scanner plus souvent (B) augmentent le volume sans corriger l'ordre, et recalculer les scores environnementaux de chaque actif (C) est théoriquement juste mais retarde le traitement des failles déjà exploitées.",
@@ -2913,10 +2913,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "An organization must assess the security posture of 250 suppliers with a small vendor-risk team, under regulatory expectations of risk-proportionate assurance. Which approach is MOST defensible?",
       "choix": [
-        "Require an annual on-site audit of every supplier",
-        "Rely on each supplier's self-declared compliance statement",
-        "Tier suppliers by criticality: require independent audit reports such as SOC 2 Type II from critical suppliers, questionnaires for low-risk vendors, and reserve on-site audits for high-risk gaps",
-        "Send every supplier the same exhaustive security questionnaire"
+        "Require an annual on-site audit of every single supplier without exception",
+        "Rely entirely on each supplier's own self-declared compliance statement",
+        "Tier suppliers by criticality: SOC 2 Type II for critical, questionnaires otherwise",
+        "Send every single supplier the exact same exhaustive security questionnaire to fill in"
       ],
       "reponse": 2,
       "explication": "L'assurance proportionnée au risque s'obtient en segmentant les tiers par criticité : attestations indépendantes dans la durée (SOC 2 Type II ou équivalent) pour les fournisseurs critiques, questionnaires pour la masse à faible risque, audits sur site ciblés en dernier recours. Le questionnaire unique (D) sature l'équipe sans discriminer, l'audit sur site universel (A) est irréaliste, et l'auto-déclaration (B) n'est pas une assurance vérifiée.",
@@ -2931,10 +2931,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "Before deploying an LLM-based customer service assistant with access to customer records, which assurance activity should the security manager REQUIRE in addition to traditional application testing?",
       "choix": [
-        "An additional static analysis pass on the integration code",
-        "The model vendor's documentation of its training data governance",
-        "A load test demonstrating acceptable response times under peak traffic",
-        "Adversarial testing targeting AI-specific failure modes such as prompt injection, sensitive data leakage, and guardrail bypass"
+        "An additional static analysis pass on the integration code base",
+        "The model vendor's documentation of its training data governance process",
+        "A load test demonstrating acceptable response times under sustained peak traffic",
+        "Adversarial testing for AI-specific failures: prompt injection, data leakage"
       ],
       "reponse": 3,
       "explication": "Les assistants fondés sur des LLM présentent des modes de défaillance propres — injection de prompt directe ou indirecte, divulgation de données sensibles dans les réponses, contournement des garde-fous — que ni le pentest applicatif ni l'analyse statique ne détectent. Des tests adversariaux dédiés (red teaming IA) sont donc l'assurance à exiger avant de connecter le modèle aux données clients. Le test de charge (C) est une préoccupation de performance, le SAST (A) ne voit pas le comportement du modèle, et la documentation du fournisseur (B) ne teste ni votre intégration ni vos garde-fous.",
@@ -2950,9 +2950,9 @@ window.CISSP_DATA.domains[6] = {
       "q": "A retailer subject to PCI DSS must validate the security of its Internet-facing cardholder data environment. Which activity is specifically REQUIRED on a quarterly basis?",
       "choix": [
         "A full penetration test performed by the internal red team",
-        "A source code review of all payment applications",
-        "A tabletop exercise of the incident response plan",
-        "An external vulnerability scan performed by an Approved Scanning Vendor (ASV)"
+        "A source code review of all in-scope payment applications",
+        "A structured tabletop exercise walking through the incident response plan",
+        "An external vulnerability scan by an Approved Scanning Vendor (ASV)"
       ],
       "reponse": 3,
       "explication": "PCI DSS impose des scans de vulnérabilités externes trimestriels du périmètre exposé sur Internet, réalisés par un Approved Scanning Vendor, un prestataire agréé par le PCI Security Standards Council : c'est un exemple emblématique de compliance check imposé par un référentiel. Le pentest est exigé par PCI DSS mais sur un rythme annuel (et après changement significatif), pas trimestriel, et il n'a pas à être externe (A). La revue de code (B) relève du cycle de développement, et l'exercice tabletop (C) du test du plan de réponse à incident, sans exigence trimestrielle de ce type.",
@@ -2967,10 +2967,10 @@ window.CISSP_DATA.domains[6] = {
     {
       "q": "A security manager is planning a penetration test of a workload hosted on a public IaaS platform. Which consideration MOST directly constrains the scope of the test?",
       "choix": [
-        "The availability window of the internal red team",
-        "The cloud provider's testing policy and the shared responsibility model, which define what the customer is authorized to test",
-        "The CVSS scores of vulnerabilities identified in previous assessments",
-        "The network bandwidth cost generated by scanning traffic"
+        "The availability window of the organization's internal red team staff",
+        "The cloud provider's testing policy and the shared responsibility model",
+        "The CVSS scores of vulnerabilities identified in previous assessments run",
+        "The network bandwidth cost generated by the scanning traffic itself"
       ],
       "reponse": 1,
       "explication": "Dans le cloud, le périmètre d'un pentest n'est pas d'abord une question technique mais une question d'autorisation : la politique de test du fournisseur et le modèle de responsabilité partagée déterminent ce que le client a le droit de tester (sa configuration, ses instances, ses applications) et ce qui est interdit (l'infrastructure mutualisée, les autres locataires). Tester au-delà viole le contrat et potentiellement la loi. La disponibilité de l'équipe (A) et les coûts de bande passante (D) sont des contraintes logistiques secondaires, et les scores CVSS antérieurs (C) aident à prioriser les cibles, pas à définir ce qui est autorisé.",

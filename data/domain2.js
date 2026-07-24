@@ -2081,10 +2081,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Après le déploiement d'un modèle d'IA interne, l'organisation découvre que son corpus d'entraînement contenait des données de clients ayant depuis exercé leur droit à l'effacement (GDPR). Quelle position du CISO reflète le MIEUX la réalité du risque ?",
       "choix": [
-        "Retirer immédiatement le modèle de production jusqu'à un réentraînement complet",
-        "La suppression des données dans le corpus source suffit, le modèle entraîné n'est pas concerné",
-        "Le modèle peut avoir mémorisé des données personnelles : il faut évaluer le risque de régurgitation et arbitrer entre réentraînement, désapprentissage ou filtrage, en documentant la décision",
-        "Un modèle entraîné est une agrégation statistique anonyme qui sort du champ du GDPR"
+        "Retirer immédiatement et définitivement le modèle de production jusqu'à un réentraînement complet et intégral",
+        "La suppression des données concernées dans le corpus source d'origine suffit, le modèle déjà entraîné n'étant nullement concerné",
+        "Le modèle peut avoir mémorisé ces données : évaluer le risque de régurgitation, puis arbitrer entre réentraînement ou filtrage",
+        "Un modèle entraîné n'est qu'une agrégation statistique anonyme qui sort entièrement du champ d'application du GDPR"
       ],
       "reponse": 2,
       "explication": "Un modèle peut mémoriser puis restituer des données d'entraînement : supprimer le corpus source ne purge pas le modèle, et l'argument de l'agrégation anonyme ne tient pas si des données personnelles restent régurgitables. La réponse managériale est une évaluation de risque documentée débouchant sur une mesure proportionnée — réentraînement, machine unlearning ou filtrage des sorties. Le retrait immédiat, avant toute évaluation, est disproportionné.",
@@ -2099,10 +2099,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "La politique de rétention de votre organisation supprime automatiquement les e-mails après dix-huit mois. Le service juridique vous informe qu'un litige impliquant un ancien projet est raisonnablement probable, et la prochaine purge automatique interviendra le mois prochain. Que doit faire le CISO EN PREMIER ?",
       "choix": [
-        "Mettre en place un legal hold suspendant la suppression automatique pour les données concernées et en documenter le périmètre avec le juridique",
-        "Laisser la purge s'exécuter puisque la politique de rétention approuvée fait foi",
-        "Exporter l'intégralité des boîtes aux lettres de l'entreprise vers une archive isolée",
-        "Attendre la notification formelle de l'assignation avant de modifier le calendrier de purge"
+        "Mettre en place un legal hold suspendant la suppression pour les données concernées et documenter son périmètre avec le juridique",
+        "Laisser la purge automatique s'exécuter puisque la politique de rétention approuvée fait foi",
+        "Exporter par précaution l'intégralité des boîtes aux lettres de l'entreprise vers une archive isolée",
+        "Attendre la notification formelle et officielle de l'assignation en justice avant de modifier quoi que ce soit au calendrier de purge"
       ],
       "reponse": 0,
       "explication": "Dès qu'un litige est raisonnablement anticipé, l'obligation de préservation naît : le legal hold suspend la destruction pour le périmètre concerné, défini avec le juridique et documenté. Appliquer la politique malgré tout exposerait à une accusation de destruction de preuves (spoliation) ; tout exporter est disproportionné et accroît l'exposition ; attendre l'assignation formelle arriverait trop tard.",
@@ -2117,10 +2117,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "La direction commerciale demande de porter de un à sept ans la rétention des enregistrements d'appels clients afin d'entraîner de futurs modèles d'analyse. Le DPO rappelle le principe de limitation de la conservation. Quel arbitrage du CISO est le PLUS défendable ?",
       "choix": [
-        "Refuser la demande : la rétention des enregistrements ne doit jamais dépasser un an",
-        "N'autoriser l'extension que sur une base légale documentée, avec des données minimisées, voire anonymisées, pour l'usage d'entraînement",
-        "Laisser l'éditeur de la solution d'enregistrement définir la durée de rétention appropriée",
-        "Accepter la demande : la valeur métier des données justifie la conservation étendue"
+        "Refuser catégoriquement la demande : la rétention des enregistrements ne doit jamais dépasser un an",
+        "N'autoriser l'extension que sur une base légale documentée, avec des données minimisées voire anonymisées",
+        "Laisser l'éditeur de la solution d'enregistrement définir librement la durée de rétention la plus appropriée",
+        "Accepter la demande : la seule valeur métier des données justifie une conservation étendue"
       ],
       "reponse": 1,
       "explication": "L'arbitrage défendable concilie le besoin métier et la conformité : une conservation étendue exige une base légale documentée et une finalité précise, et l'usage d'entraînement se satisfait souvent de données minimisées ou anonymisées — qui sortent alors du champ de la limitation de conservation. Accepter sans condition ignore la loi, refuser par principe invente une règle absolue, et déléguer au fournisseur abandonne une responsabilité qui ne se transfère pas.",
@@ -2135,10 +2135,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Le contrat de votre organisation avec un fournisseur SaaS se termine et les données — des dossiers clients classifiés Confidential — migrent vers un concurrent. Le fournisseur sortant s'engage contractuellement à « supprimer » les données sous quatre-vingt-dix jours. Quelle exigence du CISO apporte la MEILLEURE assurance d'irrécupérabilité ?",
       "choix": [
-        "Obtenir un certificat de destruction signé par le fournisseur à l'issue des quatre-vingt-dix jours",
-        "Faire réaliser un audit sur site des datacenters du fournisseur après la suppression",
-        "Exiger la destruction physique des disques ayant hébergé les données",
-        "Avoir chiffré les données avec des clés gérées par l'organisation et détruire ces clés une fois la migration validée (crypto-shredding)"
+        "Obtenir un certificat de destruction officiel signé par le fournisseur sortant à l'issue des quatre-vingt-dix jours contractuels",
+        "Faire réaliser un audit complet sur site des datacenters du fournisseur après la suppression",
+        "Exiger du fournisseur la destruction physique de tous les disques ayant hébergé les données",
+        "Avoir chiffré les données avec des clés gérées par l'organisation, puis détruire ces clés après la migration (crypto-shredding)"
       ],
       "reponse": 3,
       "explication": "Dans une infrastructure mutualisée, ni la destruction physique ciblée ni un audit ponctuel ne peuvent prouver l'effacement de VOS seules données, et un certificat reste déclaratif. Seul le crypto-shredding — clés détenues par le client et détruites après validation de la migration — rend les données logiquement irrécupérables indépendamment de ce que fait le fournisseur, y compris dans ses sauvegardes.",
@@ -2171,10 +2171,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Votre organisation migre une base de données clients classifiée Confidential d'un système legacy vers une nouvelle plateforme, avec conversion du format des enregistrements. Du point de vue de la data maintenance, quelle est la préoccupation PRINCIPALE ?",
       "choix": [
-        "Terminer la migration dans la fenêtre de maintenance afin de limiter l'indisponibilité du service",
-        "Maintenir les contrôles — classification, chiffrement, restrictions d'accès — pendant et après la migration, et vérifier l'intégrité des données converties",
-        "Choisir un format de fichier propriétaire afin de rendre les données plus difficiles à lire",
-        "Conserver indéfiniment l'ancien système en ligne comme copie de secours"
+        "Terminer impérativement la migration dans la fenêtre de maintenance afin de limiter au maximum l'indisponibilité du service en production",
+        "Maintenir les contrôles (classification, chiffrement, accès) pendant et après la migration, et vérifier l'intégrité des données converties",
+        "Choisir un format de fichier propriétaire afin de rendre les données converties plus difficiles à lire",
+        "Conserver indéfiniment l'ancien système legacy en ligne comme copie de secours permanente et fiable"
       ],
       "reponse": 1,
       "explication": "La data maintenance exige que les contrôles de sécurité suivent la donnée lors des migrations et des conversions de format : la classification, le chiffrement et les droits d'accès doivent être maintenus pendant toute l'opération, et l'exactitude comme l'intégrité des données converties doivent être vérifiées à l'arrivée. La disponibilité est un objectif opérationnel secondaire ici, un format propriétaire n'est pas un contrôle de sécurité, et garder l'ancien système en ligne indéfiniment aggrave la surface d'attaque et la rémanence.",
@@ -2207,10 +2207,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Une PME industrielle sans programme de sécurité formalisé veut des résultats rapides avec une équipe réduite. Son principal donneur d'ordres annonce qu'il exigera à terme une certification de son système de management de la sécurité. Quelle stratégie de sélection de référentiels est la PLUS pertinente ?",
       "choix": [
-        "Adopter uniquement NIST SP 800-53, le catalogue de contrôles le plus complet du marché",
-        "Viser immédiatement la certification ISO/IEC 27001 avant toute mesure technique",
-        "Attendre que l'exigence contractuelle soit formalisée avant de choisir un référentiel",
-        "Démarrer avec les CIS Controls priorisés pour des gains rapides, puis bâtir l'ISMS vers la certification ISO/IEC 27001 exigée par le client"
+        "Adopter uniquement NIST SP 800-53, réputé le catalogue de contrôles le plus complet du marché",
+        "Viser immédiatement la certification ISO/IEC 27001 avant toute autre mesure technique concrète",
+        "Attendre patiemment que l'exigence contractuelle du client soit formellement formalisée avant de choisir le moindre référentiel de sécurité",
+        "Démarrer avec les CIS Controls priorisés pour des gains rapides, puis bâtir l'ISMS vers la certification ISO 27001 du client"
       ],
       "reponse": 3,
       "explication": "Le bon arbitrage combine les forces des référentiels : les CIS Controls, prescriptifs et priorisés par Implementation Groups, donnent des gains techniques rapides à une petite équipe ; la certification ISO/IEC 27001, seule à attester formellement un système de management, se construit ensuite pour répondre à l'exigence du client. Un catalogue exhaustif comme SP 800-53 écraserait une PME sans programme, viser la certification avant toute mesure inverse les priorités de réduction du risque, et attendre le contrat fait perdre le temps d'anticipation.",
@@ -2227,10 +2227,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Which of the following BEST describes the primary purpose of data classification?",
       "choix": [
-        "To determine the level of protection required based on the value and sensitivity of the data",
-        "To satisfy external audit requirements",
-        "To assign encryption keys to each dataset",
-        "To reduce storage costs by identifying obsolete data"
+        "To determine the level of protection required by the data's value and sensitivity",
+        "To satisfy external regulatory and audit requirements",
+        "To automatically assign encryption keys to each dataset",
+        "To reduce overall storage costs by systematically identifying and archiving obsolete data"
       ],
       "reponse": 0,
       "explication": "La classification attribue à chaque donnée un niveau de sensibilité fondé sur sa valeur et l'impact d'une compromission, ce qui détermine ensuite le niveau de protection requis. Les audits, la réduction des coûts de stockage et l'attribution de clés sont au mieux des bénéfices secondaires ou des contrôles en aval, pas l'objectif premier.",
@@ -2299,10 +2299,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "A server processes both Secret and Unclassified data. What classification should the organization assign to the server?",
       "choix": [
-        "An intermediate custom level between the two",
-        "No classification, because hardware is not classified",
-        "Unclassified, because it is the lowest common level",
-        "Secret, because an asset inherits the classification of the most sensitive data it processes"
+        "An intermediate custom classification level between the two",
+        "No classification at all, because computing hardware itself is never really classified",
+        "Unclassified, because that is the lowest common denominator level",
+        "Secret, because an asset inherits the classification of the most sensitive data"
       ],
       "reponse": 3,
       "explication": "Un actif hérite toujours de la classification de la donnée la plus sensible qu'il traite ou stocke : le serveur devient un actif Secret et reçoit les contrôles correspondants. Classer au niveau le plus bas exposerait les données Secret, et le matériel qui traite des données classifiées est bel et bien classifié.",
@@ -2371,10 +2371,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Which of the following BEST protects the confidentiality of data at rest?",
       "choix": [
-        "Continuous access logging",
-        "Role-based access control",
+        "Continuous access and event logging",
+        "Role-based access control (RBAC)",
         "Strong encryption of volumes and backup media",
-        "A strict password policy"
+        "A strict enterprise-wide password rotation policy"
       ],
       "reponse": 2,
       "explication": "Le chiffrement fort est la meilleure protection de la confidentialité au repos : même si le support est volé ou les contrôles d'accès contournés, la donnée reste illisible. Le RBAC et les mots de passe protègent le chemin d'accès logique mais pas le support lui-même ; la journalisation est un contrôle détectif, pas préventif.",
@@ -2390,9 +2390,9 @@ window.CISSP_DATA.domains[2] = {
       "q": "A retention policy states that all corporate email must be deleted after one year unless subject to a legal hold. Which of the following BEST describes the rationale?",
       "choix": [
         "Retaining data longer than necessary increases legal liability and breach exposure",
-        "Older email has no business value",
-        "Email backups slow down the network",
-        "Storage costs grow linearly with retention time"
+        "Older archived email has no remaining business value",
+        "Email backups noticeably slow down the corporate network",
+        "Storage and backup costs grow almost linearly with total retention time and volume"
       ],
       "reponse": 0,
       "explication": "Conserver des données au-delà du nécessaire accroît la responsabilité juridique — tout e-mail conservé est produisible en justice (eDiscovery) — et augmente la surface d'exposition en cas de compromission. La règle d'or : conserver aussi longtemps que le métier ou la loi l'exige, mais pas plus. Les coûts sont secondaires face au risque juridique, et le legal hold suspend la suppression.",
@@ -2407,10 +2407,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Which of the following BEST explains why classified data must NEVER be processed on an unclassified system?",
       "choix": [
-        "Software licenses prohibit mixed processing",
+        "Software vendor licenses explicitly prohibit any mixed-classification processing on a single shared physical host",
         "The operating system may write memory contents into slack space, leaving hidden remnants of classified data",
-        "Unclassified systems lack sufficient processing power",
-        "Unclassified systems cannot run encryption software"
+        "Unclassified systems typically lack sufficient processing power and memory",
+        "Unclassified systems are technically unable to run strong encryption software"
       ],
       "reponse": 1,
       "explication": "Certains systèmes d'exploitation remplissent le slack space — l'espace inutilisé des clusters — avec des données issues de la mémoire : des fragments de données classifiées peuvent persister sur le disque à l'insu de tous, créant une rémanence invisible sur un système non habilité. C'est un problème de data remanence, pas de performance ni de licence.",
@@ -2479,10 +2479,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Which of the following BEST describes the difference between End-of-Life (EOL) and End-of-Support (EOS)?",
       "choix": [
-        "EOL is when support ends; EOS is when sales end",
-        "They are synonyms used interchangeably by vendors",
-        "EOL applies to hardware only; EOS applies to software only",
-        "EOL is when the vendor stops selling the product; EOS is when the vendor stops providing patches and assistance"
+        "EOL is exactly when support ends; EOS is exactly when sales end",
+        "They are simply synonyms used interchangeably by most vendors",
+        "EOL applies strictly to hardware only, whereas EOS applies strictly to software products only",
+        "EOL is when the vendor stops selling the product; EOS is when patches and assistance stop"
       ],
       "reponse": 3,
       "explication": "L'EOL marque la fin de la commercialisation ; l'EOS (ou EOSL) marque la fin de tout support : plus de correctifs de sécurité ni d'assistance. Les deux jalons s'appliquent au matériel comme au logiciel. Du point de vue du risque, l'EOS est le signal critique : toute vulnérabilité découverte ensuite reste ouverte à jamais.",
@@ -2587,10 +2587,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "In a payment system using tokenization, why does compromising the point-of-sale terminal NOT expose customers' card numbers?",
       "choix": [
-        "The terminal stores card numbers encrypted with a merchant key",
-        "The terminal hashes the card numbers irreversibly",
+        "The terminal locally stores the full card numbers encrypted with a merchant-held secret key",
+        "The terminal irreversibly hashes the card numbers before any storage",
         "The terminal only handles random tokens; the real card numbers remain in a secure vault",
-        "Card numbers are pseudonymized locally on the terminal"
+        "Card numbers are pseudonymized locally and reversibly on the terminal itself"
       ],
       "reponse": 2,
       "explication": "Avec la tokenisation, le terminal ne manipule qu'un jeton aléatoire sans valeur intrinsèque ; la correspondance avec le vrai numéro de carte n'existe que dans le vault de tokenisation sécurisé. Le numéro réel ne transite jamais par le point de vente — sa compromission ne livre donc que des jetons inutilisables ailleurs.",
@@ -2623,9 +2623,9 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Which of the following BEST describes tailoring as it goes BEYOND scoping?",
       "choix": [
-        "Documenting the asset inventory",
-        "Selecting the initial control baseline",
-        "Removing controls that do not apply to in-scope systems",
+        "Documenting the full organizational hardware and software asset inventory",
+        "Selecting the appropriate initial security control baseline",
+        "Removing from the security baseline all controls that simply do not apply to any of the in-scope target systems in this environment",
         "Adjusting controls to the mission, specifying organization-defined parameters, and selecting compensating controls"
       ],
       "reponse": 3,
@@ -2659,9 +2659,9 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "A European company stores personal data with a US cloud provider in an EU region. Which measure BEST mitigates the risk of a CLOUD Act request conflicting with GDPR?",
       "choix": [
-        "Prohibiting all cloud usage for personal data",
-        "Relying solely on the EU location of the cloud region",
-        "Transferring GDPR compliance responsibility to the cloud provider",
+        "Prohibiting all cloud usage for any personal data whatsoever",
+        "Relying solely on the physical EU location of the chosen cloud region",
+        "Transferring all GDPR compliance responsibility entirely to the external cloud service provider",
         "Encrypting the data with customer-managed keys, combined with strong contractual clauses"
       ],
       "reponse": 3,
@@ -2713,10 +2713,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "During secure provisioning of a new virtual machine, which step ensures accountability throughout the asset's lifecycle?",
       "choix": [
-        "Taking an initial snapshot",
-        "Assigning a static IP address",
-        "Registering the VM in the inventory and tagging it with its owner, classification, and environment",
-        "Installing endpoint protection software"
+        "Taking an initial full snapshot of the virtual machine",
+        "Assigning a static IP address and a DNS hostname",
+        "Registering the VM in the inventory and tagging its owner, classification, and environment",
+        "Installing endpoint protection, EDR agents, and host-based intrusion monitoring software on it"
       ],
       "reponse": 2,
       "explication": "Le provisioning sécurisé exige d'enregistrer l'actif dans l'inventaire et de le taguer dès sa création — owner, classification, environnement. Sans owner assigné, personne n'est responsable du patching ni du déprovisioning : la VM risque de devenir orpheline, donc non maintenue. IP, snapshot et antivirus sont utiles mais n'établissent pas la responsabilité.",
