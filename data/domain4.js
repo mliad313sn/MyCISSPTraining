@@ -103,7 +103,7 @@ window.CISSP_DATA.domains[4] = {
           "points": [
             "Session : établit, maintient et termine les dialogues ; simplex, half-duplex, full-duplex ; NetBIOS, RPC",
             "Présentation : formatage, compression, chiffrement ; JPEG, ASCII, MIME",
-            "Application : interface avec les applications ; HTTP, DNS, SMTP, SSH, SIP, BGP"
+            "Application : interface avec les applications ; HTTP, DNS, SMTP, SSH, SIP"
           ],
           "narration": "Les trois couches hautes correspondent à la couche application unique du modèle TCP/IP. La couche session gère le dialogue entre deux machines et connaît trois modes : simplex à sens unique, half-duplex en alternance, et full-duplex simultané. La couche présentation met les données dans un format compréhensible par tous, avec la compression et une partie du chiffrement. Enfin, la couche application fait le lien avec vos logiciels : c'est là que vivent HTTP, DNS, SMTP ou encore SIP pour la voix sur IP."
         },
@@ -153,7 +153,7 @@ window.CISSP_DATA.domains[4] = {
             "LDAP 389, LDAPS 636, RDP 3389",
             "Plages : well-known 0 à 1023, registered 1024 à 49151, dynamiques au-delà"
           ],
-          "narration": "Il existe soixante-cinq mille cinq cent trente-cinq ports, répartis en trois plages : les ports bien connus jusqu'à mille vingt-trois, les ports enregistrés, puis les ports dynamiques utilisés temporairement par les clients. Apprenez les grands classiques : vingt-deux pour SSH, vingt-cinq pour SMTP, cinquante-trois pour DNS, quatre-cent-quarante-trois pour HTTPS ou encore trois-mille-trois-cent-quatre-vingt-neuf pour le bureau à distance. Pensez aussi aux ports des services d'authentification : RADIUS utilise l'UDP mille-huit-cent-douze et TACACS plus le TCP quarante-neuf."
+          "narration": "Il existe soixante-cinq mille cinq cent trente-six ports, numérotés de zéro à soixante-cinq mille cinq cent trente-cinq, répartis en trois plages : les ports bien connus jusqu'à mille vingt-trois, les ports enregistrés, puis les ports dynamiques utilisés temporairement par les clients. Apprenez les grands classiques : vingt-deux pour SSH, vingt-cinq pour SMTP, cinquante-trois pour DNS, quatre-cent-quarante-trois pour HTTPS ou encore trois-mille-trois-cent-quatre-vingt-neuf pour le bureau à distance. Pensez aussi aux ports des services d'authentification : RADIUS utilise l'UDP mille-huit-cent-douze et TACACS plus le TCP quarante-neuf."
         },
         {
           "type": "resume",
@@ -747,11 +747,11 @@ window.CISSP_DATA.domains[4] = {
           "titre": "Équipements réseau essentiels",
           "points": [
             "Repeater et hub en couche 1 ; bridge et switch en couche 2 ; routeur en couche 3",
-            "Modem et CSU/DSU : conversion analogique-numérique vers l'opérateur",
+            "Modem : conversion analogique-numérique ; CSU/DSU : interface vers les liaisons numériques de l'opérateur",
             "Load balancer : active-active pleine capacité, active-passive capacité constante",
             "Alimentation redondante sur les équipements critiques"
           ],
-          "narration": "Replaçons chaque équipement sur la pile. Le répéteur et le hub régénèrent bêtement le signal en couche physique. Le bridge relie deux segments et le switch commute les trames en couche deux, créant au passage des domaines de collision séparés. Le routeur interconnecte les réseaux en couche trois. Le modem et le couple CSU-DSU convertissent les signaux vers le réseau de l'opérateur. Les répartiteurs de charge existent en deux modes : l'actif-actif utilise toutes les ressources en temps normal mais perd de la capacité en cas de panne, tandis que l'actif-passif garde une réserve dormante et offre une capacité constante même en incident."
+          "narration": "Replaçons chaque équipement sur la pile. Le répéteur et le hub régénèrent bêtement le signal en couche physique. Le bridge relie deux segments et le switch commute les trames en couche deux, créant au passage des domaines de collision séparés. Le routeur interconnecte les réseaux en couche trois. Le modem convertit les signaux analogiques en signaux numériques, tandis que le couple CSU-DSU raccorde l'équipement aux liaisons numériques de l'opérateur. Les répartiteurs de charge existent en deux modes : l'actif-actif utilise toutes les ressources en temps normal mais perd de la capacité en cas de panne, tandis que l'actif-passif garde une réserve dormante et offre une capacité constante même en incident."
         },
         {
           "type": "standard",
@@ -2176,7 +2176,7 @@ window.CISSP_DATA.domains[4] = {
         "Invention : aucun des deux ne chiffre le trafic analysé.",
         "Faux clivage : les deux existent en versions matérielles et logicielles.",
         "Correct : l'IPS en coupure bloque en temps réel, l'IDS sur copie de trafic ne fait que détecter et alerter — tout tient au placement.",
-        "Faux : l'IPS existe en version réseau et hôte, bien au-delà de la couche 2."
+        "Faux : l'IPS existe en version réseau (NIPS) comme en version hôte, il n'est pas limité aux postes de travail."
       ]
     },
     {
