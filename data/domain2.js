@@ -1973,10 +1973,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Quelle approche réduit le MIEUX le shadow IT de façon durable, au-delà des outils de détection ?",
       "choix": [
-        "Interdire le cloud dans la charte informatique",
-        "Sanctionner systématiquement les employés fautifs",
-        "Bloquer l'ensemble des sites web non professionnels",
-        "Offrir un processus d'approbation simple et rapide pour les nouveaux services, avec un catalogue d'alternatives validées"
+        "Interdire tout recours au cloud dans la charte informatique interne",
+        "Sanctionner systématiquement et sévèrement les employés fautifs",
+        "Bloquer par défaut l'ensemble des sites web et services cloud non professionnels connus à ce jour",
+        "Offrir un processus d'approbation simple et rapide, avec un catalogue d'alternatives validées"
       ],
       "reponse": 3,
       "explication": "Le shadow IT naît souvent d'un besoin métier légitime face à un processus IT trop lourd : la réponse durable est de rendre la voie officielle plus facile que le contournement — catalogue de services approuvés, approbation rapide. Le blocage total et la sanction traitent les symptômes et poussent les usages encore plus loin dans l'ombre ; un CASB détecte mais ne supprime pas la cause.",
@@ -1991,10 +1991,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Votre entreprise acquiert une société dont le schéma de classification comporte trois niveaux, alors que le vôtre en compte quatre. Les équipes métier doivent échanger des documents dès la clôture de l'opération. En tant que CISO, que faites-vous EN PREMIER ?",
       "choix": [
-        "Lancer la reclassification document par document du patrimoine de la société acquise selon votre schéma",
-        "Faire établir par les data owners des deux entités une table de correspondance entre les niveaux, validée par la gouvernance, avec protection par défaut au niveau équivalent le plus élevé",
+        "Lancer immédiatement la reclassification, document par document, de tout le patrimoine de la société acquise selon votre schéma interne",
+        "Établir, via les data owners des deux entités, une table de correspondance entre niveaux validée par la gouvernance, protectrice par défaut",
         "Suspendre tout échange de données entre les deux entités jusqu'à l'achèvement d'une reclassification complète",
-        "Demander à la DSI d'appliquer techniquement les étiquettes du schéma de la maison mère sur tous les dépôts de la cible"
+        "Demander à la DSI d'appliquer techniquement les étiquettes du schéma de la maison mère sur l'ensemble des dépôts de la société cible acquise"
       ],
       "reponse": 1,
       "explication": "Le besoin business est immédiat : la réponse managériale est un pont de gouvernance entre les deux schémas — une table de correspondance décidée par les data owners, validée par la gouvernance, avec un principe de précaution (protection au niveau équivalent le plus élevé). La reclassification exhaustive viendra ensuite ; l'application technique sans mapping court-circuiterait les owners, et le blocage total sacrifierait l'objectif de la fusion.",
@@ -2009,8 +2009,8 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Lors d'une acquisition, la due diligence révèle que la société cible ne dispose d'aucun inventaire fiable de ses données personnelles, et l'intégration des systèmes est prévue dans six mois. Quelle action du CISO est la PLUS importante avant la migration ?",
       "choix": [
-        "Faire porter contractuellement à la cible la responsabilité de ses données historiques",
-        "Chiffrer l'ensemble des dépôts de données de la cible avant tout transfert",
+        "Faire porter contractuellement à la société cible l'entière responsabilité juridique de ses données personnelles historiques et de leur conformité",
+        "Chiffrer l'intégralité des dépôts de données de la société cible avant tout transfert",
         "Commencer la migration par les systèmes les moins critiques pour tenir le calendrier",
         "Conduire une découverte et une classification des données de la cible pour savoir ce qui sera migré et sous quelles obligations légales"
       ],
@@ -2027,10 +2027,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Une multinationale déploie une application RH sur un cloud public avec réplication automatique entre trois régions (Union européenne, États-Unis, Singapour) pour la résilience. Le DPO alerte sur les données des salariés européens. Que devrait faire le CISO EN PREMIER ?",
       "choix": [
-        "Activer le chiffrement au repos proposé par défaut par le fournisseur dans les trois régions",
-        "Cartographier où les données sont réellement stockées et répliquées, puis restreindre la réplication des données des salariés européens aux juridictions autorisées",
-        "Signer des clauses contractuelles types (SCC) avec le fournisseur pour couvrir l'ensemble des transferts",
-        "Migrer l'application vers un fournisseur cloud dont le siège est situé dans l'Union européenne"
+        "Activer partout le chiffrement au repos proposé par défaut par le fournisseur dans les trois régions cloud",
+        "Cartographier où les données sont stockées et répliquées, puis restreindre la réplication des salariés européens aux juridictions autorisées",
+        "Signer des clauses contractuelles types (SCC) avec le fournisseur cloud pour couvrir tous les transferts internationaux de données",
+        "Migrer sans délai l'application vers un fournisseur cloud dont le siège social est situé dans l'Union européenne"
       ],
       "reponse": 1,
       "explication": "Avant tout instrument technique ou juridique, il faut la visibilité : cartographier les flux et les localisations réelles révèle quels transferts existent, puis on restreint la réplication aux juridictions autorisées. Les SCC sont utiles mais s'appliquent à des transferts qu'il faut d'abord identifier et minimiser ; le chiffrement par défaut laisse les clés au fournisseur ; changer de fournisseur est disproportionné avant l'analyse.",
@@ -2046,9 +2046,9 @@ window.CISSP_DATA.domains[2] = {
       "q": "Une banque doit déployer une charge de travail contenant des données clients dans une région cloud d'un pays dont la loi permet au régulateur local d'exiger l'accès aux données. La présence locale est une obligation commerciale. Quel arbitrage du CISO protège le MIEUX l'organisation tout en permettant l'activité ?",
       "choix": [
         "Limiter les données stockées localement au strict nécessaire et conserver les clés de chiffrement hors de la juridiction concernée",
-        "Refuser le déploiement dans ce pays tant que la loi locale n'évolue pas",
-        "Obtenir du fournisseur un engagement contractuel de notification préalable en cas de réquisition",
-        "Déployer en activant le service de chiffrement managé du fournisseur dans la région locale"
+        "Refuser purement et simplement le déploiement dans ce pays tant que la loi locale n'évolue pas",
+        "Obtenir du fournisseur un engagement contractuel ferme de notification préalable systématique en cas de réquisition légale du régulateur",
+        "Déployer en activant le service de chiffrement entièrement managé du fournisseur dans la région locale"
       ],
       "reponse": 0,
       "explication": "Le rôle du CISO est de permettre le business en réduisant le risque : minimiser les données exposées à la juridiction et garder les clés hors de portée du régulateur local limite ce qu'une réquisition peut réellement produire. Refuser bloque l'activité ; le chiffrement managé localement laisse les clés saisissables avec les données ; un engagement de notification ne prime jamais sur une loi locale, souvent assortie d'une interdiction de notifier.",
@@ -2063,10 +2063,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "L'équipe data science, sponsorisée par la direction générale, veut entraîner un modèle d'IA générative interne sur l'historique des tickets de support, qui contient des données personnelles de clients et des extraits de contrats. Que devrait exiger le CISO EN PREMIER ?",
       "choix": [
-        "Que les sorties du modèle soient filtrées par une solution DLP avant diffusion",
-        "Que l'équipe signe une charte d'usage responsable de l'intelligence artificielle",
-        "Que le corpus d'entraînement soit inventorié, classifié et minimisé (purge, pseudonymisation) avec l'accord des data owners avant tout entraînement",
-        "Que le modèle soit hébergé sur l'infrastructure interne plutôt que dans le cloud"
+        "Que les sorties du modèle génératif soient systématiquement filtrées par une solution DLP avant toute diffusion externe aux utilisateurs",
+        "Que l'équipe data science signe une charte d'usage responsable de l'intelligence artificielle",
+        "Que le corpus d'entraînement soit inventorié, classifié et minimisé avec l'accord des data owners avant tout entraînement",
+        "Que le modèle soit hébergé sur l'infrastructure interne de l'entreprise plutôt que dans le cloud public"
       ],
       "reponse": 2,
       "explication": "Le corpus d'entraînement est un actif de données comme un autre : il doit être inventorié, classifié et minimisé avant usage, avec l'autorisation des data owners — car une fois les données apprises par le modèle, il est très difficile de revenir en arrière. Le lieu d'hébergement, la charte et le filtrage des sorties sont des contrôles utiles mais en aval : ils ne corrigent pas une ingestion incontrôlée.",
