@@ -1338,7 +1338,7 @@ window.CISSP_DATA.domains[1] = {
         "Piège temporel : le risque inhérent est celui qui existe avant tout contrôle, pas après.",
         "Trop large : le risque total est l'exposition globale avant traitement, pas ce qui reste après contrôles.",
         "Correcte : le risque résiduel est ce qui subsiste après l'application des contrôles et que la direction accepte formellement.",
-        "Concept voisin mais distinct : le controls gap est la portion de risque que les contrôles ne couvrent pas, pas le risque assumé après traitement."
+        "Concept voisin mais distinct : le controls gap est la portion de risque éliminée par les contrôles (risque total − controls gap = risque résiduel), pas le risque assumé après traitement."
       ]
     },
     {
@@ -2244,7 +2244,7 @@ window.CISSP_DATA.domains[1] = {
       ],
       reponse: 1,
       explication:
-        "La BIA se déroule en quatre temps : identification des priorités (criticité des processus et fonctions), identification des risques, évaluation de leur probabilité, puis priorisation des ressources de récupération. On ne peut pas évaluer des probabilités ni prioriser des ressources avant de savoir quels processus comptent le plus. Le choix du site de repli relève du DRP, en aval.",
+        "La BIA se déroule en cinq temps : identification des priorités (criticité des processus et fonctions), identification des risques, évaluation de leur probabilité, évaluation de l'impact, puis priorisation des ressources de récupération. On ne peut pas évaluer des probabilités ni prioriser des ressources avant de savoir quels processus comptent le plus. Le choix du site de repli relève du DRP, en aval.",
       difficulte: 2,
       pourquoi: [
         "Hors séquence : l'évaluation de probabilité (likelihood assessment) vient après l'identification des priorités.",
@@ -3530,7 +3530,7 @@ window.CISSP_DATA.domains[1] = {
         "Piège temporel : le risque avant contrôles est le risque inhérent.",
         "Correcte : le risque résiduel subsiste après les contrôles et fait l'objet d'une acceptation formelle par la direction.",
         "Confusion : le transfert à l'assureur est une réponse au risque, pas la définition du résiduel.",
-        "Contresens : le controls gap est la portion non couverte par les contrôles, pas une portion éliminée."
+        "Concept distinct : le controls gap est la réduction de risque apportée par les contrôles (risque total − controls gap = risque résiduel), pas le risque restant à accepter."
       ]
     },
     {

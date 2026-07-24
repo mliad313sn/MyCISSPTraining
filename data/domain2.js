@@ -2425,7 +2425,7 @@ window.CISSP_DATA.domains[2] = {
     {
       q: "A company is terminating its contract with a cloud provider and wants assurance that its data cannot be recovered from the provider's infrastructure. Which of the following is the BEST approach?",
       choix: [
-        "Request that the provider degausses all storage arrays",
+        "Request that the provider degauss all storage arrays",
         "Cryptographic erasure: destroy the encryption keys protecting the data",
         "Delete all files and empty the recycle bin before leaving",
         "Ask the provider for a certificate of physical destruction of the disks"
