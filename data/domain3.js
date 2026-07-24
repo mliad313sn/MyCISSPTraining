@@ -1309,7 +1309,7 @@ window.CISSP_DATA.domains[3] = {
         "Accélérer le processeur graphique",
         "Filtrer le trafic réseau entrant",
         "Réaliser des opérations cryptographiques matérielles et protéger des clés",
-        "Sauvegarder automatiquement les fichiers système"
+        "Sauvegarder et restaurer automatiquement les fichiers système et les partitions de données utilisateur"
       ],
       "reponse": 2,
       "explication": "Le TPM est une puce inviolable de la carte mère qui réalise des opérations cryptographiques (dont la génération de clés) et protège de petites quantités de données sensibles comme des clés et mots de passe. Il ne joue aucun rôle graphique, réseau ou de sauvegarde. C'est un prérequis de nombreuses solutions de chiffrement de disque.",
@@ -1325,9 +1325,9 @@ window.CISSP_DATA.domains[3] = {
       "q": "Quelle différence essentielle distingue un HSM d'entreprise d'un TPM ?",
       "choix": [
         "Le TPM est un dispositif réseau externe",
-        "Le TPM offre plus de puissance de calcul cryptographique que le HSM",
+        "Le TPM offre une puissance de calcul cryptographique nettement supérieure à celle d'un HSM externe dédié",
         "Le HSM ne peut pas générer de clés",
-        "Le HSM est un cryptoprocesseur dédié, souvent un boîtier externe, tandis que le TPM est intégré à la carte mère"
+        "Le HSM est un cryptoprocesseur dédié externe, le TPM étant soudé à la carte mère"
       ],
       "reponse": 3,
       "explication": "Le TPM est une puce soudée à la carte mère d'une machine, alors que le HSM d'entreprise est un équipement dédié (boîtier ou carte) conçu pour gérer et stocker des clés à grande échelle et accélérer les opérations cryptographiques ; le TPM est d'ailleurs considéré comme un exemple de HSM. Les deux génèrent des clés, le TPM n'est pas un équipement réseau, et c'est le HSM dédié qui offre les meilleures performances.",
@@ -1360,10 +1360,10 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Un attaquant exploite une vulnérabilité de l'hyperviseur pour sortir de sa machine virtuelle et accéder à l'hôte. Comment s'appelle cette attaque, et quelle est la MEILLEURE mesure préventive complémentaire au patching ?",
       "choix": [
-        "VM sprawl ; chiffrer les disques virtuels",
+        "VM sprawl ; chiffrer systématiquement tous les disques des machines virtuelles provisionnées",
         "VM escape ; désactiver la journalisation de l'hyperviseur",
         "Side-channel ; ajouter du bruit aux signaux",
-        "VM escape ; héberger les systèmes très sensibles sur des machines physiques séparées"
+        "VM escape ; isoler les systèmes sensibles sur des machines physiques dédiées"
       ],
       "reponse": 3,
       "explication": "Il s'agit d'un VM escape. Outre le maintien à jour de l'hyperviseur, la meilleure mesure est de conserver les systèmes et données hautement sensibles sur des machines physiques distinctes, afin qu'une évasion ne les expose pas. Le VM sprawl est la prolifération incontrôlée de VM (autre problème), le chiffrement des disques n'empêche pas l'évasion, et désactiver la journalisation aggraverait la situation.",
@@ -1488,7 +1488,7 @@ window.CISSP_DATA.domains[3] = {
       "choix": [
         "La factorisation du produit de grands nombres premiers",
         "Le problème du sac à dos",
-        "Le logarithme discret sur courbes elliptiques",
+        "Le problème du logarithme discret sur les courbes elliptiques (ECC)",
         "Les réseaux euclidiens (lattices)"
       ],
       "reponse": 0,
@@ -1579,7 +1579,7 @@ window.CISSP_DATA.domains[3] = {
         "Des blocs de plaintext identiques produisent des blocs de ciphertext identiques",
         "Il ne fonctionne qu'avec des clés de 56 bits",
         "Il est trop lent pour un usage en production",
-        "Il exige un vecteur d'initialisation difficile à générer"
+        "Il exige un vecteur d'initialisation aléatoire particulièrement difficile à générer de façon sûre"
       ],
       "reponse": 0,
       "explication": "En ECB, chaque bloc est chiffré indépendamment et de la même manière : tout motif répété du plaintext se retrouve dans le ciphertext, révélant la structure des données. ECB est au contraire rapide et parallélisable, n'utilise justement pas d'IV (c'est une partie du problème), et n'est pas limité à des clés de 56 bits.",
@@ -1630,9 +1630,9 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Quelles conditions rendent un one-time pad théoriquement incassable ? (MEILLEURE réponse)",
       "choix": [
-        "Clé dérivée d'une phrase de passe robuste avec PBKDF2",
+        "Clé dérivée d'une phrase de passe robuste via PBKDF2 avec un très grand nombre d'itérations",
         "Clé partagée via Diffie-Hellman et stockée dans un TPM",
-        "Clé vraiment aléatoire, au moins aussi longue que le message, utilisée une seule fois et protégée physiquement",
+        "Clé vraiment aléatoire, aussi longue que le message et utilisée une seule fois",
         "Clé de 256 bits minimum, renouvelée chaque mois"
       ],
       "reponse": 2,
@@ -1666,7 +1666,7 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "L'attaque meet-in-the-middle a démontré la faiblesse de quel schéma cryptographique ?",
       "choix": [
-        "AES-256",
+        "AES-256 utilisé en mode CBC avec HMAC d'authentification",
         "ChaCha20",
         "Le double DES (2DES)",
         "RSA-2048"
@@ -1704,7 +1704,7 @@ window.CISSP_DATA.domains[3] = {
       "choix": [
         "Augmenter la longueur des clés",
         "Chiffrer les journaux d'exécution",
-        "Changer d'algorithme tous les mois",
+        "Changer d'algorithme de chiffrement chaque mois selon une rotation planifiée",
         "Exécuter les opérations sensibles en temps constant"
       ],
       "reponse": 3,
@@ -1722,8 +1722,8 @@ window.CISSP_DATA.domains[3] = {
       "choix": [
         "L'archivage légal des communications par les opérateurs",
         "Le vol de clés dans les sauvegardes anciennes",
-        "La collecte de hashes pour des attaques pass the hash différées",
-        "L'interception et le stockage de données chiffrées aujourd'hui, en vue de les déchiffrer avec un ordinateur quantique demain"
+        "La collecte massive de hashes d'authentification réseau en vue d'attaques pass-the-hash différées dans le temps",
+        "Stocker des données chiffrées maintenant pour les déchiffrer plus tard avec un ordinateur quantique"
       ],
       "reponse": 3,
       "explication": "Harvest Now, Decrypt Later désigne des adversaires qui interceptent et stockent dès maintenant des données chiffrées, en pariant que l'informatique quantique leur permettra de les déchiffrer à l'avenir. C'est pourquoi les données à longue durée de sensibilité doivent migrer sans attendre vers des algorithmes post-quantiques comme la cryptographie lattice-based. Les autres réponses ne décrivent pas ce concept.",
@@ -1756,8 +1756,8 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Votre organisation applique un contrôle « m of n » pour la récupération des clés de chiffrement. Qu'est-ce que cela signifie ?",
       "choix": [
-        "Sur n agents de récupération désignés, m d'entre eux au minimum doivent coopérer pour reconstituer une clé",
-        "m administrateurs détiennent chacun une copie complète de la clé",
+        "Sur n agents de récupération, m d'entre eux au minimum doivent coopérer pour reconstituer une clé",
+        "m administrateurs détiennent chacun une copie complète et autonome de la clé maîtresse du système",
         "Chaque clé est valable m mois sur une durée de vie de n mois",
         "Les clés sont fragmentées en n morceaux stockés dans m pays"
       ],
@@ -1794,7 +1794,7 @@ window.CISSP_DATA.domains[3] = {
       "choix": [
         "Sag",
         "Brownout",
-        "Inrush",
+        "Inrush de courant au démarrage",
         "Spike"
       ],
       "reponse": 1,
@@ -1846,10 +1846,10 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Pourquoi le halon n'est-il plus utilisé comme agent d'extinction dans les installations modernes ?",
       "choix": [
-        "Il se dégrade en gaz toxiques à haute température et nuit à l'environnement",
+        "Il se dégrade en gaz toxiques à haute température, dangereux pour l'homme",
         "Il est inefficace contre les feux électriques",
         "Il est trop coûteux à stocker sous pression",
-        "Il endommage les équipements par résidu de poudre"
+        "Il endommage durablement les équipements électroniques par ses résidus de poudre corrosive"
       ],
       "reponse": 0,
       "explication": "Le halon interrompt efficacement la réaction chimique de combustion, mais il se dégrade en gaz toxiques vers 900 degrés Fahrenheit et détruit la couche d'ozone, d'où son abandon au profit de substituts et du CO2. Il était justement apprécié pour les feux électriques et ne laisse pas de résidu ; le coût n'est pas la raison principale de son interdiction.",
@@ -1883,8 +1883,8 @@ window.CISSP_DATA.domains[3] = {
       "q": "Quel est le rôle d'un vecteur d'initialisation (IV) dans un chiffrement par blocs comme le mode CBC ?",
       "choix": [
         "Allonger la clé de chiffrement",
-        "Introduire de l'aléa pour que des messages identiques produisent des ciphertexts différents",
-        "Authentifier l'émetteur du message",
+        "Introduire de l'aléa : deux messages identiques produisent alors des ciphertexts différents",
+        "Authentifier de façon certaine l'émetteur légitime du message afin d'en garantir la non-répudiation",
         "Compresser le message avant chiffrement"
       ],
       "reponse": 1,
@@ -1918,10 +1918,10 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Quelle affirmation à propos de la conteneurisation est EXACTE ?",
       "choix": [
-        "Les conteneurs partagent le noyau de l'hôte, offrant plus de densité mais moins d'isolation que les VM",
+        "Les conteneurs partagent le noyau de l'hôte : plus de densité, mais moins d'isolation que les VM",
         "La conteneurisation supprime le besoin de patcher l'hôte",
         "Chaque conteneur embarque son propre système d'exploitation complet",
-        "Les conteneurs sont immunisés contre les vulnérabilités des images"
+        "Les conteneurs sont totalement immunisés contre les vulnérabilités présentes dans leurs images de base"
       ],
       "reponse": 0,
       "explication": "La conteneurisation élimine la duplication des éléments d'OS : les conteneurs partagent le noyau de l'hôte, ce qui permet une densité 10 à 100 fois supérieure aux VM, au prix d'une isolation moindre. C'est la VM qui embarque un OS complet. Les images de conteneurs doivent être scannées et signées, et l'hôte doit toujours être durci et patché.",
@@ -1972,8 +1972,8 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Dans un système fonctionnant en mode multilevel, quelle affirmation est EXACTE ?",
       "choix": [
-        "Certains utilisateurs n'ont pas de clearance pour toutes les informations : le système lui-même doit séparer les niveaux et arbitrer chaque accès",
-        "Tous les utilisateurs possèdent une clearance pour toutes les informations du système",
+        "Le système lui-même doit séparer les niveaux et arbitrer chaque accès des utilisateurs",
+        "Tous les utilisateurs possèdent une clearance valable pour toutes les informations traitées par le système",
         "Le système ne peut traiter qu'un seul niveau de classification à la fois",
         "Le need-to-know est identique pour tous les utilisateurs"
       ],
@@ -1991,8 +1991,8 @@ window.CISSP_DATA.domains[3] = {
       "q": "Dans le référentiel historique TCSEC (Orange Book), que représente le niveau A1 ?",
       "choix": [
         "Une protection discrétionnaire avec journalisation",
-        "Une protection minimale, le système a échoué à l'évaluation",
-        "Une conception formellement vérifiée (verified design), le niveau le plus élevé",
+        "Une protection minimale : le système a échoué à l'évaluation de sécurité formelle",
+        "Une conception formellement vérifiée (verified design), le plus haut niveau",
         "Un chiffrement obligatoire de tous les supports"
       ],
       "reponse": 2,
@@ -2026,7 +2026,7 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Pour ouvrir le coffre contenant les composants de la clé maîtresse d'un HSM, la politique exige que deux responsables soient présents simultanément, chacun ne connaissant que la moitié de la combinaison. Quels principes sont appliqués ?",
       "choix": [
-        "Key clustering et key stretching",
+        "Key clustering et key stretching appliqués aux clés dérivées de phrases de passe",
         "Zero Trust et least privilege",
         "Split knowledge (connaissance fragmentée) et dual control (action à deux)",
         "Key escrow et cryptographic erase"
@@ -2062,9 +2062,9 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Quel est l'avantage PRINCIPAL d'une architecture SASE par rapport au modèle de sécurité périmétrique traditionnel ?",
       "choix": [
-        "Elle applique les politiques de sécurité au plus près de l'utilisateur, où qu'il se trouve, sans rapatrier le trafic vers le datacenter",
+        "Elle applique les politiques près de l'utilisateur, sans rapatrier le trafic vers le datacenter",
         "Elle permet de conserver les pare-feux d'agence existants sans modification",
-        "Elle réduit les coûts en regroupant tous les contrats de sécurité chez un fournisseur unique",
+        "Elle réduit les coûts en regroupant l'ensemble des contrats de sécurité chez un unique fournisseur externe",
         "Elle centralise l'inspection de tout le trafic dans le datacenter de l'entreprise"
       ],
       "reponse": 0,
@@ -2081,7 +2081,7 @@ window.CISSP_DATA.domains[3] = {
       "q": "Une nouvelle application mobile collecte par défaut la géolocalisation précise des utilisateurs, qui doivent naviguer dans les paramètres pour la désactiver. Quel principe du Privacy by Design est violé ?",
       "choix": [
         "End-to-end security",
-        "Full functionality (positive-sum)",
+        "Full functionality — approche positive-sum, et non zero-sum",
         "Privacy as the default setting (vie privée par défaut)",
         "Visibility and transparency"
       ],
@@ -2098,7 +2098,7 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Lors d'un projet, l'équipe marketing affirme qu'il faut choisir entre une expérience utilisateur riche et la protection de la vie privée. Quel principe du Privacy by Design contredit DIRECTEMENT cette affirmation ?",
       "choix": [
-        "Privacy embedded into design",
+        "Privacy embedded into the design (intégrée dès la conception)",
         "Proactive not reactive",
         "Respect for user privacy",
         "Full functionality — positive-sum, not zero-sum"
@@ -2116,8 +2116,8 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Votre organisation adopte une solution SaaS de gestion RH. Selon le modèle de responsabilité partagée, quelle responsabilité de sécurité reste TOUJOURS à la charge du client ?",
       "choix": [
-        "La classification des données et la gestion des identités et des accès des utilisateurs",
-        "La redondance de l'infrastructure réseau du fournisseur",
+        "La classification des données et la gestion des identités et des accès (IAM)",
+        "La redondance de l'infrastructure réseau et électrique du fournisseur de service",
         "Le patching de l'application SaaS",
         "La sécurité physique des datacenters du fournisseur"
       ],
@@ -2224,7 +2224,7 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Quel modèle de sécurité définit huit règles primitives de protection régissant la création et la suppression sûres des sujets et des objets ainsi que l'attribution des droits d'accès ?",
       "choix": [
-        "Bell-LaPadula",
+        "Le modèle Bell-LaPadula",
         "Sutherland",
         "Biba",
         "Graham-Denning"
@@ -2278,7 +2278,7 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Sur quel concept fondamental reposent les modèles Bell-LaPadula et Biba pour garantir qu'un système sûr le reste après chaque opération ?",
       "choix": [
-        "La matrice de contrôle d'accès discrétionnaire",
+        "La matrice de contrôle d'accès discrétionnaire gérée par les propriétaires",
         "La séparation physique des réseaux",
         "Le modèle de machine à états sécurisée (secure state machine)",
         "Le chiffrement de bout en bout"
@@ -2315,8 +2315,8 @@ window.CISSP_DATA.domains[3] = {
       "q": "Un pare-feu certifié EAL4 et un antivirus certifié EAL5 sont proposés à votre organisation. Un collègue conclut que l'antivirus est « plus sûr » que le pare-feu. Pourquoi cette conclusion est-elle ERRONÉE ?",
       "choix": [
         "Parce que l'EAL ne s'applique qu'aux systèmes gouvernementaux",
-        "Parce que les antivirus ne peuvent pas être certifiés Common Criteria",
-        "Parce que les EAL ne sont comparables qu'entre produits évalués contre des cibles de sécurité comparables, et mesurent la rigueur de l'évaluation, pas la sécurité absolue",
+        "Parce que les logiciels antivirus ne peuvent pas être certifiés selon les Common Criteria internationaux",
+        "Les EAL mesurent la rigueur de l'évaluation, pas la sécurité, et exigent des cibles comparables",
         "Parce que EAL4 est en réalité supérieur à EAL5"
       ],
       "reponse": 2,
@@ -2332,10 +2332,10 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Dans les Common Criteria, quelle est la différence entre les SFR et les SAR ?",
       "choix": [
-        "Les SFR décrivent les fonctions de sécurité que la TOE doit fournir ; les SAR décrivent les mesures prises pour vérifier la conformité et la qualité de l'évaluation",
+        "Les SFR décrivent les fonctions de sécurité ; les SAR, les mesures d'assurance de l'évaluation",
         "Les SFR s'appliquent aux EAL pairs et les SAR aux EAL impairs",
         "Les SFR concernent le matériel et les SAR le logiciel",
-        "Les SFR sont rédigés par le client et les SAR par le laboratoire"
+        "Les SFR sont rédigés par le client final et les SAR par le laboratoire d'évaluation agréé (ITSEF)"
       ],
       "reponse": 0,
       "explication": "Les Security Functional Requirements (SFR) spécifient les fonctions de sécurité individuelles que le produit doit offrir (authentification, audit, chiffrement...). Les Security Assurance Requirements (SAR) décrivent comment le produit doit être évalué : rigueur du développement, tests, analyses de vulnérabilités. Les paquets de SAR déterminent l'EAL atteint. La distinction n'a rien à voir avec matériel/logiciel, avec l'auteur du document ou avec la parité des niveaux.",
@@ -2353,7 +2353,7 @@ window.CISSP_DATA.domains[3] = {
         "La génération de nombres aléatoires",
         "Le scellement (sealing) de la clé à un état de plateforme connu",
         "La signature de code du BIOS",
-        "L'accélération du chiffrement réseau"
+        "L'accélération matérielle du chiffrement du trafic réseau sortant"
       ],
       "reponse": 1,
       "explication": "Le sealing (scellement) lie une clé aux valeurs des Platform Configuration Registers : la clé n'est descellée que si l'état mesuré du système (firmware, bootloader, configuration) correspond à l'état de confiance enregistré. Un démarrage altéré — par exemple par un bootkit — produit des mesures différentes et la clé reste inaccessible. Le TPM génère effectivement de l'aléa, mais ce n'est pas la fonction décrite ; il n'accélère pas le chiffrement réseau et ne signe pas le BIOS.",
@@ -2369,7 +2369,7 @@ window.CISSP_DATA.domains[3] = {
       "q": "Avant d'autoriser un poste de travail à rejoindre le réseau, un serveur de contrôle demande au TPM du poste une preuve signée de l'intégrité de sa configuration de démarrage. Comment s'appelle ce mécanisme ?",
       "choix": [
         "La remote attestation (attestation à distance)",
-        "Le secure enclave provisioning",
+        "Le secure enclave provisioning des clés applicatives",
         "Le key escrow",
         "Le certificate pinning"
       ],
@@ -2422,9 +2422,9 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Votre équipe déploie des fonctions serverless (FaaS) chez un fournisseur cloud. Quelles responsabilités de sécurité restent à la charge de votre organisation ?",
       "choix": [
-        "Le patching du système d'exploitation des serveurs d'exécution",
+        "Le patching du système d'exploitation et du noyau des serveurs d'exécution sous-jacents gérés",
         "La maintenance du runtime d'exécution des fonctions",
-        "La sécurité du code des fonctions, la configuration des permissions (IAM) et la protection des données traitées",
+        "La sécurité du code des fonctions, les permissions IAM et la protection des données traitées",
         "La sécurité physique des datacenters"
       ],
       "reponse": 2,
@@ -2441,8 +2441,8 @@ window.CISSP_DATA.domains[3] = {
       "q": "Un audit révèle des dizaines de machines virtuelles inconnues, créées sans validation, non patchées et oubliées sur les hyperviseurs de l'entreprise. Comment s'appelle ce phénomène et quelle est la MEILLEURE réponse ?",
       "choix": [
         "VM escape ; patcher l'hyperviseur",
-        "VM sprawl ; instaurer un processus formel de provisionnement et de gestion du cycle de vie des VM",
-        "Live migration ; désactiver le déplacement automatique des VM",
+        "VM sprawl ; instaurer un processus formel de provisionnement et de cycle de vie des VM",
+        "Live migration ; désactiver le déplacement automatique des VM entre hyperviseurs du cluster",
         "Shadow IT ; bloquer tous les hyperviseurs"
       ],
       "reponse": 1,
@@ -2460,8 +2460,8 @@ window.CISSP_DATA.domains[3] = {
       "choix": [
         "N'utiliser que des images de base minimales de type distroless",
         "Analyser les hôtes de conteneurs avec un antivirus traditionnel",
-        "Figer les versions d'images validées et ne plus jamais les reconstruire",
-        "Scanner les images, n'utiliser que des images signées provenant d'un registre de confiance et les reconstruire régulièrement"
+        "Figer définitivement les versions d'images validées et ne plus jamais les reconstruire ni les re-scanner",
+        "Scanner les images, n'utiliser que des images signées et de confiance, et les reconstruire régulièrement"
       ],
       "reponse": 3,
       "explication": "La chaîne d'approvisionnement des conteneurs est un vecteur d'attaque majeur : il faut scanner les images à la recherche de vulnérabilités et de secrets, exiger des images signées issues d'un registre privé ou de confiance, et les reconstruire régulièrement pour intégrer les correctifs des couches de base. Les images minimales réduisent la surface d'attaque mais ne garantissent ni la provenance ni l'absence de vulnérabilités — c'est une mesure partielle ; un antivirus sur l'hôte n'inspecte pas la chaîne d'approvisionnement des images ; et figer les images fige aussi leurs vulnérabilités.",
@@ -2476,8 +2476,8 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Un développeur a inclus les identifiants de la base de données de production directement dans l'image d'un conteneur publiée sur le registre interne. Quel est le risque PRINCIPAL et la MEILLEURE remédiation ?",
       "choix": [
-        "Exposition des secrets à quiconque accède à l'image ; utiliser un gestionnaire de secrets injectant les identifiants à l'exécution, et révoquer les identifiants exposés",
-        "Risque limité au périmètre interne ; restreindre les droits d'accès au registre et conserver l'image telle quelle",
+        "Exposition des secrets ; injecter les identifiants à l'exécution via un gestionnaire de secrets et révoquer ceux exposés",
+        "Risque limité au périmètre interne ; restreindre l'accès au registre et conserver l'image en l'état, sans autre mesure corrective",
         "Exposition des secrets ; chiffrer l'image entière dans le registre",
         "Exposition des secrets ; supprimer les identifiants dans une nouvelle couche de l'image et republier"
       ],
@@ -2495,8 +2495,8 @@ window.CISSP_DATA.domains[3] = {
       "q": "Le fournisseur d'un automate industriel publie un correctif de sécurité pour une vulnérabilité critique. Quelle est la MEILLEURE approche pour déployer ce correctif sur l'environnement OT de production ?",
       "choix": [
         "Attendre la prochaine mise à niveau matérielle complète",
-        "Le déployer immédiatement sur tous les automates, comme pour un poste bureautique",
-        "Tester le correctif approuvé par le fabricant dans un environnement représentatif, puis le déployer lors d'une fenêtre de maintenance planifiée",
+        "Le déployer immédiatement sur l'ensemble des automates, exactement comme on le ferait pour un poste de bureautique standard",
+        "Tester le correctif validé par le fabricant sur un banc représentatif, puis le déployer en fenêtre planifiée",
         "Ne jamais patcher les systèmes industriels"
       ],
       "reponse": 2,
@@ -2513,8 +2513,8 @@ window.CISSP_DATA.domains[3] = {
       "q": "Dans un environnement ICS pilotant un procédé chimique, quelle priorité de sécurité distingue FONDAMENTALEMENT l'OT de l'IT traditionnel ?",
       "choix": [
         "La non-répudiation des opérateurs avant tout",
-        "La sûreté des personnes et la disponibilité du procédé priment sur la confidentialité",
-        "La confidentialité des données de production avant tout",
+        "La sûreté des personnes et la disponibilité priment sur la confidentialité",
+        "La confidentialité des données et des secrets de production avant toute autre priorité",
         "L'authentification multifacteur avant tout"
       ],
       "reponse": 1,
@@ -2566,10 +2566,10 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Pourquoi un chiffrement par simple substitution monoalphabétique est-il vulnérable, même avec une clé gardée secrète ?",
       "choix": [
-        "Parce que l'analyse fréquentielle des lettres du texte chiffré révèle la correspondance avec les lettres fréquentes de la langue",
+        "Parce que l'analyse fréquentielle du chiffré révèle les lettres fréquentes de la langue",
         "Parce que la clé est toujours trop courte",
         "Parce qu'il ne fonctionne qu'avec l'alphabet latin",
-        "Parce qu'il nécessite un canal sûr pour échanger la clé"
+        "Parce qu'il nécessite impérativement un canal sûr et préétabli pour échanger la clé secrète partagée"
       ],
       "reponse": 0,
       "explication": "Une substitution monoalphabétique préserve la fréquence d'apparition des lettres : le symbole le plus fréquent du chiffré correspond très probablement au E en français ou en anglais, et de proche en proche l'analyse fréquentielle reconstitue tout l'alphabet de substitution. C'est la faiblesse historique des chiffres de César et consorts. La longueur de clé et l'échange de clé sont des problèmes distincts, et l'alphabet utilisé n'est pas la cause de la vulnérabilité.",
@@ -2621,8 +2621,8 @@ window.CISSP_DATA.domains[3] = {
       "q": "Un laboratoire parvient à extraire la clé d'une carte à puce en mesurant finement sa consommation électrique pendant les opérations de chiffrement. De quelle famille d'attaques s'agit-il ?",
       "choix": [
         "Une attaque par ingénierie sociale",
-        "Une attaque de type chosen plaintext",
-        "Une attaque par canal auxiliaire (side-channel), ici l'analyse de consommation",
+        "Une attaque cryptanalytique adaptative de type chosen plaintext contre l'algorithme",
+        "Une attaque par canal auxiliaire (side-channel) par analyse de consommation",
         "Une attaque par force brute"
       ],
       "reponse": 2,
@@ -2639,9 +2639,9 @@ window.CISSP_DATA.domains[3] = {
       "q": "Deux clés DIFFÉRENTES chiffrent le même message en produisant le même texte chiffré. Comment s'appelle ce phénomène et pourquoi est-il dangereux ?",
       "choix": [
         "La collision de hash ; il casse la non-répudiation",
-        "Le key stretching ; il ralentit le déchiffrement légitime",
+        "Le key stretching ; il ralentit le déchiffrement légitime des utilisateurs autorisés",
         "Le key escrow ; il expose les clés à un tiers",
-        "Le key clustering ; il réduit l'espace de clés effectif et facilite la cryptanalyse"
+        "Le key clustering ; il réduit l'espace de clés effectif et aide la cryptanalyse"
       ],
       "reponse": 3,
       "explication": "Le key clustering désigne le cas où deux clés distinctes produisent le même chiffré à partir du même clair : l'attaquant peut alors déchiffrer avec une clé différente de l'originale, ce qui réduit l'espace de recherche effectif et trahit une faiblesse de conception de l'algorithme. Le key stretching est une technique volontaire de renforcement des mots de passe, la collision de hash concerne les fonctions de hachage, et le key escrow est un dispositif organisationnel de garde de clés.",
@@ -2656,7 +2656,7 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Pour réduire la charge de ses serveurs OCSP et préserver la vie privée des clients, une organisation fait présenter par ses serveurs web une réponse OCSP signée et horodatée directement pendant la négociation TLS. Comment s'appelle ce mécanisme ?",
       "choix": [
-        "Cross-certification",
+        "La cross-certification entre AC",
         "Certificate pinning",
         "CRL delta",
         "OCSP stapling (agrafage OCSP)"
@@ -2711,9 +2711,9 @@ window.CISSP_DATA.domains[3] = {
       "q": "Un administrateur découvre que la clé privée du certificat TLS du portail client a été copiée sur un dépôt de code public. Quelle est la PREMIÈRE action à entreprendre ?",
       "choix": [
         "Attendre l'expiration naturelle du certificat",
-        "Demander immédiatement la révocation du certificat auprès de la CA, puis générer une nouvelle paire de clés et un nouveau certificat",
+        "Révoquer immédiatement le certificat auprès de la CA, puis regénérer clés et certificat",
         "Supprimer discrètement le dépôt public",
-        "Renouveler le certificat avec la même paire de clés"
+        "Renouveler le certificat en réutilisant la même paire de clés déjà potentiellement compromise"
       ],
       "reponse": 1,
       "explication": "Une clé privée exposée doit être considérée comme définitivement compromise : la priorité est de faire révoquer le certificat (publication en CRL/OCSP) pour que les clients cessent de lui faire confiance, puis de générer une NOUVELLE paire de clés et d'obtenir un nouveau certificat. Attendre l'expiration laisse l'attaquant usurper le portail ; supprimer le dépôt n'efface pas les copies déjà faites ; renouveler avec la même paire de clés reconduit la compromission.",
@@ -2728,10 +2728,10 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "À l'entrée d'un datacenter, un sas à double porte ne laisse passer qu'une seule personne à la fois : la seconde porte ne s'ouvre qu'après fermeture de la première et vérification de l'identité. Contre quelle menace ce dispositif est-il PRINCIPALEMENT conçu ?",
       "choix": [
-        "L'écoute électromagnétique",
+        "L'écoute électromagnétique passive des câbles réseau (TEMPEST)",
         "L'incendie",
         "La coupure électrique",
-        "Le piggybacking et le tailgating (passage à plusieurs sur un seul badge)"
+        "Le piggybacking et le tailgating (passage sur un seul badge)"
       ],
       "reponse": 3,
       "explication": "Le mantrap (sas de sécurité) impose un passage individuel : il empêche qu'une personne non autorisée se glisse derrière un porteur de badge, avec sa complicité (piggybacking) ou à son insu (tailgating). Certains sas pèsent même l'occupant pour détecter une double présence. Il ne joue aucun rôle contre le feu, les coupures électriques ou les émanations électromagnétiques, qui relèvent d'autres contrôles.",
@@ -2800,9 +2800,9 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Lors d'une coupure de courant, quel est le rôle EXACT de l'UPS par rapport au générateur de secours ?",
       "choix": [
-        "L'UPS assure une alimentation immédiate et de courte durée, le temps que le générateur démarre et se stabilise",
+        "L'UPS fournit une alimentation immédiate et brève, le temps que le générateur démarre",
         "L'UPS alimente le site pendant plusieurs jours",
-        "Le générateur démarre instantanément, l'UPS ne sert qu'au filtrage",
+        "Le générateur démarre instantanément et l'UPS ne sert qu'au filtrage de la tension du secteur",
         "L'UPS et le générateur sont redondants et interchangeables"
       ],
       "reponse": 0,
@@ -2836,9 +2836,9 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Le fournisseur d'un équipement critique annonce la date d'« end-of-support ». Pourquoi cette date représente-t-elle un jalon de risque MAJEUR dans le cycle de vie du système ?",
       "choix": [
-        "La licence deviendra automatiquement gratuite",
+        "La licence du produit deviendra automatiquement gratuite et librement redistribuable après l'échéance",
         "La garantie constructeur sera prolongée",
-        "Après cette date, plus aucun correctif de sécurité ne sera publié : les nouvelles vulnérabilités resteront définitivement exploitables",
+        "Passé l'échéance, aucun correctif de sécurité : les vulnérabilités restent exploitables durablement",
         "L'équipement cessera de fonctionner à cette date"
       ],
       "reponse": 2,
@@ -2855,9 +2855,9 @@ window.CISSP_DATA.domains[3] = {
       "q": "Votre organisation retire du service une baie de stockage ayant contenu des données confidentielles. Quelle est la PREMIÈRE étape d'un décommissionnement sécurisé ?",
       "choix": [
         "Retirer les étiquettes d'inventaire",
-        "Revendre immédiatement les disques pour amortir l'investissement",
+        "Revendre immédiatement les disques d'occasion afin d'amortir au plus vite l'investissement initial",
         "Formater rapidement les disques",
-        "Identifier les données présentes et leur classification afin de déterminer la méthode de sanitisation exigée"
+        "Identifier les données et leur classification pour déterminer la méthode de sanitisation exigée"
       ],
       "reponse": 3,
       "explication": "Le décommissionnement commence par l'inventaire des données et de leur classification : c'est elle qui dicte la méthode de sanitisation requise (clear, purge ou destroy selon NIST SP 800-88) et les exigences de traçabilité. Revendre ou simplement formater expose les données résiduelles — un formatage ne supprime pas réellement les contenus. La gestion des étiquettes vient en fin de processus, avec le certificat de destruction ou d'effacement.",
@@ -2874,8 +2874,8 @@ window.CISSP_DATA.domains[3] = {
       "choix": [
         "Microsegmenter le datacenter, là où résident les données les plus sensibles",
         "Désactiver le VPN existant pour forcer l'adoption rapide du nouveau modèle",
-        "Inventorier les actifs critiques et cartographier les flux afin de définir les surfaces à protéger, avant tout déploiement technique",
-        "Déployer le ZTNA pour sécuriser les accès distants, vecteur d'attaque le plus visible"
+        "Inventorier les actifs critiques et cartographier les flux pour définir les surfaces à protéger",
+        "Déployer d'abord le ZTNA pour sécuriser les accès distants, considérés comme le vecteur d'attaque le plus visible"
       ],
       "reponse": 2,
       "explication": "Une migration Zero Trust réussie part de la connaissance : inventaire des actifs, cartographie des flux et définition des surfaces de protection (protect surfaces). Sans cette étape, les politiques ZTNA et la microsegmentation seront construites sur des hypothèses fausses et bloqueront des flux légitimes — ou laisseront passer des flux dangereux. ZTNA et microsegmentation sont deux chantiers légitimes du programme, mais ils viennent APRÈS la cartographie ; couper le VPN sans solution de remplacement validée créerait une rupture de service et des contournements.",
@@ -2908,8 +2908,8 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Le CISO d'un groupe de santé dispose d'un budget limité pour engager la transition post-quantique. Les données génétiques des patients doivent rester confidentielles plusieurs décennies. Quelle démarche devriez-vous engager EN PREMIER ?",
       "choix": [
-        "Attendre que l'ensemble des éditeurs supportent nativement les nouveaux standards avant toute action",
-        "Établir un inventaire cryptographique, instaurer la crypto-agilité et prioriser la protection des échanges de clés couvrant les données à longue durée de confidentialité",
+        "Attendre que l'ensemble des éditeurs prennent nativement en charge les nouveaux standards avant toute action",
+        "Inventaire cryptographique, crypto-agilité, et priorité aux échanges de clés à longue durée de confidentialité",
         "Porter les clés RSA existantes à 8192 bits pour gagner le temps nécessaire",
         "Remplacer immédiatement tous les certificats et signatures TLS par des algorithmes post-quantiques"
       ],
@@ -2927,9 +2927,9 @@ window.CISSP_DATA.domains[3] = {
       "q": "Pour ses VPN inter-sites, une banque hésite entre un échange de clés purement post-quantique et un mode hybride combinant un algorithme classique éprouvé et un algorithme post-quantique. Quel est le MEILLEUR argument en faveur du mode hybride ?",
       "choix": [
         "Le mode hybride élimine définitivement le risque quantique",
-        "Le mode hybride offre de meilleures performances que l'algorithme post-quantique seul",
+        "Le mode hybride offre de bien meilleures performances de calcul que l'algorithme post-quantique utilisé seul",
         "Les régulateurs bancaires interdisent l'usage exclusif d'algorithmes post-quantiques",
-        "Si une faiblesse encore inconnue est découverte dans le jeune algorithme post-quantique, la composante classique éprouvée continue de protéger l'échange, et réciproquement"
+        "Si l'algorithme post-quantique se révèle faible, la composante classique éprouvée protège encore l'échange"
       ],
       "reponse": 3,
       "explication": "Les algorithmes post-quantiques standardisés sont récents et ont un historique de cryptanalyse court — l'exemple de SIKE, cassé en 2022 après des années d'évaluation, l'a rappelé. Le mode hybride applique la défense en profondeur à la cryptographie : la session ne tombe que si les DEUX composantes sont cassées, ce qui couvre à la fois le risque quantique futur (composante PQC) et le risque de jeunesse des nouveaux algorithmes (composante classique). L'hybride coûte au contraire un peu plus cher en calcul, aucune protection n'est définitive, et l'argument réglementaire est inventé.",
@@ -2944,9 +2944,9 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Un assureur veut exécuter sur un cloud public un traitement de données réglementées, avec une exigence contractuelle : le fournisseur cloud ne doit jamais pouvoir accéder aux données PENDANT leur traitement. Quelle architecture répond le MIEUX à cette exigence aujourd'hui ?",
       "choix": [
-        "Exécuter le traitement dans des enclaves d'exécution de confiance (TEE), les clés n'étant livrées qu'après attestation à distance de l'enclave",
+        "Exécuter le traitement dans des enclaves de confiance (TEE), les clés livrées après attestation à distance",
         "Réécrire l'ensemble du traitement en chiffrement homomorphe complet",
-        "Chiffrer les données au repos avec des clés apportées et gérées par l'assureur (BYOK)",
+        "Chiffrer les données au repos avec des clés apportées et exclusivement gérées par l'assureur lui-même (BYOK)",
         "Imposer TLS 1.3 sur tous les flux entre les services du traitement"
       ],
       "reponse": 0,
@@ -2963,9 +2963,9 @@ window.CISSP_DATA.domains[3] = {
       "q": "Une application de scoring s'exécute dans une enclave (TEE) sur une infrastructure mutualisée. L'architecte doit garantir que les clés de déchiffrement des données ne seront jamais remises à un code altéré ou à une fausse enclave. Quel contrôle répond DIRECTEMENT à cette exigence ?",
       "choix": [
         "Chiffrer la mémoire de l'enclave avec une clé propre au processeur",
-        "Signer le code applicatif dans la chaîne CI/CD avant tout déploiement",
+        "Signer systématiquement le code applicatif dans la chaîne CI/CD avant chaque déploiement en production",
         "Stocker les clés chiffrées dans l'image de l'application déployée",
-        "Conditionner la livraison des clés à une attestation à distance réussie, vérifiant les mesures de l'enclave auprès du service de gestion de clés"
+        "Conditionner la livraison des clés à une attestation à distance réussie des mesures de l'enclave"
       ],
       "reponse": 3,
       "explication": "La question n'est pas de protéger la mémoire (le TEE le fait nativement) mais de décider À QUI livrer les secrets. La remote attestation répond exactement à ce besoin : l'enclave produit une preuve signée par le matériel de son identité et de ses mesures (code chargé, configuration), que le service de gestion de clés vérifie AVANT de provisionner les clés — un code altéré ou une enclave simulée échoue à l'attestation et ne reçoit rien. La signature de code en CI/CD est nécessaire mais ne prouve pas ce qui s'exécute réellement à l'instant T ; le chiffrement mémoire est une propriété du TEE, pas un mécanisme de livraison de secrets ; embarquer les clés dans l'image les expose à quiconque obtient l'image.",
@@ -2980,8 +2980,8 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Un opérateur d'importance vitale renouvelle son parc de serveurs et craint l'insertion d'implants matériels ou de firmwares piégés dans la chaîne d'approvisionnement. Quelle stratégie réduit le MIEUX ce risque ?",
       "choix": [
-        "Faire réaliser un test d'intrusion complet des serveurs après leur mise en production",
-        "Combiner des fournisseurs qualifiés contractuellement, la vérification d'intégrité à la réception et le démarrage mesuré avec attestation (racine de confiance matérielle)",
+        "Faire réaliser un test d'intrusion complet de l'ensemble des serveurs après leur mise en production effective",
+        "Fournisseurs qualifiés, contrôle d'intégrité à la réception et démarrage mesuré avec attestation matérielle",
         "N'acheter que du matériel fabriqué sur le territoire national",
         "Exiger l'audit du code source des firmwares de chaque composant avant tout achat"
       ],
@@ -3000,8 +3000,8 @@ window.CISSP_DATA.domains[3] = {
       "choix": [
         "Imposer l'IPS en coupure : la sécurité prime sur les objections opérationnelles",
         "Planifier un arrêt mensuel du procédé pour exécuter des scans actifs de vulnérabilités",
-        "Déployer une surveillance passive hors bande (TAP/port mirror) avec détection spécialisée OT, appuyée sur la segmentation et des procédures de réponse",
-        "Renoncer aux contrôles réseau et concentrer l'effort sur le durcissement des postes de supervision"
+        "Surveillance passive hors bande (TAP/mirror) avec détection OT, segmentation et procédures de réponse",
+        "Renoncer à tout contrôle réseau et concentrer l'effort uniquement sur le durcissement des postes de supervision SCADA"
       ],
       "reponse": 2,
       "explication": "En environnement OT, la disponibilité et la sûreté du procédé sont premières : un IPS en coupure introduit un point de défaillance et un risque de faux positif bloquant des ordres de contrôle — inacceptable sur un procédé continu. L'architecture adaptée est la surveillance passive hors bande via TAP ou port mirror, avec une détection comprenant les protocoles industriels, adossée à la segmentation (zones et conduits) et à des procédures de réponse : on obtient la visibilité sans créer de risque sur la production. Imposer l'IPS ignore la contrainte fondamentale de l'OT, tout miser sur les postes laisse le réseau de contrôle aveugle, et arrêter le procédé chaque mois pour des scans actifs coûte une disponibilité disproportionnée — les scans actifs sont d'ailleurs eux-mêmes risqués sur des automates.",
@@ -3017,8 +3017,8 @@ window.CISSP_DATA.domains[3] = {
       "q": "Une vulnérabilité exploitable à distance est publiée pour le contrôleur d'une turbine, en fin de vie et non patchable ; son remplacement qualifié est planifié dans dix-huit mois et un arrêt non planifié coûte plusieurs millions. Aucune atteinte aux personnes n'est en jeu. Que devriez-vous faire EN PREMIER ?",
       "choix": [
         "Arrêter la turbine jusqu'au remplacement du contrôleur",
-        "Déployer des contrôles compensatoires : segmentation renforcée, accès distant limité à un rebond avec MFA, et surveillance dédiée du contrôleur jusqu'au remplacement",
-        "Avancer le remplacement du contrôleur sans attendre la qualification complète du nouveau matériel",
+        "Contrôles compensatoires : segmentation renforcée, accès distant par rebond MFA et surveillance dédiée du contrôleur",
+        "Avancer en urgence le remplacement du contrôleur sans attendre la qualification complète du nouveau matériel de commande",
         "Faire accepter formellement le risque par la direction et attendre le remplacement planifié"
       ],
       "reponse": 1,
@@ -3035,9 +3035,9 @@ window.CISSP_DATA.domains[3] = {
       "q": "Au cours d'une migration Zero Trust, une application métier critique ne supporte ni SSO, ni MFA, ni protocoles d'authentification modernes ; son éditeur a disparu. L'équipe projet propose de l'exclure du programme. Quelle est la MEILLEURE décision du CISO ?",
       "choix": [
         "Imposer le MFA à l'ouverture de session des postes de travail qui accèdent à l'application",
-        "Lancer immédiatement la réécriture complète de l'application avant de poursuivre la migration",
+        "Lancer immédiatement la réécriture complète et intégrale de l'application avant même de poursuivre la migration vers le cloud",
         "Accepter l'exclusion et documenter l'application comme exception permanente au programme",
-        "Placer l'application derrière un proxy d'accès qui impose en frontal l'authentification moderne et le MFA, et isoler l'application dans un segment dédié"
+        "Placer l'application derrière un proxy imposant en frontal l'authentification moderne et le MFA, dans un segment dédié"
       ],
       "reponse": 3,
       "explication": "Le modèle Zero Trust prévoit précisément ce cas : quand la ressource ne peut pas porter elle-même les contrôles, on les déplace devant elle. Un proxy d'accès applicatif (composante ZTNA) impose l'authentification moderne, le MFA et les politiques d'accès en frontal, pendant que la segmentation isole l'application pour que seul le proxy puisse l'atteindre. L'exclusion documentée laisse un accès non contrôlé au cœur du système d'information — une exception « permanente » est une dette de sécurité, pas une décision. La réécriture est peut-être la cible à long terme mais ne protège rien pendant des années, et le MFA du poste de travail ne contrôle pas l'accès à l'application elle-même : n'importe quel processus du poste authentifié peut l'atteindre.",
@@ -3054,8 +3054,8 @@ window.CISSP_DATA.domains[3] = {
       "choix": [
         "Le dimensionnement des instances, qui risque de faire dériver les coûts",
         "Le choix de l'éditeur de pare-feu virtuel, qui devrait être le même que celui du datacenter",
-        "L'absence de gestion des identités et des droits IAM cloud (rôles sur-privilégiés, clés d'API non gouvernées), nouveau périmètre réel de l'environnement",
-        "L'absence de chiffrement des disques virtuels, que le fournisseur n'active jamais par défaut"
+        "L'absence de gouvernance IAM cloud (rôles sur-privilégiés, clés d'API non gouvernées), nouveau périmètre réel",
+        "L'absence de chiffrement des disques virtuels, une option que le fournisseur cloud n'active pratiquement jamais par défaut"
       ],
       "reponse": 2,
       "explication": "Dans le cloud, l'identité EST le périmètre : la majorité des compromissions cloud passent par des identités et clés mal gouvernées, pas par le réseau. Répliquer le modèle périmétrique on-premise laisse ce plan de contrôle sans gouvernance.",
@@ -3070,8 +3070,8 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Un fabricant intègre un module cryptographique certifié FIPS 140-3 niveau 2 dans un produit destiné à un client exigeant le niveau 3. Le chef de produit propose « d'ajouter du code de détection d'intrusion logicielle » pour combler l'écart. Que devez-vous expliquer EN PREMIER à la direction ?",
       "choix": [
-        "Le niveau 3 exige des mécanismes physiques de résistance et de réponse aux intrusions validés lors de la certification du module : on ne « surclasse » pas un module par du logiciel ajouté, il faut un module certifié au bon niveau",
-        "Le niveau 2 est suffisant en pratique car le produit sera déployé dans des locaux sécurisés",
+        "Le niveau 3 impose des protections physiques certifiées ; on ne surclasse pas le module par du logiciel",
+        "Le niveau 2 est jugé suffisant en pratique puisque le produit sera déployé dans des locaux sécurisés et surveillés",
         "Le code additionnel devra être développé selon un cycle sécurisé pour être recevable",
         "Il faut négocier avec le client un avenant au contrat pour accepter le niveau 2"
       ],
@@ -3106,8 +3106,8 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Un administrateur de bases de données utilise en permanence son compte à hauts privilèges, y compris pour lire ses e-mails et naviguer sur le web. Un malware exécuté dans son navigateur obtient ainsi un contrôle étendu sur les serveurs. Quel principe de conception sécurisée a été violé EN PREMIER lieu ?",
       "choix": [
-        "Least privilege : les tâches courantes auraient dû s'effectuer avec un compte ordinaire, les privilèges d'administration étant réservés aux seules tâches qui l'exigent",
-        "Separation of duties : deux personnes auraient dû se partager l'administration",
+        "Least privilege : les tâches courantes auraient dû utiliser un compte ordinaire, non un compte administrateur",
+        "Separation of duties : deux personnes distinctes auraient dû se partager les tâches d'administration du poste concerné",
         "Defense in depth : il manquait un second pare-feu",
         "Fail securely : le navigateur aurait dû se fermer en cas d'erreur"
       ],
@@ -3126,8 +3126,8 @@ window.CISSP_DATA.domains[3] = {
       "choix": [
         "Segmenter les caméras existantes sur un VLAN dédié",
         "Ajouter les caméras à la supervision du SOC",
-        "Changer manuellement les mots de passe des caméras déjà installées",
-        "Exiger dans le processus d'achat et de déploiement des équipements livrés et configurés selon des secure defaults : mot de passe unique imposé au premier démarrage, services inutiles désactivés"
+        "Changer manuellement, une par une, les mots de passe par défaut des caméras déjà installées sur les sites",
+        "Exiger dès l'achat des équipements configurés en secure defaults par le fournisseur"
       ],
       "reponse": 3,
       "explication": "Le principe des secure defaults veut que les équipements soient sûrs dès leur sortie de boîte : mot de passe d'usine à changer obligatoirement, services non essentiels désactivés par défaut. L'inscrire dans les exigences d'achat et le processus de déploiement traite la cause racine. La segmentation et la supervision sont des compensations, et la correction manuelle ne règle que le parc existant.",
@@ -3143,9 +3143,9 @@ window.CISSP_DATA.domains[3] = {
       "q": "Des conseillers utilisent une application web métier depuis des postes partagés en agence. Un auditeur constate que des données clients restent lisibles dans le cache du navigateur et les fichiers temporaires après la déconnexion. Quelle est la MEILLEURE mesure corrective ?",
       "choix": [
         "Renforcer le chiffrement TLS entre les postes et le serveur",
-        "Configurer l'application pour interdire la mise en cache des contenus sensibles et purger les données locales à la fermeture de session",
+        "Interdire le cache des contenus sensibles et purger les données locales à la fermeture de session",
         "Installer un antivirus à jour sur les postes partagés",
-        "Remplacer l'application web par un client lourd installé localement"
+        "Remplacer l'application web par un client lourd installé et exécuté localement sur chaque poste partagé"
       ],
       "reponse": 1,
       "explication": "Le risque des systèmes client-based inclut les données résiduelles dans les caches locaux : sur un poste partagé, l'utilisateur suivant peut lire les données du précédent. La parade est applicative : en-têtes interdisant la mise en cache des contenus sensibles et purge des données locales en fin de session. TLS protège les données en transit, pas les résidus locaux, et un client lourd stocke souvent davantage en local.",
@@ -3162,8 +3162,8 @@ window.CISSP_DATA.domains[3] = {
       "choix": [
         "L'attaque par agrégation",
         "Le VM sprawl",
-        "Le data flow control : la maîtrise du rythme et du chemin des échanges (files d'attente, répartition de charge) fait défaut",
-        "Le comportement fail-open"
+        "Le data flow control : la maîtrise du débit et du chemin des échanges fait défaut",
+        "Le comportement fail-open des équipements de sécurité lors d'une panne interne du système"
       ],
       "reponse": 2,
       "explication": "Le contrôle des flux de données (data flow control) garantit que les échanges entre systèmes suivent un rythme soutenable et des chemins maîtrisés : files d'attente, répartiteurs de charge et régulation évitent la perte de transactions et l'apparition de circuits de contournement non sécurisés. L'agrégation est une attaque sur les bases de données, le VM sprawl une prolifération de machines virtuelles, et fail-open décrit la défaillance d'un contrôle.",
@@ -3178,9 +3178,9 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Une application répartit données et traitements sur des dizaines de nœuds coopérants dans trois pays. L'architecte propose de concentrer tous les contrôles de sécurité sur le serveur central d'orchestration. Pourquoi cette approche est-elle INSUFFISANTE ?",
       "choix": [
-        "Dans un système distribué, chaque nœud et chaque lien constituent une surface d'attaque : authentification, chiffrement et durcissement doivent s'appliquer partout, pas en un point unique",
+        "Dans un système distribué, chaque nœud et chaque lien est une surface d'attaque : la sécurité doit s'appliquer partout",
         "Parce qu'il faudrait plutôt doubler l'orchestrateur d'un second orchestrateur de secours",
-        "Parce qu'il faudrait d'abord rapatrier l'application dans un cloud unique pour centraliser la sécurité",
+        "Parce qu'il faudrait d'abord rapatrier l'ensemble de l'application dans un cloud unique afin de centraliser toute la sécurité",
         "Parce qu'un VPN entre les nœuds suffirait à couvrir l'ensemble du risque"
       ],
       "reponse": 0,
@@ -3198,8 +3198,8 @@ window.CISSP_DATA.domains[3] = {
       "choix": [
         "Revenir à l'architecture monolithique d'origine",
         "Laisser chaque équipe choisir librement son mécanisme d'authentification",
-        "Considérer le réseau interne du cluster comme de confiance pour le trafic entre services",
-        "Placer une API gateway en point d'entrée unique — authentification, autorisation, rate limiting, journalisation — et chiffrer le trafic inter-services avec mTLS"
+        "Considérer par défaut le réseau interne du cluster comme entièrement de confiance pour l'ensemble du trafic entre services",
+        "Placer une API gateway en entrée unique (authz, rate limiting, journaux) et chiffrer le trafic inter-services en mTLS"
       ],
       "reponse": 3,
       "explication": "L'API gateway centralise l'application des politiques de sécurité à l'entrée (authentification, autorisation, limitation de débit, journalisation) et supprime l'incohérence entre services ; le mTLS, souvent via un service mesh, sécurise le trafic est-ouest. Revenir au monolithe est une décision d'architecture, pas une mesure de sécurité, et faire confiance au réseau interne contredit le Zero Trust.",
@@ -3215,8 +3215,8 @@ window.CISSP_DATA.domains[3] = {
       "q": "Un laboratoire loue du temps de calcul de son cluster HPC à des équipes externes. Un air gap est impossible et les pare-feux classiques dégradent trop les performances des nœuds de calcul. Quelle approche de sécurisation est la PLUS adaptée ?",
       "choix": [
         "Installer un agent antivirus sur chacun des nœuds de calcul",
-        "Canaliser tous les accès par des head nodes durcis servant de points d'entrée uniques, et surveiller les comportements anormaux du cluster",
-        "Chiffrer l'intégralité des interconnexions internes à haute vitesse du cluster",
+        "Canaliser les accès par des head nodes durcis servant de points d'entrée uniques et surveiller le cluster",
+        "Chiffrer l'intégralité des interconnexions internes à très haute vitesse entre tous les nœuds du cluster de calcul",
         "Cesser de louer le cluster à des équipes externes"
       ],
       "reponse": 1,
@@ -3232,9 +3232,9 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Une enseigne déploie des passerelles d'edge computing dans trois cents magasins pour traiter localement vidéo et données de caisse. Ces sites n'ont aucun personnel informatique et les équipements sont physiquement accessibles. Quelle combinaison de mesures est la PLUS pertinente ?",
       "choix": [
-        "Rapatrier tout le traitement dans le cloud central pour supprimer les équipements edge",
+        "Rapatrier l'intégralité du traitement dans le cloud central afin de supprimer purement et simplement les équipements edge",
         "Installer un pare-feu périmétrique dans chaque magasin et s'en tenir là",
-        "Appliquer une approche Zero Trust aux équipements : chiffrement des données au repos, secure boot et attestation, segmentation réseau, patching centralisé et automatisé",
+        "Zero Trust des équipements : chiffrement au repos, secure boot, attestation, segmentation et patching centralisé",
         "S'appuyer sur la vidéosurveillance existante des magasins pour dissuader les manipulations"
       ],
       "reponse": 2,
@@ -3250,10 +3250,10 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Lors d'une revue d'architecture, vous découvrez qu'une application horodate et signe des documents contractuels sur la base d'empreintes SHA-1. Que devez-vous recommander ?",
       "choix": [
-        "Migrer vers SHA-2 (SHA-256 ou plus) ou SHA-3 : des collisions SHA-1 pratiques sont démontrées, ce qui fragilise la valeur probante des signatures",
+        "Migrer vers SHA-2 (SHA-256+) ou SHA-3 : des collisions SHA-1 pratiques sont démontrées, fragilisant la preuve",
         "Conserver SHA-1, ses collisions restant purement théoriques",
         "Adopter MD5, plus rapide pour le traitement de gros volumes",
-        "Appliquer SHA-1 deux fois de suite pour restaurer un niveau de sécurité suffisant"
+        "Appliquer l'algorithme SHA-1 deux fois de suite afin de restaurer artificiellement un niveau de sécurité suffisant"
       ],
       "reponse": 0,
       "explication": "Des collisions SHA-1 réelles ont été démontrées publiquement (attaque SHAttered, 2017) : un attaquant peut produire deux documents distincts de même empreinte, ce qui ruine la fiabilité d'une signature. La recommandation est de migrer vers la famille SHA-2 ou SHA-3. MD5 est encore plus faible, et composer un algorithme cassé avec lui-même ne rétablit pas la résistance aux collisions.",
@@ -3268,10 +3268,10 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Une banque veut que ses clients puissent vérifier l'identité juridique de l'établissement derrière son portail web, au-delà de la simple preuve de contrôle du nom de domaine. Quel type de certificat doit-elle demander à son autorité de certification ?",
       "choix": [
-        "Un certificat auto-signé généré par ses propres équipes",
+        "Un certificat auto-signé, généré en interne par ses propres équipes techniques d'exploitation",
         "Un certificat DV (Domain Validation)",
         "Un certificat wildcard couvrant tous ses sous-domaines",
-        "Un certificat EV (Extended Validation), délivré après vérification approfondie de l'entité juridique"
+        "Un certificat EV (Extended Validation), délivré après vérification de l'entité juridique"
       ],
       "reponse": 3,
       "explication": "Les certificats se distinguent par le niveau de vérification effectué par la CA : DV prouve uniquement le contrôle du domaine, OV ajoute la vérification de l'organisation, et EV impose une vérification approfondie de l'entité juridique — exactement le besoin exprimé. Un certificat auto-signé n'apporte aucune vérification tierce, et « wildcard » décrit la portée des noms couverts, pas le niveau de validation.",
@@ -3286,8 +3286,8 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Une base de hashes de mots de passe est exfiltrée. Les mots de passe étaient hachés SANS salt avec un algorithme rapide. Quelle technique permettra à l'attaquant de récupérer le PLUS efficacement un grand nombre de mots de passe ?",
       "choix": [
-        "Une fault injection sur les serveurs d'authentification",
-        "Des rainbow tables : la recherche inversée précalculée est rendue possible par l'absence de salt",
+        "Une attaque par fault injection matérielle ciblant les serveurs d'authentification de l'annuaire central",
+        "Des rainbow tables : la recherche inversée précalculée, rendue possible par l'absence de salt",
         "Une attaque chosen ciphertext contre la base",
         "Une attaque par timing contre la fonction de hachage"
       ],
@@ -3323,8 +3323,8 @@ window.CISSP_DATA.domains[3] = {
       "q": "Un audit révèle qu'une application utilise AES-256, algorithme réputé sûr, mais avec une bibliothèque qui réutilise le même IV pour chaque message et journalise les clés en clair dans les logs de debug. Comment qualifier au MIEUX la faiblesse exploitée par un attaquant ?",
       "choix": [
         "Une faiblesse mathématique de l'algorithme AES",
-        "Une attaque par force brute sur l'espace de clés de 256 bits",
-        "Une attaque d'implémentation : c'est la mise en œuvre logicielle qui est défaillante, pas l'algorithme",
+        "Une attaque par force brute exhaustive parcourant l'espace de clés de 256 bits de l'algorithme AES",
+        "Une attaque d'implémentation : la mise en œuvre logicielle est défaillante, pas l'algorithme",
         "Une analyse de fréquence des lettres du ciphertext"
       ],
       "reponse": 2,
@@ -3342,8 +3342,8 @@ window.CISSP_DATA.domains[3] = {
       "choix": [
         "Timing attack — parade : exécution en temps constant",
         "Force brute — parade : allonger la clé",
-        "Chosen ciphertext — parade : passer à un mode authentifié comme GCM",
-        "Fault injection — parade : capteurs environnementaux (tension, température) et vérification interne des résultats avant émission"
+        "Chosen ciphertext — parade : basculer vers un mode de chiffrement authentifié tel qu'AES-GCM ou ChaCha20",
+        "Fault injection — parade : capteurs de tension/température et vérification des résultats avant émission"
       ],
       "reponse": 3,
       "explication": "Provoquer volontairement un dysfonctionnement par surtension, sous-alimentation ou température extrême pour faire produire des calculs erronés exploitables est une fault injection. Les parades sont matérielles et logiques : capteurs environnementaux qui mettent la carte en sécurité et double calcul ou vérification interne des résultats avant de les émettre. Le timing exploite la mesure passive des durées, ce qui est différent d'une perturbation active.",
@@ -3358,8 +3358,8 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Après avoir compromis un poste Windows, un attaquant extrait de la mémoire le hash NTLM d'un compte d'administration et le rejoue tel quel pour s'authentifier sur d'autres serveurs, sans jamais connaître le mot de passe. Quelle mesure limite le PLUS efficacement ce mouvement latéral ?",
       "choix": [
-        "Imposer des mots de passe nettement plus longs et complexes",
-        "Cloisonner les comptes privilégiés (tiering, comptes d'administration dédiés par niveau), désactiver NTLM au profit de Kerberos et protéger les identifiants en mémoire",
+        "Imposer à tous les utilisateurs des mots de passe nettement plus longs et complexes, renouvelés très fréquemment et sans réutilisation",
+        "Cloisonner les comptes privilégiés (tiering), désactiver NTLM au profit de Kerberos et protéger les identifiants en mémoire",
         "Chiffrer les disques de tous les serveurs",
         "Augmenter la fréquence des analyses antivirus planifiées"
       ],
@@ -3376,8 +3376,8 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Le comité de direction demande quelle mesure garantit le MIEUX la capacité de récupération face à un ransomware moderne qui chiffre les données de production et cherche aussi à détruire les sauvegardes accessibles en ligne. Que recommandez-vous EN PRIORITÉ ?",
       "choix": [
-        "Des sauvegardes régulières dont au moins une copie hors ligne ou immuable, validées par des tests de restauration",
-        "Le paiement rapide de la rançon pour minimiser la durée d'interruption",
+        "Des sauvegardes régulières, dont une copie hors ligne ou immuable, testées en restauration",
+        "Le paiement rapide de la rançon exigée afin de minimiser au maximum la durée d'interruption d'activité",
         "Le déploiement d'un EDR sur l'ensemble des postes et serveurs",
         "Le chiffrement de toutes les données au repos"
       ],
@@ -3395,8 +3395,8 @@ window.CISSP_DATA.domains[3] = {
       "q": "Lors d'une visite de site, vous constatez que le local technique d'étage (IDF) abritant les commutateurs et le brassage réseau sert de débarras au service d'entretien, avec une porte non verrouillée donnant sur un couloir accessible au public. Quel est le risque PRINCIPAL ?",
       "choix": [
         "La surchauffe des équipements due à l'encombrement du local",
-        "La non-conformité du local aux règles d'ergonomie du travail",
-        "Un accès physique non autorisé au réseau : pose d'un dispositif d'écoute ou raccordement direct sur les équipements de brassage",
+        "La non-conformité du local d'archivage aux règles d'ergonomie et de santé au travail applicables",
+        "Un accès physique non autorisé au réseau : pose d'un mouchard ou raccordement sur le brassage",
         "L'usure prématurée des câbles entreposés au sol"
       ],
       "reponse": 2,
@@ -3414,8 +3414,8 @@ window.CISSP_DATA.domains[3] = {
       "choix": [
         "Chiffrer le contenu des bandes et les laisser au même endroit",
         "Étiqueter les bandes et effectuer un inventaire annuel",
-        "Confier la garde des bandes à l'administrateur systèmes dans son bureau",
-        "Un local dédié protégé comme une salle serveurs, avec un responsable des médias et un processus formel de check-in/check-out tracé"
+        "Confier la garde exclusive des bandes de sauvegarde à l'administrateur systèmes, dans son propre bureau",
+        "Un local dédié type salle serveurs, avec responsable des médias et check-in/check-out formel tracé"
       ],
       "reponse": 3,
       "explication": "Une media storage facility doit être protégée avec le même sérieux qu'une salle serveurs : accès restreint, idéalement un bibliothécaire des médias, et un processus d'entrée-sortie qui trace chaque mouvement — les sauvegardes contiennent l'intégralité des données de l'organisation. Le chiffrement est un complément précieux mais ne contrôle ni le vol ni la traçabilité, et la garde informelle par une personne ne constitue pas un contrôle.",
@@ -3431,9 +3431,9 @@ window.CISSP_DATA.domains[3] = {
       "q": "À la suite d'un incident, des disques saisis pour analyse forensique sont entreposés sur une étagère ouverte du bureau de l'équipe sécurité, accessibles à toute l'équipe sans registre. Le juriste de l'organisation s'en alarme. Quelle est la conséquence la PLUS grave de cette pratique ?",
       "choix": [
         "Le risque de décharge électrostatique endommageant les disques",
-        "La rupture de la chain of custody : sans stockage dédié, verrouillé et journalisé, la recevabilité des preuves en justice est compromise",
+        "La rupture de la chain of custody : sans stockage dédié et journalisé, la preuve est irrecevable",
         "L'encombrement du bureau de l'équipe sécurité",
-        "Le non-respect du schéma interne de classification de l'information"
+        "Le non-respect du schéma interne de classification de l'information et de ses obligations de marquage réglementaire"
       ],
       "reponse": 1,
       "explication": "Un evidence storage existe précisément pour préserver la chaîne de custody : stockage dédié et verrouillé, accès journalisé, intégrité démontrable (empreintes). Si n'importe qui a pu toucher les disques sans trace, la partie adverse plaidera l'altération possible et les preuves risquent d'être écartées — un dommage juridique irréversible, bien plus grave que les risques matériels ou documentaires.",
@@ -3448,10 +3448,10 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Un sous-traitant du secteur de la défense doit traiter dans ses locaux de l'information classifiée compartimentée. Le responsable des installations propose d'utiliser la salle serveurs existante, « déjà très sécurisée ». Pourquoi cette proposition est-elle INSUFFISANTE ?",
       "choix": [
-        "Le traitement d'information compartimentée exige une zone accréditée de type SCIF : enceinte dédiée avec protection contre les émanations (TEMPEST), interdiction des appareils personnels et contrôle d'accès strict — exigences qu'une salle serveurs ordinaire ne satisfait pas",
+        "L'information compartimentée exige une installation accréditée SCIF, qu'une salle serveurs ordinaire ne satisfait pas",
         "Une salle serveurs est maintenue trop froide pour y installer des postes de travail",
         "Il suffirait d'ajouter un lecteur de badge supplémentaire à la salle serveurs",
-        "L'information compartimentée ne peut légalement être traitée que dans des bâtiments gouvernementaux"
+        "L'information compartimentée ne peut légalement être traitée que dans des bâtiments appartenant au gouvernement fédéral"
       ],
       "reponse": 0,
       "explication": "Une SCIF (Sensitive Compartmented Information Facility) est une zone de travail formellement accréditée pour l'information compartimentée : construction et blindage conformes aux exigences d'émanations (TEMPEST), interdiction des téléphones et appareils personnels, contrôle et journalisation stricts des accès, procédures de visite. Une salle serveurs, même bien protégée, n'est ni conçue ni accréditée pour cela — et un simple badge ne comble pas cet écart.",
@@ -3467,8 +3467,8 @@ window.CISSP_DATA.domains[3] = {
       "q": "Au lancement d'un projet de nouveau système RH, l'équipe technique veut passer immédiatement au choix de la plateforme. En tant que responsable sécurité du projet, que devez-vous obtenir EN PREMIER ?",
       "choix": [
         "Le budget définitif et le calendrier détaillé du projet",
-        "La liste des correctifs de sécurité à appliquer à la plateforme",
-        "L'expression des besoins des parties prenantes — métier, juridique, RH, sécurité, utilisateurs — dont découleront toutes les exigences, y compris de sécurité",
+        "La liste détaillée des correctifs de sécurité à appliquer immédiatement à la plateforme technique retenue",
+        "L'expression des besoins des parties prenantes, dont découleront toutes les exigences du projet",
         "Le certificat Common Criteria de la plateforme pressentie"
       ],
       "reponse": 2,
@@ -3484,10 +3484,10 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Pendant la phase d'analyse des exigences d'un futur portail client, comment les besoins de sécurité doivent-ils être exprimés ?",
       "choix": [
-        "Sous forme de choix de produits, par exemple « installer le WAF de l'éditeur X »",
+        "Directement sous forme de choix de produits du marché, par exemple « installer le WAF de l'éditeur X »",
         "Ils seront précisés après la mise en production, à l'occasion du premier audit",
         "Uniquement par renvoi aux textes réglementaires applicables",
-        "Comme des exigences formelles, testables et traçables — authentification forte, chiffrement des données, journalisation — au même rang que les exigences fonctionnelles"
+        "Comme des exigences formelles, testables et traçables, au même rang que les exigences fonctionnelles"
       ],
       "reponse": 3,
       "explication": "L'analyse des exigences transforme les besoins en exigences formelles, vérifiables et traçables jusqu'aux tests ; les exigences de sécurité (authentification, chiffrement, journalisation, disponibilité) s'y expriment au même rang que les exigences fonctionnelles. Nommer un produit confond exigence et solution, attendre la production contredit le secure design, et la réglementation n'est qu'un socle minimal.",
@@ -3520,10 +3520,10 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Pendant la phase de développement d'un nouveau système, quelle pratique intègre le MIEUX la sécurité au fil de l'eau plutôt qu'en fin de projet ?",
       "choix": [
-        "Des pratiques de codage sécurisé, avec revues de code et analyses statiques intégrées au pipeline de build (démarche shift left)",
+        "Du codage sécurisé, avec revues de code et analyses statiques intégrées au pipeline (shift left)",
         "Un test d'intrusion unique, réalisé après la mise en production",
         "La rédaction anticipée du dossier d'exploitation",
-        "Un audit de certification externe préalable à l'écriture du code"
+        "Un audit de certification externe complet, réalisé préalablement à toute écriture de code applicatif"
       ],
       "reponse": 0,
       "explication": "Pendant le développement, la sécurité s'exerce en continu : standards de codage sécurisé, revues de code, analyses statiques et tests intégrés au pipeline — c'est la démarche shift left, qui détecte les défauts quand ils coûtent le moins cher à corriger. Un pentest post-production arrive au moment où la correction est la plus coûteuse, et l'on ne certifie pas un produit qui n'existe pas.",
@@ -3538,9 +3538,9 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Lors de la phase d'intégration d'un nouveau module avec l'ERP et l'annuaire existants, quel risque de sécurité est SPÉCIFIQUE à cette phase et doit être examiné en priorité ?",
       "choix": [
-        "L'usure matérielle des serveurs hébergeant le module",
+        "L'usure et le vieillissement matériel progressif des serveurs physiques hébergeant le module applicatif",
         "Le dépassement du budget de licences logicielles",
-        "Les interfaces entre composants : comptes de service sur-privilégiés, flux non chiffrés et hypothèses de confiance implicites entre systèmes",
+        "Les interfaces entre composants : comptes sur-privilégiés, flux non chiffrés, confiance implicite",
         "L'obsolescence du besoin métier initial"
       ],
       "reponse": 2,
@@ -3558,8 +3558,8 @@ window.CISSP_DATA.domains[3] = {
       "choix": [
         "La validation a réussi mais la vérification a échoué",
         "La vérification et la validation ont toutes deux échoué",
-        "Il s'agit d'un simple défaut d'intégration entre composants",
-        "La vérification (conformité aux spécifications) a réussi, mais la validation (adéquation au besoin réel) a échoué"
+        "Il s'agit en réalité d'un simple défaut d'intégration technique entre deux composants du système",
+        "La vérification (conformité aux specs) a réussi, mais la validation (besoin réel) a échoué"
       ],
       "reponse": 3,
       "explication": "La verification répond à la question « le système est-il construit conformément à ses spécifications ? » — ici oui, tous les tests passent. La validation répond à « le système répond-il au besoin réel ? » — ici non. On retient : verification = build the system right ; validation = build the right system. Le vrai défaut est en amont : des spécifications qui ne reflétaient pas le besoin.",
@@ -3574,8 +3574,8 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Avant la mise en production d'un nouveau système d'information dans une agence gouvernementale, quelle condition formelle doit être remplie lors de la phase de transition ?",
       "choix": [
-        "La signature du contrat de maintenance matérielle avec le fournisseur",
-        "L'obtention de l'authorization to operate (ATO), par laquelle l'Authorizing Official accepte formellement les risques résiduels",
+        "La signature du contrat pluriannuel de maintenance matérielle avec le fournisseur retenu au marché",
+        "L'obtention de l'ATO : l'Authorizing Official accepte formellement les risques résiduels",
         "Le dépôt du code source auprès d'un tiers séquestre",
         "La formation de la totalité des utilisateurs finaux"
       ],
@@ -3592,9 +3592,9 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "L'éditeur d'un middleware critique pour la production annonce sa fin de support (end-of-support) dans dix-huit mois. En tant que responsable du cycle de vie des systèmes, que faites-vous EN PREMIER ?",
       "choix": [
-        "Inscrire dès maintenant le jalon end-of-support dans la feuille de route et l'analyse de risque, et planifier la migration ou le remplacement avant l'échéance",
+        "Inscrire dès maintenant le end-of-support dans la roadmap et planifier la migration avant l'échéance",
         "Attendre la date de fin de support pour évaluer les alternatives disponibles",
-        "Acheter un stock de licences supplémentaires tant qu'elles sont commercialisées",
+        "Acheter dès à présent un stock de licences supplémentaires tant qu'elles restent commercialisées par l'éditeur",
         "Isoler immédiatement le middleware du réseau de production"
       ],
       "reponse": 0,
@@ -3631,7 +3631,7 @@ window.CISSP_DATA.domains[3] = {
       "q": "During a design review, an engineer argues that a proposed authentication module is too complex to be properly analyzed and tested, and should be simplified. Which secure design principle supports this position?",
       "choix": [
         "Complete mediation",
-        "Psychological acceptability",
+        "Psychological acceptability of the mechanism",
         "Economy of mechanism (keep it simple)",
         "Open design"
       ],
@@ -3650,7 +3650,7 @@ window.CISSP_DATA.domains[3] = {
       "choix": [
         "Zero Trust",
         "Abstraction",
-        "Secure defaults",
+        "Secure defaults everywhere",
         "Least common mechanism"
       ],
       "reponse": 3,
@@ -3666,10 +3666,10 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "After stealing one employee's credentials, an attacker moved laterally across the flat corporate network and reached the finance servers. Which architectural approach would BEST have limited this attack?",
       "choix": [
-        "A Zero Trust architecture with microsegmentation and continuous verification of every request",
+        "A Zero Trust architecture with microsegmentation and continuous verification of requests",
         "A stronger perimeter firewall",
         "Full-disk encryption on all servers",
-        "Longer password requirements for all users"
+        "Significantly longer and more complex password requirements enforced for absolutely all users"
       ],
       "reponse": 0,
       "explication": "Le problème décrit est la confiance implicite accordée à tout ce qui se trouve DÉJÀ dans le réseau : une architecture Zero Trust avec microsegmentation authentifie et autorise chaque requête, quel que soit son point d'origine, ce qui bloque le mouvement latéral même après un vol d'identifiants. Renforcer le périmètre n'aide pas une fois l'attaquant entré, des mots de passe plus longs n'empêchent pas l'usage d'identifiants volés valides, et le chiffrement de disque ne protège pas des accès effectués via des sessions légitimes.",
@@ -3777,7 +3777,7 @@ window.CISSP_DATA.domains[3] = {
         "Biba",
         "Take-Grant",
         "Brewer-Nash (Chinese Wall)",
-        "Graham-Denning"
+        "The Graham-Denning protection model"
       ],
       "reponse": 2,
       "explication": "Brewer-Nash, ou « ethical wall », a été conçu pour les cabinets servant des clients concurrents : les droits d'accès évoluent DYNAMIQUEMENT en fonction de l'historique de consultation de l'utilisateur, afin de prévenir tout conflit d'intérêts. Graham-Denning définit huit règles de gestion des sujets, objets et droits, Biba protège l'intégrité par niveaux, et Take-Grant analyse la propagation des droits dans un graphe — aucun n'offre cette restriction dynamique.",
@@ -3883,7 +3883,7 @@ window.CISSP_DATA.domains[3] = {
       "q": "An operating system prevents one application from reading or writing the memory space allocated to another application. Which security capability does this describe?",
       "choix": [
         "Process isolation through memory protection",
-        "Data execution prevention only",
+        "Data execution prevention (DEP) enforcement only",
         "Full-disk encryption",
         "Address translation caching"
       ],
@@ -3918,9 +3918,9 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "What is the PRIMARY security concern introduced by multitenancy in a public cloud environment?",
       "choix": [
-        "Data leakage or attacks crossing the isolation boundary between tenants sharing the same infrastructure",
+        "Data leakage or attacks crossing the isolation boundary between tenants on shared infrastructure",
         "Increased hardware costs",
-        "Mandatory use of proprietary protocols",
+        "Mandatory use of the cloud provider's proprietary networking protocols and data formats everywhere",
         "Inability to encrypt data at rest"
       ],
       "reponse": 0,
@@ -3937,9 +3937,9 @@ window.CISSP_DATA.domains[3] = {
       "q": "Compared with virtual machines, what is the MAIN security trade-off of containerization?",
       "choix": [
         "Containers cannot be patched",
-        "Containers require dedicated hardware for each instance",
+        "Containers require expensive dedicated physical hardware provisioned for each running instance",
         "Containers cannot run in the cloud",
-        "Containers share the host kernel, providing weaker isolation than hypervisor-based virtual machines"
+        "Containers share the host kernel, giving weaker isolation than hypervisor-based VMs"
       ],
       "reponse": 3,
       "explication": "Les conteneurs partagent le noyau du système hôte : une vulnérabilité du noyau ou une mauvaise configuration peut permettre à un conteneur compromis d'affecter l'hôte ou les autres conteneurs, alors qu'une VM bénéficie de l'isolation plus forte de l'hyperviseur avec un OS complet par machine. En contrepartie, les conteneurs offrent densité et rapidité de déploiement. Ils se patchent en reconstruisant les images, ne requièrent aucun matériel dédié et sont omniprésents dans le cloud.",
@@ -3954,9 +3954,9 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Which control BEST reduces the impact of a potential VM escape vulnerability in a virtualized environment hosting workloads of very different sensitivity levels?",
       "choix": [
-        "Disabling hypervisor audit logging",
+        "Permanently disabling all hypervisor audit and security event logging across the entire host cluster",
         "Encrypting virtual disk files",
-        "Hosting the most sensitive workloads on physically separate infrastructure and keeping the hypervisor patched",
+        "Hosting the most sensitive workloads on physically separate hardware, hypervisor kept patched",
         "Increasing the memory allocated to each VM"
       ],
       "reponse": 2,
@@ -3974,8 +3974,8 @@ window.CISSP_DATA.domains[3] = {
       "choix": [
         "Hardening the underlying host operating system",
         "Patching the runtime environment",
-        "Maintaining physical access controls at the provider's data center",
-        "Securing the function code, granting each function least-privilege permissions, and protecting the data it processes"
+        "Maintaining strict physical access controls at the cloud provider's own data center facilities",
+        "Securing the function code, granting least-privilege permissions, and protecting its data"
       ],
       "reponse": 3,
       "explication": "En serverless (FaaS), le fournisseur gère serveurs, OS, runtime et mise à l'échelle : le client reste responsable de son code (vulnérabilités applicatives, dépendances), des permissions IAM accordées à chaque fonction — le sur-privilège est le risque numéro un — et des données traitées, y compris la gestion des secrets. Le durcissement des hôtes, le patching du runtime et la sécurité physique relèvent du fournisseur dans ce modèle.",
@@ -4009,9 +4009,9 @@ window.CISSP_DATA.domains[3] = {
       "q": "A hospital deploys network-connected infusion pumps that cannot be patched and only support weak embedded credentials. What is the BEST compensating control?",
       "choix": [
         "Accept the risk since the devices are medically certified",
-        "Isolate the pumps on a dedicated network segment with strict access control and monitoring",
+        "Isolate the pumps on a dedicated network segment with strict access control",
         "Install antivirus agents on each pump",
-        "Expose the pumps' management interface to the vendor over the internet"
+        "Expose the pumps' remote management interface directly to the vendor over the public internet"
       ],
       "reponse": 1,
       "explication": "Quand un équipement médical ou IoT ne peut être ni patché ni durci, le contrôle compensatoire de référence est l'isolation réseau : segment dédié, règles d'accès strictes limitées aux flux nécessaires, et surveillance des communications. Accepter le risque sans mesure d'atténuation est injustifiable pour des dispositifs touchant à la vie des patients, les pompes ne peuvent pas héberger d'agent antivirus, et exposer leur interface de gestion sur internet multiplierait la surface d'attaque.",
@@ -4082,8 +4082,8 @@ window.CISSP_DATA.domains[3] = {
       "choix": [
         "Certificates expire during long sessions",
         "Symmetric keys are more secure than asymmetric keys",
-        "Symmetric encryption is orders of magnitude faster for bulk data, while asymmetric solves the key exchange problem",
-        "Asymmetric algorithms cannot encrypt more than one block"
+        "Symmetric encryption is far faster for bulk data; asymmetric solves the key exchange problem",
+        "Asymmetric algorithms are physically unable to encrypt more than one single fixed block of data"
       ],
       "reponse": 2,
       "explication": "C'est le principe du chiffrement hybride : l'asymétrique, lent mais capable d'établir un secret entre inconnus, sert uniquement à échanger ou négocier une clé de session ; le symétrique, extrêmement rapide, chiffre ensuite le volume des données. Chaque famille apporte sa force et compense la faiblesse de l'autre. L'asymétrique peut chiffrer plusieurs blocs (mais inefficacement), la « supériorité » d'une clé ne se mesure pas ainsi, et l'expiration des certificats n'est pas la raison de cette conception.",
@@ -4099,7 +4099,7 @@ window.CISSP_DATA.domains[3] = {
       "q": "An attacker repeatedly submits modified ciphertexts to a server and uses the server's padding error messages to progressively recover the plaintext. Which type of attack is this?",
       "choix": [
         "A known plaintext attack",
-        "A brute-force attack against the key",
+        "An exhaustive brute-force attack against the full symmetric key",
         "A frequency analysis attack",
         "A chosen ciphertext attack exploiting a padding oracle"
       ],
@@ -4135,9 +4135,9 @@ window.CISSP_DATA.domains[3] = {
       "q": "Why did the industry move directly from DES to Triple DES, skipping Double DES?",
       "choix": [
         "Double DES was too slow for commercial hardware",
-        "The meet-in-the-middle attack reduces Double DES's effective strength to barely more than single DES",
+        "The meet-in-the-middle attack cuts Double DES's effective strength to near single-DES level",
         "Double DES required incompatible key lengths",
-        "Triple DES was already standardized before Double DES was invented"
+        "Triple DES had already been fully standardized long before Double DES was ever even invented"
       ],
       "reponse": 1,
       "explication": "L'attaque meet-in-the-middle mène deux calculs simultanés — chiffrer le clair connu avec toutes les clés possibles d'un côté, déchiffrer le chiffré de l'autre — et cherche la « rencontre » au milieu : elle ramène la sécurité effective du double DES à environ 2^57 opérations, à peine plus que le DES simple. Doubler le chiffrement n'a donc presque rien apporté, d'où le passage direct au triple DES. La lenteur, les longueurs de clés et la chronologie des normes ne sont pas les raisons de cet abandon.",
@@ -4188,7 +4188,7 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "A browser needs an immediate, per-certificate revocation status without downloading the CA's full list of revoked certificates. Which mechanism provides this?",
       "choix": [
-        "Certificate Revocation List (CRL)",
+        "Certificate Revocation List (CRL) distribution point",
         "Key escrow",
         "Online Certificate Status Protocol (OCSP)",
         "Certificate Signing Request (CSR)"
@@ -4296,10 +4296,10 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "An organization is retiring self-encrypting SSDs that stored highly confidential data. Overwriting is unreliable on SSDs due to wear leveling. Which sanitization method is MOST appropriate if the drives must be reused?",
       "choix": [
-        "Deleting all files and emptying the recycle bin",
+        "Deleting all visible files and then emptying the operating system's recycle bin entirely",
         "A single-pass overwrite of all visible sectors",
         "Degaussing the drives",
-        "Cryptographic erasure: securely destroying the encryption keys so the data becomes unrecoverable"
+        "Cryptographic erasure: destroying the encryption keys so the data becomes unrecoverable"
       ],
       "reponse": 3,
       "explication": "Sur un SSD auto-chiffrant, l'effacement cryptographique (crypto-erase) détruit de façon sûre les clés de chiffrement : les données, toujours physiquement présentes, deviennent définitivement indéchiffrables — méthode reconnue par NIST SP 800-88 et compatible avec la réutilisation du support. La réécriture est peu fiable sur SSD à cause du wear leveling et des blocs de réserve, la suppression de fichiers ne retire que les références, et le dégaussage, conçu pour les supports magnétiques, est inefficace sur la mémoire flash (et détruirait l'usage du disque sans garantie).",
@@ -4314,9 +4314,9 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "A CISO is starting a three-year Zero Trust migration. The network team wants to deploy ZTNA agents to every endpoint immediately, and the data center team wants to begin microsegmentation. What should the CISO do FIRST?",
       "choix": [
-        "Decommission the legacy VPN to force rapid adoption of the new model",
+        "Immediately decommission the entire legacy VPN to force rapid adoption of the new access model",
         "Microsegment the data center where the most sensitive data resides",
-        "Inventory critical assets and map transaction flows to define the protect surfaces before any technical rollout",
+        "Inventory critical assets and map flows to define the protect surfaces before any rollout",
         "Deploy ZTNA to secure remote access, the most exposed attack vector"
       ],
       "reponse": 2,
@@ -4332,9 +4332,9 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "A healthcare organization holds genomic data that must remain confidential for decades. With a limited budget, which post-quantum readiness step should the security executive take FIRST?",
       "choix": [
-        "Replace all TLS certificates and digital signatures with post-quantum algorithms immediately",
+        "Immediately replace all TLS certificates and digital signatures with post-quantum algorithms overnight",
         "Wait until every vendor natively supports the new standards before acting",
-        "Build a cryptographic inventory, establish crypto-agility, and prioritize migrating the key exchanges protecting long-lived confidential data",
+        "Build a cryptographic inventory, establish crypto-agility, and prioritize long-lived key exchanges",
         "Increase existing RSA key sizes to 8192 bits to buy time"
       ],
       "reponse": 2,
@@ -4350,10 +4350,10 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "An insurer must run regulated data processing in a public cloud under a contractual requirement that the provider can never access the data WHILE it is being processed. Which architecture BEST meets this requirement today?",
       "choix": [
-        "Rewriting the entire workload to use fully homomorphic encryption",
+        "Rewriting the entire application workload from scratch to rely on fully homomorphic encryption schemes",
         "Encrypting data at rest with customer-managed keys (BYOK)",
         "Enforcing TLS 1.3 on all traffic between processing services",
-        "Running the workload inside hardware trusted execution environments, releasing keys only after successful remote attestation"
+        "Running the workload in hardware TEEs; keys are released only after remote attestation succeeds"
       ],
       "reponse": 3,
       "explication": "L'exigence vise les données EN COURS D'UTILISATION : le chiffrement au repos (BYOK) et TLS protègent d'autres phases — au repos et en transit — mais pendant le calcul, les données sont en clair en mémoire, accessibles à l'hôte. Le confidential computing exécute le traitement dans une enclave matérielle chiffrée inaccessible au fournisseur, et les clés ne sont livrées qu'après attestation à distance prouvant que l'enclave exécute le code attendu. Le chiffrement homomorphe complet répond en théorie mais reste irréaliste en production généraliste à cause de son coût de calcul.",
@@ -4369,8 +4369,8 @@ window.CISSP_DATA.domains[3] = {
       "q": "In a plant that operates continuously, the security team wants an inline IPS on the control network, but process engineers reject any device that could interrupt controller traffic. Which architecture decision BEST balances these constraints?",
       "choix": [
         "Abandon network controls and focus solely on hardening the engineering workstations",
-        "Deploy passive out-of-band monitoring (TAP/SPAN) with OT-aware detection, supported by network segmentation and response procedures",
-        "Deploy the inline IPS anyway, because security requirements override operational objections",
+        "Deploy passive out-of-band monitoring (TAP/SPAN) with OT-aware detection, plus segmentation and response procedures",
+        "Deploy the inline IPS in blocking mode anyway, because security requirements override all operational objections",
         "Schedule a monthly production shutdown to run active vulnerability scans"
       ],
       "reponse": 1,
