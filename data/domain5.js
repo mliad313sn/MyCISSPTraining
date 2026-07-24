@@ -711,7 +711,7 @@ window.CISSP_DATA.domains[5] = {
         "Authentification multifacteur, car deux éléments sont exigés"
       ],
       "reponse": 1,
-      "explication": "Le MFA exige des facteurs de types différents. Un mot de passe et un PIN sont tous deux 'something you know' : c'est donc une authentification à facteur unique en deux étapes. Les réponses A, B et D confondent le nombre d'éléments demandés avec le nombre de types de facteurs, ce qui est le piège classique.",
+      "explication": "Le MFA exige des facteurs de types différents. Un mot de passe et un PIN sont tous deux 'something you know' : c'est donc une authentification à facteur unique en deux étapes. Les réponses A, C et D confondent le nombre d'éléments demandés avec le nombre de types de facteurs, ce qui est le piège classique.",
       "pourquoi": [
         "Hors cadre : AAL2 exige deux TYPES de facteurs différents, ce que mot de passe + PIN ne fournissent pas.",
         "Bonne réponse : mot de passe et PIN sont tous deux « something you know » — authentification à facteur unique en deux étapes.",
@@ -747,7 +747,7 @@ window.CISSP_DATA.domains[5] = {
         "Le taux d'imposteurs acceptés lorsque la sensibilité est maximale"
       ],
       "reponse": 2,
-      "explication": "Le CER est le point où le taux de fausses acceptations (FAR) égale le taux de faux rejets (FRR) : c'est la mesure de référence pour comparer la précision de systèmes biométriques, et un CER bas indique un système précis. La réponse B décrit le FRR, la C évoque le FAR, et la D concerne le processus d'enrôlement.",
+      "explication": "Le CER est le point où le taux de fausses acceptations (FAR) égale le taux de faux rejets (FRR) : c'est la mesure de référence pour comparer la précision de systèmes biométriques, et un CER bas indique un système précis. La réponse B décrit le FRR, la D évoque le FAR, et la A concerne le processus d'enrôlement.",
       "pourquoi": [
         "Hors sujet : le temps d'enrôlement est un critère opérationnel sans lien avec la précision.",
         "Confusion de définition : le taux de rejets d'utilisateurs légitimes est le FRR, pas le CER.",
@@ -801,7 +801,7 @@ window.CISSP_DATA.domains[5] = {
         "La smart card fonctionne uniquement avec la biométrie"
       ],
       "reponse": 1,
-      "explication": "La smart card embarque un circuit intégré capable de générer des données uniques à chaque transaction, ce qui empêche le rejeu. La memory card, à piste magnétique, restitue toujours les mêmes données, ce qui la rend facilement clonable — l'inverse de la sécurité affirmée en B. Les réponses C et D décrivent des exigences qui ne sont pas systématiques.",
+      "explication": "La smart card embarque un circuit intégré capable de générer des données uniques à chaque transaction, ce qui empêche le rejeu. La memory card, à piste magnétique, restitue toujours les mêmes données, ce qui la rend facilement clonable — l'inverse de la sécurité affirmée en A. Les réponses C et D décrivent des exigences qui ne sont pas systématiques.",
       "pourquoi": [
         "Inversion : des données statiques rendent la memory card facilement clonable — c'est une faiblesse, pas une force.",
         "Bonne réponse : la puce de la smart card génère des données uniques à chaque transaction, ce qui empêche clonage et rejeu.",
@@ -819,7 +819,7 @@ window.CISSP_DATA.domains[5] = {
         "Le point de compromission unique ; exiger le MFA sur l'identifiant SSO"
       ],
       "reponse": 3,
-      "explication": "Le SSO crée un single point of compromise : un identifiant SSO volé expose toutes les ressources liées. La meilleure parade est de protéger cette authentification unique par du MFA. La dépendance à l'annuaire (A) est un vrai enjeu de disponibilité mais pas le risque de sécurité principal ; le SSO réduit justement le nombre de mots de passe (C est contradictoire) ; et D n'adresse pas le risque principal.",
+      "explication": "Le SSO crée un single point of compromise : un identifiant SSO volé expose toutes les ressources liées. La meilleure parade est de protéger cette authentification unique par du MFA. La dépendance à l'annuaire (A) est un vrai enjeu de disponibilité mais pas le risque de sécurité principal ; le SSO réduit justement le nombre de mots de passe (C est contradictoire) ; et B n'adresse pas le risque principal.",
       "pourquoi": [
         "Techniquement vrai (la disponibilité de l'annuaire est un enjeu) mais ce n'est pas le risque PRINCIPAL : le danger majeur est la compromission, pas la panne.",
         "Hors sujet : le SSO n'empêche pas l'audit ; la journalisation existe indépendamment.",
@@ -1035,7 +1035,7 @@ window.CISSP_DATA.domains[5] = {
         "Les privilèges sont attribués via des rôles métier"
       ],
       "reponse": 1,
-      "explication": "Le MAC se reconnaît à ses labels de classification appliqués aux sujets comme aux objets, l'accès étant imposé par le système selon la politique de l'organisation (modèle lattice-based, need to know). La réponse A décrit le DAC, la C le RBAC et la D l'ABAC.",
+      "explication": "Le MAC se reconnaît à ses labels de classification appliqués aux sujets comme aux objets, l'accès étant imposé par le système selon la politique de l'organisation (modèle lattice-based, need to know). La réponse A décrit le DAC, la C l'ABAC et la D le RBAC.",
       "pourquoi": [
         "Confusion : le propriétaire qui décide, c'est la définition du DAC.",
         "Bonne réponse : labels sur sujets et objets, politique imposée par le système — la signature du MAC.",
@@ -1143,7 +1143,7 @@ window.CISSP_DATA.domains[5] = {
         "Il ne permet pas l'authentification auprès des ressources réseau"
       ],
       "reponse": 0,
-      "explication": "Le compte système local évite de créer un compte de service dédié, mais il accorde presque toujours des privilèges excessifs à l'application, en violation du least privilege — et limiter les privilèges des comptes de service réduit le succès des attaques par escalade. La difficulté d'attribution dans les journaux (C) est réelle mais secondaire par rapport au sur-privilège ; A et D sont factuellement fausses.",
+      "explication": "Le compte système local évite de créer un compte de service dédié, mais il accorde presque toujours des privilèges excessifs à l'application, en violation du least privilege — et limiter les privilèges des comptes de service réduit le succès des attaques par escalade. La difficulté d'attribution dans les journaux (C) est réelle mais secondaire par rapport au sur-privilège ; B et D sont factuellement fausses.",
       "pourquoi": [
         "Bonne réponse : le compte système accorde presque toujours plus de privilèges que nécessaire, en violation du least privilege.",
         "Faux : la gestion en coffre-fort n'est pas le problème — le risque du compte système est ailleurs.",
@@ -1179,7 +1179,7 @@ window.CISSP_DATA.domains[5] = {
         "Kerberoasting, puis pass-the-hash"
       ],
       "reponse": 1,
-      "explication": "Passer d'utilisateur standard à administrateur est une escalade verticale (privilèges nettement supérieurs) ; se propager ensuite vers d'autres machines avec des privilèges similaires est une escalade horizontale, appelée mouvement latéral à l'échelle du réseau. La réponse C inverse l'ordre, la C nomme des attaques spécifiques non décrites ici, et la D confond avec des dérives administratives.",
+      "explication": "Passer d'utilisateur standard à administrateur est une escalade verticale (privilèges nettement supérieurs) ; se propager ensuite vers d'autres machines avec des privilèges similaires est une escalade horizontale, appelée mouvement latéral à l'échelle du réseau. La réponse C inverse l'ordre, la D nomme des attaques spécifiques non décrites ici, et la A confond avec des dérives administratives.",
       "pourquoi": [
         "Confusion : privilege creep et session hijacking sont d'autres notions.",
         "Bonne réponse : utilisateur vers administrateur = escalade verticale ; propagation à privilèges équivalents = escalade horizontale (mouvement latéral).",
@@ -1323,7 +1323,7 @@ window.CISSP_DATA.domains[5] = {
         "La passkey synchronisée n'utilise pas la cryptographie asymétrique"
       ],
       "reponse": 2,
-      "explication": "Les deux types reposent sur la même cryptographie asymétrique WebAuthn et sont résistants au phishing. La différence porte sur l'exportabilité de la clé privée : une passkey synchronisée est répliquée entre appareils via un compte cloud (la sécurité dépend alors de ce compte et de son recouvrement), tandis qu'une passkey device-bound reste confinée dans le matériel (élément sécurisé, clé FIDO), ce qui offre une assurance supérieure — exigée par exemple pour atteindre AAL3. Les réponses A et C sont fausses, et D n'est pas une exigence.",
+      "explication": "Les deux types reposent sur la même cryptographie asymétrique WebAuthn et sont résistants au phishing. La différence porte sur l'exportabilité de la clé privée : une passkey synchronisée est répliquée entre appareils via un compte cloud (la sécurité dépend alors de ce compte et de son recouvrement), tandis qu'une passkey device-bound reste confinée dans le matériel (élément sécurisé, clé FIDO), ce qui offre une assurance supérieure — exigée par exemple pour atteindre AAL3. Les réponses A, B et D sont fausses.",
       "pourquoi": [
         "Faux : aucun mot de passe complémentaire n'est exigé pour une passkey device-bound.",
         "Faux : les deux types sont résistants au phishing par conception.",
@@ -1593,7 +1593,7 @@ window.CISSP_DATA.domains[5] = {
         "Le Service Provider vérifie ; l'Identity Provider consomme"
       ],
       "reponse": 2,
-      "explication": "Dans SAML, l'Identity Provider (IdP) détient les comptes et vérifie les identifiants, puis émet une assertion signée ; le Service Provider (SP) fait confiance à cette assertion, la valide (signature, audience, durée) et ouvre la session locale sans jamais voir le mot de passe. La réponse D inverse les rôles, la C décrit Kerberos, et la D mélange les rôles OAuth.",
+      "explication": "Dans SAML, l'Identity Provider (IdP) détient les comptes et vérifie les identifiants, puis émet une assertion signée ; le Service Provider (SP) fait confiance à cette assertion, la valide (signature, audience, durée) et ouvre la session locale sans jamais voir le mot de passe. La réponse D inverse les rôles, la A décrit Kerberos, et la B mélange les rôles OAuth.",
       "pourquoi": [
         "Hors protocole : cette description correspond à Kerberos.",
         "Hors protocole : ce sont des rôles OAuth mélangés.",
@@ -1827,7 +1827,7 @@ window.CISSP_DATA.domains[5] = {
         "Allonger la durée de vie du cookie pour éviter les reconnexions"
       ],
       "reponse": 0,
-      "explication": "HttpOnly rend le cookie inaccessible aux scripts (contre le vol par XSS), Secure impose HTTPS (contre l'interception), la régénération de l'ID à la connexion contre la fixation de session, et la liaison au contexte (empreinte de l'appareil, adresse, ré-évaluation continue) rend le rejeu depuis un autre poste détectable. Les réponses A et D aggravent le risque, et placer l'ID en URL l'expose dans les journaux, l'historique et les referrers — l'exact contraire d'une bonne pratique.",
+      "explication": "HttpOnly rend le cookie inaccessible aux scripts (contre le vol par XSS), Secure impose HTTPS (contre l'interception), la régénération de l'ID à la connexion contre la fixation de session, et la liaison au contexte (empreinte de l'appareil, adresse, ré-évaluation continue) rend le rejeu depuis un autre poste détectable. Les réponses B et D aggravent le risque, et placer l'ID en URL (C) l'expose dans les journaux, l'historique et les referrers — l'exact contraire d'une bonne pratique.",
       "pourquoi": [
         "Bonne réponse : Secure et HttpOnly, régénération de l'identifiant à la connexion et liaison au contexte client limitent le vol et le rejeu.",
         "Facilite la fixation de session : l'identifiant doit changer après l'authentification.",
@@ -2657,7 +2657,7 @@ window.CISSP_DATA.domains[5] = {
         "A compromised SSO credential exposes every connected application; require strong MFA on the SSO identity"
       ],
       "reponse": 3,
-      "explication": "Le SSO concentre le risque : un seul identifiant compromis ouvre TOUTES les applications reliées (single point of compromise). La parade prioritaire est de durcir cette authentification unique — MFA fort, idéalement résistant au phishing, surveillance des connexions et gestion de session rigoureuse. La réponse A est contradictoire (le SSO réduit le nombre de mots de passe), et les réponses C et D n'adressent pas le risque principal.",
+      "explication": "Le SSO concentre le risque : un seul identifiant compromis ouvre TOUTES les applications reliées (single point of compromise). La parade prioritaire est de durcir cette authentification unique — MFA fort, idéalement résistant au phishing, surveillance des connexions et gestion de session rigoureuse. La réponse A est contradictoire (le SSO réduit le nombre de mots de passe), et les réponses B et C n'adressent pas le risque principal.",
       "pourquoi": [
         "Contradiction : le SSO réduit le nombre de mots de passe à mémoriser.",
         "Faux : le SSO ne supprime pas la journalisation applicative.",
