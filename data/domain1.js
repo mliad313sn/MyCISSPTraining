@@ -1226,9 +1226,9 @@ window.CISSP_DATA.domains[1] = {
       "q": "Lors d'une réunion de crise, la direction demande qui porte la responsabilité ULTIME de la sécurité de l'information dans l'organisation. Quelle est la MEILLEURE réponse ?",
       "choix": [
         "La direction générale (senior management)",
-        "Le propriétaire des données",
-        "Le RSSI (CISO)",
-        "L'équipe sécurité"
+        "Le propriétaire des données (data owner) concerné",
+        "Le RSSI (CISO), qui pilote le programme de sécurité",
+        "L'équipe sécurité opérationnelle et technique"
       ],
       "reponse": 0,
       "explication": "La responsabilité ultime de la sécurité incombe toujours à la direction générale : c'est elle qui approuve les politiques, alloue les ressources et assume les conséquences. Le CISO a une responsabilité fonctionnelle, le data owner classifie ses données, et l'équipe sécurité exécute, mais aucun d'eux ne porte la responsabilité finale.",
@@ -1299,8 +1299,8 @@ window.CISSP_DATA.domains[1] = {
       "choix": [
         "Rejeter le safeguard car son coût est trop élevé",
         "Transférer le risque à un assureur avant toute décision",
-        "Implémenter le safeguard car sa valeur annuelle nette est de 40 000 €",
-        "Accepter le risque sans contrôle"
+        "Implémenter le safeguard, financièrement rentable",
+        "Accepter le risque en l'état, sans aucun contrôle"
       ],
       "reponse": 2,
       "explication": "Valeur du safeguard = (ALE avant − ALE après) − coût annuel = (120 000 − 50 000) − 30 000 = 40 000 €. La valeur nette étant positive, l'investissement est financièrement justifié. Rejeter le safeguard ou accepter le risque ignorerait cette analyse coût/bénéfice favorable, et rien n'indique qu'un transfert serait plus avantageux.",
@@ -1568,9 +1568,9 @@ window.CISSP_DATA.domains[1] = {
       "q": "Dans le cadre d'une enquête menée par la SEC contre votre entreprise, un cadre propose de « faire le ménage » dans certains e-mails. Quelle est la MEILLEURE réponse du RSSI ?",
       "choix": [
         "Accepter, car les e-mails internes appartiennent à l'entreprise",
-        "Refuser : dans une enquête réglementaire, l'organisation doit coopérer et ne détruire aucune preuve",
+        "Refuser : coopérer à l'enquête et ne détruire aucune preuve",
         "Accepter si le service juridique donne un accord verbal",
-        "Reporter la décision à la fin de l'enquête"
+        "Reporter toute décision jusqu'à la clôture de l'enquête"
       ],
       "reponse": 1,
       "explication": "Dans une enquête réglementaire, l'organisation a l'obligation légale de coopérer, ce qui interdit de dissimuler ou de détruire des preuves : la destruction d'e-mails constituerait une obstruction passible de sanctions graves. Aucun accord interne, verbal ou différé, ne peut légitimer la destruction de preuves.",
@@ -1586,8 +1586,8 @@ window.CISSP_DATA.domains[1] = {
       "q": "Quel canon du Code of Ethics ISC² doit primer lorsqu'il entre en conflit avec les intérêts de votre employeur ?",
       "choix": [
         "Provide diligent and competent service to principals",
-        "Protect society, the common good, necessary public trust and confidence, and the infrastructure",
-        "Advance and protect the profession",
+        "Protect society, the common good, and the infrastructure",
+        "Advance and protect the profession at all times",
         "Act honorably, honestly, justly, responsibly, and legally"
       ],
       "reponse": 1,
@@ -1603,10 +1603,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Qui peut déposer une plainte pour violation du canon III (« Provide diligent and competent service to principals ») du code d'éthique ISC² ?",
       "choix": [
-        "Uniquement un employeur ou une personne liée par une relation contractuelle",
-        "Uniquement un autre titulaire du CISSP",
-        "Uniquement le comité d'éthique d'ISC²",
-        "Tout membre du public"
+        "Uniquement un employeur ou un cocontractant",
+        "Uniquement un autre professionnel titulaire du CISSP",
+        "Uniquement le comité d'éthique d'ISC² saisi de la plainte",
+        "Tout membre du public, sans aucune restriction"
       ],
       "reponse": 0,
       "explication": "Pour le canon III, seuls un employeur ou une personne ayant une relation contractuelle avec le professionnel peuvent porter plainte, car ce canon protège les mandants. Tout membre du public peut porter plainte au titre des canons I et II, et toute personne soumise à un code d'éthique professionnel peut le faire pour le canon IV.",
@@ -1747,10 +1747,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Quel est l'objectif PRINCIPAL d'une Business Impact Analysis (BIA) ?",
       "choix": [
-        "Identifier les processus critiques et évaluer l'impact de leur interruption",
-        "Chiffrer le budget annuel de la sécurité",
-        "Attribuer les rôles de l'équipe de gestion de crise",
-        "Tester le plan de reprise après sinistre"
+        "Identifier les processus critiques et l'impact de leur interruption",
+        "Chiffrer précisément le budget annuel de la sécurité",
+        "Attribuer les rôles et responsabilités de l'équipe de gestion de crise",
+        "Tester intégralement le plan de reprise après sinistre"
       ],
       "reponse": 0,
       "explication": "La BIA identifie les systèmes et processus dont l'entreprise dépend, évalue l'impact d'une interruption et établit les priorités de récupération ainsi que les métriques RTO, RPO et MTD. Les tests du DRP et l'organisation de crise interviennent dans d'autres phases, et le budget sécurité n'est pas l'objet de la BIA.",
@@ -1783,9 +1783,9 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Lors de l'élaboration du BCP, quelle étape doit être réalisée EN PREMIER ?",
       "choix": [
-        "La formation du personnel au plan",
-        "La Business Impact Analysis",
-        "Le développement de la stratégie de continuité",
+        "La formation et la sensibilisation du personnel au plan",
+        "La conduite de la Business Impact Analysis (BIA)",
+        "Le développement détaillé de la stratégie de continuité d'activité",
         "Le cadrage du projet et l'obtention du soutien de la direction"
       ],
       "reponse": 3,
@@ -1821,8 +1821,8 @@ window.CISSP_DATA.domains[1] = {
       "choix": [
         "Le nombre de campagnes de phishing simulé envoyées",
         "Le nombre d'employés ayant assisté à la formation annuelle",
-        "Le budget alloué au programme de formation",
-        "L'évolution du taux de clic et du taux de signalement lors des campagnes simulées"
+        "Le budget total alloué au programme de formation annuel",
+        "L'évolution du taux de clic et du taux de signalement"
       ],
       "reponse": 3,
       "explication": "L'efficacité se mesure par les résultats comportementaux : la baisse du taux de clic et la hausse du taux de signalement des e-mails de phishing simulés montrent un vrai changement. Le nombre de campagnes, le budget et la simple assiduité sont des indicateurs d'activité ou de moyens, pas des preuves d'efficacité.",
@@ -1855,10 +1855,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Quelle est la distinction correcte entre risk appetite et risk tolerance ?",
       "choix": [
-        "L'appetite s'applique aux projets, la tolerance à l'organisation entière",
-        "L'appetite est le risque total que l'organisation accepte de prendre, la tolerance est la variation acceptable autour d'un objectif donné",
-        "L'appetite est le maximum absorbable, la tolerance est le total accepté",
-        "Les deux termes sont strictement synonymes"
+        "L'appetite s'applique uniquement aux projets individuels, tandis que la tolerance vaut pour l'organisation entière",
+        "L'appetite est le risque global accepté ; la tolerance, la variation admise autour d'un objectif",
+        "L'appetite est le maximum absorbable en une fois, la tolerance le total annuel accepté",
+        "Les deux termes sont strictement synonymes et parfaitement interchangeables"
       ],
       "reponse": 1,
       "explication": "Le risk appetite est la quantité totale de risque qu'une organisation est prête à accepter pour atteindre sa mission ; la risk tolerance est la variation acceptable des résultats par rapport à un objectif spécifique. Le maximum absorbable correspond à la risk capacity. Les deux notions ne sont donc ni synonymes ni inversées.",
@@ -1945,10 +1945,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Quelle formulation résume le MIEUX la relation entre Due Care et Due Diligence ?",
       "choix": [
-        "Les deux notions ne concernent que les fournisseurs",
-        "La Due Care planifie, la Due Diligence exécute",
-        "La Due Diligence est facultative si la Due Care est exercée",
-        "La Due Care est la protection responsable des actifs ; la Due Diligence est la capacité à prouver cette Due Care"
+        "Les deux notions ne concernent que la relation avec les fournisseurs",
+        "La Due Care planifie la protection, la Due Diligence l'exécute",
+        "La Due Diligence devient facultative dès lors que la Due Care est correctement exercée",
+        "La Due Care protège les actifs ; la Due Diligence prouve cette Due Care"
       ],
       "reponse": 3,
       "explication": "La Due Care est la pratique responsable : appliquer les contrôles, suivre les politiques, agir raisonnablement. La Due Diligence est le volet connaissance et planification : évaluer, documenter, structurer, ce qui permet aussi de prouver que la Due Care est exercée. La première proposition inverse les rôles, et les deux devoirs sont indissociables, pour l'organisation comme pour ses dirigeants.",
@@ -2017,9 +2017,9 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Votre organisation déploie un honeypot. Le conseil juridique vous met en garde : quelle pratique rendrait les poursuites contre un attaquant IRRECEVABLES ?",
       "choix": [
-        "Laisser le honeypot visible avec des vulnérabilités attrayantes (enticement)",
-        "Inviter activement des personnes sans intention malveillante à pénétrer le système (entrapment)",
-        "Isoler le honeypot du réseau de production",
+        "Laisser le honeypot visible avec des vulnérabilités volontairement attrayantes (enticement)",
+        "Inciter une personne sans intention malveillante à attaquer (entrapment)",
+        "Isoler soigneusement le honeypot du réseau de production interne",
         "Journaliser toutes les actions de l'attaquant sur le honeypot"
       ],
       "reponse": 1,
@@ -2089,10 +2089,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Selon la RFC 1087 (« Ethics and the Internet »), laquelle de ces activités est explicitement considérée comme non éthique ?",
       "choix": [
-        "Publier un article critiquant un protocole réseau",
-        "Gaspiller délibérément des ressources (personnes, capacité, ordinateurs) via Internet",
-        "Chiffrer ses communications personnelles",
-        "Utiliser un logiciel open source à des fins commerciales"
+        "Publier un article de recherche technique critiquant un protocole réseau",
+        "Gaspiller délibérément les ressources d'Internet (personnes, machines)",
+        "Chiffrer ses communications personnelles au quotidien",
+        "Utiliser un logiciel open source à des fins purement commerciales"
       ],
       "reponse": 1,
       "explication": "La RFC 1087 qualifie de non éthique tout acte qui cherche un accès non autorisé, perturbe l'usage prévu d'Internet, gaspille des ressources (personnes, capacité, ordinateurs), détruit l'intégrité d'informations ou compromet la vie privée des utilisateurs. La critique publique d'un protocole, l'usage commercial de l'open source (dans le respect des licences) et le chiffrement de ses communications sont des activités parfaitement légitimes.",
@@ -2125,9 +2125,9 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Qui est habilité à déposer une plainte pour violation du canon IV (« Advance and protect the profession ») du code d'éthique ISC² ?",
       "choix": [
-        "Tout membre du public, sans condition",
-        "Uniquement les clients liés par contrat",
-        "Uniquement l'employeur du professionnel",
+        "Tout membre du public, sans aucune condition préalable",
+        "Uniquement les clients liés par un contrat en vigueur",
+        "Uniquement l'employeur direct ou l'ancien employeur du professionnel",
         "Toute personne elle-même soumise à un code d'éthique professionnel"
       ],
       "reponse": 3,
@@ -2197,10 +2197,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Quelle est la PREMIÈRE étape d'une Business Impact Analysis ?",
       "choix": [
-        "Évaluer la probabilité de chaque risque",
-        "Identifier les priorités de l'organisation en déterminant la criticité des processus métier",
-        "Calculer l'ALE de chaque actif informatique",
-        "Sélectionner le site de repli"
+        "Évaluer la probabilité d'occurrence de chaque risque identifié",
+        "Identifier les priorités et la criticité des processus métier",
+        "Calculer l'espérance de perte annualisée (ALE) de chaque actif informatique",
+        "Sélectionner et contractualiser un site de repli alternatif"
       ],
       "reponse": 1,
       "explication": "La BIA se déroule en cinq temps : identification des priorités (criticité des processus et fonctions), identification des risques, évaluation de leur probabilité, évaluation de l'impact, puis priorisation des ressources de récupération. On ne peut pas évaluer des probabilités ni prioriser des ressources avant de savoir quels processus comptent le plus. Le choix du site de repli relève du DRP, en aval.",
@@ -2215,10 +2215,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Après un sinistre majeur, plusieurs systèmes doivent être restaurés. Selon la logique de priorisation issue de la BIA, lesquels devraient l'être EN PREMIER ?",
       "choix": [
-        "Les services fondamentaux dont tout le reste dépend, comme le réseau et l'annuaire",
-        "Les postes de travail des dirigeants",
-        "Les applications métier les plus visibles des clients",
-        "Les systèmes les moins coûteux à restaurer"
+        "Les services fondamentaux dont tout le reste dépend (réseau, annuaire)",
+        "Les postes de travail personnels de l'équipe dirigeante",
+        "Les applications métier les plus visibles des clients externes de l'entreprise",
+        "Les systèmes les moins coûteux et rapides à restaurer"
       ],
       "reponse": 0,
       "explication": "La restauration commence par les services d'infrastructure fondamentaux (réseau, DNS, annuaire/authentification) car aucune application métier ne peut fonctionner sans eux. Restaurer d'abord les applications visibles échouerait faute de fondations, et ni le coût de restauration ni le statut hiérarchique des utilisateurs ne sont des critères de priorisation valables.",
@@ -2233,10 +2233,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Quel est l'objectif du Continuity of Operations Plan (COOP), livrable de la phase « provisions and processes » du BCP ?",
       "choix": [
-        "Décrire comment maintenir les fonctions critiques depuis la survenue de la perturbation jusqu'à un mois d'opérations soutenues",
-        "Définir la politique de sécurité de l'organisation",
-        "Remplacer intégralement le DRP",
-        "Décrire la restauration technique détaillée des sauvegardes"
+        "Maintenir les fonctions critiques jusqu'à un mois après la perturbation",
+        "Définir la politique globale de sécurité de l'organisation",
+        "Remplacer intégralement le plan de reprise après sinistre (DRP)",
+        "Décrire la restauration technique détaillée des systèmes et des sauvegardes"
       ],
       "reponse": 0,
       "explication": "Le COOP décrit comment l'organisation assurera ses fonctions critiques dès la survenue d'une perturbation et jusqu'à un mois d'opérations soutenues. La restauration technique des sauvegardes relève du DRP, qui complète le COOP sans être remplacé par lui, et la politique de sécurité est un document de gouvernance distinct.",
@@ -2251,10 +2251,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Le plan de continuité d'activité est finalisé. Qui devrait l'endosser formellement pour lui donner tout son poids dans l'organisation ?",
       "choix": [
-        "Le RSSI",
-        "Le comité d'audit interne",
+        "Le RSSI, responsable de la sécurité de l'information",
+        "Le comité d'audit interne de l'organisation",
         "Le dirigeant le plus haut placé de l'organisation",
-        "Le responsable de la continuité d'activité"
+        "Le responsable opérationnel de la continuité d'activité"
       ],
       "reponse": 2,
       "explication": "Le BCP doit être approuvé et endossé par le plus haut dirigeant de l'organisation (CEO ou équivalent) : c'est ce qui démontre l'engagement de la direction, garantit les ressources et donne au plan son autorité en temps de crise. Le RSSI et le responsable de la continuité construisent et maintiennent le plan, et le comité d'audit le contrôle, mais aucun ne peut se substituer à l'endossement de la direction générale.",
@@ -2287,10 +2287,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Quelle affirmation distingue le MIEUX le BCP du DRP ?",
       "choix": [
-        "Le BCP s'active avant l'incident, le DRP uniquement après l'incident",
-        "Le DRP englobe le BCP",
-        "Le BCP est technique, le DRP est stratégique",
-        "Le BCP est stratégique et centré sur les processus métier ; le DRP est tactique et technique (sites de repli, sauvegardes, restauration)"
+        "Le BCP s'active uniquement avant l'incident, tandis que le DRP s'active seulement après l'incident",
+        "Le DRP englobe et contient entièrement le BCP dans son périmètre",
+        "Le BCP est purement technique, le DRP purement stratégique",
+        "Le BCP est stratégique et centré sur les processus métier ; le DRP est tactique et technique"
       ],
       "reponse": 3,
       "explication": "Le Business Continuity Plan est stratégique : il vise à maintenir les processus métier critiques pendant et après une crise. Le Disaster Recovery Plan est son volet tactique et technique : sites de repli, sauvegardes, procédures de restauration des systèmes. C'est le BCP qui englobe conceptuellement le DRP, et non l'inverse ; la première proposition inverse les rôles.",
@@ -2341,10 +2341,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Lors d'une reduction analysis (décomposition d'un système), pourquoi identifie-t-on les trust boundaries ?",
       "choix": [
-        "Pour inventorier les licences des bibliothèques",
-        "Pour localiser les points où le niveau de confiance ou de privilège change, là où les contrôles doivent être concentrés",
-        "Pour calculer l'ALE de chaque module applicatif",
-        "Pour mesurer la latence réseau entre les composants"
+        "Pour inventorier les licences des bibliothèques tierces",
+        "Pour localiser les points où le niveau de confiance ou de privilège change",
+        "Pour calculer l'ALE financière de chaque module applicatif",
+        "Pour mesurer la latence réseau et le débit entre les différents composants applicatifs"
       ],
       "reponse": 1,
       "explication": "La reduction analysis décompose le système en cinq éléments : trust boundaries, data flow paths, input points, opérations privilégiées et détails des contrôles. Les frontières de confiance marquent les endroits où le niveau de confiance ou de privilège change (ex. passage d'Internet au réseau interne) : ce sont précisément les points où valider les entrées et renforcer les contrôles. Les calculs financiers, la latence et les licences ne relèvent pas du threat modeling.",
@@ -2467,10 +2467,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Des attaquants compromettent le mécanisme de mise à jour d'un éditeur logiciel largement déployé afin de distribuer une porte dérobée à tous ses clients. Comment qualifier cette attaque ?",
       "choix": [
-        "Attaque par force brute",
-        "Attaque de la chaîne d'approvisionnement (supply chain attack)",
-        "Typosquatting",
-        "Attaque par watering hole"
+        "Attaque par force brute contre les identifiants d'accès distants",
+        "Attaque de la chaîne d'approvisionnement (supply chain)",
+        "Typosquatting de noms de domaine visuellement trompeurs",
+        "Attaque par point d'eau (watering hole) ciblant un site tiers"
       ],
       "reponse": 1,
       "explication": "Compromettre un maillon amont de confiance (ici l'éditeur et son canal de mise à jour) pour atteindre ses clients en aval est la définition même de l'attaque de supply chain, illustrée par l'affaire SolarWinds. Le watering hole compromet un site web que la cible visite, le typosquatting exploite des noms de domaine ressemblants, et la force brute vise des mots de passe. La parade passe par le SCRM : évaluation des fournisseurs, signature et vérification des mises à jour, SBOM.",
@@ -2539,10 +2539,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Quelle a été la conséquence PRINCIPALE de l'arrêt Schrems II de la Cour de justice de l'Union européenne (2020) ?",
       "choix": [
-        "L'interdiction définitive de tout transfert de données vers les États-Unis",
-        "L'invalidation du Privacy Shield et l'obligation d'évaluer les transferts fondés sur les SCC, avec des mesures supplémentaires si nécessaire",
-        "L'abrogation du GDPR",
-        "La création des Binding Corporate Rules"
+        "L'interdiction définitive et générale de tout transfert vers les États-Unis",
+        "L'invalidation du Privacy Shield et la réévaluation des transferts par SCC",
+        "L'abrogation pure et simple du règlement GDPR",
+        "La création des Binding Corporate Rules (BCR)"
       ],
       "reponse": 1,
       "explication": "Schrems II a invalidé le Privacy Shield, jugeant que la surveillance américaine ne garantissait pas une protection équivalente au droit européen. Les SCC restent valides, mais l'exportateur doit évaluer le droit du pays de destination (transfer impact assessment) et ajouter des mesures supplémentaires (chiffrement, pseudonymisation…) si nécessaire. Les transferts vers les États-Unis n'ont jamais été interdits en bloc, et les BCR existaient bien avant cet arrêt.",
@@ -2557,10 +2557,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "La Commission européenne adopte une adequacy decision en faveur d'un pays tiers. Qu'est-ce que cela implique pour les transferts de données personnelles vers ce pays ?",
       "choix": [
-        "Seules des données anonymisées peuvent être transférées",
-        "Les transferts restent interdits par défaut",
-        "Les transferts peuvent se faire librement, sans garantie supplémentaire, car le pays offre une protection substantiellement équivalente",
-        "Chaque transfert doit être approuvé individuellement par l'autorité de contrôle"
+        "Seules des données préalablement anonymisées peuvent être transférées",
+        "Les transferts restent totalement interdits par défaut, sauf dérogation",
+        "Les transferts peuvent se faire librement, le pays offrant une protection équivalente",
+        "Chaque transfert doit être approuvé individuellement et au préalable par l'autorité de contrôle"
       ],
       "reponse": 2,
       "explication": "Une décision d'adéquation atteste que le pays tiers assure un niveau de protection substantiellement équivalent à celui de l'UE : les transferts vers ce pays sont alors libres, comme s'il s'agissait de transferts intra-européens, sans SCC ni BCR. C'est le mécanisme le plus simple pour l'exportateur, mais il dépend entièrement de la Commission, qui peut réévaluer ou révoquer sa décision.",
@@ -2593,9 +2593,9 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Que sont les Standard Contractual Clauses (SCC) dans le contexte du GDPR ?",
       "choix": [
-        "Une décision reconnaissant le niveau de protection adéquat d'un pays tiers",
-        "Un certificat de conformité délivré par l'ENISA",
-        "Des clauses types approuvées par la Commission européenne, insérées dans les contrats pour encadrer les transferts de données hors UE",
+        "Une décision de la Commission reconnaissant le niveau de protection adéquat d'un pays tiers",
+        "Un certificat officiel de conformité au GDPR délivré par l'ENISA",
+        "Des clauses types approuvées par la Commission pour les transferts hors UE",
         "Des règles internes contraignantes propres à un groupe multinational"
       ],
       "reponse": 2,
@@ -2612,9 +2612,9 @@ window.CISSP_DATA.domains[1] = {
       "q": "Quel traité constitue le premier accord international visant à harmoniser la lutte contre la cybercriminalité et à faciliter la coopération entre États ?",
       "choix": [
         "La Convention de Budapest sur la cybercriminalité (2001)",
-        "Le traité de Lisbonne",
-        "L'accord EU-US Data Privacy Framework",
-        "L'arrangement de Wassenaar"
+        "Le traité de Lisbonne de l'Union européenne",
+        "L'accord transatlantique EU-US Data Privacy Framework",
+        "L'arrangement de Wassenaar sur le contrôle des exportations"
       ],
       "reponse": 0,
       "explication": "La Convention de Budapest, adoptée en 2001 sous l'égide du Conseil de l'Europe et ouverte aux États non européens, est le premier traité international sur la cybercriminalité : elle harmonise les incriminations (accès illégal, atteinte à l'intégrité des données, fraude informatique…) et organise l'entraide judiciaire. Wassenaar concerne le contrôle des exportations, Lisbonne l'organisation de l'UE, et le Data Privacy Framework les transferts de données UE–USA.",
@@ -2629,10 +2629,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Sous le GDPR, dans quel cas et dans quel délai les personnes concernées doivent-elles être informées d'une violation de leurs données ?",
       "choix": [
-        "Uniquement si plus de 500 personnes sont affectées, sous 60 jours",
-        "Sans retard injustifié, lorsque la violation est susceptible d'engendrer un risque élevé pour leurs droits et libertés",
-        "Jamais : seule l'autorité de contrôle doit être notifiée",
-        "Toujours, dans les 72 heures"
+        "Uniquement si plus de 500 personnes sont concernées, et sous un délai de 60 jours",
+        "Sans retard injustifié, en cas de risque élevé pour leurs droits et libertés",
+        "Jamais : seule l'autorité de contrôle compétente doit être notifiée",
+        "Toujours et systématiquement, dans un délai de 72 heures"
       ],
       "reponse": 1,
       "explication": "Le délai de 72 heures concerne la notification à l'autorité de contrôle. Les personnes concernées, elles, doivent être informées sans retard injustifié uniquement lorsque la violation est susceptible d'engendrer un risque élevé pour leurs droits et libertés (des exceptions existent, par exemple si les données étaient chiffrées). Le seuil de 500 personnes et le délai de 60 jours relèvent de HIPAA/HITECH, pas du GDPR.",
@@ -2647,10 +2647,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Une violation touche simultanément des données de santé de patients américains (PHI) et des données personnelles de résidents européens. Quelles obligations de notification s'appliquent ?",
       "choix": [
-        "Uniquement le GDPR, car c'est le régime le plus strict",
-        "Aucune notification tant que l'enquête interne n'est pas terminée",
-        "Uniquement HIPAA, car les données de santé priment",
-        "Les deux régimes cumulativement : autorité européenne sous 72 heures ET notification HIPAA/HITECH des individus sous 60 jours"
+        "Uniquement le GDPR, puisque c'est le régime le plus strict des deux",
+        "Aucune notification tant que l'enquête interne de l'entreprise n'est pas entièrement terminée",
+        "Uniquement HIPAA, puisque les données de santé priment sur le reste",
+        "Les deux régimes cumulativement : autorité UE sous 72 h et individus HIPAA sous 60 jours"
       ],
       "reponse": 3,
       "explication": "Les régimes de notification ne s'excluent pas : ils se cumulent en fonction des personnes concernées et des juridictions. L'organisation doit notifier l'autorité de contrôle européenne sous 72 heures pour les résidents de l'UE, et respecter HIPAA/HITECH (individus, HHS, médias si plus de 500 personnes, sous 60 jours) pour les PHI américaines. Attendre la fin de l'enquête interne ferait manquer les délais légaux : c'est la découverte de la violation qui déclenche les horloges.",
@@ -2683,10 +2683,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Quel cadre encadre depuis 2023 les transferts de données personnelles entre l'Union européenne et les États-Unis, en remplacement du Privacy Shield invalidé ?",
       "choix": [
-        "Le Cloud Act",
-        "Le Safe Harbor",
+        "Le Cloud Act américain de 2018",
+        "L'accord Safe Harbor, invalidé en 2015",
         "L'EU-US Data Privacy Framework",
-        "La directive NIS2"
+        "La directive européenne NIS2"
       ],
       "reponse": 2,
       "explication": "L'EU-US Data Privacy Framework, adossé à une décision d'adéquation de la Commission européenne adoptée en 2023, encadre les transferts vers les entreprises américaines auto-certifiées. Il succède au Privacy Shield (invalidé par Schrems II en 2020), lui-même successeur du Safe Harbor (invalidé par Schrems I en 2015). Le Cloud Act est une loi américaine d'accès aux données, et NIS2 concerne la cybersécurité des entités critiques, pas les transferts.",
@@ -2701,7 +2701,7 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Le comité exécutif d'une banque veut déployer un modèle d'IA générative pour automatiser les réponses aux clients. Le RSSI est chargé d'encadrer l'initiative. Que devrait-il faire EN PREMIER ?",
       "choix": [
-        "Rattacher l'initiative au cadre de gouvernance existant : classification des cas d'usage, appétit pour le risque et rôles de décision",
+        "Rattacher l'initiative à la gouvernance existante (cas d'usage, appétit, décideurs)",
         "Rédiger une politique d'usage acceptable de l'IA générative pour les employés",
         "Sélectionner un cadre de référence comme le NIST AI RMF et lancer un gap assessment technique",
         "Exiger des tests adversariaux (prompt injection, jailbreak) avant toute mise en production"
@@ -2719,10 +2719,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Votre organisation intègre un modèle de langage fourni par un tiers via API dans une application RH de présélection des candidatures. Quel risque le RSSI devrait-il traiter en PRIORITÉ ?",
       "choix": [
-        "La fuite des prompts système révélant la logique interne de l'application",
+        "La fuite des prompts système révélant toute la logique interne de l'application déployée",
         "L'augmentation des coûts d'inférence en cas de montée en charge",
         "La latence et la disponibilité de l'API du fournisseur",
-        "Des décisions discriminatoires du modèle exposant l'organisation à des sanctions réglementaires et à un préjudice pour les candidats"
+        "Des décisions discriminatoires exposant à des sanctions et à un préjudice candidat"
       ],
       "reponse": 3,
       "explication": "Un traitement RH automatisé touche des personnes et déclenche des obligations légales fortes : non-discrimination, GDPR (décision automatisée), réglementations sur l'IA. Pour un manager, l'impact humain et réglementaire prime sur la disponibilité (gérable par SLA), la confidentialité des prompts (risque limité) et les coûts (question financière, pas sécuritaire).",
@@ -2900,9 +2900,9 @@ window.CISSP_DATA.domains[1] = {
       "q": "Un grand éditeur exerce sa clause d'audit contractuelle. Votre inventaire interne révèle 1 200 installations d'un logiciel pour 800 licences acquises. En tant que responsable, que devriez-vous faire EN PREMIER ?",
       "choix": [
         "Désinstaller discrètement les 400 copies excédentaires avant l'arrivée des auditeurs",
-        "Contester la validité de la clause d'audit pour gagner du temps",
-        "Attendre les conclusions de l'éditeur avant toute action interne",
-        "Valider l'écart via le programme SAM, informer la direction et le juridique, et préparer une régularisation transparente"
+        "Contester la validité juridique de la clause d'audit pour gagner du temps",
+        "Attendre les conclusions de l'éditeur avant d'engager toute action interne",
+        "Valider l'écart via le SAM, alerter la direction et le juridique, puis régulariser"
       ],
       "reponse": 3,
       "explication": "Face à un audit d'éditeur, la démarche de gouvernance consiste à établir les faits avec le Software Asset Management, à informer la direction et le juridique, puis à coopérer et régulariser : c'est ce qui limite à la fois le risque contractuel et le risque de violation de copyright. Désinstaller discrètement revient à dissimuler des preuves face à un audit contractuel, contester la clause librement acceptée est dilatoire, et attendre passivement prive la direction de toute capacité d'anticipation et de négociation.",
@@ -2935,9 +2935,9 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Un ingénieur démissionne pour rejoindre un concurrent direct et affirme pouvoir désormais parler librement des projets confidentiels puisqu'il n'est plus salarié. Quel document donne à l'organisation le MEILLEUR recours ?",
       "choix": [
-        "L'Acceptable Use Policy (AUP) qu'il avait signée à son arrivée",
-        "Son contrat de travail, même arrivé à terme",
-        "Le Non-Disclosure Agreement (NDA), dont les obligations survivent à la fin de l'emploi",
+        "L'Acceptable Use Policy (AUP) qu'il avait signée le jour de son arrivée",
+        "Son contrat de travail initial, même arrivé à son terme",
+        "Le Non-Disclosure Agreement (NDA), dont l'obligation survit à l'emploi",
         "La politique de classification des données de l'entreprise"
       ],
       "reponse": 2,
@@ -2953,10 +2953,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "La direction marketing veut lancer un profilage à grande échelle des clients européens combinant géolocalisation et historique d'achats. Avec le DPO, qu'exigez-vous AVANT le démarrage du traitement ?",
       "choix": [
-        "Un Security Control Assessment complet de l'infrastructure d'hébergement",
-        "Une Data Protection Impact Assessment (DPIA), le traitement présentant un risque élevé pour les droits des personnes",
+        "Un Security Control Assessment (SCA) complet de l'infrastructure d'hébergement",
+        "Une Data Protection Impact Assessment (DPIA), traitement à risque élevé",
         "Une notification préalable du projet à l'autorité de contrôle sous 72 heures",
-        "Un test d'intrusion de l'application de profilage"
+        "Un test d'intrusion complet de l'application de profilage"
       ],
       "reponse": 1,
       "explication": "Un profilage à grande échelle de résidents européens est un traitement à risque élevé : l'article 35 du GDPR impose une DPIA menée avant le début du traitement, avec le concours du DPO ; si le risque résiduel reste élevé, une consultation préalable de l'autorité de contrôle s'ajoute. Le SCA vérifie les contrôles de sécurité mais n'évalue pas l'impact sur les droits des personnes, le délai de 72 heures concerne la notification d'une violation et non le lancement d'un traitement, et le pentest est un contrôle technique ponctuel qui ne remplace pas l'analyse d'impact.",
@@ -2971,7 +2971,7 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Un système critique vient d'être autorisé en production. La direction demande comment garantir que sa posture de sécurité restera acceptable entre deux évaluations annuelles. Quelle est la MEILLEURE réponse ?",
       "choix": [
-        "Mettre en place un monitoring continu : collecte automatisée, KRI assortis de seuils déclencheurs, réévaluation à chaque changement majeur",
+        "Mettre en place un monitoring continu avec KRI et seuils déclencheurs",
         "Doubler la fréquence des audits en passant à des évaluations semestrielles",
         "Programmer un test d'intrusion complet après chaque incident de sécurité",
         "S'appuyer sur les scans de vulnérabilités mensuels déjà en place"
@@ -2990,9 +2990,9 @@ window.CISSP_DATA.domains[1] = {
       "q": "Les employés d'une fintech subissent des arnaques à l'investissement en cryptomonnaie et des deepfakes vocaux imitant leur direction, mais la formation de sensibilisation, conçue il y a trois ans, ne couvre que le phishing par e-mail. Que devrait faire le responsable du programme ?",
       "choix": [
         "Augmenter la fréquence des campagnes de phishing simulé existantes",
-        "Attendre la prochaine revue annuelle planifiée pour modifier les supports",
-        "Compenser par un durcissement des filtres de messagerie",
-        "Déclencher une revue du contenu pour intégrer les menaces émergentes, puis re-mesurer l'efficacité du programme"
+        "Attendre la prochaine revue annuelle déjà planifiée pour modifier les supports de formation",
+        "Compenser par un durcissement des filtres anti-spam de la messagerie",
+        "Réviser le contenu pour intégrer les menaces émergentes, puis re-mesurer l'efficacité"
       ],
       "reponse": 3,
       "explication": "Le contenu SETA est un contenu vivant : la revue périodique planifiée se complète de revues déclenchées par l'évolution des menaces. Face à des attaques émergentes avérées — cryptomonnaie, deepfakes — non couvertes par des supports vieux de trois ans, on déclenche la revue du contenu, on l'adapte aux nouveaux vecteurs, puis on mesure l'effet de la mise à jour. Intensifier les simulations de phishing e-mail n'apprend rien sur ces vecteurs, attendre la revue annuelle laisse les employés exposés, et les filtres de messagerie n'arrêtent ni un appel deepfake ni une arnaque hors des canaux de l'entreprise.",
@@ -3008,9 +3008,9 @@ window.CISSP_DATA.domains[1] = {
       "q": "Un analyste certifié CISSP constate qu'une pratique commerciale de son entreprise est parfaitement légale, mais contraire au code d'éthique interne de l'organisation. Quelle est la MEILLEURE conduite ?",
       "choix": [
         "Ne rien faire : seul le code d'éthique ISC² s'impose à un certifié",
-        "Démissionner afin de ne pas compromettre sa certification",
-        "Signaler la pratique par le canal prévu par le code interne, qu'il a le devoir de soutenir et de promouvoir",
-        "Déposer une plainte éthique formelle auprès d'ISC² contre son employeur"
+        "Démissionner immédiatement afin de ne pas compromettre sa certification",
+        "Signaler la pratique par le canal prévu par le code interne de l'organisation",
+        "Déposer une plainte éthique formelle auprès d'ISC² à l'encontre de son employeur"
       ],
       "reponse": 2,
       "explication": "Le professionnel doit soutenir et promouvoir le code d'éthique de son organisation en plus du code ISC². Une pratique peut être légale et néanmoins contraire à l'éthique interne : le levier approprié est alors le dispositif prévu par l'organisation elle-même, c'est-à-dire le signalement par le canal interne. Ignorer la violation contredit les deux codes, la démission est un dernier recours quand les canaux internes ont échoué, et ISC² instruit les plaintes contre des certifiés au titre de ses canons, pas contre les pratiques commerciales d'une entreprise.",
@@ -3045,10 +3045,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "A security manager wants to ensure that the sender of a critical financial message cannot later deny having sent it. Which of the following BEST meets this requirement?",
       "choix": [
-        "Hashing the message with SHA-256",
-        "Symmetric encryption of the message",
+        "Hashing the message with the SHA-256 algorithm",
+        "Symmetric encryption of the message with a single shared secret key",
         "Digital signatures supported by a public key infrastructure",
-        "Role-based access control"
+        "Role-based access control (RBAC) on the system"
       ],
       "reponse": 2,
       "explication": "La non-répudiation exige de lier l'action à une identité unique de façon prouvable : c'est ce que fait la signature numérique, car la clé privée n'est détenue que par le signataire. Le chiffrement symétrique utilise une clé partagée (chaque partie pourrait avoir produit le message), un hachage seul ne prouve pas l'identité de l'émetteur, et le RBAC gère les droits d'accès, pas la preuve d'origine.",
@@ -3081,10 +3081,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "What should a security manager do FIRST when initiating a business continuity planning effort?",
       "choix": [
-        "Perform the business impact analysis",
+        "Perform the complete business impact analysis (BIA)",
         "Obtain senior management support and define the project scope",
-        "Develop recovery procedures for critical systems",
-        "Select an alternate processing site"
+        "Develop detailed recovery procedures for the critical business systems",
+        "Select and contract an alternate processing site"
       ],
       "reponse": 1,
       "explication": "La première étape du processus BCP est le cadrage du projet : obtenir le soutien de la direction, bâtir le business case, constituer l'équipe et définir le périmètre. Sans cet appui, la BIA et les phases suivantes n'aboutiront pas. Le choix d'un site alternatif et les procédures de récupération relèvent de phases ultérieures (continuity planning et DRP). Face à une question « FIRST », remontez toujours au début du processus.",
@@ -3099,10 +3099,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Which of the following BEST describes due diligence?",
       "choix": [
-        "Delegating security decisions to system administrators",
-        "Understanding risks and developing plans, policies, and processes to address them",
-        "Purchasing cyber insurance to transfer risk",
-        "Applying security controls in day-to-day operations"
+        "Delegating all critical security decisions to the system administrators",
+        "Understanding risks and developing plans, policies, and processes",
+        "Purchasing cyber insurance to transfer the residual risk",
+        "Applying security controls throughout day-to-day operations"
       ],
       "reponse": 1,
       "explication": "La Due Diligence, c'est savoir ce qui doit être fait : comprendre les risques, évaluer, planifier, documenter les politiques et structures. L'application quotidienne des contrôles est la Due Care (« Due Diligence pense, Due Care agit »). L'assurance est une réponse de transfert de risque, et déléguer les décisions de sécurité aux administrateurs serait un manquement du management à ses devoirs.",
@@ -3153,10 +3153,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "What is the PRIMARY purpose of a business impact analysis (BIA)?",
       "choix": [
-        "To determine who caused previous service outages",
-        "To test the effectiveness of disaster recovery procedures",
-        "To identify critical business functions and assess the impact of their disruption over time",
-        "To calculate the annual security budget"
+        "To determine who caused previous major service outages",
+        "To test the effectiveness of the organization's disaster recovery procedures",
+        "To identify critical business functions and their disruption impact",
+        "To calculate the annual information security budget figure"
       ],
       "reponse": 2,
       "explication": "La BIA identifie les fonctions et processus critiques de l'organisation, évalue l'impact de leur interruption dans le temps, et en déduit les priorités de récupération ainsi que les métriques RTO, RPO et MTD. Les tests du DRP interviennent après l'élaboration des plans, la recherche de responsabilité relève d'autres processus, et le budget sécurité n'est pas l'objet de la BIA.",
@@ -3279,10 +3279,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Which of the following BEST reduces the risk of counterfeit network hardware being introduced into an organization's infrastructure?",
       "choix": [
-        "Extending the warranty period on all purchased devices",
-        "Increasing the frequency of internal vulnerability scans",
-        "Requiring all employees to sign an acceptable use policy",
-        "Purchasing equipment only from authorized distributors and verifying its integrity upon receipt"
+        "Extending the manufacturer's warranty period on all purchased hardware devices",
+        "Increasing the frequency of internal network vulnerability scans",
+        "Requiring all employees to read and sign an acceptable use policy",
+        "Buying only from authorized distributors and verifying integrity on receipt"
       ],
       "reponse": 3,
       "explication": "Le risque de contrefaçon se traite à la source, dans la chaîne d'approvisionnement : acheter uniquement auprès de canaux autorisés et vérifier l'intégrité et l'authenticité du matériel à réception (numéros de série, scellés, root of trust). La garantie est un recours commercial, pas une prévention ; les scans de vulnérabilités ne détectent pas un implant matériel ; et l'AUP encadre le comportement des employés, pas la provenance du matériel.",
@@ -3315,10 +3315,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Which of the following BEST describes how PCI DSS is enforced on a merchant?",
       "choix": [
-        "Through federal legislation on electronic payments",
+        "Through federal legislation directly regulating electronic card payments",
         "Through contractual obligations with the merchant's acquiring bank",
-        "Through European Union directives",
-        "Through a mandatory ISO certification scheme"
+        "Through binding European Union directives on payments",
+        "Through a mandatory ISO certification scheme for merchants"
       ],
       "reponse": 1,
       "explication": "PCI DSS n'est pas une loi : c'est un standard de l'industrie des cartes de paiement, imposé par le contrat entre le commerçant et sa banque acquéreuse. Sa force vient des pénalités contractuelles et du risque de perdre la capacité d'accepter les cartes. Aucune législation fédérale, certification ISO ou directive européenne ne fonde son application — c'est le piège classique de l'examen.",
@@ -3351,10 +3351,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Following the Schrems II ruling, what MUST an organization do before relying on standard contractual clauses (SCC) to transfer personal data outside the EU?",
       "choix": [
-        "Obtain individual approval from the European Commission for each transfer",
-        "Nothing; SCC remain automatically sufficient in all cases",
-        "Assess the legal environment of the destination country and implement supplementary measures where needed",
-        "Replace the SCC with the Privacy Shield framework"
+        "Obtain prior individual approval from the European Commission for every single transfer",
+        "Nothing; the SCC remain automatically sufficient in every case",
+        "Assess the destination country's law and add supplementary measures if needed",
+        "Replace the SCC entirely with the old Privacy Shield framework"
       ],
       "reponse": 2,
       "explication": "Schrems II a maintenu la validité des SCC mais a imposé une condition : l'exportateur doit évaluer si le droit du pays de destination (notamment ses lois de surveillance) permet de respecter les clauses en pratique — c'est le transfer impact assessment — et ajouter des mesures supplémentaires (chiffrement, pseudonymisation…) si nécessaire. La Commission n'approuve pas chaque transfert individuellement, et le Privacy Shield est précisément ce que l'arrêt a invalidé.",
@@ -3495,10 +3495,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Which of the following BEST indicates that a security awareness program is effective?",
       "choix": [
-        "The size of the budget allocated to the program",
-        "A decreasing click rate and an increasing reporting rate during simulated phishing campaigns",
-        "The number of training sessions delivered each year",
-        "The attendance rate at the annual training session"
+        "The overall size of the annual budget allocated to the program",
+        "A falling click rate and rising reporting rate in simulations",
+        "The total number of training sessions delivered to staff each year",
+        "The employee attendance rate at the annual training session"
       ],
       "reponse": 1,
       "explication": "L'efficacité d'un programme de sensibilisation se mesure aux changements de comportement : la baisse du taux de clic et la hausse du taux de signalement lors des campagnes de phishing simulé sont des indicateurs de résultat. Le nombre de sessions, le budget et l'assiduité ne mesurent que l'activité ou les moyens engagés, pas l'impact réel sur les comportements — distinction classique entre indicateurs de moyens et indicateurs de résultats.",
@@ -3513,10 +3513,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "A defense contractor discovers a stealthy intrusion that has persisted for two years, using custom-built malware to exfiltrate classified design documents. Which threat actor is MOST likely responsible?",
       "choix": [
-        "A negligent insider",
-        "A script kiddie",
+        "A negligent insider acting by mistake",
+        "A script kiddie using off-the-shelf tools",
         "A nation-state advanced persistent threat (APT)",
-        "A hacktivist group"
+        "A hacktivist group seeking publicity and attention"
       ],
       "reponse": 2,
       "explication": "Furtivité, persistance sur deux ans, malwares développés sur mesure et ciblage de secrets de défense : tous les marqueurs de l'acteur étatique (APT) sont réunis — ressources quasi illimitées, objectifs d'espionnage, patience. Un script kiddie n'a ni la compétence ni la persistance, un insider négligent cause des incidents par erreur et non une campagne structurée, et un hacktiviste chercherait la visibilité et revendiquerait son action.",
@@ -3549,10 +3549,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Which of the following BEST defines residual risk?",
       "choix": [
-        "The total risk that has been transferred to an insurance provider",
-        "The risk remaining after controls have been implemented, which management chooses to accept",
-        "The risk that exists before any controls are applied",
-        "The portion of risk eliminated by the controls gap"
+        "The total amount of risk that has been transferred to an external insurance provider",
+        "The risk remaining after controls are implemented, which management accepts",
+        "The risk that exists before any security controls are applied",
+        "The portion of total risk eliminated by the controls gap analysis"
       ],
       "reponse": 1,
       "explication": "Le risque résiduel est celui qui subsiste après la mise en place des contrôles approuvés : c'est ce risque que la direction accepte formellement. Le risque existant avant tout traitement est le risque inhérent, le transfert à un assureur est une réponse au risque (pas la définition du résiduel), et le controls gap est la part de risque éliminée par les contrôles — le résiduel est ce qui reste, pas ce qui est éliminé.",
@@ -3585,10 +3585,10 @@ window.CISSP_DATA.domains[1] = {
     {
       "q": "Which of the following BEST describes the difference between risk appetite and risk tolerance?",
       "choix": [
-        "Risk tolerance always exceeds risk capacity",
-        "The two terms are synonyms and can be used interchangeably",
-        "Risk appetite applies only to financial risks",
-        "Risk appetite is the total amount of risk an organization is willing to accept, while risk tolerance is the acceptable variation around a specific objective"
+        "Risk tolerance always exceeds the organization's total risk capacity",
+        "The two terms are exact synonyms and may always be used interchangeably in any risk-management context",
+        "Risk appetite applies only to purely financial categories of risk",
+        "Appetite is the overall risk accepted; tolerance is the variation allowed around an objective"
       ],
       "reponse": 3,
       "explication": "Le risk appetite est la quantité globale de risque que l'organisation est prête à accepter pour poursuivre sa mission ; la risk tolerance est plus fine : la variation acceptable des résultats autour d'un objectif spécifique. Les deux notions ne sont pas synonymes, la tolérance ne doit jamais dépasser la risk capacity (le maximum absorbable), et l'appétit pour le risque s'applique à tous les types de risques, pas seulement financiers.",
@@ -3604,7 +3604,7 @@ window.CISSP_DATA.domains[1] = {
       "q": "An organization plans to embed a third-party large language model into a customer-facing application. Which action should the CISO take FIRST?",
       "choix": [
         "Require the vendor to provide a complete inventory of the model's training data sources",
-        "Bring the initiative under the existing governance framework, including risk appetite, use-case classification, and approval roles",
+        "Bring the initiative under the existing enterprise governance framework",
         "Conduct adversarial testing of the model against prompt injection and jailbreak techniques",
         "Develop an incident response playbook for AI-specific failure scenarios"
       ],
