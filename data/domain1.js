@@ -170,7 +170,7 @@ window.CISSP_DATA.domains[1] = {
               "Plans opérationnels (détaillés)"
             ]
           },
-          "narration": "La planification de la sécurité se décline en trois niveaux. Le plan stratégique est un plan de long terme, utile environ cinq ans, qui définit la raison d'être de la sécurité dans l'organisation et qui doit inclure une évaluation des risques. Le plan tactique, d'un an ou moins, détaille comment atteindre les buts fixés par la stratégie. Et les plans opérationnels sont des plans de court terme, très détaillés et concrets, qui découlent des deux niveaux supérieurs. Les objectifs alimentent les missions, les missions mènent aux buts, et les buts réalisent la stratégie."
+          "narration": "La planification de la sécurité se décline en trois niveaux. Le plan stratégique est un plan de long terme, utile environ cinq ans, qui définit la raison d'être de la sécurité dans l'organisation et qui doit inclure une évaluation des risques. Le plan tactique, d'un an ou moins, détaille comment atteindre les buts fixés par la stratégie. Et les plans opérationnels sont des plans de court terme, très détaillés et concrets, qui découlent des deux niveaux supérieurs. Les plans opérationnels soutiennent les plans tactiques, qui soutiennent eux-mêmes le plan stratégique."
         },
         {
           "type": "standard",
@@ -898,10 +898,10 @@ window.CISSP_DATA.domains[1] = {
           "titre": "La Business Impact Analysis (BIA)",
           "points": [
             "Identifier les processus et systèmes critiques et l'impact d'une interruption",
-            "Quatre temps : identification des priorités, identification des risques, évaluation de la probabilité, priorisation des ressources",
+            "Cinq temps : identification des priorités, identification des risques, évaluation de la probabilité, évaluation de l'impact, priorisation des ressources",
             "Produit les métriques clés : RTO, RPO, MTD"
           ],
-          "narration": "La Business Impact Analysis identifie les systèmes et services dont l'entreprise dépend, et évalue l'impact qu'aurait leur interruption, y compris sur des processus métier comme la facturation ou les ventes. Elle se déroule en quatre temps : identifier les priorités de l'organisation, identifier les risques, évaluer leur probabilité, puis prioriser les ressources, c'est-à-dire décider quels systèmes restaurer en premier, en commençant par les services fondamentaux comme le réseau et l'annuaire, dont tout le reste dépend. C'est la BIA qui produit les métriques de récupération que tout candidat CISSP doit connaître parfaitement."
+          "narration": "La Business Impact Analysis identifie les systèmes et services dont l'entreprise dépend, et évalue l'impact qu'aurait leur interruption, y compris sur des processus métier comme la facturation ou les ventes. Elle se déroule en cinq temps : identifier les priorités de l'organisation, identifier les risques, évaluer leur probabilité, évaluer leur impact, puis prioriser les ressources, c'est-à-dire décider quels systèmes restaurer en premier, en commençant par les services fondamentaux comme le réseau et l'annuaire, dont tout le reste dépend. C'est la BIA qui produit les métriques de récupération que tout candidat CISSP doit connaître parfaitement."
         },
         {
           "type": "standard",
@@ -1312,7 +1312,7 @@ window.CISSP_DATA.domains[1] = {
         "La quantitative évalue la probabilité, la qualitative uniquement l'impact"
       ],
       "reponse": 0,
-      "explication": "L'analyse quantitative assigne des valeurs monétaires réelles (AV, SLE, ALE) à partir de calculs, tandis que l'analyse qualitative s'appuie sur des jugements subjectifs, des scénarios et des classements (élevé/moyen/faible). La première proposition inverse les définitions ; aucun ordre obligatoire n'existe entre les deux approches, qui considèrent chacune probabilité et impact — la plupart des organisations les combinent.",
+      "explication": "L'analyse quantitative assigne des valeurs monétaires réelles (AV, SLE, ALE) à partir de calculs, tandis que l'analyse qualitative s'appuie sur des jugements subjectifs, des scénarios et des classements (élevé/moyen/faible). La deuxième proposition inverse les définitions ; aucun ordre obligatoire n'existe entre les deux approches, qui considèrent chacune probabilité et impact — la plupart des organisations les combinent.",
       "difficulte": 1,
       "pourquoi": [
         "Correcte : la quantitative produit des valeurs monétaires objectives (AV, SLE, ALE), la qualitative des jugements subjectifs fondés sur des scénarios et des échelles.",
@@ -3552,8 +3552,8 @@ window.CISSP_DATA.domains[1] = {
       "verso": "Administrative : interne, la moins formelle. Civile : prépondérance de la preuve. Criminelle : au-delà de tout doute raisonnable (formalisme maximal). Réglementaire : menée par un régulateur, coopération obligatoire. Standards industriels : conformité contractuelle (ex. PCI DSS)."
     },
     {
-      "recto": "BIA et ses 4 étapes",
-      "verso": "Business Impact Analysis : identifier les processus critiques et l'impact d'une interruption. Étapes : 1) Identification des priorités, 2) Identification des risques, 3) Évaluation de la probabilité, 4) Priorisation des ressources. Produit RTO, RPO et MTD."
+      "recto": "BIA et ses 5 étapes",
+      "verso": "Business Impact Analysis : identifier les processus critiques et l'impact d'une interruption. Étapes : 1) Identification des priorités, 2) Identification des risques, 3) Évaluation de la probabilité, 4) Évaluation de l'impact, 5) Priorisation des ressources. Produit RTO, RPO et MTD."
     },
     {
       "recto": "RTO / RPO / MTD",
