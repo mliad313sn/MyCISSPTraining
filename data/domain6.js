@@ -1693,7 +1693,7 @@ window.CISSP_DATA.domains[6] = {
         "Test d'interface utilisateur automatisé"
       ],
       "reponse": 0,
-      "explication": "Le generational fuzzing (intelligent) construit des entrées à partir d'un modèle décrivant le format attendu : pour un protocole propriétaire structuré, il atteint des couches profondes du parseur que des mutations aléatoires n'atteindraient presque jamais, car elles échoueraient dès les premières validations de format. Le mutation fuzzing (C) reste utile mais moins efficace ici, et les options C et D ne testent pas la robustesse d'un parseur.",
+      "explication": "Le generational fuzzing (intelligent) construit des entrées à partir d'un modèle décrivant le format attendu : pour un protocole propriétaire structuré, il atteint des couches profondes du parseur que des mutations aléatoires n'atteindraient presque jamais, car elles échoueraient dès les premières validations de format. Le mutation fuzzing (C) reste utile mais moins efficace ici, et les options B et D ne testent pas la robustesse d'un parseur.",
       "difficulte": 3,
       "pourquoi": [
         "Le generational fuzzing modélise la spécification et atteint les couches profondes du parseur : le choix efficace quand le format est connu.",
@@ -1873,7 +1873,7 @@ window.CISSP_DATA.domains[6] = {
         "Le test de bascule du datacenter"
       ],
       "reponse": 2,
-      "explication": "La read-through, ou revue documentaire, consiste à distribuer le plan aux responsables concernés pour qu'ils le relisent et signalent les éléments obsolètes : aucune opération n'est touchée, c'est le test le moins perturbant et le moins coûteux. Le parallel test (A) mobilise le site de repli, et le full-interruption (A, D) interrompt réellement la production, avec le risque le plus élevé.",
+      "explication": "La read-through, ou revue documentaire, consiste à distribuer le plan aux responsables concernés pour qu'ils le relisent et signalent les éléments obsolètes : aucune opération n'est touchée, c'est le test le moins perturbant et le moins coûteux. Le parallel test (A) mobilise le site de repli, et le full-interruption comme la bascule de datacenter (B, D) interrompent réellement la production, avec le risque le plus élevé.",
       "difficulte": 1,
       "pourquoi": [
         "Le parallel test mobilise le site de repli : perturbation réelle quoique maîtrisée.",
@@ -1927,7 +1927,7 @@ window.CISSP_DATA.domains[6] = {
         "Le propriétaire métier ou système de l'application concernée, avec le conseil de l'équipe sécurité"
       ],
       "reponse": 3,
-      "explication": "La responsabilité de la remédiation revient au propriétaire du système ou du processus concerné : lui seul peut arbitrer les impacts métier, planifier les changements et engager les ressources, l'équipe sécurité jouant un rôle de conseil et de suivi. L'auditeur (C) doit rester indépendant de la remédiation pour préserver son objectivité, et les options C et D diluent la responsabilité loin de ceux qui possèdent le risque.",
+      "explication": "La responsabilité de la remédiation revient au propriétaire du système ou du processus concerné : lui seul peut arbitrer les impacts métier, planifier les changements et engager les ressources, l'équipe sécurité jouant un rôle de conseil et de suivi. L'auditeur (C) doit rester indépendant de la remédiation pour préserver son objectivité, et les options A et B diluent la responsabilité loin de ceux qui possèdent le risque.",
       "difficulte": 2,
       "pourquoi": [
         "Le prestataire de scan détecte, il ne possède ni le système ni le risque.",
@@ -2199,7 +2199,7 @@ window.CISSP_DATA.domains[6] = {
         "SOC 2 Type I"
       ],
       "reponse": 2,
-      "explication": "Le SOC 3 est conçu pour une diffusion publique sans restriction : il atteste que l'organisation a satisfait aux Trust Services Criteria sans divulguer le détail des contrôles ni des tests, et sert souvent d'argument commercial. Les rapports SOC 1 et SOC 2 (A, B, C) contiennent des détails sensibles et sont partagés de manière restreinte, généralement sous NDA.",
+      "explication": "Le SOC 3 est conçu pour une diffusion publique sans restriction : il atteste que l'organisation a satisfait aux Trust Services Criteria sans divulguer le détail des contrôles ni des tests, et sert souvent d'argument commercial. Les rapports SOC 1 et SOC 2 (A, B, D) contiennent des détails sensibles et sont partagés de manière restreinte, généralement sous NDA.",
       "difficulte": 1,
       "pourquoi": [
         "Le SOC 2 Type II, le plus détaillé, est justement le plus restreint.",
@@ -2613,7 +2613,7 @@ window.CISSP_DATA.domains[6] = {
         "Accounts of employees on vacation"
       ],
       "reponse": 2,
-      "explication": "Les comptes hautement privilégiés (administrateurs de domaine, de systèmes, comptes root) doivent être revus en totalité à chaque cycle, car leur compromission ou leur dérive a l'impact maximal. Pour les comptes ordinaires, un échantillonnage est acceptable à condition d'être véritablement aléatoire. Les populations proposées en A, C et D ne correspondent pas à une approche fondée sur le risque.",
+      "explication": "Les comptes hautement privilégiés (administrateurs de domaine, de systèmes, comptes root) doivent être revus en totalité à chaque cycle, car leur compromission ou leur dérive a l'impact maximal. Pour les comptes ordinaires, un échantillonnage est acceptable à condition d'être véritablement aléatoire. Les populations proposées en A, B et D ne correspondent pas à une approche fondée sur le risque.",
       "difficulte": 2,
       "pourquoi": [
         "Une sélection discrétionnaire n'est ni aléatoire ni fondée sur le risque.",
