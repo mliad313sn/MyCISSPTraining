@@ -998,9 +998,9 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Quelle est l'unité de données (PDU) manipulée à la couche 2 du modèle OSI ?",
       "choix": [
-        "Le paquet",
-        "Le segment",
-        "Le bit",
+        "Le paquet, unité de la couche réseau",
+        "Le segment, unité de la couche transport",
+        "Le bit, unité de la couche physique",
         "La trame (frame)"
       ],
       "reponse": 3,
@@ -1034,10 +1034,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Un administrateur constate qu'un poste a l'adresse 169.254.10.23. Quelle est la cause la PLUS probable ?",
       "choix": [
-        "Le poste est victime d'un empoisonnement ARP",
-        "Le poste utilise une adresse privée RFC 1918 normale",
+        "Le poste est victime d'un empoisonnement ARP ayant altéré sa table d'adresses locale",
+        "Le poste utilise une adresse privée RFC 1918 tout à fait normale sur le LAN",
         "Le poste n'a pas pu joindre de serveur DHCP et s'est auto-configuré via APIPA",
-        "Le poste a été configuré en IPv6"
+        "Le poste a été configuré manuellement en IPv6 sur ce segment réseau"
       ],
       "reponse": 2,
       "explication": "La plage 169.254.0.0/16 correspond à l'APIPA : le poste se l'attribue automatiquement quand aucun serveur DHCP ne répond. Ce n'est pas une plage RFC 1918 (10/8, 172.16/12, 192.168/16), cela n'a rien à voir avec IPv6, et l'ARP poisoning ne change pas l'adresse IP du poste.",
@@ -1124,10 +1124,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Pourquoi HTTPS utilise-t-il une cryptographie dite hybride ?",
       "choix": [
-        "Parce qu'il alterne aléatoirement entre deux algorithmes",
-        "Parce qu'il chiffre deux fois les données pour plus de sécurité",
+        "Parce qu'il alterne aléatoirement entre deux algorithmes symétriques à chaque session",
+        "Parce qu'il chiffre deux fois les données avec deux clés symétriques distinctes pour renforcer la sécurité",
         "Parce qu'il utilise l'asymétrique pour échanger une clé de session, puis le symétrique pour le trafic",
-        "Parce qu'il combine hachage et compression"
+        "Parce qu'il combine une fonction de hachage et une compression avant l'émission des données"
       ],
       "reponse": 2,
       "explication": "TLS utilise la cryptographie asymétrique, lente mais sans secret partagé préalable, pour négocier une clé de session éphémère, puis bascule sur la cryptographie symétrique, rapide, pour chiffrer les échanges. Il n'y a ni double chiffrement systématique, ni alternance aléatoire, et le hachage sert à l'intégrité, pas au chiffrement.",
@@ -1305,9 +1305,9 @@ window.CISSP_DATA.domains[4] = {
       "q": "Quel mécanisme de WPA2 mode enterprise le distingue du mode personal ?",
       "choix": [
         "L'authentification 802.1X/EAP via un serveur avec des identifiants individuels",
-        "L'utilisation d'AES au lieu de RC4",
-        "Le chiffrement en 192 bits",
-        "Un SSID masqué"
+        "L'utilisation du chiffrement AES-CCMP à la place de l'ancien algorithme RC4 de WEP",
+        "Le chiffrement des trames sur 192 bits propre au mode entreprise",
+        "Un SSID masqué et non diffusé aux clients du réseau sans fil"
       ],
       "reponse": 0,
       "explication": "Les deux modes de WPA2 utilisent AES-CCMP ; ce qui change, c'est l'authentification : le mode personal repose sur une clé pré-partagée commune, le mode enterprise sur 802.1X/EAP avec un serveur d'authentification et des comptes individuels. Le 192 bits est propre à WPA3 enterprise, et masquer le SSID n'est pas une mesure d'authentification.",
@@ -1322,10 +1322,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Pourquoi le WPS est-il considéré comme dangereux même sur un réseau WPA2 correctement chiffré ?",
       "choix": [
-        "Il force l'utilisation de TKIP",
-        "Il diffuse la clé Wi-Fi en clair",
-        "Il désactive AES",
-        "Son PIN de 8 chiffres est validé en deux moitiés et souvent sans limitation de tentatives, facilitant le brute-force"
+        "Il impose le chiffrement TKIP déprécié à la place d'AES sur l'ensemble du réseau",
+        "Il diffuse la clé Wi-Fi en clair à tous les clients qui rejoignent le réseau sans fil local",
+        "Il désactive silencieusement le chiffrement AES protégeant le réseau sans fil",
+        "Son PIN de 8 chiffres est validé en deux moitiés, souvent sans limite de tentatives"
       ],
       "reponse": 3,
       "explication": "La structure du protocole WPS valide le PIN en deux moitiés, réduisant drastiquement l'espace de recherche, et beaucoup de routeurs n'imposent aucun verrouillage après échecs : le brute-force devient réaliste et livre l'accès au réseau. Le WPS ne diffuse pas la clé en clair et ne touche ni à AES ni à TKIP ; la parade est de le désactiver.",
@@ -1376,9 +1376,9 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Une attaque envoie des trames de gestion forgées pour déconnecter les clients d'un point d'accès Wi-Fi. Comment s'appelle-t-elle et à quoi sert-elle souvent ?",
       "choix": [
-        "Wardriving, pour cartographier les réseaux",
-        "Attaque IV, pour casser la clé WEP",
-        "CAM flooding, pour transformer le switch en hub",
+        "Wardriving, une reconnaissance passive pour cartographier les réseaux environnants",
+        "Attaque par IV, pour casser la clé de chiffrement WEP par analyse statistique",
+        "CAM flooding, pour saturer le switch et le transformer en simple hub",
         "Attaque de désassociation, souvent pour pousser les victimes vers un evil twin"
       ],
       "reponse": 3,
@@ -1412,10 +1412,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Quelle mesure prévient le PLUS efficacement le CAM table flooding sur un switch ?",
       "choix": [
-        "Masquer le SSID",
+        "Masquer la diffusion du SSID sur l'ensemble du réseau",
         "Activer le port security sur les ports du switch",
-        "Utiliser des adresses IP statiques",
-        "Déployer un WAF"
+        "Utiliser uniquement des adresses IP statiques sur les postes",
+        "Déployer un pare-feu applicatif WAF en frontal"
       ],
       "reponse": 1,
       "explication": "Le port security limite le nombre d'adresses MAC apprises par port et bloque les violations, ce qui neutralise la saturation de la table CAM qui forcerait le switch à diffuser toutes les trames. Le SSID concerne le Wi-Fi, le WAF les applications web, et l'adressage statique n'empêche pas l'apprentissage MAC.",
@@ -1466,9 +1466,9 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Une organisation veut vérifier que chaque poste est patché et dispose d'un antivirus à jour AVANT de lui accorder l'accès au réseau. Quelle approche répond à ce besoin ?",
       "choix": [
-        "Un IDS réseau en coeur de réseau",
-        "NAC en philosophie postadmission",
-        "Un portail captif sans authentification",
+        "Un IDS réseau déployé au coeur du réseau interne",
+        "NAC configuré en philosophie postadmission",
+        "Un portail captif dépourvu de toute authentification des utilisateurs",
         "NAC en philosophie preadmission avec évaluation de posture"
       ],
       "reponse": 3,
@@ -1592,10 +1592,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Du point de vue d'un RSSI, quelle est la MEILLEURE stratégie face aux risques d'interception sur les réseaux d'opérateurs mobiles ?",
       "choix": [
-        "Considérer le réseau de l'opérateur comme non fiable et imposer un chiffrement de bout en bout comme TLS ou VPN",
-        "Se reposer sur le chiffrement radio entre le mobile et l'antenne",
-        "Interdire l'usage des téléphones mobiles professionnels",
-        "N'autoriser que la 5G"
+        "Traiter le réseau de l'opérateur comme non fiable et chiffrer de bout en bout via TLS ou VPN",
+        "Se reposer sur le seul chiffrement radio établi entre le mobile et l'antenne relais mobile de l'opérateur",
+        "Interdire purement et simplement l'usage des téléphones mobiles professionnels",
+        "N'autoriser que les connexions cellulaires en 5G"
       ],
       "reponse": 0,
       "explication": "Le chiffrement cellulaire s'arrête souvent à l'antenne et des tours peuvent être simulées pour des attaques on-path : la posture correcte est de traiter le réseau de l'opérateur comme non fiable et de chiffrer au-dessus, via TLS ou VPN. Interdire les mobiles est disproportionné, et la 5G améliore mais ne supprime pas le besoin de chiffrement applicatif.",
@@ -1628,10 +1628,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Quelle affirmation décrit le MIEUX FCoE (Fibre Channel over Ethernet) ?",
       "choix": [
-        "Il remplace MPLS pour l'interconnexion des sites distants",
-        "Il encapsule le trafic Fibre Channel dans des trames Ethernet en couche 2, sur un réseau à 10 Gbps minimum",
-        "Il encapsule les commandes SCSI dans TCP/IP et traverse les routeurs",
-        "Il chiffre nativement le trafic de stockage avec TLS"
+        "Il remplace le MPLS pour l'interconnexion des sites distants sur le réseau étendu",
+        "Il encapsule les trames Fibre Channel dans de l'Ethernet de couche 2, sur un réseau à 10 Gbps",
+        "Il encapsule les commandes SCSI dans TCP/IP et traverse sans peine les routeurs IP standard actuels",
+        "Il chiffre nativement tout le trafic de stockage à l'aide du protocole TLS"
       ],
       "reponse": 1,
       "explication": "FCoE fait converger le stockage Fibre Channel sur l'infrastructure Ethernet : les trames Fibre Channel sont encapsulées en couche 2, ce qui exige un réseau haut débit (10 Gbps minimum) et ne traverse pas nativement les routeurs IP. C'est iSCSI qui encapsule SCSI dans TCP/IP ; ni l'un ni l'autre ne chiffre nativement, et FCoE n'a aucun rapport avec MPLS.",
@@ -1646,10 +1646,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Pourquoi CHAP est-il préférable à PAP pour authentifier un accès distant ?",
       "choix": [
-        "CHAP impose des certificats des deux côtés",
-        "CHAP est un framework qui accepte de nombreuses méthodes d'authentification",
-        "CHAP utilise un échange challenge-response : le mot de passe ne circule jamais en clair, et la ré-authentification est périodique",
-        "CHAP chiffre l'ensemble de la session de données"
+        "CHAP impose des certificats numériques valides des deux côtés de la liaison distante",
+        "CHAP est un framework acceptant de très nombreuses méthodes d'authentification bien distinctes",
+        "CHAP utilise un échange challenge-response ; le mot de passe ne circule pas en clair",
+        "CHAP chiffre l'intégralité de la session de données échangée entre les pairs"
       ],
       "reponse": 2,
       "explication": "CHAP répond au challenge du serveur par un haché combinant le défi et le secret : le mot de passe n'est jamais transmis, contrairement à PAP qui l'envoie en clair, et CHAP ré-authentifie périodiquement en cours de session. CHAP n'assure pas le chiffrement des données de la session, n'utilise pas de certificats (c'est EAP-TLS), et le framework extensible décrit EAP, pas CHAP.",
@@ -1664,10 +1664,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Quelle affirmation à propos d'EAP (Extensible Authentication Protocol) est EXACTE ?",
       "choix": [
-        "EAP est réservé aux réseaux sans fil",
-        "EAP est un framework d'authentification qui accueille de multiples méthodes, comme les certificats ou les cartes à puce",
-        "EAP transmet les identifiants en clair comme PAP",
-        "EAP est une méthode d'authentification par mot de passe chiffré"
+        "EAP est un protocole réservé aux seuls réseaux locaux sans fil",
+        "EAP est un framework accueillant de multiples méthodes d'authentification",
+        "EAP transmet toujours les identifiants en clair, comme le fait PAP",
+        "EAP est une simple méthode d'authentification reposant sur un mot de passe chiffré"
       ],
       "reponse": 1,
       "explication": "EAP n'est pas une méthode unique mais un cadre extensible : EAP-TLS avec certificats, PEAP avec tunnel TLS, méthodes à carte à puce ou OTP s'y branchent. Ce n'est ni un simple mot de passe chiffré, ni un protocole en clair, et il s'utilise aussi bien sur le filaire (802.1X sur les switches) que sur le Wi-Fi ou les liens VPN.",
@@ -1683,9 +1683,9 @@ window.CISSP_DATA.domains[4] = {
       "q": "Un audit révèle que des automates industriels communiquent en Modbus et DNP3 sur le réseau de l'usine. Sachant que ces protocoles n'offrent ni authentification ni chiffrement, quelle est la MEILLEURE mesure à recommander ?",
       "choix": [
         "Isoler et segmenter strictement le réseau OT, en s'appuyant sur le modèle Purdue",
-        "Installer un antivirus sur les automates",
-        "Activer WPA3 sur le réseau industriel",
-        "Remplacer Modbus par HTTPS sur tous les équipements"
+        "Installer un logiciel antivirus sur chacun des automates industriels programmables",
+        "Activer le chiffrement WPA3 sur le réseau industriel",
+        "Remplacer le protocole Modbus par HTTPS sur tous les équipements"
       ],
       "reponse": 0,
       "explication": "Modbus et DNP3 ont été conçus sans sécurité et ne peuvent généralement pas être corrigés ni remplacés sur des équipements industriels : la réponse architecturale est l'isolement et la segmentation stricte des réseaux OT, organisés en zones selon le modèle Purdue, avec des passerelles contrôlées vers l'IT. Les automates ne supportent pas d'antivirus, le remplacement protocolaire est irréaliste, et WPA3 ne concerne que le Wi-Fi.",
@@ -1718,10 +1718,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Un ingénieur réseau constate un nombre croissant d'erreurs FCS/CRC sur un port de commutateur. Que devrait-il vérifier EN PREMIER ?",
       "choix": [
-        "La table de routage du routeur en amont",
-        "Les ACL configurées sur le port",
-        "La configuration du serveur DHCP",
-        "Le câblage, la connectique et les interférences électromagnétiques (couche 1)"
+        "La table de routage du routeur situé en amont du lien concerné",
+        "Les listes de contrôle d'accès (ACL) appliquées à ce port du commutateur",
+        "La configuration du serveur DHCP qui distribue les adresses",
+        "Le câblage, la connectique ou les interférences électromagnétiques"
       ],
       "reponse": 3,
       "explication": "Le FCS (Frame Check Sequence) est un contrôle d'intégrité vérifié en couche 2, mais les trames corrompues qu'il détecte sont presque toujours causées par un défaut de couche 1 : câble endommagé, connecteur défectueux, longueur excessive ou interférences électromagnétiques. Le routage, les ACL et le DHCP n'altèrent pas les trames au niveau binaire. La méthode de dépannage part du bas de la pile.",
@@ -1808,10 +1808,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Un analyste détecte du trafic Teredo sortant du réseau de l'entreprise. Pourquoi ce mécanisme de transition IPv6 est-il préoccupant du point de vue de la sécurité ?",
       "choix": [
-        "Il expose les adresses MAC internes sur Internet",
-        "Il désactive automatiquement le chiffrement TLS",
-        "Il ralentit fortement les connexions des utilisateurs",
-        "Il encapsule IPv6 dans UDP, traverse le NAT et peut échapper à l'inspection des pare-feux et IDS configurés pour IPv4"
+        "Il expose les adresses MAC internes des postes directement sur Internet",
+        "Il désactive automatiquement le chiffrement TLS de toutes les connexions sortantes des postes de travail",
+        "Il ralentit fortement les connexions Internet de tous les utilisateurs",
+        "Il encapsule IPv6 dans UDP, franchit le NAT et échappe aux pare-feux IPv4"
       ],
       "reponse": 3,
       "explication": "Teredo encapsule des paquets IPv6 dans de l'UDP IPv4, précisément pour traverser les NAT : ce tunnel peut transporter du trafic que les équipements de sécurité, qui n'inspectent que l'IPv4 apparent, ne décodent pas. Les mécanismes de transition (Teredo, 6to4) doivent être bloqués ou strictement contrôlés en entreprise. Les autres réponses ne décrivent pas le fonctionnement de Teredo.",
@@ -1845,9 +1845,9 @@ window.CISSP_DATA.domains[4] = {
       "q": "Quelle affirmation à propos d'IPv6 est EXACTE ?",
       "choix": [
         "IPv6 supprime le broadcast et le remplace par le multicast",
-        "IPv6 rend le NAT obligatoire",
-        "IPv6 utilise des adresses de 64 bits",
-        "IPv6 ne supporte pas IPsec"
+        "IPv6 rend l'usage du NAT strictement obligatoire",
+        "IPv6 utilise des adresses codées sur 64 bits seulement, soit moitié moins qu'en réalité",
+        "IPv6 ne prend pas en charge le protocole IPsec"
       ],
       "reponse": 0,
       "explication": "IPv6 n'a pas d'adresse de broadcast : les fonctions équivalentes reposent sur des groupes multicast bien définis (tous les noeuds, tous les routeurs), ce qui réduit le bruit sur le réseau. Le NAT devient au contraire inutile grâce à l'immensité de l'espace d'adressage, le support d'IPsec est intégré à la conception d'IPv6, et les adresses font 128 bits.",
@@ -1862,10 +1862,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Pourquoi une organisation devrait-elle exiger des suites cryptographiques à base d'ECDHE pour ses serveurs TLS ?",
       "choix": [
-        "ECDHE est la seule suite compatible avec les navigateurs anciens",
-        "ECDHE fournit la confidentialité persistante (forward secrecy) : la compromission future de la clé privée du serveur ne permet pas de déchiffrer les sessions passées",
-        "ECDHE accélère le chiffrement des données de session",
-        "ECDHE supprime le besoin de certificat serveur"
+        "ECDHE est la seule suite cryptographique compatible avec les navigateurs les plus anciens du marché",
+        "ECDHE assure la forward secrecy : une clé privée volée ne déchiffre pas le trafic passé",
+        "ECDHE accélère nettement le chiffrement des données de session",
+        "ECDHE supprime le besoin d'un certificat serveur signé"
       ],
       "reponse": 1,
       "explication": "Avec un échange de clé éphémère Diffie-Hellman (ECDHE), chaque session dérive des clés uniques jamais transmises : même si la clé privée du serveur est volée plus tard, le trafic capturé auparavant reste indéchiffrable. C'est la forward secrecy, rendue obligatoire par TLS 1.3. À l'inverse, l'ancien échange par chiffrement RSA de la clé de session expose tout l'historique en cas de vol de la clé privée. Le chiffrement des données reste symétrique, et le certificat serveur demeure nécessaire pour l'authentification.",
@@ -1880,10 +1880,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Quel est le rôle d'IKE (Internet Key Exchange) dans une connexion IPsec ?",
       "choix": [
-        "Négocier les Security Associations et établir les clés de session, via une phase 1 (canal sécurisé) puis une phase 2 (SA IPsec)",
-        "Chiffrer les données utilisateur pendant la session",
-        "Compresser les paquets avant chiffrement",
-        "Vérifier l'intégrité de l'en-tête IP comme le fait AH"
+        "Négocier les Security Associations et établir les clés via une phase 1 puis une phase 2",
+        "Chiffrer les données utilisateur pendant toute la durée de la session établie entre les deux pairs",
+        "Compresser les paquets avant leur chiffrement par le tunnel",
+        "Vérifier l'intégrité de l'en-tête IP exactement comme le fait AH"
       ],
       "reponse": 0,
       "explication": "IKE automatise la négociation : la phase 1 authentifie les pairs et établit un canal de gestion sécurisé (IKE SA), la phase 2 négocie les SA IPsec qui protégeront réellement le trafic, avec les algorithmes et les clés. Le chiffrement des données est ensuite assuré par ESP, l'intégrité de l'en-tête par AH ; IKE ne chiffre pas les données utilisateur lui-même.",
@@ -1898,10 +1898,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Un tunnel IPsec utilisant AH échoue dès qu'il traverse un équipement NAT. Quelle en est la cause et quelle est la solution standard ?",
       "choix": [
-        "AH exige IPv6 ; il faut migrer le réseau",
-        "Le NAT bloque le port TCP 500 utilisé par AH ; il faut ouvrir ce port",
-        "AH protège l'intégrité de l'en-tête IP que le NAT modifie, ce qui invalide le contrôle ; la solution est ESP avec NAT-Traversal (encapsulation UDP 4500)",
-        "AH est trop lent pour le NAT ; il faut augmenter la bande passante"
+        "AH exige IPv6 ; il faut donc migrer l'ensemble du réseau vers IPv6",
+        "Le NAT bloque le port TCP 500 prétendument utilisé par AH ; il faudrait donc l'ouvrir",
+        "AH couvre l'en-tête IP que le NAT réécrit ; la parade est ESP avec NAT-T",
+        "AH est trop lent pour le NAT ; il faut augmenter la bande passante du lien"
       ],
       "reponse": 2,
       "explication": "AH calcule son contrôle d'intégrité sur l'en-tête IP, y compris les adresses : le NAT, qui réécrit précisément ces adresses, casse systématiquement la vérification. La solution éprouvée est d'utiliser ESP, qui ne couvre pas l'en-tête externe, avec NAT-T qui encapsule le trafic dans UDP 4500 pour franchir les NAT. IKE utilise UDP 500 et non TCP, et AH fonctionne aussi bien en IPv4 qu'en IPv6.",
@@ -1934,10 +1934,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Un attaquant en position d'interception force un client et un serveur à négocier une version obsolète de TLS afin d'exploiter ses faiblesses. Comment s'appelle cette attaque et quelle est la MEILLEURE parade ?",
       "choix": [
-        "Attaque par force brute ; allonger les clés",
-        "Attaque de downgrade ; désactiver les versions et suites obsolètes côté serveur",
-        "Attaque par rejeu ; ajouter des numéros de séquence",
-        "Certificate pinning ; renouveler les certificats"
+        "Attaque par force brute ; allonger nettement la taille des clés utilisées",
+        "Attaque de downgrade ; désactiver les versions et suites obsolètes",
+        "Attaque par rejeu ; ajouter des numéros de séquence aux messages",
+        "Certificate pinning ; renouveler régulièrement les certificats"
       ],
       "reponse": 1,
       "explication": "L'attaque de downgrade (illustrée historiquement par POODLE) manipule la négociation pour retomber sur SSL 3.0 ou TLS 1.0 et leurs vulnérabilités. La parade décisive est de ne plus proposer du tout les versions et suites faibles : ce qui n'est pas négociable ne peut pas être imposé. TLS 1.3 intègre en outre une protection cryptographique de la négociation. Les autres réponses décrivent des mécanismes sans rapport avec la manipulation de version.",
@@ -1952,10 +1952,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Dans une négociation TLS, à quoi sert le certificat présenté par le serveur ?",
       "choix": [
-        "À chiffrer l'ensemble du trafic de la session",
-        "À compresser les données échangées",
-        "À authentifier l'utilisateur final",
-        "À prouver l'identité du serveur via une autorité de certification de confiance et à fournir sa clé publique"
+        "À chiffrer l'intégralité du trafic applicatif échangé pendant toute la durée de la session établie",
+        "À compresser les données échangées durant la connexion",
+        "À authentifier directement l'utilisateur final du poste",
+        "À prouver l'identité du serveur via une autorité de certification et à fournir sa clé publique"
       ],
       "reponse": 3,
       "explication": "Le certificat lie l'identité du serveur (son nom de domaine) à sa clé publique, sous la signature d'une autorité de certification que le client vérifie : c'est ce qui empêche un imposteur de se faire passer pour le site. Le chiffrement de la session utilise ensuite une clé symétrique négociée, l'utilisateur n'est authentifié que si mTLS ou un autre mécanisme est ajouté, et TLS moderne a abandonné la compression pour raisons de sécurité.",
@@ -1970,10 +1970,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Après connexion au VPN, les télétravailleurs d'une organisation peuvent atteindre librement tous les serveurs internes. Quelle évolution s'inscrit le MIEUX dans une démarche Zero Trust ?",
       "choix": [
-        "Restreindre les accès par microsegmentation et politiques par application, selon l'identité et la posture, au moindre privilège",
-        "Doubler la capacité du concentrateur VPN",
-        "Passer le VPN en split tunneling",
-        "Renforcer le mot de passe du VPN"
+        "Restreindre les accès par microsegmentation et politiques par application, au moindre privilège",
+        "Doubler la capacité de traitement matériel du concentrateur VPN pour absorber davantage de charge",
+        "Faire passer le VPN en mode split tunneling",
+        "Renforcer la robustesse du mot de passe du VPN"
       ],
       "reponse": 0,
       "explication": "Le Zero Trust rejette le modèle où franchir le périmètre (ici le VPN) donne une confiance implicite sur tout le réseau : chaque accès doit être autorisé explicitement, par application, selon l'identité, le contexte et la posture du poste, au moindre privilège. La microsegmentation matérialise ce contrôle. Renforcer le mot de passe ou la capacité ne change pas le modèle de confiance, et le split tunneling ajoute un risque au lieu d'en retirer.",
@@ -1988,10 +1988,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Une organisation veut filtrer le trafic east-west entre machines virtuelles hébergées sur le MÊME hyperviseur. Pourquoi son NGFW de périmètre est-il insuffisant, et quelle est la bonne approche ?",
       "choix": [
-        "Le NGFW est trop lent ; il faut un modèle plus puissant",
-        "Le trafic virtuel ne peut pas être filtré ; il faut l'accepter comme risque résiduel",
-        "Le trafic entre VM d'un même hôte ne sort jamais vers le pare-feu physique ; il faut un pare-feu distribué au niveau de l'hyperviseur (microsegmentation)",
-        "Il suffit de créer des VLAN supplémentaires sur le switch physique"
+        "Le NGFW est trop lent ; il faut le remplacer par un modèle bien plus puissant",
+        "Le trafic virtuel entre machines ne peut pas être filtré ; il faut l'accepter comme risque résiduel assumé",
+        "Le trafic entre VM colocalisées n'atteint pas le pare-feu physique ; d'où un pare-feu à l'hyperviseur",
+        "Il suffit de créer quelques VLAN supplémentaires sur le commutateur physique"
       ],
       "reponse": 2,
       "explication": "Les flux entre VM colocalisées transitent par le switch virtuel de l'hyperviseur sans jamais toucher le réseau physique : le pare-feu de périmètre ne les voit tout simplement pas. La microsegmentation avec pare-feu distribué applique les politiques directement au niveau de l'hyperviseur ou de la carte virtuelle de chaque VM. Les VLAN physiques n'interceptent pas ce trafic interne, et le risque est parfaitement traitable.",
@@ -2006,10 +2006,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Quelle caractéristique définit un Software-Defined Perimeter (SDP) ?",
       "choix": [
-        "Il désigne le périmètre physique du datacenter défini par logiciel",
-        "Il remplace le chiffrement par de l'obfuscation d'adresses",
-        "Les ressources restent invisibles et injoignables tant que l'utilisateur et son appareil ne sont pas authentifiés : on authentifie d'abord, on connecte ensuite",
-        "Il place toutes les ressources dans une DMZ accessible publiquement"
+        "Il désigne le périmètre physique du datacenter, simplement défini par logiciel",
+        "Il remplace le chiffrement par une obfuscation des adresses réseau",
+        "Les ressources restent invisibles tant que l'appareil n'est pas authentifié : authentifier puis connecter",
+        "Il place l'ensemble des ressources internes dans une grande DMZ librement accessible depuis l'Internet public"
       ],
       "reponse": 2,
       "explication": "Le SDP applique le principe « authenticate first, connect second » : un contrôleur vérifie l'identité et la posture avant d'ouvrir dynamiquement un tunnel vers la seule ressource autorisée ; le reste de l'infrastructure reste sombre, non scannable. C'est l'inverse du VPN traditionnel qui expose une passerelle publique puis donne un large accès. Le SDP conserve évidemment le chiffrement et n'a rien de physique.",
@@ -2024,10 +2024,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Quelle méthode EAP offre l'authentification la PLUS robuste pour un réseau Wi-Fi d'entreprise, et quel est son principal coût opérationnel ?",
       "choix": [
-        "EAP-TLS ; il exige une PKI pour déployer et gérer des certificats sur chaque client",
-        "PEAP ; il exige des jetons matériels pour tous les utilisateurs",
-        "LEAP ; il exige des mots de passe complexes",
-        "EAP-MD5 ; il exige un serveur RADIUS redondant"
+        "EAP-TLS ; il exige une PKI pour gérer des certificats sur chaque client",
+        "PEAP ; il exige des jetons matériels distincts pour tous les utilisateurs finaux du réseau",
+        "LEAP ; il exige des mots de passe particulièrement complexes",
+        "EAP-MD5 ; il exige un serveur RADIUS redondant en secours"
       ],
       "reponse": 0,
       "explication": "EAP-TLS repose sur une authentification mutuelle par certificats : pas de mot de passe à voler ni à hameçonner, résistance maximale. Sa contrepartie est opérationnelle : une PKI complète pour émettre, distribuer, renouveler et révoquer les certificats de chaque poste. PEAP se contente d'un certificat côté serveur, LEAP est un protocole Cisco cassé depuis longtemps, et EAP-MD5 n'offre ni certificat ni protection sérieuse.",
@@ -2042,10 +2042,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Comment PEAP protège-t-il les identifiants des utilisateurs lors de l'authentification Wi-Fi ?",
       "choix": [
-        "Il exige un certificat client sur chaque poste",
-        "Il les hache avec MD5 avant envoi",
-        "Il les transmet en clair mais sur un canal radio séparé",
-        "Il établit d'abord un tunnel TLS grâce au certificat du serveur, puis fait circuler l'authentification interne (ex. MSCHAPv2) à l'intérieur de ce tunnel"
+        "Il exige l'installation d'un certificat client sur chaque poste",
+        "Il hache systématiquement les identifiants des utilisateurs avec l'algorithme MD5 avant tout envoi réseau",
+        "Il transmet les identifiants en clair mais sur un canal radio séparé",
+        "Il monte un tunnel TLS via le certificat serveur, puis y fait passer l'authentification MSCHAPv2"
       ],
       "reponse": 3,
       "explication": "PEAP (Protected EAP) crée un tunnel TLS authentifié par le seul certificat du serveur ; l'échange d'identifiants, souvent MSCHAPv2, se déroule ensuite à l'abri de ce tunnel. Point de vigilance : les clients doivent valider strictement le certificat du serveur, sinon un evil twin peut monter le tunnel à la place du serveur légitime et capter les identifiants. Le certificat client généralisé est le propre d'EAP-TLS, pas de PEAP.",
@@ -2078,10 +2078,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Lors d'un audit Wi-Fi, vous découvrez que le réseau utilise encore LEAP pour l'authentification. Que devriez-vous recommander ?",
       "choix": [
-        "Le compléter par du filtrage d'adresses MAC",
-        "Ajouter simplement un SSID masqué",
-        "Le remplacer par une méthode EAP robuste comme EAP-TLS ou PEAP, LEAP étant vulnérable aux attaques par dictionnaire",
-        "Le conserver car il est propriétaire donc peu attaqué"
+        "Le compléter par un filtrage des adresses MAC autorisées",
+        "Ajouter simplement un SSID masqué et non diffusé",
+        "Le remplacer par une méthode EAP robuste comme EAP-TLS ou PEAP, LEAP étant cassé",
+        "Le conserver tel quel car il est propriétaire à Cisco, donc supposé peu attaqué en pratique"
       ],
       "reponse": 2,
       "explication": "LEAP, protocole propriétaire Cisco, repose sur MS-CHAP sans tunnel de protection : des outils publics cassent ses échanges par attaque par dictionnaire depuis des années. La sécurité par l'obscurité n'est pas une défense. Il faut migrer vers EAP-TLS ou au minimum PEAP. Le SSID masqué et le filtrage MAC sont des mesures cosmétiques contournables en quelques minutes par capture radio.",
@@ -2096,10 +2096,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Un serveur web devient injoignable : sa table de connexions est saturée de connexions TCP à moitié ouvertes provenant d'adresses sources aléatoires. Quelle attaque est en cours et quelle parade est la PLUS adaptée ?",
       "choix": [
-        "SYN flood ; activer les SYN cookies et des mécanismes anti-DDoS",
-        "Evil twin ; renforcer le WPA3",
-        "Smurf ; désactiver ICMP",
-        "Teardrop ; corriger le réassemblage de fragments"
+        "SYN flood ; activer les SYN cookies et un service anti-DDoS",
+        "Evil twin ; renforcer la configuration WPA3 du réseau",
+        "Smurf ; désactiver le protocole ICMP sur le pare-feu",
+        "Teardrop ; corriger la gestion du réassemblage des fragments IP superposés reçus"
       ],
       "reponse": 0,
       "explication": "L'accumulation de connexions half-open (SYN reçus jamais complétés par un ACK) est la signature du SYN flood, qui épuise la table d'états du serveur. Les SYN cookies permettent de ne pas allouer de ressources avant la validation du handshake ; on y ajoute filtrage amont et services anti-DDoS. Le smurf est une amplification ICMP, le teardrop un DoS par fragments malformés, et l'evil twin une attaque Wi-Fi.",
@@ -2114,10 +2114,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Une victime reçoit un déluge de volumineuses réponses DNS qu'elle n'a jamais demandées, provenant de résolveurs ouverts légitimes. Quelle technique l'attaquant utilise-t-il ?",
       "choix": [
-        "Tunneling DNS : exfiltration de données dans les requêtes",
-        "Amplification DNS : requêtes à source usurpée envoyées à des résolveurs ouverts, dont les réponses, bien plus grosses, convergent vers la victime",
-        "Typosquatting : enregistrement de domaines ressemblants",
-        "DNS poisoning : corruption du cache des résolveurs"
+        "Tunneling DNS : exfiltration de données dissimulées dans les requêtes émises",
+        "Amplification DNS : réponses volumineuses de résolveurs ouverts renvoyées vers la victime usurpée",
+        "Typosquatting : enregistrement de noms de domaine volontairement ressemblants à ceux de la marque visée",
+        "DNS poisoning : corruption du cache des résolveurs interrogés"
       ],
       "reponse": 1,
       "explication": "C'est une attaque par réflexion et amplification : l'attaquant usurpe l'adresse IP de la victime dans de petites requêtes DNS ; les résolveurs ouverts répondent à la victime avec des réponses beaucoup plus volumineuses, démultipliant le débit d'attaque. Les parades incluent le filtrage anti-spoofing chez les opérateurs (BCP 38) et la fermeture des résolveurs ouverts. Le poisoning corrompt des réponses, le tunneling exfiltre, le typosquatting trompe les utilisateurs : rien à voir avec ce déluge.",
@@ -2132,10 +2132,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Un attaquant insère deux étiquettes 802.1Q dans ses trames pour atteindre un VLAN auquel il n'appartient pas. Quelles mesures contrent ce VLAN hopping par double tagging ?",
       "choix": [
-        "Chiffrer le trafic avec TLS",
-        "Réduire la taille des trames Ethernet",
-        "Activer le spanning tree sur tous les ports",
-        "Changer le VLAN natif des trunks, ne jamais y placer de ports d'accès, et désactiver la négociation automatique de trunk (DTP)"
+        "Chiffrer l'intégralité du trafic échangé à l'aide de TLS",
+        "Réduire la taille maximale des trames Ethernet transmises",
+        "Activer le spanning tree protocol (STP) sur l'ensemble des ports du switch",
+        "Changer le VLAN natif des trunks et couper la négociation DTP des ports"
       ],
       "reponse": 3,
       "explication": "Le double tagging exploite le VLAN natif non étiqueté des trunks : le premier switch retire l'étiquette externe et transmet la trame avec l'étiquette interne vers le VLAN cible. Les parades sont architecturales : dédier un VLAN natif inutilisé, étiqueter le VLAN natif, refuser DTP et figer les ports en mode access ou trunk explicite. Le spanning tree prévient les boucles, pas le hopping, et TLS ne protège pas la topologie de commutation.",
@@ -2150,10 +2150,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Dans un café, un attaquant intercepte le trafic entre les clients du Wi-Fi et Internet en se faisant passer pour la passerelle. Comment nomme-t-on sa position, et qu'est-ce qui protège le MIEUX les victimes ?",
       "choix": [
-        "Wardriving ; la géolocalisation",
-        "Attaque on-path (man-in-the-middle) ; le chiffrement de bout en bout via VPN et TLS",
-        "Salami ; la journalisation des transactions",
-        "Attaque par rejeu ; les horodatages"
+        "Wardriving ; la géolocalisation des points d'accès",
+        "Attaque on-path (man-in-the-middle) ; le chiffrement de bout en bout par VPN et TLS",
+        "Attaque salami ; la journalisation détaillée de toutes les transactions financières menées",
+        "Attaque par rejeu ; l'ajout d'horodatages aux messages"
       ],
       "reponse": 1,
       "explication": "S'interposer entre la victime et sa destination pour lire ou modifier les échanges est une attaque on-path, terme moderne pour man-in-the-middle. Même interceptés, des flux chiffrés en VPN ou TLS avec validation stricte des certificats restent illisibles et inviolables : le chiffrement de bout en bout est la protection décisive. Le rejeu réutilise des messages capturés, le wardriving cartographie des réseaux, et l'attaque salami accumule des micro-détournements financiers.",
@@ -2186,10 +2186,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Un attaquant tente de s'insérer dans une session TCP établie en prédisant les numéros de séquence. Quelles défenses rendent ce détournement de session impraticable ?",
       "choix": [
-        "Le passage d'UDP à TCP",
-        "La désactivation des accusés de réception",
+        "Le simple passage du protocole UDP vers TCP",
+        "La désactivation complète de tous les accusés de réception (ACK) de la connexion TCP en cours",
         "Des numéros de séquence initiaux aléatoires et le chiffrement de la session (TLS, IPsec)",
-        "L'augmentation de la MTU"
+        "L'augmentation de la MTU des interfaces réseau"
       ],
       "reponse": 2,
       "explication": "Le TCP session hijacking exige de deviner les numéros de séquence pour injecter des segments acceptés par la pile de la victime : des ISN réellement aléatoires (standard sur les systèmes modernes) rendent la prédiction infaisable, et le chiffrement authentifié (TLS, IPsec) fait qu'une injection éventuelle échoue à la vérification cryptographique. La MTU concerne la taille des paquets, la session est déjà en TCP, et supprimer les ACK casserait simplement le protocole.",
@@ -2204,9 +2204,9 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Malgré un pare-feu stateful correctement configuré, le site web d'une organisation subit des injections SQL. Quel équipement complémentaire cible ce problème ?",
       "choix": [
-        "Un serveur RADIUS",
-        "Un routeur avec des ACL plus strictes",
-        "Un concentrateur VPN",
+        "Un serveur d'authentification RADIUS",
+        "Un routeur de bordure doté de listes de contrôle d'accès (ACL) bien plus strictes",
+        "Un concentrateur de tunnels VPN",
         "Un web application firewall (WAF) qui inspecte les requêtes HTTP/S"
       ],
       "reponse": 3,
@@ -2222,10 +2222,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Quelle capacité distingue FONDAMENTALEMENT un NGFW d'un pare-feu stateful traditionnel ?",
       "choix": [
-        "Le NGFW identifie les applications indépendamment du port utilisé, grâce à l'inspection profonde des paquets, et intègre IPS et connaissance des identités",
-        "Le NGFW suit l'état des connexions TCP",
-        "Le NGFW fonctionne sans table d'états pour plus de rapidité",
-        "Le NGFW filtre par adresses IP source et destination"
+        "Le NGFW identifie les applications quel que soit le port, avec IPS et connaissance des identités",
+        "Le NGFW suit l'état des connexions TCP en cours",
+        "Le NGFW fonctionne entièrement sans table d'états afin de gagner encore en rapidité de traitement",
+        "Le NGFW filtre selon les adresses IP source et destination"
       ],
       "reponse": 0,
       "explication": "Le suivi d'état et le filtrage par adresses existent déjà sur un pare-feu stateful classique. La valeur ajoutée du next-generation firewall est l'app-awareness : reconnaître l'application réelle même sur un port non standard ou chiffré, appliquer des politiques par application et par utilisateur, avec IPS intégré et souvent inspection TLS. Il conserve bien entendu une table d'états.",
@@ -2258,10 +2258,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Quelle est la différence OPÉRATIONNELLE essentielle entre un IDS et un IPS réseau ?",
       "choix": [
-        "L'IDS chiffre le trafic analysé, pas l'IPS",
-        "L'IDS est matériel, l'IPS est logiciel",
-        "L'IPS est placé en coupure (inline) et peut bloquer le trafic malveillant en temps réel ; l'IDS écoute une copie du trafic et se limite à détecter et alerter",
-        "L'IPS ne fonctionne que sur les postes de travail"
+        "L'IDS chiffre le trafic qu'il analyse, contrairement à l'IPS",
+        "L'IDS est un équipement matériel et l'IPS un simple logiciel",
+        "L'IPS en coupure bloque le trafic malveillant en temps réel ; l'IDS sur copie ne fait qu'alerter",
+        "L'IPS ne fonctionne en réalité que sur les postes de travail des utilisateurs finaux du réseau interne"
       ],
       "reponse": 2,
       "explication": "Tout tient au placement : l'IPS, en coupure sur le chemin du trafic, peut rejeter les paquets malveillants immédiatement, au prix d'un risque de blocage légitime (faux positif) et d'un point de panne potentiel. L'IDS, alimenté par un port SPAN ou un TAP, observe sans pouvoir intervenir directement. Les deux existent en versions réseau et hôte, aucun ne chiffre le trafic.",
@@ -2276,10 +2276,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Lors d'une revue d'architecture, vous découvrez un VPN d'accès distant encore configuré en PPTP. Pourquoi faut-il le remplacer d'URGENCE ?",
       "choix": [
-        "PPTP impose un débit maximal de 10 Mbps",
-        "L'authentification MS-CHAPv2 de PPTP est cassée et son chiffrement MPPE est faible : le trafic peut être déchiffré",
-        "PPTP est trop coûteux en licences",
-        "PPTP ne fonctionne pas sur les réseaux modernes"
+        "PPTP impose un débit maximal théorique de 10 Mbps par tunnel, jugé bien trop lent pour aujourd'hui",
+        "MS-CHAPv2 de PPTP est cassé et son chiffrement MPPE est faible : le trafic est déchiffrable",
+        "PPTP revient trop cher en licences propriétaires à déployer",
+        "PPTP ne fonctionne tout simplement plus sur les réseaux modernes"
       ],
       "reponse": 1,
       "explication": "PPTP est cryptographiquement mort : MS-CHAPv2 se casse par des services de calcul spécialisés en un temps court, et le chiffrement MPPE qui en dérive tombe avec lui. Toute donnée transitant par PPTP doit être considérée comme exposée. Les remplaçants sont IKEv2/IPsec, les VPN TLS ou WireGuard. Les questions de coût, de compatibilité ou de débit ne sont pas le sujet : c'est la confidentialité qui est rompue.",
@@ -2295,9 +2295,9 @@ window.CISSP_DATA.domains[4] = {
       "q": "Des consultants externes doivent accéder à UNE seule application web interne, sans installation de logiciel sur leurs machines. Quelle solution d'accès distant est la PLUS appropriée ?",
       "choix": [
         "Un VPN TLS clientless : un portail web publiant uniquement l'application autorisée",
-        "La création de comptes sur le VPN full tunnel de l'entreprise",
-        "Un VPN IPsec en mode tunnel avec client complet",
-        "Un accès RDP direct exposé sur Internet"
+        "La création de comptes nominatifs sur le VPN full tunnel de l'ensemble de l'entreprise",
+        "Un VPN IPsec en mode tunnel avec un client logiciel complet",
+        "Un accès RDP direct exposé publiquement sur Internet"
       ],
       "reponse": 0,
       "explication": "Le VPN TLS clientless s'utilise depuis un simple navigateur et le portail ne publie que les applications explicitement autorisées : accès au moindre privilège, aucune installation, aucune visibilité sur le reste du réseau. Un VPN IPsec ou full tunnel donnerait aux consultants un accès réseau bien trop large depuis des machines non maîtrisées, et exposer RDP directement sur Internet est une des premières causes de compromission par ransomware.",
@@ -2312,10 +2312,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Pourquoi L2TP est-il presque toujours déployé conjointement avec IPsec ?",
       "choix": [
-        "IPsec accélère les performances de L2TP",
-        "L2TP ne fonctionne qu'en IPv6 et IPsec assure la conversion",
-        "L2TP ne fournit aucun chiffrement par lui-même : IPsec apporte la confidentialité et l'intégrité du tunnel",
-        "IPsec fournit l'attribution d'adresses que L2TP ne sait pas faire"
+        "IPsec accélère nettement les performances du protocole L2TP",
+        "L2TP ne fonctionne qu'en IPv6 et IPsec assure la conversion de protocole nécessaire au tunnel",
+        "L2TP ne chiffre rien par lui-même : IPsec apporte confidentialité et intégrité au tunnel",
+        "IPsec fournit l'attribution d'adresses que L2TP ne sait pas réaliser"
       ],
       "reponse": 2,
       "explication": "L2TP (Layer 2 Tunneling Protocol) sait encapsuler et tunneler, mais ne chiffre rien : utilisé seul, tout le trafic circule en clair. Le couple L2TP/IPsec confie à IPsec (ESP) la confidentialité, l'intégrité et l'authentification du tunnel. IPsec ajoute au contraire une surcharge de traitement, L2TP fonctionne en IPv4 comme en IPv6, et l'attribution d'adresses relève d'autres mécanismes du tunnel.",
@@ -2330,10 +2330,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Un test d'intrusion démontre que les appels VoIP internes peuvent être capturés et réécoutés depuis n'importe quelle prise réseau. Quelle combinaison de mesures corrige le MIEUX cette exposition ?",
       "choix": [
-        "Augmenter la bande passante et prioriser la voix",
-        "Publier une charte interdisant l'écoute des appels",
-        "Remplacer les téléphones IP par des softphones",
-        "Chiffrer les flux avec SRTP et la signalisation avec SIPS, et isoler la téléphonie dans un VLAN voix dédié"
+        "Augmenter la bande passante disponible sur le lien WAN et prioriser fortement le trafic de la voix",
+        "Publier une charte interne interdisant l'écoute des appels",
+        "Remplacer les téléphones IP matériels par des softphones",
+        "Chiffrer les flux par SRTP et la signalisation par SIPS, et isoler la voix dans un VLAN dédié"
       ],
       "reponse": 3,
       "explication": "RTP non chiffré se réécoute avec des outils triviaux dès que le trafic est accessible. La réponse est technique et en profondeur : SRTP chiffre et authentifie les flux média, SIPS protège la signalisation, et le VLAN voix dédié réduit la surface d'écoute depuis le réseau data. La QoS améliore la qualité, pas la confidentialité ; les softphones ne changent rien au protocole ; une charte ne bloque aucune capture.",
@@ -2348,10 +2348,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Outre la qualité de service, quel bénéfice de SÉCURITÉ apporte le placement des téléphones IP dans un VLAN voix séparé ?",
       "choix": [
-        "Il rend les téléphones invisibles sur le réseau",
-        "Il sépare la téléphonie du réseau data, compliquant l'écoute des flux voix et le rebond depuis un poste compromis vers l'infrastructure téléphonique",
-        "Il chiffre automatiquement les communications",
-        "Il supprime le besoin d'authentifier les téléphones"
+        "Elle rend les téléphones totalement invisibles sur le réseau",
+        "Elle sépare voix et données, compliquant l'écoute et le rebond vers la téléphonie",
+        "Elle chiffre automatiquement toutes les communications vocales",
+        "Elle supprime totalement le besoin d'authentifier les téléphones IP raccordés au réseau voix"
       ],
       "reponse": 1,
       "explication": "La ségrégation en VLAN voix crée une frontière logique : un poste de travail compromis n'a plus d'accès direct aux flux et aux serveurs de téléphonie, et le trafic voix n'est plus exposé sur le segment data. C'est de la segmentation, pas du chiffrement : SRTP reste nécessaire pour la confidentialité, les téléphones restent adressables dans leur VLAN, et leur authentification (802.1X) reste pertinente.",
@@ -2366,10 +2366,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Une organisation déploie un SAN iSCSI transportant des données sensibles. Quelle combinaison de mesures constitue la MEILLEURE ligne de défense ?",
       "choix": [
-        "Faire transiter l'iSCSI sur le VLAN utilisateurs pour simplifier l'administration",
-        "Limiter l'accès par un filtrage d'adresses MAC",
-        "Isoler le trafic de stockage sur un réseau ou VLAN dédié, activer l'authentification CHAP mutuelle et chiffrer par IPsec si le réseau n'est pas de confiance",
-        "Se reposer sur le chiffrement natif du protocole iSCSI"
+        "Faire transiter l'iSCSI sur le VLAN des utilisateurs finaux afin de simplifier l'administration au quotidien",
+        "Limiter l'accès par un simple filtrage des adresses MAC",
+        "Isoler le stockage sur un VLAN dédié, activer CHAP mutuel et chiffrer par IPsec hors réseau de confiance",
+        "Se reposer sur le prétendu chiffrement natif du protocole iSCSI"
       ],
       "reponse": 2,
       "explication": "iSCSI n'embarque nativement ni chiffrement ni authentification forte : la défense repose sur l'isolement du réseau de stockage (VLAN ou infrastructure dédiée), l'authentification CHAP mutuelle entre initiateurs et cibles, et IPsec lorsque le trafic traverse des segments non maîtrisés. Mélanger le stockage au trafic utilisateurs l'expose au sniffing et aux accès indus, et le filtrage MAC se contourne par usurpation.",
@@ -2384,10 +2384,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Quelle est la différence essentielle entre un SAN et un NAS ?",
       "choix": [
-        "Le SAN fonctionne uniquement en Wi-Fi",
-        "Le SAN est toujours moins cher que le NAS",
-        "Le NAS est réservé aux sauvegardes",
-        "Le SAN offre un accès en mode bloc (les serveurs voient des disques), le NAS un accès en mode fichier via des protocoles comme NFS ou SMB"
+        "Le SAN fonctionne exclusivement au travers d'une liaison sans fil Wi-Fi dédiée au stockage",
+        "Le SAN revient toujours moins cher à déployer que le NAS",
+        "Le NAS est strictement réservé aux opérations de sauvegarde",
+        "Le SAN offre un accès en mode bloc, le NAS un accès en mode fichier via NFS ou SMB"
       ],
       "reponse": 3,
       "explication": "Le SAN (via Fibre Channel, FCoE ou iSCSI) présente aux serveurs des volumes en mode bloc, qu'ils formatent comme des disques locaux : c'est le choix des bases de données et de la virtualisation. Le NAS expose des systèmes de fichiers partagés via NFS ou SMB. Le SAN est généralement plus coûteux, le NAS sert bien au-delà des sauvegardes, et aucun des deux n'a de rapport avec le Wi-Fi.",
@@ -2402,10 +2402,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Un site marchand subit régulièrement des attaques DDoS volumétriques qui saturent sa connexion Internet. Quelle approche architecturale absorbe le MIEUX ce type d'attaque ?",
       "choix": [
-        "Passer par un CDN avec adressage anycast, qui répartit et absorbe le trafic d'attaque sur des points de présence mondiaux",
-        "Bloquer les adresses IP attaquantes une par une au pare-feu",
-        "Doubler la bande passante du lien Internet",
-        "Ajouter un IDS derrière le routeur de bordure"
+        "Passer par un CDN en anycast, qui répartit et absorbe l'attaque sur des points de présence mondiaux",
+        "Bloquer les adresses IP attaquantes une par une directement au pare-feu de bordure du réseau d'entreprise",
+        "Doubler la bande passante du lien Internet de l'entreprise",
+        "Ajouter un IDS juste derrière le routeur de bordure"
       ],
       "reponse": 0,
       "explication": "Contre une attaque volumétrique, tout équipement situé derrière le lien saturé arrive trop tard : il faut absorber en amont. Un CDN en anycast disperse le trafic vers des dizaines de points de présence dont la capacité cumulée dépasse largement l'attaque, tout en servant le contenu légitime depuis le cache. Doubler la bande passante ne fait que relever marginalement le seuil, l'IDS ne bloque rien, et le blocage manuel d'adresses ne suit pas le rythme d'un botnet.",
@@ -2420,10 +2420,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Une enseigne déploie des noeuds de edge computing dans ses centaines de magasins pour traiter les données localement. Quelle préoccupation de sécurité SPÉCIFIQUE cette architecture introduit-elle par rapport à un datacenter centralisé ?",
       "choix": [
-        "La bande passante consommée entre les magasins et le siège augmente fortement",
-        "Des équipements traitant des données sensibles se retrouvent hors du périmètre physique maîtrisé : sécurité physique, durcissement et gestion à distance de centaines de sites deviennent critiques",
-        "La conformité réglementaire devient impossible dès que les données quittent le datacenter certifié",
-        "La panne d'un seul noeud edge interrompt l'activité de l'ensemble des magasins"
+        "La bande passante consommée entre les magasins et le siège central augmente très fortement du fait du traitement local des données de production",
+        "Des équipements traitant des données sensibles sortent du périmètre physique maîtrisé : sécurité physique et gestion à distance de sites",
+        "La conformité réglementaire devient totalement impossible dès que les données quittent le datacenter central certifié",
+        "La panne d'un seul noeud edge suffit à interrompre l'activité de l'ensemble des magasins de l'enseigne"
       ],
       "reponse": 1,
       "explication": "L'edge computing rapproche traitement et données des utilisateurs, mais disperse l'infrastructure dans des lieux sans les protections d'un datacenter : accès physique facilité, vol possible d'équipements, patching et supervision à grande échelle. Les réponses passent par le chiffrement au repos, le démarrage sécurisé, la gestion centralisée et la segmentation de chaque site. Le traitement local réduit au contraire la bande passante vers le siège, la conformité reste atteignable avec des contrôles adaptés, et l'architecture distribuée limite justement l'impact de la panne d'un noeud à son seul site.",
@@ -2438,8 +2438,8 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "À la suite d'un ransomware ayant paralysé un concurrent par mouvement latéral, le comité exécutif demande au RSSI de « passer en Zero Trust ». Le budget de l'année ne couvre qu'une fraction d'une refonte complète, et la BIA a identifié trois applications critiques. Que devrait faire le RSSI EN PREMIER ?",
       "choix": [
-        "Microsegmenter d'abord les zones hébergeant les trois applications critiques identifiées par la BIA, et inscrire le reste dans une feuille de route Zero Trust pluriannuelle",
-        "Imposer la MFA sur l'accès VPN de tous les utilisateurs distants",
+        "Microsegmenter d'abord les zones des trois applications critiques de la BIA, le reste sur une feuille de route pluriannuelle",
+        "Imposer la MFA sur l'accès VPN de tous les utilisateurs distants de l'entreprise sans exception",
         "Lancer immédiatement la refonte Zero Trust complète : IAM moderne, ZTNA, microsegmentation généralisée et remplacement du VPN",
         "Remplacer le pare-feu de périmètre par un NGFW de dernière génération pour durcir la frontière du réseau"
       ],
@@ -2456,9 +2456,9 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Un architecte réseau remplace le MPLS de 40 agences par un SD-WAN avec sorties Internet locales vers les applications SaaS, pour réduire les coûts. Quelle exigence de sécurité est la PLUS importante à intégrer dès la conception ?",
       "choix": [
-        "Conserver le backhaul de tout le trafic SaaS vers le siège pour l'inspecter avec les équipements existants",
-        "Appliquer à chaque sortie Internet locale une politique de sécurité homogène et administrée centralement, par exemple via un modèle SASE",
-        "Chiffrer en IPsec les tunnels entre les agences et les datacenters",
+        "Conserver le backhaul de tout le trafic SaaS vers le siège pour l'inspecter avec les équipements de sécurité déjà en place",
+        "Appliquer à chaque sortie Internet locale une politique de sécurité homogène et centralisée, via un modèle SASE",
+        "Chiffrer en IPsec les tunnels reliant les agences aux datacenters de l'entreprise",
         "Doubler les liens Internet de chaque agence pour garantir la disponibilité des accès SaaS"
       ],
       "reponse": 1,
@@ -2474,10 +2474,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Le SOC d'une banque demande l'inspection TLS de tout le trafic sortant pour détecter l'exfiltration de données. Le DPO objecte que les salariés accèdent aussi à leur banque en ligne, à des sites de santé et à des services syndicaux. Quelle est la MEILLEURE décision du RSSI ?",
       "choix": [
-        "Déployer l'inspection TLS sur la totalité du trafic : la détection de l'exfiltration prime sur toute autre considération",
-        "Limiter l'inspection TLS aux seuls dirigeants et détenteurs d'accès privilégiés, population la plus à risque",
-        "Renoncer à l'inspection TLS et s'appuyer uniquement sur l'EDR des postes pour détecter l'exfiltration",
-        "Déployer une inspection TLS sélective excluant les catégories sensibles (santé, banque, vie privée), encadrée par une politique validée avec le DPO et notifiée aux salariés"
+        "Déployer l'inspection TLS sur la totalité du trafic : la détection de l'exfiltration prime sur toute autre considération juridique",
+        "Limiter l'inspection TLS aux seuls dirigeants et détenteurs d'accès privilégiés, considérés comme la population la plus à risque",
+        "Renoncer à toute inspection TLS et s'appuyer uniquement sur l'EDR des postes de travail pour détecter l'exfiltration de données",
+        "Déployer une inspection TLS sélective excluant les catégories sensibles, validée avec le DPO et notifiée aux salariés"
       ],
       "reponse": 3,
       "explication": "Le RSSI doit arbitrer entre deux exigences légitimes : la visibilité du SOC et les obligations de protection de la vie privée. L'inspection sélective par catégories, gouvernée avec le DPO et transparente pour les salariés, préserve la détection sur l'essentiel du trafic tout en respectant la proportionnalité juridique — c'est l'équilibre attendu d'un manager. Tout inspecter est un absolu juridiquement indéfendable ; tout abandonner sacrifie la visibilité réseau alors qu'un compromis existe ; cibler des personnes plutôt que des catégories de trafic est discriminatoire et laisse le reste du personnel sans détection.",
@@ -2492,10 +2492,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Lors d'un projet de convergence IT/OT, un audit révèle que des automates (PLC) sont joignables depuis le réseau bureautique. La direction de production refuse tout arrêt des lignes, et les PLC ne peuvent pas être patchés avant l'arrêt annuel dans neuf mois. Que devrait recommander le RSSI EN PREMIER ?",
       "choix": [
-        "Exiger de la direction générale un arrêt exceptionnel des lignes pour traiter la vulnérabilité",
-        "Déployer une sonde de détection passive spécialisée OT pour obtenir la visibilité sur les échanges industriels",
-        "Segmenter les réseaux IT et OT en zones et conduits avec des contrôles compensatoires aux points de passage, conformément au modèle Purdue et à l'IEC 62443",
-        "Planifier une campagne de patching d'urgence des PLC en dehors des heures de production"
+        "Exiger de la direction générale un arrêt exceptionnel des lignes de production pour traiter la vulnérabilité sans délai",
+        "Déployer une sonde de détection passive spécialisée OT afin d'obtenir de la visibilité sur les échanges industriels observés",
+        "Segmenter IT et OT en zones et conduits avec des contrôles compensatoires aux points de passage (modèle Purdue, IEC 62443)",
+        "Planifier une campagne de patching d'urgence des automates PLC en dehors des heures de production habituelles"
       ],
       "reponse": 2,
       "explication": "Quand le patching est impossible sous contrainte métier, la réponse architecturale est le contrôle compensatoire : segmenter IT et OT en zones et conduits supprime immédiatement le chemin d'attaque depuis la bureautique, sans toucher aux lignes de production. La campagne de patching ignore la contrainte opérationnelle réelle des PLC (fenêtres de maintenance rares, requalification) ; la sonde passive donne de la visibilité mais ne bloque rien — elle vient en complément, après la segmentation ; exiger l'arrêt des lignes fait prévaloir la sécurité sur le métier sans avoir d'abord épuisé les mesures compensatoires.",
@@ -2510,10 +2510,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "En pleine période de déclaration fiscale, le portail de télé-déclaration d'une administration subit un DDoS volumétrique qui sature son lien Internet ; les pare-feux tiennent la charge. Le plan de continuité interdit plus d'une heure d'indisponibilité. Que faire EN PREMIER ?",
       "choix": [
-        "Configurer les pare-feux pour bloquer les adresses IP sources identifiées dans les journaux",
-        "Commander en urgence une augmentation de la bande passante du lien Internet",
-        "Basculer le portail vers le site de secours prévu au plan de reprise",
-        "Activer le service de mitigation anti-DDoS de l'opérateur ou du fournisseur cloud prévu au contrat, pour filtrer le trafic en amont du lien"
+        "Configurer les pare-feux pour bloquer les adresses IP sources identifiées dans les journaux de connexion récents",
+        "Commander en urgence une augmentation de la bande passante du lien Internet auprès de l'opérateur",
+        "Basculer le portail de télé-déclaration vers le site de secours prévu au plan de reprise d'activité",
+        "Activer le service anti-DDoS de l'opérateur ou du cloud, prévu au contrat, pour filtrer en amont du lien"
       ],
       "reponse": 3,
       "explication": "Une attaque volumétrique se gagne en amont du lien saturé : seul le service de mitigation de l'opérateur ou un scrubbing center cloud peut filtrer le trafic avant qu'il n'atteigne le goulot d'étranglement, dans le délai imposé par le PCA. Bloquer les IP au pare-feu est inutile : les paquets ont déjà traversé et saturé le lien, et un botnet change d'adresses plus vite que les règles ; basculer vers le site de secours ne fait que déplacer la cible, que l'attaque suivra via le DNS ; augmenter la bande passante prend des jours et ne fait que relever marginalement le seuil.",
@@ -2529,9 +2529,9 @@ window.CISSP_DATA.domains[4] = {
       "q": "La direction de production exige que le prestataire de maintenance des automates puisse intervenir à distance 24 h/24. Le RSSI doit concilier cette exigence métier avec la protection du réseau OT. Quelle architecture d'accès distant est la PLUS appropriée ?",
       "choix": [
         "Un outil de prise en main à distance grand public installé sur le poste d'ingénierie, activé à la demande par l'exploitant",
-        "Un VPN site à site permanent entre le réseau du prestataire et le réseau OT de l'usine",
-        "Un accès via un bastion (jump host) placé dans une DMZ industrielle, avec MFA, enregistrement des sessions et fenêtres d'accès limitées dans le temps",
-        "Le refus de tout accès distant au réseau OT, les interventions devant se faire sur site"
+        "Un VPN site à site permanent établi entre le réseau du prestataire et le réseau OT de l'usine",
+        "Un accès via un bastion (jump host) en DMZ industrielle, avec MFA, enregistrement des sessions et fenêtres limitées",
+        "Le refus de tout accès distant au réseau OT, les interventions devant obligatoirement se faire sur site"
       ],
       "reponse": 2,
       "explication": "Le bastion en DMZ industrielle est le point de passage unique contrôlé : authentification forte du prestataire, traçabilité complète par enregistrement de session, accès ouverts uniquement pendant les fenêtres d'intervention et limités aux équipements concernés — l'exigence métier est satisfaite sans exposer le réseau OT. Le VPN site à site crée une confiance permanente envers un réseau tiers non maîtrisé ; un outil de prise en main grand public échappe à la gouvernance (pas de MFA d'entreprise, pas de journalisation centrale, flux sortants incontrôlés) ; interdire tout accès distant viole l'exigence métier posée et pousse les équipes vers des contournements non maîtrisés.",
@@ -2546,10 +2546,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "L'API de paiement d'un commerçant subit un DDoS applicatif (couche 7) qui épuise le CPU du WAF. Un géoblocage total des régions d'origine de l'attaque couperait aussi 15 % des clients légitimes en pleine campagne commerciale. Quelle réponse le RSSI devrait-il privilégier ?",
       "choix": [
-        "Appliquer immédiatement le géoblocage total : la survie de la plateforme justifie la perte temporaire de clients",
-        "Mettre en place un rate limiting progressif et des défis de validation (challenge) ciblant les signatures de trafic anormales, en préservant les parcours clients légitimes",
-        "Mettre l'API hors ligne le temps que l'attaque cesse afin de protéger l'infrastructure",
-        "Augmenter en urgence les ressources CPU du WAF pour absorber la charge"
+        "Appliquer immédiatement le géoblocage total des régions concernées : la survie de la plateforme justifie la perte temporaire de clients",
+        "Mettre en place un rate limiting progressif et des défis ciblant les signatures anormales, en préservant les clients légitimes",
+        "Mettre l'API de paiement hors ligne le temps que l'attaque cesse afin de protéger l'infrastructure sous-jacente",
+        "Augmenter en urgence les ressources CPU allouées au WAF pour absorber la charge de l'attaque applicative"
       ],
       "reponse": 1,
       "explication": "Le DDoS applicatif se distingue par un trafic qui imite les requêtes légitimes : la réponse proportionnée est de discriminer par le comportement — rate limiting progressif, défis de validation sur les patterns anormaux — pour dégrader l'attaque sans sacrifier les clients légitimes, ce qui est l'objectif business en pleine campagne. Le géoblocage total est un remède disproportionné qui réalise lui-même le déni de service sur 15 % du chiffre d'affaires ; couper l'API réalise l'objectif de l'attaquant ; ajouter du CPU sans discrimination ne fait que retarder l'épuisement en subventionnant l'attaque.",
@@ -2564,10 +2564,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Une entreprise a obtenu un budget triennal pour une transformation Zero Trust de son réseau. Par quelle étape le programme devrait-il COMMENCER ?",
       "choix": [
-        "Inventorier les actifs, cartographier les flux applicatifs et les identités afin de définir les surfaces à protéger",
-        "Microsegmenter l'ensemble du datacenter avec des pare-feux distribués",
-        "Remplacer le VPN par une solution ZTNA/SDP pour tous les collaborateurs dès la première année",
-        "Généraliser le mTLS entre tous les services internes"
+        "Inventorier les actifs et cartographier les flux applicatifs et les identités pour définir les surfaces à protéger",
+        "Microsegmenter l'ensemble du datacenter à l'aide de pare-feux distribués dès le lancement",
+        "Remplacer d'emblée le VPN par une solution ZTNA ou SDP pour tous les collaborateurs dès la première année du programme",
+        "Généraliser l'authentification mutuelle mTLS entre tous les services internes de l'entreprise"
       ],
       "reponse": 0,
       "explication": "Toute démarche Zero Trust commence par la connaissance : on ne peut définir des politiques d'accès au moindre privilège que si l'on sait quels actifs existent, quels flux sont légitimes et quelles identités y accèdent. Sans cette cartographie, la microsegmentation produit des règles fausses qui cassent la production, le ZTNA reproduit les accès trop larges existants, et le mTLS chiffre des flux dont on ignore la légitimité. Les trois autres actions sont des composantes valides du programme, mais placées en première étape elles échouent faute de fondation.",
@@ -2618,10 +2618,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Après une fusion, vous devez interconnecter deux réseaux d'entreprise qui utilisent tous deux 10.0.0.0/8 avec des plans d'adressage qui se chevauchent largement. La direction veut des échanges applicatifs opérationnels en six semaines. Quelle approche recommandez-vous EN PREMIER ?",
       "choix": [
-        "Interconnexion contrôlée via NAT double sens sur des passerelles dédiées, limitée aux flux applicatifs identifiés, le temps de planifier la convergence d'adressage",
-        "Établir un VPN site à site standard entre les deux cœurs de réseau",
-        "Fusionner les domaines d'administration réseau des deux entités pour simplifier la gestion",
-        "Renuméroter immédiatement le réseau de la société acquise pour éliminer le chevauchement"
+        "Interconnexion contrôlée par NAT double sens sur passerelles dédiées, limitée aux seuls flux applicatifs identifiés",
+        "Établir un VPN site à site standard entre les deux coeurs de réseau des entreprises fusionnées",
+        "Fusionner les domaines d'administration réseau des deux entités afin de simplifier la gestion quotidienne",
+        "Renuméroter immédiatement tout le réseau de la société acquise pour éliminer d'emblée le chevauchement d'adressage constaté"
       ],
       "reponse": 0,
       "explication": "Le chevauchement d'adressage rend le routage direct impossible : le NAT double sens sur des points de passage contrôlés répond au besoin métier dans le délai, en limitant l'exposition aux seuls flux nécessaires — et laisse le temps de traiter la renumérotation comme un projet.",
@@ -2636,10 +2636,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Votre SOC signale que l'inspection TLS du proxy sortant est aveugle sur un service SaaS critique depuis que celui-ci impose le certificate pinning. L'équipe réseau propose de placer le domaine en liste d'exemption globale. Quelle est la MEILLEURE réponse ?",
       "choix": [
-        "Refuser l'exemption et bloquer le service jusqu'à ce que l'éditeur retire le pinning",
-        "Désactiver l'inspection TLS globalement puisqu'elle devient inefficace",
-        "Installer l'autorité de certification interne sur les serveurs de l'éditeur SaaS",
-        "Accepter l'exemption mais la compenser : restreindre l'exemption au strict domaine concerné, renforcer les contrôles alternatifs (télémétrie endpoint, CASB via API, journaux du SaaS) et documenter le risque résiduel accepté"
+        "Refuser l'exemption et bloquer purement et simplement le service critique jusqu'à ce que l'éditeur retire le certificate pinning",
+        "Désactiver l'inspection TLS de manière globale sur tout le trafic sortant, puisqu'elle devient inefficace sur ce service",
+        "Installer l'autorité de certification interne de l'entreprise directement sur les serveurs de l'éditeur du service SaaS",
+        "Accepter l'exemption mais la compenser : la restreindre au strict domaine, renforcer les contrôles alternatifs et documenter"
       ],
       "reponse": 3,
       "explication": "Le pinning empêche l'interception licite comme illicite : la réponse mature est une exemption minimale assortie de contrôles compensatoires (visibilité par l'endpoint et l'API du SaaS) et d'une acceptation de risque documentée.",
@@ -2654,10 +2654,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Un site industriel connecte ses automates (OT) au réseau IT pour remonter des données de production vers un outil d'analyse cloud. L'intégrateur propose une règle de pare-feu autorisant le serveur d'historisation, situé dans la zone OT, à pousser directement vers Internet. Quelle exigence d'architecture imposez-vous ?",
       "choix": [
-        "Le chiffrement TLS du flux direct entre l'historian OT et le cloud",
-        "La limitation du débit du flux sortant pour éviter l'exfiltration massive",
-        "Une authentification forte de l'outil cloud avant chaque collecte",
-        "Le passage par une zone démilitarisée industrielle (iDMZ) : l'historian OT pousse vers un réplica en iDMZ, seul ce réplica dialogue avec le cloud — aucun flux direct OT→Internet"
+        "Le chiffrement TLS du flux poussé directement entre l'historian OT et la plateforme cloud d'analyse",
+        "La limitation du débit du flux sortant afin d'éviter toute exfiltration massive de données de production",
+        "Une authentification forte de l'outil cloud d'analyse exigée avant chaque opération de collecte de données",
+        "Le passage par une iDMZ : l'historian pousse vers un réplica, seul ce réplica parle au cloud"
       ],
       "reponse": 3,
       "explication": "Le modèle Purdue/IEC 62443 impose la rupture de flux en iDMZ : la zone OT ne dialogue jamais directement avec Internet. Le réplica en iDMZ absorbe l'exposition ; TLS et authentification s'ajoutent mais ne remplacent pas la ségrégation.",
@@ -2672,10 +2672,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Une PME dont le site e-commerce subit un DDoS applicatif (L7) sous une adresse IP directement exposée envisage trois offres : un service anti-DDoS BGP de son opérateur, un CDN avec WAF intégré, ou le doublement de la capacité de ses serveurs. Le budget ne permet qu'une option. Laquelle est la PLUS adaptée ?",
       "choix": [
-        "Le doublement de la capacité serveur, qui améliore aussi les performances au quotidien",
-        "Les trois sont équivalents : choisir la moins chère",
-        "Le CDN avec WAF : il masque l'origine, absorbe la charge en périphérie et filtre les requêtes applicatives — le vecteur exact de l'attaque",
-        "Le service anti-DDoS BGP de l'opérateur, référence contre les attaques volumétriques"
+        "Le doublement de la capacité des serveurs, qui améliore par ailleurs les performances du site marchand au quotidien",
+        "Les trois offres se valent : il suffit de retenir la moins chère du marché",
+        "Le CDN avec WAF : il masque l'origine, absorbe la charge en périphérie et filtre les requêtes applicatives",
+        "Le service anti-DDoS BGP de l'opérateur, référence reconnue contre les attaques volumétriques"
       ],
       "reponse": 2,
       "explication": "Une attaque L7 se filtre au niveau applicatif : le CDN/WAF traite les requêtes malveillantes en périphérie et cache l'IP d'origine. La protection BGP excelle contre le volumétrique L3/L4 mais laisse passer du L7 « propre » ; ajouter des serveurs ne fait que renchérir la cible.",
@@ -2726,10 +2726,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Les utilisateurs se plaignent d'une voix hachée et de coupures sur la téléphonie IP, alors que les liens sont loin de la saturation et que la latence moyenne mesurée reste correcte. QUELLE métrique devez-vous examiner EN PRIORITÉ ?",
       "choix": [
-        "Le débit réel (throughput) des liens WAN",
-        "Le rapport signal sur bruit (SNR) du câblage",
+        "Le débit réel (throughput) réellement atteint sur les liens WAN",
+        "Le rapport signal sur bruit (SNR) mesuré sur le câblage cuivre",
         "Le jitter : la variation de la latence entre les paquets, que la voix tolère très mal",
-        "La bande passante théorique souscrite auprès de l'opérateur"
+        "La bande passante théorique totale souscrite auprès de l'opérateur télécom pour le lien"
       ],
       "reponse": 2,
       "explication": "Une voix hachée avec des liens non saturés et une latence moyenne correcte pointe vers le jitter : la variation de la latence désynchronise les paquets audio et vide les tampons de gigue. La parade est la QoS et le traffic shaping pour prioriser la voix. Débit et bande passante sont hors de cause puisque les liens ne saturent pas.",
@@ -2744,10 +2744,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Dans un Virtual Private Cloud, votre équipe doit bloquer explicitement une plage d'adresses IP malveillante pour l'ensemble des instances d'un subnet, tout en conservant les autorisations applicatives existantes. QUEL mécanisme utilisez-vous ?",
       "choix": [
-        "Un security group avec une règle de refus sur la plage concernée",
-        "Un VPC peering vers un VPC de quarantaine qui absorbera le trafic hostile",
-        "Une route statique dirigeant la plage malveillante vers la NAT gateway",
-        "Une NACL sur le subnet : stateless, elle accepte des règles d'interdiction (deny) explicites appliquées à toutes les instances"
+        "Un security group assorti d'une règle de refus portant sur la plage concernée",
+        "Un VPC peering vers un VPC de quarantaine chargé d'absorber le trafic hostile",
+        "Une route statique dirigeant la plage d'adresses malveillante vers la NAT gateway du subnet concerné",
+        "Une NACL de subnet : stateless, elle accepte des règles deny explicites pour toutes les instances"
       ],
       "reponse": 3,
       "explication": "La NACL opère au niveau du subnet, est stateless et accepte des règles allow ET deny évaluées dans l'ordre : c'est l'outil fait pour interdire explicitement une plage d'adresses à tout un subnet. Un security group est stateful et ne contient QUE des règles d'autorisation — il ne sait pas exprimer un deny explicite.",
@@ -2780,10 +2780,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Chaque soir, les sauvegardes inter-sites saturent le lien WAN et dégradent la visioconférence et les applications métier, mais le budget interdit d'augmenter la bande passante cette année. QUELLE est la MEILLEURE réponse à court terme ?",
       "choix": [
-        "Suspendre les sauvegardes inter-sites tant que le lien n'est pas redimensionné",
-        "Mettre en oeuvre du traffic shaping avec QoS : prioriser les flux temps réel et lisser le trafic de sauvegarde",
-        "Basculer la visioconférence sur un accès 4G de secours pendant les sauvegardes",
-        "Compresser les sauvegardes pour réduire le volume transféré"
+        "Suspendre les sauvegardes inter-sites tant que le lien WAN n'est pas redimensionné",
+        "Mettre en oeuvre du traffic shaping avec QoS : prioriser les flux temps réel et lisser la sauvegarde",
+        "Basculer la visioconférence sur un accès mobile 4G de secours pendant toute la durée des sauvegardes nocturnes",
+        "Compresser davantage les sauvegardes pour réduire le volume de données transféré"
       ],
       "reponse": 1,
       "explication": "Le traffic shaping et la QoS répondent exactement au problème : les flux temps réel (visio, applications) sont priorisés et le trafic de sauvegarde, tolérant au délai, est lissé sur la fenêtre nocturne — sans dépense d'infrastructure. À moyen terme, la gestion de capacité (capacity management) planifiera la mise à niveau du lien.",
@@ -2798,10 +2798,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Le constructeur annonce la fin de support (end-of-support) dans 18 mois des commutateurs de coeur du datacenter, encore parfaitement fonctionnels. En tant que responsable de la sécurité, QUELLE est votre PRINCIPALE préoccupation ?",
       "choix": [
-        "La perte de la garantie matérielle, qui allongera les délais de réparation",
-        "L'incompatibilité future avec les nouvelles générations d'optiques et de câbles",
-        "L'absence de correctifs de sécurité après l'échéance : toute nouvelle vulnérabilité restera sans patch — planifier le remplacement ou la migration AVANT la date",
-        "Le coût du renouvellement, à étaler en conservant les équipements le plus longtemps possible"
+        "La perte de la garantie matérielle du constructeur, qui allongera les délais de réparation en cas de panne",
+        "L'incompatibilité future des châssis avec les nouvelles générations d'optiques et de câbles réseau",
+        "L'absence de correctifs après l'échéance : toute nouvelle vulnérabilité restera sans patch sur le coeur de réseau",
+        "Le coût du renouvellement, que l'on cherchera à étaler en conservant les équipements le plus longtemps possible en service"
       ],
       "reponse": 2,
       "explication": "Après l'end-of-support, plus aucun correctif de sécurité n'est publié : chaque nouvelle vulnérabilité sur le coeur de réseau restera exploitable indéfiniment. Le réflexe managérial est d'inscrire le remplacement (ou un contrat de support étendu transitoire) dans la feuille de route avant l'échéance. La garantie et la logistique sont des enjeux de disponibilité secondaires, et prolonger l'usage au-delà de la date inverse la logique de gestion du risque.",
@@ -2834,10 +2834,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Lors d'une réunion de direction en visioconférence consacrée à une acquisition confidentielle, un inconnu a rejoint l'appel et écouté les échanges : le lien de réunion, réutilisé chaque semaine, avait largement circulé. QUELLE combinaison de mesures prévient le MIEUX une récidive ?",
       "choix": [
-        "Activer le chiffrement de bout en bout (E2EE) sur toutes les réunions de l'entreprise",
-        "Exiger des codes de réunion uniques, activer la salle d'attente (lobby) et authentifier les participants avant leur admission",
-        "Revenir aux conférences téléphoniques classiques pour les sujets sensibles",
-        "Interdire l'enregistrement des réunions et le partage d'écran"
+        "Activer le chiffrement de bout en bout (E2EE) sur absolument toutes les réunions tenues dans toute l'entreprise sans exception",
+        "Exiger des codes de réunion uniques, activer la salle d'attente et authentifier les participants avant admission",
+        "Revenir aux conférences téléphoniques classiques dès qu'un sujet sensible doit être abordé",
+        "Interdire l'enregistrement des réunions ainsi que le partage d'écran entre participants"
       ],
       "reponse": 1,
       "explication": "L'incident est un défaut de contrôle d'admission (meeting bombing via un lien statique réutilisé) : codes uniques, salle d'attente et authentification des participants traitent exactement cette cause. L'E2EE protège le contenu contre l'interception, pas contre un participant admis — l'intrus authentifié... ou non filtré aurait tout entendu quand même.",
@@ -2890,10 +2890,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "An organization must establish a site-to-site IPsec VPN where one gateway sits behind a NAT device. Which configuration is MOST likely to function correctly?",
       "choix": [
-        "AH in transport mode",
-        "ESP in transport mode without IKE",
+        "AH in transport mode across the NAT device",
+        "ESP in transport mode without any IKE key negotiation at all",
         "ESP in tunnel mode with NAT-Traversal (UDP encapsulation)",
-        "AH in tunnel mode"
+        "AH in tunnel mode across the NAT device"
       ],
       "reponse": 2,
       "explication": "AH protège l'intégrité de l'en-tête IP, que le NAT modifie : la vérification échoue systématiquement, quel que soit le mode. ESP en mode tunnel ne couvre pas l'en-tête externe réécrit par le NAT, et NAT-T encapsule le trafic IPsec dans UDP 4500 pour franchir la traduction d'adresses. Se passer d'IKE supprimerait la négociation automatique des clés, ce qui n'est pas viable.",
@@ -2926,9 +2926,9 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "During a wireless assessment, a tester captures the WPA2-PSK four-way handshake and successfully recovers the passphrase using an offline dictionary attack. Which control BEST prevents this attack in the future?",
       "choix": [
-        "Hiding the SSID",
-        "Enabling MAC address filtering",
-        "Shortening the DHCP lease time",
+        "Hiding the wireless network SSID",
+        "Enabling MAC address filtering on all of the deployed wireless access points",
+        "Shortening the DHCP lease time granted to the wireless clients",
         "Migrating to WPA3 with Simultaneous Authentication of Equals (SAE)"
       ],
       "reponse": 3,
@@ -2962,9 +2962,9 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "A company needs to give external auditors access to a single internal reporting application. The auditors cannot install any software on their workstations. Which remote access solution BEST meets this requirement?",
       "choix": [
-        "A full-tunnel IPsec VPN client",
-        "A site-to-site VPN to the auditors' office network",
-        "Direct RDP access through a firewall rule",
+        "A full-tunnel IPsec VPN client installed on their laptops",
+        "A site-to-site VPN linking headquarters to the auditors' office network",
+        "Direct RDP access opened through a firewall rule",
         "A clientless TLS VPN portal publishing only the reporting application"
       ],
       "reponse": 3,
@@ -2980,10 +2980,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "What is the PRIMARY security improvement of TLS 1.3 over TLS 1.2?",
       "choix": [
-        "It removes support for weak cryptographic algorithms and mandates forward secrecy for all key exchanges",
-        "It replaces certificates with pre-shared passwords",
-        "It introduces certificate-based server authentication",
-        "It doubles the symmetric key length to 512 bits"
+        "It drops support for weak cryptographic algorithms and mandates forward secrecy",
+        "It replaces the X.509 certificates with pre-shared static passwords distributed to peers",
+        "It introduces certificate-based authentication of the server",
+        "It doubles the symmetric session key length to 512 bits"
       ],
       "reponse": 0,
       "explication": "TLS 1.3 élague le protocole : suppression des suites faibles (RSA statique, RC4, CBC anciennes, SHA-1), échange de clé exclusivement éphémère garantissant la forward secrecy, négociation raccourcie et chiffrée plus tôt. L'authentification serveur par certificat existe depuis SSL, les clés symétriques restent de 128 ou 256 bits, et les certificats demeurent le mécanisme central.",
@@ -3016,10 +3016,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "After compromising one virtual machine, an attacker moves laterally to other servers in the same flat network segment. Which control would have BEST limited this movement?",
       "choix": [
-        "A honeypot in the DMZ",
-        "A stronger perimeter firewall policy",
+        "A decoy honeypot deployed inside the DMZ",
+        "A markedly stronger firewall policy enforced at the network perimeter",
         "Microsegmentation enforcing per-workload firewall policies",
-        "Full-disk encryption on all servers"
+        "Full-disk encryption applied on every server"
       ],
       "reponse": 2,
       "explication": "Le mouvement latéral exploite l'absence de contrôle sur le trafic east-west : le pare-feu de périmètre ne voit pas ces flux internes. La microsegmentation applique une politique par charge de travail, n'autorisant que les flux strictement nécessaires, ce qui confine la compromission. Le chiffrement de disque protège les données au repos, pas les connexions réseau, et un honeypot détecte sans confiner.",
@@ -3052,10 +3052,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "What is the KEY operational difference between a network-based IDS and a network-based IPS?",
       "choix": [
-        "An IPS sits inline and can block malicious traffic in real time, while an IDS monitors a copy of traffic and can only alert",
-        "An IDS encrypts monitored traffic while an IPS does not",
-        "An IPS works only at Layer 2",
-        "An IDS uses signatures while an IPS uses only anomaly detection"
+        "An IPS sits inline and blocks malicious traffic in real time; an IDS only monitors a copy and alerts",
+        "An IDS encrypts the monitored traffic while an IPS never does so",
+        "An IPS is restricted to operating at Layer 2 of the stack",
+        "An IDS relies on signatures while an IPS relies solely on statistical anomaly detection models and baselines"
       ],
       "reponse": 0,
       "explication": "La différence est le placement : l'IPS, en coupure sur le chemin du trafic, peut rejeter les paquets malveillants immédiatement, avec pour contrepartie le risque de bloquer du trafic légitime et de constituer un point de panne. L'IDS écoute passivement via SPAN ou TAP et alerte seulement. Les deux peuvent combiner signatures et détection d'anomalies, aucun ne chiffre, et l'IPS opère bien au-delà de la couche 2.",
@@ -3088,9 +3088,9 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Why has the IPsec Authentication Header (AH) protocol become rarely used on the modern Internet?",
       "choix": [
-        "It encrypts traffic too slowly for modern links",
-        "It provides no integrity protection",
-        "It only supports IPv6 networks",
+        "It encrypts the traffic far too slowly for today's very high-speed enterprise backbone links",
+        "It provides no integrity protection whatsoever for the packet",
+        "It only supports IPv6 networks and never IPv4",
         "Its integrity check covers the IP header, which NAT devices modify, breaking verification"
       ],
       "reponse": 3,
@@ -3124,10 +3124,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "An attacker transmits forged 802.11 deauthentication frames to wireless clients. What is the attacker's MOST likely objective?",
       "choix": [
-        "To force clients to disconnect and lure them into reconnecting to a rogue access point",
-        "To disable the RADIUS server",
-        "To exhaust the DHCP address pool",
-        "To crack the AES encryption key directly"
+        "To force clients to disconnect and lure them onto a rogue access point",
+        "To take the central RADIUS server fully offline",
+        "To exhaust the entire DHCP address pool of the subnet",
+        "To crack the network's AES encryption key directly from the captured frames"
       ],
       "reponse": 0,
       "explication": "Les trames de désauthentification forgées déconnectent les clients de force : c'est un déni de service, mais surtout un rabatteur classique vers un evil twin qui imite le SSID légitime, ou un moyen de forcer un nouveau handshake WPA2 à capturer. Ces trames ne cassent pas AES, ne touchent pas au DHCP et n'atteignent pas le serveur RADIUS. La parade est le 802.11w (Protected Management Frames).",
@@ -3178,10 +3178,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Which capability BEST distinguishes a next-generation firewall (NGFW) from a traditional stateful firewall?",
       "choix": [
-        "Identifying applications regardless of port through deep packet inspection, with integrated IPS and user awareness",
-        "Performing network address translation",
-        "Filtering based on source and destination IP addresses",
-        "Tracking the state of TCP connections"
+        "Identifying applications regardless of port via DPI, with integrated IPS and user awareness",
+        "Performing plain network address translation on all outbound traffic leaving the network edge",
+        "Filtering strictly on source and destination IP addresses",
+        "Tracking the state of established TCP connections over time"
       ],
       "reponse": 0,
       "explication": "Suivi d'état, filtrage par adresses et NAT existent déjà sur les pare-feux stateful classiques. Le NGFW ajoute l'app-awareness : reconnaître l'application réelle même sur un port détourné, appliquer des politiques par application et par identité d'utilisateur, avec IPS intégré et souvent déchiffrement TLS pour inspection. C'est cette visibilité applicative qui le définit.",
@@ -3232,10 +3232,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Which statement about Fibre Channel over Ethernet (FCoE) is CORRECT?",
       "choix": [
-        "It natively encrypts all storage traffic with TLS",
-        "It authenticates initiators using Kerberos by default",
-        "It routes storage traffic across any IP network",
-        "It encapsulates Fibre Channel frames at Layer 2 and requires a lossless, high-speed Ethernet fabric, typically 10 Gbps or more"
+        "It natively encrypts all stored and in-transit storage traffic with TLS",
+        "It authenticates every storage initiator using Kerberos tickets issued by a domain controller",
+        "It routes storage traffic transparently across any ordinary IP network",
+        "It encapsulates Fibre Channel frames at Layer 2 and needs a lossless 10 Gbps Ethernet fabric"
       ],
       "reponse": 3,
       "explication": "FCoE fait converger le stockage Fibre Channel sur l'Ethernet du datacenter : encapsulation en couche 2, non routable en IP, exigeant un réseau sans perte (Data Center Bridging) à 10 Gbps minimum. C'est iSCSI qui traverse les réseaux IP routés. FCoE ne chiffre rien nativement et n'utilise pas Kerberos : la sécurité repose sur l'isolement du fabric et le zoning.",
@@ -3250,10 +3250,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "What is the PRIMARY security benefit a content delivery network (CDN) provides to a public-facing website?",
       "choix": [
-        "It encrypts data stored in the origin database",
-        "It replaces the need for TLS certificates",
-        "It patches web application vulnerabilities automatically",
-        "It absorbs and disperses volumetric DDoS attacks across globally distributed points of presence while caching content"
+        "It transparently encrypts all of the data stored inside the website's back-end origin SQL database",
+        "It removes the need to deploy and manage TLS certificates entirely",
+        "It automatically discovers and patches web application vulnerabilities",
+        "It absorbs and disperses volumetric DDoS attacks across globally distributed points of presence"
       ],
       "reponse": 3,
       "explication": "Grâce à l'anycast et à ses points de présence mondiaux, le CDN encaisse les attaques volumétriques sur une capacité cumulée énorme, loin de l'origine, tout en continuant de servir le contenu depuis le cache ; beaucoup intègrent aussi un WAF. Il ne chiffre pas la base de données d'origine, il utilise TLS (il ne le remplace pas), et il ne corrige pas les vulnérabilités du code applicatif.",
@@ -3268,10 +3268,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Which principle is at the CORE of the Zero Trust network model?",
       "choix": [
-        "Devices inside the corporate perimeter are trusted by default",
-        "All security controls should be consolidated at the network perimeter",
-        "No user or device is trusted based on network location; every access request must be authenticated, authorized, and continuously validated",
-        "Encryption is only required for traffic crossing the Internet"
+        "Devices inside the corporate network perimeter are trusted by default and are only rarely re-checked afterwards",
+        "All security controls should be consolidated tightly at the outer network perimeter",
+        "No user or device is trusted by network location; every request is authenticated and continuously validated",
+        "Encryption is only required for traffic that actually crosses the public Internet"
       ],
       "reponse": 2,
       "explication": "Le Zero Trust abolit la confiance implicite liée à l'emplacement réseau : « never trust, always verify ». Chaque requête est authentifiée, autorisée selon l'identité, la posture et le contexte, et revalidée en continu, avec moindre privilège et microsegmentation. Les trois autres propositions décrivent précisément le modèle périmétrique traditionnel que le Zero Trust remplace, y compris l'idée que le trafic interne n'aurait pas besoin de chiffrement.",
@@ -3286,10 +3286,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Which set of countermeasures BEST mitigates VLAN hopping via double tagging?",
       "choix": [
-        "Enabling jumbo frames and increasing the MTU",
-        "Changing the native VLAN to an unused ID, tagging the native VLAN, and disabling automatic trunk negotiation (DTP)",
-        "Deploying spanning tree protocol on all trunk links",
-        "Encrypting inter-switch links with MACsec only"
+        "Enabling jumbo frames and increasing the interface MTU on all the trunk links between the core switches",
+        "Changing the native VLAN to an unused ID, tagging it, and disabling automatic trunk negotiation (DTP)",
+        "Deploying the spanning tree protocol on all trunk links between switches",
+        "Encrypting the inter-switch links with MACsec and nothing else"
       ],
       "reponse": 1,
       "explication": "Le double tagging abuse du VLAN natif non étiqueté : le premier switch retire l'étiquette externe et laisse la trame atteindre le VLAN cible. Les parades sont de dédier un VLAN natif inutilisé, d'étiqueter le VLAN natif, de figer les ports (access ou trunk explicite) et de désactiver DTP. Le spanning tree prévient les boucles, les jumbo frames concernent la taille des trames, et MACsec chiffre les liens sans corriger la logique d'étiquetage.",
@@ -3322,10 +3322,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Compared with RADIUS, which statement about TACACS+ is CORRECT?",
       "choix": [
-        "TACACS+ runs over UDP ports 1812 and 1813",
-        "TACACS+ uses TCP port 49, encrypts the entire packet payload, and separates authentication, authorization, and accounting",
-        "TACACS+ encrypts only the password field of each packet",
-        "TACACS+ cannot be used for network device administration"
+        "TACACS+ runs over UDP ports 1812 and 1813 like RADIUS does",
+        "TACACS+ uses TCP port 49, encrypts the whole payload, and separates the three AAA functions",
+        "TACACS+ encrypts only the password field of each individual packet",
+        "TACACS+ cannot be used for administering network devices such as routers and switches at all"
       ],
       "reponse": 1,
       "explication": "TACACS+ utilise TCP 49, chiffre l'intégralité de la charge utile et sépare les trois fonctions AAA, ce qui permet des autorisations fines commande par commande : il est privilégié pour l'administration des équipements réseau. RADIUS, lui, fonctionne en UDP 1812/1813 et ne chiffre que le mot de passe, le reste de l'échange circulant en clair.",
@@ -3358,10 +3358,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "When adopting SD-WAN with direct Internet breakout at branch offices, which security measure is MOST important?",
       "choix": [
-        "Encrypting all inter-site tunnels and applying consistent, centrally managed security policy at every breakout, for example through a SASE model",
-        "Disabling encryption to maximize throughput on Internet links",
-        "Backhauling all branch traffic to headquarters permanently",
-        "Relying solely on each ISP's built-in security services"
+        "Encrypting all inter-site tunnels and enforcing consistent, centrally managed policy at every breakout (SASE)",
+        "Disabling encryption entirely so as to maximize the raw throughput on the public Internet uplinks between sites",
+        "Backhauling all branch office traffic permanently to the headquarters site",
+        "Relying solely on each ISP's own built-in security services for protection"
       ],
       "reponse": 0,
       "explication": "Le SD-WAN fait transiter le trafic d'entreprise par des liens Internet non fiables et ouvre des sorties locales dans chaque agence : il faut chiffrer tous les tunnels inter-sites (IPsec) et appliquer partout une politique de sécurité homogène et centralisée, ce que le modèle SASE apporte en combinant SD-WAN et services de sécurité cloud. Désactiver le chiffrement est inacceptable, déléguer aveuglément aux FAI ne donne aucune garantie, et tout rapatrier au siège annule l'intérêt du SD-WAN.",
@@ -3376,10 +3376,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "Which switch feature BEST mitigates ARP poisoning on a local network?",
       "choix": [
-        "Enabling jumbo frames",
-        "Configuring a longer CAM table aging time",
-        "Dynamic ARP Inspection validating ARP replies against trusted bindings",
-        "Disabling the spanning tree protocol"
+        "Enabling jumbo frames on the access switch ports",
+        "Configuring a much longer CAM table aging time",
+        "Dynamic ARP Inspection validating ARP replies against trusted DHCP bindings",
+        "Disabling the spanning tree protocol on every single port of the local access switch entirely"
       ],
       "reponse": 2,
       "explication": "Dynamic ARP Inspection valide chaque réponse ARP contre les associations IP-MAC de confiance apprises par le DHCP snooping, et rejette les réponses forgées qui tenteraient de détourner le trafic vers l'attaquant. Les jumbo frames et le vieillissement de la table CAM n'ont aucun effet sur ARP, et désactiver le spanning tree crée des risques de boucles sans le moindre bénéfice de sécurité.",
@@ -3394,9 +3394,9 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "After a competitor was crippled by ransomware spreading laterally, the board directs the CISO to \"implement Zero Trust.\" This year's budget covers only a fraction of a full redesign, and the BIA has identified three mission-critical applications. What should the CISO do FIRST?",
       "choix": [
-        "Enforce multifactor authentication on VPN access for all remote users",
-        "Microsegment the network zones hosting the three mission-critical applications first, and place the remainder on a multi-year Zero Trust roadmap",
-        "Launch the complete Zero Trust redesign at once: modern IAM, ZTNA, network-wide microsegmentation, and VPN replacement",
+        "Enforce multifactor authentication on VPN access for all remote users of the company",
+        "Microsegment the zones hosting the three mission-critical applications first, then a multi-year roadmap",
+        "Launch the complete Zero Trust redesign at once: modern IAM, ZTNA, network-wide microsegmentation and VPN replacement",
         "Replace the perimeter firewall with a latest-generation NGFW to harden the network boundary"
       ],
       "reponse": 1,
@@ -3412,10 +3412,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "A financial institution plans to deploy outbound TLS inspection to detect data exfiltration. The privacy officer objects that employees also access personal banking, health, and union-related websites. Which course of action BEST balances these concerns?",
       "choix": [
-        "Deploy selective TLS inspection that exempts sensitive categories, governed by a documented policy agreed with the privacy officer and communicated to employees",
-        "Abandon TLS inspection entirely and rely solely on endpoint detection and response (EDR) telemetry",
-        "Restrict TLS inspection to executives and privileged users, as they present the highest risk",
-        "Inspect all outbound TLS traffic, because exfiltration detection outweighs any other consideration"
+        "Deploy selective TLS inspection that exempts sensitive categories under a documented policy agreed with the DPO",
+        "Abandon TLS inspection entirely and rely solely on endpoint detection and response (EDR) telemetry from the hosts",
+        "Restrict TLS inspection to executives and privileged users, on the grounds that they present the highest risk",
+        "Inspect all outbound TLS traffic without exception, because exfiltration detection outweighs every other consideration"
       ],
       "reponse": 0,
       "explication": "L'arbitrage attendu d'un manager concilie la visibilité du SOC et la proportionnalité juridique : une inspection sélective, exemptant les catégories sensibles, encadrée par une politique validée avec le DPO et notifiée aux salariés, conserve la détection sur l'essentiel du trafic sans violer la vie privée. Tout inspecter est un absolu juridiquement indéfendable ; tout abandonner sacrifie la visibilité réseau alors qu'un compromis existe ; cibler des personnes plutôt que des catégories de trafic est discriminatoire et laisse la majorité du trafic sans détection.",
@@ -3430,10 +3430,10 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "During an IT/OT convergence project, an audit finds legacy PLCs reachable from the corporate office network. Production leadership refuses any line downtime, and the PLCs cannot be patched until the annual shutdown in nine months. What should the CISO recommend FIRST?",
       "choix": [
-        "Escalate to executive management to mandate an exceptional production shutdown",
-        "Schedule an emergency patching campaign for the PLCs outside production hours",
-        "Deploy a passive OT-specific monitoring sensor to gain visibility into industrial traffic",
-        "Segment IT and OT networks into zones and conduits with compensating controls at the boundaries, consistent with the Purdue model and IEC 62443"
+        "Escalate to executive management to mandate an exceptional shutdown of the production lines",
+        "Schedule an emergency patching campaign for the PLCs strictly outside production hours",
+        "Deploy a passive OT-specific monitoring sensor to gain visibility into the industrial traffic observed",
+        "Segment IT and OT into zones and conduits with compensating controls at the boundaries"
       ],
       "reponse": 3,
       "explication": "Quand le patching est impossible sous contrainte métier, la réponse est le contrôle compensatoire architectural : segmenter IT et OT en zones et conduits coupe immédiatement le chemin d'attaque depuis la bureautique, sans toucher aux lignes. Le patching d'urgence ignore la contrainte posée (fenêtres rares, requalification des automates) ; la sonde passive apporte une visibilité précieuse mais ne bloque rien — elle vient après la segmentation ; exiger l'arrêt des lignes fait primer la sécurité sur le métier sans avoir épuisé les mesures compensatoires.",
@@ -3448,9 +3448,9 @@ window.CISSP_DATA.domains[4] = {
     {
       "q": "During the holiday sales peak, a retailer's e-commerce platform is hit by a volumetric DDoS attack that saturates its Internet link; the firewalls are holding. The continuity plan tolerates no more than one hour of downtime. What should the operations team do FIRST?",
       "choix": [
-        "Fail over the platform to the disaster recovery site",
-        "Order an emergency bandwidth upgrade for the Internet link",
-        "Activate the contracted upstream anti-DDoS scrubbing service from the ISP or cloud provider to filter traffic before it reaches the link",
+        "Fail the whole platform over to the disaster recovery site that had been prepared in advance in the continuity plan",
+        "Order an emergency bandwidth upgrade for the saturated Internet link",
+        "Activate the contracted upstream anti-DDoS scrubbing service to filter traffic before it reaches the link",
         "Add firewall rules blocking the source IP addresses observed in the logs"
       ],
       "reponse": 2,
