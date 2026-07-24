@@ -1098,7 +1098,7 @@ window.CISSP_DATA.domains[8] = {
         "XSS ne concerne que les applications mobiles ; CSRF ne concerne que les APIs"
       ],
       "reponse": 1,
-      "explication": "Le XSS injecte un script qui s'exécute dans le navigateur de la victime, abusant de la confiance de l'utilisateur envers le site. Le CSRF abuse de la confiance du site envers le navigateur : il fait émettre à un utilisateur déjà authentifié une requête qu'il n'a pas voulue. La première proposition inverse les deux définitions, et les deux attaques sont bien distinctes, avec des défenses différentes : encodage des sorties pour XSS, jetons anti-CSRF pour CSRF.",
+      "explication": "Le XSS injecte un script qui s'exécute dans le navigateur de la victime, abusant de la confiance de l'utilisateur envers le site. Le CSRF abuse de la confiance du site envers le navigateur : il fait émettre à un utilisateur déjà authentifié une requête qu'il n'a pas voulue. La troisième proposition inverse les deux définitions, et les deux attaques sont bien distinctes, avec des défenses différentes : encodage des sorties pour XSS, jetons anti-CSRF pour CSRF.",
       "difficulte": 2,
       "pourquoi": [
         "Absolu faux : les deux attaques sont distinctes, avec des défenses différentes.",
@@ -1152,7 +1152,7 @@ window.CISSP_DATA.domains[8] = {
         "L'agrégation exige un accès privilégié, tandis que l'inférence exploite une faille d'injection"
       ],
       "reponse": 2,
-      "explication": "L'agrégation est un problème de sécurité : la capacité de combiner des données non sensibles issues de sources séparées pour créer une information sensible. L'inférence est l'attaque : l'adversaire rassemble des éléments peu sensibles pour déduire une information de sensibilité supérieure. La première proposition inverse les termes, et les deux dernières inventent des restrictions de périmètre ou des mécanismes d'accès qui n'existent pas : les deux notions s'appliquent à tout type de base et à des utilisateurs légitimes.",
+      "explication": "L'agrégation est un problème de sécurité : la capacité de combiner des données non sensibles issues de sources séparées pour créer une information sensible. L'inférence est l'attaque : l'adversaire rassemble des éléments peu sensibles pour déduire une information de sensibilité supérieure. La deuxième proposition inverse les termes, et les première et dernière inventent des restrictions de périmètre ou des mécanismes d'accès qui n'existent pas : les deux notions s'appliquent à tout type de base et à des utilisateurs légitimes.",
       "difficulte": 3,
       "pourquoi": [
         "Restriction inventée : les deux notions s'appliquent à tout type de base ou d'entrepôt de données.",
@@ -1314,7 +1314,7 @@ window.CISSP_DATA.domains[8] = {
         "Un standard est recommandé, une guideline est obligatoire"
       ],
       "reponse": 2,
-      "explication": "Un standard est une règle obligatoire : il doit réduire le risque d'un type précis de vulnérabilité, être applicable à l'ensemble des développements de l'organisation et être vérifiable. Une guideline est une recommandation qui laisse de la flexibilité, comme des commentaires cohérents ou des fonctions courtes. La première proposition inverse les définitions, les deux notions restent bien distinctes, et aucune promotion automatique ne transforme une recommandation en règle obligatoire : cela exige une décision de gouvernance.",
+      "explication": "Un standard est une règle obligatoire : il doit réduire le risque d'un type précis de vulnérabilité, être applicable à l'ensemble des développements de l'organisation et être vérifiable. Une guideline est une recommandation qui laisse de la flexibilité, comme des commentaires cohérents ou des fonctions courtes. La dernière proposition inverse les définitions, les deux notions restent bien distinctes, et aucune promotion automatique ne transforme une recommandation en règle obligatoire : cela exige une décision de gouvernance.",
       "difficulte": 1,
       "pourquoi": [
         "Mécanisme inventé : aucune promotion automatique n'existe — élever une guideline en standard est une décision de gouvernance.",
@@ -1368,7 +1368,7 @@ window.CISSP_DATA.domains[8] = {
         "La certification est la décision d'exploitation ; l'accréditation est l'analyse technique"
       ],
       "reponse": 2,
-      "explication": "La certification est l'analyse technique de sécurité complète vérifiant que le système répond aux exigences applicables. L'accréditation est la déclaration formelle par une autorité d'accréditation désignée (DAA) que le système est approuvé pour fonctionner à un niveau de risque acceptable. La première proposition inverse les définitions ; il ne s'agit ni d'un audit annuel ni d'une décision de l'éditeur.",
+      "explication": "La certification est l'analyse technique de sécurité complète vérifiant que le système répond aux exigences applicables. L'accréditation est la déclaration formelle par une autorité d'accréditation désignée (DAA) que le système est approuvé pour fonctionner à un niveau de risque acceptable. La dernière proposition inverse les définitions ; il ne s'agit ni d'un audit annuel ni d'une décision de l'éditeur.",
       "difficulte": 3,
       "pourquoi": [
         "Fausse attribution : l'accréditation émane de l'autorité désignée de l'organisation, jamais de l'éditeur.",
