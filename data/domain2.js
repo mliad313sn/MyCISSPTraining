@@ -119,6 +119,30 @@ window.CISSP_DATA.domains[2] = {
           "narration": "Une fois les actifs classifiés, il faut définir comment les manipuler. L'asset handling regroupe les procédures qui encadrent le déplacement, le stockage et la récupération des actifs, avec un objectif central : prévenir les fuites de données. Deux bonnes pratiques dominent. D'abord, limiter la collecte : si une donnée n'a pas de but métier clair, on ne la collecte pas et on ne la stocke pas. Ensuite, adapter le stockage à la classification : verrous physiques pour le papier, chiffrement pour l'électronique, et copies de sauvegarde sur site et hors site."
         },
         {
+          "type": "standard",
+          "titre": "Transport sécurisé des supports",
+          "points": [
+            "Chain of custody : documenter qui détient le support, quand, et chaque transfert",
+            "Emballage inviolable (tamper-evident) et coursier agréé pour les supports sensibles",
+            "Journal de mouvement pour les supports amovibles et les bandes de sauvegarde",
+            "Chiffrer les supports AVANT le transport : une perte devient un incident mineur"
+          ],
+          "narration": "Le handling ne s'arrête pas aux murs du bâtiment : les supports voyagent, et c'est en transit qu'ils se perdent. Quand des bandes de sauvegarde, des disques ou des documents classifiés quittent un site, quatre mesures s'imposent. D'abord, une chain of custody documentée : on sait à tout moment qui détient le support, depuis quand, et chaque remise de main en main est signée et horodatée. Ensuite, un emballage inviolable, dit tamper-evident, qui révèle toute tentative d'ouverture. Puis un transporteur de confiance : coursier agréé ou personnel habilité, jamais le courrier ordinaire pour du sensible. Enfin, un journal de mouvement trace les entrées et sorties des supports amovibles. Et bien sûr, on chiffre les supports avant leur départ : ainsi, même perdue, une bande chiffrée ne livre rien.",
+          "astuce": "💡 Conseil examen : la chain of custody n'est pas réservée au forensique du Domaine 7 — elle s'applique aussi aux sauvegardes et supports qui transitent vers un site externe."
+        },
+        {
+          "type": "standard",
+          "titre": "Déclassification et revue périodique",
+          "points": [
+            "La sensibilité diminue souvent avec le temps : une classification n'est pas éternelle",
+            "Declassification : processus FORMEL, approuvé par le data owner",
+            "Downgrading : abaisser le niveau — attention à la rémanence sur les supports",
+            "Revue périodique des classifications : éviter la sur-classification coûteuse"
+          ],
+          "narration": "La classification n'est pas gravée dans le marbre. Un plan produit ultra-confidentiel avant son lancement devient banal une fois le produit commercialisé. La déclassification est le processus formel qui abaisse ou retire la classification d'une donnée devenue moins sensible : elle est décidée par le data owner, jamais improvisée par un utilisateur. On distingue le downgrading, qui abaisse le niveau, de la declassification complète ; dans les deux cas, méfiez-vous des supports qui ont hébergé la donnée à son ancien niveau, car la rémanence peut y laisser des traces plus sensibles que l'étiquette actuelle. Enfin, une revue périodique des classifications évite la sur-classification, qui coûte cher et pousse les utilisateurs à contourner les règles.",
+          "astuce": "💡 Conseil examen : sur-classifier n'est pas prudent, c'est du gaspillage — la bonne réponse CISSP est la classification proportionnée, revue périodiquement."
+        },
+        {
           "type": "question",
           "titre": "Contrôle de connaissance",
           "points": [],
@@ -141,9 +165,11 @@ window.CISSP_DATA.domains[2] = {
             "PII, PHI et données propriétaires sont des données sensibles à protéger",
             "L'actif hérite de la classification de la donnée la plus sensible",
             "Marking = lisible par l'humain ; Labeling = lisible par le système",
-            "Le handling découle de la classification, pas du support"
+            "Le handling découle de la classification, pas du support",
+            "Transport des supports : chiffrement, emballage inviolable, coursier agréé, chain of custody",
+            "Déclassification : processus formel décidé par le data owner, avec revue périodique"
           ],
-          "narration": "Résumons. La classification est la première étape de la protection : elle attribue à chaque donnée et à chaque actif un niveau de sensibilité fondé sur la valeur et l'impact d'une compromission. Les PII, les PHI et les données propriétaires exigent une protection particulière. Un actif hérite toujours de la classification de la donnée la plus sensible qu'il traite. Enfin, distinguez le marking, lisible par l'humain, du labeling, lisible par le système, et souvenez-vous que les règles de manipulation dépendent de la classification et non du type de support."
+          "narration": "Résumons. La classification est la première étape de la protection : elle attribue à chaque donnée et à chaque actif un niveau de sensibilité fondé sur la valeur et l'impact d'une compromission. Les PII, les PHI et les données propriétaires exigent une protection particulière. Un actif hérite toujours de la classification de la donnée la plus sensible qu'il traite. Distinguez le marking, lisible par l'humain, du labeling, lisible par le système, et souvenez-vous que les règles de manipulation dépendent de la classification et non du type de support. Quand les supports voyagent, exigez chiffrement, emballage inviolable, coursier agréé et chain of custody documentée. Enfin, la classification se revoit : la déclassification est un processus formel approuvé par le data owner."
         }
       ]
     },
@@ -383,6 +409,18 @@ window.CISSP_DATA.domains[2] = {
           "astuce": "💡 Conseil examen : la rétention concerne les données, mais aussi les supports, les systèmes ET le personnel qui y a accès."
         },
         {
+          "type": "standard",
+          "titre": "Data maintenance : qualité, flux et migrations",
+          "points": [
+            "Revue continue de la qualité et de l'EXACTITUDE des données — une donnée fausse est un passif",
+            "Gérer les flux entre systèmes : quand la donnée circule, ses contrôles doivent suivre",
+            "Migrations et conversions de format : maintenir classification, chiffrement et droits d'accès",
+            "Après migration : vérifier l'intégrité des données converties, puis assainir la source"
+          ],
+          "narration": "Approfondissons la maintenance, car elle ne se limite pas à ranger des fichiers. C'est d'abord une revue continue de la qualité et de l'exactitude des données : une adresse client périmée ou un dossier erroné conduisent à de mauvaises décisions et, pour des données personnelles, violent le principe d'exactitude du GDPR. C'est ensuite la gestion des flux entre systèmes : quand une donnée est copiée d'une application vers un entrepôt de données ou un partenaire, ses contrôles de sécurité doivent voyager avec elle. Enfin, les migrations et les conversions de format sont des moments à risque : la classification, le chiffrement et les restrictions d'accès doivent être maintenus pendant et après l'opération, l'intégrité des données converties doit être vérifiée, et l'ancien support doit être assaini pour éviter la rémanence.",
+          "astuce": "💡 Conseil examen : dans une question de migration, la bonne réponse préserve les contrôles existants pendant l'opération — jamais « on remettra la sécurité après la migration »."
+        },
+        {
           "type": "schema",
           "titre": "Les trois états de la donnée",
           "points": [
@@ -456,11 +494,12 @@ window.CISSP_DATA.domains[2] = {
             "Cycle de vie : création, classification et stockage, utilisation, archivage, destruction",
             "Ne pas collecter sans but clair ; sauvegardes sur site et hors site",
             "Localization (obligation légale), residency (choix), sovereignty (lois locales) — attention CLOUD Act vs GDPR",
+            "Maintenance : qualité et exactitude en continu ; les contrôles suivent la donnée lors des migrations et conversions",
             "Rétention : aussi longtemps que nécessaire, pas plus",
             "Trois états : at rest et in transit se chiffrent, in use est le plus dur à protéger",
             "Rémanence et émanations : slack space, TEMPEST, Van Eck phreaking"
           ],
-          "narration": "Récapitulons. Le cycle de vie mène la donnée de la création à la destruction, en passant par la classification, le stockage, l'utilisation et l'archivage. On ne collecte que ce qui a un but clair, on garde des sauvegardes sur site et hors site, et on retient la donnée aussi longtemps que nécessaire, mais pas davantage. La donnée existe en trois états : le chiffrement protège le repos et le transit, tandis que l'état in use reste le plus difficile à sécuriser. Enfin, méfiez-vous de la rémanence dans le slack space et des émanations électromagnétiques, contrées par TEMPEST."
+          "narration": "Récapitulons. Le cycle de vie mène la donnée de la création à la destruction, en passant par la classification, le stockage, l'utilisation et l'archivage. On ne collecte que ce qui a un but clair, on garde des sauvegardes sur site et hors site, et on retient la donnée aussi longtemps que nécessaire, mais pas davantage. La maintenance veille en continu à la qualité et à l'exactitude des données, et garantit que les contrôles suivent la donnée lors des migrations et des conversions de format. La donnée existe en trois états : le chiffrement protège le repos et le transit, tandis que l'état in use reste le plus difficile à sécuriser. Enfin, méfiez-vous de la rémanence dans le slack space et des émanations électromagnétiques, contrées par TEMPEST."
         }
       ]
     },
@@ -686,10 +725,15 @@ window.CISSP_DATA.domains[2] = {
           "points": [
             "Identifier les standards applicables : PCI DSS, GDPR, etc.",
             "Même sans obligation, un standard communautaire solide aide (NIST SP 800)",
+            "Conformité OBLIGATOIRE (PCI DSS, GDPR) versus adoption VOLONTAIRE (NIST CSF, CIS)",
+            "ISO/IEC 27001 : ISMS certifiable — quand clients, régulateurs ou appels d'offres exigent une preuve formelle",
+            "NIST CSF : cadre volontaire et flexible pour structurer le programme et dialoguer avec la direction",
+            "CIS Controls : prescriptif et priorisé (Implementation Groups) — gains rapides avec des ressources limitées",
             "Processus de sélection objectif et mesurable, reproductible",
             "Vendor selection : même logique, appliquée aux fournisseurs"
           ],
-          "narration": "Les organisations doivent identifier les standards qui s'appliquent à elles, comme PCI DSS pour les cartes de paiement ou le GDPR pour les données personnelles européennes, et s'assurer que les contrôles choisis y sont pleinement conformes. Même sans obligation, s'appuyer sur un standard communautaire bien conçu, comme les documents NIST SP 800, est une bonne pratique. La sélection de standards, comme la sélection de vendeurs, doit être un processus objectif et mesurable : si une équipe totalement différente refaisait l'exercice, elle devrait aboutir au même choix."
+          "narration": "Les organisations doivent identifier les standards qui s'appliquent à elles, comme PCI DSS pour les cartes de paiement ou le GDPR pour les données personnelles européennes, et s'assurer que les contrôles choisis y sont pleinement conformes. Distinguez d'abord ce qui est obligatoire de ce qui est volontaire : PCI DSS s'impose dès qu'on traite des cartes, le GDPR dès qu'on traite des données personnelles européennes ; NIST CSF ou les CIS Controls, eux, sont des choix. Ensuite vient l'arbitrage entre référentiels volontaires. ISO 27001 définit un système de management de la sécurité certifiable : on le choisit quand des clients, des régulateurs ou des appels d'offres exigent une preuve formelle et internationalement reconnue. Le NIST Cybersecurity Framework est un cadre flexible et gratuit, idéal pour structurer un programme de gestion des risques et le communiquer à la direction, sans certification. Les CIS Controls sont prescriptifs et priorisés par Implementation Groups : parfaits pour une équipe réduite qui veut des gains techniques rapides. Ces choix ne s'excluent pas : beaucoup d'organisations démarrent avec les CIS Controls, se structurent avec le NIST CSF, puis se font certifier ISO 27001 quand le marché l'exige. Dans tous les cas, la sélection de standards, comme la sélection de vendeurs, doit être un processus objectif et mesurable : si une équipe totalement différente refaisait l'exercice, elle devrait aboutir au même choix.",
+          "astuce": "💡 Conseil examen : certifiable et exigé par un client = ISO 27001 ; structurer et communiquer le risque = NIST CSF ; actions techniques priorisées à petit budget = CIS Controls."
         },
         {
           "type": "question",
@@ -729,9 +773,10 @@ window.CISSP_DATA.domains[2] = {
             "DLP : bloque l'exfiltration — network, endpoint, cloud",
             "CASB : visibilité, sécurité des données, détection des menaces, conformité",
             "Anonymisation irréversible ; pseudonymisation et tokenisation réversibles",
-            "Baseline → scoping (retirer) → tailoring (ajuster) → contrôles adaptés"
+            "Baseline → scoping (retirer) → tailoring (ajuster) → contrôles adaptés",
+            "Standards : obligatoire (PCI DSS, GDPR) vs volontaire — ISO 27001 certifiable, NIST CSF structurant, CIS Controls priorisés"
           ],
-          "narration": "Concluons ce domaine. Le DRM protège les contenus soumis au droit d'auteur et sa protection accompagne la donnée partout. Le DLP détecte et bloque l'exfiltration, en version réseau, endpoint ou cloud. Le CASB étend vos politiques vers le cloud avec ses quatre piliers : visibilité, sécurité des données, détection des menaces et conformité. Pour les données personnelles, l'anonymisation est irréversible, tandis que pseudonymisation, tokenisation et chiffrement sont réversibles. Et pour les contrôles, partez d'une baseline, retirez l'inapplicable par scoping, puis ajustez par tailoring. Vous avez maintenant tous les outils du Domaine 2."
+          "narration": "Concluons ce domaine. Le DRM protège les contenus soumis au droit d'auteur et sa protection accompagne la donnée partout. Le DLP détecte et bloque l'exfiltration, en version réseau, endpoint ou cloud. Le CASB étend vos politiques vers le cloud avec ses quatre piliers : visibilité, sécurité des données, détection des menaces et conformité. Pour les données personnelles, l'anonymisation est irréversible, tandis que pseudonymisation, tokenisation et chiffrement sont réversibles. Et pour les contrôles, partez d'une baseline, retirez l'inapplicable par scoping, puis ajustez par tailoring. Côté référentiels, distinguez l'obligatoire du volontaire, et retenez le trio : ISO 27001 quand il faut une certification, NIST CSF pour structurer le programme, CIS Controls pour agir vite avec peu de moyens. Vous avez maintenant tous les outils du Domaine 2."
         }
       ]
     }
@@ -2122,6 +2167,60 @@ window.CISSP_DATA.domains[2] = {
         "Bonne réponse : des clés client dès le premier jour rendent le crypto-shredding possible à la sortie — la décision d'architecture qui conditionne tout le reste.",
         "Réactif : une pénalité indemnise après coup un manquement — elle ne prouve ni n'assure l'irrécupérabilité."
       ]
+    },
+    {
+      "q": "Votre organisation migre une base de données clients classifiée Confidential d'un système legacy vers une nouvelle plateforme, avec conversion du format des enregistrements. Du point de vue de la data maintenance, quelle est la préoccupation PRINCIPALE ?",
+      "choix": [
+        "Terminer la migration dans la fenêtre de maintenance afin de limiter l'indisponibilité du service",
+        "Maintenir les contrôles — classification, chiffrement, restrictions d'accès — pendant et après la migration, et vérifier l'intégrité des données converties",
+        "Choisir un format de fichier propriétaire afin de rendre les données plus difficiles à lire",
+        "Conserver indéfiniment l'ancien système en ligne comme copie de secours"
+      ],
+      "reponse": 1,
+      "explication": "La data maintenance exige que les contrôles de sécurité suivent la donnée lors des migrations et des conversions de format : la classification, le chiffrement et les droits d'accès doivent être maintenus pendant toute l'opération, et l'exactitude comme l'intégrité des données converties doivent être vérifiées à l'arrivée. La disponibilité est un objectif opérationnel secondaire ici, un format propriétaire n'est pas un contrôle de sécurité, et garder l'ancien système en ligne indéfiniment aggrave la surface d'attaque et la rémanence.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Objectif opérationnel, pas de sécurité : respecter la fenêtre de maintenance ne protège en rien la donnée pendant la conversion.",
+        "Bonne réponse : les contrôles doivent voyager avec la donnée — les maintenir pendant et après la migration, puis vérifier l'intégrité du résultat, est le cœur de la data maintenance.",
+        "Fausse sécurité : l'obscurité d'un format propriétaire n'est pas un contrôle — la confidentialité repose sur le chiffrement et les accès, pas sur l'illisibilité supposée.",
+        "Contre-productif : conserver le legacy en ligne indéfiniment multiplie les copies non maîtrisées, la rémanence et la surface d'attaque — il faut le migrer, vérifier, puis l'assainir."
+      ]
+    },
+    {
+      "q": "Des bandes de sauvegarde contenant des données Confidential sont transférées chaque semaine vers un site de stockage externe. Quelle combinaison de mesures répond le MIEUX aux exigences de handling pendant le transport ?",
+      "choix": [
+        "Chiffrement des bandes, emballage inviolable, coursier agréé et chain of custody documentée à chaque transfert",
+        "Envoi par courrier postal ordinaire, les bandes étant illisibles sans le logiciel de sauvegarde",
+        "Transport par n'importe quel employé disponible, avec un e-mail de confirmation à l'arrivée",
+        "Étiquetage visible « Confidentiel » sur les bandes pour que le transporteur en prenne particulièrement soin"
+      ],
+      "reponse": 0,
+      "explication": "Le transport de supports classifiés combine quatre mesures : le chiffrement rend la perte inoffensive, l'emballage inviolable révèle toute manipulation, le coursier agréé est un tiers de confiance, et la chain of custody documente chaque détenteur et chaque transfert. Le format propriétaire n'est pas un contrôle, un employé quelconque sans traçabilité ne constitue pas une chain of custody, et un étiquetage visible sans autre protection signale surtout la valeur du colis à un voleur.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Bonne réponse : la défense en profondeur du transport — chiffrement, tamper-evident, transporteur de confiance et traçabilité de bout en bout.",
+        "Fausse sécurité : un format de sauvegarde se lit avec des outils courants — sans chiffrement, une bande perdue est une fuite de données.",
+        "Absence de contrôle : sans habilitation ni traçabilité signée des remises, il n'y a ni chain of custody ni détection possible d'un détournement.",
+        "Contre-productif : un marquage visible sans chiffrement ni emballage inviolable attire l'attention sur le support le plus précieux du lot."
+      ]
+    },
+    {
+      "q": "Une PME industrielle sans programme de sécurité formalisé veut des résultats rapides avec une équipe réduite. Son principal donneur d'ordres annonce qu'il exigera à terme une certification de son système de management de la sécurité. Quelle stratégie de sélection de référentiels est la PLUS pertinente ?",
+      "choix": [
+        "Adopter uniquement NIST SP 800-53, le catalogue de contrôles le plus complet du marché",
+        "Viser immédiatement la certification ISO/IEC 27001 avant toute mesure technique",
+        "Attendre que l'exigence contractuelle soit formalisée avant de choisir un référentiel",
+        "Démarrer avec les CIS Controls priorisés pour des gains rapides, puis bâtir l'ISMS vers la certification ISO/IEC 27001 exigée par le client"
+      ],
+      "reponse": 3,
+      "explication": "Le bon arbitrage combine les forces des référentiels : les CIS Controls, prescriptifs et priorisés par Implementation Groups, donnent des gains techniques rapides à une petite équipe ; la certification ISO/IEC 27001, seule à attester formellement un système de management, se construit ensuite pour répondre à l'exigence du client. Un catalogue exhaustif comme SP 800-53 écraserait une PME sans programme, viser la certification avant toute mesure inverse les priorités de réduction du risque, et attendre le contrat fait perdre le temps d'anticipation.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Disproportionné : SP 800-53 est un catalogue exhaustif pensé pour le fédéral américain — sans priorisation, une petite équipe s'y noie, et il ne fournit pas de certification.",
+        "Hors séquence : la certification atteste un ISMS qui fonctionne — la viser avant toute mesure technique laisse le risque réel intact pendant des mois.",
+        "Attentisme : l'exigence est annoncée — anticiper la trajectoire de certification est exactement le rôle du CISO ; attendre le contrat crée l'urgence subie.",
+        "Bonne réponse : gains rapides et priorisés avec les CIS Controls, puis montée vers l'ISMS certifiable ISO 27001 — la trajectoire qui sert le risque ET l'exigence client."
+      ]
     }
   ],
   "quizEn": [
@@ -2753,6 +2852,42 @@ window.CISSP_DATA.domains[2] = {
         "Piège de la politique-refuge : la politique interne ne protège pas d'une accusation de destruction de preuves — l'obligation légale prime.",
         "Hors phase : l'obligation naît avant l'assignation — attendre détruirait des preuves potentielles.",
         "Bonne réponse : le legal hold ciblé et documenté, déclenché dès l'anticipation raisonnable, est l'action immédiate attendue."
+      ]
+    },
+    {
+      "q": "A government agency determines that documents classified Secret ten years ago no longer require that level of protection. What is the MOST appropriate course of action?",
+      "choix": [
+        "Destroy the documents, since their classification is now obsolete",
+        "Keep the Secret classification unchanged, because lowering it would create unnecessary risk",
+        "Follow the formal declassification process, with approval from the data owner, before lowering the protection level",
+        "Allow custodians to relabel the documents as Unclassified as they access them"
+      ],
+      "reponse": 2,
+      "explication": "La déclassification est un processus formel, approuvé par le data owner : la sensibilité diminue souvent avec le temps, et maintenir des protections coûteuses sur des données devenues banales est de la sur-classification. Détruire des documents encore utiles n'est pas une réponse à une classification obsolète, conserver le niveau par prudence gaspille des ressources, et laisser les custodians ré-étiqueter au fil de l'eau court-circuite l'autorité du owner et tout processus formel.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Hors sujet : l'obsolescence de la classification ne signifie pas que la donnée n'a plus de valeur — la destruction relève de la politique de rétention, pas de la déclassification.",
+        "Piège de la fausse prudence : sur-classifier gaspille des ressources et pousse au contournement — la réponse CISSP est la protection proportionnée, pas maximale.",
+        "Bonne réponse : la déclassification est un processus formel décidé par le data owner — jamais un ajustement improvisé.",
+        "Violation des rôles : le custodian applique les protections, il ne décide pas du niveau de classification — seul le owner a cette autorité."
+      ]
+    },
+    {
+      "q": "A multinational company must demonstrate to customers and regulators in several countries that its security management system meets a recognized, certifiable standard. Which framework BEST meets this requirement?",
+      "choix": [
+        "NIST Cybersecurity Framework",
+        "ISO/IEC 27001",
+        "CIS Critical Security Controls",
+        "NIST SP 800-53"
+      ],
+      "reponse": 1,
+      "explication": "ISO/IEC 27001 est le seul référentiel de la liste qui définit un système de management de la sécurité (ISMS) certifiable par un organisme accrédité et reconnu internationalement — exactement ce qu'exigent clients et régulateurs multi-pays. Le NIST CSF est un cadre volontaire sans mécanisme de certification, les CIS Controls sont un ensemble prescriptif de mesures techniques priorisées, et NIST SP 800-53 est un catalogue de contrôles conçu pour le secteur fédéral américain — aucun des trois ne délivre de certification du système de management.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Techniquement utile mais non certifiable : le NIST CSF structure et communique un programme de gestion des risques, il n'offre aucune certification formelle.",
+        "Bonne réponse : ISO/IEC 27001 est l'ISMS certifiable et internationalement reconnu — la preuve formelle attendue par des clients et régulateurs de plusieurs pays.",
+        "Mauvais niveau : les CIS Controls priorisent des mesures techniques — excellents pour agir, mais ils ne certifient pas un système de management.",
+        "Mauvais contexte : SP 800-53 est un catalogue de contrôles orienté fédéral américain, pas un standard de certification international du management de la sécurité."
       ]
     }
   ],
