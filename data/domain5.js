@@ -757,7 +757,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Un système exige un mot de passe puis un code PIN pour ouvrir une session. Comment qualifier cette authentification ?",
       "choix": [
         "Authentification à deux facteurs conforme à AAL2",
-        "Authentification à facteur unique, car les deux éléments sont de type connaissance",
+        "Facteur unique : les deux éléments sont de type connaissance",
         "Authentification forte, car le PIN est indépendant du mot de passe",
         "Authentification multifacteur, car deux éléments sont exigés"
       ],
@@ -794,7 +794,7 @@ window.CISSP_DATA.domains[5] = {
       "choix": [
         "Le temps moyen nécessaire pour enrôler un nouvel utilisateur",
         "Le taux d'utilisateurs légitimes rejetés par le système",
-        "Le point où le FAR est égal au FRR ; plus il est bas, plus le système est précis",
+        "Le point où le FAR est égal au FRR ; plus il est bas, plus précis",
         "Le taux d'imposteurs acceptés lorsque la sensibilité est maximale"
       ],
       "reponse": 2,
@@ -847,7 +847,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Quelle est la PRINCIPALE différence entre une smart card et une memory card ?",
       "choix": [
         "La memory card est plus sécurisée car ses données ne changent jamais",
-        "La smart card contient une puce qui génère des données d'authentification uniques à chaque transaction",
+        "La puce de la smart card génère des données uniques à chaque usage",
         "La memory card exige toujours un code PIN",
         "La smart card fonctionne uniquement avec la biométrie"
       ],
@@ -883,7 +883,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Des utilisateurs d'un domaine Active Directory ne peuvent plus s'authentifier après le dérèglement de l'horloge d'un contrôleur de domaine. Quel protocole est la cause la PLUS probable du problème ?",
       "choix": [
         "SAML, car les assertions ont expiré",
-        "RADIUS, car les ports UDP sont bloqués",
+        "RADIUS, car les ports UDP 1812 et 1813 seraient bloqués par le pare-feu",
         "Kerberos, car il dépend de la synchronisation horaire via NTP",
         "LDAP, car l'annuaire est corrompu"
       ],
@@ -902,7 +902,7 @@ window.CISSP_DATA.domains[5] = {
       "choix": [
         "Le Ticket-Granting Service (TGS)",
         "Le principal",
-        "L'Authentication Service (AS)",
+        "L’Authentication Service (AS), qui délivre le TGT initial",
         "Le realm"
       ],
       "reponse": 0,
@@ -919,7 +919,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Quelle affirmation sur le processus de connexion Kerberos est EXACTE ?",
       "choix": [
         "Le KDC utilise la cryptographie asymétrique pour distribuer les clés",
-        "Le mot de passe n'est jamais transmis ; la clé de session est chiffrée avec un hash du mot de passe",
+        "Le mot de passe n’est jamais transmis, mais vérifié via son hash",
         "Le mot de passe de l'utilisateur est transmis chiffré au KDC",
         "Le TGT est stocké en clair sur le serveur de ressources"
       ],
@@ -954,7 +954,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "Dans SAML 2.0, quelle assertion prouve que l'utilisateur a fourni les bons identifiants et précise la méthode et l'heure de connexion ?",
       "choix": [
-        "L'assertion d'autorisation",
+        "L’assertion d’autorisation (décision d’accès au service)",
         "L'assertion d'attribut",
         "L'assertion d'authentification",
         "L'assertion de session"
@@ -974,7 +974,7 @@ window.CISSP_DATA.domains[5] = {
       "choix": [
         "OpenID Connect (OIDC)",
         "TACACS+",
-        "OAuth 2.0 seul",
+        "OAuth 2.0 seul, sans couche d’identité",
         "Kerberos"
       ],
       "reponse": 0,
@@ -991,7 +991,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Quelle est la relation ENTRE OAuth 2.0 et OpenID Connect ?",
       "choix": [
         "Les deux sont des protocoles d'authentification concurrents et incompatibles",
-        "OIDC est une couche d'authentification construite sur le framework d'autorisation OAuth 2.0",
+        "OIDC est une couche d’authentification bâtie sur le framework OAuth 2.0",
         "OAuth 2.0 est une extension d'OIDC dédiée au chiffrement",
         "OIDC remplace OAuth 2.0, qui est déprécié"
       ],
@@ -1009,7 +1009,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Quel avantage TACACS+ offre-t-il par rapport à RADIUS ?",
       "choix": [
         "Il utilise UDP, plus rapide que TCP",
-        "Il ne nécessite aucun serveur central",
+        "Il ne nécessite aucun serveur central et fonctionne entièrement en pair-à-pair sur le réseau local",
         "Il est rétrocompatible avec Diameter",
         "Il chiffre l'ensemble des informations d'authentification et sépare les processus AAA"
       ],
@@ -1027,7 +1027,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Quels ports UDP RADIUS utilise-t-il par défaut pour les messages d'authentification et d'accounting ?",
       "choix": [
         "1812 et 1813",
-        "2083 et 2084",
+        "2083 et 2084 (RadSec)",
         "88 et 89",
         "49 et 50"
       ],
@@ -1081,7 +1081,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Quelle est la caractéristique CLÉ du modèle Mandatory Access Control ?",
       "choix": [
         "Le propriétaire de l'objet décide des accès",
-        "Des labels sont appliqués aux sujets et aux objets, et le système impose la politique",
+        "Le système impose la politique via des labels sur sujets et objets",
         "Les règles s'appuient sur des attributs multiples exprimés en XACML",
         "Les privilèges sont attribués via des rôles métier"
       ],
@@ -1224,7 +1224,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "Après avoir compromis le poste d'un utilisateur standard, un attaquant obtient les droits administrateur de la machine, puis accède avec des privilèges similaires à d'autres postes du réseau. Quelles techniques décrit ce scénario, dans l'ordre ?",
       "choix": [
-        "Privilege creep, puis session hijacking",
+        "Privilege creep, puis session hijacking après vol du cookie de session",
         "Escalade verticale, puis escalade horizontale (mouvement latéral)",
         "Escalade horizontale, puis escalade verticale",
         "Kerberoasting, puis pass-the-hash"
@@ -1242,7 +1242,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "Quelle fonctionnalité relève spécifiquement d'une solution de Privileged Access Management (PAM) ?",
       "choix": [
-        "L'enregistrement des sessions privilégiées et l'accès privilégié just-in-time",
+        "L’enregistrement de session et l’accès just-in-time",
         "Le filtrage des courriels entrants",
         "La génération de certificats TLS pour les serveurs web",
         "La sauvegarde chiffrée des bases de données"
@@ -1299,7 +1299,7 @@ window.CISSP_DATA.domains[5] = {
         "Les deux sont des protocoles d'authentification unique (SSO)",
         "SCIM est un profil de SPML pour les environnements cloud",
         "SPML gère le provisioning et SCIM gère l'authentification des utilisateurs",
-        "SPML est l'ancien standard de provisioning basé XML ; SCIM est son successeur moderne basé REST et JSON"
+        "SPML est l’ancien provisioning XML ; SCIM son successeur REST/JSON"
       ],
       "reponse": 3,
       "explication": "SPML (Service Provisioning Markup Language) est un standard XML de provisioning qui n'a jamais été largement adopté ; SCIM l'a remplacé avec une approche moderne fondée sur des API REST et JSON, largement supportée par les fournisseurs SaaS. Aucun des deux n'authentifie les utilisateurs ni ne fournit de SSO : ce sont des standards de gestion du cycle de vie des comptes.",
@@ -1353,7 +1353,7 @@ window.CISSP_DATA.domains[5] = {
         "Imposer un changement de mot de passe tous les 30 jours",
         "Envoyer les codes par SMS plutôt que par application",
         "Allonger les codes TOTP à huit chiffres",
-        "Déployer des authentificateurs FIDO2/WebAuthn liés à l'origine du site"
+        "Déployer des clés FIDO2/WebAuthn liées à l’origine"
       ],
       "reponse": 3,
       "explication": "FIDO2/WebAuthn est résistant au phishing par conception : la clé privée ne quitte jamais l'authentificateur et la signature est cryptographiquement liée à l'origine (le domaine) du site légitime — un site de phishing, même parfaitement imité, ne peut pas obtenir de réponse valide. Les codes TOTP et SMS restent saisissables par l'utilisateur sur un faux site (attaque adversary-in-the-middle), quelle que soit leur longueur, et la rotation des mots de passe n'empêche pas leur capture en temps réel.",
@@ -1386,7 +1386,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "Des employés reçoivent en pleine nuit des dizaines de notifications push MFA et l'un d'eux finit par approuver pour faire cesser les alertes. Quelle attaque est décrite et quelle est la MEILLEURE contre-mesure ?",
       "choix": [
-        "Credential stuffing ; imposer des mots de passe uniques",
+        "Credential stuffing ; imposer des mots de passe uniques et surveiller les fuites",
         "Session hijacking ; raccourcir la durée des sessions",
         "MFA fatigue (push bombing) ; activer le number matching ou passer à FIDO2",
         "SIM swapping ; contacter l'opérateur mobile"
@@ -1407,7 +1407,7 @@ window.CISSP_DATA.domains[5] = {
         "SAML pour le navigateur et OAuth pour l'authentificateur",
         "PKCS#11 pour la carte à puce et X.509 pour le certificat",
         "TOTP pour générer les codes et HOTP pour les vérifier",
-        "WebAuthn, l'API entre le navigateur et le service web ; CTAP, le protocole entre le navigateur et l'authentificateur externe"
+        "WebAuthn (API) et CTAP (protocole vers l’authentificateur)"
       ],
       "reponse": 3,
       "explication": "FIDO2 combine WebAuthn (API du W3C permettant au site web, via le navigateur, de créer et vérifier des credentials à clé publique) et CTAP (Client to Authenticator Protocol de la FIDO Alliance, qui fait dialoguer le navigateur avec un authentificateur externe comme une clé USB/NFC ou un smartphone). TOTP/HOTP sont des générateurs de codes à usage unique sans lien avec FIDO2, et PKCS#11/X.509 relèvent des infrastructures à clé publique classiques.",
@@ -1423,7 +1423,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Le service RH se plaint qu'un nouveau lecteur biométrique exige trois minutes par personne pour l'enrôlement et plus de dix secondes à chaque passage. Quels critères d'acceptabilité opérationnelle sont en cause ?",
       "choix": [
         "La précision et le taux de faux rejets",
-        "Le temps d'enrôlement et le throughput (débit de passage)",
+        "Le temps d’enrôlement et le débit de passage",
         "Le CER et le FAR",
         "La résistance au spoofing et la vivacité (liveness)"
       ],
@@ -1440,7 +1440,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "Quelle est la MEILLEURE pratique pour le stockage des données biométriques d'authentification ?",
       "choix": [
-        "Stocker uniquement un gabarit (template) mathématique protégé, idéalement sur l'appareil de l'utilisateur",
+        "Stocker uniquement un gabarit mathématique protégé, idéalement sur l’appareil",
         "Stocker les images brutes chiffrées dans une base centrale pour faciliter le ré-enrôlement",
         "Stocker les empreintes en clair mais sur un serveur isolé du réseau",
         "Hacher les images brutes avec un algorithme lent comme bcrypt, comme pour les mots de passe"
@@ -1479,7 +1479,7 @@ window.CISSP_DATA.domains[5] = {
         "Something you do (biométrie comportementale)",
         "Something you know",
         "Somewhere you are",
-        "Something you have"
+        "Something you have (un objet possédé, ex. token)"
       ],
       "reponse": 0,
       "explication": "La dynamique de frappe — rythme, durée d'appui, temps entre les touches — est une biométrie comportementale, classée 'something you do'. Elle permet notamment l'authentification continue pour détecter qu'un imposteur a pris la place de l'utilisateur en cours de session. Ce n'est ni une connaissance, ni un objet possédé, ni une localisation.",
@@ -1514,7 +1514,7 @@ window.CISSP_DATA.domains[5] = {
       "choix": [
         "Le golden ticket ne fonctionne que si la pré-authentification est désactivée",
         "Le golden ticket vise RADIUS, le silver ticket vise Kerberos",
-        "Le golden ticket forge des TGT avec le hash de krbtgt ; le silver ticket forge des service tickets avec le hash d'un compte de service, sans contacter le KDC",
+        "Golden ticket : TGT via krbtgt ; silver ticket : service tickets",
         "Le silver ticket donne plus de privilèges que le golden ticket"
       ],
       "reponse": 2,
@@ -1531,7 +1531,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Lors d'un audit Active Directory, vous découvrez des comptes configurés avec l'option « Do not require Kerberos preauthentication ». Quelle attaque ces comptes rendent-ils possible ?",
       "choix": [
         "Overpass-the-hash : convertir un hash en TGT",
-        "AS-REP roasting : obtenir une réponse chiffrée avec le hash du mot de passe et la casser hors ligne",
+        "AS-REP roasting : réponse chiffrée cassée hors ligne",
         "Golden ticket : forger des TGT arbitraires",
         "Pass-the-hash : rejouer le hash NTLM sur d'autres machines"
       ],
@@ -1551,7 +1551,7 @@ window.CISSP_DATA.domains[5] = {
         "La haute disponibilité du KDC",
         "La non-répudiation par signature numérique",
         "Le chiffrement de bout en bout de toutes les données applicatives",
-        "L'authentification mutuelle : le client prouve son identité au service, et le service peut prouver la sienne au client"
+        "L’authentification mutuelle du client et du service"
       ],
       "reponse": 3,
       "explication": "Kerberos offre l'authentification mutuelle : grâce aux clés de session partagées via le KDC, le client s'authentifie auprès du service et peut exiger que le service renvoie une preuve (l'horodatage chiffré avec la clé de session), démontrant qu'il détient la clé attendue — parade contre l'usurpation de serveur. Kerberos utilise la cryptographie symétrique, donc pas de non-répudiation (qui exige des signatures asymétriques) ; il protège ses échanges de tickets mais ne chiffre pas automatiquement tout le trafic applicatif ; et le KDC reste un point unique de défaillance à redonder soi-même.",
@@ -1566,7 +1566,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "Quel est le PRINCIPAL point faible architectural de Kerberos qu'un concepteur doit compenser ?",
       "choix": [
-        "Le KDC concentre toutes les clés secrètes et constitue un point unique de défaillance et de compromission",
+        "Le KDC concentre toutes les clés : point unique de compromission",
         "L'obligation d'utiliser des certificats X.509 pour chaque utilisateur",
         "L'impossibilité de fonctionner avec Active Directory",
         "L'absence totale de chiffrement des tickets"
@@ -1586,7 +1586,7 @@ window.CISSP_DATA.domains[5] = {
       "choix": [
         "OAuth 2.0 sans OIDC",
         "Kerberos, en exposant le KDC sur Internet",
-        "SAML 2.0, l'IdP interne émettant des assertions vers chaque SaaS (SP)",
+        "SAML 2.0 : IdP interne vers les SP",
         "RADIUS avec un portail captif"
       ],
       "reponse": 2,
@@ -1602,7 +1602,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "Une application de gestion de photos demande l'autorisation d'accéder aux fichiers stockés dans votre drive cloud, sans jamais connaître votre mot de passe. Quel protocole réalise EXACTEMENT cette fonction ?",
       "choix": [
-        "OAuth 2.0 : le serveur d'autorisation délivre un access token à portée limitée",
+        "OAuth 2.0 : access token limité",
         "SAML 2.0, via une assertion d'attributs",
         "OIDC, via l'ID token",
         "SCIM, via une API REST"
@@ -1640,7 +1640,7 @@ window.CISSP_DATA.domains[5] = {
       "choix": [
         "Le KDC authentifie ; le TGS consomme",
         "Le client authentifie ; le serveur d'autorisation consomme",
-        "L'Identity Provider authentifie l'utilisateur ; le Service Provider consomme l'assertion",
+        "L’IdP authentifie ; le SP consomme l’assertion",
         "Le Service Provider vérifie ; l'Identity Provider consomme"
       ],
       "reponse": 2,
@@ -1677,7 +1677,7 @@ window.CISSP_DATA.domains[5] = {
         "Il impose un secret client impossible à stocker",
         "Il ne fonctionne pas avec les serveurs d'autorisation modernes",
         "Il est trop lent car il exige deux allers-retours supplémentaires",
-        "L'access token transite par l'URL du navigateur, où il peut fuiter (historique, referrer, scripts)"
+        "L’access token transite par l’URL et peut y fuiter"
       ],
       "reponse": 3,
       "explication": "Dans le flux implicit, l'access token est retourné directement dans le fragment de l'URL de redirection : il s'expose à l'historique du navigateur, aux en-têtes referrer et aux scripts tiers, sans possibilité d'authentifier le client. Les bonnes pratiques OAuth 2.0 actuelles (et OAuth 2.1) le remplacent par l'authorization code flow avec PKCE, qui ne fait transiter qu'un code à usage unique. Ce n'est ni une question de performance ni de compatibilité, et l'implicit flow a justement été conçu pour les clients SANS secret.",
@@ -1693,7 +1693,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Un utilisateur exécute par mégarde un cheval de Troie qui partage silencieusement ses documents avec un attaquant, en utilisant les propres permissions de l'utilisateur. Quel modèle de contrôle d'accès est INTRINSÈQUEMENT vulnérable à ce scénario ?",
       "choix": [
         "ABAC, car les attributs sont dynamiques",
-        "DAC, car tout programme exécuté hérite des droits du propriétaire, y compris celui de re-partager",
+        "DAC : tout programme hérite des droits du propriétaire",
         "MAC, car les labels peuvent être modifiés par le malware",
         "RBAC, car les rôles sont trop larges"
       ],
@@ -1711,7 +1711,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Un système militaire applique des étiquettes (Secret, Très Secret) aux documents et aux utilisateurs ; un analyste habilité Secret ne peut pas lire un document Très Secret, même si son collègue propriétaire du document le souhaite. Quel modèle est en place ?",
       "choix": [
         "Risk-based access control",
-        "DAC, avec des ACL renforcées",
+        "DAC, avec des ACL renforcées gérées à la discrétion de chaque propriétaire de fichier ou dossier",
         "MAC : le système impose la politique via les labels, le propriétaire n'a pas voix au chapitre",
         "RBAC hiérarchique"
       ],
@@ -1728,7 +1728,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "Votre déploiement RBAC compte désormais 900 rôles pour 1 100 employés, à force de créer un rôle par exception (par projet, par site, par horaire). Comment s'appelle ce phénomène et quelle évolution est la PLUS pertinente ?",
       "choix": [
-        "Role explosion ; évoluer vers l'ABAC, qui exprime les exceptions par des attributs et non par de nouveaux rôles",
+        "Role explosion ; évoluer vers l’ABAC",
         "Roles mining ; supprimer tous les rôles inutilisés",
         "Privilege creep ; lancer des revues d'accès",
         "Toxic combination ; appliquer la separation of duties"
@@ -1748,7 +1748,7 @@ window.CISSP_DATA.domains[5] = {
       "choix": [
         "DAC : le responsable du dépôt gère les accès",
         "RBAC avec un rôle 'prestataire'",
-        "ABAC : la politique combine des attributs du sujet, de l'environnement et une donnée RH évaluée dynamiquement",
+        "ABAC : attributs évalués dynamiquement",
         "MAC avec un label 'prestataire'"
       ],
       "reponse": 2,
@@ -1785,7 +1785,7 @@ window.CISSP_DATA.domains[5] = {
         "Accélérer la connexion des administrateurs",
         "Remplacer les revues d'accès périodiques",
         "Supprimer le besoin de MFA pour les comptes à privilèges",
-        "Tendre vers le zéro privilège permanent : les droits élevés n'existent que pendant la tâche, puis disparaissent"
+        "Tendre vers le zéro privilège permanent"
       ],
       "reponse": 3,
       "explication": "Le JIT vise le 'zero standing privileges' : au lieu de comptes administrateurs dotés de droits permanents — cibles idéales en cas de vol d'identifiants —, les privilèges sont accordés à la demande, pour une durée limitée, souvent après approbation, puis automatiquement retirés. La fenêtre d'attaque se réduit drastiquement. Le JIT complète le MFA et les revues d'accès, il ne les remplace pas, et son but n'est pas la commodité.",
@@ -1801,7 +1801,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Votre solution PAM crée un compte administrateur éphémère à la demande, valable une heure, puis le supprime automatiquement. Quelle approche est mise en œuvre ?",
       "choix": [
         "La délégation Kerberos contrainte",
-        "Le provisioning JIT de comptes éphémères (broker and remove)",
+        "Le provisioning JIT de comptes jetables",
         "La rotation de secrets à intervalle fixe",
         "Le password vaulting classique"
       ],
@@ -1821,7 +1821,7 @@ window.CISSP_DATA.domains[5] = {
         "Le confier au RSSI qui en mémorise le mot de passe",
         "Le supprimer : il contredit le principe du moindre privilège",
         "L'intégrer à l'IdP et au MFA d'entreprise pour bénéficier des contrôles standards",
-        "Identifiants scellés en coffre, MFA exclu si l'IdP peut être en panne, alertes et audit systématiques à chaque usage, rotation après chaque utilisation"
+        "Identifiants scellés en coffre, audités à chaque usage et changés ensuite"
       ],
       "reponse": 3,
       "explication": "Le compte break-glass sert quand tout le reste est en panne (IdP, MFA, PAM) : ses identifiants sont conservés hors ligne sous scellé, son usage doit déclencher une alerte immédiate et un audit complet, et ses secrets sont changés après chaque utilisation. L'intégrer à l'IdP et à son MFA — séduisant sur le papier — le rendrait inutilisable précisément quand on en a besoin, lors d'une panne de l'IdP. Le supprimer expose à une perte totale d'administration, et le confier à la mémoire d'une personne crée un point unique de défaillance humain.",
@@ -1837,7 +1837,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Trois administrateurs de bases de données utilisent le même compte 'sa'. Quelle configuration PAM restaure le MIEUX l'accountability sans supprimer le compte ?",
       "choix": [
         "Changer le mot de passe chaque mois et l'afficher dans la salle serveur",
-        "Coffre-fort PAM : chaque administrateur s'authentifie individuellement (avec MFA), obtient le mot de passe ou une session injectée, la session est enregistrée et le mot de passe est changé après chaque utilisation",
+        "Coffre-fort PAM : accès individuel tracé, rotation après usage",
         "Communiquer le mot de passe par messagerie chiffrée",
         "Interdire l'usage du compte et attendre la refonte de l'application"
       ],
@@ -1856,7 +1856,7 @@ window.CISSP_DATA.domains[5] = {
       "choix": [
         "Uniquement un timeout d'inactivité de 24 heures",
         "Session illimitée tant que l'utilisateur est actif, pour le confort",
-        "Timeout d'inactivité court, durée de session absolue maximale, et ré-authentification avant toute opération sensible",
+        "Timeout d’inactivité court et durée de session absolue maximale",
         "Déconnexion uniquement à la fermeture du navigateur"
       ],
       "reponse": 2,
@@ -1872,7 +1872,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "Un attaquant a volé le cookie de session d'un utilisateur via un script malveillant et rejoue la session depuis son propre poste. Quelles mesures auraient le MIEUX limité cette attaque ?",
       "choix": [
-        "Attributs Secure et HttpOnly sur le cookie, régénération de l'identifiant de session après connexion, et liaison de la session au contexte du client",
+        "Cookies Secure/HttpOnly et régénération de l’ID de session",
         "Utiliser le même identifiant de session avant et après l'authentification",
         "Stocker l'identifiant de session dans l'URL",
         "Allonger la durée de vie du cookie pour éviter les reconnexions"
@@ -1890,7 +1890,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "Votre entreprise ouvre son portail fournisseurs aux 2 000 employés d'un partenaire. Le partenaire exige que ses employés utilisent leurs identifiants internes existants et que les départs soient immédiatement répercutés. Quelle architecture répond le MIEUX à ces exigences ?",
       "choix": [
-        "Fédération B2B : le partenaire reste l'IdP de ses employés, votre portail agit en SP et fait confiance à ses assertions",
+        "Fédération B2B : le partenaire reste l’IdP, votre portail agit en SP",
         "Créer 2 000 comptes locaux et envoyer les mots de passe au partenaire",
         "Synchroniser une copie de l'annuaire du partenaire chaque trimestre",
         "Un compte générique partagé 'partenaire' avec un mot de passe fort"
@@ -1908,8 +1908,8 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "Dans une fédération avec un partenaire, quel document ou mécanisme établit les exigences mutuelles (niveaux d'assurance, attributs échangés, obligations de sécurité) AVANT l'échange technique d'assertions ?",
       "choix": [
-        "Le certificat TLS du Service Provider",
-        "Un accord de fédération (trust agreement) négocié entre les organisations, complété par l'échange de métadonnées",
+        "Le certificat TLS et la clé privée du Service Provider",
+        "Un accord de fédération (trust agreement) négocié",
         "La politique de mots de passe locale",
         "Le fichier de zone DNS"
       ],
@@ -1927,7 +1927,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Des millions d'identifiants issus d'une fuite chez un site tiers sont rejoués tels quels contre votre portail, avec un taux de réussite de 1 %. Puis un autre attaquant essaie « Printemps2026! » sur des milliers de vos comptes. Comment nommer ces DEUX attaques, dans l'ordre ?",
       "choix": [
         "Brute force, puis rainbow table",
-        "Password spraying, puis credential stuffing",
+        "Password spraying, puis credential stuffing massif",
         "Credential stuffing, puis password spraying",
         "Phishing, puis MFA fatigue"
       ],
@@ -1947,7 +1947,7 @@ window.CISSP_DATA.domains[5] = {
         "Il ne génère aucun échec d'authentification",
         "Il passe par le protocole Kerberos, invisible dans les journaux",
         "Il utilise des mots de passe chiffrés ; seul un HSM le détecte",
-        "Il ne fait qu'un ou deux essais par compte, sous le seuil de verrouillage ; une détection centralisée des échecs sur l'ensemble des comptes (et depuis les mêmes sources) le révèle"
+        "Peu d’essais par compte, sous le seuil de verrouillage"
       ],
       "reponse": 3,
       "explication": "Le verrouillage de compte compte les échecs PAR COMPTE ; le spraying distribue les essais sur des milliers de comptes avec un ou deux mots de passe, restant sous chaque seuil individuel. La détection doit donc être transversale : un pic d'échecs répartis sur de nombreux comptes, souvent depuis les mêmes adresses ou avec le même mot de passe, visible dans un SIEM. Les réponses A et C sont techniquement fausses et l'attaque génère bien des échecs — mais dispersés.",
@@ -1962,7 +1962,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "Quelle exigence de gouvernance est la PLUS appropriée pour les revues d'accès (access reviews) des comptes à privilèges par rapport aux comptes standard ?",
       "choix": [
-        "Des revues plus fréquentes et plus approfondies pour les comptes à privilèges, menées par les managers ou propriétaires de ressources, avec retrait immédiat des droits non justifiés",
+        "Des revues plus fréquentes des comptes à privilèges",
         "Aucune revue pour les comptes à privilèges, car le PAM suffit",
         "Des revues uniquement lors du départ de l'employé",
         "Les mêmes revues annuelles pour tous les comptes, par équité"
@@ -1981,7 +1981,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Un développeur quitte l'entreprise un vendredi en mauvais termes. Concernant ses accès, que devriez-vous faire EN PREMIER ?",
       "choix": [
         "Supprimer immédiatement son compte et toutes ses données",
-        "Désactiver son compte dès l'annonce du départ, avant même l'entretien de sortie",
+        "Désactiver son compte dès l’annonce du départ",
         "Attendre la revue d'accès trimestrielle",
         "Transférer son compte à son remplaçant pour assurer la continuité"
       ],
@@ -2000,7 +2000,7 @@ window.CISSP_DATA.domains[5] = {
       "choix": [
         "Commander des clés FIDO2 pour l'ensemble des employés et fixer une date de bascule unique",
         "Activer le number matching sur les notifications push existantes pour toute l'entreprise",
-        "Prioriser par le risque : cartographier populations et applications, migrer d'abord les comptes à privilèges et les accès exposés à Internet, avec des parcours adaptés aux postes partagés",
+        "Prioriser par le risque : migrer d’abord les comptes à privilèges et les accès exposés à Internet",
         "Lancer un pilote sur la base du volontariat au siège et généraliser selon les retours utilisateurs"
       ],
       "reponse": 2,
@@ -2019,7 +2019,7 @@ window.CISSP_DATA.domains[5] = {
         "Faire tourner manuellement tous les secrets identifiés et clore le constat d'audit",
         "Publier une politique interdisant le stockage de secrets dans le code et former les développeurs",
         "Chiffrer l'ensemble des dépôts de code afin que les secrets ne soient plus lisibles",
-        "Déployer un coffre-fort de secrets centralisé avec injection de secrets éphémères à l'exécution, et intégrer la détection de secrets dans les pipelines pour prévenir la récidive"
+        "Coffre-fort de secrets avec injection éphémère et détection dans les pipelines"
       ],
       "reponse": 3,
       "explication": "Le problème est systémique : tant que les applications ont besoin de secrets statiques, ils réapparaîtront dans le code. La remédiation durable combine un coffre-fort centralisé (les secrets sont récupérés à l'exécution, idéalement éphémères et générés à la demande) et un contrôle préventif dans les pipelines (secret scanning bloquant). La rotation manuelle corrige le passé sans empêcher la récidive ; chiffrer les dépôts ne change rien pour les développeurs et les pipelines qui doivent les lire ; la politique et la formation sont nécessaires mais, sans mécanisme technique, elles ne survivent pas à la pression des délais de livraison.",
@@ -2035,7 +2035,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Une plateforme de 400 microservices répartis sur deux clouds et un datacenter legacy utilise des secrets statiques partagés pour les appels inter-services. L'architecte sécurité veut une authentification mutuelle des workloads à grande échelle. Quelle approche répond le MIEUX au besoin ?",
       "choix": [
         "Créer un compte de service unique par cloud, avec rotation trimestrielle du secret",
-        "Attribuer à chaque workload une identité attestée de courte durée, délivrée et renouvelée automatiquement (modèle SPIFFE/SVID), en remplacement des secrets partagés",
+        "Attribuer à chaque workload une identité attestée de courte durée (SPIFFE/SVID)",
         "Restreindre les flux entre clusters par filtrage d'adresses IP et micro-segmentation réseau",
         "Émettre manuellement des certificats TLS par service, renouvelés chaque année par l'équipe PKI"
       ],
@@ -2054,7 +2054,7 @@ window.CISSP_DATA.domains[5] = {
       "choix": [
         "Bloquer tout accès croisé jusqu'à la fin du programme d'intégration des systèmes d'information",
         "Créer des comptes invités dans votre annuaire pour tous les employés acquis",
-        "Évaluer les contrôles IAM de la cible, puis établir une fédération inter-entreprises avec des exigences contractualisées (MFA, niveaux d'assurance, deprovisioning), en attendant l'intégration complète",
+        "Évaluer les contrôles IAM de la cible, puis fédérer avec des exigences contractualisées",
         "Fusionner immédiatement les deux annuaires pour simplifier l'administration"
       ],
       "reponse": 2,
@@ -2070,7 +2070,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "Les campagnes de certification d'accès de votre outil IGA affichent 98 % d'approbations, la plupart validées en bloc en quelques minutes par les managers (« rubber stamping »). Quelle évolution améliorera le MIEUX la valeur de ces certifications ?",
       "choix": [
-        "Cibler les campagnes sur les accès à risque, mettre en évidence les écarts (droits inhabituels par rapport aux pairs, privilèges élevés) et révoquer par défaut les droits non justifiés",
+        "Cibler les campagnes sur les accès à risque et révoquer par défaut les droits non justifiés",
         "Augmenter la fréquence des campagnes de trimestrielle à mensuelle",
         "Rappeler aux managers leur responsabilité et sanctionner les validations en bloc",
         "Transférer les revues aux administrateurs de l'outil IGA, qui connaissent mieux les droits techniques"
@@ -2091,7 +2091,7 @@ window.CISSP_DATA.domains[5] = {
         "Exiger une approbation humaine avant chaque action de chaque agent",
         "Déplacer la clé API partagée dans un coffre-fort de secrets avec rotation automatique",
         "Limiter le nombre d'agents IA autorisés à s'exécuter simultanément",
-        "Attribuer à chaque agent une identité non humaine propre, avec des droits limités à sa fonction, des jetons de courte durée et une journalisation attribuable à l'agent et à son commanditaire"
+        "Attribuer à chaque agent une identité non humaine à droits limités et jetons courts"
       ],
       "reponse": 3,
       "explication": "Les agents IA sont des identités non humaines et doivent être gouvernés comme telles : identité individuelle (pas de clé partagée), least privilege par fonction, jetons de courte durée pour limiter la fenêtre d'exploitation, et journalisation qui rattache chaque appel à l'agent ET au commanditaire humain ou service — sans quoi ni accountability ni révocation ciblée ne sont possibles. Limiter le nombre d'agents ne change rien à l'anonymat ni au sur-privilège ; l'approbation humaine systématique est un absolu qui détruit la valeur de l'autonomie et sera contourné ; le coffre-fort avec rotation améliore la protection du secret mais conserve une identité partagée sur-privilégiée — le problème de fond demeure.",
@@ -2106,7 +2106,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "Une banque en ligne a déployé les passkeys pour ses clients. Six mois plus tard, le support traite des milliers de demandes de récupération après perte d'appareil, via un simple lien envoyé par e-mail. Quel risque le RSSI doit-il traiter EN PRIORITÉ ?",
       "choix": [
-        "Le processus de récupération par e-mail, qui ramène l'assurance globale du compte au niveau de la boîte mail et contourne la résistance au phishing des passkeys",
+        "La récupération par e-mail, qui rabaisse l’assurance au niveau de la boîte mail",
         "La synchronisation des passkeys via des clouds grand public, hors du contrôle de la banque",
         "L'incompatibilité des passkeys avec les navigateurs anciens de certains clients",
         "La dégradation de l'expérience client provoquée par les pertes d'accès répétées"
@@ -2125,7 +2125,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Après une acquisition, un audit révèle que l'application mainframe de facturation héritée de la cible — sans API ni support SCIM — compte des dizaines de comptes d'employés partis depuis plus de 90 jours. Son remplacement est budgété dans trois ans. Quelle est la MEILLEURE réponse ?",
       "choix": [
         "Accélérer le remplacement du mainframe en réallouant le budget sécurité",
-        "Raccorder l'application au processus de départ : réconciliation automatisée régulière des comptes avec la source RH (connecteur ou traitement de fichiers), complétée par des revues d'accès rapprochées en compensation",
+        "Réconcilier automatiquement les comptes avec la source RH, plus des revues d’accès rapprochées",
         "Accepter formellement le risque puisque l'application sera décommissionnée",
         "Rappeler aux administrateurs de l'application leur obligation de supprimer les comptes sous 24 heures"
       ],
@@ -2144,7 +2144,7 @@ window.CISSP_DATA.domains[5] = {
       "choix": [
         "Imposer une connexion VPN avec MFA pour atteindre les applications héritées",
         "Reporter le programme MFA jusqu'à la modernisation complète du parc applicatif",
-        "Placer les applications héritées derrière une passerelle ou un proxy d'accès qui impose l'authentification moderne en frontal, et traiter les protocoles hérités comme une dette à réduire progressivement",
+        "Placer les applications héritées derrière un proxy imposant l’authentification moderne",
         "Exempter définitivement les applications héritées de l'exigence MFA, documentée dans la politique"
       ],
       "reponse": 2,
@@ -2163,7 +2163,7 @@ window.CISSP_DATA.domains[5] = {
         "Supprimer tous les comptes non humains inactifs depuis plus de 90 jours",
         "Imposer la rotation immédiate des mots de passe de tous les comptes de service",
         "Étendre immédiatement les campagnes de certification existantes à toutes les identités non humaines",
-        "Établir l'inventaire des identités non humaines et assigner un propriétaire responsable à chacune, en priorisant celles dotées de privilèges élevés"
+        "Inventorier les identités non humaines et leur assigner un propriétaire"
       ],
       "reponse": 3,
       "explication": "On ne gouverne pas ce qu'on ne connaît pas : la première étape est l'inventaire et l'assignation d'un propriétaire (ownership) pour chaque identité non humaine, en priorisant les privilèges élevés — c'est le prérequis de toute certification, rotation ou nettoyage. Étendre les certifications à 45 000 identités sans propriétaire identifié produirait du rubber stamping à grande échelle : personne ne peut attester d'un compte dont on ignore la fonction. La rotation massive sans connaître les dépendances provoque des pannes en chaîne ; supprimer les comptes « inactifs » sans propriétaire ni analyse casse des traitements périodiques légitimes (batchs trimestriels, plans de secours).",
@@ -2196,7 +2196,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "Un audit révèle qu'un prestataire est entré plusieurs fois dans le bâtiment après la fin de son contrat : son badge n'avait jamais été désactivé dans le système de contrôle d'accès physique (PACS). Quelle mesure corrective traite la cause RACINE ?",
       "choix": [
-        "Intégrer la désactivation des badges du PACS au processus de deprovisioning IAM déclenché par la fin de contrat",
+        "Intégrer la désactivation des badges PACS au deprovisioning IAM",
         "Installer des caméras de surveillance supplémentaires aux entrées du bâtiment",
         "Diffuser une note interne rappelant l'interdiction du tailgating aux employés",
         "Exiger que tous les visiteurs signent le registre à l'accueil et portent un badge visiteur"
@@ -2217,7 +2217,7 @@ window.CISSP_DATA.domains[5] = {
         "Planifier une rotation manuelle trimestrielle des mots de passe par les administrateurs",
         "Basculer les services concernés vers le compte système local pour supprimer les mots de passe de domaine",
         "Imposer le MFA sur ces comptes de service",
-        "Migrer ces services vers des group Managed Service Accounts (gMSA), dont le mot de passe long et aléatoire est géré et pivoté automatiquement par l'annuaire"
+        "Migrer ces services vers des group Managed Service Accounts (gMSA) à mot de passe géré par l’annuaire"
       ],
       "reponse": 3,
       "explication": "Les gMSA répondent exactement au problème : l'annuaire génère un mot de passe de 240 caractères, le renouvelle automatiquement et aucun humain ne le connaît — le Kerberoasting devient inopérant car le hash est incassable hors ligne. La rotation manuelle trimestrielle dépend de la discipline humaine et laisse des fenêtres d'exposition ; le compte système local accorde des privilèges excessifs sur la machine, ce que la leçon déconseille explicitement ; et le MFA ne s'applique pas aux comptes de service, qui s'authentifient sans interaction humaine.",
@@ -2255,7 +2255,7 @@ window.CISSP_DATA.domains[5] = {
         "Identification proves an identity; authentication claims it",
         "They are synonymous terms in modern IAM systems",
         "Identification grants access rights; authentication logs user actions",
-        "Identification is claiming an identity; authentication is proving that claim"
+        "Identification claims an identity; authentication proves that claim"
       ],
       "reponse": 3,
       "explication": "L'identification est la déclaration d'une identité (saisir un nom d'utilisateur, présenter un badge) ; l'authentification est la preuve de cette déclaration (mot de passe, biométrie, token). La réponse A inverse les définitions, la C confond avec l'autorisation et l'audit, et les deux termes ne sont jamais synonymes à l'examen CISSP.",
@@ -2288,7 +2288,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "An organization deploying biometric authentication for a high-security vault should tune the system to achieve which of the following?",
       "choix": [
-        "The lowest possible False Rejection Rate",
+        "The lowest possible False Rejection Rate, even if some impostors are occasionally accepted",
         "A False Acceptance Rate as low as possible, even at the cost of more false rejections",
         "The highest possible throughput",
         "Equal FAR and FRR at all times"
@@ -2362,7 +2362,7 @@ window.CISSP_DATA.domains[5] = {
       "choix": [
         "Expired TLS certificates on the domain controller",
         "A corrupted LDAP schema",
-        "Kerberos clock skew exceeding the allowed tolerance",
+        "Kerberos clock skew beyond tolerance",
         "RADIUS shared secret mismatch"
       ],
       "reponse": 2,
@@ -2381,7 +2381,7 @@ window.CISSP_DATA.domains[5] = {
         "Kerberoasting against service accounts",
         "Offline cracking of NTLM hashes",
         "Forging Golden Tickets granting arbitrary domain access",
-        "AS-REP roasting against users without preauthentication"
+        "AS-REP roasting against domain users without Kerberos preauthentication"
       ],
       "reponse": 2,
       "explication": "Le compte krbtgt signe et chiffre tous les TGT du domaine : avec son hash, l'attaquant forge des golden tickets — des TGT parfaitement valides pour n'importe quelle identité, y compris des comptes inexistants, avec la durée de vie de son choix. Le Kerberoasting et l'AS-REP roasting ne nécessitent pas krbtgt (ils exploitent des service tickets ou l'absence de pré-authentification), et le cassage NTLM est une attaque distincte.",
@@ -2397,7 +2397,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Which statement about Security Assertion Markup Language (SAML) 2.0 is TRUE?",
       "choix": [
         "It is a JSON-based protocol maintained by the IETF",
-        "It is an XML-based standard maintained by OASIS used to exchange authentication and authorization assertions",
+        "An XML-based standard maintained by OASIS",
         "It replaced OAuth 2.0 for API authorization",
         "It requires Kerberos as the underlying ticket system"
       ],
@@ -2415,7 +2415,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "A company wants employees to sign in once to the corporate identity provider and then access dozens of third-party SaaS applications without re-entering credentials. Which technology BEST meets this requirement?",
       "choix": [
         "Local accounts with a password manager",
-        "Password synchronization across all SaaS providers",
+        "Password synchronization across all SaaS providers nightly",
         "TACACS+ command authorization",
         "Federated SSO using SAML or OIDC assertions/tokens"
       ],
@@ -2435,7 +2435,7 @@ window.CISSP_DATA.domains[5] = {
         "The authorization server",
         "The user agent",
         "The resource server",
-        "The client application"
+        "The client application requesting the token"
       ],
       "reponse": 0,
       "explication": "Le serveur d'autorisation authentifie le resource owner, recueille son consentement puis émet les access tokens (et refresh tokens). Le serveur de ressources se contente de vérifier et d'accepter ces tokens pour servir les données ; le client les utilise mais ne les émet jamais ; le user agent (navigateur) n'est qu'un intermédiaire de transport.",
@@ -2452,7 +2452,7 @@ window.CISSP_DATA.domains[5] = {
       "choix": [
         "A replacement for TLS in mobile applications",
         "Automatic account provisioning across domains",
-        "An identity layer with a signed ID token (JWT) that proves user authentication",
+        "An identity layer adding a signed ID token",
         "Transport encryption for bearer tokens"
       ],
       "reponse": 2,
@@ -2507,7 +2507,7 @@ window.CISSP_DATA.domains[5] = {
         "Granting permissions individually to each user account",
         "Applying a single access rule set to all employees",
         "Letting data owners grant access on request",
-        "Assigning permissions to job-based roles and moving users between roles"
+        "Assigning permissions to job-based roles"
       ],
       "reponse": 3,
       "explication": "Le RBAC est conçu pour cela : les privilèges sont rattachés à des rôles alignés sur les fonctions ; lors d'une mutation, il suffit de retirer l'ancien rôle et d'assigner le nouveau — les anciens droits disparaissent automatiquement, ce qui prévient aussi le privilege creep. L'attribution individuelle (A) et le DAC (C) explosent en charge administrative et en erreurs, et une règle unique pour tous (B) ne reflète pas les différences de fonctions.",
@@ -2525,7 +2525,7 @@ window.CISSP_DATA.domains[5] = {
         "Excessive session duration",
         "Password policy violation",
         "A toxic combination violating separation of duties, enabling potential fraud",
-        "Lack of encryption on financial data"
+        "Lack of encryption on the financial data stored at rest in the reporting database"
       ],
       "reponse": 2,
       "explication": "Créer un fournisseur ET approuver ses paiements est une combinaison toxique : une seule personne peut monter une fraude complète (fournisseur fictif, paiements approuvés par elle-même). C'est une violation de la separation of duties, souvent issue du privilege creep après une mutation — exactement ce que les revues d'accès doivent détecter, avec retrait immédiat des droits hérités de l'ancien poste. Les autres réponses sont hors sujet par rapport au risque décrit.",
@@ -2543,7 +2543,7 @@ window.CISSP_DATA.domains[5] = {
         "Administrators no longer need MFA",
         "It allows unlimited concurrent administrative sessions",
         "It removes the need for privileged session logging",
-        "It eliminates standing privileges, shrinking the window during which stolen credentials grant elevated access"
+        "It eliminates standing (always-on) privileges"
       ],
       "reponse": 3,
       "explication": "Le JIT supprime les privilèges permanents : les droits élevés sont accordés à la demande, pour une durée limitée et une tâche précise, puis retirés automatiquement. Des identifiants volés entre deux élévations ne donnent alors AUCUN privilège — la fenêtre d'attaque se réduit à la durée de la tâche. Le JIT ne dispense ni du MFA ni de l'enregistrement des sessions, qu'il complète au sein d'une solution PAM.",
@@ -2559,7 +2559,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Which capability is a core function of a Privileged Access Management (PAM) solution?",
       "choix": [
         "Scanning web applications for SQL injection",
-        "Vaulting privileged credentials, rotating them, and recording privileged sessions",
+        "Vaulting and recording privileged sessions",
         "Filtering outbound email for data loss",
         "Encrypting backup tapes"
       ],
@@ -2576,7 +2576,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "A web application keeps users logged in indefinitely as long as the browser remains open. Which control BEST reduces the risk of session hijacking exploitation?",
       "choix": [
-        "Enforcing both an idle timeout and an absolute session lifetime with re-authentication",
+        "Enforcing both an idle timeout and an absolute session lifetime",
         "Requiring TLS only on the authentication page where credentials are entered",
         "Storing the session ID in the page URL for easy tracking",
         "Increasing cookie lifetime to one year"
@@ -2631,7 +2631,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Why are FIDO2/WebAuthn authenticators considered phishing-resistant while TOTP codes are not?",
       "choix": [
         "FIDO2 codes are longer than TOTP codes",
-        "The FIDO2 signature is cryptographically bound to the legitimate site's origin, so a fake site cannot obtain a valid response, whereas a user can type a TOTP code into any site",
+        "FIDO2 signatures are bound to the site’s origin",
         "TOTP requires a network connection while FIDO2 does not",
         "FIDO2 encrypts the password before transmission"
       ],
@@ -2650,7 +2650,7 @@ window.CISSP_DATA.domains[5] = {
       "choix": [
         "Each individual user",
         "Your organization, as the service provider",
-        "The partner organization, acting as the identity provider",
+        "The partner, acting as identity provider",
         "A neutral third-party certificate authority"
       ],
       "reponse": 2,
@@ -2687,7 +2687,7 @@ window.CISSP_DATA.domains[5] = {
         "Wait for the next scheduled access review",
         "Reset the passwords and give them to the employee's manager",
         "Delete all accounts and associated data immediately",
-        "Disable the accounts immediately, ideally during the exit interview"
+        "Disable the accounts immediately on notice of departure"
       ],
       "reponse": 3,
       "explication": "La bonne pratique est de DÉSACTIVER immédiatement les comptes — idéalement pendant l'entretien de sortie — afin de couper tout accès sans détruire les données, clés de chiffrement ou preuves potentiellement nécessaires. La suppression définitive vient plus tard, selon la politique de rétention. Supprimer d'emblée fait perdre des éléments irremplaçables, attendre une revue planifiée laisse une fenêtre d'attaque, et donner les identifiants au manager brise l'accountability (mieux vaut des accès délégués tracés).",
@@ -2703,7 +2703,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "Which of the following BEST describes an access control matrix and its two derived views?",
       "choix": [
         "A network diagram showing firewalls and routers",
-        "A table of subjects and objects where each column is an object's ACL and each row is a subject's capability list",
+        "A subjects-by-objects table of access rights",
         "A list of roles mapped to organizational units",
         "A lattice of security labels ordered by sensitivity"
       ],
@@ -2721,7 +2721,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "A bank teller application only exposes menu options and data fields appropriate to the teller's job, hiding administrative functions entirely. Which access control technique is this?",
       "choix": [
         "Constrained (restricted) user interface",
-        "Context-dependent access control",
+        "Context-dependent access control using session state",
         "Content-dependent access control",
         "Capability-based security"
       ],
@@ -2738,7 +2738,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "A risk-based authentication system prompts for additional verification only when a login originates from a new device in an unusual country. What is this pattern called?",
       "choix": [
-        "Adaptive (step-up) authentication driven by risk scoring",
+        "Adaptive step-up authentication",
         "Certificate-based mutual TLS",
         "Single sign-on with session persistence",
         "Static multi-factor authentication"
@@ -2759,7 +2759,7 @@ window.CISSP_DATA.domains[5] = {
         "Users must remember more passwords; deploy a password manager",
         "Applications can no longer log user activity; enable local logging",
         "Session length becomes too short; extend token lifetimes",
-        "A compromised SSO credential exposes every connected application; require strong MFA on the SSO identity"
+        "One stolen SSO credential exposes every connected app"
       ],
       "reponse": 3,
       "explication": "Le SSO concentre le risque : un seul identifiant compromis ouvre TOUTES les applications reliées (single point of compromise). La parade prioritaire est de durcir cette authentification unique — MFA fort, idéalement résistant au phishing, surveillance des connexions et gestion de session rigoureuse. La réponse A est contradictoire (le SSO réduit le nombre de mots de passe), et les réponses B et C n'adressent pas le risque principal.",
@@ -2775,7 +2775,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "During identity proofing for a new remote employee, which approach provides the HIGHEST assurance according to identity assurance level practices?",
       "choix": [
         "Accepting a self-asserted email address",
-        "Verifying government-issued identity evidence, with biometric comparison, in person or via supervised remote session",
+        "Verifying government-issued ID evidence with biometric comparison",
         "Sending a one-time code to any phone number the applicant provides",
         "Confirming control of a corporate email address through a verification link"
       ],
@@ -2794,7 +2794,7 @@ window.CISSP_DATA.domains[5] = {
       "choix": [
         "Run a voluntary pilot at headquarters and expand based on user feedback",
         "Enable number matching on the existing push notifications for the whole company",
-        "Map user populations and applications, then migrate privileged and internet-exposed accounts first with journeys adapted to shared workstations",
+        "Prioritize by risk: migrate privileged and internet-exposed accounts first",
         "Purchase hardware security keys for all employees and set a single cutover date"
       ],
       "reponse": 2,
@@ -2813,7 +2813,7 @@ window.CISSP_DATA.domains[5] = {
         "Store the shared API key in a secrets vault with automatic rotation",
         "Require human approval before every action any agent performs",
         "Limit how many AI agents may run concurrently",
-        "Issue each agent its own non-human identity with least-privilege entitlements, short-lived credentials, and logging attributable to the agent and its owner"
+        "Give each agent its own least-privilege non-human identity"
       ],
       "reponse": 3,
       "explication": "Les agents IA sont des identités non humaines et doivent être gouvernés comme telles : identité individuelle, moindre privilège par fonction, jetons de courte durée et journalisation rattachant chaque appel à l'agent et à son commanditaire — conditions de l'accountability et de la révocation ciblée. Limiter le nombre d'agents ne change rien à l'anonymat ; l'approbation humaine de chaque action est un absolu qui détruit l'autonomie et sera contourné ; le coffre-fort avec rotation protège le secret mais conserve une identité partagée sur-privilégiée.",
@@ -2828,7 +2828,7 @@ window.CISSP_DATA.domains[5] = {
     {
       "q": "Your company has just acquired a competitor. The business requires the acquired employees to reach group applications on day one, but the security team has no visibility into the target's IAM hygiene. As CISO, what should you do FIRST?",
       "choix": [
-        "Assess the target's IAM controls, then establish cross-company federation with contractual assurance requirements (MFA, deprovisioning) until full integration",
+        "Assess the target’s IAM, then federate with contractual requirements",
         "Block all cross-company access until the integration program completes",
         "Create guest accounts in your directory for every acquired employee",
         "Merge both directories immediately to simplify administration"
@@ -2847,7 +2847,7 @@ window.CISSP_DATA.domains[5] = {
       "q": "An online bank rolled out passkeys. Months later, thousands of customers who lost their devices regain access through a simple emailed recovery link. Which risk should the CISO address FIRST?",
       "choix": [
         "Customer dissatisfaction caused by repeated loss of access",
-        "The email-based recovery path, which reduces overall account assurance to the strength of the mailbox and bypasses the passkeys' phishing resistance",
+        "The email-based recovery path, which lowers assurance to the mailbox’s strength",
         "Passkey synchronization through consumer cloud accounts outside the bank's control",
         "Passkey incompatibility with older browsers used by some customers"
       ],

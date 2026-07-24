@@ -785,10 +785,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Que devrait faire une organisation EN PREMIER avant de pouvoir protéger efficacement ses données ?",
       "choix": [
-        "Souscrire une cyber-assurance",
+        "Souscrire une police de cyber-assurance dédiée",
         "Identifier et classifier les informations et les actifs",
-        "Déployer une solution DLP sur le réseau",
-        "Chiffrer toutes les données au repos"
+        "Déployer une solution DLP sur l'ensemble du réseau interne",
+        "Chiffrer toutes les données stockées au repos"
       ],
       "reponse": 1,
       "explication": "On ne peut protéger que ce que l'on connaît : l'identification et la classification des actifs sont la première étape du cycle de vie, généralement formalisées dans la politique de sécurité. DLP, chiffrement et assurance sont des contrôles qui viennent APRÈS, une fois que l'on sait quoi protéger et à quel niveau.",
@@ -894,8 +894,8 @@ window.CISSP_DATA.domains[2] = {
       "q": "Un employé demande l'accès à des données classifiées Confidential pour un nouveau projet. Que devrait exiger le processus EN PREMIER ?",
       "choix": [
         "Une augmentation générale de la clearance de tout le département",
-        "Que l'employé signe une décharge de responsabilité",
-        "L'installation d'un agent DLP sur son poste",
+        "Que l'employé signe une décharge de responsabilité écrite couvrant tout risque d'accès",
+        "L'installation d'un agent DLP de surveillance sur son poste de travail",
         "L'approbation formelle du data owner et la vérification du besoin d'en connaître"
       ],
       "reponse": 3,
@@ -912,9 +912,9 @@ window.CISSP_DATA.domains[2] = {
       "q": "Quel est l'objectif PRINCIPAL de la gestion des actifs (asset management) ?",
       "choix": [
         "Prévenir les pertes en inventoriant, suivant et protégeant les actifs",
-        "Satisfaire les auditeurs financiers",
-        "Optimiser les coûts d'achat du matériel",
-        "Accélérer le déploiement des nouveaux systèmes"
+        "Satisfaire les auditeurs financiers et les régulateurs sectoriels externes",
+        "Optimiser les coûts d'achat et de renouvellement du matériel",
+        "Accélérer le déploiement des nouveaux systèmes en production"
       ],
       "reponse": 0,
       "explication": "La gestion des actifs — tangibles et intangibles — commence par l'inventaire et vise avant tout à prévenir les pertes, en suivant les actifs et en les protégeant tout au long de leur vie. Les bénéfices financiers ou d'audit sont secondaires par rapport à cet objectif de protection.",
@@ -929,9 +929,9 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Quelle est la façon la PLUS simple et la plus efficace d'éviter la perte d'une donnée sensible ?",
       "choix": [
-        "La pseudonymiser dès la collecte",
-        "La chiffrer avec un algorithme fort",
-        "La répliquer sur plusieurs sites",
+        "La pseudonymiser systématiquement dès la collecte",
+        "La chiffrer avec un algorithme de chiffrement fort et éprouvé",
+        "La répliquer sur plusieurs sites géographiques distants",
         "Ne pas la collecter si elle n'a pas de but métier clair"
       ],
       "reponse": 3,
@@ -947,10 +947,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Une organisation conserve tous ses e-mails indéfiniment « au cas où ». Quel est le PRINCIPAL risque de cette pratique du point de vue d'un manager ?",
       "choix": [
-        "Les sauvegardes deviennent plus lentes",
+        "Les sauvegardes deviennent nettement plus lentes à exécuter",
         "L'augmentation de la responsabilité juridique et de la surface d'exposition",
-        "Les e-mails anciens sont difficiles à rechercher",
-        "Le coût de stockage devient prohibitif"
+        "Les e-mails anciens deviennent difficiles à rechercher et à indexer rapidement",
+        "Le coût de stockage finit par devenir prohibitif"
       ],
       "reponse": 1,
       "explication": "Conserver des données plus longtemps que nécessaire accroît la responsabilité juridique (tout e-mail conservé est produisible en justice) et la surface d'exposition en cas de compromission. C'est pourquoi la tendance est aux politiques de rétention courtes pour les e-mails. Le coût et la performance sont des considérations réelles mais secondaires face au risque juridique.",
@@ -965,10 +965,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Quelle règle résume le MIEUX une politique de rétention des données saine ?",
       "choix": [
-        "Laisser chaque département décider librement de sa rétention",
+        "Laisser chaque département décider librement et sans cadre commun de sa propre rétention",
         "Supprimer toutes les données après un an pour limiter les risques",
         "Conserver aussi longtemps que l'exige le besoin métier ou légal, mais pas plus longtemps",
-        "Conserver toutes les données au moins dix ans"
+        "Conserver toutes les données au moins dix ans par précaution"
       ],
       "reponse": 2,
       "explication": "La rétention doit être bornée dans les deux sens : pas moins que ce que le métier et la loi exigent, pas plus que nécessaire. Une durée uniforme (dix ans ou un an) ignore les exigences réglementaires variées, et laisser chaque département décider sans cadre produit une rétention incohérente et indéfendable.",
@@ -1091,10 +1091,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Le support d'un logiciel critique atteint son End-of-Support (EOS) dans six mois. Quelle est la MEILLEURE action du manager sécurité ?",
       "choix": [
-        "Négocier une baisse du prix des licences",
+        "Négocier une baisse du prix des licences existantes",
         "Planifier dès maintenant la migration ou le remplacement avant l'échéance",
-        "Isoler définitivement le système et continuer à l'utiliser",
-        "Attendre la première vulnérabilité pour agir"
+        "Isoler définitivement le système du réseau et continuer malgré tout à l'utiliser",
+        "Attendre la première vulnérabilité critique pour agir"
       ],
       "reponse": 1,
       "explication": "Après l'EOS, plus aucun correctif de sécurité n'est publié : chaque nouvelle vulnérabilité reste ouverte à jamais. Le manager doit planifier la migration AVANT l'échéance. Attendre une vulnérabilité est réactif et dangereux ; l'isolation est au mieux une mesure compensatoire temporaire, pas une stratégie.",
@@ -1128,9 +1128,9 @@ window.CISSP_DATA.domains[2] = {
       "q": "Une organisation veut empêcher que des documents sensibles soient copiés sur des clés USB depuis les postes de travail. Quelle solution répond le MIEUX à ce besoin ?",
       "choix": [
         "Un DLP endpoint-based",
-        "Un DLP network-based",
-        "Un DRM",
-        "Un CASB"
+        "Un DLP network-based en périmètre réseau",
+        "Un DRM sur les documents",
+        "Un CASB en proxy cloud"
       ],
       "reponse": 0,
       "explication": "Le DLP endpoint-based s'exécute sur les postes : il scanne les fichiers stockés et peut bloquer l'impression ou la copie vers un support amovible. Le DLP réseau ne voit que le trafic sortant du réseau, le CASB gouverne l'accès au cloud, et le DRM protège les contenus soumis au droit d'auteur.",
@@ -1145,9 +1145,9 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Une règle bloque tout trafic sortant contenant des numéros au format « numéro de sécurité sociale ». De quel type de contrôle s'agit-il ?",
       "choix": [
-        "DRM appliqué à la donnée au repos",
-        "Pare-feu applicatif web",
-        "CASB en mode proxy",
+        "DRM appliqué à la donnée au repos et en transit",
+        "Pare-feu applicatif web (WAF) en frontal",
+        "CASB en mode reverse proxy inline",
         "DLP network-based sur la donnée en transit"
       ],
       "reponse": 3,
@@ -1181,10 +1181,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Votre organisation doit partager un jeu de données clients avec un partenaire de recherche, sans qu'AUCUNE identité ne puisse jamais être reconstituée. Quelle technique choisir ?",
       "choix": [
-        "La pseudonymisation",
+        "La pseudonymisation avec table de correspondance",
         "L'anonymisation par masquage aléatoire",
-        "La tokenisation",
-        "Le chiffrement"
+        "La tokenisation adossée à un vault",
+        "Le chiffrement à clé symétrique"
       ],
       "reponse": 1,
       "explication": "Seule l'anonymisation — notamment par randomized masking bien réalisé — est permanente et irréversible. La pseudonymisation, la tokenisation et le chiffrement sont des quasi-anonymisations réversibles : quiconque détient la table de correspondance, le vault ou la clé peut reconstituer les identités.",
@@ -1235,9 +1235,9 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Quelle activité fait partie du tailoring mais va AU-DELÀ du simple scoping ?",
       "choix": [
-        "Choisir la baseline de départ",
-        "Documenter l'inventaire des actifs",
-        "Retirer les contrôles sans objet pour les systèmes concernés",
+        "Choisir la baseline de contrôles de sécurité de départ",
+        "Documenter l'inventaire complet des actifs concernés",
+        "Retirer de la baseline tous les contrôles sans objet pour les systèmes du périmètre concerné",
         "Sélectionner des contrôles compensatoires et fixer les paramètres définis par l'organisation"
       ],
       "reponse": 3,
@@ -1253,10 +1253,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Quel critère indique qu'un processus de sélection de standards ou de vendeurs est bien conçu ?",
       "choix": [
-        "Il repose sur l'expérience personnelle du décideur",
+        "Il repose entièrement sur l'expérience personnelle et l'intuition du décideur en charge",
         "Une équipe totalement différente, refaisant l'exercice, aboutirait au même choix",
-        "Il est validé par le fournisseur retenu",
-        "Il aboutit toujours au fournisseur le moins cher"
+        "Il est validé a posteriori par le fournisseur retenu",
+        "Il aboutit systématiquement au fournisseur le moins cher"
       ],
       "reponse": 1,
       "explication": "L'objectif est un processus objectif et mesurable : sa reproductibilité — une autre équipe arriverait à la même sélection — en est le meilleur indicateur. Le prix seul, la validation par le vendeur ou l'intuition d'un décideur sont des critères subjectifs ou biaisés.",
@@ -1271,7 +1271,7 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Une entreprise ne peut pas chiffrer certains volumes de données partagés, mais veut que la protection accompagne les documents où qu'ils aillent. Quelle solution est la PLUS adaptée ?",
       "choix": [
-        "Le DRM, car la protection voyage avec la donnée quel que soit son état",
+        "Le DRM : la protection voyage avec la donnée",
         "Un VPN pour tous les accès au partage",
         "Le DLP réseau, qui bloque toute sortie de fichier",
         "Une ACL renforcée sur le partage de fichiers"
@@ -1307,10 +1307,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Du point de vue d'un manager, pourquoi surveiller la conformité des licences logicielles fait-il partie de la gestion des actifs ?",
       "choix": [
-        "Pour accélérer les déploiements applicatifs",
-        "Pour réduire la consommation des serveurs",
+        "Pour accélérer les déploiements applicatifs internes",
+        "Pour réduire la consommation électrique des serveurs",
         "Pour éviter les problèmes juridiques et détecter les logiciels non autorisés",
-        "Pour négocier de meilleurs prix aux renouvellements"
+        "Pour négocier de meilleurs prix lors des renouvellements de licences annuelles"
       ],
       "reponse": 2,
       "explication": "Le suivi des actifs logiciels vise deux risques : l'usage au-delà des licences acquises, source de contentieux juridique, et la présence de logiciels non autorisés, source de vulnérabilités. Les gains d'achat ou de performance sont accessoires par rapport à ces enjeux de conformité et de sécurité.",
@@ -1343,10 +1343,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Une entreprise européenne stocke des données personnelles chez un fournisseur cloud américain, dans une région située dans l'Union européenne. Quelle est la MEILLEURE mesure pour réduire le risque de conflit entre le CLOUD Act et le GDPR ?",
       "choix": [
-        "Interdire tout usage du cloud pour les données personnelles",
-        "Transférer la responsabilité de conformité au fournisseur cloud",
-        "Se fier uniquement à la localisation européenne de la région cloud",
-        "Chiffrer les données avec des clés gérées et conservées par le client, complété par des clauses contractuelles"
+        "Interdire purement et simplement tout usage du cloud pour les données personnelles",
+        "Transférer toute la responsabilité de conformité GDPR au fournisseur cloud",
+        "Se fier uniquement à la localisation européenne de la région cloud choisie chez le fournisseur",
+        "Chiffrer les données avec des clés gérées par le client et des clauses contractuelles"
       ],
       "reponse": 3,
       "explication": "Le CLOUD Act peut contraindre un fournisseur américain à remettre des données même stockées en Europe : la localisation seule ne suffit donc pas. Le chiffrement avec des clés détenues par le client rend les données remises inexploitables, et les clauses contractuelles encadrent les transferts. Interdire le cloud est disproportionné, et la responsabilité de conformité du controller ne se transfère jamais.",
@@ -1398,9 +1398,9 @@ window.CISSP_DATA.domains[2] = {
       "q": "Un hôpital externalise la numérisation de dossiers médicaux à un prestataire. Quelle affirmation sur les PHI est CORRECTE ?",
       "choix": [
         "Le prestataire manipule des PHI et doit donc aussi respecter les exigences applicables",
-        "Seul l'hôpital est soumis à HIPAA, pas le prestataire",
-        "Les dossiers numérisés ne sont plus des PHI car ils changent de support",
-        "Les PHI deviennent des PII une fois numérisées"
+        "Seul l'hôpital est légalement soumis à HIPAA, pas le prestataire",
+        "Les dossiers numérisés ne sont plus des PHI une fois qu'ils changent de support physique",
+        "Les PHI deviennent de simples PII dès leur numérisation complète"
       ],
       "reponse": 0,
       "explication": "Les exigences sur les PHI s'appliquent à tout organisme qui manipule des informations de santé rattachables à une personne, pas seulement aux hôpitaux : le prestataire (business associate au sens HIPAA) y est également soumis. Le changement de support ne change rien à la nature de la donnée, et les PHI sont une catégorie spécifique qui ne « devient » pas de simples PII.",
@@ -1415,10 +1415,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Quelle est la PREMIÈRE conséquence pratique de l'attribution d'une classification à un actif ?",
       "choix": [
-        "Il est automatiquement chiffré par le système",
-        "Les exigences de manipulation (handling) et de stockage qui s'y appliquent sont déterminées",
-        "Son prix d'assurance augmente",
-        "Il doit être remplacé plus fréquemment"
+        "Il est automatiquement chiffré et sauvegardé par le système d'exploitation",
+        "Les exigences de manipulation (handling) et de stockage sont déterminées",
+        "Son prix d'assurance et de couverture augmente sensiblement",
+        "Il doit être remplacé beaucoup plus fréquemment"
       ],
       "reponse": 1,
       "explication": "La classification détermine directement les exigences de handling : comment déplacer, stocker, transmettre et détruire l'actif. C'est tout l'intérêt de classifier — proportionner les contrôles à la sensibilité. Le chiffrement peut être l'une de ces exigences, mais rien n'est « automatique » : les contrôles découlent de la politique associée au niveau.",
@@ -1433,10 +1433,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Un employé détient une clearance Secret. Peut-il accéder à TOUTES les données classifiées Secret de l'organisation ?",
       "choix": [
-        "Oui, mais uniquement en lecture seule",
-        "Non, il doit d'abord obtenir une clearance Top Secret",
-        "Non, il lui faut en plus le besoin d'en connaître (need-to-know) et l'approbation formelle",
-        "Oui, la clearance suffit"
+        "Oui, mais uniquement en lecture seule et sans copie",
+        "Non, il doit d'abord obtenir une clearance de niveau Top Secret plus élevé",
+        "Non, il lui faut aussi le besoin d'en connaître et l'approbation formelle",
+        "Oui, la clearance seule suffit toujours largement"
       ],
       "reponse": 2,
       "explication": "La clearance est une condition nécessaire mais pas suffisante : l'accès exige aussi le need-to-know — la donnée doit être nécessaire à la mission — et une approbation formelle impliquant le data owner. C'est un principe fondamental : détenir l'habilitation au niveau n'ouvre jamais l'accès à tout le niveau.",
@@ -1487,10 +1487,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Quelle affirmation sur la notion de « subject » est CORRECTE ?",
       "choix": [
-        "Un subject est toujours un être humain",
-        "Un subject est toute entité qui accède à un objet : utilisateur, mais aussi processus ou service",
-        "Un subject est la ressource à laquelle on accède",
-        "Subject et user sont strictement synonymes"
+        "Un subject désigne toujours et uniquement un être humain",
+        "Un subject est toute entité qui accède à un objet : utilisateur, processus ou service",
+        "Un subject est la ressource passive à laquelle un utilisateur accède directement en lecture",
+        "Les termes subject et user sont toujours strictement synonymes"
       ],
       "reponse": 1,
       "explication": "Un subject est toute entité active qui accède à un objet (la ressource passive) : les utilisateurs en sont, mais aussi les programmes, processus et services. Tous les users sont des subjects, mais tous les subjects ne sont pas des users — nuance que l'examen aime tester.",
@@ -1506,8 +1506,8 @@ window.CISSP_DATA.domains[2] = {
       "q": "Le DPO d'une entreprise rapporte directement au responsable marketing, qui décide aussi de ses objectifs annuels. Quel est le PRINCIPAL problème ?",
       "choix": [
         "Le rôle de DPO doit être indépendant : ce rattachement crée un conflit d'intérêts",
-        "Le DPO devrait être externalisé auprès d'un cabinet indépendant",
-        "Le DPO devrait rapporter au DSI",
+        "Le DPO devrait obligatoirement être externalisé auprès d'un cabinet externe indépendant",
+        "Le DPO devrait plutôt rapporter directement au DSI de l'entreprise",
         "Aucun : le GDPR n'impose rien sur le rattachement du DPO"
       ],
       "reponse": 0,
@@ -1523,10 +1523,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Quelle est la PREMIÈRE phase du cycle de vie de la donnée ?",
       "choix": [
-        "L'archivage",
+        "L'archivage à long terme",
         "La création ou la collecte",
-        "La classification",
-        "Le stockage"
+        "La classification des données",
+        "Le stockage chiffré des données"
       ],
       "reponse": 1,
       "explication": "Le cycle de vie commence par la création ou la collecte de la donnée, suivie de la classification, du stockage, de l'utilisation, de l'archivage et enfin de la destruction. La classification intervient juste après la création — on ne peut classifier une donnée qui n'existe pas encore.",
@@ -1541,10 +1541,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Où une organisation devrait-elle conserver ses copies de sauvegarde pour se protéger d'un sinistre majeur ?",
       "choix": [
-        "Uniquement sur site, pour garantir un accès rapide",
-        "Dans le même bâtiment mais à des étages différents",
+        "Uniquement sur site, pour garantir un accès rapide aux restaurations",
+        "Dans le même bâtiment mais répartis sur des étages différents",
         "Sur site ET hors site, avec une distance suffisante entre les deux emplacements",
-        "Uniquement hors site, le stockage sur site étant inutile"
+        "Uniquement hors site, le stockage sur site étant jugé coûteux et totalement inutile"
       ],
       "reponse": 2,
       "explication": "La bonne pratique combine une copie sur site (restauration rapide) et une copie hors site, séparées par une distance suffisante pour qu'un même sinistre — incendie, inondation, tempête — ne détruise pas l'original et la sauvegarde. Un autre étage du même bâtiment ne protège pas d'un incendie généralisé.",
@@ -1577,10 +1577,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Pourquoi le choix des régions cloud d'un fournisseur est-il une décision de SÉCURITÉ et pas seulement de performance ?",
       "choix": [
-        "Le prix varie selon les régions",
-        "Certaines régions ont des datacenters moins fiables",
-        "Les régions éloignées augmentent la latence",
-        "La région détermine dans quelles juridictions la donnée réside, donc quelles lois s'y appliquent (data sovereignty)"
+        "Le prix de stockage et de transfert varie selon les régions",
+        "Certaines régions du fournisseur ont des datacenters moins fiables, sûrs et disponibles",
+        "Les régions géographiquement éloignées augmentent la latence réseau",
+        "La région détermine les juridictions où réside la donnée, donc les lois applicables (data sovereignty)"
       ],
       "reponse": 3,
       "explication": "En vertu de la data sovereignty, une donnée est soumise aux lois du pays où elle réside physiquement : choisir une région cloud, c'est choisir les juridictions qui pourront s'appliquer à vos données (réquisitions, obligations de divulgation…). La latence et le coût sont des considérations opérationnelles, pas l'enjeu de sécurité principal.",
@@ -1685,10 +1685,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Après un simple reformatage, un disque destiné au don contient encore des données récupérables. Quel principe cette situation illustre-t-elle ?",
       "choix": [
-        "Le slack space",
-        "La defensible destruction",
-        "La data remanence : le formatage ne détruit pas les données, seulement les index",
-        "Le crypto-shredding"
+        "Le slack space résiduel des clusters du disque",
+        "La defensible destruction, correctement documentée et tracée",
+        "La data remanence : le formatage ne détruit pas les données",
+        "Le crypto-shredding préalable des données"
       ],
       "reponse": 2,
       "explication": "Le reformatage reconstruit les structures du système de fichiers mais laisse les données elles-mêmes sur le support : c'est la data remanence, exploitable par des outils de récupération ou par file carving. Avant don ou mise au rebut, il faut au minimum un clearing, et une méthode proportionnée à la classification.",
@@ -1721,10 +1721,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Votre organisation retire du service des bandes magnétiques de sauvegarde contenant des données Confidential, destinées à être réutilisées en interne pour des données de même niveau. Quelle méthode est la PLUS appropriée et la plus économique ?",
       "choix": [
-        "Le crypto-shredding",
+        "Le crypto-shredding préalable de toutes les bandes magnétiques",
         "Le clearing ou le degaussing, suffisants pour une réutilisation au même niveau",
-        "Aucune : la réutilisation interne ne nécessite pas d'assainissement",
-        "La destruction physique par incinération"
+        "Aucune mesure : la réutilisation interne ne nécessite aucun assainissement particulier",
+        "La destruction physique systématique par incinération"
       ],
       "reponse": 1,
       "explication": "Pour une réutilisation interne au même niveau de classification, détruire le support serait un gaspillage : un clearing (réécriture) ou un degaussing (support magnétique) suffit selon la politique. La destruction physique s'impose pour la mise au rebut de supports très sensibles ; ne rien faire exposerait les données au prochain utilisateur.",
@@ -1757,10 +1757,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Une organisation prévoit de conserver des archives sur bandes pendant quinze ans. Quelle considération est la PLUS souvent oubliée ?",
       "choix": [
-        "Maintenir des lecteurs compatibles et du personnel sachant restaurer, pendant toute la durée",
-        "Le coût des bandes",
-        "Le chiffrement des bandes",
-        "La capacité de stockage à provisionner pour la durée totale"
+        "Maintenir des lecteurs compatibles et du personnel sachant restaurer",
+        "Le coût d'achat récurrent des bandes magnétiques",
+        "Le chiffrement systématique de toutes les bandes",
+        "La capacité de stockage totale à provisionner pour toute la durée de rétention"
       ],
       "reponse": 0,
       "explication": "La rétention couvre les données, mais aussi le MATÉRIEL capable de les lire et le PERSONNEL compétent : dans quinze ans, les lecteurs actuels seront obsolètes et les experts partis. Sans plan de migration des supports et de maintien des compétences, les archives deviennent illisibles — donc inutiles.",
@@ -1829,10 +1829,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Un chercheur reçoit un jeu de données où les noms sont remplacés par des alias, la table de correspondance restant chez l'émetteur. Quelle technique a été utilisée et quel est le risque résiduel ?",
       "choix": [
-        "Chiffrement ; la clé est perdue",
-        "Anonymisation ; aucun risque résiduel",
+        "Chiffrement symétrique ; la clé de déchiffrement est perdue",
+        "Anonymisation irréversible ; strictement aucun risque résiduel de ré-identification",
         "Pseudonymisation ; la ré-identification reste possible pour qui détient la table",
-        "Tokenisation ; le vault est public"
+        "Tokenisation ; le vault de correspondance est public"
       ],
       "reponse": 2,
       "explication": "Remplacer les identités par des alias avec conservation d'une table de correspondance est la pseudonymisation : elle est réversible, donc les données restent des données personnelles au sens du GDPR, et une fuite de la table permettrait la ré-identification. Seule l'anonymisation véritable est irréversible.",
@@ -1847,10 +1847,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Pourquoi le GDPR continue-t-il de s'appliquer à des données pseudonymisées ?",
       "choix": [
-        "Parce que le GDPR s'applique à toutes les données, même anonymes",
-        "Parce que la pseudonymisation est réversible : les personnes restent identifiables indirectement",
-        "Parce que la pseudonymisation est interdite par le GDPR",
-        "Il ne s'applique plus : pseudonymiser équivaut à anonymiser"
+        "Parce que le GDPR s'applique à toutes les données, même totalement anonymisées et agrégées",
+        "Parce que la pseudonymisation est réversible : les personnes restent identifiables",
+        "Parce que la pseudonymisation est formellement interdite par le GDPR",
+        "Il ne s'applique plus : pseudonymiser équivaut juridiquement à anonymiser"
       ],
       "reponse": 1,
       "explication": "Les données pseudonymisées restent des données personnelles car la ré-identification est possible via la table de correspondance : le GDPR continue de s'appliquer (la pseudonymisation y est d'ailleurs encouragée comme mesure de protection). Seules les données véritablement anonymisées — irréversiblement — sortent du champ du règlement.",
@@ -1865,9 +1865,9 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Que devrait faire une organisation EN PREMIER pour bâtir son programme de gestion des actifs ?",
       "choix": [
-        "Rédiger la procédure de mise au rebut",
-        "Former les utilisateurs au tagging",
-        "Acheter un outil ITAM du leader du marché",
+        "Rédiger d'abord la procédure de mise au rebut",
+        "Former tous les utilisateurs au tagging des actifs",
+        "Acheter d'emblée un outil ITAM du leader du marché mondial reconnu",
         "Établir un inventaire complet des actifs tangibles et intangibles"
       ],
       "reponse": 3,
@@ -1883,10 +1883,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Quel est le PRINCIPAL apport d'une CMDB par rapport à un simple tableur d'inventaire ?",
       "choix": [
-        "Elle modélise les relations et dépendances entre actifs, utiles pour évaluer l'impact d'un incident ou d'un changement",
-        "Elle est moins chère à maintenir",
-        "Elle chiffre automatiquement les actifs recensés",
-        "Elle remplace la découverte automatisée"
+        "Elle modélise les relations et dépendances entre actifs, utiles à l'analyse d'impact",
+        "Elle est nettement moins chère à maintenir qu'un tableur",
+        "Elle chiffre automatiquement tous les actifs matériels recensés dans la base de configuration",
+        "Elle remplace entièrement la découverte automatisée des actifs"
       ],
       "reponse": 0,
       "explication": "La Configuration Management Database recense les actifs ET leurs relations : quel service dépend de quel serveur, quelle application de quelle base. Cette cartographie des dépendances permet d'évaluer l'impact d'un incident ou d'un changement — ce qu'un tableur statique ne fait pas. Elle se nourrit de la découverte automatisée, elle ne la remplace pas.",
@@ -1901,10 +1901,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Malgré un inventaire déclaratif tenu à jour, un audit révèle des serveurs inconnus sur le réseau. Quelle mesure corrige le MIEUX cette lacune de façon durable ?",
       "choix": [
-        "Le blocage de tous les ports réseau inutilisés",
-        "Un inventaire manuel annuel plus rigoureux",
+        "Le blocage systématique de tous les ports réseau inutilisés",
+        "Un inventaire manuel annuel nettement plus rigoureux",
         "La découverte automatisée et continue des actifs (scans réseau, agents)",
-        "Une sanction disciplinaire pour les administrateurs"
+        "Une sanction disciplinaire systématique pour les administrateurs négligents"
       ],
       "reponse": 2,
       "explication": "Un inventaire déclaratif se périme entre deux campagnes : seule la découverte automatisée et continue (scans réseau, agents, intégration DHCP/AD) détecte en permanence les actifs non déclarés. L'inventaire annuel reste ponctuel, la sanction ne traite pas la cause, et le blocage de ports est un contrôle utile mais qui n'inventorie rien.",
@@ -1919,10 +1919,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Lors du provisioning d'une nouvelle machine virtuelle de production, quelle étape garantit qu'un responsable pourra être identifié pendant toute la vie de l'actif ?",
       "choix": [
-        "La création d'un snapshot initial",
-        "Le tagging de la VM avec son owner, sa classification et son environnement, et son enregistrement dans l'inventaire",
-        "L'installation d'un antivirus",
-        "L'attribution d'une adresse IP fixe"
+        "La création d'un snapshot initial complet de la machine virtuelle avant sa mise en production",
+        "Le tagging de la VM (owner, classification, environnement) et son inscription à l'inventaire",
+        "L'installation d'un antivirus et d'un agent EDR de surveillance",
+        "L'attribution d'une adresse IP fixe et d'un nom DNS dédié"
       ],
       "reponse": 1,
       "explication": "Le provisioning sécurisé impose d'enregistrer l'actif dans l'inventaire et de le taguer dès sa création : owner, classification, environnement. Sans owner assigné, personne n'est responsable du patching ni du déprovisioning — la VM risque de devenir orpheline. Antivirus, IP et snapshot sont utiles mais n'établissent pas la responsabilité.",
@@ -1937,10 +1937,10 @@ window.CISSP_DATA.domains[2] = {
     {
       "q": "Un administrateur supprime une VM de test mais oublie de révoquer son compte de service et ses certificats. Quel risque cette situation illustre-t-elle ?",
       "choix": [
-        "Une violation du droit d'auteur",
-        "Un simple problème de coût de licences",
-        "Un déprovisioning incomplet : des credentials orphelins restent exploitables par un attaquant",
-        "Un problème de rémanence magnétique"
+        "Une violation caractérisée du droit d'auteur logiciel",
+        "Un simple problème de surcoût des licences logicielles non résiliées à temps",
+        "Un déprovisioning incomplet : des credentials orphelins restent exploitables",
+        "Un problème de rémanence magnétique sur les supports physiques"
       ],
       "reponse": 2,
       "explication": "Le déprovisioning ne se limite pas à supprimer l'actif : il faut retirer l'actif de l'inventaire, révoquer ses accès, comptes de service et certificats, et assainir les données selon leur classification. Des credentials orphelins sont une porte d'entrée classique — ils ne sont plus surveillés mais restent valides.",
@@ -1956,9 +1956,9 @@ window.CISSP_DATA.domains[2] = {
       "q": "Un département marketing souscrit de sa propre initiative à un outil SaaS d'e-mailing pour ses campagnes, sans en informer l'IT. Comment appelle-t-on ce phénomène et quel est son PRINCIPAL danger ?",
       "choix": [
         "Shadow IT ; les données de l'entreprise échappent à tout inventaire et à toute protection",
-        "Vendor lock-in ; le coût de sortie sera élevé",
-        "Scope creep ; le projet dépasse son périmètre",
-        "BYOD ; les appareils personnels contaminent le réseau"
+        "Vendor lock-in ; le coût de sortie et de migration sera très élevé",
+        "Scope creep ; le projet dépasse progressivement son périmètre initial",
+        "BYOD ; les appareils personnels non gérés contaminent durablement le réseau interne de l'entreprise"
       ],
       "reponse": 0,
       "explication": "Le shadow IT désigne les actifs et services adoptés sans approbation de l'IT. Le danger principal est la perte de visibilité : des données d'entreprise (ici, des listes de clients) partent vers un service ni inventorié, ni évalué, ni protégé par les contrôles de l'organisation. La réponse combine découverte (CASB), politique claire et processus de demande simple.",
