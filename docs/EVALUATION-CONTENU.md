@@ -62,6 +62,37 @@ difficulté 3 qui ne sont que du rappel rallongé.
 
 Re-mesure automatisée après chaque étape jusqu'à convergence.
 
+## 5. Résultat de la correction (itération 1 close)
+
+**Length tell neutralisé sur tout le corpus** — vague de 8 agents rédacteurs (un par
+domaine) + 1 pour les scénarios, chaque résultat vérifié indépendamment par script :
+
+| Périmètre | Avant | Après |
+|---|---|---|
+| **Global (1080 questions)** | 75 % | **21 %** |
+| Difficulté 1 | 60 % | 27 % |
+| Difficulté 2 | 74 % | 20 % |
+| **Difficulté 3** | **91 %** | **16 %** |
+| Scénarios (79 étapes) | 100 % | 30 % |
+
+Détail par domaine (FR / EN, avant → après) : D1 63→28 / 61→28 · D2 79→29 / 62→27 ·
+D3 79→23 / 58→16 · D4 81→22 / 68→9 · D5 83→17 / 86→14 · D6 75→5 / 72→3 · D7 81→31 / 73→18 ·
+D8 79→18 / 70→30. **~600 questions retouchées, 0 cas flagrant (>1,5×) restant.**
+
+La bonne réponse n'est plus devinable par sa longueur : on est au niveau du hasard (25 %),
+et le pire cas (difficulté 3, l'assiette du CAT) tombe de 91 % à 16 %.
+
+**Garde-fous tenus (vérifiés par domaine) :** aucune clé `reponse` modifiée, aucune erreur
+factuelle introduite, `pourquoi` réajusté quand une option était reformulée, leçons et
+flashcards intactes. **Portes de sortie :** lint distribution 25/25/25/25 · VERIFY CAT 8/8
+PASS · test navigateur 26/26.
+
+**Impact honnête sur les notes :** authenticité CAT **6 → 7,5/10** (le défaut le plus
+gameable est éliminé). Les défauts secondaires restants (rationales de distracteurs
+stéréotypées, « mode catalogue » D3/D6/D8, quelques difficulté 3 = rappel rallongé) sont
+réels mais de second ordre — prochaine itération. La limite de fond demeure : sans relecture
+humaine CISSP ni calibration sur cohorte réelle, ces notes sont auto-évaluées.
+
 ---
 *Limite méthodologique inchangée : évaluation et correction par IA à plusieurs niveaux
 indépendants, sans relecture par un CISSP humain certifié ni calibration psychométrique sur
