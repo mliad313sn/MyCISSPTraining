@@ -739,7 +739,7 @@ window.CISSP_DATA.domains[6] = {
         "Le Type I est réalisé en interne, le Type II par un tiers"
       ],
       "reponse": 2,
-      "explication": "Le Type I donne l'opinion de l'auditeur sur la description du management et la pertinence de la conception des contrôles à un instant donné. Le Type II confirme en plus que les contrôles fonctionnent effectivement, sur une période d'au moins six mois. La distinction ne porte ni sur le périmètre sécurité/vie privée (B), ni sur la diffusion (C, c'est SOC 3 qui est public), ni sur l'auteur de l'audit (D).",
+      "explication": "Le Type I donne l'opinion de l'auditeur sur la description du management et la pertinence de la conception des contrôles à un instant donné. Le Type II confirme en plus que les contrôles fonctionnent effectivement, sur une période d'au moins six mois. La distinction ne porte ni sur le périmètre sécurité/vie privée (B), ni sur la diffusion (A, c'est SOC 3 qui est public), ni sur l'auteur de l'audit (D).",
       "difficulte": 2,
       "pourquoi": [
         "Confusion avec le SOC 3 : c'est lui qui est public, ce n'est pas une différence entre Type I et Type II.",
@@ -901,7 +901,7 @@ window.CISSP_DATA.domains[6] = {
         "L'équipe qui gère la réponse aux incidents pendant l'attaque"
       ],
       "reponse": 1,
-      "explication": "La purple team n'est pas une équipe distincte : elle représente la collaboration entre la red team (offensive) et la blue team (défensive), avec partage d'informations et compétition saine. Les réponses A, B et D décrivent respectivement un rôle inexistant dans ce modèle, une mission de la blue team, et un prestataire externe.",
+      "explication": "La purple team n'est pas une équipe distincte : elle représente la collaboration entre la red team (offensive) et la blue team (défensive), avec partage d'informations et compétition saine. Les réponses A, C et D décrivent respectivement un prestataire externe (qui reste une red team), un rôle d'arbitrage relevant plutôt de la white team, et une mission de la blue team.",
       "difficulte": 1,
       "pourquoi": [
         "Un prestataire offensif externe reste une red team, quelle que soit sa provenance.",
@@ -1315,7 +1315,7 @@ window.CISSP_DATA.domains[6] = {
         "Le partenaire décide librement du périmètre sans limite"
       ],
       "reponse": 0,
-      "explication": "Un audit externe (parfois appelé second-party audit) conduit par ou pour un partenaire commercial est lié au contrat : par définition, son périmètre doit se limiter aux obligations contractuelles de l'organisation. Ouvrir tout le SI (A, D) excède le besoin et crée des risques de confidentialité ; aligner sur l'audit interne (C) n'a pas de fondement contractuel.",
+      "explication": "Un audit conduit par ou pour le compte d'un partenaire commercial (audit tierce partie dans la terminologie ISC2, parfois appelé second-party audit dans d'autres référentiels) est lié au contrat : par définition, son périmètre doit se limiter aux obligations contractuelles de l'organisation. Ouvrir tout le SI ou laisser le partenaire décider seul (B, D) excède le besoin et crée des risques de confidentialité ; aligner sur l'audit interne (C) n'a pas de fondement contractuel.",
       "difficulte": 3,
       "pourquoi": [
         "Un audit de partenaire est de nature contractuelle : son périmètre se limite aux obligations qui lient les deux organisations.",
@@ -1621,7 +1621,7 @@ window.CISSP_DATA.domains[6] = {
         "La red team poursuit des objectifs précis en émulant un adversaire réaliste, dans la durée et en furtivité, pour éprouver aussi la détection et la réponse"
       ],
       "reponse": 3,
-      "explication": "Un engagement de red team est orienté objectifs (par exemple exfiltrer des données précises), émule les tactiques d'un adversaire réaliste, se déroule sur une période étendue et privilégie la furtivité afin de tester la capacité de la blue team à détecter et répondre. Un pen test classique vise plutôt l'identification exhaustive des vulnérabilités sur un périmètre donné, dans un temps court. Les affirmations A, C et D sont fausses.",
+      "explication": "Un engagement de red team est orienté objectifs (par exemple exfiltrer des données précises), émule les tactiques d'un adversaire réaliste, se déroule sur une période étendue et privilégie la furtivité afin de tester la capacité de la blue team à détecter et répondre. Un pen test classique vise plutôt l'identification exhaustive des vulnérabilités sur un périmètre donné, dans un temps court. Les affirmations A, B et C sont fausses.",
       "difficulte": 2,
       "pourquoi": [
         "Trop étroit : la red team ne se limite à aucune couche technique.",
