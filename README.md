@@ -38,7 +38,7 @@ Déployable tel quel sur **GitHub Pages** (Settings → Pages → branche → `/
 
 ```
 index.html          # coquille de l'application (SPA à routage par hash)
-css/style.css       # design sombre complet
+css/style.css       # design system clair « Lumina » (Inter + JetBrains Mono)
 js/
   app.js            # routeur + tableau de bord + vues
   player.js         # lecteur de leçons « vidéo » + synthèse vocale fr-FR
