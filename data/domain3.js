@@ -172,6 +172,7 @@ window.CISSP_DATA.domains[3] = {
             "Créé en 1973 pour protéger la confidentialité",
             "Simple property : no read up",
             "Star property : no write down (confinement)",
+            "Pourquoi le no write down bloque la fuite : sans lui, un sujet habilité recopierait une donnée classifiée dans un fichier de niveau inférieur, aussitôt lisible par des non-habilités",
             "Ne traite pas les canaux cachés (covert channels)"
           ],
           "schema": {
@@ -183,7 +184,7 @@ window.CISSP_DATA.domains[3] = {
               "Non classifié"
             ]
           },
-          "narration": "Bell-LaPadula, établi en 1973, vise exclusivement la confidentialité. Sa règle simple, la simple security property, interdit de lire vers le haut : no read up. Sa règle étoile, la star property, interdit d'écrire vers le bas : no write down, pour empêcher qu'une information classifiée fuie vers un niveau inférieur. Il existe aussi la strong star property, où un sujet ne lit et n'écrit que dans son propre niveau. Notez que ce modèle ne traite pas les canaux cachés.",
+          "narration": "Bell-LaPadula, établi en 1973, vise exclusivement la confidentialité. Sa règle simple, la simple security property, interdit de lire vers le haut : no read up. Sa règle étoile, la star property, interdit d'écrire vers le bas : no write down. Prenons le temps de comprendre pourquoi cette règle protège vraiment, car l'énoncer ne suffit pas. Imaginez un analyste habilité au plus haut niveau qui consulte un document classifié : s'il pouvait écrire vers le bas, il lui suffirait d'en recopier le contenu dans un fichier non classifié, immédiatement lisible par n'importe quel employé sans habilitation. La confidentialité s'effondrerait. Pire encore, un cheval de Troie exécuté avec ses droits ferait cette copie à son insu. Le no write down ferme précisément ce canal de fuite : l'information ne peut jamais redescendre vers un niveau moins protégé, volontairement ou non. Il existe aussi la strong star property, où un sujet ne lit et n'écrit que dans son propre niveau. Notez enfin que ce modèle ne traite pas les canaux cachés.",
           "astuce": "💡 Moyen mnémotechnique : dans Bell-LaPadula, pensez « chut, c'est secret » — tout est orienté confidentialité."
         },
         {
@@ -193,6 +194,7 @@ window.CISSP_DATA.domains[3] = {
             "Publié en 1977 en complément de Bell-LaPadula",
             "Simple integrity property : no read down",
             "Star integrity property : no write up",
+            "Pourquoi le no write up protège l'intégrité : un sujet de faible intégrité pourrait sinon écrire dans des données de haute intégrité et les corrompre — la règle interdit toute contamination de bas en haut",
             "Invocation property : pas d'appel vers un niveau d'intégrité supérieur"
           ],
           "schema": {
@@ -203,7 +205,7 @@ window.CISSP_DATA.domains[3] = {
               "Intégrité basse"
             ]
           },
-          "narration": "Biba, publié en 1977, est le miroir de Bell-LaPadula, mais orienté intégrité. Sa règle simple interdit de lire vers le bas, no read down, pour éviter de contaminer des données fiables par des données douteuses. Sa règle étoile interdit d'écrire vers le haut, no write up. La propriété d'invocation empêche un sujet d'appeler un sujet de niveau d'intégrité supérieur. Retenez enfin l'implémentation Lipner, qui combine Biba et Bell-LaPadula pour obtenir à la fois confidentialité et intégrité.",
+          "narration": "Biba, publié en 1977, est le miroir de Bell-LaPadula, mais orienté intégrité. Comprenons d'abord le renversement : en intégrité, la menace n'est plus la fuite d'un secret, mais la corruption d'une donnée fiable. Sa règle étoile interdit d'écrire vers le haut, no write up. Voici pourquoi c'est décisif : si un processus de basse intégrité, par exemple une saisie venue d'internet et jamais vérifiée, pouvait écrire vers le haut, il injecterait des données douteuses dans un fichier de haute intégrité dont dépendent des décisions critiques, exactement comme on refuse de verser un ingrédient avarié dans un plat sain. Symétriquement, sa règle simple interdit de lire vers le bas, no read down, pour qu'un sujet de confiance n'aille pas se contaminer en s'appuyant sur des données moins fiables que lui. Ensemble, ces deux règles garantissent que l'information de haute intégrité ne reçoit jamais rien d'une source de moindre confiance. La propriété d'invocation complète le dispositif en empêchant un sujet d'appeler un sujet de niveau d'intégrité supérieur. Retenez enfin l'implémentation Lipner, qui combine Biba et Bell-LaPadula pour obtenir à la fois confidentialité et intégrité.",
           "astuce": "💡 Conseil examen : les règles de Biba sont l'inverse exact de celles de Bell-LaPadula. Confidentialité = BLP, Intégrité = Biba."
         },
         {
@@ -222,12 +224,12 @@ window.CISSP_DATA.domains[3] = {
           "titre": "Brewer-Nash et les autres modèles",
           "points": [
             "Brewer-Nash : « ethical wall », prévention des conflits d'intérêts, accès dynamique selon l'historique",
-            "Take-Grant : graphe orienté, règles take, grant, create, remove",
-            "Graham-Denning : création et suppression sûres de sujets et objets, huit règles",
-            "Harrison-Ruzzo-Ullman : extension de Graham-Denning sur les droits d'accès",
+            "Take-Grant : graphe orienté, règles take, grant, create, remove — le graphe sert surtout à PROUVER si un droit peut se propager jusqu'à un sujet non autorisé",
+            "Graham-Denning : huit règles pour créer, supprimer et attribuer droits, sujets et objets sans laisser le système dans un état incohérent",
+            "Harrison-Ruzzo-Ullman : pose le « safety problem » — un droit donné peut-il finir par fuiter, quelle que soit la séquence de commandes ?",
             "Goguen-Meseguer et Sutherland : fondements de la non-interférence et de l'intégrité"
           ],
-          "narration": "Le modèle Brewer-Nash, surnommé ethical wall ou muraille de Chine, empêche les conflits d'intérêts : les droits d'accès changent dynamiquement selon l'activité passée de l'utilisateur. Pensez à un cabinet de conseil qui sert deux concurrents. Take-Grant utilise un graphe orienté avec quatre opérations : take, grant, create et remove. Graham-Denning se concentre sur la création et la suppression sécurisées des sujets et des objets avec huit règles, et Harrison-Ruzzo-Ullman l'étend en s'intéressant à l'attribution des droits. Enfin, Goguen-Meseguer et Sutherland sont des modèles d'intégrité liés à la non-interférence.",
+          "narration": "Le modèle Brewer-Nash, surnommé ethical wall ou muraille de Chine, empêche les conflits d'intérêts : les droits d'accès changent dynamiquement selon l'activité passée de l'utilisateur. Pensez à un cabinet de conseil qui sert deux concurrents. Les trois modèles suivants raisonnent plutôt sur la façon dont les droits d'accès se transfèrent et évoluent. Take-Grant représente le système comme un graphe orienté et n'autorise que quatre opérations : take, grant, create et remove. Son intérêt réel n'est pas de mémoriser cette liste, mais ce qu'elle permet de démontrer : en suivant les arêtes du graphe, on établit si un droit peut se propager, de proche en proche, jusqu'à un sujet qui ne devrait jamais l'obtenir. Graham-Denning va plus loin avec huit règles primitives qui encadrent la création et la suppression sûres des sujets et des objets, ainsi que l'octroi et la révocation des droits, afin qu'aucune de ces opérations ne laisse le système dans un état incohérent. Harrison-Ruzzo-Ullman l'étend en posant la question dite de sûreté, le safety problem : peut-on garantir qu'un droit donné ne finira jamais par fuiter, quelle que soit la suite des commandes exécutées ? Enfin, Goguen-Meseguer et Sutherland fondent l'intégrité sur la non-interférence, l'idée que les actions des niveaux élevés ne doivent produire aucun effet observable pour les niveaux inférieurs.",
           "astuce": "💡 Conseil examen : « conflit d'intérêts » ou « cabinet d'audit avec clients concurrents » = Brewer-Nash, sans hésiter."
         },
         {
@@ -1153,10 +1155,10 @@ window.CISSP_DATA.domains[3] = {
       "explication": "La simple security property énonce « no read up » : un sujet ne peut pas lire de données classées au-dessus de son niveau d'habilitation. La star property interdit d'écrire vers le bas (no write down). La strong star property limite lecture et écriture au propre niveau du sujet, et la discretionary security property utilise une matrice d'accès fondée sur le besoin d'en connaître.",
       "difficulte": 1,
       "pourquoi": [
-        "Faux : la strong star property restreint lecture ET écriture au seul niveau du sujet — réponse trop large pour la seule lecture.",
+        "Trop large : la strong star property restreint à la fois la lecture ET l'écriture au seul niveau du sujet, alors qu'on ne cherche ici que la règle de lecture.",
         "Correct : la simple security property énonce « no read up » — un sujet ne peut pas lire au-dessus de son niveau d'habilitation.",
-        "Faux : la discretionary security property repose sur une matrice d'accès et le besoin d'en connaître, pas sur les niveaux de classification.",
-        "Faux : la star (*) property interdit l'écriture vers le bas (no write down) — piège d'inversion entre lecture et écriture."
+        "La discretionary security property repose sur une matrice d'accès et le besoin d'en connaître, non sur les niveaux de classification.",
+        "Inversion lecture/écriture : la star (*) property interdit d'écrire vers le bas (no write down), elle ne régit pas la lecture."
       ]
     },
     {
@@ -1172,9 +1174,9 @@ window.CISSP_DATA.domains[3] = {
       "difficulte": 1,
       "pourquoi": [
         "Correct : Biba est le modèle d'INTÉGRITÉ — no read down, no write up.",
-        "Faux : la confidentialité des données classifiées est l'objectif de Bell-LaPadula — piège de substitution de modèle.",
-        "Faux : aucun des modèles formels classiques ne traite la disponibilité — attribut hors périmètre.",
-        "Faux : la prévention des conflits d'intérêts est l'objet de Brewer-Nash, pas de Biba."
+        "Substitution de modèle : la confidentialité des données classifiées est l'objectif de Bell-LaPadula.",
+        "Aucun des modèles formels classiques ne couvre la disponibilité — attribut hors de leur périmètre.",
+        "La prévention des conflits d'intérêts est l'objet de Brewer-Nash, pas de Biba."
       ]
     },
     {
@@ -1189,10 +1191,10 @@ window.CISSP_DATA.domains[3] = {
       "explication": "Brewer-Nash, surnommé « ethical wall », a été créé pour prévenir les conflits d'intérêts : les droits d'accès changent dynamiquement selon l'activité passée de l'utilisateur. Clark-Wilson protège l'intégrité via des programmes intermédiaires, Bell-LaPadula protège la confidentialité par niveaux de classification, et Graham-Denning traite la création et la suppression sûres de sujets et d'objets.",
       "difficulte": 1,
       "pourquoi": [
-        "Faux : Clark-Wilson protège l'intégrité via des programmes intermédiaires — techniquement vrai ailleurs, hors besoin ici.",
-        "Faux : Graham-Denning régit la création et la suppression sûres de sujets et d'objets — hors sujet.",
+        "Clark-Wilson protège l'intégrité via des programmes intermédiaires — utile ailleurs, mais sans rapport avec un conflit d'intérêts.",
+        "Graham-Denning régit la création et la suppression sûres de sujets et d'objets — autre finalité.",
         "Correct : Brewer-Nash (« ethical wall ») ajuste dynamiquement les droits selon l'historique d'accès, exactement pour prévenir les conflits d'intérêts.",
-        "Faux : Bell-LaPadula protège la confidentialité par niveaux, il ne gère pas les conflits d'intérêts entre clients."
+        "Bell-LaPadula protège la confidentialité par niveaux ; il ne gère pas les conflits d'intérêts entre clients concurrents."
       ]
     },
     {
@@ -1306,19 +1308,19 @@ window.CISSP_DATA.domains[3] = {
     {
       "q": "Quelle est la fonction PRINCIPALE d'un Trusted Platform Module (TPM) ?",
       "choix": [
-        "Accélérer le processeur graphique",
+        "Isoler l'exécution du code sensible dans une enclave interne du processeur",
         "Filtrer le trafic réseau entrant",
         "Réaliser des opérations cryptographiques matérielles et protéger des clés",
         "Sauvegarder et restaurer automatiquement les fichiers système et les partitions de données utilisateur"
       ],
       "reponse": 2,
-      "explication": "Le TPM est une puce inviolable de la carte mère qui réalise des opérations cryptographiques (dont la génération de clés) et protège de petites quantités de données sensibles comme des clés et mots de passe. Il ne joue aucun rôle graphique, réseau ou de sauvegarde. C'est un prérequis de nombreuses solutions de chiffrement de disque.",
+      "explication": "Le TPM est une puce inviolable de la carte mère qui réalise des opérations cryptographiques (dont la génération de clés) et protège de petites quantités de données sensibles comme des clés et mots de passe. Il ne filtre pas le réseau, ne sauvegarde pas de fichiers, et n'exécute pas de code applicatif : l'exécution isolée relève d'un TEE ou secure enclave du processeur, une ancre de confiance distincte. C'est un prérequis de nombreuses solutions de chiffrement de disque.",
       "difficulte": 1,
       "pourquoi": [
-        "Faux : le TPM n'a aucun rôle graphique — distracteur hors domaine.",
-        "Faux : le filtrage réseau est le rôle d'un pare-feu, pas d'un TPM.",
+        "À ne pas confondre : l'exécution isolée de code relève du TEE ou secure enclave du processeur, pas du TPM, qui stocke et manipule des clés mais n'exécute pas les applications.",
+        "Le filtrage du trafic réseau est le rôle d'un pare-feu, pas d'une puce cryptographique.",
         "Correct : le TPM est une puce inviolable dédiée aux opérations cryptographiques matérielles et à la protection de clés.",
-        "Faux : la sauvegarde de fichiers relève d'une solution de backup, pas d'un cryptoprocesseur."
+        "La sauvegarde et la restauration de fichiers relèvent d'une solution de backup, pas d'un cryptoprocesseur."
       ]
     },
     {
@@ -1412,7 +1414,7 @@ window.CISSP_DATA.domains[3] = {
       ]
     },
     {
-      "q": "Quelle est la PREMIÈRE recommandation pour sécuriser des objets connectés (IoT) dans une entreprise ?",
+      "q": "Un parc d'objets connectés (IoT) hétérogènes, dont beaucoup ne peuvent être ni durcis ni mis à jour, doit rejoindre le réseau de l'entreprise. Quelle mesure limite le MIEUX l'impact d'une compromission de l'un de ces objets sur le reste du système d'information ?",
       "choix": [
         "Installer un agent antivirus ou EDR sur chaque objet",
         "Les déployer sur un réseau distinct et isolé",
@@ -1420,13 +1422,13 @@ window.CISSP_DATA.domains[3] = {
         "Changer les identifiants par défaut de chaque objet"
       ],
       "reponse": 1,
-      "explication": "La mesure de référence est de placer les équipements IoT sur un réseau dédié, séparé et isolé du réseau de production : elle contient l'impact de n'importe quelle compromission, y compris celle d'un objet non patchable. Changer les identifiants par défaut est indispensable mais ne limite pas la propagation d'une compromission ; la plupart des objets ne peuvent pas héberger d'agent EDR ; exiger une certification Common Criteria est irréaliste pour l'essentiel du marché IoT et ne protège pas le réseau existant.",
-      "difficulte": 1,
+      "explication": "La question porte sur la LIMITATION de l'impact d'une compromission à l'échelle du parc : seule la ségrégation réseau y répond. Placer les objets sur un réseau dédié, séparé et isolé du réseau de production contient tout objet compromis, y compris ceux qu'on ne peut ni durcir ni patcher, et empêche le pivot vers le cœur du système d'information. Changer les identifiants par défaut est une hygiène indispensable, mais c'est une mesure objet par objet qui ne contient rien une fois un objet compromis — et beaucoup de ces équipements n'exposent même pas de changement de mot de passe ; la plupart ne peuvent pas héberger d'agent EDR ; exiger une certification Common Criteria est irréaliste pour l'essentiel du marché IoT et ne protège pas le réseau existant.",
+      "difficulte": 2,
       "pourquoi": [
-        "Faux : réponse de technicien irréaliste — la plupart des objets IoT ne peuvent pas héberger d'agent antivirus ou EDR.",
-        "Correct : un réseau dédié et isolé contient l'impact de toute compromission, y compris celle d'objets non patchables.",
-        "Faux : exigence de sur-certification irréaliste pour le marché IoT, et sans effet protecteur sur le réseau existant.",
-        "Faux : indispensable mais insuffisant — changer les identifiants ne limite pas la propagation une fois l'objet compromis ; vrai mais pas prioritaire."
+        "Techniquement inapplicable : la plupart des objets IoT n'ont ni la puissance ni le système ouvert nécessaires pour héberger un agent antivirus ou EDR.",
+        "Correct : un réseau dédié et isolé est le seul contrôle qui contient l'impact — un objet compromis reste cantonné et ne peut pivoter vers le reste du système d'information.",
+        "Irréaliste et hors cible : la sur-certification Common Criteria couvre une infime part du marché IoT et ne protège en rien le réseau déjà en place.",
+        "Hygiène nécessaire mais non contenante : changer les identifiants réduit la probabilité d'une intrusion initiale, sans limiter la propagation une fois un objet compromis — c'est justement ce que la question demande."
       ]
     },
     {
@@ -2249,12 +2251,12 @@ window.CISSP_DATA.domains[3] = {
       ],
       "reponse": 0,
       "explication": "Take-Grant repose sur quatre opérations : take (prendre les droits d'un autre sujet), grant (accorder ses droits à un autre), create (créer de nouveaux droits) et remove (retirer des droits que l'on détient). Le graphe orienté permet d'analyser si un droit peut « fuir » vers un sujet non autorisé. Les autres propositions mélangent des permissions de systèmes de fichiers, les primitives de Graham-Denning et les propriétés de Bell-LaPadula.",
-      "difficulte": 3,
+      "difficulte": 2,
       "pourquoi": [
         "Correct : take, grant, create, remove — les quatre règles de propagation des droits du modèle Take-Grant.",
-        "Faux : simple/star/strong star/discretionary sont les propriétés de Bell-LaPadula.",
-        "Faux : piège de proximité — ce sont quatre des huit règles de Graham-Denning.",
-        "Faux : read/write/execute/delete sont des droits de fichiers classiques — vocabulaire hors modèle."
+        "Ce quatuor simple/star/strong star/discretionary désigne les propriétés de Bell-LaPadula, pas Take-Grant.",
+        "Proximité trompeuse : ce sont quatre des huit règles de Graham-Denning, un modèle voisin mais distinct.",
+        "read/write/execute/delete sont des droits de fichiers classiques — vocabulaire système sans rapport avec le modèle."
       ]
     },
     {
@@ -3621,10 +3623,10 @@ window.CISSP_DATA.domains[3] = {
       "explication": "La défense en profondeur consiste à empiler plusieurs contrôles indépendants en série, afin que la défaillance de l'un d'eux (ici le pare-feu périmétrique) n'expose pas les actifs : IPS, segmentation interne et contrôles sur les hôtes prennent le relais. Le moindre privilège limite les droits accordés, la séparation des tâches répartit les fonctions critiques entre plusieurs personnes, et fail securely concerne le comportement d'un composant en cas de panne — aucun ne décrit cet empilement de couches.",
       "difficulte": 1,
       "pourquoi": [
-        "Faux : fail securely décrit le comportement sûr d'un composant en panne, pas la superposition de couches.",
+        "Fail securely décrit le comportement sûr d'un composant en panne, non la superposition de couches indépendantes.",
         "Correct : plusieurs contrôles en série (IPS, segmentation, contrôles hôtes) prenant le relais du pare-feu défaillant = defense in depth.",
-        "Faux : least privilege limite les droits accordés — il ne décrit pas l'empilement de contrôles indépendants.",
-        "Faux : la separation of duties répartit des fonctions critiques entre personnes — hors sujet architecture."
+        "Least privilege limite les droits accordés ; il ne décrit pas l'empilement de contrôles indépendants.",
+        "La separation of duties répartit des fonctions critiques entre plusieurs personnes — sans rapport avec cette question d'architecture."
       ]
     },
     {
@@ -3747,10 +3749,10 @@ window.CISSP_DATA.domains[3] = {
       "explication": "Biba protège l'intégrité en inversant la logique de Bell-LaPadula : la simple integrity property interdit de lire des données de moindre intégrité (no read down, pour ne pas se contaminer) et la star integrity property interdit d'écrire vers une intégrité supérieure (no write up, pour ne pas corrompre). « No read up, no write down » est la combinaison de Bell-LaPadula pour la confidentialité ; les deux autres combinaisons ne correspondent à aucun modèle standard.",
       "difficulte": 1,
       "pourquoi": [
-        "Faux : mélange incohérent des règles des deux modèles.",
-        "Faux : no read up / no write down est le couple de Bell-LaPadula — inversion classique confidentialité/intégrité.",
+        "Combinaison incohérente qui ne correspond à aucun des deux modèles.",
+        "No read up / no write down est le couple de Bell-LaPadula — l'inversion classique entre confidentialité et intégrité.",
         "Correct : Biba = no read down, no write up — l'exact miroir de Bell-LaPadula, au service de l'intégrité.",
-        "Faux : mélange incohérent — ce couple n'appartient à aucun des deux modèles."
+        "Autre combinaison incohérente : ce couple n'appartient à aucun des deux modèles standard."
       ]
     },
     {
@@ -3938,16 +3940,16 @@ window.CISSP_DATA.domains[3] = {
       "choix": [
         "Containers cannot be patched",
         "Containers require expensive dedicated physical hardware provisioned for each running instance",
-        "Containers cannot run in the cloud",
+        "Containers provide stronger isolation than VMs because each runs its own dedicated kernel",
         "Containers share the host kernel, giving weaker isolation than hypervisor-based VMs"
       ],
       "reponse": 3,
-      "explication": "Les conteneurs partagent le noyau du système hôte : une vulnérabilité du noyau ou une mauvaise configuration peut permettre à un conteneur compromis d'affecter l'hôte ou les autres conteneurs, alors qu'une VM bénéficie de l'isolation plus forte de l'hyperviseur avec un OS complet par machine. En contrepartie, les conteneurs offrent densité et rapidité de déploiement. Ils se patchent en reconstruisant les images, ne requièrent aucun matériel dédié et sont omniprésents dans le cloud.",
+      "explication": "Les conteneurs partagent le noyau du système hôte : une vulnérabilité du noyau ou une mauvaise configuration peut permettre à un conteneur compromis d'affecter l'hôte ou les autres conteneurs, alors qu'une VM bénéficie de l'isolation plus forte de l'hyperviseur avec un OS complet par machine. En contrepartie, les conteneurs offrent densité et rapidité de déploiement. Ils se patchent en reconstruisant les images et ne requièrent aucun matériel dédié ; et contrairement à une idée reçue, ils ne possèdent PAS chacun leur propre noyau — c'est justement ce partage qui affaiblit leur isolation.",
       "difficulte": 2,
       "pourquoi": [
-        "Faux : formulation absolue — les conteneurs se patchent en reconstruisant leurs images.",
-        "Faux : c'est l'inverse — les conteneurs maximisent la densité sur un même matériel.",
-        "Faux : les conteneurs sont omniprésents dans le cloud — affirmation fausse.",
+        "Formulation absolue erronée : les conteneurs se patchent en reconstruisant leurs images à partir de couches de base à jour.",
+        "C'est l'inverse : les conteneurs maximisent la densité sur un même matériel, sans machine dédiée par instance.",
+        "Renversement piégeux : les conteneurs n'ont pas de noyau dédié — ils partagent celui de l'hôte, ce qui réduit l'isolation au lieu de la renforcer.",
         "Correct : les conteneurs partagent le noyau de l'hôte — isolation plus faible que celle d'un hyperviseur ; c'est LE compromis de sécurité."
       ]
     },

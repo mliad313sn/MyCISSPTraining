@@ -533,11 +533,12 @@ window.CISSP_DATA.domains[8] = {
           "titre": "Injection et validation des entrées",
           "points": [
             "SQL injection : du code SQL malveillant injecté via une entrée utilisateur",
-            "Défenses : requêtes paramétrées, procédures stockées, validation des entrées",
+            "Pourquoi la requête paramétrée tue l'injection : la structure SQL est figée AVANT de recevoir la donnée, qui n'est plus qu'une valeur liée, jamais du code",
+            "Défenses : requêtes paramétrées, procédures stockées, validation des entrées, moindre privilège du compte applicatif",
             "Malformed input : les entrées mal contrôlées sont la source d'erreurs numéro un",
             "Defensive programming : traiter TOUTE entrée comme non fiable jusqu'à preuve du contraire"
           ],
-          "narration": "L'injection reste un grand classique. Dans une injection SQL, l'attaquant insère du code SQL dans un champ de saisie pour manipuler la base de données : contourner une authentification, extraire des données, voire les détruire. La défense principale est constituée des requêtes paramétrées, complétées par la validation stricte des entrées et la limitation des privilèges du compte applicatif. Plus généralement, la mauvaise gestion des entrées est une source majeure d'erreurs pouvant mener à l'exécution de code arbitraire. D'où le principe de defensive programming : traiter toutes les routines d'entrée comme non fiables tant qu'elles n'ont pas été validées et assainies.",
+          "narration": "L'injection reste un grand classique. Dans une injection SQL, l'attaquant insère du code SQL dans un champ de saisie pour manipuler la base de données : contourner une authentification, extraire des données, voire les détruire. La défense de référence est la requête paramétrée, et il faut vraiment comprendre pourquoi elle est si efficace. Avec une requête paramétrée, l'application envoie d'abord au moteur de base de données le squelette de la requête, avec des emplacements réservés à la place des valeurs. Le moteur analyse et fige cette structure avant de recevoir la moindre donnée de l'utilisateur. L'entrée est ensuite transmise séparément, comme une simple valeur liée à un emplacement : même si l'utilisateur tape apostrophe, OR, un égale un, ce texte est traité comme une chaîne de caractères à comparer, et jamais comme de la syntaxe à exécuter. Le code et les données sont ainsi structurellement séparés, et c'est cette séparation qui neutralise l'injection à la racine, là où un simple filtrage de caractères resterait contournable par des encodages. On complète par la validation stricte des entrées et la limitation des privilèges du compte applicatif. Plus généralement, la mauvaise gestion des entrées est une source majeure d'erreurs pouvant mener à l'exécution de code arbitraire, d'où le principe de defensive programming : traiter toutes les routines d'entrée comme non fiables tant qu'elles n'ont pas été validées et assainies.",
           "astuce": "💡 Conseil examen : face à une question sur l'injection SQL, la MEILLEURE réponse technique est presque toujours les parameterized queries, avec la validation des entrées en complément."
         },
         {
@@ -545,11 +546,12 @@ window.CISSP_DATA.domains[8] = {
           "titre": "XSS et CSRF",
           "points": [
             "XSS (Cross-Site Scripting) : un script malveillant s'exécute dans le navigateur de la victime",
-            "Défenses XSS : validation des entrées et encodage des sorties (output encoding)",
+            "Pourquoi l'encodage de sortie neutralise le XSS : les caractères de structure deviennent des entités HTML, donc AFFICHÉS comme texte au lieu d'être EXÉCUTÉS comme code",
+            "L'encodage doit être adapté au contexte d'insertion : corps HTML, attribut, JavaScript ou URL",
             "CSRF (Cross-Site Request Forgery) : exploiter la session authentifiée de la victime à son insu",
-            "Défenses CSRF : jetons anti-CSRF uniques par session, revérification de l'utilisateur"
+            "Défenses CSRF : jetons anti-CSRF uniques par session, cookie SameSite, revérification"
           ],
-          "narration": "Deux attaques web à ne pas confondre. Le cross-site scripting, ou XSS, consiste à injecter un script malveillant dans une page web consultée par la victime : le script s'exécute dans son navigateur et peut voler ses cookies de session. La défense repose sur la validation des entrées et surtout l'encodage des sorties. Le cross-site request forgery, ou CSRF, exploite au contraire la confiance du serveur envers le navigateur : l'attaquant fait émettre à la victime, déjà authentifiée sur un site, une requête qu'elle n'a jamais voulue, comme un virement. La parade classique est le jeton anti-CSRF, une valeur unique et imprévisible exigée avec chaque requête sensible.",
+          "narration": "Deux attaques web à ne pas confondre. Le cross-site scripting, ou XSS, consiste à injecter un script malveillant dans une page web consultée par la victime : le script s'exécute dans son navigateur et peut voler ses cookies de session. La défense repose sur la validation des entrées et surtout l'encodage des sorties, et là encore il faut saisir pourquoi cela fonctionne. Un navigateur décide qu'un fragment est du code exécutable à cause de certains caractères de structure, comme le chevron ouvrant qui débute une balise script, ou les guillemets qui délimitent un attribut. L'encodage de sortie remplace ces caractères spéciaux par leurs équivalents d'entités HTML au moment où la donnée est réinsérée dans la page : le chevron ouvrant devient la séquence esperluette, l, t, point-virgule, et ainsi de suite. Résultat, le navigateur affiche littéralement ces caractères à l'écran comme du texte inoffensif, au lieu de les interpréter comme le début d'une balise ou d'un script. Le contenu malveillant est neutralisé parce qu'il est rendu comme une simple donnée à montrer, et non comme du code à exécuter. Point crucial : l'encodage doit être adapté au contexte d'insertion, car le corps d'une page HTML, un attribut, du JavaScript ou une URL n'exigent pas le même traitement. Le cross-site request forgery, ou CSRF, exploite au contraire la confiance du serveur envers le navigateur : l'attaquant fait émettre à la victime, déjà authentifiée sur un site, une requête qu'elle n'a jamais voulue, comme un virement. La parade classique est le jeton anti-CSRF, une valeur unique et imprévisible exigée avec chaque requête sensible.",
           "astuce": "💡 Conseil examen : XSS abuse de la confiance de l'utilisateur envers un site ; CSRF abuse de la confiance du site envers le navigateur de l'utilisateur."
         },
         {
@@ -1258,10 +1260,10 @@ window.CISSP_DATA.domains[8] = {
       "explication": "La dirty read viole la propriété d'Isolation, qui exige que les transactions concurrentes n'interfèrent pas entre elles : une transaction ne doit pas voir les modifications non validées d'une autre. L'atomicité garantit le tout-ou-rien, la cohérence le respect des règles d'intégrité, et la durabilité la persistance des transactions validées.",
       "difficulte": 2,
       "pourquoi": [
-        "Hors sujet : la durabilité garantit la persistance des transactions validées.",
-        "Hors sujet : l'atomicité garantit le tout-ou-rien d'une transaction, pas l'étanchéité entre transactions.",
-        "Hors sujet : la cohérence porte sur le respect des règles d'intégrité de la base.",
-        "Bonne réponse : lire des données non validées d'une autre transaction viole l'Isolation — définition même de la dirty read."
+        "La durabilité garantit seulement la persistance des transactions déjà validées : elle ne régit pas ce qu'une transaction voit d'une autre.",
+        "L'atomicité assure le tout-ou-rien d'une transaction, pas l'étanchéité entre transactions concurrentes.",
+        "La cohérence porte sur le respect des règles d'intégrité de la base, un aspect distinct de l'isolement.",
+        "Lire une valeur non validée d'une autre transaction rompt précisément l'Isolation : c'est la définition de la dirty read."
       ]
     },
     {
@@ -1366,10 +1368,10 @@ window.CISSP_DATA.domains[8] = {
       "explication": "Les premières causes de brèches cloud restent les misconfigurations, le manque de visibilité sur les paramètres d'accès et les contrôles d'accès insuffisants : des erreurs côté client du modèle de responsabilité partagée. Les zero-days d'hyperviseur sont rares, les pannes matérielles relèvent de la disponibilité gérée par le fournisseur, et les DDoS, bien que réels, ne sont pas la cause principale des brèches de données.",
       "difficulte": 2,
       "pourquoi": [
-        "Techniquement vrai mais pas la cause principale : les DDoS affectent la disponibilité, pas les fuites de données.",
-        "Techniquement réel mais marginal : les zero-days d'hyperviseur sont rares et côté fournisseur.",
-        "Hors sujet : les pannes matérielles relèvent de la disponibilité, gérée par le fournisseur.",
-        "Bonne réponse : misconfigurations, manque de visibilité et contrôles d'accès insuffisants — erreurs côté client — sont les premières causes de brèches cloud."
+        "Les attaques par déni de service pèsent sur la disponibilité, elles ne sont pas la cause dominante des fuites de données cloud.",
+        "Les zero-days d'hyperviseur existent mais restent rares et relèvent du fournisseur, pas du client.",
+        "Les pannes matérielles touchent la disponibilité et sont gérées par le fournisseur : sans rapport avec les brèches de données.",
+        "Erreurs de configuration, manque de visibilité et contrôles d'accès insuffisants — toutes côté client — dominent les causes de brèches cloud."
       ]
     },
     {
@@ -1454,12 +1456,12 @@ window.CISSP_DATA.domains[8] = {
       ],
       "reponse": 2,
       "explication": "La certification est l'analyse technique de sécurité complète vérifiant que le système répond aux exigences applicables. L'accréditation est la déclaration formelle par une autorité d'accréditation désignée (DAA) que le système est approuvé pour fonctionner à un niveau de risque acceptable. La dernière proposition inverse les définitions ; il ne s'agit ni d'un audit annuel ni d'une décision de l'éditeur.",
-      "difficulte": 3,
+      "difficulte": 2,
       "pourquoi": [
-        "Fausse attribution : l'accréditation émane de l'autorité désignée de l'organisation, jamais de l'éditeur.",
-        "Confusion de processus : il ne s'agit pas d'un audit annuel de conformité.",
-        "Bonne réponse : certification = analyse technique complète ; accréditation = approbation formelle d'exploitation par l'autorité désignée à un niveau de risque acceptable.",
-        "Inversion des définitions : la certification est l'analyse technique, pas la décision."
+        "L'accréditation émane de l'autorité désignée de l'organisation qui assume le risque, jamais de l'éditeur du logiciel.",
+        "Ni la certification ni l'accréditation ne désignent un audit annuel de conformité : ce sont deux étapes distinctes d'autorisation d'un système.",
+        "Certification égale analyse technique complète ; accréditation égale approbation formelle d'exploitation par l'autorité désignée à un niveau de risque acceptable.",
+        "Les deux termes sont ici intervertis : la certification est l'analyse technique, l'accréditation est la décision d'autoriser."
       ]
     },
     {
@@ -1483,19 +1485,19 @@ window.CISSP_DATA.domains[8] = {
     {
       "q": "Dans une architecture microservices, quelle combinaison de contrôles réduit le MIEUX la surface d'attaque liée à la multiplication des APIs ?",
       "choix": [
-        "La désactivation du chiffrement interne pour améliorer les performances",
-        "Un mot de passe partagé entre tous les services et des logs locaux",
-        "L'exposition directe de chaque microservice sur Internet pour simplifier l'architecture",
+        "Se fier au trafic interne car le pare-feu périmétrique bloque déjà les attaquants externes",
+        "Centraliser l'authentification à la seule passerelle et considérer les échanges internes comme fiables",
+        "Attribuer une même clé API statique à tous les services et journaliser localement sur chaque nœud",
         "Passerelle API, TLS entre services et posture zero trust"
       ],
       "reponse": 3,
-      "explication": "La bonne combinaison associe une passerelle API qui centralise l'authentification, l'autorisation et la limitation de débit, du chiffrement TLS pour les communications entre services, et une approche zero trust où aucun service ne fait confiance à un autre par défaut. Un secret partagé crée un point de compromission unique, désactiver le chiffrement interne expose les flux, et l'exposition directe multiplie les portes d'entrée.",
+      "explication": "La bonne combinaison associe une passerelle API qui centralise l'authentification, l'autorisation et la limitation de débit, du chiffrement TLS pour les communications entre services, et une approche zero trust où aucun service ne fait confiance à un autre par défaut. Se fier au périmètre reproduit le modèle « château fort » qu'un seul service compromis suffit à ruiner ; sécuriser uniquement la passerelle laisse le trafic est-ouest sans protection ; et une clé statique partagée n'identifie aucun appelant et se propage à la moindre fuite.",
       "difficulte": 3,
       "pourquoi": [
-        "Contresens : désactiver le chiffrement interne expose tout le trafic est-ouest.",
-        "Anti-modèle : un secret partagé crée un point de compromission unique et les logs locaux se dispersent.",
-        "Contresens : exposer chaque microservice sur Internet multiplie les portes d'entrée.",
-        "Bonne réponse : passerelle API centralisée, TLS entre services et zero trust réduisent ensemble la surface d'attaque des APIs."
+        "La confiance périmétrique s'effondre dès qu'un seul service interne est compromis : rien n'arrête ensuite la propagation latérale.",
+        "Protéger seulement la passerelle couvre le trafic nord-sud mais abandonne les échanges internes entre services, l'essentiel de la surface.",
+        "Une clé statique partagée n'authentifie personne individuellement et sa compromission expose tous les services d'un coup.",
+        "Passerelle API centralisée, TLS entre services et zero trust agissent ensemble sur toute la surface : c'est la combinaison recherchée."
       ]
     },
     {
@@ -1564,10 +1566,10 @@ window.CISSP_DATA.domains[8] = {
       "explication": "Le code signing garantit l'intégrité (le hash correspond, donc le code n'a pas été altéré depuis la signature) et l'origine (le certificat authentifie l'éditeur). Il ne dit rien de la qualité ni de l'innocuité du code : un binaire signé peut être vulnérable, et même malveillant si le certificat de signature a été volé. La CA délivre le certificat mais ne teste jamais le code, et la signature n'implique aucun mécanisme de mise à jour.",
       "difficulte": 2,
       "pourquoi": [
-        "Mécanisme inventé : la signature n'implique aucun dispositif de mise à jour.",
-        "Faux rôle : la CA délivre le certificat mais ne teste jamais le code.",
-        "Surestimation classique : la signature ne dit rien de la qualité ni de l'innocuité du code.",
-        "Bonne réponse : la signature vérifiée garantit l'intégrité depuis la signature et l'origine identifiée par le certificat — rien de plus."
+        "Signer un exécutable ne déclenche aucune mise à jour : c'est un mécanisme inexistant dans le code signing.",
+        "L'autorité de certification délivre et valide l'identité du certificat, mais n'inspecte jamais le contenu du code.",
+        "C'est la surestimation classique : la signature ne dit rien de la qualité ni de l'innocuité du binaire.",
+        "La vérification atteste deux choses et deux seulement : l'intégrité depuis la signature et l'origine identifiée par le certificat."
       ]
     },
     {
@@ -2664,10 +2666,10 @@ window.CISSP_DATA.domains[8] = {
       "explication": "Le SBOM est l'inventaire formel de tous les composants, bibliothèques et dépendances — y compris transitives — d'un logiciel. Sa valeur première en sécurité est la réactivité : lors de la divulgation d'une vulnérabilité comme Log4Shell, il permet d'identifier immédiatement les applications affectées. La conformité des licences est un bénéfice secondaire réel mais non principal, et le SBOM ne documente ni les exigences fonctionnelles ni les coûts.",
       "difficulte": 1,
       "pourquoi": [
-        "Bonne réponse : inventaire formel des composants et dépendances, il permet d'identifier immédiatement l'exposition lors d'une nouvelle divulgation.",
-        "Trop étroit : la conformité des licences est un bénéfice secondaire, pas le but principal.",
-        "Hors sujet : le SBOM n'estime aucun coût de développement.",
-        "Hors sujet : le SBOM n'est pas un document d'exigences fonctionnelles."
+        "Inventaire formel des composants et dépendances, le SBOM permet d'identifier immédiatement l'exposition dès qu'une vulnérabilité est divulguée.",
+        "La conformité des licences est un bénéfice réel mais secondaire, pas la finalité première du SBOM.",
+        "Un SBOM n'a pas vocation à estimer un coût de développement.",
+        "Un SBOM inventorie des composants, il ne documente pas les exigences fonctionnelles de l'application."
       ]
     },
     {
@@ -2784,16 +2786,16 @@ window.CISSP_DATA.domains[8] = {
         "Output encoding of user-supplied data",
         "Unique anti-CSRF tokens per request",
         "Password complexity requirements",
-        "Database connection pooling"
+        "Enforcing a strict Content Security Policy (CSP)"
       ],
       "reponse": 1,
-      "explication": "Le CSRF exploite le fait que le navigateur joint automatiquement les cookies de session aux requêtes, même émises depuis un site attaquant. Le jeton anti-CSRF — secret unique et imprévisible exigé avec chaque requête modifiant un état — ne peut pas être connu du site attaquant, ce qui invalide la requête forgée ; l'attribut de cookie SameSite complète la défense. L'encodage des sorties contre le XSS, la robustesse des mots de passe et le pooling de connexions n'ont aucun effet sur le CSRF.",
+      "explication": "Le CSRF exploite le fait que le navigateur joint automatiquement les cookies de session aux requêtes, même émises depuis un site attaquant. Le jeton anti-CSRF — secret unique et imprévisible exigé avec chaque requête modifiant un état — ne peut pas être connu du site attaquant, ce qui invalide la requête forgée ; l'attribut de cookie SameSite complète la défense. L'encodage des sorties et la Content Security Policy ciblent le XSS, et la robustesse des mots de passe n'a aucun effet sur une victime déjà authentifiée dont le navigateur émet la requête forgée.",
       "difficulte": 1,
       "pourquoi": [
-        "Mauvaise cible : l'encodage des sorties combat le XSS.",
-        "Bonne réponse : un jeton anti-CSRF unique et imprévisible, validé à chaque requête modifiant un état, est LE contrôle spécifique anti-CSRF.",
-        "Hors sujet : la victime est déjà authentifiée, la complexité du mot de passe n'intervient pas.",
-        "Hors sujet : le pooling de connexions est une optimisation de performance."
+        "L'encodage des sorties empêche l'exécution de scripts injectés (XSS) ; il ne dit rien d'une requête forgée par ailleurs légitime.",
+        "Un jeton anti-CSRF unique et imprévisible, validé à chaque requête modifiant un état, est LE contrôle spécifiquement conçu contre le CSRF.",
+        "La victime est déjà authentifiée : renforcer la complexité des mots de passe ne change rien à la requête forgée en son nom.",
+        "Une CSP restreint les scripts exécutables et vise le XSS ; elle n'empêche pas le navigateur d'émettre une requête forgée avec ses cookies de session."
       ]
     },
     {
@@ -2916,10 +2918,10 @@ window.CISSP_DATA.domains[8] = {
       "explication": "C'est une dirty read, violation de l'ISOLATION : les transactions concurrentes ne doivent pas voir les modifications non validées les unes des autres, comme si chacune s'exécutait seule. L'atomicité garantit le tout-ou-rien d'une transaction (le rollback de B a d'ailleurs fonctionné), la cohérence le respect des règles d'intégrité, et la durabilité la persistance des transactions VALIDÉES. Retenez l'association d'examen : dirty read = échec d'isolation.",
       "difficulte": 2,
       "pourquoi": [
-        "Bonne réponse : lire les modifications non validées d'une autre transaction est une dirty read, violation de l'Isolation.",
-        "Hors sujet : la cohérence porte sur les règles d'intégrité de la base.",
-        "Piège : l'atomicité a fonctionné — le rollback de B s'est bien exécuté.",
-        "Hors sujet : la durabilité concerne la persistance des transactions validées."
+        "Voir les modifications non validées d'une autre transaction est une dirty read, qui viole l'Isolation.",
+        "La cohérence porte sur le respect des règles d'intégrité de la base, pas sur l'étanchéité entre transactions.",
+        "L'atomicité a justement fonctionné ici : le rollback de B s'est correctement exécuté.",
+        "La durabilité ne concerne que la persistance des transactions validées, sans rapport avec ce cas."
       ]
     },
     {
@@ -3031,21 +3033,21 @@ window.CISSP_DATA.domains[8] = {
       ]
     },
     {
-      "q": "A CISO learns that development teams now merge AI-generated code into product repositories daily. The business will not accept slower release cycles. Which approach BEST manages the associated risk?",
+      "q": "An internal review finds that code produced by the team's AI coding assistant contains hardcoded secrets and unsafe SQL string concatenation far more often than human-written code. Leadership will not slow releases. Which action MOST directly prevents these specific defect classes from reaching production?",
       "choix": [
-        "Ban AI coding assistants until a full security evaluation has been completed",
-        "Deploy a tool that watermarks AI-generated code to ensure traceability",
-        "Train developers to write security-aware prompts for the AI assistant",
-        "Require AI code to pass the same pipeline controls as human code"
+        "Publish a policy affirming developers remain accountable for the AI-generated code they commit",
+        "Obtain a contractual indemnification clause from the AI assistant's vendor covering insecure output",
+        "Require developers to label which functions were AI-generated so the code can be traced later",
+        "Add blocking secret-scanning and SAST gates for these flaw classes to the pipeline"
       ],
       "reponse": 3,
-      "explication": "Le code généré par IA doit être traité comme du code tiers non fiable et soumis aux mêmes contrôles vérifiables que le code humain — revue par les pairs, SAST, SCA et tests automatisés dans le pipeline : la gouvernance existante absorbe le nouveau risque sans ralentir les livraisons. L'interdiction est un absolu incompatible avec la contrainte business et pousse à l'usage clandestin ; la formation aux prompts améliore la qualité en amont mais n'est pas un contrôle vérifiable ; et le marquage de provenance trace le code sans jamais empêcher un défaut d'atteindre la production.",
+      "explication": "Le scénario nomme des classes de défauts TECHNIQUES précises — secrets en dur et concaténation SQL — que seul un contrôle technique intercepte avant la production. Des gates de secret-scanning et de SAST réglés sur ces motifs, exécutés à chaque build, bloquent exactement ces défauts à la vitesse du pipeline. La charte de responsabilité et l'étiquetage de provenance encadrent l'usage mais n'empêchent aucun secret d'être poussé, et l'indemnisation transfère le coût juridique sans réduire le risque d'exploitation. Attention à l'automatisme « rattacher à la gouvernance d'abord » : quand le scénario désigne une vulnérabilité concrète, c'est la mesure technique prioritaire qui l'emporte.",
       "difficulte": 3,
       "pourquoi": [
-        "Absolu et hors contexte business : l'interdiction ignore la contrainte de vélocité et provoque le shadow IT.",
-        "Réponse de technicien : la traçabilité n'empêche aucun défaut de partir en production.",
-        "Techniquement vrai mais insuffisant : la formation aux prompts n'est pas un contrôle vérifiable — complément, pas fondement.",
-        "Bonne réponse : soumettre le code IA aux gates existants du pipeline gouverne le risque à la vitesse du DevOps."
+        "Une charte de responsabilité clarifie qui répond du code, mais n'intercepte techniquement ni un secret en dur ni une requête SQL concaténée.",
+        "Une clause d'indemnisation déplace le coût d'un litige vers le fournisseur sans jamais empêcher le défaut d'atteindre la production.",
+        "Étiqueter l'origine du code sert l'analyse a posteriori, pas la prévention : le défaut part quand même en production.",
+        "Des gates de secret-scanning et de SAST calibrés sur ces classes de failles les bloquent à chaque build, sans ralentir la cadence — la seule mesure qui traite directement le problème posé."
       ]
     },
     {
