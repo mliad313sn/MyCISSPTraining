@@ -506,7 +506,7 @@ window.CISSP_DATA.scenarios = [
           "Bonne réponse : une segmentation éprouvée par des exercices permet de continuer à opérer en confiance quand l'IT est compromis.",
           "Supprimer l'IT n'est pas une stratégie : le métier en dépend."
         ],
-        "explication": "Le pipeline américain a été arrêté notamment parce que l'opérateur ne pouvait pas garantir que la compromission IT n'atteindrait pas l'OT — un aveu de segmentation insuffisante. Une architecture en zones réellement étanche, testée par des exercices réguliers, permet de prendre des décisions proportionnées au lieu d'arrêts totaux coûteux. Couper systématiquement (B) transforme chaque incident IT en crise nationale. Les options C et D ne sont pas des stratégies d'architecture.",
+        "explication": "Le pipeline américain a été arrêté notamment parce que l'opérateur ne pouvait pas garantir que la compromission IT n'atteindrait pas l'OT — un aveu de segmentation insuffisante. Une architecture en zones réellement étanche, testée par des exercices réguliers, permet de prendre des décisions proportionnées au lieu d'arrêts totaux coûteux. Couper systématiquement (B) transforme chaque incident IT en crise nationale. L'assurance (A) et la suppression de l'IT (D) ne sont pas des stratégies d'architecture.",
         "concept": "Résilience — la segmentation comme condition de la continuité d'activité"
       }
     ],
@@ -1172,7 +1172,7 @@ window.CISSP_DATA.scenarios = [
           "Le cycle mensuel n'est pas conçu pour une exploitation active : le respecter ici est une faute de priorisation.",
           "Un audit complet prend des semaines : la fenêtre d'exploitation se compte en heures."
         ],
-        "explication": "Une vulnérabilité critique activement exploitée sur un système exposé à Internet est une urgence opérationnelle : le cycle mensuel ne s'applique pas. Il faut immédiatement localiser les instances vulnérables, patcher en priorité les systèmes exposés, et si le patch ne peut être immédiat, mitiger (règle WAF, restriction d'accès). C'est exactement la fenêtre de quelques jours — parfois quelques heures — que les attaquants exploitent. Les options A, C et D consomment le temps qui manque.",
+        "explication": "Une vulnérabilité critique activement exploitée sur un système exposé à Internet est une urgence opérationnelle : le cycle mensuel ne s'applique pas. Il faut immédiatement localiser les instances vulnérables, patcher en priorité les systèmes exposés, et si le patch ne peut être immédiat, mitiger (règle WAF, restriction d'accès). C'est exactement la fenêtre de quelques jours — parfois quelques heures — que les attaquants exploitent. Les options B, C et D consomment le temps qui manque.",
         "concept": "Emergency Patching — vulnérabilités critiques activement exploitées"
       },
       {
