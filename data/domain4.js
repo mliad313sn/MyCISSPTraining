@@ -2686,6 +2686,168 @@ window.CISSP_DATA.domains[4] = {
         "Techniquement vrai mais décalé : l'anti-DDoS BGP vise le volumétrique réseau, pas les requêtes applicatives légitimes en apparence."
       ],
       "difficulte": 3
+    },
+    {
+      "q": "Une analyse révèle qu'un poste compromis exfiltre des données confidentielles en les encodant dans des requêtes DNS vers un domaine contrôlé par l'attaquant, alors que le pare-feu bloque tous les ports sortants sauf 53 et 443. QUELLE propriété des protocoles réseau cette attaque exploite-t-elle ?",
+      "choix": [
+        "L'encapsulation multicouche : un protocole autorisé peut transporter un contenu arbitraire et servir de canal caché",
+        "L'absence de chiffrement du protocole DNS, qui expose les requêtes à l'écoute",
+        "La fragmentation IP, qui découpe les données volées en paquets indétectables",
+        "Le three-way handshake TCP, détourné pour établir des sessions non autorisées"
+      ],
+      "reponse": 0,
+      "explication": "C'est l'implication majeure des protocoles multicouches : un flux interdit s'encapsule dans un protocole autorisé (ici DNS) et franchit le filtrage par ports. Seule une inspection applicative profonde (DPI) ou l'analyse des flux détecte ce canal caché — pas un filtrage par numéros de ports.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Correct : le DNS tunneling exploite l'encapsulation — le contenu exfiltré voyage à l'intérieur d'un protocole que le pare-feu laisse passer ; c'est le canal caché typique des protocoles multicouches.",
+        "Contresens : l'absence de chiffrement de DNS aide plutôt le défenseur à inspecter les requêtes ; elle n'explique en rien le franchissement du pare-feu.",
+        "Hors sujet : la fragmentation opère en couche 3 et n'est pas le mécanisme utilisé — les données voyagent dans le contenu applicatif des requêtes DNS.",
+        "Hors sujet : DNS s'appuie majoritairement sur UDP, et le handshake TCP n'a aucun rôle dans le canal caché décrit."
+      ]
+    },
+    {
+      "q": "Votre organisation déploie un cluster de calcul haute performance (HPC) dont les noeuds doivent échanger des données avec une latence minimale, en accédant directement à la mémoire des serveurs distants sans solliciter leurs processeurs (RDMA). QUELLE technologie d'interconnexion répond à ce besoin ?",
+      "choix": [
+        "FCoE, qui encapsule le trafic Fibre Channel dans des trames Ethernet",
+        "InfiniBand, interconnexion à très haut débit et très faible latence conçue pour le HPC et le RDMA",
+        "iSCSI, qui transporte les commandes SCSI sur un réseau TCP/IP standard",
+        "MPLS, qui commute rapidement les paquets grâce à des labels"
+      ],
+      "reponse": 1,
+      "explication": "InfiniBand est l'interconnexion de référence des clusters HPC : très haut débit, latence minimale et RDMA (accès direct à la mémoire distante en contournant le CPU). À distinguer de CXL, qui relie CPU, accélérateurs et mémoire via PCIe avec cohérence de cache. Côté sécurité, InfiniBand se cloisonne par partitions (P_Key) et, faute de chiffrement natif, s'isole des zones moins sûres.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Piège de la même famille : FCoE est un protocole convergé de STOCKAGE sur Ethernet — il n'offre ni RDMA ni les latences exigées par le calcul distribué.",
+        "Correct : InfiniBand combine très haut débit, latence minuscule et RDMA, exactement le profil des interconnexions de clusters HPC.",
+        "Trop lent pour le besoin : iSCSI vise un SAN économique sur IP standard, pas des échanges mémoire à latence minimale entre noeuds de calcul.",
+        "Hors sujet : MPLS est une technique de commutation WAN par labels chez les opérateurs, pas une interconnexion de datacenter pour le HPC."
+      ]
+    },
+    {
+      "q": "Les utilisateurs se plaignent d'une voix hachée et de coupures sur la téléphonie IP, alors que les liens sont loin de la saturation et que la latence moyenne mesurée reste correcte. QUELLE métrique devez-vous examiner EN PRIORITÉ ?",
+      "choix": [
+        "Le débit réel (throughput) des liens WAN",
+        "Le rapport signal sur bruit (SNR) du câblage",
+        "Le jitter : la variation de la latence entre les paquets, que la voix tolère très mal",
+        "La bande passante théorique souscrite auprès de l'opérateur"
+      ],
+      "reponse": 2,
+      "explication": "Une voix hachée avec des liens non saturés et une latence moyenne correcte pointe vers le jitter : la variation de la latence désynchronise les paquets audio et vide les tampons de gigue. La parade est la QoS et le traffic shaping pour prioriser la voix. Débit et bande passante sont hors de cause puisque les liens ne saturent pas.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Écarté par l'énoncé : les liens sont loin de la saturation, le débit réellement atteint n'est donc pas le facteur limitant.",
+        "Plausible mais secondaire : un SNR dégradé provoque des erreurs et retransmissions détectables (FCS/CRC) — ce n'est pas l'explication première d'une voix hachée sur un réseau sain par ailleurs.",
+        "Correct : la VoIP tolère mal la VARIATION de latence ; un jitter élevé hache la voix même quand la latence moyenne et le débit semblent bons.",
+        "Piège du vocabulaire : la bande passante est une capacité théorique — la question dit déjà que la capacité n'est pas atteinte."
+      ]
+    },
+    {
+      "q": "Dans un Virtual Private Cloud, votre équipe doit bloquer explicitement une plage d'adresses IP malveillante pour l'ensemble des instances d'un subnet, tout en conservant les autorisations applicatives existantes. QUEL mécanisme utilisez-vous ?",
+      "choix": [
+        "Un security group avec une règle de refus sur la plage concernée",
+        "Un VPC peering vers un VPC de quarantaine qui absorbera le trafic hostile",
+        "Une route statique dirigeant la plage malveillante vers la NAT gateway",
+        "Une NACL sur le subnet : stateless, elle accepte des règles d'interdiction (deny) explicites appliquées à toutes les instances"
+      ],
+      "reponse": 3,
+      "explication": "La NACL opère au niveau du subnet, est stateless et accepte des règles allow ET deny évaluées dans l'ordre : c'est l'outil fait pour interdire explicitement une plage d'adresses à tout un subnet. Un security group est stateful et ne contient QUE des règles d'autorisation — il ne sait pas exprimer un deny explicite.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Piège classique : un security group ne contient que des règles d'AUTORISATION — il est impossible d'y écrire un refus explicite visant une plage précise.",
+        "Contresens : le peering interconnecte deux VPC pour des échanges légitimes ; il n'est ni transitif ni conçu pour filtrer ou détourner du trafic hostile.",
+        "Bricolage incorrect : la NAT gateway sert aux sorties des subnets privés, pas au filtrage — détourner une route n'est pas un contrôle d'accès.",
+        "Correct : niveau subnet + stateless + règles deny numérotées : la NACL est exactement le mécanisme prévu pour bloquer explicitement une plage d'adresses."
+      ]
+    },
+    {
+      "q": "Le RSSI veut détecter les exfiltrations de données et les communications anormales sur un grand réseau, mais la capture complète des paquets est trop coûteuse en stockage et soulève des questions de vie privée. QUELLE approche recommandez-vous ?",
+      "choix": [
+        "Collecter les métadonnées de flux avec NetFlow/IPFIX : qui parle à qui, quand et en quel volume",
+        "Interroger tous les équipements en SNMPv2c pour suivre leurs compteurs d'interface",
+        "Déployer un TAP sur chaque lien et enregistrer l'intégralité du trafic pendant 90 jours",
+        "Activer le port mirroring vers un IDS uniquement pendant les heures ouvrées"
+      ],
+      "reponse": 0,
+      "explication": "NetFlow/IPFIX exportent les métadonnées des conversations (adresses, ports, volumes, horaires) sans le contenu : on détecte un volume sortant anormal ou un balayage interne à faible coût de stockage et avec moins d'impact vie privée. SNMP ne donne que des compteurs globaux (et la v2c en clair est à proscrire au profit de SNMPv3), la capture intégrale est exactement ce que l'énoncé écarte, et une surveillance limitée aux heures ouvrées manque les attaques nocturnes.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Correct : les métadonnées de flux suffisent à repérer exfiltrations et anomalies (volumes, destinations, horaires) tout en répondant aux contraintes de coût et de vie privée.",
+        "Insuffisant et non sécurisé : SNMP fournit des compteurs agrégés par interface, pas la visibilité conversation par conversation — et SNMPv2c transmet ses community strings en clair.",
+        "Écarté par l'énoncé : c'est précisément la capture complète jugée trop coûteuse et intrusive.",
+        "Fenêtre arbitraire : les exfiltrations se programment volontiers la nuit ou le week-end — une surveillance partielle crée un angle mort prévisible."
+      ]
+    },
+    {
+      "q": "Chaque soir, les sauvegardes inter-sites saturent le lien WAN et dégradent la visioconférence et les applications métier, mais le budget interdit d'augmenter la bande passante cette année. QUELLE est la MEILLEURE réponse à court terme ?",
+      "choix": [
+        "Suspendre les sauvegardes inter-sites tant que le lien n'est pas redimensionné",
+        "Mettre en oeuvre du traffic shaping avec QoS : prioriser les flux temps réel et lisser le trafic de sauvegarde",
+        "Basculer la visioconférence sur un accès 4G de secours pendant les sauvegardes",
+        "Compresser les sauvegardes pour réduire le volume transféré"
+      ],
+      "reponse": 1,
+      "explication": "Le traffic shaping et la QoS répondent exactement au problème : les flux temps réel (visio, applications) sont priorisés et le trafic de sauvegarde, tolérant au délai, est lissé sur la fenêtre nocturne — sans dépense d'infrastructure. À moyen terme, la gestion de capacité (capacity management) planifiera la mise à niveau du lien.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Remède pire que le mal : suspendre les sauvegardes sacrifie la protection des données (disponibilité/récupération) pour un problème de performance qui a une solution technique.",
+        "Correct : prioriser les flux sensibles au délai et lisser les flux qui ne le sont pas est la fonction même du traffic shaping — réponse efficace à budget constant.",
+        "Contournement fragile et coûteux : la 4G ajoute un lien non maîtrisé, une surface d'exposition et des coûts récurrents, sans traiter la cause.",
+        "Utile mais insuffisant : la compression réduit le volume sans garantir la priorité des flux temps réel — et beaucoup de flux de sauvegarde sont déjà compressés ou chiffrés."
+      ]
+    },
+    {
+      "q": "Le constructeur annonce la fin de support (end-of-support) dans 18 mois des commutateurs de coeur du datacenter, encore parfaitement fonctionnels. En tant que responsable de la sécurité, QUELLE est votre PRINCIPALE préoccupation ?",
+      "choix": [
+        "La perte de la garantie matérielle, qui allongera les délais de réparation",
+        "L'incompatibilité future avec les nouvelles générations d'optiques et de câbles",
+        "L'absence de correctifs de sécurité après l'échéance : toute nouvelle vulnérabilité restera sans patch — planifier le remplacement ou la migration AVANT la date",
+        "Le coût du renouvellement, à étaler en conservant les équipements le plus longtemps possible"
+      ],
+      "reponse": 2,
+      "explication": "Après l'end-of-support, plus aucun correctif de sécurité n'est publié : chaque nouvelle vulnérabilité sur le coeur de réseau restera exploitable indéfiniment. Le réflexe managérial est d'inscrire le remplacement (ou un contrat de support étendu transitoire) dans la feuille de route avant l'échéance. La garantie et la logistique sont des enjeux de disponibilité secondaires, et prolonger l'usage au-delà de la date inverse la logique de gestion du risque.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Enjeu réel mais secondaire : la garantie concerne la panne matérielle (disponibilité) ; elle se compense par des spares et un contrat de support — pas la préoccupation première d'un RSSI.",
+        "Marginal : la compatibilité des optiques est un sujet d'ingénierie prévisible, sans commune mesure avec un coeur de réseau non patchable.",
+        "Correct : un équipement end-of-support ne reçoit plus de correctifs — c'est un risque de sécurité croissant et irréversible qui impose de planifier la sortie avant l'échéance.",
+        "Contresens managérial : étirer la durée de vie AU-DELÀ de la fin de support maximise l'exposition ; le coût se gère par la planification, pas par le report du risque."
+      ]
+    },
+    {
+      "q": "Une entreprise généralise le travail hybride : les portables se connectent depuis les domiciles, les hôtels et les espaces de coworking, souvent sans passer par le VPN. Les pare-feux et IDS du siège ne voient plus une grande partie du trafic. QUELLE mesure restaure le MIEUX la protection de ces postes ?",
+      "choix": [
+        "Imposer le full tunnel VPN en permanence pour ramener tout le trafic vers les contrôles du siège",
+        "Augmenter la fréquence des scans de vulnérabilités sur le réseau interne",
+        "Déployer un NAC pour contrôler l'admission des postes sur le LAN du siège",
+        "Déployer une défense host-based : pare-feu local, HIDS/HIPS et EDR, qui protègent la machine où qu'elle soit"
+      ],
+      "reponse": 3,
+      "explication": "Quand le poste vit hors du périmètre, la protection doit suivre la machine : pare-feu host-based, HIDS/HIPS et EDR restent actifs dans un hôtel comme au bureau, sans dépendre d'un tunnel ni de la visibilité du siège. Le full tunnel permanent est fragile (performances, poste non protégé avant l'établissement du tunnel), et les scans internes comme le NAC ne s'appliquent qu'aux postes présents sur le réseau de l'entreprise.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Plausible mais fragile : le full tunnel dégrade les performances, dépend de l'activation effective du VPN et laisse le poste nu avant l'établissement du tunnel — l'énoncé dit justement que le VPN n'est pas toujours utilisé.",
+        "Angle mort : les scans du réseau interne n'atteignent pas des portables qui n'y sont plus connectés.",
+        "Périmètre inadapté : le NAC contrôle l'admission AU réseau de l'entreprise ; il ne protège pas un poste qui travaille depuis un hôtel sans jamais s'y connecter.",
+        "Correct : les contrôles host-based résident sur la machine et la protègent indépendamment du réseau utilisé — la réponse adaptée à la mobilité, en complément des contrôles réseau."
+      ]
+    },
+    {
+      "q": "Lors d'une réunion de direction en visioconférence consacrée à une acquisition confidentielle, un inconnu a rejoint l'appel et écouté les échanges : le lien de réunion, réutilisé chaque semaine, avait largement circulé. QUELLE combinaison de mesures prévient le MIEUX une récidive ?",
+      "choix": [
+        "Activer le chiffrement de bout en bout (E2EE) sur toutes les réunions de l'entreprise",
+        "Exiger des codes de réunion uniques, activer la salle d'attente (lobby) et authentifier les participants avant leur admission",
+        "Revenir aux conférences téléphoniques classiques pour les sujets sensibles",
+        "Interdire l'enregistrement des réunions et le partage d'écran"
+      ],
+      "reponse": 1,
+      "explication": "L'incident est un défaut de contrôle d'admission (meeting bombing via un lien statique réutilisé) : codes uniques, salle d'attente et authentification des participants traitent exactement cette cause. L'E2EE protège le contenu contre l'interception, pas contre un participant admis — l'intrus authentifié... ou non filtré aurait tout entendu quand même.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Piège séduisant : l'E2EE chiffre le transport du contenu, mais l'intrus était DANS la réunion — il aurait déchiffré les flux comme tout participant admis.",
+        "Correct : le problème est l'admission — code unique (le lien qui fuite expire), lobby (filtrage humain) et authentification (identité vérifiée) ferment le vecteur exact de l'incident.",
+        "Régression : le téléphone classique n'authentifie pas mieux les participants (numéro de conférence partageable) et supprime des contrôles disponibles en visioconférence.",
+        "À côté du sujet : encadrer enregistrement et partage d'écran est une bonne hygiène, mais n'aurait pas empêché un inconnu d'écouter la réunion."
+      ]
     }
   ],
   "quizEn": [

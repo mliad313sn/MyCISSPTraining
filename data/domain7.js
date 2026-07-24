@@ -3562,6 +3562,78 @@ window.CISSP_DATA.domains[7] = {
         "Dangereux : exclure les serveurs critiques les prive de tout confinement rapide alors qu'ils sont précisément les cibles les plus attractives.",
         "Sur-réaction : exiger une approbation humaine pour chaque action sacrifie la réactivité que la direction veut conserver."
       ]
+    },
+    {
+      "q": "A weekly compliance scan shows that 40 of 500 servers no longer match the approved security baseline. Change records account for only 25 of them. What should the security manager do FIRST regarding the remaining 15 servers?",
+      "choix": [
+        "Update the baseline to reflect the servers' current configuration",
+        "Investigate the unexplained deviations as potential unauthorized changes or indicators of compromise",
+        "Redeploy all 500 servers from the golden image immediately",
+        "Defer the servers to the next quarterly audit for confirmation"
+      ],
+      "reponse": 1,
+      "explication": "Une dérive de configuration qu'aucun changement approuvé n'explique peut révéler des modifications non autorisées, voire une compromission : la première action est d'investiguer. Mettre à jour la baseline légitimerait un état non approuvé, redéployer les 500 serveurs détruirait les indices et serait disproportionné, et attendre le trimestre suivant laisse une exposition potentielle ouverte.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Inversion dangereuse : aligner la baseline sur la réalité approuve rétroactivement des changements dont l'origine est inconnue.",
+        "Bonne réponse : 15 dérives sans trace de change management sont des changements non autorisés potentiels — on investigue avant de corriger.",
+        "Disproportionné et destructeur : un redéploiement massif efface les indices avant toute analyse et perturbe 460 serveurs sains.",
+        "Inacceptable : reporter au trimestre suivant laisse une possible compromission en place pendant des mois."
+      ]
+    },
+    {
+      "q": "An e-commerce company requires that its web tier survive the failure of any single server with no service interruption and no manual intervention, while continuing to serve all customers during peak load. Which design BEST meets these requirements?",
+      "choix": [
+        "An active-active server cluster behind a load balancer with health checks",
+        "A primary server with a cold standby restored from nightly backups",
+        "A single high-end server with redundant power supplies",
+        "A warm recovery site that can be activated within twelve hours"
+      ],
+      "reponse": 0,
+      "explication": "Un cluster actif-actif derrière un load balancer avec health checks retire automatiquement le nœud défaillant de la rotation : pas d'interruption, pas d'intervention, et la capacité cumulée absorbe les pics. Le cold standby impose des heures d'indisponibilité, les alimentations redondantes ne couvrent qu'un mode de panne d'un serveur unique, et un warm site relève du DR en heures, pas de la continuité en secondes.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Bonne réponse : le load balancer détecte la panne via les health checks et redistribue le trafic automatiquement — zéro interruption, zéro intervention, capacité partagée.",
+        "Trop lent : restaurer un cold standby depuis les sauvegardes nocturnes prend des heures et exige une intervention manuelle.",
+        "Point unique de défaillance : les alimentations redondantes ne protègent ni du crash OS, ni de la carte mère, ni de la maintenance.",
+        "Mauvaise échelle de temps : un warm site répond à un sinistre en une douzaine d'heures, pas à la panne d'un serveur en continuité de service."
+      ]
+    },
+    {
+      "q": "During a regional disaster, the DR coordinator must quickly notify 200 recovery staff even though corporate email and VoIP are down. Which plan element BEST supports this need?",
+      "choix": [
+        "Posting status updates on the company intranet",
+        "Instructing managers to improvise contact methods as the situation evolves",
+        "A tested call tree using personal out-of-band contact details, with alternates at each node and confirmation reported back up the tree",
+        "Waiting for employees to contact the help desk for instructions"
+      ],
+      "reponse": 2,
+      "explication": "Le call tree est la méthode de communication DR de référence : notification en cascade via des coordonnées personnelles hors bande, avec des suppléants pour qu'aucun maillon injoignable ne coupe une branche, et des confirmations qui remontent pour vérifier la couverture. L'intranet est hors service comme le reste de l'infrastructure, l'improvisation garantit des oublis, et attendre des appels entrants inverse la responsabilité de notification.",
+      "difficulte": 2,
+      "pourquoi": [
+        "Indisponible et passif : l'intranet dépend de l'infrastructure sinistrée et suppose que chacun pense à le consulter.",
+        "Improvisation : sans arbre prédéfini ni coordonnées à jour, des équipes entières ne seront jamais jointes à temps.",
+        "Bonne réponse : le call tree testé, hors bande, avec suppléants et remontée de confirmations, notifie 200 personnes rapidement sans dépendre des systèmes détruits.",
+        "Inversion de responsabilité : la notification incombe au plan DR, pas à l'initiative de chaque employé — et le help desk est probablement hors service."
+      ]
+    },
+    {
+      "q": "A threat intelligence report indicates that attackers targeting your industry exfiltrate stolen data through encrypted uploads to personal cloud storage services. Which control BEST addresses this specific risk?",
+      "choix": [
+        "Signature-based antivirus deployed on all endpoints",
+        "Egress monitoring with DLP and inspection of outbound traffic to unauthorized cloud services",
+        "Full-disk encryption on all servers and workstations",
+        "A perimeter IDS tuned for inbound exploit signatures"
+      ],
+      "reponse": 1,
+      "explication": "Le risque décrit est une exfiltration par le trafic sortant : la réponse est l'egress monitoring, avec DLP et inspection des flux sortants vers les services cloud non autorisés. L'antivirus à signatures vise le code malveillant connu, pas les transferts de données ; le chiffrement des disques protège les supports au repos, pas les envois par une session active ; et un IDS réglé sur les signatures entrantes regarde dans la mauvaise direction.",
+      "difficulte": 3,
+      "pourquoi": [
+        "Mauvais objet : l'antivirus détecte du code malveillant connu, pas des données légitimes qui sortent vers un cloud personnel.",
+        "Bonne réponse : l'egress monitoring avec DLP inspecte précisément le trafic sortant et bloque les destinations cloud non autorisées — le contrôle aligné sur la menace décrite.",
+        "Mauvais état des données : le chiffrement au repos ne protège en rien des uploads effectués depuis une session authentifiée.",
+        "Mauvaise direction : un IDS orienté exploits entrants ne voit pas l'exfiltration sortante."
+      ]
     }
   ],
   "flashcards": [
